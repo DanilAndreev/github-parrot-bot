@@ -1,0 +1,23 @@
+{
+  "name": "github-tracker-telegram-bot",
+  "version": "0.1.0",
+  "description": "GitHub issues and pull requests tracker bot for telegram.",
+  "keywords": [],
+  "author": {
+    "name": "Danil Andreev",
+    "email": "danssg08@gmail.com",
+    "url": "https://github.com/DanilAndreev"
+  },
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "babel "
+  },
+  "dependencies": {
+    "babel": "^6.23.0",
+    "node-telegram-bot-api": "^0.50.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.0"
+  }
+}
