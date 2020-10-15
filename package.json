@@ -2,7 +2,24 @@
   "name": "github-tracker-telegram-bot",
   "version": "0.1.0",
   "description": "GitHub issues and pull requests tracker bot for telegram.",
-  "keywords": [],
+  "keywords": [
+    "github",
+    "bot",
+    "telegram-bot",
+    "tracker",
+    "webhooks",
+    "issue-tracker",
+    "pull-request"
+  ],
+  "homepage": "https://github.com/DanilAndreev/github-tracker-telegram-bot",
+  "repository": {
+    "url": "https://github.com/DanilAndreev/github-tracker-telegram-bot.git",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/DanilAndreev/github-tracker-telegram-bot/issues",
+    "email": "danssg08@gmail.com"
+  },
   "author": {
     "name": "Danil Andreev",
     "email": "danssg08@gmail.com",
