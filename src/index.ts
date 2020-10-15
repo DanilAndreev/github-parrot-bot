@@ -35,6 +35,7 @@ const Bot = new TelegramBot(token, {polling: true});
 
 Bot.onText(/\/echo (.+)/, (message, match) => {
     const fromId = message.from.id;
+    console.log(`Message from ${fromId}, test : "${match[1]}"`);
     let response = match[1];
     Bot.sendMessage(fromId, response).then();
 });
