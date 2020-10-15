@@ -1,5 +1,8 @@
+# node modules
 node_modules/
+# builds
 dest/
 build/
-.env.development/
-.env.production/
+# environment files
+.env.*
+.env
