@@ -24,19 +24,12 @@
  * SOFTWARE.
  */
 
-import "reflect-metadata";
-import * as TelegramBot from "node-telegram-bot-api";
+import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
-const token = process.env.TELEGRAM_BOT_TOKEN;
-
-if (!token)
-    throw new Error(`FatalError: you must specify token to run this app! "token" = "${token}".`);
-
-const Bot = new TelegramBot(token, {polling: true});
-
-Bot.onText(/\/echo (.+)/, (message, match) => {
-    const fromId = message.from.id;
-    console.log(`Message from ${fromId}, test : "${match[1]}"`);
-    let response = match[1];
-    Bot.sendMessage(fromId, response).then();
-});
+@Entity()
+export class Chat {
+    @PrimaryGeneratedColumn()
+    id: number;
+    @Column()
+    chatId: number;
+}
