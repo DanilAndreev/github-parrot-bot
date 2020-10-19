@@ -24,28 +24,18 @@
  * SOFTWARE.
  */
 
-import "reflect-metadata";
-import * as TelegramBot from "node-telegram-bot-api";
-import * as Koa from "koa";
-import {Context, Next} from "koa";
+import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
 
-const token = process.env.TELEGRAM_BOT_TOKEN;
+@Entity()
+export class WebHook {
+    @PrimaryGeneratedColumn()
+    id: number;
+    @Column()
+    chatId: number;
+    @Column()
+    secret: string;
+    @Column()
 
-if (!token)
-    throw new Error(`FatalError: you must specify token to run this app! "token" = "${token}".`);
-
-const Bot = new TelegramBot(token, {polling: true});
-
-Bot.onText(/\/echo (.+)/, (message, match) => {
-    const fromId = message.from.id;
-    console.log(`Message from ${fromId}, test : "${match[1]}"`);
-    let response = match[1];
-    Bot.sendMessage(fromId, response).then();
-});
-
-const server = new Koa();
-server.use(async (ctx: Context, next: Next) => {
-    console.log(ctx.body);
-    await next;
-});
-server.listen(process.env.PORT || 3030);
+    @CreateDateColumn()
+    createdAt: Date;
+}
