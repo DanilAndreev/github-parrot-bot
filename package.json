@@ -25,7 +25,7 @@
     "email": "danssg08@gmail.com",
     "url": "https://github.com/DanilAndreev"
   },
-  "main": "index.js",
+  "main": "dest/index.js",
   "license": "MIT",
   "dependencies": {
     "koa": "^2.13.0",
@@ -50,7 +50,7 @@
     "typescript": "^4.0.3"
   },
   "scripts": {
-    "build": "babel ./src --out-dir dist",
-    "start": "tsc"
+    "build": "tsc",
+    "start": "ts-node"
   }
 }
