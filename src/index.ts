@@ -28,6 +28,8 @@ import "reflect-metadata";
 import * as TelegramBot from "node-telegram-bot-api";
 import * as Koa from "koa";
 import {Context, Next} from "koa";
+import * as BodyParser from "koa-bodyparser";
+
 
 const token = process.env.TELEGRAM_BOT_TOKEN;
 
@@ -44,9 +46,13 @@ Bot.onText(/\/echo (.+)/, (message, match) => {
 });
 
 const server = new Koa();
+server.use(BodyParser())
+
 server.use(async (ctx: Context, next: Next) => {
-    console.log("--------------------------------------------------------------------------");
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     console.log(ctx);
+    console.log("--- BODY -----------------------------------------------------------------");
+    console.log(ctx.request.body);
     await next;
 });
 server.listen(process.env.PORT || 3030);
