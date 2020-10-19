@@ -51,6 +51,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "ts-node"
+    "start:dev": "ts-node",
+    "start": "node dest/index.js"
   }
 }
