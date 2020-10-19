@@ -24,32 +24,28 @@
  * SOFTWARE.
  */
 
-import "reflect-metadata";
-import * as Koa from "koa";
-import {Context, Next} from "koa";
-import * as BodyParser from "koa-bodyparser";
-import {setupDbConnection} from "./core/DataBase";
-import {initBot} from "./core/Bot";
+import * as TelegramBot from "node-telegram-bot-api";
+import CommandError from "./CommandError";
+import {Bot} from "./Bot";
+import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
 
+export type BotHandler = (msg: TelegramBot.Message, match: RegExpExecArray) => CommandFinalMessageSync | Promise<CommandFinalMessageSync>;
 
-async function main() {
-    await setupDbConnection();
-
-    const server = new Koa();
-    server.use(BodyParser())
-
-    server.use(async (ctx: Context, next: Next) => {
-        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        console.log(ctx);
-        console.log("--- BODY -----------------------------------------------------------------");
-        console.log(ctx.request.body);
-        await next;
-    });
-
-    console.log("Server is listening on port", process.env.PORT || 3030);
-
-    initBot();
-    server.listen(process.env.PORT || 3030);
+const makeCommand = (handler: BotHandler) => async (msg: TelegramBot.Message, match: RegExpExecArray): Promise<void> => {
+    try {
+        let result = await handler(msg, match);
+        if (Array.isArray(result)) result = result.join("\n");
+        if (result) await Bot.sendMessage(msg.from.id, result, {parse_mode: "Markdown"});
+    } catch (error) {
+        if (error instanceof CommandError) {
+            const message = error.message;
+            Bot.sendMessage(msg.from.id, "Error: \n" + message, {parse_mode: "Markdown"}).catch(error => {
+                throw error;
+            });
+        } else {
+            throw error;
+        }
+    }
 }
 
-main().then();
+export default makeCommand;

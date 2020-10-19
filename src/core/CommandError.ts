@@ -24,32 +24,15 @@
  * SOFTWARE.
  */
 
-import "reflect-metadata";
-import * as Koa from "koa";
-import {Context, Next} from "koa";
-import * as BodyParser from "koa-bodyparser";
-import {setupDbConnection} from "./core/DataBase";
-import {initBot} from "./core/Bot";
-
-
-async function main() {
-    await setupDbConnection();
-
-    const server = new Koa();
-    server.use(BodyParser())
-
-    server.use(async (ctx: Context, next: Next) => {
-        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        console.log(ctx);
-        console.log("--- BODY -----------------------------------------------------------------");
-        console.log(ctx.request.body);
-        await next;
-    });
-
-    console.log("Server is listening on port", process.env.PORT || 3030);
-
-    initBot();
-    server.listen(process.env.PORT || 3030);
+export default class CommandError extends Error {
+    constructor(...text: string[]) {
+        const message = text.join("\n");
+        super(message);
+    }
+    public addUsage(usage: string | string[]) {
+        let text = usage;
+        if (Array.isArray(text)) text = text.join("\n");
+        this.message = this.message + "\n" + text;
+        return this;
+    }
 }
-
-main().then();

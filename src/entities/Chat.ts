@@ -30,8 +30,10 @@ import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} fr
 export default class Chat extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
+
     @Column()
     chatId: number;
+
     @CreateDateColumn()
     createdAt: Date;
 }

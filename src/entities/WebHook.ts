@@ -30,12 +30,19 @@ import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} fr
 export default class WebHook extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
+
     @Column()
     chatId: number;
+
     @Column()
     secret: string;
+
+    @Column()
+    secretPreview: string;
+
     @Column()
     repository: string;
+
     @CreateDateColumn()
     createdAt: Date;
 }

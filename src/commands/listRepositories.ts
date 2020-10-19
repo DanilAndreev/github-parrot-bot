@@ -24,32 +24,21 @@
  * SOFTWARE.
  */
 
-import "reflect-metadata";
-import * as Koa from "koa";
-import {Context, Next} from "koa";
-import * as BodyParser from "koa-bodyparser";
-import {setupDbConnection} from "./core/DataBase";
-import {initBot} from "./core/Bot";
+import CommandError from "../core/CommandError";
+import WebHook from "../entities/WebHook";
+import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
 
+export default async function listRepositories(message, match): Promise<CommandFinalMessageSync> {
+    const usage = [
+        `Usage: /list`,
+        `Example: /list`
+    ].join("\n");
 
-async function main() {
-    await setupDbConnection();
+    const chatId: number = message.from.id;
+    const result: WebHook[] = await WebHook.find({where: {chatId}});
 
-    const server = new Koa();
-    server.use(BodyParser())
-
-    server.use(async (ctx: Context, next: Next) => {
-        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        console.log(ctx);
-        console.log("--- BODY -----------------------------------------------------------------");
-        console.log(ctx.request.body);
-        await next;
-    });
-
-    console.log("Server is listening on port", process.env.PORT || 3030);
-
-    initBot();
-    server.listen(process.env.PORT || 3030);
+    return [
+        `Connected repositories:`,
+        ...result.map(repo => `__[${repo.repository}]__`),
+    ];
 }
-
-main().then();

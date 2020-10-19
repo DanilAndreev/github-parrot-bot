@@ -26,7 +26,16 @@
 
 import * as TelegramBot from "node-telegram-bot-api";
 import WebHook from "../entities/WebHook";
+import CommandError from "./CommandError";
+import makeCommand from "./makeCommand";
+import * as argon2 from "argon2";
+import createSecretPreview from "./createSecretPreview";
+import addRepository from "../commands/addRepository";
+import removeRepository from "../commands/removeRepository";
+import listRepositories from "../commands/listRepositories";
+import removeAllRepositories from "../commands/removeAllRepositories";
 
+export let Bot: TelegramBot | null = null;
 
 export default function CreateBot(): TelegramBot {
     const token = process.env.TELEGRAM_BOT_TOKEN;
@@ -44,42 +53,13 @@ export default function CreateBot(): TelegramBot {
         Bot.sendMessage(chatId, response).then();
     });
 
-    Bot.onText(/\/add (.+)/, async (message, match) => {
-        const usage = [
-            `Usage: /add [repository_full_name] [secret]`,
-            `Example: /add DanilAndreev/test_repo webhook_secret_string`
-        ].join("\n");
-
-        console.log("message /add");
-
-        const chatId = message.from.id;
-        const [repository, secret] = match[1] && match[1].split(" ");
-
-        if (!repository) {
-            const response = [
-                `Error: Missing required parameter repository_full_name!`,
-                usage,
-            ].join("\n");
-            await Bot.sendMessage(chatId, response);
-            return;
-        }
-
-        if (!secret) {
-            const response = [
-                `Error: Missing required parameter secret!`,
-                usage,
-            ].join("\n");
-            await Bot.sendMessage(chatId, response);
-            return;
-        }
-
-        const webhook = new WebHook();
-        webhook.secret = secret;
-        webhook.chatId = chatId;
-        webhook.repository = repository;
-        const result = await webhook.save();
-        await Bot.sendMessage(chatId, `Successfully added repository ${result.repository}`);
-    });
-
+    Bot.onText(/\/add (.+)/, makeCommand(addRepository));
+    Bot.onText(/\/remove (.+)/, makeCommand(removeRepository));
+    Bot.onText(/\/remove_all/, makeCommand(removeAllRepositories));
+    Bot.onText(/\/list/, makeCommand(listRepositories));
     return Bot;
+}
+
+export function initBot() {
+    Bot = CreateBot();
 }
