@@ -10,11 +10,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[workspace] Small changes.">
-      <change afterPath="$PROJECT_DIR$/src/entities/Chat.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[typeorm] Added configuration.&#10;[entities] Added Chat entity.">
+      <change afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Chat.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Chat.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +65,11 @@
     <property name="ts.external.directory.path" value="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -75,6 +84,7 @@
       <workItem from="1602767243857" duration="395000" />
       <workItem from="1602767703422" duration="3153000" />
       <workItem from="1602771618964" duration="453000" />
+      <workItem from="1603108552340" duration="1432000" />
     </task>
     <task id="LOCAL-00001" summary="[Global] Initialized repository.">
       <created>1602758176185</created>
@@ -139,6 +149,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2660" y="225" key="#com.intellij.ide.macro.MacrosDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602768856755" />
+    <state x="2610" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1603109927908">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2610" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603109927908" />
     <state x="2747" y="270" width="486" height="560" key="EnvironmentVariablesDialog" timestamp="1602767038795">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -147,22 +161,22 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2660" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602769412155" />
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1602772006914">
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1603109806709">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602772006914" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1602772006914">
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603109806709" />
+    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1603109806709">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602772006914" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1602772006914">
+    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603109806709" />
+    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1603109806709">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602772006914" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1602772006914">
+    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603109806709" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1603109806709">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602772006914" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603109806709" />
     <state x="2381" y="165" key="SettingsEditor" timestamp="1602765706294">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>

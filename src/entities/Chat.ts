@@ -24,7 +24,7 @@
  * SOFTWARE.
  */
 
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity()
 export class Chat {
@@ -32,4 +32,6 @@ export class Chat {
     id: number;
     @Column()
     chatId: number;
+    @CreateDateColumn()
+    createdAt: Date;
 }
