@@ -45,7 +45,8 @@ Bot.onText(/\/echo (.+)/, (message, match) => {
 
 const server = new Koa();
 server.use(async (ctx: Context, next: Next) => {
-    console.log(ctx.body);
+    console.log("--------------------------------------------------------------------------");
+    console.log(ctx);
     await next;
 });
 server.listen(process.env.PORT || 3030);
