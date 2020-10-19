@@ -31,8 +31,10 @@
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
     "koa-cors": "^0.0.16",
+    "moment": "^2.29.1",
     "node-telegram-bot-api": "^0.50.0",
     "pg": "^8.4.1",
+    "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.28"
   },
   "devDependencies": {
