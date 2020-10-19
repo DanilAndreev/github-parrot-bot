@@ -24,18 +24,14 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Connection, createConnection} from "typeorm"
+import config from "../config";
 
-@Entity()
-export default class WebHook extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
-    @Column()
-    chatId: number;
-    @Column()
-    secret: string;
-    @Column()
-    repository: string;
-    @CreateDateColumn()
-    createdAt: Date;
+
+export let DBConnection: Connection | null = null;
+
+export async function setupDbConnection() {
+    console.log("Connecting to database");
+    DBConnection = await createConnection(config.db);
+    await DBConnection.synchronize();
 }

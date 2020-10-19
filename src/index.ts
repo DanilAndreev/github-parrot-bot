@@ -25,34 +25,33 @@
  */
 
 import "reflect-metadata";
-import * as TelegramBot from "node-telegram-bot-api";
 import * as Koa from "koa";
 import {Context, Next} from "koa";
 import * as BodyParser from "koa-bodyparser";
+import {setupDbConnection} from "./core/DataBase";
+import CreateBot from "./core/Bot";
 
 
-const token = process.env.TELEGRAM_BOT_TOKEN;
 
-if (!token)
-    throw new Error(`FatalError: you must specify token to run this app! "token" = "${token}".`);
 
-const Bot = new TelegramBot(token, {polling: true});
+async function main() {
+    await setupDbConnection();
 
-Bot.onText(/\/echo (.+)/, (message, match) => {
-    const fromId = message.from.id;
-    console.log(`Message from ${fromId}, test : "${match[1]}"`);
-    let response = match[1];
-    Bot.sendMessage(fromId, response).then();
-});
+    const server = new Koa();
+    server.use(BodyParser())
 
-const server = new Koa();
-server.use(BodyParser())
+    server.use(async (ctx: Context, next: Next) => {
+        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        console.log(ctx);
+        console.log("--- BODY -----------------------------------------------------------------");
+        console.log(ctx.request.body);
+        await next;
+    });
 
-server.use(async (ctx: Context, next: Next) => {
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    console.log(ctx);
-    console.log("--- BODY -----------------------------------------------------------------");
-    console.log(ctx.request.body);
-    await next;
-});
-server.listen(process.env.PORT || 3030);
+    console.log("Server is listening on port", process.env.PORT || 3030);
+
+    const bot = await CreateBot();
+    server.listen(process.env.PORT || 3030);
+}
+
+main().then();

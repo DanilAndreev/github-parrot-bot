@@ -24,10 +24,10 @@
  * SOFTWARE.
  */
 
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity()
-export class Chat {
+export default class Chat extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
     @Column()

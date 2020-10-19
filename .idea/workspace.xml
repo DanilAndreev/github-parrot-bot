@@ -11,8 +11,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Server] Added request echo.">
+      <change afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/DataBase.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Run_with_TSC.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Run_with_TSC.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Chat.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Chat.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/WebHook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/WebHook.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +87,7 @@
       <workItem from="1602767703422" duration="3153000" />
       <workItem from="1602771618964" duration="453000" />
       <workItem from="1603108552340" duration="7244000" />
+      <workItem from="1603123506422" duration="7925000" />
     </task>
     <task id="LOCAL-00001" summary="[Global] Initialized repository.">
       <created>1602758176185</created>
@@ -203,10 +212,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="[Server] Added request echo." />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2334" y="175" width="1092" height="738" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602770737959">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="414" y="175" width="1092" height="738" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603132339892">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602757594682" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603132339892" />
     <state x="2334" y="175" width="1092" height="738" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602770737959" />
     <state x="2660" y="225" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1602768856755">
       <screen x="1920" y="0" width="1920" height="1040" />
@@ -216,34 +225,43 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2610" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603109927908" />
-    <state x="2747" y="270" width="486" height="560" key="EnvironmentVariablesDialog" timestamp="1602767038795">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="827" y="270" width="486" height="560" key="EnvironmentVariablesDialog" timestamp="1603132339346">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="827" y="270" key="EnvironmentVariablesDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603132339346" />
     <state x="2747" y="270" width="486" height="560" key="EnvironmentVariablesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602767038795" />
     <state x="2660" y="275" key="FileChooserDialogImpl" timestamp="1602769412155">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2660" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602769412155" />
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1603116350382">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1603133116917">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603133116917" />
     <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603116350382" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1603116350382">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1603133116917">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603133116917" />
     <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603116350382" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1603116350381">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1603133116917">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603133116917" />
     <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603116350381" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1603116350382">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1603133116917">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603133116917" />
     <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603116350382" />
     <state x="2518" y="281" key="MultipleFileMergeDialog" timestamp="1603110192735">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2518" y="281" key="MultipleFileMergeDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603110192735" />
+    <state x="758" y="222" key="RollbackChangesDialog" timestamp="1603123562548">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="758" y="222" key="RollbackChangesDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603123562548" />
     <state x="2381" y="165" key="SettingsEditor" timestamp="1603112891334">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
