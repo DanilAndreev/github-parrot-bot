@@ -28,6 +28,7 @@ import {Issues} from "github-webhook-event-types";
 import {Bot} from "../core/Bot";
 import WebHook from "../entities/WebHook";
 import getAkaAlias from "../core/getAkaAlias";
+import moment = require("moment");
 
 export default async function issueEvent(payload: Issues): Promise<void> {
     const {action, issue, repository} = payload;
@@ -43,18 +44,20 @@ export default async function issueEvent(payload: Issues): Promise<void> {
             issue.assignees.map(assignee => getAkaAlias(assignee.login, webHook.chatId)))
         ).join(" ");
 
+        const milestone = issue.milestone;
+
         const message = [
-            repository.full_name,
-            `Issue ${issue.state}.   #${issue.number}`,
-            `${issue.title}`,
-            `${issue.body}`,
+            `[__${repository.full_name} #${issue.number}__](${issue.url})`,
+            `Issue _${issue.state}_`,
+            `__${issue.title}__`,
+            issue.body,
             `--------`,
             `Opened by: ${await getAkaAlias(issue.user.login, webHook.chatId)}`,
-            `Assigners: ${assignees}`,
-            `--------`,
-            issue.labels.map(label => label.name).join(" "),
-            `--------`,
-            `milestone: ${issue.milestone}`,
+            assignees && `Assigners: ${assignees}`,
+            issue.labels && `--------`,
+            issue.labels && issue.labels.map(label => label.name).join("\n"),
+            milestone && `--------`,
+            milestone && `Milestone: ${milestone.title} ${moment(milestone.due_on).format("ll") || ""}`,
         ].join("\n");
         await Bot.sendMessage(webHook.chatId, message);
     }
