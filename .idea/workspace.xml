@@ -10,9 +10,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[issueEvent] Added AKA mechanism.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/issueEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/issueEvent.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[issueEvent] Debug logs added.">
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +81,7 @@
       <workItem from="1603123506422" duration="22734000" />
       <workItem from="1603182056556" duration="2303000" />
       <workItem from="1603184712391" duration="2330000" />
-      <workItem from="1603195373706" duration="90000" />
+      <workItem from="1603195373706" duration="130000" />
     </task>
     <task id="LOCAL-00001" summary="[Global] Initialized repository.">
       <created>1602758176185</created>
@@ -217,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603195089183</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="[issueEvent] Debug logs added.">
+      <created>1603195486196</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1603195486196</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -251,7 +257,8 @@
     <MESSAGE value="[config] Added env support." />
     <MESSAGE value="[webhook] Created basic issue event handler." />
     <MESSAGE value="[issueEvent] Added AKA mechanism." />
-    <option name="LAST_COMMIT_MESSAGE" value="[issueEvent] Added AKA mechanism." />
+    <MESSAGE value="[issueEvent] Debug logs added." />
+    <option name="LAST_COMMIT_MESSAGE" value="[issueEvent] Debug logs added." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2334" y="175" width="1092" height="738" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603192024324">
