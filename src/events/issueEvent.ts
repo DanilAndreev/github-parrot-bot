@@ -59,6 +59,6 @@ export default async function issueEvent(payload: Issues): Promise<void> {
             milestone && `--------`,
             milestone && `Milestone: ${milestone.title} ${moment(milestone.due_on).format("ll") || ""}`,
         ].join("\n");
-        await Bot.sendMessage(webHook.chatId, message);
+        await Bot.sendMessage(webHook.chatId, message, {parse_mode: "Markdown"});
     }
 }
