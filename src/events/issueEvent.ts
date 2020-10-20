@@ -47,18 +47,18 @@ export default async function issueEvent(payload: Issues): Promise<void> {
         const milestone = issue.milestone;
 
         const message = [
-            `[__${repository.full_name} #${issue.number}__](${issue.url})`,
-            `Issue _${issue.state}_`,
-            `__${issue.title}__`,
+            `[<a src="${issue.html_url}"><b>${repository.full_name} #${issue.number}</b></a>`,
+            `Issue <i>${issue.state}</i>`,
+            `<b>${issue.title}</b>`,
             issue.body,
             `--------`,
-            `Opened by: ${await getAkaAlias(issue.user.login, webHook.chatId)}`,
-            assignees && `Assigners: ${assignees}`,
+            `Opened by: <b>${await getAkaAlias(issue.user.login, webHook.chatId)}</b>`,
+            assignees && `Assigners: <b>${assignees}</b>`,
             issue.labels && `--------`,
-            issue.labels && issue.labels.map(label => label.name).join("\n"),
+            issue.labels && issue.labels.map(label => `<b>${label.name}</b>`).join("\n"),
             milestone && `--------`,
-            milestone && `Milestone: ${milestone.title} ${moment(milestone.due_on).format("ll") || ""}`,
+            milestone && `Milestone: <i>${milestone.title} ${moment(milestone.due_on).format("ll") || ""}</i>`,
         ].join("\n");
-        await Bot.sendMessage(webHook.chatId, message, {parse_mode: "Markdown"});
+        await Bot.sendMessage(webHook.chatId, message, {parse_mode: "HTML"});
     }
 }
