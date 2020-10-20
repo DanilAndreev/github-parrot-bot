@@ -54,8 +54,8 @@ export default async function issueEvent(payload: Issues): Promise<void> {
             `--------`,
             `Opened by: *${await getAkaAlias(issue.user.login, webHook.chatId)}*`,
             assignees && `Assigners: *${assignees}*`,
-            !!issue.labels.length && `--------`,
-            !!issue.labels.length && issue.labels.map(label => `*${label.name}*`).join("\n"),
+            issue.labels.length ? `--------` : undefined,
+            issue.labels.length ? issue.labels.map(label => `*${label.name}*`).join("\n") : undefined,
             milestone && `--------`,
             milestone && `Milestone: _${milestone.title} ${moment(milestone.due_on).format("ll") || ""}_ #milestone${milestone.id}`,
         ].join("\n");
