@@ -24,18 +24,30 @@
  * SOFTWARE.
  */
 
-import {Context, Next} from "koa";
-import pullRequestEvent from "../events/pullRequestEvent";
-import issueEvent from "../events/issueEvent";
-import {Issues, PullRequest} from "github-webhook-event-types";
+import {Issues} from "github-webhook-event-types";
+import {Bot} from "../core/Bot";
+import WebHook from "../entities/WebHook";
 
-export default async function eventsMiddleware(ctx: Context, next: Next): Promise<void> {
-    const payload = ctx.request.body;
+export default async function issueEvent(payload: Issues): Promise<void> {
+    const {action, issue, repository} = payload;
 
-    if (payload.pull_request) {
-        await pullRequestEvent(payload as PullRequest);
-    } else if (payload.issue) {
-        await issueEvent(payload as Issues);
+    const message = [
+        repository.full_name,
+        `Issue ${issue.state}.   #${issue.number}`,
+        `${issue.title}`,
+        `${issue.body}`,
+        `--------`,
+        `Opened by: ${issue.user.login}`,
+        `Assigners: ${issue.assignee}`,
+        `--------`,
+        issue.labels.map(label => label.name).join(" "),
+        `--------`,
+        `milestone: ${issue.milestone}`,
+    ].join("\n");
+
+    const webHooks: WebHook[] = await WebHook.find({where: {repository: repository.full_name}});
+
+    for (const webHook of webHooks) {
+        await Bot.sendMessage(webHook.chatId, message);
     }
-
 }
