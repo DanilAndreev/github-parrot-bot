@@ -32,7 +32,11 @@ import getAkaAlias from "../core/getAkaAlias";
 export default async function issueEvent(payload: Issues): Promise<void> {
     const {action, issue, repository} = payload;
 
+    console.log(`Issue event: `, issue.number);
+
     const webHooks: WebHook[] = await WebHook.find({where: {repository: repository.full_name}});
+
+    console.log("Found chats: ", webHooks.map(hook => hook.chatId).join(" "));
 
     for (const webHook of webHooks) {
         let assignees: string = (await Promise.all(
