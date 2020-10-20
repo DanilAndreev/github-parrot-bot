@@ -51,12 +51,12 @@ export default async function issueEvent(payload: Issues): Promise<void> {
             `#issue _${issue.state}_`,
             `*${issue.title}*`,
             issue.body,
-            `--------`,
+            `-- Assignees --`,
             `Opened by: *${await getAkaAlias(issue.user.login, webHook.chatId)}*`,
             assignees && `Assigners: *${assignees}*`,
-            issue.labels.length ? `--------` : undefined,
+            issue.labels.length ? `-- Labels -----` : undefined,
             issue.labels.length ? issue.labels.map(label => `*${label.name}*`).join("\n") : undefined,
-            milestone && `--------`,
+            milestone && `---------------`,
             milestone && `Milestone: _${milestone.title} ${moment(milestone.due_on).format("ll") || ""}_ #milestone${milestone.id}`,
         ].join("\n");
         await Bot.sendMessage(webHook.chatId, message, {parse_mode: "Markdown"});

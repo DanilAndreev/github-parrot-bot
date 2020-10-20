@@ -273,7 +273,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603198250883</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="[issueEvent] Finished issues.">
+      <created>1603198620419</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1603198620419</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,7 +320,8 @@
     <MESSAGE value="[issueEvent] Changed message parser markdownV2" />
     <MESSAGE value="[issueEvent] Screening symbols." />
     <MESSAGE value="[issueEvent] Added hashtag to issue." />
-    <option name="LAST_COMMIT_MESSAGE" value="[issueEvent] Added hashtag to issue." />
+    <MESSAGE value="[issueEvent] Finished issues." />
+    <option name="LAST_COMMIT_MESSAGE" value="[issueEvent] Finished issues." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2334" y="175" width="1092" height="738" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603192024324">
@@ -422,11 +430,11 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2381" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603112891334" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1603198318927">
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1603198638878">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603149503010" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603198318927" />
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603198638878" />
     <state x="-1928" y="-8" width="1392" height="717" maximized="true" key="dock-window-1" timestamp="1603184716451">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
