@@ -24,34 +24,9 @@
  * SOFTWARE.
  */
 
-import "reflect-metadata";
-import * as Koa from "koa";
 import {Context, Next} from "koa";
-import * as BodyParser from "koa-bodyparser";
-import {setupDbConnection} from "./core/DataBase";
-import {initBot} from "./core/Bot";
 
+export default function eventsMiddleware(ctx: Context, next: Next) {
+    const body = ctx.request.body;
 
-async function main() {
-    await setupDbConnection();
-
-    const server = new Koa();
-    server.use(BodyParser())
-
-    server.use(async (ctx: Context, next: Next) => {
-        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        console.log(ctx);
-        console.log("--- BODY -----------------------------------------------------------------");
-        console.log(ctx.request.body);
-
-
-        await next;
-    });
-
-    console.log("Server is listening on port", process.env.PORT || 3030);
-
-    initBot();
-    server.listen(process.env.PORT || 3030);
 }
-
-main().then();
