@@ -37,5 +37,5 @@ export default async function eventsMiddleware(ctx: Context, next: Next): Promis
     } else if (payload.issue) {
         await issueEvent(payload as Issues);
     }
-
+    await next();
 }
