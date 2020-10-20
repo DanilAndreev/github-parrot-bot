@@ -29,15 +29,13 @@ import {Bot} from "../core/Bot";
 import WebHook from "../entities/WebHook";
 import getAkaAlias from "../core/getAkaAlias";
 import moment = require("moment");
+import useIssue from "../core/useIssue";
+import Issue from "../entities/Issue";
 
 export default async function issueEvent(payload: Issues): Promise<void> {
     const {action, issue, repository} = payload;
 
-    console.log(`Issue event: `, issue.number);
-
     const webHooks: WebHook[] = await WebHook.find({where: {repository: repository.full_name}});
-
-    console.log("Found chats: ", webHooks.map(hook => hook.chatId).join(" "));
 
     for (const webHook of webHooks) {
         let assignees: string = (await Promise.all(
@@ -59,6 +57,17 @@ export default async function issueEvent(payload: Issues): Promise<void> {
             milestone && `---------------`,
             milestone && `Milestone: _${milestone.title} ${moment(milestone.due_on).format("ll") || ""}_ #milestone${milestone.id}`,
         ].join("\n");
-        await Bot.sendMessage(webHook.chatId, message, {parse_mode: "Markdown"});
+
+        try {
+            const messageId = await useIssue(issue.id, webHook.chatId);
+            await Bot.editMessageText(message, {chat_id: webHook.chatId, message_id: messageId, parse_mode: "Markdown"});
+        } catch (error) {
+            const result = await Bot.sendMessage(webHook.chatId, message, {parse_mode: "Markdown"});
+            const newIssue = new Issue();
+            newIssue.chatId = webHook.chatId;
+            newIssue.messageId = result.message_id;
+            newIssue.issueId = issue.id;
+            await newIssue.save();
+        }
     }
 }

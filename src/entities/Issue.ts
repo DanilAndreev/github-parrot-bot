@@ -24,44 +24,22 @@
  * SOFTWARE.
  */
 
-import WebHook from "./entities/WebHook";
-import Chat from "./entities/Chat";
-import {ConnectionOptions} from "typeorm";
-import Collaborator from "./entities/Collaborator";
-import {Issues} from "github-webhook-event-types";
-import Issue from "./entities/Issue";
+import {BaseEntity, Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
 
-export interface BotConfig {
-    token: string;
+@Entity()
+export default class Issue extends BaseEntity {
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Column()
+    chatId: number;
+
+    @Column()
+    issueId: number;
+
+    @Column()
+    messageId: number;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
 }
-
-export interface ServerConfig {
-    port: number;
-}
-
-export interface Config {
-    bot: BotConfig;
-    db: ConnectionOptions;
-    server: ServerConfig;
-}
-
-const config: Config = {
-    bot: {
-        token: process.env.TELEGRAM_BOT_TOKEN,
-    },
-    db: {
-        type: "postgres",
-        url: process.env.DATABASE_URL,
-        entities: [
-            Chat, WebHook, Collaborator, Issue
-        ],
-        ssl: {
-            rejectUnauthorized: false,
-        }
-    },
-    server: {
-        port: +process.env.PORT | 3030,
-    }
-}
-
-export default config;
