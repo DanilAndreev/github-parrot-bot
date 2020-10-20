@@ -30,6 +30,7 @@ import {Context, Next} from "koa";
 import * as BodyParser from "koa-bodyparser";
 import {setupDbConnection} from "./core/DataBase";
 import {initBot} from "./core/Bot";
+import config from "./config";
 
 
 async function main() {
@@ -51,7 +52,7 @@ async function main() {
     console.log("Server is listening on port", process.env.PORT || 3030);
 
     initBot();
-    server.listen(process.env.PORT || 3030);
+    server.listen(config.server.port);
 }
 
 main().then();
