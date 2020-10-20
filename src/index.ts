@@ -49,10 +49,10 @@ async function main() {
         await next;
     });
 
-    console.log("Server is listening on port", process.env.PORT || 3030);
+    console.log("Server is listening on port", config.server.port);
 
     initBot();
-    server.listen(config.server.port);
+    server.listen(process.env.PORT || config.server.port);
 }
 
 main().then();

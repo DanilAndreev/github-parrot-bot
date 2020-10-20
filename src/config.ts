@@ -58,7 +58,7 @@ const config: Config = {
         }
     },
     server: {
-        port: +process.env.PORT | 3002,
+        port: +process.env.PORT | 3030,
     }
 }
 
