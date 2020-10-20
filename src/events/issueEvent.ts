@@ -47,7 +47,7 @@ export default async function issueEvent(payload: Issues): Promise<void> {
         const milestone = issue.milestone;
 
         const message = [
-            `[<a src="${issue.html_url}"><b>${repository.full_name} #${issue.number}</b></a>`,
+            `<a src="${issue.html_url}"><b>${repository.full_name} #${issue.number}</b></a>`,
             `Issue <i>${issue.state}</i>`,
             `<b>${issue.title}</b>`,
             issue.body,
@@ -59,6 +59,6 @@ export default async function issueEvent(payload: Issues): Promise<void> {
             milestone && `--------`,
             milestone && `Milestone: <i>${milestone.title} ${moment(milestone.due_on).format("ll") || ""}</i>`,
         ].join("\n");
-        await Bot.sendMessage(webHook.chatId, message, {parse_mode: "HTML"});
+        await Bot.sendMessage(webHook.chatId, message, {parse_mode: "MarkdownV2"});
     }
 }
