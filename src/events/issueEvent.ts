@@ -47,7 +47,7 @@ export default async function issueEvent(payload: Issues): Promise<void> {
         const milestone = issue.milestone;
 
         const message = [
-            `[__${repository.full_name} #${issue.number}__](${issue.html_url})`,
+            `[__${repository.full_name} \#${issue.number}__](${issue.html_url})`,
             `Issue _${issue.state}_`,
             `__${issue.title}__`,
             issue.body,
