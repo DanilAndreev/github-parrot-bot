@@ -25,23 +25,35 @@
  */
 
 import CommandError from "../core/CommandError";
-import WebHook from "../entities/WebHook";
 import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
+import Collaborator from "../entities/Collaborator";
+import getUsername from "../core/getUsername";
 import checkAdmin from "../core/checkAdmin";
 
-export default async function removeRepository(message, match): Promise<CommandFinalMessageSync> {
+export default async function removeAKA(message, match): Promise<CommandFinalMessageSync> {
     const usage = [
-        `Usage: /remove_all`,
-        `Example: /remove_all`
+        `Usage: /remove_aka [telegram_username] [git_hub_username]`,
+        `Example: /remove_aka @danssg08 DanilAndreev`
     ].join("\n");
 
     const chatId: number = message.from.id;
-    const telegramName: string = message.from.username;
+    const [tag, ghName] = match[1].split(" ");
+    const telegramName = getUsername(tag);
 
-    if (!await checkAdmin(telegramName, message))
-        throw new CommandError(`User @${telegramName} have no permissions to delete all repositories.`);
+    if (!await checkAdmin(message.from.username, message))
+        throw new CommandError(`User @${message.from.username} have no permissions to remove AKAs.`);
 
-    const result = await WebHook.delete({chatId});
-    if (!result.affected) throw new CommandError(`You have no repositories to delete.`);
-    return `Successfully deleted all repositories.`;
+    const result = ghName ?
+        await Collaborator.delete({chatId, gitHubName: ghName, telegramName}) :
+        await Collaborator.delete({chatId, telegramName});
+
+    if (!result.affected)
+        throw new CommandError(
+            ghName ?
+                `User @${telegramName} is not connected to GitHub account __[${ghName}]__.` :
+                `User @${telegramName} have no AKAs.`
+        );
+    return ghName ?
+        `Successfully deleted link __[${ghName}]__ -> @${telegramName}.` :
+        `Successfully deleted all @${telegramName} AKAs.`;
 }

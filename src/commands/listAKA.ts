@@ -24,24 +24,24 @@
  * SOFTWARE.
  */
 
-import CommandError from "../core/CommandError";
-import WebHook from "../entities/WebHook";
 import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
-import checkAdmin from "../core/checkAdmin";
+import Collaborator from "../entities/Collaborator";
 
-export default async function removeRepository(message, match): Promise<CommandFinalMessageSync> {
+export default async function listAKA(message, match): Promise<CommandFinalMessageSync> {
     const usage = [
-        `Usage: /remove_all`,
-        `Example: /remove_all`
+        `Usage: /akas`,
+        `Example: /akas`
     ].join("\n");
 
     const chatId: number = message.from.id;
-    const telegramName: string = message.from.username;
 
-    if (!await checkAdmin(telegramName, message))
-        throw new CommandError(`User @${telegramName} have no permissions to delete all repositories.`);
+    const result: Collaborator[] = await Collaborator.find({where: {chatId}});
 
-    const result = await WebHook.delete({chatId});
-    if (!result.affected) throw new CommandError(`You have no repositories to delete.`);
-    return `Successfully deleted all repositories.`;
+    if (!result.length)
+        return `This chat have no AKAs.`;
+
+    return [
+        `All AKAs for this chat:`,
+        ...result.map(collaboration => `AKA: __[${collaboration.gitHubName}]__ -> @${collaboration.telegramName}`),
+    ];
 }

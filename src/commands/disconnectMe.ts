@@ -25,23 +25,29 @@
  */
 
 import CommandError from "../core/CommandError";
-import WebHook from "../entities/WebHook";
 import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
-import checkAdmin from "../core/checkAdmin";
+import Collaborator from "../entities/Collaborator";
 
-export default async function removeRepository(message, match): Promise<CommandFinalMessageSync> {
+export default async function disconnectMe(message, match): Promise<CommandFinalMessageSync> {
     const usage = [
-        `Usage: /remove_all`,
-        `Example: /remove_all`
+        `Usage: /disconnect_me [git_hub_username]`,
+        `Example: /disconnect_me DanilAndreev`
     ].join("\n");
 
     const chatId: number = message.from.id;
-    const telegramName: string = message.from.username;
+    const ghName: string = match[1];
+    const telegramName = message.from.username;
 
-    if (!await checkAdmin(telegramName, message))
-        throw new CommandError(`User @${telegramName} have no permissions to delete all repositories.`);
+    if (ghName.includes(" "))
+        throw new CommandError(
+            `GitHub username can not contain spaces! `,
+            `Input: __[${ghName}]__`
+        );
 
-    const result = await WebHook.delete({chatId});
-    if (!result.affected) throw new CommandError(`You have no repositories to delete.`);
-    return `Successfully deleted all repositories.`;
+    const result = await Collaborator.delete({chatId, gitHubName: ghName, telegramName});
+
+
+    if (!result.affected)
+        throw new CommandError(`User @${telegramName} is not connected to GitHub account __[${ghName}]__.`);
+    return `Successfully deleted link __[${ghName}]__ -> @${telegramName}`;
 }

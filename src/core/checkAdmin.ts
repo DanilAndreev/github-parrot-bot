@@ -24,24 +24,16 @@
  * SOFTWARE.
  */
 
-import CommandError from "../core/CommandError";
-import WebHook from "../entities/WebHook";
-import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
-import checkAdmin from "../core/checkAdmin";
+import {Bot} from "./Bot";
+import {ChatMember} from "node-telegram-bot-api";
 
-export default async function removeRepository(message, match): Promise<CommandFinalMessageSync> {
-    const usage = [
-        `Usage: /remove_all`,
-        `Example: /remove_all`
-    ].join("\n");
-
-    const chatId: number = message.from.id;
-    const telegramName: string = message.from.username;
-
-    if (!await checkAdmin(telegramName, message))
-        throw new CommandError(`User @${telegramName} have no permissions to delete all repositories.`);
-
-    const result = await WebHook.delete({chatId});
-    if (!result.affected) throw new CommandError(`You have no repositories to delete.`);
-    return `Successfully deleted all repositories.`;
+export default async function checkAdmin(username: string, message): Promise<boolean> {
+    try {
+        const admins: ChatMember[] = await Bot.getChatAdministrators(message.from.id);
+        if (admins.find((member) => member.user.username === username))
+            return true;
+    } catch (error) {
+        if (message.chat.username === username) return true;
+    }
+    return false;
 }

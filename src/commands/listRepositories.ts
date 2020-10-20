@@ -24,7 +24,6 @@
  * SOFTWARE.
  */
 
-import CommandError from "../core/CommandError";
 import WebHook from "../entities/WebHook";
 import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
 
@@ -36,6 +35,9 @@ export default async function listRepositories(message, match): Promise<CommandF
 
     const chatId: number = message.from.id;
     const result: WebHook[] = await WebHook.find({where: {chatId}});
+
+    if (!result.length)
+        return `You have no repositories added.`;
 
     return [
         `Connected repositories:`,

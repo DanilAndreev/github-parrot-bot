@@ -25,15 +25,18 @@
  */
 
 import * as TelegramBot from "node-telegram-bot-api";
-import WebHook from "../entities/WebHook";
-import CommandError from "./CommandError";
 import makeCommand from "./makeCommand";
-import * as argon2 from "argon2";
-import createSecretPreview from "./createSecretPreview";
 import addRepository from "../commands/addRepository";
 import removeRepository from "../commands/removeRepository";
 import listRepositories from "../commands/listRepositories";
 import removeAllRepositories from "../commands/removeAllRepositories";
+import connectMe from "../commands/connectMe";
+import disconnectMe from "../commands/disconnectMe";
+import whoAmI from "../commands/whoAmI";
+import disconnectMeAll from "../commands/disconnectMeAll";
+import removeAKA from "../commands/removeAKA";
+import clearAKA from "../commands/clearAKA";
+import listAKA from "../commands/listAKA";
 
 export let Bot: TelegramBot | null = null;
 
@@ -46,17 +49,20 @@ export default function CreateBot(): TelegramBot {
     console.log("Creating telegram bot.")
     const Bot = new TelegramBot(token, {polling: true});
 
-    Bot.onText(/\/echo (.+)/, (message, match) => {
-        const chatId = message.from.id;
-        console.log(`Message from ${chatId}, test : "${match[1]}"`);
-        let response = match[1];
-        Bot.sendMessage(chatId, response).then();
-    });
-
     Bot.onText(/\/add (.+)/, makeCommand(addRepository));
     Bot.onText(/\/remove (.+)/, makeCommand(removeRepository));
-    Bot.onText(/\/remove_all/, makeCommand(removeAllRepositories));
+    Bot.onText(/^\/remove_all/, makeCommand(removeAllRepositories));
     Bot.onText(/\/list/, makeCommand(listRepositories));
+
+    Bot.onText(/\/connect_me (.+)/, makeCommand(connectMe));
+    Bot.onText(/\/disconnect_me (.+)/, makeCommand(disconnectMe));
+    Bot.onText(/^\/disconnect_me$/, makeCommand(disconnectMeAll));
+    Bot.onText(/\/whoami/, makeCommand(whoAmI));
+
+    Bot.onText(/\/remove_aka (.+)/, makeCommand(removeAKA));
+    Bot.onText(/^\/clear_aka/, makeCommand(clearAKA));
+    Bot.onText(/^\/akas/, makeCommand(listAKA));
+
     return Bot;
 }
 

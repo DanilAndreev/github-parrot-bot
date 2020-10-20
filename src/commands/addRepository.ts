@@ -30,6 +30,7 @@ import * as argon2 from "argon2";
 import createSecretPreview from "../core/createSecretPreview";
 import {Bot} from "../core/Bot";
 import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
+import checkAdmin from "../core/checkAdmin";
 
 export default async function addRepository(message, match): Promise<CommandFinalMessageSync> {
     const usage = [
@@ -38,6 +39,7 @@ export default async function addRepository(message, match): Promise<CommandFina
     ].join("\n");
 
     const chatId: number = message.from.id;
+    const telegramName: string = message.from.username;
     const [repository, secret] = match[1] && match[1].split(" ");
 
     if (!repository)
@@ -45,6 +47,9 @@ export default async function addRepository(message, match): Promise<CommandFina
 
     if (!secret)
         throw new CommandError("Missing required parameter secret!").addUsage(usage);
+
+    if (!await checkAdmin(telegramName, message))
+        throw new CommandError(`User @${telegramName} have no permissions to add repository.`);
 
     if (await WebHook.findOne({where: {chatId, repository}}))
         throw new CommandError(
