@@ -24,44 +24,18 @@
  * SOFTWARE.
  */
 
-import WebHook from "./entities/WebHook";
-import Chat from "./entities/Chat";
-import {ConnectionOptions} from "typeorm";
-import Collaborator from "./entities/Collaborator";
-import {Issues} from "github-webhook-event-types";
-import Issue from "./entities/Issue";
 
-export interface BotConfig {
-    token: string;
-}
+import Issue from "../entities/Issue";
+import moment = require("moment");
 
-export interface ServerConfig {
-    port: number;
-}
-
-export interface Config {
-    bot: BotConfig;
-    db: ConnectionOptions;
-    server: ServerConfig;
-}
-
-const config: Config = {
-    bot: {
-        token: process.env.TELEGRAM_BOT_TOKEN,
-    },
-    db: {
-        type: "postgres",
-        url: process.env.DATABASE_URL,
-        entities: [
-            Chat, WebHook, Collaborator, Issue
-        ],
-        ssl: {
-            rejectUnauthorized: false,
+export default async function useIssue(issueId: number, chatId: number): Promise<number> {
+    const result: Issue = await Issue.findOne({where: {chatId, issueId}});
+    if (result) {
+        if (result?.updatedAt && moment(result.updatedAt) <  moment().subtract(1, "day")) {
+            await Issue.delete({id: result.id});
+            return undefined;
         }
-    },
-    server: {
-        port: +process.env.PORT | 3030,
+        await result.save()
     }
+    return result?.messageId;
 }
-
-export default config;
