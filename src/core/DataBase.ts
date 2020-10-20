@@ -24,16 +24,14 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Connection, createConnection} from "typeorm"
+import config from "../config";
 
-@Entity()
-export default class Chat extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
 
-    @Column()
-    chatId: number;
+export let DBConnection: Connection | null = null;
 
-    @CreateDateColumn()
-    createdAt: Date;
+export async function setupDbConnection() {
+    console.log("Connecting to database");
+    DBConnection = await createConnection(config.db);
+    await DBConnection.synchronize();
 }

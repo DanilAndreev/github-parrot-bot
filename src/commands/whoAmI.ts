@@ -24,16 +24,25 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
+import Collaborator from "../entities/Collaborator";
 
-@Entity()
-export default class Chat extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+export default async function whoAmI(message, match): Promise<CommandFinalMessageSync> {
+    const usage = [
+        `Usage: /whoami`,
+        `Example: /whoami`
+    ].join("\n");
 
-    @Column()
-    chatId: number;
+    const chatId: number = message.from.id;
+    const telegramName = message.from.username;
 
-    @CreateDateColumn()
-    createdAt: Date;
+    const result: Collaborator[] = await Collaborator.find({where: {chatId, telegramName}});
+
+    if (!result.length)
+        return `User @${telegramName} have no AKA.`;
+
+    return [
+        `User @${telegramName}:`,
+        ...result.map(collaboration => `AKA: __[${collaboration.gitHubName}]__`),
+    ];
 }

@@ -24,16 +24,5 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
-
-@Entity()
-export default class Chat extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Column()
-    chatId: number;
-
-    @CreateDateColumn()
-    createdAt: Date;
-}
+export type CommandFinalMessageAsync = Promise<void | string | string[]>
+export type CommandFinalMessageSync = void | string | string[]

@@ -24,16 +24,16 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Bot} from "./Bot";
+import {ChatMember} from "node-telegram-bot-api";
 
-@Entity()
-export default class Chat extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Column()
-    chatId: number;
-
-    @CreateDateColumn()
-    createdAt: Date;
+export default async function checkAdmin(username: string, message): Promise<boolean> {
+    try {
+        const admins: ChatMember[] = await Bot.getChatAdministrators(message.from.id);
+        if (admins.find((member) => member.user.username === username))
+            return true;
+    } catch (error) {
+        if (message.chat.username === username) return true;
+    }
+    return false;
 }

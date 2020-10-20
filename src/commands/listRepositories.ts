@@ -24,16 +24,23 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
+import WebHook from "../entities/WebHook";
+import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
 
-@Entity()
-export default class Chat extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+export default async function listRepositories(message, match): Promise<CommandFinalMessageSync> {
+    const usage = [
+        `Usage: /list`,
+        `Example: /list`
+    ].join("\n");
 
-    @Column()
-    chatId: number;
+    const chatId: number = message.from.id;
+    const result: WebHook[] = await WebHook.find({where: {chatId}});
 
-    @CreateDateColumn()
-    createdAt: Date;
+    if (!result.length)
+        return `You have no repositories added.`;
+
+    return [
+        `Connected repositories:`,
+        ...result.map(repo => `__[${repo.repository}]__`),
+    ];
 }

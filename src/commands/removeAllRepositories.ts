@@ -24,16 +24,24 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
+import CommandError from "../core/CommandError";
+import WebHook from "../entities/WebHook";
+import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
+import checkAdmin from "../core/checkAdmin";
 
-@Entity()
-export default class Chat extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+export default async function removeRepository(message, match): Promise<CommandFinalMessageSync> {
+    const usage = [
+        `Usage: /remove_all`,
+        `Example: /remove_all`
+    ].join("\n");
 
-    @Column()
-    chatId: number;
+    const chatId: number = message.from.id;
+    const telegramName: string = message.from.username;
 
-    @CreateDateColumn()
-    createdAt: Date;
+    if (!await checkAdmin(telegramName, message))
+        throw new CommandError(`User @${telegramName} have no permissions to delete all repositories.`);
+
+    const result = await WebHook.delete({chatId});
+    if (!result.affected) throw new CommandError(`You have no repositories to delete.`);
+    return `Successfully deleted all repositories.`;
 }

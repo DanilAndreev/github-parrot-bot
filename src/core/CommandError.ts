@@ -24,16 +24,15 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
-
-@Entity()
-export default class Chat extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Column()
-    chatId: number;
-
-    @CreateDateColumn()
-    createdAt: Date;
+export default class CommandError extends Error {
+    constructor(...text: string[]) {
+        const message = text.join("\n");
+        super(message);
+    }
+    public addUsage(usage: string | string[]) {
+        let text = usage;
+        if (Array.isArray(text)) text = text.join("\n");
+        this.message = this.message + "\n" + text;
+        return this;
+    }
 }

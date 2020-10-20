@@ -24,16 +24,22 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
+import CommandError from "../core/CommandError";
+import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
+import Collaborator from "../entities/Collaborator";
 
-@Entity()
-export default class Chat extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+export default async function disconnectMeAll(message, match): Promise<CommandFinalMessageSync> {
+    const usage = [
+        `Usage: /disconnect_me`,
+        `Example: /disconnect_me`
+    ].join("\n");
 
-    @Column()
-    chatId: number;
+    const chatId: number = message.from.id;
+    const telegramName = message.from.username;
 
-    @CreateDateColumn()
-    createdAt: Date;
+    const result = await Collaborator.delete({chatId, telegramName});
+
+    if (!result.affected)
+        throw new CommandError(`User @${telegramName} has no AKA.`);
+    return `Successfully deleted all AKAs for @${telegramName}`;
 }

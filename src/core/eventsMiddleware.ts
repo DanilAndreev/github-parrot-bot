@@ -24,16 +24,9 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Context, Next} from "koa";
 
-@Entity()
-export default class Chat extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+export default function eventsMiddleware(ctx: Context, next: Next) {
+    const body = ctx.request.body;
 
-    @Column()
-    chatId: number;
-
-    @CreateDateColumn()
-    createdAt: Date;
 }

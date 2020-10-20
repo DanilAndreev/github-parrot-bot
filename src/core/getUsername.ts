@@ -24,16 +24,10 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
-
-@Entity()
-export default class Chat extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Column()
-    chatId: number;
-
-    @CreateDateColumn()
-    createdAt: Date;
+export default function getUsername(user: string) {
+    if (!user.length) return undefined;
+    if (user[0] !== "@") {
+        return user;
+    }
+    return user.slice(1);
 }

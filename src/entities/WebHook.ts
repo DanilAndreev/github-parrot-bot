@@ -24,17 +24,24 @@
  * SOFTWARE.
  */
 
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity()
-export class WebHook {
+export default class WebHook extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
+
     @Column()
     chatId: number;
+
     @Column()
     secret: string;
+
     @Column()
+    secretPreview: string;
+
+    @Column()
+    repository: string;
 
     @CreateDateColumn()
     createdAt: Date;

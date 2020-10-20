@@ -24,16 +24,24 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
+import Collaborator from "../entities/Collaborator";
 
-@Entity()
-export default class Chat extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+export default async function listAKA(message, match): Promise<CommandFinalMessageSync> {
+    const usage = [
+        `Usage: /akas`,
+        `Example: /akas`
+    ].join("\n");
 
-    @Column()
-    chatId: number;
+    const chatId: number = message.from.id;
 
-    @CreateDateColumn()
-    createdAt: Date;
+    const result: Collaborator[] = await Collaborator.find({where: {chatId}});
+
+    if (!result.length)
+        return `This chat have no AKAs.`;
+
+    return [
+        `All AKAs for this chat:`,
+        ...result.map(collaboration => `AKA: __[${collaboration.gitHubName}]__ -> @${collaboration.telegramName}`),
+    ];
 }

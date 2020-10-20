@@ -24,16 +24,11 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
 
-@Entity()
-export default class Chat extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Column()
-    chatId: number;
-
-    @CreateDateColumn()
-    createdAt: Date;
+export default function createSecretPreview(secret: string) {
+    if (secret.length < 4) throw new RangeError("Error: secret is too short. It must be at least 4 symbols in length.");
+    const head: string = secret.slice(0, 2);
+    const tail: string = secret.slice(secret.length - 2, secret.length);
+    const preview: string = head + "********" + tail;
+    return preview;
 }

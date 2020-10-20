@@ -24,16 +24,28 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
+import * as TelegramBot from "node-telegram-bot-api";
+import CommandError from "./CommandError";
+import {Bot} from "./Bot";
+import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
 
-@Entity()
-export default class Chat extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+export type BotHandler = (msg: TelegramBot.Message, match: RegExpExecArray) => CommandFinalMessageSync | Promise<CommandFinalMessageSync>;
 
-    @Column()
-    chatId: number;
-
-    @CreateDateColumn()
-    createdAt: Date;
+const makeCommand = (handler: BotHandler) => async (msg: TelegramBot.Message, match: RegExpExecArray): Promise<void> => {
+    try {
+        let result = await handler(msg, match);
+        if (Array.isArray(result)) result = result.join("\n");
+        if (result) await Bot.sendMessage(msg.from.id, result, {parse_mode: "Markdown"});
+    } catch (error) {
+        if (error instanceof CommandError) {
+            const message = error.message;
+            Bot.sendMessage(msg.from.id, "Error: \n" + message, {parse_mode: "Markdown"}).catch(error => {
+                throw error;
+            });
+        } else {
+            throw error;
+        }
+    }
 }
+
+export default makeCommand;

@@ -1,5 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Run with TSC" type="NodeJSConfigurationType" application-parameters="--project tsconfig.json" node-parameters="--require ts-node/register" path-to-js-file="src/index.ts" working-dir="$PROJECT_DIR$">
+    <envs>
+      <env name="TELEGRAM_BOT_TOKEN" value="1329471372:AAFbQEq8b5mRF_OEUdfaaBq506VIrqhuz-E" />
+    </envs>
     <method v="2">
       <option name="NpmBeforeRunTask" enabled="true">
         <package-json value="$PROJECT_DIR$/package.json" />

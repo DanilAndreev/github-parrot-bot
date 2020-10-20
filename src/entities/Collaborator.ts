@@ -27,12 +27,18 @@
 import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity()
-export default class Chat extends BaseEntity {
+export default class Collaborator extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
     chatId: number;
+
+    @Column()
+    gitHubName: string;
+
+    @Column()
+    telegramName: string;
 
     @CreateDateColumn()
     createdAt: Date;
