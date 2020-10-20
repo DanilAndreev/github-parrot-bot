@@ -10,8 +10,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[issueEvent] Screening symbols.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[issueEvent] Added hashtag to issue.">
       <change beforePath="$PROJECT_DIR$/src/events/issueEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/issueEvent.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -252,7 +251,28 @@
       <option name="project" value="LOCAL" />
       <updated>1603197525663</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="[issueEvent] Screening symbols.">
+      <created>1603197953351</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1603197953351</updated>
+    </task>
+    <task id="LOCAL-00026" summary="[issueEvent] Added hashtag to issue.">
+      <created>1603198230493</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1603198230493</updated>
+    </task>
+    <task id="LOCAL-00027" summary="[issueEvent] Added hashtag to issue.">
+      <created>1603198250883</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1603198250883</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -291,7 +311,8 @@
     <MESSAGE value="[issueEvent] Added markdown parser to message." />
     <MESSAGE value="[issueEvent] Changed message parser markdownV2" />
     <MESSAGE value="[issueEvent] Screening symbols." />
-    <option name="LAST_COMMIT_MESSAGE" value="[issueEvent] Screening symbols." />
+    <MESSAGE value="[issueEvent] Added hashtag to issue." />
+    <option name="LAST_COMMIT_MESSAGE" value="[issueEvent] Added hashtag to issue." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2334" y="175" width="1092" height="738" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603192024324">
@@ -400,11 +421,11 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2381" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603112891334" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1603197793558">
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1603198252791">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603149503010" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603197793558" />
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603198252791" />
     <state x="-1928" y="-8" width="1392" height="717" maximized="true" key="dock-window-1" timestamp="1603184716451">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
