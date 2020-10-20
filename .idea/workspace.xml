@@ -10,13 +10,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[index] Small changes.">
-      <change afterPath="$PROJECT_DIR$/src/events/issueEvent.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/events/pullRequestEvent.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[webhook] Created basic issue event handler.">
+      <change afterPath="$PROJECT_DIR$/src/core/getAkaAlias.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/eventsMiddleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/eventsMiddleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/issueEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/issueEvent.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,7 +203,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603191972977</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="[webhook] Created basic issue event handler.">
+      <created>1603194608061</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1603194608061</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,7 +242,8 @@
     <MESSAGE value="[Bot] Added repository add." />
     <MESSAGE value="[Commands] Added repository management commands." />
     <MESSAGE value="[config] Added env support." />
-    <option name="LAST_COMMIT_MESSAGE" value="[config] Added env support." />
+    <MESSAGE value="[webhook] Created basic issue event handler." />
+    <option name="LAST_COMMIT_MESSAGE" value="[webhook] Created basic issue event handler." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2334" y="175" width="1092" height="738" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603192024324">
@@ -347,11 +352,11 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2381" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603112891334" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1603192652337">
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1603194611031">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603149503010" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603192652337" />
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603194611031" />
     <state x="-1928" y="-8" width="1392" height="717" maximized="true" key="dock-window-1" timestamp="1603184716451">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>

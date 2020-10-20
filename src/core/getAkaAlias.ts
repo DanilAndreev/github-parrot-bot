@@ -24,34 +24,11 @@
  * SOFTWARE.
  */
 
-import {Issues} from "github-webhook-event-types";
-import {Bot} from "../core/Bot";
-import WebHook from "../entities/WebHook";
-import getAkaAlias from "../core/getAkaAlias";
+import Collaborator from "../entities/Collaborator";
 
-export default async function issueEvent(payload: Issues): Promise<void> {
-    const {action, issue, repository} = payload;
 
-    const webHooks: WebHook[] = await WebHook.find({where: {repository: repository.full_name}});
-
-    for (const webHook of webHooks) {
-        let assignees: string = (await Promise.all(
-            issue.assignees.map(assignee => getAkaAlias(assignee.login, webHook.chatId)))
-        ).join(" ");
-
-        const message = [
-            repository.full_name,
-            `Issue ${issue.state}.   #${issue.number}`,
-            `${issue.title}`,
-            `${issue.body}`,
-            `--------`,
-            `Opened by: ${await getAkaAlias(issue.user.login, webHook.chatId)}`,
-            `Assigners: ${assignees}`,
-            `--------`,
-            issue.labels.map(label => label.name).join(" "),
-            `--------`,
-            `milestone: ${issue.milestone}`,
-        ].join("\n");
-        await Bot.sendMessage(webHook.chatId, message);
-    }
+export default async function getAkaAlias(githubUsername: string, chatId: number) {
+    const aka: Collaborator = await Collaborator.findOne({where: {chatId, gitHubName: githubUsername}});
+    if (aka) return "@" + aka.telegramName;
+    return githubUsername;
 }
