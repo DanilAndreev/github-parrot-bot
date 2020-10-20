@@ -31,7 +31,7 @@ import moment = require("moment");
 export default async function useIssue(issueId: number, chatId: number): Promise<number> {
     const result: Issue = await Issue.findOne({where: {chatId, issueId}});
     if (result) {
-        if (result?.updatedAt && moment(result.updatedAt) <  moment().subtract(1, "day")) {
+        if (result?.updatedAt && moment(result.updatedAt) <  moment().subtract(1, "hour")) {
             await Issue.delete({id: result.id});
             return undefined;
         }
