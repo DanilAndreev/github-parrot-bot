@@ -37,11 +37,12 @@ import disconnectMeAll from "../commands/disconnectMeAll";
 import removeAKA from "../commands/removeAKA";
 import clearAKA from "../commands/clearAKA";
 import listAKA from "../commands/listAKA";
+import config from "../config";
 
 export let Bot: TelegramBot | null = null;
 
 export default function CreateBot(): TelegramBot {
-    const token = process.env.TELEGRAM_BOT_TOKEN;
+    const token = config.bot.token;
 
     if (!token)
         throw new Error(`FatalError: you must specify token to run this app! "token" = "${token}".`);
