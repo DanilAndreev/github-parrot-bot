@@ -30,6 +30,7 @@
   "dependencies": {
     "@types/argon2": "^0.15.0",
     "argon2": "^0.27.0",
+    "github-webhook-event-types": "^1.2.1",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
     "koa-cors": "^0.0.16",

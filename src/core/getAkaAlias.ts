@@ -24,18 +24,11 @@
  * SOFTWARE.
  */
 
-import {Context, Next} from "koa";
-import pullRequestEvent from "../events/pullRequestEvent";
-import issueEvent from "../events/issueEvent";
-import {Issues, PullRequest} from "github-webhook-event-types";
+import Collaborator from "../entities/Collaborator";
 
-export default async function eventsMiddleware(ctx: Context, next: Next): Promise<void> {
-    const payload = ctx.request.body;
 
-    if (payload.pull_request) {
-        await pullRequestEvent(payload as PullRequest);
-    } else if (payload.issue) {
-        await issueEvent(payload as Issues);
-    }
-
+export default async function getAkaAlias(githubUsername: string, chatId: number) {
+    const aka: Collaborator = await Collaborator.findOne({where: {chatId, gitHubName: githubUsername}});
+    if (aka) return "@" + aka.telegramName;
+    return githubUsername;
 }

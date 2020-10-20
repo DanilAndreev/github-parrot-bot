@@ -31,6 +31,7 @@ import * as BodyParser from "koa-bodyparser";
 import {setupDbConnection} from "./core/DataBase";
 import {initBot} from "./core/Bot";
 import config from "./config";
+import eventsMiddleware from "./core/eventsMiddleware";
 
 
 async function main() {
@@ -48,6 +49,8 @@ async function main() {
 
         await next;
     });
+
+    server.use(eventsMiddleware);
 
     console.log("Server is listening on port", config.server.port);
 
