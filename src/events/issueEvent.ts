@@ -47,18 +47,18 @@ export default async function issueEvent(payload: Issues): Promise<void> {
         const milestone = issue.milestone;
 
         const message = [
-            `[__${repository.full_name} \#${issue.number}__](${issue.html_url})`,
+            `[*${repository.full_name} #${issue.number}*](${issue.html_url})`,
             `Issue _${issue.state}_`,
-            `__${issue.title}__`,
+            `*${issue.title}*`,
             issue.body,
             `--------`,
-            `Opened by: __${await getAkaAlias(issue.user.login, webHook.chatId)}__`,
-            assignees && `Assigners: __${assignees}__`,
+            `Opened by: *${await getAkaAlias(issue.user.login, webHook.chatId)}*`,
+            assignees && `Assigners: *${assignees}*`,
             issue.labels && `--------`,
-            issue.labels && issue.labels.map(label => `__${label.name}__`).join("\n"),
+            issue.labels && issue.labels.map(label => `*${label.name}*`).join("\n"),
             milestone && `--------`,
             milestone && `Milestone: _${milestone.title} ${moment(milestone.due_on).format("ll") || ""}_`,
         ].join("\n");
-        await Bot.sendMessage(webHook.chatId, message, {parse_mode: "MarkdownV2"});
+        await Bot.sendMessage(webHook.chatId, message, {parse_mode: "Markdown"});
     }
 }
