@@ -49,12 +49,13 @@ export default async function connectMe(message, match): Promise<CommandFinalMes
         );
 
 
-    try {
-        await Bot.getChatMember(chatId, telegramName);
-    } catch (error) {
-        if (message.chat.username !== telegramName)
-            return `User ${telegramName} is not belong to this chat.`;
-    }
+    // TODO: fix bug in groups.
+    // try {
+    //     await Bot.getChatMember(chatId, telegramName);
+    // } catch (error) {
+    //     if (message.chat.username !== telegramName)
+    //         return `User ${telegramName} is not belong to this chat.`;
+    // }
 
     const storedCollaborator = await Collaborator.findOne({where: {chatId, gitHubName: ghName}});
     if (storedCollaborator)
