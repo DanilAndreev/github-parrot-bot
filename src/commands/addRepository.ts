@@ -59,7 +59,7 @@ export default async function addRepository(message, match): Promise<CommandFina
 
 
     const webhook = new WebHook();
-    webhook.secret = await argon2.hash(secret);
+    webhook.secret = secret;
     webhook.secretPreview = createSecretPreview(secret);
     webhook.chatId = chatId;
     webhook.repository = repository;
