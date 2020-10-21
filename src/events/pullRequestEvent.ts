@@ -25,7 +25,8 @@
  */
 
 import {PullRequest} from "github-webhook-event-types";
+import {Context} from "koa";
 
-export default async function pullRequestEvent(payload: PullRequest) {
+export default async function pullRequestEvent(payload: PullRequest, ctx: Context) {
     const {action} = payload;
 }

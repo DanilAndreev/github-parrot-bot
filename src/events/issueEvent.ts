@@ -31,13 +31,23 @@ import getAkaAlias from "../core/getAkaAlias";
 import moment = require("moment");
 import useIssue from "../core/useIssue";
 import Issue from "../entities/Issue";
+import {Context} from "koa";
+import * as Crypto from "crypto";
 
-export default async function issueEvent(payload: Issues): Promise<void> {
+export default async function issueEvent(payload: Issues, ctx: Context): Promise<void> {
     const {action, issue, repository} = payload;
 
     const webHooks: WebHook[] = await WebHook.find({where: {repository: repository.full_name}});
 
     for (const webHook of webHooks) {
+        const externalSignature = ctx.request.header["x-hub-signature"];
+        const expectedSignature = "sha1=" + Crypto.createHmac("sha1", webHook.secret)
+            .update(JSON.stringify(payload))
+            .digest("hex");
+        if (expectedSignature !== externalSignature) {
+            continue;
+        }
+
         let assignees: string = (await Promise.all(
             issue.assignees.map(assignee => getAkaAlias(assignee.login, webHook.chatId)))
         ).join(" ");
