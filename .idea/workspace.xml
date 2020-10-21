@@ -12,7 +12,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[issueEvent] Changed from.id to chat.id.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/makeCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/makeCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/checkAdmin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/checkAdmin.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +31,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="development" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -295,7 +295,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603203372841</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="[makeCommand] Changed from.id to chat.id.">
+      <created>1603283490889</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1603283490889</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,7 +345,8 @@
     <MESSAGE value="[issueEvent] Finished issues." />
     <MESSAGE value="[issueEvent] Styled separators." />
     <MESSAGE value="[issueEvent] Changed message cache deleting time." />
-    <option name="LAST_COMMIT_MESSAGE" value="[issueEvent] Changed message cache deleting time." />
+    <MESSAGE value="[makeCommand] Changed from.id to chat.id." />
+    <option name="LAST_COMMIT_MESSAGE" value="[makeCommand] Changed from.id to chat.id." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2334" y="175" width="1092" height="738" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603192024324">
@@ -447,11 +455,11 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2381" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603112891334" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1603283139254">
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1603283505819">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603149503010" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603283139254" />
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603283505819" />
     <state x="-1928" y="-8" width="1392" height="717" maximized="true" key="dock-window-1" timestamp="1603184716451">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
