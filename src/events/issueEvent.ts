@@ -45,9 +45,9 @@ export default async function issueEvent(payload: Issues, ctx: Context): Promise
         const expectedSignature = "sha1=" + Crypto.createHmac("sha1", webHook.secret)
             .update(JSON.stringify(payload))
             .digest("hex");
+        console.log(externalSignature, externalSignature);
         if (expectedSignature !== externalSignature) {
             console.log("Secret is failed");
-            console.log(externalSignature, externalSignature);
             continue;
         }
 
