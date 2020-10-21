@@ -42,6 +42,6 @@ export default async function listAKA(message, match): Promise<CommandFinalMessa
 
     return [
         `All AKAs for this chat:`,
-        ...result.map(collaboration => `AKA: __[${collaboration.gitHubName}]__ -> @${collaboration.telegramName}`),
+        ...result.map(collaboration => `AKA: *[${collaboration.gitHubName}]* -> @${collaboration.telegramName}`),
     ];
 }

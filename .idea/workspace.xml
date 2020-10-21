@@ -10,8 +10,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[issueEvent] Added debuggers.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[issueEvent] Removed debuggers.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/listAKA.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/listAKA.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/makeCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/makeCommand.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/issueEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/issueEvent.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,6 +86,7 @@
       <workItem from="1603184712391" duration="2330000" />
       <workItem from="1603195373706" duration="130000" />
       <workItem from="1603280800910" duration="1193000" />
+      <workItem from="1603288151094" duration="1605000" />
     </task>
     <task id="LOCAL-00001" summary="[Global] Initialized repository.">
       <created>1602758176185</created>

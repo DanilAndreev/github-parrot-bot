@@ -33,6 +33,8 @@ import useIssue from "../core/useIssue";
 import Issue from "../entities/Issue";
 import {Context} from "koa";
 import * as Crypto from "crypto";
+import Mock = jest.Mock;
+import {Moment} from "moment";
 
 export default async function issueEvent(payload: Issues, ctx: Context): Promise<void> {
     const {action, issue, repository} = payload;
@@ -53,6 +55,8 @@ export default async function issueEvent(payload: Issues, ctx: Context): Promise
         ).join(" ");
 
         const milestone = issue.milestone;
+        const milestoneDueData: Moment = moment(milestone.due_on);
+        const milestoneDue: string = milestoneDueData ? milestoneDueData.format("ll") : "";
 
         const message = [
             `[${repository.full_name} #${issue.number}](${issue.html_url})`,
@@ -65,7 +69,7 @@ export default async function issueEvent(payload: Issues, ctx: Context): Promise
             issue.labels.length ? `-- Labels -----` : undefined,
             issue.labels.length ? issue.labels.map(label => `*${label.name}*`).join("\n") : undefined,
             milestone && `---------------`,
-            milestone && `Milestone: _${milestone.title} ${moment(milestone.due_on).format("ll") || ""}_ #milestone${milestone.id}`,
+            milestone && `Milestone: _${milestone.title} ${milestoneDue}_ #milestone${milestone.id}`,
         ].join("\n");
 
         try {

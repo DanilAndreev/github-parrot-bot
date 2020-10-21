@@ -39,7 +39,7 @@ const makeCommand = (handler: BotHandler) => async (msg: TelegramBot.Message, ma
     } catch (error) {
         if (error instanceof CommandError) {
             const message = error.message;
-            Bot.sendMessage(msg.chat.id, "Error: \n" + message, {parse_mode: "Markdown"}).catch(error => {
+            Bot.sendMessage(msg.chat.id, "*Error:* \n" + message, {parse_mode: "Markdown"}).catch(error => {
                 throw error;
             });
         } else {
