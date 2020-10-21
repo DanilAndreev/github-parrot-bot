@@ -62,7 +62,7 @@ export default async function removeAllAKA(message, match): Promise<CommandFinal
         `Example: /clear_aka`
     ].join("\n");
 
-    const chatId: number = message.from.id;
+    const chatId: number = message.chat.id;
     const telegramName = message.from.username;
 
     if (!await checkAdmin(telegramName, message))

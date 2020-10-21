@@ -35,7 +35,7 @@ export default async function removeRepository(message, match): Promise<CommandF
         `Example: /remove_all`
     ].join("\n");
 
-    const chatId: number = message.from.id;
+    const chatId: number = message.chat.id;
     const telegramName: string = message.from.username;
 
     if (!await checkAdmin(telegramName, message))

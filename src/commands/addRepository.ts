@@ -38,7 +38,7 @@ export default async function addRepository(message, match): Promise<CommandFina
         `Example: /add DanilAndreev/test_repo webhook_secret_string`
     ].join("\n");
 
-    const chatId: number = message.from.id;
+    const chatId: number = message.chat.id;
     const telegramName: string = message.from.username;
     const [repository, secret] = match[1] && match[1].split(" ");
 

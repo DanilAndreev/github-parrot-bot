@@ -33,7 +33,7 @@ export default async function whoAmI(message, match): Promise<CommandFinalMessag
         `Example: /whoami`
     ].join("\n");
 
-    const chatId: number = message.from.id;
+    const chatId: number = message.chat.id;
     const telegramName = message.from.username;
 
     const result: Collaborator[] = await Collaborator.find({where: {chatId, telegramName}});

@@ -34,7 +34,7 @@ export default async function disconnectMe(message, match): Promise<CommandFinal
         `Example: /disconnect_me DanilAndreev`
     ].join("\n");
 
-    const chatId: number = message.from.id;
+    const chatId: number = message.chat.id;
     const ghName: string = match[1];
     const telegramName = message.from.username;
 

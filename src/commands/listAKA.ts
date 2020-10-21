@@ -33,7 +33,7 @@ export default async function listAKA(message, match): Promise<CommandFinalMessa
         `Example: /akas`
     ].join("\n");
 
-    const chatId: number = message.from.id;
+    const chatId: number = message.chat.id;
 
     const result: Collaborator[] = await Collaborator.find({where: {chatId}});
 

@@ -36,7 +36,7 @@ export default async function removeAKA(message, match): Promise<CommandFinalMes
         `Example: /remove_aka @danssg08 DanilAndreev`
     ].join("\n");
 
-    const chatId: number = message.from.id;
+    const chatId: number = message.chat.id;
     const [tag, ghName] = match[1].split(" ");
     const telegramName = getUsername(tag);
 

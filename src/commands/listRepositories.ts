@@ -33,7 +33,7 @@ export default async function listRepositories(message, match): Promise<CommandF
         `Example: /list`
     ].join("\n");
 
-    const chatId: number = message.from.id;
+    const chatId: number = message.chat.id;
     const result: WebHook[] = await WebHook.find({where: {chatId}});
 
     if (!result.length)

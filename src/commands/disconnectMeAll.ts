@@ -34,7 +34,7 @@ export default async function disconnectMeAll(message, match): Promise<CommandFi
         `Example: /disconnect_me`
     ].join("\n");
 
-    const chatId: number = message.from.id;
+    const chatId: number = message.chat.id;
     const telegramName = message.from.username;
 
     const result = await Collaborator.delete({chatId, telegramName});
