@@ -64,7 +64,11 @@ export default async function addRepository(message, match): Promise<CommandFina
     webhook.chatId = chatId;
     webhook.repository = repository;
     const result = await webhook.save();
-    await Bot.deleteMessage(chatId, "" + message.message_id);
+    try {
+        await Bot.deleteMessage(chatId, "" + message.message_id);
+    } catch (error) {
+        await Bot.sendMessage(chatId, `Warning: You should give permissions to delete messages for GitHub Tracker bot.`);
+    }
     return [
         `Successfully added repository.`,
         `Name: __${result.repository}__`,
