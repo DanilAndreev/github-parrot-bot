@@ -40,14 +40,11 @@ export default async function issueEvent(payload: Issues, ctx: Context): Promise
     const webHooks: WebHook[] = await WebHook.find({where: {repository: repository.full_name}});
 
     for (const webHook of webHooks) {
-        console.log("Looking on chat ", webHook.chatId);
         const externalSignature = ctx.request.header["x-hub-signature"];
         const expectedSignature = "sha1=" + Crypto.createHmac("sha1", webHook.secret)
             .update(JSON.stringify(payload))
             .digest("hex");
-        console.log(externalSignature, externalSignature);
         if (expectedSignature !== externalSignature) {
-            console.log("Secret is failed");
             continue;
         }
 
