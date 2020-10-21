@@ -45,6 +45,8 @@ export default async function issueEvent(payload: Issues, ctx: Context): Promise
             .update(JSON.stringify(payload))
             .digest("hex");
         if (expectedSignature !== externalSignature) {
+            console.log("Secret is failed");
+            console.log(externalSignature, externalSignature);
             continue;
         }
 
