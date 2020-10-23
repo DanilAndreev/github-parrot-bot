@@ -32,5 +32,6 @@ import {AMQP_ISSUES_QUEUE} from "../globals";
 
 export default async function issueEvent(payload: Issues, ctx: Context): Promise<void> {
     const channel: Amqp.Channel = await RabbitMQ.createChannel();
+    await channel.assertQueue(AMQP_ISSUES_QUEUE);
     channel.sendToQueue(AMQP_ISSUES_QUEUE, new Buffer(JSON.stringify({payload, ctx})));
 }

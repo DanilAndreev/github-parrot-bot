@@ -33,6 +33,7 @@ import {initBot} from "./core/Bot";
 import config from "./config";
 import eventsMiddleware from "./core/eventsMiddleware";
 import * as Amqp from "amqplib";
+import setupAmqp from "./core/setupAmqp";
 
 
 export let RabbitMQ: Amqp.Connection = null;
@@ -40,6 +41,7 @@ export let RabbitMQ: Amqp.Connection = null;
 async function main() {
     await setupDbConnection();
     RabbitMQ = await Amqp.connect(config.rabbitmq);
+    await setupAmqp();
 
     const server = new Koa();
     server.use(BodyParser());

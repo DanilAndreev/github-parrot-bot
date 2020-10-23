@@ -31,10 +31,12 @@ import issueHandler from "../handlers/issueHandler";
 
 export default async function setupAmqp(): Promise<void> {
     const issuesChannel: Amqp.Channel = await RabbitMQ.createChannel();
+    await issuesChannel.assertQueue(AMQP_ISSUES_QUEUE);
     await issuesChannel.prefetch(10);
     await issuesChannel.consume(AMQP_ISSUES_QUEUE, issueHandler);
 
     const pullRequestsChannel: Amqp.Channel = await RabbitMQ.createChannel();
+    await pullRequestsChannel.assertQueue(AMQP_PULL_REQUESTS_QUEUE);
     await pullRequestsChannel.prefetch(10);
     await pullRequestsChannel.consume(AMQP_PULL_REQUESTS_QUEUE, issueHandler);
 }

@@ -32,5 +32,6 @@ import {AMQP_PULL_REQUESTS_QUEUE} from "../globals";
 
 export default async function pullRequestEvent(payload: PullRequest, ctx: Context) {
     const channel: Amqp.Channel = await RabbitMQ.createChannel();
+    await channel.assertQueue(AMQP_PULL_REQUESTS_QUEUE);
     channel.sendToQueue(AMQP_PULL_REQUESTS_QUEUE, new Buffer(JSON.stringify({payload, ctx})));
 }
