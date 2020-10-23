@@ -28,7 +28,7 @@ import WebHook from "./entities/WebHook";
 import Chat from "./entities/Chat";
 import {ConnectionOptions} from "typeorm";
 import Collaborator from "./entities/Collaborator";
-import {Issues} from "github-webhook-event-types";
+import * as Amqp from "amqplib";
 import Issue from "./entities/Issue";
 
 export interface BotConfig {
@@ -43,6 +43,7 @@ export interface Config {
     bot: BotConfig;
     db: ConnectionOptions;
     server: ServerConfig;
+    rabbitmq: string | Amqp.Options.Connect,
 }
 
 const config: Config = {
@@ -59,6 +60,7 @@ const config: Config = {
             rejectUnauthorized: false,
         }
     },
+    rabbitmq: process.env.CLOUDQMQP_URL,
     server: {
         port: +process.env.PORT | 3030,
     }

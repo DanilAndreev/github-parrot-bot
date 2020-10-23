@@ -24,42 +24,5 @@
  * SOFTWARE.
  */
 
-import "reflect-metadata";
-import * as Koa from "koa";
-import {Context, Next} from "koa";
-import * as BodyParser from "koa-bodyparser";
-import {setupDbConnection} from "./core/DataBase";
-import {initBot} from "./core/Bot";
-import config from "./config";
-import eventsMiddleware from "./core/eventsMiddleware";
-import * as Amqp from "amqplib";
-
-
-export let RabbitMQ: Amqp.Connection = null;
-
-async function main() {
-    await setupDbConnection();
-    RabbitMQ = await Amqp.connect(config.rabbitmq);
-
-    const server = new Koa();
-    server.use(BodyParser());
-
-    server.use(eventsMiddleware);
-
-    server.use(async (ctx: Context, next: Next) => {
-        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        console.log(ctx);
-        console.log("--- BODY -----------------------------------------------------------------");
-        console.log(ctx.request.body);
-
-        await next;
-    });
-
-
-    console.log("Server is listening on port", config.server.port);
-
-    initBot();
-    server.listen(process.env.PORT || config.server.port);
-}
-
-main().then();
+export const AMQP_ISSUES_QUEUE = "issues";
+export const AMQP_PULL_REQUESTS_QUEUE = "pull_requests";

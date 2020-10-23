@@ -25,62 +25,12 @@
  */
 
 import {Issues} from "github-webhook-event-types";
-import {Bot} from "../core/Bot";
-import WebHook from "../entities/WebHook";
-import getAkaAlias from "../core/getAkaAlias";
-import moment = require("moment");
-import useIssue from "../core/useIssue";
-import Issue from "../entities/Issue";
 import {Context} from "koa";
-import * as Crypto from "crypto";
-import {Moment} from "moment";
+import {RabbitMQ} from "../index";
+import * as Amqp from "amqplib";
+import {AMQP_ISSUES_QUEUE} from "../globals";
 
 export default async function issueEvent(payload: Issues, ctx: Context): Promise<void> {
-    const {action, issue, repository} = payload;
-
-    const webHooks: WebHook[] = await WebHook.find({where: {repository: repository.full_name}});
-
-    for (const webHook of webHooks) {
-        const externalSignature = ctx.request.header["x-hub-signature"];
-        const expectedSignature = "sha1=" + Crypto.createHmac("sha1", webHook.secret)
-            .update(JSON.stringify(payload))
-            .digest("hex");
-        if (expectedSignature !== externalSignature) {
-            continue;
-        }
-
-        let assignees: string = (await Promise.all(
-            issue.assignees.map(assignee => getAkaAlias(assignee.login, webHook.chatId)))
-        ).join(" ");
-
-        const milestone = issue.milestone;
-        const milestoneDueData: Moment = moment(milestone.due_on);
-        const milestoneDue: string = milestoneDueData ? milestoneDueData.format("ll") : "";
-
-        const message = [
-            `[${repository.full_name} #${issue.number}](${issue.html_url})`,
-            `#issue _${issue.state}_`,
-            `*${issue.title}*`,
-            issue.body,
-            `-- Assignees --`,
-            `Opened by: ${await getAkaAlias(issue.user.login, webHook.chatId)}`,
-            assignees && `Assigners: ${assignees}`,
-            issue.labels.length ? `-- Labels -----` : undefined,
-            issue.labels.length ? issue.labels.map(label => `*${label.name}*`).join("\n") : undefined,
-            milestone && `---------------`,
-            milestone && `Milestone: _${milestone.title} ${milestoneDue}_ #milestone${milestone.id}`,
-        ].join("\n");
-
-        try {
-            const messageId = await useIssue(issue.id, webHook.chatId);
-            await Bot.editMessageText(message, {chat_id: webHook.chatId, message_id: messageId, parse_mode: "Markdown"});
-        } catch (error) {
-            const result = await Bot.sendMessage(webHook.chatId, message, {parse_mode: "Markdown"});
-            const newIssue = new Issue();
-            newIssue.chatId = webHook.chatId;
-            newIssue.messageId = result.message_id;
-            newIssue.issueId = issue.id;
-            await newIssue.save();
-        }
-    }
+    const channel: Amqp.Channel = await RabbitMQ.createChannel();
+    channel.sendToQueue(AMQP_ISSUES_QUEUE, new Buffer(JSON.stringify({payload, ctx})));
 }
