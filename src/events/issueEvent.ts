@@ -33,7 +33,6 @@ import useIssue from "../core/useIssue";
 import Issue from "../entities/Issue";
 import {Context} from "koa";
 import * as Crypto from "crypto";
-import Mock = jest.Mock;
 import {Moment} from "moment";
 
 export default async function issueEvent(payload: Issues, ctx: Context): Promise<void> {
