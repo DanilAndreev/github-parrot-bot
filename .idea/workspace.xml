@@ -10,12 +10,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[AMQP] Setted up.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[AMQP] Fixed incorrect queues asserting.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/setupAmqp.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/setupAmqp.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/issueEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/issueEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/pullRequestEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/pullRequestEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/issueHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/issueHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/pullRequestHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/pullRequestHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +90,7 @@
       <workItem from="1603195373706" duration="130000" />
       <workItem from="1603280800910" duration="1193000" />
       <workItem from="1603288151094" duration="1605000" />
-      <workItem from="1603454535572" duration="4311000" />
+      <workItem from="1603454535572" duration="4658000" />
     </task>
     <task id="LOCAL-00001" summary="[Global] Initialized repository.">
       <created>1602758176185</created>
@@ -359,7 +358,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603458509420</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="[AMQP] Fixed incorrect queues asserting.">
+      <created>1603459024722</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1603459024722</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -378,7 +384,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[deploy] Changed package scripts for heroku deployment." />
     <MESSAGE value="[koa] Initialized server." />
     <MESSAGE value="[Server] Added request echo." />
     <MESSAGE value="[Bot] Added repository add." />
@@ -403,7 +408,8 @@
     <MESSAGE value="[issueEvent] Design changes." />
     <MESSAGE value="[pullRequestEvent] Created." />
     <MESSAGE value="[AMQP] Setted up." />
-    <option name="LAST_COMMIT_MESSAGE" value="[AMQP] Setted up." />
+    <MESSAGE value="[AMQP] Fixed incorrect queues asserting." />
+    <option name="LAST_COMMIT_MESSAGE" value="[AMQP] Fixed incorrect queues asserting." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2334" y="175" width="1092" height="738" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603457231738">
@@ -524,11 +530,11 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2381" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603112891334" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1603458513042">
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1603459027747">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603149503010" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603458513042" />
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603459027747" />
     <state x="-1928" y="-8" width="1392" height="717" maximized="true" key="dock-window-1" timestamp="1603184716451">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>

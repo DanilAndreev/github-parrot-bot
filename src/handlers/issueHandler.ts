@@ -36,7 +36,7 @@ import * as Crypto from "crypto";
 import {Moment} from "moment";
 import * as Amqp from "amqplib";
 
-export default async function issueHandler(msg: Amqp.Message): Promise<void> {
+export default async function issueHandler(msg: Amqp.Message, channel: Amqp.Channel): Promise<void> {
     async function handler(payload: Issues, ctx: Context): Promise<void> {
         const {action, issue, repository} = payload;
 
@@ -88,4 +88,5 @@ export default async function issueHandler(msg: Amqp.Message): Promise<void> {
     }
     const {payload, ctx} = JSON.parse(msg.content.toString());
     await handler(payload, ctx);
+    channel.ack(msg);
 }

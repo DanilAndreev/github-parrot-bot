@@ -34,7 +34,7 @@ import {Bot} from "../core/Bot";
 import Issue from "../entities/Issue";
 import * as Amqp from "amqplib";
 
-export default async function pullRequestHandler(msg: Amqp.Message): Promise<void> {
+export default async function pullRequestHandler(msg: Amqp.Message, channel: Amqp.Channel): Promise<void> {
     async function handler(payload: PullRequest, ctx: Context) {
         const {action, pull_request: pullRequest, repository} = payload;
 
@@ -90,4 +90,5 @@ export default async function pullRequestHandler(msg: Amqp.Message): Promise<voi
     }
     const {payload, ctx} = JSON.parse(msg.content.toString());
     await handler(payload, ctx);
+    channel.ack(msg);
 }
