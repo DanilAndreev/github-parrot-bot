@@ -64,4 +64,4 @@ async function main() {
     server.listen(process.env.PORT || config.server.port);
 }
 
-main().then();
+main().catch(console.error);

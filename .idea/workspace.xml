@@ -12,9 +12,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[AMQP] Fixed incorrect queues asserting.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/setupAmqp.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/setupAmqp.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/issueHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/issueHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/pullRequestHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/pullRequestHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +88,7 @@
       <workItem from="1603195373706" duration="130000" />
       <workItem from="1603280800910" duration="1193000" />
       <workItem from="1603288151094" duration="1605000" />
-      <workItem from="1603454535572" duration="4658000" />
+      <workItem from="1603454535572" duration="5008000" />
     </task>
     <task id="LOCAL-00001" summary="[Global] Initialized repository.">
       <created>1602758176185</created>
@@ -365,7 +363,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603459024722</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="[AMQP] Fixed incorrect queues asserting.">
+      <created>1603459364268</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1603459364268</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -530,11 +535,11 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2381" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603112891334" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1603459027747">
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1603459366747">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603149503010" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603459027747" />
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603459366747" />
     <state x="-1928" y="-8" width="1392" height="717" maximized="true" key="dock-window-1" timestamp="1603184716451">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
