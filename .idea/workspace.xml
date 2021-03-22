@@ -11,8 +11,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[yarn] Removed log file.">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/listRepositories.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/listRepositories.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/makeCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/makeCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Chat.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Chat.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Collaborator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Collaborator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Issue.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Issue.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/WebHook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/WebHook.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +51,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
-    <property name="javascript.nodejs.core.library.typings.version" value="12.12.67" />
+    <property name="javascript.nodejs.core.library.typings.version" value="12.20.6" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -56,7 +62,7 @@
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="ts.external.directory.path" value="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\Projects\github-tracker-telegram-bot\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -97,6 +103,7 @@
       <workItem from="1612525867131" duration="590000" />
       <workItem from="1616418486141" duration="1900000" />
       <workItem from="1616420648360" duration="1671000" />
+      <workItem from="1616434459208" duration="7768000" />
     </task>
     <task id="LOCAL-00001" summary="[Global] Initialized repository.">
       <created>1602758176185</created>
@@ -452,108 +459,14 @@
     <MESSAGE value="[yarn] Removed log file." />
     <option name="LAST_COMMIT_MESSAGE" value="[yarn] Removed log file." />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="2360" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616419501843">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2360" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616419501843" />
-    <state x="2773" y="261" width="616" height="640" key="EnvironmentVariablesDialog" timestamp="1612359381348">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2773" y="261" width="616" height="640" key="EnvironmentVariablesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612359381348" />
-    <state x="2686" y="266" key="FileChooserDialogImpl" timestamp="1612359037775">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2686" y="266" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612359037775" />
-    <state width="1899" height="353" key="GridCell.Tab.0.bottom" timestamp="1616422271644">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="353" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616422271644" />
-    <state width="1899" height="353" key="GridCell.Tab.0.center" timestamp="1616422271644">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="353" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616422271644" />
-    <state width="1899" height="353" key="GridCell.Tab.0.left" timestamp="1616422271644">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="353" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616422271644" />
-    <state width="1899" height="353" key="GridCell.Tab.0.right" timestamp="1616422271644">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="353" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616422271644" />
-    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1616420407037">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
-    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1616420407021">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407021" />
-    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1616420407021">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407021" />
-    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1616420407037">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
-    <state width="1899" height="348" key="GridCell.Tab.2.bottom" timestamp="1616420407037">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.2.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
-    <state width="1899" height="348" key="GridCell.Tab.2.center" timestamp="1616420407037">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.2.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
-    <state width="1899" height="348" key="GridCell.Tab.2.left" timestamp="1616420407037">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.2.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
-    <state width="1899" height="348" key="GridCell.Tab.2.right" timestamp="1616420407037">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.2.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
-    <state width="1899" height="348" key="GridCell.Tab.3.bottom" timestamp="1616420407037">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.3.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
-    <state width="1899" height="348" key="GridCell.Tab.3.center" timestamp="1616420407037">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.3.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
-    <state width="1899" height="348" key="GridCell.Tab.3.left" timestamp="1616420407037">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.3.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
-    <state width="1899" height="348" key="GridCell.Tab.3.right" timestamp="1616420407037">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
-    <state x="2563" y="222" key="RollbackChangesDialog" timestamp="1612358310575">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2563" y="222" key="RollbackChangesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612358310575" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1616422406609">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616422406609" />
-    <state x="2697" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1616418652120">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2697" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616418652120" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/config.ts</url>
-          <line>48</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/core/Bot.ts</url>
-          <line>44</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/src/commands/listRepositories.ts</url>
+          <line>35</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

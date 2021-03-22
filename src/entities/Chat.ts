@@ -31,7 +31,7 @@ export default class Chat extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({type: "bigint"})
     chatId: number;
 
     @CreateDateColumn()

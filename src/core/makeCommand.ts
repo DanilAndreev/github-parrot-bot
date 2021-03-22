@@ -35,12 +35,12 @@ const makeCommand = (handler: BotHandler) => async (msg: TelegramBot.Message, ma
     try {
         let result = await handler(msg, match);
         if (Array.isArray(result)) result = result.join("\n");
-        if (result) await Bot.sendMessage(msg.chat.id, result, {parse_mode: "Markdown"});
+        if (result) await Bot.sendMessage(msg.chat.id, result, {parse_mode: "HTML"});
     } catch (error) {
         if (error instanceof CommandError) {
             const message = error.message;
-            Bot.sendMessage(msg.chat.id, "*Error:* \n" + message, {parse_mode: "Markdown"}).catch(error => {
-                throw error;
+            Bot.sendMessage(msg.chat.id, "<i>Error:</i> \n" + message, {parse_mode: "HTML"}).catch(err => {
+                throw err;
             });
         } else {
             throw error;
