@@ -7,5 +7,6 @@ build/
 .env.*
 .env
 
-# Git crypt key
-key
+# yarn
+yarn-error.log
+

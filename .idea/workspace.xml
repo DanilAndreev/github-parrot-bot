@@ -10,7 +10,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[babel] Removed." />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[yarn] Removed log file.">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -93,7 +96,7 @@
       <workItem from="1612444704459" duration="594000" />
       <workItem from="1612525867131" duration="590000" />
       <workItem from="1616418486141" duration="1900000" />
-      <workItem from="1616420648360" duration="1449000" />
+      <workItem from="1616420648360" duration="1671000" />
     </task>
     <task id="LOCAL-00001" summary="[Global] Initialized repository.">
       <created>1602758176185</created>
@@ -396,7 +399,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616422400306</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="[yarn] Removed log file.">
+      <created>1616422637275</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1616422637275</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -415,7 +425,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[Commands] Added repository management commands." />
     <MESSAGE value="[config] Added env support." />
     <MESSAGE value="[webhook] Created basic issue event handler." />
     <MESSAGE value="[issueEvent] Added AKA mechanism." />
@@ -440,7 +449,8 @@
     <MESSAGE value="[SECURITY] Removed git-crypt and added .env parser." />
     <MESSAGE value="[project] Changed structure a little to load envs from file." />
     <MESSAGE value="[babel] Removed." />
-    <option name="LAST_COMMIT_MESSAGE" value="[babel] Removed." />
+    <MESSAGE value="[yarn] Removed log file." />
+    <option name="LAST_COMMIT_MESSAGE" value="[yarn] Removed log file." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2360" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616419501843">
