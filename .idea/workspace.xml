@@ -10,14 +10,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[SECURITY] Removed git-crypt and added .env parser.">
-      <change afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[project] Changed structure a little to load envs from file.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/setupAmqp.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/setupAmqp.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/issueEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/issueEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/pullRequestEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/pullRequestEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/babel.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +98,7 @@
       <workItem from="1612444704459" duration="594000" />
       <workItem from="1612525867131" duration="590000" />
       <workItem from="1616418486141" duration="1900000" />
-      <workItem from="1616420648360" duration="110000" />
+      <workItem from="1616420648360" duration="1401000" />
     </task>
     <task id="LOCAL-00001" summary="[Global] Initialized repository.">
       <created>1602758176185</created>
@@ -390,7 +387,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616419232631</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="[project] Changed structure a little to load envs from file.">
+      <created>1616420786356</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1616420786356</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -409,7 +413,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[Server] Added request echo." />
     <MESSAGE value="[Bot] Added repository add." />
     <MESSAGE value="[Commands] Added repository management commands." />
     <MESSAGE value="[config] Added env support." />
@@ -434,7 +437,8 @@
     <MESSAGE value="[AMQP] Setted up." />
     <MESSAGE value="[AMQP] Fixed incorrect queues asserting." />
     <MESSAGE value="[SECURITY] Removed git-crypt and added .env parser." />
-    <option name="LAST_COMMIT_MESSAGE" value="[SECURITY] Removed git-crypt and added .env parser." />
+    <MESSAGE value="[project] Changed structure a little to load envs from file." />
+    <option name="LAST_COMMIT_MESSAGE" value="[project] Changed structure a little to load envs from file." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2360" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616419501843">
@@ -449,22 +453,22 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2686" y="266" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612359037775" />
-    <state width="1899" height="353" key="GridCell.Tab.0.bottom" timestamp="1616420692113">
+    <state width="1899" height="353" key="GridCell.Tab.0.bottom" timestamp="1616422271644">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="353" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420692113" />
-    <state width="1899" height="353" key="GridCell.Tab.0.center" timestamp="1616420692113">
+    <state width="1899" height="353" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616422271644" />
+    <state width="1899" height="353" key="GridCell.Tab.0.center" timestamp="1616422271644">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="353" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420692113" />
-    <state width="1899" height="353" key="GridCell.Tab.0.left" timestamp="1616420692113">
+    <state width="1899" height="353" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616422271644" />
+    <state width="1899" height="353" key="GridCell.Tab.0.left" timestamp="1616422271644">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="353" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420692113" />
-    <state width="1899" height="353" key="GridCell.Tab.0.right" timestamp="1616420692113">
+    <state width="1899" height="353" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616422271644" />
+    <state width="1899" height="353" key="GridCell.Tab.0.right" timestamp="1616422271644">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="353" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420692113" />
+    <state width="1899" height="353" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616422271644" />
     <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1616420407037">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -517,10 +521,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2563" y="222" key="RollbackChangesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612358310575" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1616419238926">
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1616420790134">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616419238926" />
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420790134" />
     <state x="2697" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1616418652120">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
