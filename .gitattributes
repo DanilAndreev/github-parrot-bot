@@ -1,3 +1,0 @@
-.env filter=git-crypt diff=git-crypt
-.env.* filter=git-crypt diff=git-crypt
-.idea/runConfigurations/*.xml filter=git-crypt diff=git-crypt
