@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,44 +24,8 @@
  * SOFTWARE.
  */
 
-import "reflect-metadata";
-import * as Koa from "koa";
-import {Context, Next} from "koa";
-import * as BodyParser from "koa-bodyparser";
-import {setupDbConnection} from "./core/DataBase";
-import {initBot} from "./core/Bot";
-import config from "./config";
-import eventsMiddleware from "./core/eventsMiddleware";
-import * as Amqp from "amqplib";
-import setupAmqp from "./core/setupAmqp";
+import * as dotenv from "dotenv";
+dotenv.config()
 
-
-export let RabbitMQ: Amqp.Connection = null;
-
-async function main() {
-    await setupDbConnection();
-    RabbitMQ = await Amqp.connect(config.rabbitmq);
-    await setupAmqp();
-
-    const server = new Koa();
-    server.use(BodyParser());
-
-    server.use(eventsMiddleware);
-
-    server.use(async (ctx: Context, next: Next) => {
-        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        console.log(ctx);
-        console.log("--- BODY -----------------------------------------------------------------");
-        console.log(ctx.request.body);
-
-        await next;
-    });
-
-
-    console.log("Server is listening on port", config.server.port);
-
-    initBot();
-    server.listen(process.env.PORT || config.server.port);
-}
-
+import main from "./main";
 main().catch(console.error);

@@ -27,7 +27,7 @@
 import {PullRequest} from "github-webhook-event-types";
 import {Context} from "koa";
 import * as Amqp from "amqplib";
-import {RabbitMQ} from "../index";
+import {RabbitMQ} from "../main";
 import {AMQP_PULL_REQUESTS_QUEUE} from "../globals";
 
 export default async function pullRequestEvent(payload: PullRequest, ctx: Context) {

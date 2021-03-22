@@ -10,12 +10,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[AMQP] Fixed incorrect queues asserting.">
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_20_2020_1_32_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_20_2020_1_32_PM__Default_Changelist_.xml" beforeDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[SECURITY] Removed git-crypt and added .env parser.">
+      <change afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/setupAmqp.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/setupAmqp.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/issueEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/issueEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/pullRequestEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/pullRequestEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,11 +65,12 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src" />
+      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -97,7 +100,8 @@
       <workItem from="1612442527698" duration="592000" />
       <workItem from="1612444704459" duration="594000" />
       <workItem from="1612525867131" duration="590000" />
-      <workItem from="1616418486141" duration="555000" />
+      <workItem from="1616418486141" duration="1900000" />
+      <workItem from="1616420648360" duration="110000" />
     </task>
     <task id="LOCAL-00001" summary="[Global] Initialized repository.">
       <created>1602758176185</created>
@@ -379,7 +383,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603459364268</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="[SECURITY] Removed git-crypt and added .env parser.">
+      <created>1616419232631</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1616419232631</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -398,7 +409,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[koa] Initialized server." />
     <MESSAGE value="[Server] Added request echo." />
     <MESSAGE value="[Bot] Added repository add." />
     <MESSAGE value="[Commands] Added repository management commands." />
@@ -423,13 +433,14 @@
     <MESSAGE value="[pullRequestEvent] Created." />
     <MESSAGE value="[AMQP] Setted up." />
     <MESSAGE value="[AMQP] Fixed incorrect queues asserting." />
-    <option name="LAST_COMMIT_MESSAGE" value="[AMQP] Fixed incorrect queues asserting." />
+    <MESSAGE value="[SECURITY] Removed git-crypt and added .env parser." />
+    <option name="LAST_COMMIT_MESSAGE" value="[SECURITY] Removed git-crypt and added .env parser." />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2360" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616419046869">
+    <state x="2360" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616419501843">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2360" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616419046869" />
+    <state x="2360" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616419501843" />
     <state x="2773" y="261" width="616" height="640" key="EnvironmentVariablesDialog" timestamp="1612359381348">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -438,29 +449,97 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2686" y="266" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612359037775" />
-    <state width="1083" height="361" key="GridCell.Tab.0.bottom" timestamp="1612359385620">
+    <state width="1899" height="353" key="GridCell.Tab.0.bottom" timestamp="1616420692113">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1083" height="361" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612359385620" />
-    <state width="1083" height="361" key="GridCell.Tab.0.center" timestamp="1612359385620">
+    <state width="1899" height="353" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420692113" />
+    <state width="1899" height="353" key="GridCell.Tab.0.center" timestamp="1616420692113">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1083" height="361" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612359385620" />
-    <state width="1083" height="361" key="GridCell.Tab.0.left" timestamp="1612359385620">
+    <state width="1899" height="353" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420692113" />
+    <state width="1899" height="353" key="GridCell.Tab.0.left" timestamp="1616420692113">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1083" height="361" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612359385620" />
-    <state width="1083" height="361" key="GridCell.Tab.0.right" timestamp="1612359385620">
+    <state width="1899" height="353" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420692113" />
+    <state width="1899" height="353" key="GridCell.Tab.0.right" timestamp="1616420692113">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1083" height="361" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612359385620" />
+    <state width="1899" height="353" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420692113" />
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1616420407037">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
+    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1616420407021">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407021" />
+    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1616420407021">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407021" />
+    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1616420407037">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
+    <state width="1899" height="348" key="GridCell.Tab.2.bottom" timestamp="1616420407037">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.2.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
+    <state width="1899" height="348" key="GridCell.Tab.2.center" timestamp="1616420407037">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.2.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
+    <state width="1899" height="348" key="GridCell.Tab.2.left" timestamp="1616420407037">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.2.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
+    <state width="1899" height="348" key="GridCell.Tab.2.right" timestamp="1616420407037">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.2.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
+    <state width="1899" height="348" key="GridCell.Tab.3.bottom" timestamp="1616420407037">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.3.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
+    <state width="1899" height="348" key="GridCell.Tab.3.center" timestamp="1616420407037">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.3.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
+    <state width="1899" height="348" key="GridCell.Tab.3.left" timestamp="1616420407037">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.3.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
+    <state width="1899" height="348" key="GridCell.Tab.3.right" timestamp="1616420407037">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420407037" />
     <state x="2563" y="222" key="RollbackChangesDialog" timestamp="1612358310575">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2563" y="222" key="RollbackChangesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612358310575" />
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1616419238926">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616419238926" />
     <state x="2697" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1616418652120">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2697" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616418652120" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/config.ts</url>
+          <line>48</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/core/Bot.ts</url>
+          <line>44</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

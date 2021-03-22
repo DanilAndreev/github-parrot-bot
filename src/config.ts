@@ -60,7 +60,7 @@ const config: Config = {
             rejectUnauthorized: false,
         }
     },
-    rabbitmq: process.env.CLOUDQMQP_URL,
+    rabbitmq: process.env.CLOUDAMQP_URL,
     server: {
         port: +process.env.PORT | 3030,
     }

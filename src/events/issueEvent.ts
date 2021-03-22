@@ -26,7 +26,7 @@
 
 import {Issues} from "github-webhook-event-types";
 import {Context} from "koa";
-import {RabbitMQ} from "../index";
+import {RabbitMQ} from "../main";
 import * as Amqp from "amqplib";
 import {AMQP_ISSUES_QUEUE} from "../globals";
 

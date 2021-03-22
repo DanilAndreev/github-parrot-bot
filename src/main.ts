@@ -24,19 +24,41 @@
  * SOFTWARE.
  */
 
-import {RabbitMQ} from "../main";
+import "reflect-metadata";
+import * as Koa from "koa";
+import {Context, Next} from "koa";
+import * as BodyParser from "koa-bodyparser";
+import {setupDbConnection} from "./core/DataBase";
+import {initBot} from "./core/Bot";
+import config from "./config";
+import eventsMiddleware from "./core/eventsMiddleware";
 import * as Amqp from "amqplib";
-import {AMQP_ISSUES_QUEUE, AMQP_PULL_REQUESTS_QUEUE} from "../globals";
-import issueHandler from "../handlers/issueHandler";
+import setupAmqp from "./core/setupAmqp";
 
-export default async function setupAmqp(): Promise<void> {
-    const issuesChannel: Amqp.Channel = await RabbitMQ.createChannel();
-    await issuesChannel.assertQueue(AMQP_ISSUES_QUEUE);
-    await issuesChannel.prefetch(10);
-    await issuesChannel.consume(AMQP_ISSUES_QUEUE, (msg) => issueHandler(msg, issuesChannel));
+export let RabbitMQ: Amqp.Connection = null;
 
-    const pullRequestsChannel: Amqp.Channel = await RabbitMQ.createChannel();
-    await pullRequestsChannel.assertQueue(AMQP_PULL_REQUESTS_QUEUE);
-    await pullRequestsChannel.prefetch(10);
-    await pullRequestsChannel.consume(AMQP_PULL_REQUESTS_QUEUE, (msg) => issueHandler(msg, pullRequestsChannel));
+export default async function main() {
+    await setupDbConnection();
+    RabbitMQ = await Amqp.connect(config.rabbitmq);
+    await setupAmqp();
+
+    const server = new Koa();
+    server.use(BodyParser());
+
+    server.use(eventsMiddleware);
+
+    server.use(async (ctx: Context, next: Next) => {
+        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        console.log(ctx);
+        console.log("--- BODY -----------------------------------------------------------------");
+        console.log(ctx.request.body);
+
+        await next;
+    });
+
+
+    console.log("Server is listening on port", config.server.port);
+
+    initBot();
+    server.listen(process.env.PORT || config.server.port);
 }
