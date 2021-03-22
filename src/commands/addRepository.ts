@@ -26,13 +26,13 @@
 
 import CommandError from "../core/CommandError";
 import WebHook from "../entities/WebHook";
-import * as argon2 from "argon2";
 import createSecretPreview from "../core/createSecretPreview";
 import {Bot} from "../core/Bot";
 import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
 import checkAdmin from "../core/checkAdmin";
 
-export default async function addRepository(message, match): Promise<CommandFinalMessageSync> {
+
+async function addRepository(message, match): Promise<CommandFinalMessageSync> {
     const usage = [
         `Usage: /add [repository_full_name] [secret]`,
         `Example: /add DanilAndreev/test_repo webhook_secret_string`
@@ -75,3 +75,5 @@ export default async function addRepository(message, match): Promise<CommandFina
         `Secret: \`\`\`${result.secretPreview}\`\`\`__`
     ];
 }
+
+export default addRepository;

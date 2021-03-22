@@ -38,6 +38,7 @@ import removeAKA from "../commands/removeAKA";
 import clearAKA from "../commands/clearAKA";
 import listAKA from "../commands/listAKA";
 import config from "../config";
+import Test from "../commands/Test";
 
 export let Bot: TelegramBot | null = null;
 
@@ -63,6 +64,10 @@ export default function CreateBot(): TelegramBot {
     Bot.onText(/\/remove_aka (.+)/, makeCommand(removeAKA));
     Bot.onText(/^\/clear_aka/, makeCommand(clearAKA));
     Bot.onText(/^\/akas/, makeCommand(listAKA));
+
+    const test = new Test()
+    Bot.onText(/^\/test (.+)/, test.getCallback());
+    Bot.onText(/^\/test$/, test.getCallback());
 
     return Bot;
 }
