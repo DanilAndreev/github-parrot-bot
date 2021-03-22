@@ -10,12 +10,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[project] Changed structure a little to load envs from file.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/babel.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
-    </list>
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[babel] Removed." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -98,7 +93,7 @@
       <workItem from="1612444704459" duration="594000" />
       <workItem from="1612525867131" duration="590000" />
       <workItem from="1616418486141" duration="1900000" />
-      <workItem from="1616420648360" duration="1401000" />
+      <workItem from="1616420648360" duration="1449000" />
     </task>
     <task id="LOCAL-00001" summary="[Global] Initialized repository.">
       <created>1602758176185</created>
@@ -394,7 +389,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616420786356</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="[babel] Removed.">
+      <created>1616422400306</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1616422400306</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -413,7 +415,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[Bot] Added repository add." />
     <MESSAGE value="[Commands] Added repository management commands." />
     <MESSAGE value="[config] Added env support." />
     <MESSAGE value="[webhook] Created basic issue event handler." />
@@ -438,7 +439,8 @@
     <MESSAGE value="[AMQP] Fixed incorrect queues asserting." />
     <MESSAGE value="[SECURITY] Removed git-crypt and added .env parser." />
     <MESSAGE value="[project] Changed structure a little to load envs from file." />
-    <option name="LAST_COMMIT_MESSAGE" value="[project] Changed structure a little to load envs from file." />
+    <MESSAGE value="[babel] Removed." />
+    <option name="LAST_COMMIT_MESSAGE" value="[babel] Removed." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2360" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616419501843">
@@ -521,10 +523,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2563" y="222" key="RollbackChangesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612358310575" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1616420790134">
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1616422406609">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616420790134" />
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616422406609" />
     <state x="2697" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1616418652120">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
