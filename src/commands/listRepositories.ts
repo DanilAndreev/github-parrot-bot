@@ -34,7 +34,13 @@ export default async function listRepositories(message, match): Promise<CommandF
     ].join("\n");
 
     const chatId: number = message.chat.id;
-    const result: WebHook[] = await WebHook.find({where: {chatId}});
+
+    let result: WebHook[] = null;
+    try {
+        result = await WebHook.find({where: {chatId: chatId}});
+    } catch (error) {
+        console.log(error)
+    }
 
     if (!result.length)
         return `You have no repositories added.`;

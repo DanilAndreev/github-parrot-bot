@@ -45,19 +45,21 @@ export default async function main() {
     const server = new Koa();
     server.use(BodyParser());
 
-    server.use(eventsMiddleware);
-
     server.use(async (ctx: Context, next: Next) => {
         console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         console.log(ctx);
         console.log("--- BODY -----------------------------------------------------------------");
         console.log(ctx.request.body);
 
+        ctx.body = "Hello"
         await next;
     });
 
+    server.use(eventsMiddleware);
 
-    console.log("Server is listening on port", config.server.port);
+
+
+    console.log("Server is listening on port", process.env.PORT || config.server.port);
 
     initBot();
     server.listen(process.env.PORT || config.server.port);
