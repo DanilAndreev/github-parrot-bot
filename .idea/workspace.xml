@@ -10,9 +10,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[gitignore] Updated.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[BotCommand] Added result handler.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/BotCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/BotCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -419,7 +420,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616422663271</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="[BotCommand] Added result handler.">
+      <created>1616503586423</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1616503586423</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -438,7 +446,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[webhook] Created basic issue event handler." />
     <MESSAGE value="[issueEvent] Added AKA mechanism." />
     <MESSAGE value="[issueEvent] Debug logs added." />
     <MESSAGE value="[index] Small changes." />
@@ -463,9 +470,14 @@
     <MESSAGE value="[babel] Removed." />
     <MESSAGE value="[yarn] Removed log file." />
     <MESSAGE value="[gitignore] Updated." />
-    <option name="LAST_COMMIT_MESSAGE" value="[gitignore] Updated." />
+    <MESSAGE value="[BotCommand] Added result handler." />
+    <option name="LAST_COMMIT_MESSAGE" value="[BotCommand] Added result handler." />
   </component>
   <component name="WindowStateProjectService">
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1616503589840">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616503589840" />
     <state x="227" y="0" width="1464" height="1027" maximized="true" key="dock-window-1" timestamp="1616503271980">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
