@@ -28,6 +28,7 @@ import {Message} from "node-telegram-bot-api";
 import Bot from "./Bot";
 import ValidationError from "../errors/ValidationError";
 import Validator from "./Validator";
+import CommandError from "./CommandError";
 
 
 /**
@@ -55,7 +56,7 @@ abstract class BotCommand {
      * @param message - Chat message.
      * @param args - Command arguments list.
      */
-    protected abstract async handler(message: Message, args: BotCommand.CommandArguments): Promise<void>;
+    protected abstract async handler(message: Message, args: BotCommand.CommandArguments): Promise<void | string | string[]>;
 
     /**
      * validate - validates command arguments and call.
@@ -98,14 +99,27 @@ abstract class BotCommand {
     public async execute(message: Message, match: RegExpExecArray): Promise<void> {
         try {
             const args: BotCommand.CommandArguments = this.validate((match[1] || "").split(" "));
-            await this.handler(message, args);
+            let result: string | string[] | void = await this.handler(message, args);
+            if (Array.isArray(result)) result = result.join("\n");
+            if (result) {
+                await Bot.getCurrent().sendMessage(message.chat.id, result, {parse_mode: "HTML"});
+            }
         } catch (error) {
             if (error instanceof ReferenceError) {
                 throw error;
             } else if (error instanceof ValidationError) {
                 await Bot.getCurrent().sendMessage(message.chat.id, error.message);
+            } else if (error instanceof CommandError) {
+                const out_message = error.message;
+                Bot
+                    .getCurrent()
+                    .sendMessage(message.chat.id, "<i>Error:</i> \n" + out_message, {parse_mode: "HTML"})
+                    .catch(err => {
+                        throw err;
+                    });
             } else {
-                await Bot.getCurrent().sendMessage(message.chat.id, "Unrecognized error: " + error.message);
+                await Bot.getCurrent().sendMessage(message.chat.id, "Unrecognized error");
+                console.error(error);
             }
         }
     }

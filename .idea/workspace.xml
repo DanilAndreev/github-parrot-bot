@@ -11,26 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[gitignore] Updated.">
-      <change afterPath="$PROJECT_DIR$/src/core/Validator.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/Test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/Test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/addRepository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/addRepository.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/connectMe.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/connectMe.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/listRepositories.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/listRepositories.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/BotCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/BotCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/checkAdmin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/checkAdmin.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/getAkaAlias.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/getAkaAlias.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/makeCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/makeCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/setupAmqp.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/setupAmqp.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/useIssue.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/useIssue.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/issueHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/issueHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/pullRequestHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/pullRequestHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -483,6 +465,12 @@
     <MESSAGE value="[gitignore] Updated." />
     <option name="LAST_COMMIT_MESSAGE" value="[gitignore] Updated." />
   </component>
+  <component name="WindowStateProjectService">
+    <state x="227" y="0" width="1464" height="1027" maximized="true" key="dock-window-1" timestamp="1616503271980">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="227" y="0" width="1464" height="1027" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616503271980" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -498,8 +486,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/core/BotCommand.ts</url>
-          <line>66</line>
-          <properties lambdaOrdinal="-1" />
+          <line>67</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
