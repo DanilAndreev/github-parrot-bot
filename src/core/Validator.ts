@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,11 +24,36 @@
  * SOFTWARE.
  */
 
-import Collaborator from "../entities/Collaborator";
+import Ajv, {JSONSchemaType, ValidateFunction} from "ajv";
+import ValidationError from "../errors/ValidationError";
 
 
-export default async function getAkaAlias(githubUsername: string, chatId: number) {
-    const aka: Collaborator | undefined = await Collaborator.findOne({where: {chatId, gitHubName: githubUsername}});
-    if (aka) return "@" + aka.telegramName;
-    return githubUsername;
+export default class Validator<T> {
+    /**
+     * AJV instance for validation.
+     */
+    protected static ajv = new Ajv({allErrors: true});
+    protected validator: ValidateFunction;
+    public readonly requires: string[];
+    public readonly key: string;
+    public readonly required: boolean;
+
+    constructor(key: string, schema: JSONSchemaType<T>, required: boolean = true, requires?: string[]) {
+        this.validator = Validator.ajv.compile<T>(schema);
+        this.requires = requires || [];
+        this.key = key;
+        this.required = required;
+    }
+
+    public validate(data: any): any {
+        if (!this.validator)
+            throw new ReferenceError("Validator is undefined.");
+        if(!this.validator(data)) {
+            if (this.validator.errors)
+                throw new ValidationError("Argument " + this.key + " " + this.validator.errors.map(item => item.message).join("\n"));
+            else
+                throw new ValidationError("Invalid arguments.");
+        }
+        return data;
+    }
 }

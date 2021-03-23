@@ -26,7 +26,7 @@
 
 import * as TelegramBot from "node-telegram-bot-api";
 import CommandError from "./CommandError";
-import {Bot} from "./Bot";
+import Bot from "./Bot";
 import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
 
 export type BotHandler = (msg: TelegramBot.Message, match: RegExpExecArray) => CommandFinalMessageSync | Promise<CommandFinalMessageSync>;
@@ -35,11 +35,11 @@ const makeCommand = (handler: BotHandler) => async (msg: TelegramBot.Message, ma
     try {
         let result = await handler(msg, match);
         if (Array.isArray(result)) result = result.join("\n");
-        if (result) await Bot.sendMessage(msg.chat.id, result, {parse_mode: "HTML"});
+        if (result) await Bot.getCurrent().sendMessage(msg.chat.id, result, {parse_mode: "HTML"});
     } catch (error) {
         if (error instanceof CommandError) {
             const message = error.message;
-            Bot.sendMessage(msg.chat.id, "<i>Error:</i> \n" + message, {parse_mode: "HTML"}).catch(err => {
+            Bot.getCurrent().sendMessage(msg.chat.id, "<i>Error:</i> \n" + message, {parse_mode: "HTML"}).catch(err => {
                 throw err;
             });
         } else {

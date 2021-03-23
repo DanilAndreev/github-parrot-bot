@@ -25,7 +25,6 @@
  */
 
 import CommandError from "../core/CommandError";
-import {Bot} from "../core/Bot";
 import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
 import Collaborator from "../entities/Collaborator";
 

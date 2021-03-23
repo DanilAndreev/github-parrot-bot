@@ -25,8 +25,9 @@
  */
 
 import {Message} from "node-telegram-bot-api";
-import {Bot} from "./Bot";
+import Bot from "./Bot";
 import ValidationError from "../errors/ValidationError";
+import Validator from "./Validator";
 
 
 /**
@@ -35,16 +36,16 @@ import ValidationError from "../errors/ValidationError";
  * @class
  * @author Danil Andreev
  */
-class BotCommand {
+abstract class BotCommand {
     /**
      * validation - validation spec array.
      */
-    public validation = [];
+    public validation: Validator<any>[] = [];
     /**
      * pattern - command pattern.
      * For example - "myCommand".
      */
-    public pattern: string = ""
+    public pattern: string = "";
 
     /**
      * handler - command handler. Here you can do actions.
@@ -54,18 +55,37 @@ class BotCommand {
      * @param message - Chat message.
      * @param args - Command arguments list.
      */
-    protected async handler(message: Message, args: BotCommand.CommandArgument[]): Promise<void> {
-        throw ReferenceError("sdf")
-    }
+    protected abstract async handler(message: Message, args: BotCommand.CommandArguments): Promise<void>;
 
     /**
      * validate - validates command arguments and call.
      * @method
      * @author Danil Andreev
-     * @param match - RegExp matches array.
+     * @param words - RegExp matches array.
      */
-    protected validate(match: string[]): BotCommand.CommandArgument[] {
-        return []
+    protected validate(words: string[]): BotCommand.CommandArguments {
+        if (words.length > this.validation.length) {
+            throw new ValidationError("Too many arguments passed.");
+        }
+        const args: BotCommand.CommandArguments = {};
+        try {
+            for (let i = 0; i < this.validation.length; i++) {
+                const validator: Validator<any> = this.validation[i];
+                const value = words[i];
+                if (validator.required && value === undefined)
+                    throw new ValidationError(`Required argument "${validator.key}" can not be empty.`);
+                validator.validate(value);
+                args[validator.key] = value;
+            }
+        } catch (error) {
+            if (error instanceof ValidationError) {
+                throw error;
+            }
+            console.log(error);
+            //TODO: handle
+        }
+
+        return args;
     }
 
     /**
@@ -75,17 +95,17 @@ class BotCommand {
      * @param message - Chat message.
      * @param match - Arguments RegExp match.
      */
-    public async execute(message: Message, match: string[]): Promise<void> {
+    public async execute(message: Message, match: RegExpExecArray): Promise<void> {
         try {
-            const args: BotCommand.CommandArgument[] = this.validate(match);
+            const args: BotCommand.CommandArguments = this.validate((match[1] || "").split(" "));
             await this.handler(message, args);
         } catch (error) {
             if (error instanceof ReferenceError) {
                 throw error;
             } else if (error instanceof ValidationError) {
-                await Bot.sendMessage(message.chat.id, error.message);
+                await Bot.getCurrent().sendMessage(message.chat.id, error.message);
             } else {
-                await Bot.sendMessage(message.chat.id, "Unrecognized error: " + error.message);
+                await Bot.getCurrent().sendMessage(message.chat.id, "Unrecognized error: " + error.message);
             }
         }
     }
@@ -96,16 +116,16 @@ class BotCommand {
      * @author Danil Andreev
      */
     public getCallback(): BotCommand.CallbackFunction {
-        return async (message: Message, match: string[]): Promise<void> => this.execute(message, match);
+        return async (message: Message, match: RegExpExecArray): Promise<void> => this.execute(message, match);
     }
 
     /**
-     * getCommandRegExp - returns command regexp pattern.
+     * getCommandRegExp - returns command pattern.
      * @method
      * @author Danil Andreev
      */
-    public getCommandRegExp(): RegExp {
-        return new RegExp(this.pattern + " (.+)");
+    public getCommandPattern(): string {
+        return this.pattern;
     }
 }
 
@@ -115,27 +135,16 @@ namespace BotCommand {
      * @interface
      * @author Danil Andreev
      */
-    export interface CommandArgument {
-        /**
-         * name - argumant name.
-         */
-        name: string;
-        /**
-         * value - parsed argument value.
-         */
-        value: string;
-        /**
-         * type - argument type.
-         */
-        type: string;
+    export interface CommandArguments {
+        [key: string]: string | number | undefined;
     }
 
     /**
-     * Prototype - decorator for bot command.
+     * Command - decorator for bot command.
      * @param pattern - command pattern (command name).
-     * @param validation - command arguments spec array.
+     * @param validation
      */
-    export function Prototype(pattern: string, validation?: []) {
+    export function Command(pattern: string, validation?: Validator<any>[]) {
         return function BotCommandWrapper<T extends new(...args: any[]) => {}>(objectConstructor: T): T {
             return class WrappedBotCommand extends objectConstructor {
                 constructor(...args: any[]) {
@@ -143,42 +152,51 @@ namespace BotCommand {
                     if (this instanceof BotCommand) {
                         this.pattern = pattern;
                         if (validation) {
-                            // TODO: check correctness.
-                            this.validation.concat(validation);
+                            for (const validator of validation) {
+                                if (this.validation.find(candidate => candidate.key == validator.key))
+                                    throw new ReferenceError(`Duplicate argument key "${validator.key}" on command "${this.pattern}".`);
+                                this.validation.push(validator);
+                            }
                         }
+                        // Bot.commands.push(this);
                     } else {
                         throw new TypeError(`Invalid decorated class, expected BotCommand or derived from it.`);
                     }
                 }
-            }
-        }
+            };
+        };
     }
 
     /**
      * Argument - decorator for adding bot command arguments.
-     * @param validation - command arguments spec.
+     * @param validation -
      */
-    export function Argument(validation?: [] | any) {
+    export function Argument(validation: Validator<any> | Validator<any>[]) {
         return function BotCommandWrapper<T extends new(...args: any[]) => {}>(objectConstructor: T): T {
             return class WrappedBotCommand extends objectConstructor {
                 constructor(...args: any[]) {
                     super(...args);
                     if (this instanceof BotCommand) {
                         if (Array.isArray(validation)) {
-                            // TODO: check correctness.
-                            this.validation.concat(validation);
-                        } else {
-                            this.validation.push(validation)
+                            for (const validator of validation) {
+                                if (this.validation.find(candidate => candidate.key == validator.key))
+                                    throw new ReferenceError(`Duplicate argument key "${validator.key}" on command "${this.pattern}".`);
+                                this.validation.push(validator);
+                            }
+                        } else if (validation) {
+                            if (this.validation.find(candidate => candidate.key == validation.key))
+                                throw new ReferenceError(`Duplicate argument key "${validation.key}" on command "${this.pattern}".`);
+                            this.validation.push(validation);
                         }
                     } else {
                         throw new TypeError(`Invalid decorated class, expected BotCommand or derived from it.`);
                     }
                 }
-            }
-        }
+            };
+        };
     }
 
-    export type CallbackFunction = (message: Message, match: string[]) => Promise<void>
+    export type CallbackFunction = (message: Message, match: RegExpExecArray) => Promise<void>
 }
 
 export default BotCommand;

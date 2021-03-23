@@ -27,7 +27,7 @@
 import CommandError from "../core/CommandError";
 import WebHook from "../entities/WebHook";
 import createSecretPreview from "../core/createSecretPreview";
-import {Bot} from "../core/Bot";
+import Bot from "../core/Bot";
 import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
 import checkAdmin from "../core/checkAdmin";
 
@@ -65,9 +65,9 @@ async function addRepository(message, match): Promise<CommandFinalMessageSync> {
     webhook.repository = repository;
     const result = await webhook.save();
     try {
-        await Bot.deleteMessage(chatId, "" + message.message_id);
+        await Bot.getCurrent().deleteMessage(chatId, "" + message.message_id);
     } catch (error) {
-        await Bot.sendMessage(chatId, `Warning: You should give permissions to delete messages for GitHub Tracker bot.`);
+        await Bot.getCurrent().sendMessage(chatId, `Warning: You should give permissions to delete messages for GitHub Tracker bot.`);
     }
     return [
         `Successfully added repository.`,

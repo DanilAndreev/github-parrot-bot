@@ -25,7 +25,7 @@
  */
 
 import {Issues} from "github-webhook-event-types";
-import {Bot} from "../core/Bot";
+import Bot from "../core/Bot";
 import WebHook from "../entities/WebHook";
 import getAkaAlias from "../core/getAkaAlias";
 import moment = require("moment");
@@ -75,9 +75,9 @@ export default async function issueHandler(msg: Amqp.Message, channel: Amqp.Chan
 
             try {
                 const messageId = await useIssue(issue.id, webHook.chatId);
-                await Bot.editMessageText(message, {chat_id: webHook.chatId, message_id: messageId, parse_mode: "Markdown"});
+                await Bot.getCurrent().editMessageText(message, {chat_id: webHook.chatId, message_id: messageId, parse_mode: "Markdown"});
             } catch (error) {
-                const result = await Bot.sendMessage(webHook.chatId, message, {parse_mode: "Markdown"});
+                const result = await Bot.getCurrent().sendMessage(webHook.chatId, message, {parse_mode: "Markdown"});
                 const newIssue = new Issue();
                 newIssue.chatId = webHook.chatId;
                 newIssue.messageId = result.message_id;

@@ -26,13 +26,22 @@
 
 import BotCommand from "../core/BotCommand";
 import {Message} from "node-telegram-bot-api";
+import Validator from "../core/Validator";
 
+
+@BotCommand.Command("test")
+@BotCommand.Argument(new Validator<string>("arg1", {
+    type: "string",
+    minLength: 0,
+    maxLength: 3,
+}))
+@BotCommand.Argument(new Validator<number>("arg2", {
+    type: "integer",
+    minLength: 0,
+    maxLength: 10,
+}))
 export default class Test extends BotCommand {
-    public constructor() {
-        super();
-    }
-
-    protected async handler(message: Message, args: BotCommand.CommandArgument[]): Promise<void> {
+    protected async handler(message: Message, args: BotCommand.CommandArguments): Promise<void> {
         console.log("kuku");
         return;
     }

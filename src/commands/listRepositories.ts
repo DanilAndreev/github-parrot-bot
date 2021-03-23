@@ -35,7 +35,7 @@ export default async function listRepositories(message, match): Promise<CommandF
 
     const chatId: number = message.chat.id;
 
-    let result: WebHook[] = null;
+    let result: WebHook[] = [];
     try {
         result = await WebHook.find({where: {chatId: chatId}});
     } catch (error) {
