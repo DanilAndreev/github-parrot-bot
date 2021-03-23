@@ -11,8 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[BotCommand] Added result handler.">
+      <change afterPath="$PROJECT_DIR$/src/core/argsParse.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -473,16 +476,6 @@
     <MESSAGE value="[BotCommand] Added result handler." />
     <option name="LAST_COMMIT_MESSAGE" value="[BotCommand] Added result handler." />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1616503589840">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616503589840" />
-    <state x="227" y="0" width="1464" height="1027" maximized="true" key="dock-window-1" timestamp="1616503271980">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="227" y="0" width="1464" height="1027" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616503271980" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -500,6 +493,18 @@
           <url>file://$PROJECT_DIR$/src/core/BotCommand.ts</url>
           <line>67</line>
           <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/core/argsParse.ts</url>
+          <line>34</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/core/argsParse.ts</url>
+          <line>47</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

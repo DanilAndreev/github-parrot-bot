@@ -34,10 +34,14 @@ import eventsMiddleware from "./core/eventsMiddleware";
 import * as Amqp from "amqplib";
 import setupAmqp from "./core/setupAmqp";
 import Bot from "./core/Bot";
+import argsParse from "./core/argsParse";
 
 export let RabbitMQ: Amqp.Connection;
 
 export default async function main() {
+    // argsParse("hello darkness --dev a friend --kek=111 --lol = 12+ \"impossible move\" aaa")
+    argsParse("hello darkness --cheese \"Hello dakrness\" -s")
+
     await setupDbConnection();
     RabbitMQ = await Amqp.connect(config.rabbitmq);
     await setupAmqp();
