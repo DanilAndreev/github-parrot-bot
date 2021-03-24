@@ -34,13 +34,31 @@ import eventsMiddleware from "./core/eventsMiddleware";
 import * as Amqp from "amqplib";
 import setupAmqp from "./core/setupAmqp";
 import Bot from "./core/Bot";
-import argsParse from "./core/argsParse";
+import {Command} from "commander";
+import stringArgv from "string-argv";
 
 export let RabbitMQ: Amqp.Connection;
 
 export default async function main() {
-    // argsParse("hello darkness --dev a friend --kek=111 --lol = 12+ \"impossible move\" aaa")
-    argsParse("hello darkness --cheese \"Hello dakrness\" -s")
+    const program = new Command();
+
+    program
+        .exitOverride((error) => {throw error})
+        .allowExcessArguments(false)
+        .action( (source, destination, a, b, c) => {
+            console.log('clone command called:', source, destination);
+        })
+        .arguments('clone <source> [destination]')
+        .option("-s, --shape <value>", "Shape of the a", "0")
+        .description('clone a repository into a newly created directory')
+
+    try {
+        program.parse(stringArgv("from to -s asdf"), {from: "user"})
+        // console.log(program.opts(), program.args);
+    } catch (error) {
+        console.error("Error caught", error);
+    }
+
 
     await setupDbConnection();
     RabbitMQ = await Amqp.connect(config.rabbitmq);
