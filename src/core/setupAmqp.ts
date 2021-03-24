@@ -33,10 +33,10 @@ export default async function setupAmqp(): Promise<void> {
     const issuesChannel: Amqp.Channel = await RabbitMQ.createChannel();
     await issuesChannel.assertQueue(AMQP_ISSUES_QUEUE);
     await issuesChannel.prefetch(10);
-    await issuesChannel.consume(AMQP_ISSUES_QUEUE, (msg) => issueHandler(msg, issuesChannel));
+    await issuesChannel.consume(AMQP_ISSUES_QUEUE, (msg) => msg && issueHandler(msg, issuesChannel));
 
     const pullRequestsChannel: Amqp.Channel = await RabbitMQ.createChannel();
     await pullRequestsChannel.assertQueue(AMQP_PULL_REQUESTS_QUEUE);
     await pullRequestsChannel.prefetch(10);
-    await pullRequestsChannel.consume(AMQP_PULL_REQUESTS_QUEUE, (msg) => issueHandler(msg, pullRequestsChannel));
+    await pullRequestsChannel.consume(AMQP_PULL_REQUESTS_QUEUE, (msg) => msg && issueHandler(msg, pullRequestsChannel));
 }

@@ -24,18 +24,18 @@
  * SOFTWARE.
  */
 
-import "reflect-metadata";
 import * as Koa from "koa";
 import {Context, Next} from "koa";
 import * as BodyParser from "koa-bodyparser";
 import {setupDbConnection} from "./core/DataBase";
-import {initBot} from "./core/Bot";
 import config from "./config";
 import eventsMiddleware from "./core/eventsMiddleware";
 import * as Amqp from "amqplib";
 import setupAmqp from "./core/setupAmqp";
+import Bot from "./core/Bot";
 
-export let RabbitMQ: Amqp.Connection = null;
+
+export let RabbitMQ: Amqp.Connection;
 
 export default async function main() {
     await setupDbConnection();
@@ -61,6 +61,6 @@ export default async function main() {
 
     console.log("Server is listening on port", process.env.PORT || config.server.port);
 
-    initBot();
+    Bot.init();
     server.listen(process.env.PORT || config.server.port);
 }

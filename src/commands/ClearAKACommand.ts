@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -50,27 +50,29 @@
  * SOFTWARE.
  */
 
-import CommandError from "../core/CommandError";
-import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
-import Collaborator from "../entities/Collaborator";
-import getUsername from "../core/getUsername";
+import BotCommand from "../core/BotCommand";
+import {Message} from "node-telegram-bot-api";
 import checkAdmin from "../core/checkAdmin";
+import CommandError from "../errors/CommandError";
+import Collaborator from "../entities/Collaborator";
+import JSONObject from "../interfaces/JSONObject";
 
-export default async function removeAllAKA(message, match): Promise<CommandFinalMessageSync> {
-    const usage = [
-        `Usage: /clear_aka`,
-        `Example: /clear_aka`
-    ].join("\n");
 
-    const chatId: number = message.chat.id;
-    const telegramName = message.from.username;
+@BotCommand.Command("clear_aka")
+@BotCommand.Description("Removes all AKAs in this chat.")
+export default class ClearAKACommand extends BotCommand {
+    protected async handler(message: Message, args: string[], opts: JSONObject<string>): Promise<string> {
 
-    if (!await checkAdmin(telegramName, message))
-        throw new CommandError(`User @${telegramName} have no permissions to remove AKAs.`);
+        const chatId: number = message.chat.id;
+        const telegramName = message.from?.username || "";
 
-    const result = await Collaborator.delete({chatId});
+        if (!await checkAdmin(telegramName, message))
+            throw new CommandError(`User @${telegramName} have no permissions to remove AKAs.`);
 
-    if (!result.affected)
-        throw new CommandError(`This chat has no AKAs.`);
-    return `Successfully deleted all AKAs.`;
+        const result = await Collaborator.delete({chatId});
+
+        if (!result.affected)
+            throw new CommandError(`This chat has no AKAs.`);
+        return `Successfully deleted all AKAs.`;
+    }
 }

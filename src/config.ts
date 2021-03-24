@@ -48,7 +48,7 @@ export interface Config {
 
 const config: Config = {
     bot: {
-        token: process.env.TELEGRAM_BOT_TOKEN,
+        token: process.env.TELEGRAM_BOT_TOKEN || "",
     },
     db: {
         type: "postgres",
@@ -60,9 +60,9 @@ const config: Config = {
             rejectUnauthorized: false,
         }
     },
-    rabbitmq: process.env.CLOUDAMQP_URL,
+    rabbitmq: process.env.CLOUDAMQP_URL || "",
     server: {
-        port: +process.env.PORT | 3030,
+        port: process.env.PORT ? +process.env.PORT : 3030,
     }
 }
 

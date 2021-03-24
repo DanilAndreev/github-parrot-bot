@@ -30,7 +30,7 @@ import WebHook from "../entities/WebHook";
 import * as Crypto from "crypto";
 import getAkaAlias from "../core/getAkaAlias";
 import useIssue from "../core/useIssue";
-import {Bot} from "../core/Bot";
+import Bot from "../core/Bot";
 import Issue from "../entities/Issue";
 import * as Amqp from "amqplib";
 
@@ -76,9 +76,9 @@ export default async function pullRequestHandler(msg: Amqp.Message, channel: Amq
 
             try {
                 const messageId = await useIssue(pullRequest.id, webHook.chatId);
-                await Bot.editMessageText(message, {chat_id: webHook.chatId, message_id: messageId, parse_mode: "Markdown"});
+                await Bot.getCurrent().editMessageText(message, {chat_id: webHook.chatId, message_id: messageId, parse_mode: "Markdown"});
             } catch (error) {
-                const result = await Bot.sendMessage(webHook.chatId, message, {parse_mode: "Markdown"});
+                const result = await Bot.getCurrent().sendMessage(webHook.chatId, message, {parse_mode: "Markdown"});
                 const newIssue = new Issue();
                 newIssue.chatId = webHook.chatId;
                 newIssue.messageId = result.message_id;

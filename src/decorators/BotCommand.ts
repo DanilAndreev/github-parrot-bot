@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,24 +24,17 @@
  * SOFTWARE.
  */
 
-import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
-import Collaborator from "../entities/Collaborator";
+function BotCommand(command: string) {
+    if (command.includes(" ") || command.includes("\t") || command.includes("\n"))
+        throw new SyntaxError("Command can't contain spaces, linebreaks and tabulation");
 
-export default async function listAKA(message, match): Promise<CommandFinalMessageSync> {
-    const usage = [
-        `Usage: /akas`,
-        `Example: /akas`
-    ].join("\n");
-
-    const chatId: number = message.chat.id;
-
-    const result: Collaborator[] = await Collaborator.find({where: {chatId}});
-
-    if (!result.length)
-        return `This chat have no AKAs.`;
-
-    return [
-        `All AKAs for this chat:`,
-        ...result.map(collaboration => `AKA: *[${collaboration.gitHubName}]* -> @${collaboration.telegramName}`),
-    ];
+    return (
+        target: any,
+        propertyKey: string,
+        descriptor: PropertyDescriptor,
+    ) => {
+        console.log(target);
+    }
 }
+
+export default BotCommand;

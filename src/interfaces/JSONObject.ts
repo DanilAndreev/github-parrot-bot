@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,31 +24,10 @@
  * SOFTWARE.
  */
 
-import CommandError from "../core/CommandError";
-import WebHook from "../entities/WebHook";
-import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
-import checkAdmin from "../core/checkAdmin";
-
-export default async function removeRepository(message, match): Promise<CommandFinalMessageSync> {
-    const usage = [
-        `Usage: /remove [repository_full_name]`,
-        `Example: /remove DanilAndreev/test_repo`
-    ].join("\n");
-
-    const chatId: number = message.chat.id;
-    const telegramName: string = message.from.username;
-    const repository: string = match[1];
-
-    if (repository.includes(" "))
-        throw new CommandError(
-            `Repository name can not contain spaces! `,
-            `Input: __[${repository}]__`
-        );
-
-    if (!await checkAdmin(telegramName, message))
-        throw new CommandError(`User @${telegramName} have no permissions to delete repositories.`);
-
-    const result = await WebHook.delete({chatId, repository});
-    if (!result.affected) throw new CommandError(`Repository __[${repository}]__ not found.`);
-    return `Successfully deleted repository __[${repository}]__.`;
+/**
+ * JSONObject - interface for key-pair object.
+ * @author Danil Andreev
+ */
+export default interface JSONObject<T = any> {
+    [key: string]: T
 }

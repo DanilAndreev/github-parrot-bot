@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,25 +24,26 @@
  * SOFTWARE.
  */
 
-import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
-import Collaborator from "../entities/Collaborator";
+import BotCommand from "../core/BotCommand";
+import {Message} from "node-telegram-bot-api";
+import WebHook from "../entities/WebHook";
+import JSONObject from "../interfaces/JSONObject";
 
-export default async function whoAmI(message, match): Promise<CommandFinalMessageSync> {
-    const usage = [
-        `Usage: /whoami`,
-        `Example: /whoami`
-    ].join("\n");
 
-    const chatId: number = message.chat.id;
-    const telegramName = message.from.username;
+@BotCommand.Command("list")
+@BotCommand.Description("Shows all GitHub repositories connected to this chat.")
+export default class ListRepositoriesCommand extends BotCommand {
+    protected async handler(message: Message, args: string[], opts: JSONObject<string>): Promise<string | string[]> {
+        const chatId: number = message.chat.id;
 
-    const result: Collaborator[] = await Collaborator.find({where: {chatId, telegramName}});
+        const result: WebHook[] = await WebHook.find({where: {chatId: chatId}});
 
-    if (!result.length)
-        return `User @${telegramName} have no AKA.`;
+        if (!result.length)
+            return `You have no repositories added.`;
 
-    return [
-        `User @${telegramName}:`,
-        ...result.map(collaboration => `AKA: __[${collaboration.gitHubName}]__`),
-    ];
+        return [
+            `Connected repositories:`,
+            ...result.map(repo => `<b>[${repo.repository}]</b>`),
+        ];
+    }
 }
