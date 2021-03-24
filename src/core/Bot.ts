@@ -28,7 +28,6 @@ import * as TelegramBot from "node-telegram-bot-api";
 import config from "../config";
 import BotCommand from "./BotCommand";
 import Collaborator from "../entities/Collaborator";
-import {Tgresolve} from "tg-resolve";
 
 
 /**
@@ -46,8 +45,6 @@ export default class Bot extends TelegramBot {
      */
     protected static current: Bot;
 
-    protected resolver: Tgresolve;
-
     /**
      * Creates an instance of Bot.
      * @param token - Telegram bot token.
@@ -61,7 +58,6 @@ export default class Bot extends TelegramBot {
             throw new Error(`FatalError: you must specify token to run this app! "token" = "${token}".`);
         console.log("Creating telegram bot.");
         super(token, {polling: true});
-        this.resolver = new Tgresolve(token);
         this.addListener("left_chat_member", this.handleMemberLeftChat);
         this.updateBotCommandsHelp().catch((error: Error) => {
             console.error("Failed to update bot commands: ", error);

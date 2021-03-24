@@ -10,17 +10,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Commands] Rewritten to new logic.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Commands] Changed logic to telegram user id.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ClearAKACommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ClearAKACommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ConnectMeCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ConnectCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/DisconnectMeCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/DisconnectCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/RemoveAKACommand.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/getAkaAlias.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/getAkaAlias.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -114,7 +107,7 @@
       <workItem from="1616420648360" duration="7441000" />
       <workItem from="1616428493825" duration="2659000" />
       <workItem from="1616545792931" duration="8574000" />
-      <workItem from="1616605886860" duration="11322000" />
+      <workItem from="1616605886860" duration="11394000" />
     </task>
     <task id="LOCAL-00001" summary="[Global] Initialized repository.">
       <created>1602758176185</created>
@@ -452,7 +445,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616599743798</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="[Commands] Changed logic to telegram user id.">
+      <created>1616618155851</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1616618155851</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -471,7 +471,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[index] Small changes." />
     <MESSAGE value="[issueEvent] Added markdown parser to message." />
     <MESSAGE value="[issueEvent] Changed message parser markdownV2" />
     <MESSAGE value="[issueEvent] Screening symbols." />
@@ -496,7 +495,8 @@
     <MESSAGE value="[BotCommand] Added result handler." />
     <MESSAGE value="[BotCommand] Added command decorators and spec with new mechanism." />
     <MESSAGE value="[Commands] Rewritten to new logic." />
-    <option name="LAST_COMMIT_MESSAGE" value="[Commands] Rewritten to new logic." />
+    <MESSAGE value="[Commands] Changed logic to telegram user id." />
+    <option name="LAST_COMMIT_MESSAGE" value="[Commands] Changed logic to telegram user id." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
