@@ -33,10 +33,9 @@ import Issue from "./entities/Issue";
 import AddRepositoryCommand from "./commands/AddRepositoryCommand";
 import AKAsCommand from "./commands/AKAsCommand";
 import ClearAKACommand from "./commands/ClearAKACommand";
-import ConnectMeCommand from "./commands/ConnectMeCommand";
-import DisconnectMeCommand from "./commands/DisconnectMeCommand";
+import ConnectCommand from "./commands/ConnectCommand";
+import DisconnectCommand from "./commands/DisconnectCommand";
 import ListRepositoriesCommand from "./commands/ListRepositoriesCommand";
-import RemoveAKACommand from "./commands/RemoveAKACommand";
 import RemoveRepositoryCommand from "./commands/RemoveRepositoryCommand";
 import BotCommand from "./core/BotCommand";
 
@@ -63,10 +62,9 @@ const config: Config = {
             AddRepositoryCommand,
             AKAsCommand,
             ClearAKACommand,
-            ConnectMeCommand,
-            DisconnectMeCommand,
+            ConnectCommand,
+            DisconnectCommand,
             ListRepositoriesCommand,
-            RemoveAKACommand,
             RemoveRepositoryCommand
         ]
     },

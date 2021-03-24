@@ -12,7 +12,16 @@
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Commands] Rewritten to new logic.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/Collaborator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Collaborator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/ClearAKACommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ClearAKACommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/ConnectMeCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ConnectCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/DisconnectMeCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/DisconnectCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/RemoveAKACommand.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/getAkaAlias.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/getAkaAlias.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +114,7 @@
       <workItem from="1616420648360" duration="7441000" />
       <workItem from="1616428493825" duration="2659000" />
       <workItem from="1616545792931" duration="8574000" />
+      <workItem from="1616605886860" duration="11322000" />
     </task>
     <task id="LOCAL-00001" summary="[Global] Initialized repository.">
       <created>1602758176185</created>
@@ -488,88 +498,6 @@
     <MESSAGE value="[Commands] Rewritten to new logic." />
     <option name="LAST_COMMIT_MESSAGE" value="[Commands] Rewritten to new logic." />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="2610" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1616596219962">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2610" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616596219962" />
-    <state width="1899" height="211" key="GridCell.Tab.0.bottom" timestamp="1616603460397">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="211" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616603460397" />
-    <state width="1899" height="211" key="GridCell.Tab.0.center" timestamp="1616603460397">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="211" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616603460397" />
-    <state width="1899" height="211" key="GridCell.Tab.0.left" timestamp="1616603460396">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="211" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616603460396" />
-    <state width="1899" height="211" key="GridCell.Tab.0.right" timestamp="1616603460397">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="211" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616603460397" />
-    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1616603459620">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616603459620" />
-    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1616603459620">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616603459620" />
-    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1616603459620">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616603459620" />
-    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1616603459620">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616603459620" />
-    <state width="1899" height="348" key="GridCell.Tab.2.bottom" timestamp="1616603459620">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.2.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616603459620" />
-    <state width="1899" height="348" key="GridCell.Tab.2.center" timestamp="1616603459620">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.2.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616603459620" />
-    <state width="1899" height="348" key="GridCell.Tab.2.left" timestamp="1616603459620">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.2.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616603459620" />
-    <state width="1899" height="348" key="GridCell.Tab.2.right" timestamp="1616603459620">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.2.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616603459620" />
-    <state width="1899" height="348" key="GridCell.Tab.3.bottom" timestamp="1616603459620">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.3.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616603459620" />
-    <state width="1899" height="348" key="GridCell.Tab.3.center" timestamp="1616603459620">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.3.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616603459620" />
-    <state width="1899" height="348" key="GridCell.Tab.3.left" timestamp="1616603459620">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.3.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616603459620" />
-    <state width="1899" height="348" key="GridCell.Tab.3.right" timestamp="1616603459620">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616603459620" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1616599747015">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616599747015" />
-    <state x="2697" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1616592783131">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2697" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616592783131" />
-    <state x="472" y="0" width="1464" height="646" maximized="true" key="dock-window-1" timestamp="1616599344191">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="472" y="0" width="1464" height="646" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616599344191" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -577,11 +505,6 @@
           <url>file://$PROJECT_DIR$/src/decorators/BotCommand.ts</url>
           <line>35</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/commands/ConnectMeCommand.ts</url>
-          <line>40</line>
-          <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

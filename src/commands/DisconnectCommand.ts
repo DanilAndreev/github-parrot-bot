@@ -25,16 +25,18 @@
  */
 
 import BotCommand from "../core/BotCommand";
-import {Message} from "node-telegram-bot-api";
+import {ChatMember, Message} from "node-telegram-bot-api";
 import Collaborator from "../entities/Collaborator";
 import CommandError from "../errors/CommandError";
 import JSONObject from "../interfaces/JSONObject";
+import Bot from "../core/Bot";
 
 
-@BotCommand.Command("disconnect_me", "[github_username]")
-@BotCommand.Description("Breaks link between telegram and github user.")
-@BotCommand.Option("-a, --all", "Disconnect all my github accounts.", false)
-export default class DisconnectMeCommand extends BotCommand {
+@BotCommand.Command("disconnect", "[github_username]")
+@BotCommand.Description("Breaks link between telegram and github user (by default - you).")
+@BotCommand.Option("-a, --all", "Apply this action for each connection for selected user.", false)
+@BotCommand.Option("-u, --user <value>", "Apply this action selected user.")
+export default class DisconnectCommand extends BotCommand {
     protected async handler(message: Message, args: string[], opts: JSONObject<string>): Promise<string | string[]> {
         const [githubUsername] = args;
 
@@ -49,9 +51,22 @@ export default class DisconnectMeCommand extends BotCommand {
 
     protected async disconnectAll(message: Message, args: string[], opts: JSONObject<string>): Promise<string> {
         const chatId: number = message.chat.id;
-        const telegramName = message.from?.username || "";
+        let telegramName: string = message.from?.username || message.from?.first_name || "";
+        const telegramId: number | undefined = (opts.user ? +opts.user : undefined) || message.from?.id;
 
-        const result = await Collaborator.delete({chatId, telegramName});
+        if (!telegramId)
+            throw new CommandError(`Unable to get telegram user.`);
+
+        if (opts.user) {
+            try {
+                const chatMember: ChatMember = await Bot.getCurrent().getChatMember(chatId, String(telegramId));
+                telegramName = chatMember.user.username || chatMember.user.first_name;
+            } catch (error) {
+                throw new CommandError(`Unable to get telegram user with id: ${telegramId}.`);
+            }
+        }
+
+        const result = await Collaborator.delete({chatId, telegramId});
 
         if (!result.affected)
             throw new CommandError(`User @${telegramName} has no AKA.`);
@@ -62,12 +77,25 @@ export default class DisconnectMeCommand extends BotCommand {
     protected async disconnectOne(message: Message, args: string[], opts: JSONObject<string>): Promise<string> {
         const chatId: number = message.chat.id;
         const [ghName] = args;
-        const telegramName = message.from?.username || "";
+        let telegramName: string = message.from?.username || message.from?.first_name || "";
+        const telegramId: number | undefined = (opts.user ? +opts.user : undefined) || message.from?.id;
 
-        const result = await Collaborator.delete({chatId, gitHubName: ghName, telegramName});
+        if (!telegramId)
+            throw new CommandError(`Unable to get telegram user.`);
+
+        if (opts.user) {
+            try {
+                const chatMember: ChatMember = await Bot.getCurrent().getChatMember(chatId, String(telegramId));
+                telegramName = chatMember.user.username || chatMember.user.first_name;
+            } catch (error) {
+                throw new CommandError(`Unable to get telegram user with id: ${telegramId}.`);
+            }
+        }
+
+        const result = await Collaborator.delete({chatId, gitHubName: ghName, telegramId});
 
         if (!result.affected)
-            throw new CommandError(`User @${telegramName} is not connected to GitHub account __[${ghName}]__.`);
+            throw new CommandError(`User @${telegramName} is not connected to GitHub account <b>[${ghName}]</b>.`);
 
         return `Successfully deleted link <b>[${ghName}]</b> -> @${telegramName}`;
     }
