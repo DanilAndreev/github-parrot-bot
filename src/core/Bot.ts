@@ -40,6 +40,7 @@ import listAKA from "../commands/listAKA";
 import config from "../config";
 import Test from "../commands/Test";
 import BotCommand from "./BotCommand";
+import AddRepositoryCommand from "../commands/AddRepositoryCommand";
 
 // export let Bot: TelegramBot | null = null;
 //
@@ -86,7 +87,7 @@ export default class Bot extends TelegramBot {
     /**
      * commands - commands array. Decorate your class derived from BotCommand with decorator BotCommand.Command();
      */
-    public static commands: BotCommand[] = [new Test()];
+    public static commands: BotCommand[] = [new AddRepositoryCommand(), new Test()];
     /**
      * current - current class instance. Singleton.
      */
@@ -107,6 +108,14 @@ export default class Bot extends TelegramBot {
             for (const command of Bot.commands) {
                 this.onText(new RegExp(`\/${command.getCommandPattern()} (.+)`), command.getCallback());
                 this.onText(new RegExp(`^\/${command.getCommandPattern()}$`), command.getCallback());
+                if (process.env.TELEGRAM_TAG) {
+                    let telegramTag: string = process.env.TELEGRAM_TAG;
+                    if (telegramTag[0] !== "@") {
+                        telegramTag = "@" + telegramTag;
+                    }
+                    this.onText(new RegExp(`\/${command.getCommandPattern()}${telegramTag} (.+)`), command.getCallback());
+                    this.onText(new RegExp(`^\/${command.getCommandPattern()}${telegramTag}$`), command.getCallback());
+                }
             }
         } else {
             console.warn("No commands provided.");

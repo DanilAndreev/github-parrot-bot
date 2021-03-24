@@ -30,6 +30,7 @@ import CommandError from "./CommandError";
 import * as commander from "commander";
 import {Command, CommanderError, Option} from "commander";
 import stringArgv from "string-argv";
+import JSONObject from "../interfaces/JSONObject";
 
 
 /**
@@ -66,7 +67,6 @@ abstract class BotCommand {
         this.pattern = "";
     }
 
-
     /**
      * handler - command handler. Here you can do actions.
      * @method
@@ -74,8 +74,9 @@ abstract class BotCommand {
      * @author Danil Andreev
      * @param message - Chat message.
      * @param args - Command arguments list.
+     * @param options - Json with command options.
      */
-    protected abstract async handler(message: Message, args: string[], options: { [p: string]: string }): Promise<void | string | string[]>;
+    protected abstract async handler(message: Message, args: string[], options: JSONObject<string>): Promise<void | string | string[]>;
 
     /**
      * execute - method for command execution. Contain error handlers and validation process.
