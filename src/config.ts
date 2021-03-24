@@ -30,9 +30,19 @@ import {ConnectionOptions} from "typeorm";
 import Collaborator from "./entities/Collaborator";
 import * as Amqp from "amqplib";
 import Issue from "./entities/Issue";
+import AddRepositoryCommand from "./commands/AddRepositoryCommand";
+import AKAsCommand from "./commands/AKAsCommand";
+import ClearAKACommand from "./commands/ClearAKACommand";
+import ConnectMeCommand from "./commands/ConnectMeCommand";
+import DisconnectMeCommand from "./commands/DisconnectMeCommand";
+import ListRepositoriesCommand from "./commands/ListRepositoriesCommand";
+import RemoveAKACommand from "./commands/RemoveAKACommand";
+import RemoveRepositoryCommand from "./commands/RemoveRepositoryCommand";
+import BotCommand from "./core/BotCommand";
 
 export interface BotConfig {
     token: string;
+    commands: typeof BotCommand[]
 }
 
 export interface ServerConfig {
@@ -49,6 +59,16 @@ export interface Config {
 const config: Config = {
     bot: {
         token: process.env.TELEGRAM_BOT_TOKEN || "",
+        commands: [
+            AddRepositoryCommand,
+            AKAsCommand,
+            ClearAKACommand,
+            ConnectMeCommand,
+            DisconnectMeCommand,
+            ListRepositoriesCommand,
+            RemoveAKACommand,
+            RemoveRepositoryCommand
+        ]
     },
     db: {
         type: "postgres",

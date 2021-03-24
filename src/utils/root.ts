@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,10 +24,23 @@
  * SOFTWARE.
  */
 
-export default function getUsername(user: string) {
-    if (!user.length) return undefined;
-    if (user[0] !== "@") {
-        return user;
-    }
-    return user.slice(1);
+import * as path from "path";
+
+
+/**
+ * getProjectRoot - returns project root directory path or undefined if error occured.
+ * @function
+ * @author Danil Andreev
+ */
+export function getProjectRoot(): string | undefined {
+    if (!require?.main?.filename && !process?.mainModule?.filename)
+        return undefined;
+    return path.dirname(require?.main?.filename || process?.mainModule?.filename || "");
+
 }
+
+/**
+ * root - project root directory path.
+ */
+const root: string | undefined = getProjectRoot();
+export default root;

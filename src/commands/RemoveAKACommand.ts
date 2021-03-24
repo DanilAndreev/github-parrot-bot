@@ -26,7 +26,6 @@
 
 import BotCommand from "../core/BotCommand";
 import {Message} from "node-telegram-bot-api";
-import getUsername from "../core/getUsername";
 import checkAdmin from "../core/checkAdmin";
 import CommandError from "../errors/CommandError";
 import Collaborator from "../entities/Collaborator";
@@ -39,7 +38,7 @@ export default class RemoveAKACommand extends BotCommand {
     protected async handler(message: Message, args: string[], opts: JSONObject<string>): Promise<string> {
         const chatId: number = message.chat.id;
         const [tag, ghName] = args;
-        const telegramName = getUsername(tag);
+        const telegramName = RemoveAKACommand.getUsername(tag) || "";
 
         if (!await checkAdmin(message.from?.username || "", message))
             throw new CommandError(`User @${message.from?.username} have no permissions to remove AKAs.`);
@@ -57,5 +56,13 @@ export default class RemoveAKACommand extends BotCommand {
         return ghName ?
             `Successfully deleted link <b>[${ghName}]</b> -> @${telegramName}.` :
             `Successfully deleted all @${telegramName} AKAs.`;
+    }
+
+    public static  getUsername(user: string): string | void {
+        if (!user.length) return undefined;
+        if (user[0] !== "@") {
+            return user;
+        }
+        return user.slice(1);
     }
 }
