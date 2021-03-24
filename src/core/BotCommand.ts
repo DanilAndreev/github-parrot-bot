@@ -42,7 +42,7 @@ import JSONObject from "../interfaces/JSONObject";
 @Reflect.metadata("bot-command", true)
 @Reflect.metadata("bot-command-allowed-unknown-option", false)
 @Reflect.metadata("bot-command-allowed-excess-arguments", false)
-abstract class BotCommand {
+class BotCommand {
     /**
      * validation - validation spec array.
      */
@@ -79,7 +79,9 @@ abstract class BotCommand {
      * @param args - Command arguments list.
      * @param options - Json with command options.
      */
-    protected abstract async handler(message: Message, args: string[], options: JSONObject<string>): Promise<void | string | string[]>;
+    protected async handler(message: Message, args: string[], options: JSONObject<string>): Promise<void | string | string[]> {
+        throw new ReferenceError(`Abstract method. Inherit this class and override this method.`);
+    };
 
     /**
      * execute - method for command execution. Contain error handlers and validation process.

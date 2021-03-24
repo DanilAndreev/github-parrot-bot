@@ -10,34 +10,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[BotCommand] Added command decorators and spec with new mechanism.">
-      <change afterPath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/commands/ClearAKACommand.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/commands/ConnectMeCommand.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/commands/DisconnectMeCommand.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/commands/ListRepositoriesCommand.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/commands/RemoveAKACommand.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/commands/RemoveRepositoryCommand.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Commands] Rewritten to new logic.">
+      <change afterPath="$PROJECT_DIR$/src/utils/root.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/Test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/addRepository.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/clearAKA.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/connectMe.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/disconnectMe.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/disconnectMeAll.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/listAKA.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/listRepositories.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/removeAKA.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/removeAllRepositories.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/removeRepository.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/whoAmI.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/RemoveAKACommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/RemoveAKACommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/BotCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/BotCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/CommandError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors/CommandError.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/createSecretPreview.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/makeCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/makeCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/getUsername.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/makeCommand.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -460,7 +441,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616552924001</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="[Commands] Rewritten to new logic.">
+      <created>1616599743798</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1616599743798</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -479,7 +467,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[issueEvent] Debug logs added." />
     <MESSAGE value="[index] Small changes." />
     <MESSAGE value="[issueEvent] Added markdown parser to message." />
     <MESSAGE value="[issueEvent] Changed message parser markdownV2" />
@@ -504,77 +491,82 @@
     <MESSAGE value="[gitignore] Updated." />
     <MESSAGE value="[BotCommand] Added result handler." />
     <MESSAGE value="[BotCommand] Added command decorators and spec with new mechanism." />
-    <option name="LAST_COMMIT_MESSAGE" value="[BotCommand] Added command decorators and spec with new mechanism." />
+    <MESSAGE value="[Commands] Rewritten to new logic." />
+    <option name="LAST_COMMIT_MESSAGE" value="[Commands] Rewritten to new logic." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2610" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1616596219962">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2610" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616596219962" />
-    <state width="1899" height="353" key="GridCell.Tab.0.bottom" timestamp="1616599695055">
+    <state width="1899" height="348" key="GridCell.Tab.0.bottom" timestamp="1616602694348">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="353" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616599695055" />
-    <state width="1899" height="353" key="GridCell.Tab.0.center" timestamp="1616599695055">
+    <state width="1899" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616602694348" />
+    <state width="1899" height="348" key="GridCell.Tab.0.center" timestamp="1616602694348">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="353" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616599695055" />
-    <state width="1899" height="353" key="GridCell.Tab.0.left" timestamp="1616599695055">
+    <state width="1899" height="348" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616602694348" />
+    <state width="1899" height="348" key="GridCell.Tab.0.left" timestamp="1616602694348">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="353" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616599695055" />
-    <state width="1899" height="353" key="GridCell.Tab.0.right" timestamp="1616599695055">
+    <state width="1899" height="348" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616602694348" />
+    <state width="1899" height="348" key="GridCell.Tab.0.right" timestamp="1616602694348">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="353" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616599695055" />
-    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1616598608194">
+    <state width="1899" height="348" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616602694348" />
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1616602710988">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
-    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1616598608194">
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616602710988" />
+    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1616602710988">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
-    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1616598608194">
+    <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616602710988" />
+    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1616602710988">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
-    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1616598608194">
+    <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616602710988" />
+    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1616602710988">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
-    <state width="1899" height="348" key="GridCell.Tab.2.bottom" timestamp="1616598608194">
+    <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616602710988" />
+    <state width="1899" height="348" key="GridCell.Tab.2.bottom" timestamp="1616602694160">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.2.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
-    <state width="1899" height="348" key="GridCell.Tab.2.center" timestamp="1616598608194">
+    <state width="1899" height="348" key="GridCell.Tab.2.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616602694160" />
+    <state width="1899" height="348" key="GridCell.Tab.2.center" timestamp="1616602694160">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.2.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
-    <state width="1899" height="348" key="GridCell.Tab.2.left" timestamp="1616598608194">
+    <state width="1899" height="348" key="GridCell.Tab.2.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616602694160" />
+    <state width="1899" height="348" key="GridCell.Tab.2.left" timestamp="1616602694160">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.2.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
-    <state width="1899" height="348" key="GridCell.Tab.2.right" timestamp="1616598608194">
+    <state width="1899" height="348" key="GridCell.Tab.2.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616602694160" />
+    <state width="1899" height="348" key="GridCell.Tab.2.right" timestamp="1616602694160">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.2.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
-    <state width="1899" height="348" key="GridCell.Tab.3.bottom" timestamp="1616598608194">
+    <state width="1899" height="348" key="GridCell.Tab.2.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616602694160" />
+    <state width="1899" height="348" key="GridCell.Tab.3.bottom" timestamp="1616602694161">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.3.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
-    <state width="1899" height="348" key="GridCell.Tab.3.center" timestamp="1616598608194">
+    <state width="1899" height="348" key="GridCell.Tab.3.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616602694161" />
+    <state width="1899" height="348" key="GridCell.Tab.3.center" timestamp="1616602694160">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.3.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
-    <state width="1899" height="348" key="GridCell.Tab.3.left" timestamp="1616598608194">
+    <state width="1899" height="348" key="GridCell.Tab.3.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616602694160" />
+    <state width="1899" height="348" key="GridCell.Tab.3.left" timestamp="1616602694160">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.3.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
-    <state width="1899" height="348" key="GridCell.Tab.3.right" timestamp="1616598608194">
+    <state width="1899" height="348" key="GridCell.Tab.3.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616602694160" />
+    <state width="1899" height="348" key="GridCell.Tab.3.right" timestamp="1616602694160">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
+    <state width="1899" height="348" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616602694160" />
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1616599747015">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616599747015" />
     <state x="2697" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1616592783131">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -591,6 +583,12 @@
           <url>file://$PROJECT_DIR$/src/decorators/BotCommand.ts</url>
           <line>35</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/commands/ConnectMeCommand.ts</url>
+          <line>40</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

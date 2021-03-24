@@ -27,14 +27,6 @@
 import * as TelegramBot from "node-telegram-bot-api";
 import config from "../config";
 import BotCommand from "./BotCommand";
-import AddRepositoryCommand from "../commands/AddRepositoryCommand";
-import RemoveRepositoryCommand from "../commands/RemoveRepositoryCommand";
-import ListRepositoriesCommand from "../commands/ListRepositoriesCommand";
-import AKAsCommand from "../commands/AKAsCommand";
-import ClearAKACommand from "../commands/ClearAKACommand";
-import ConnectMeCommand from "../commands/ConnectMeCommand";
-import DisconnectMeCommand from "../commands/DisconnectMeCommand";
-import RemoveAKACommand from "../commands/RemoveAKACommand";
 
 /**
  * Bot - class for telegram bot api.
@@ -45,16 +37,7 @@ export default class Bot extends TelegramBot {
     /**
      * commands - commands array. Decorate your class derived from BotCommand with decorator BotCommand.Command();
      */
-    public static commands: BotCommand[] = [
-        new AddRepositoryCommand(),
-        new AKAsCommand(),
-        new ClearAKACommand(),
-        new ConnectMeCommand(),
-        new DisconnectMeCommand(),
-        new ListRepositoriesCommand(),
-        new RemoveAKACommand(),
-        new RemoveRepositoryCommand(),
-    ];
+    public static commands: BotCommand[] = [];
     /**
      * current - current class instance. Singleton.
      */
@@ -67,6 +50,8 @@ export default class Bot extends TelegramBot {
      */
     protected constructor(token?: string) {
         token = token || config.bot.token;
+        Bot.commands = config.bot.commands.map((CommandClass: typeof BotCommand) => new CommandClass());
+
         if (!token)
             throw new Error(`FatalError: you must specify token to run this app! "token" = "${token}".`);
         console.log("Creating telegram bot.");
