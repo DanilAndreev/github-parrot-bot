@@ -31,16 +31,19 @@ import Collaborator from "../entities/Collaborator";
 import JSONObject from "../interfaces/JSONObject";
 
 
-@BotCommand.Command("connect_me", "<github_username>")
+@BotCommand.Command("connect", "<github_username>")
 @BotCommand.Description("Creates link between telegram and github user to show notifications.", {
     "github_username": "GitHub username. Example: octocat",
 })
-export default class ConnectMeCommand extends BotCommand {
+export default class ConnectCommand extends BotCommand {
     protected async handler(message: Message, args: string[], opts: JSONObject<string>): Promise<string[]> {
 
         const chatId: number = message.chat.id;
         const [ghName] = args;
-        const telegramName = await message.from?.username || "";
+        const telegramName: string = message.from?.username || "";
+        if (!message.from?.id)
+            throw new CommandError("Unable to get telegram user id.");
+        const telegramId: number = message.from.id;
 
         // TODO: fix bug in groups.
         // try {
@@ -53,19 +56,19 @@ export default class ConnectMeCommand extends BotCommand {
         const storedCollaborator = await Collaborator.findOne({where: {chatId, gitHubName: ghName}});
         if (storedCollaborator)
             throw new CommandError(
-                `User [@${storedCollaborator.telegramName}] is already connected to GitHub account [${storedCollaborator.gitHubName}]`
+                `User [@${telegramName}] is already connected to GitHub account [${storedCollaborator.gitHubName}]`
             );
 
         const collaborator = new Collaborator();
         collaborator.gitHubName = ghName;
-        collaborator.telegramName = telegramName;
+        collaborator.telegramId = telegramId;
         collaborator.chatId = chatId;
         const result: Collaborator = await collaborator.save();
 
         return [
             `Successfully added collaborator.`,
             `GitHub: <b>${result.gitHubName}</b>`,
-            `Telegram: @${result.telegramName}`
+            `Telegram: @${telegramName}`
         ];
     }
 }

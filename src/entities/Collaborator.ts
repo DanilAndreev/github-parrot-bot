@@ -37,8 +37,8 @@ export default class Collaborator extends BaseEntity {
     @Column()
     gitHubName: string;
 
-    @Column()
-    telegramName: string;
+    @Column({type: "bigint"})
+    telegramId: number;
 
     @CreateDateColumn()
     createdAt: Date;

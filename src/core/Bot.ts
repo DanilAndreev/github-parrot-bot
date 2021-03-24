@@ -27,6 +27,8 @@
 import * as TelegramBot from "node-telegram-bot-api";
 import config from "../config";
 import BotCommand from "./BotCommand";
+import Collaborator from "../entities/Collaborator";
+
 
 /**
  * Bot - class for telegram bot api.
@@ -56,6 +58,11 @@ export default class Bot extends TelegramBot {
             throw new Error(`FatalError: you must specify token to run this app! "token" = "${token}".`);
         console.log("Creating telegram bot.");
         super(token, {polling: true});
+        this.addListener("left_chat_member", this.handleMemberLeftChat);
+        this.updateBotCommandsHelp().catch((error: Error) => {
+            console.error("Failed to update bot commands: ", error);
+        });
+
         if (Bot.commands.length) {
             for (const command of Bot.commands) {
                 this.onText(new RegExp(`\/${command.getCommandPattern()} (.+)`), command.getCallback());
@@ -71,6 +78,40 @@ export default class Bot extends TelegramBot {
             }
         } else {
             console.warn("No commands provided.");
+        }
+    }
+
+    /**
+     * updateBotCommandsHelp - updates telegram bot help for commands.
+     * @method
+     * @author Danil Andreev
+     */
+    protected async updateBotCommandsHelp(): Promise<boolean> {
+        return await this.setMyCommands(
+            Bot.commands
+                .filter((command: BotCommand) => !!Reflect.getMetadata("bot-command-name", command))
+                .map((command: BotCommand) => {
+                    const name: string = Reflect.getMetadata("bot-command-name", command);
+                    const args: string = Reflect.getMetadata("bot-command-arguments", command);
+                    const description: string = Reflect.getMetadata("bot-command-description", command);
+                    return {
+                        command: name,
+                        description: [args, description].filter(i => i).join(" ")
+                    };
+                })
+        );
+    }
+
+    /**
+     * handleMemberLeftChat - handler for chat member leave.
+     * @method
+     * @param message - Message object.
+     * @author Danil Andreev
+     */
+    protected async handleMemberLeftChat(message: TelegramBot.Message) {
+        if (message.left_chat_member?.id) {
+            const telegramId: number = message.left_chat_member.id;
+            await Collaborator.delete({telegramId});
         }
     }
 

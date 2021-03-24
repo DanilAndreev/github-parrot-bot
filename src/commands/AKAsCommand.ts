@@ -25,9 +25,11 @@
  */
 
 import BotCommand from "../core/BotCommand";
-import {Message} from "node-telegram-bot-api";
+import {ChatMember, Message} from "node-telegram-bot-api";
 import Collaborator from "../entities/Collaborator";
 import JSONObject from "../interfaces/JSONObject";
+import CommandError from "../errors/CommandError";
+import Bot from "../core/Bot";
 
 
 @BotCommand.Command("akas")
@@ -51,23 +53,44 @@ export default class AKAsCommand extends BotCommand {
         if (!result.length)
             return `This chat have no AKAs.`;
 
+        const text: string[] = await Promise
+            .all(result.map(async (collaboration: Collaborator) => {
+                try {
+                    const chatMember: ChatMember = await Bot.getCurrent().getChatMember(chatId, "" + collaboration.telegramId);
+                    if (chatMember.status === "left") {
+                        throw Error();
+                    }
+                    const telegramName: string = chatMember.user.username || chatMember.user.first_name;
+                    return `AKA: <i>[${collaboration.gitHubName}]</i> -> @${telegramName} <i>[${collaboration.telegramId}]</i>`;
+                } catch (error) {
+
+                }
+                return "";
+            }))
+            .catch((error: Error) => {
+                throw new CommandError(error.message);
+            });
+
         return [
             `All AKAs for this chat:`,
-            ...result.map(collaboration => `AKA: <i>[${collaboration.gitHubName}]</i> -> @${collaboration.telegramName}`),
+            ...text
         ];
     }
 
     protected async showMy(message: Message, args: string[], opts: JSONObject<string>): Promise<string | string[]> {
         const chatId: number = message.chat.id;
-        const telegramName = message.from?.username || "";
+        const telegramName: string = message.from?.username || "";
+        if (!message.from?.id)
+            throw new CommandError("Unable to get telegram user id.");
+        const telegramId: number = message.from.id;
 
-        const result: Collaborator[] = await Collaborator.find({where: {chatId, telegramName}});
+        const result: Collaborator[] = await Collaborator.find({where: {chatId, telegramId}});
 
         if (!result.length)
             return `User @${telegramName} have no AKA.`;
 
         return [
-            `User @${telegramName}:`,
+            `User @${telegramName} <i>[${telegramId}]</i>:`,
             ...result.map(collaboration => `AKA: <b>[${collaboration.gitHubName}]</b>`),
         ];
     }
