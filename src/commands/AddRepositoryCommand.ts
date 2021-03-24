@@ -26,10 +26,9 @@
 
 import BotCommand from "../core/BotCommand";
 import {Message} from "node-telegram-bot-api";
-import CommandError from "../core/CommandError";
+import CommandError from "../errors/CommandError";
 import checkAdmin from "../core/checkAdmin";
 import WebHook from "../entities/WebHook";
-import createSecretPreview from "../core/createSecretPreview";
 import Bot from "../core/Bot";
 
 
@@ -49,13 +48,17 @@ export default class AddRepositoryCommand extends BotCommand {
 
         if (await WebHook.findOne({where: {chatId, repository}}))
             throw new CommandError(
-                `Repository __[${repository}]__ is already connected.`,
+                `Repository <b>[${repository}]</b> is already connected.`,
                 `Use /remove command to remove repository.`
             );
 
         const webhook = new WebHook();
+        try {
+            webhook.secretPreview = AddRepositoryCommand.createSecretPreview(secret);
+        } catch (error) {
+            throw new CommandError(error.message);
+        }
         webhook.secret = secret;
-        webhook.secretPreview = createSecretPreview(secret);
         webhook.chatId = chatId;
         webhook.repository = repository;
         const result = await webhook.save();
@@ -66,8 +69,29 @@ export default class AddRepositoryCommand extends BotCommand {
         }
         return [
             `Successfully added repository.`,
-            `Name: __${result.repository}__`,
-            `Secret: \`\`\`${result.secretPreview}\`\`\`__`
+            `Name: <b>${result.repository}</b>`,
+            `Secret: <code>${result.secretPreview}</code>`
         ];
+    }
+
+    /**
+     * createSecretPreview - creates a secret preview string.
+     *
+     * Example:
+     *
+     * Secret: "hello darkness my old friend"
+     *
+     * Preview: "he********nd"
+     * @method
+     * @author Danil Andreev
+     * @param secret - Input secret string.
+     * @throws RangeError
+     */
+    public static createSecretPreview(secret: string) {
+        if (secret.length < 4) throw new RangeError("Error: secret is too short. It must be at least 4 symbols in length.");
+        const head: string = secret.slice(0, 2);
+        const tail: string = secret.slice(secret.length - 2, secret.length);
+        const preview: string = head + "********" + tail;
+        return preview;
     }
 }

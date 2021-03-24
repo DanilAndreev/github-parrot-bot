@@ -24,7 +24,6 @@
  * SOFTWARE.
  */
 
-import "reflect-metadata";
 import * as Koa from "koa";
 import {Context, Next} from "koa";
 import * as BodyParser from "koa-bodyparser";

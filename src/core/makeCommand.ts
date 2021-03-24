@@ -25,7 +25,7 @@
  */
 
 import * as TelegramBot from "node-telegram-bot-api";
-import CommandError from "./CommandError";
+import CommandError from "../errors/CommandError";
 import Bot from "./Bot";
 import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
 

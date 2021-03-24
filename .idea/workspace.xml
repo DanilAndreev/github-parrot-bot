@@ -11,11 +11,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[BotCommand] Added command decorators and spec with new mechanism.">
-      <change afterPath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interfaces/JSONObject.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/commands/ClearAKACommand.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/commands/ConnectMeCommand.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/commands/DisconnectMeCommand.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/commands/ListRepositoriesCommand.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/commands/RemoveAKACommand.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/commands/RemoveRepositoryCommand.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/Test.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/addRepository.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/clearAKA.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/connectMe.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/disconnectMe.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/disconnectMeAll.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/listAKA.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/listRepositories.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/removeAKA.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/removeAllRepositories.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/removeRepository.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/whoAmI.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/BotCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/BotCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/CommandError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors/CommandError.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/createSecretPreview.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/makeCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/makeCommand.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,13 +89,14 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\errors" />
       <recent name="D:\Projects\github-tracker-telegram-bot\src\core" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -484,6 +506,84 @@
     <MESSAGE value="[BotCommand] Added command decorators and spec with new mechanism." />
     <option name="LAST_COMMIT_MESSAGE" value="[BotCommand] Added command decorators and spec with new mechanism." />
   </component>
+  <component name="WindowStateProjectService">
+    <state x="2610" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1616596219962">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2610" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616596219962" />
+    <state width="1899" height="353" key="GridCell.Tab.0.bottom" timestamp="1616599695055">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="353" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616599695055" />
+    <state width="1899" height="353" key="GridCell.Tab.0.center" timestamp="1616599695055">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="353" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616599695055" />
+    <state width="1899" height="353" key="GridCell.Tab.0.left" timestamp="1616599695055">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="353" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616599695055" />
+    <state width="1899" height="353" key="GridCell.Tab.0.right" timestamp="1616599695055">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="353" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616599695055" />
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1616598608194">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
+    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1616598608194">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
+    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1616598608194">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
+    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1616598608194">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
+    <state width="1899" height="348" key="GridCell.Tab.2.bottom" timestamp="1616598608194">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.2.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
+    <state width="1899" height="348" key="GridCell.Tab.2.center" timestamp="1616598608194">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.2.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
+    <state width="1899" height="348" key="GridCell.Tab.2.left" timestamp="1616598608194">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.2.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
+    <state width="1899" height="348" key="GridCell.Tab.2.right" timestamp="1616598608194">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.2.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
+    <state width="1899" height="348" key="GridCell.Tab.3.bottom" timestamp="1616598608194">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.3.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
+    <state width="1899" height="348" key="GridCell.Tab.3.center" timestamp="1616598608194">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.3.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
+    <state width="1899" height="348" key="GridCell.Tab.3.left" timestamp="1616598608194">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.3.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
+    <state width="1899" height="348" key="GridCell.Tab.3.right" timestamp="1616598608194">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616598608194" />
+    <state x="2697" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1616592783131">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2697" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616592783131" />
+    <state x="472" y="0" width="1464" height="646" maximized="true" key="dock-window-1" timestamp="1616599344191">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="472" y="0" width="1464" height="646" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616599344191" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -491,23 +591,6 @@
           <url>file://$PROJECT_DIR$/src/decorators/BotCommand.ts</url>
           <line>35</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/commands/Test.ts</url>
-          <line>38</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/core/BotCommand.ts</url>
-          <line>87</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/core/Bot.ts</url>
-          <line>115</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="30" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

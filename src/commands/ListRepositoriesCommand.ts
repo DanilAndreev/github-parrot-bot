@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,31 +24,26 @@
  * SOFTWARE.
  */
 
-import CommandError from "../core/CommandError";
+import BotCommand from "../core/BotCommand";
+import {Message} from "node-telegram-bot-api";
 import WebHook from "../entities/WebHook";
-import {CommandFinalMessageSync} from "../interfaces/CommandFinalMessage";
-import checkAdmin from "../core/checkAdmin";
+import JSONObject from "../interfaces/JSONObject";
 
-export default async function removeRepository(message, match): Promise<CommandFinalMessageSync> {
-    const usage = [
-        `Usage: /remove [repository_full_name]`,
-        `Example: /remove DanilAndreev/test_repo`
-    ].join("\n");
 
-    const chatId: number = message.chat.id;
-    const telegramName: string = message.from.username;
-    const repository: string = match[1];
+@BotCommand.Command("list")
+@BotCommand.Description("Shows all GitHub repositories connected to this chat.")
+export default class ListRepositoriesCommand extends BotCommand {
+    protected async handler(message: Message, args: string[], opts: JSONObject<string>): Promise<string | string[]> {
+        const chatId: number = message.chat.id;
 
-    if (repository.includes(" "))
-        throw new CommandError(
-            `Repository name can not contain spaces! `,
-            `Input: __[${repository}]__`
-        );
+        const result: WebHook[] = await WebHook.find({where: {chatId: chatId}});
 
-    if (!await checkAdmin(telegramName, message))
-        throw new CommandError(`User @${telegramName} have no permissions to delete repositories.`);
+        if (!result.length)
+            return `You have no repositories added.`;
 
-    const result = await WebHook.delete({chatId, repository});
-    if (!result.affected) throw new CommandError(`Repository __[${repository}]__ not found.`);
-    return `Successfully deleted repository __[${repository}]__.`;
+        return [
+            `Connected repositories:`,
+            ...result.map(repo => `<b>[${repo.repository}]</b>`),
+        ];
+    }
 }

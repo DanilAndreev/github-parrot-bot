@@ -26,7 +26,7 @@
 
 import {Message} from "node-telegram-bot-api";
 import Bot from "./Bot";
-import CommandError from "./CommandError";
+import CommandError from "../errors/CommandError";
 import * as commander from "commander";
 import {Command, CommanderError, Option} from "commander";
 import stringArgv from "string-argv";
@@ -39,6 +39,9 @@ import JSONObject from "../interfaces/JSONObject";
  * @class
  * @author Danil Andreev
  */
+@Reflect.metadata("bot-command", true)
+@Reflect.metadata("bot-command-allowed-unknown-option", false)
+@Reflect.metadata("bot-command-allowed-excess-arguments", false)
 abstract class BotCommand {
     /**
      * validation - validation spec array.
@@ -86,11 +89,26 @@ abstract class BotCommand {
      */
     public async execute(message: Message, match: RegExpExecArray) {
         this.validation.action(async (...params) => {
-            const command: Command = params[params.length - 1];
-            let result: string | string[] | void = await this.handler(message, command.args, command.opts());
-            if (Array.isArray(result)) result = result.join("\n");
-            if (result) {
-                await Bot.getCurrent().sendMessage(message.chat.id, result, {parse_mode: "HTML"});
+            try {
+                const command: Command = params[params.length - 1];
+                let result: string | string[] | void = await this.handler(message, command.args, command.opts());
+                if (Array.isArray(result)) result = result.join("\n");
+                if (result) {
+                    await Bot.getCurrent().sendMessage(message.chat.id, result, {parse_mode: "HTML"});
+                }
+            } catch (error) {
+                if (error instanceof CommandError) {
+                    const out_message = error.message;
+                    Bot
+                        .getCurrent()
+                        .sendMessage(message.chat.id, "<i>Error:</i> \n" + out_message, {parse_mode: "HTML"})
+                        .catch(err => {
+                            throw err;
+                        });
+                } else {
+                    await Bot.getCurrent().sendMessage(message.chat.id, "Unrecognized error");
+                    console.error(error);
+                }
             }
         });
 
@@ -98,20 +116,10 @@ abstract class BotCommand {
             const argv = stringArgv(match[1] || "");
             this.validation.parse(argv, {from: "user"});
         } catch (error) {
-            if (error instanceof ReferenceError) {
-                throw error;
-            } else if (error instanceof CommanderError) {
+            if (error instanceof CommanderError) {
                 await Bot
                     .getCurrent()
                     .sendMessage(message.chat.id, error.message + "\n\n" + this.validation.helpInformation());
-            } else if (error instanceof CommandError) {
-                const out_message = error.message;
-                Bot
-                    .getCurrent()
-                    .sendMessage(message.chat.id, "<i>Error:</i> \n" + out_message, {parse_mode: "HTML"})
-                    .catch(err => {
-                        throw err;
-                    });
             } else {
                 await Bot.getCurrent().sendMessage(message.chat.id, "Unrecognized error");
                 console.error(error);
@@ -140,15 +148,6 @@ abstract class BotCommand {
 
 namespace BotCommand {
     /**
-     * CommandArgument - interface for command argument item.
-     * @interface
-     * @author Danil Andreev
-     */
-    export interface CommandArguments {
-        [key: string]: string | number | undefined;
-    }
-
-    /**
      * Command - decorator for bot command.
      * @param name - command name.
      * @param args_pattern - command arguments pattern.
@@ -159,6 +158,8 @@ namespace BotCommand {
                 constructor(...args: any[]) {
                     super(...args);
                     if (this instanceof BotCommand) {
+                        Reflect.defineMetadata("bot-command-name", name, WrappedBotCommand.prototype);
+                        Reflect.defineMetadata("bot-command-arguments", args_pattern, WrappedBotCommand.prototype);
                         this.validation.arguments([name, args_pattern].join(" "));
                         this.validation.name(name);
                         this.pattern = name;
@@ -208,6 +209,8 @@ namespace BotCommand {
                 constructor(...args: any[]) {
                     super(...args);
                     if (this instanceof BotCommand) {
+                        Reflect.defineMetadata("bot-command-description", str, WrappedBotCommand.prototype);
+                        Reflect.defineMetadata("bot-command-arguments-description", argsDescription, WrappedBotCommand.prototype);
                         this.validation.description(str, argsDescription);
                     } else {
                         throw new TypeError(`Invalid decorated class, expected BotCommand or derived from it.`);
@@ -227,6 +230,7 @@ namespace BotCommand {
                 constructor(...args: any[]) {
                     super(...args);
                     if (this instanceof BotCommand) {
+                        Reflect.defineMetadata("bot-command-allowed-excess-arguments", true, WrappedBotCommand.prototype);
                         this.validation.allowExcessArguments(true);
                     } else {
                         throw new TypeError(`Invalid decorated class, expected BotCommand or derived from it.`);
@@ -246,6 +250,7 @@ namespace BotCommand {
                 constructor(...args: any[]) {
                     super(...args);
                     if (this instanceof BotCommand) {
+                        Reflect.defineMetadata("bot-command-allowed-unknown-option", true, WrappedBotCommand.prototype);
                         this.validation.allowUnknownOption(true);
                     } else {
                         throw new TypeError(`Invalid decorated class, expected BotCommand or derived from it.`);
@@ -267,6 +272,7 @@ namespace BotCommand {
                 constructor(...args: any[]) {
                     super(...args);
                     if (this instanceof BotCommand) {
+                        Reflect.defineMetadata("bot-command-help-text", text, WrappedBotCommand.prototype);
                         this.validation.addHelpText(position, text);
                     } else {
                         throw new TypeError(`Invalid decorated class, expected BotCommand or derived from it.`);
