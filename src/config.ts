@@ -25,9 +25,7 @@
  */
 
 import WebHook from "./entities/WebHook";
-import {ConnectionOptions} from "typeorm";
 import Collaborator from "./entities/Collaborator";
-import * as Amqp from "amqplib";
 import Issue from "./entities/Issue";
 import AddRepositoryCommand from "./commands/AddRepositoryCommand";
 import AKAsCommand from "./commands/AKAsCommand";
@@ -36,42 +34,14 @@ import ConnectCommand from "./commands/ConnectCommand";
 import DisconnectCommand from "./commands/DisconnectCommand";
 import ListRepositoriesCommand from "./commands/ListRepositoriesCommand";
 import RemoveRepositoryCommand from "./commands/RemoveRepositoryCommand";
-import BotCommand from "./core/BotCommand";
-import WebHookEvent from "./core/WebHookEvent";
 import IssueEvent from "./events/IssueEvent";
 import PullRequestEvent from "./events/PullRequestEvent";
-import AmqpHandler from "./core/AmqpHandler";
 import IssuesHandler from "./handlers/IssuesHandler";
 import PullRequestsHandler from "./handlers/PullRequestsHandler";
+import Config from "./interfaces/Config";
 
-namespace Config {
-    export interface Bot {
-        token: string;
-        commands: typeof BotCommand[]
-    }
 
-    export interface Server {
-        port: number;
-        handlers: typeof WebHookEvent[];
-    }
-
-    export interface Amqp {
-        connect: string | Amqp.Options.Connect,
-        handlers: typeof AmqpHandler[]
-    }
-
-}
-
-interface Config {
-    bot: Config.Bot;
-    db: ConnectionOptions;
-    server: Config.Server;
-    amqp: Config.Amqp,
-}
-
-export default Config;
-
-export const config: Config = {
+const config: Config = {
     bot: {
         token: process.env.TELEGRAM_BOT_TOKEN || "",
         commands: [
@@ -103,3 +73,5 @@ export const config: Config = {
         handlers: [IssueEvent, PullRequestEvent],
     }
 }
+
+export default config;

@@ -26,7 +26,7 @@
 
 import * as Amqp from "amqplib";
 import {Connection} from "amqplib";
-import {config} from "../config";
+import config from "../config";
 import AmqpHandler from "./AmqpHandler";
 
 

@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,14 +24,35 @@
  * SOFTWARE.
  */
 
-import {Connection, createConnection} from "typeorm"
-import config from "../config";
+import BotCommand from "../core/BotCommand";
+import WebHookEvent from "../core/WebHookEvent";
+import AmqpHandler from "../core/AmqpHandler";
+import {ConnectionOptions} from "typeorm";
+import * as Amqp from "amqplib";
 
+namespace Config {
+    export interface Bot {
+        token: string;
+        commands: typeof BotCommand[]
+    }
 
-export let DBConnection: Connection | null = null;
+    export interface Server {
+        port: number;
+        handlers: typeof WebHookEvent[];
+    }
 
-export async function setupDbConnection() {
-    console.log("Connecting to database");
-    DBConnection = await createConnection(config.db);
-    await DBConnection.synchronize();
+    export interface Amqp {
+        connect: string | Amqp.Options.Connect,
+        handlers: typeof AmqpHandler[]
+    }
+
 }
+
+interface Config {
+    bot: Config.Bot;
+    db: ConnectionOptions;
+    server: Config.Server;
+    amqp: Config.Amqp,
+}
+
+export default Config;

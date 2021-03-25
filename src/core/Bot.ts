@@ -25,7 +25,7 @@
  */
 
 import * as TelegramBot from "node-telegram-bot-api";
-import {config} from "../config";
+import config from "../config";
 import BotCommand from "./BotCommand";
 import Collaborator from "../entities/Collaborator";
 

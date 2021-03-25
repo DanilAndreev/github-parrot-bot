@@ -29,7 +29,7 @@ import {Context, Next} from "koa";
 import * as BodyParser from "koa-bodyparser";
 import {EventEmitter} from "events";
 import WebHookEvent from "./WebHookEvent";
-import {config} from "../config";
+import config from "../config";
 
 
 /**
