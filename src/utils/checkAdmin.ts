@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
  * SOFTWARE.
  */
 
-import Bot from "./Bot";
+import Bot from "../core/Bot";
 import {ChatMember} from "node-telegram-bot-api";
 
 export default async function checkAdmin(username: string, message): Promise<boolean> {

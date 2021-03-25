@@ -28,7 +28,6 @@
   "main": "dest/index.js",
   "license": "MIT",
   "dependencies": {
-    "@types/handlebars": "^4.1.0",
     "amqplib": "^0.6.0",
     "argon2": "^0.27.0",
     "commander": "^7.2.0",
@@ -49,6 +48,7 @@
     "@types/amqplib": "^0.5.14",
     "@types/argon2": "^0.15.0",
     "@types/commander": "^2.12.2",
+    "@types/handlebars": "^4.1.0",
     "@types/jest": "^26.0.14",
     "@types/koa": "^2.11.5",
     "@types/koa-bodyparser": "^4.3.0",
@@ -56,14 +56,18 @@
     "@types/node": "^14.11.8",
     "@types/node-telegram-bot-api": "^0.50.4",
     "@types/string-argv": "^0.3.0",
+    "copyfiles": "2.3.0",
     "jest": "^26.5.3",
     "telegram-test-api": "^2.5.0",
     "ts-jest": "^26.4.1",
     "ts-node": "^9.0.0",
+    "tsc": "^1.20150623.0",
     "typescript": "^4.0.3"
   },
   "scripts": {
-    "build": "tsc",
+    "build:compile": "tsc",
+    "build:copyfiles": "copyfiles --up 1 \"./src/**/*.hbs\" \"./dest/\" --verbose --error",
+    "build": "yarn run build:compile && yarn run build:copyfiles",
     "start:dev": "ts-node",
     "start": "node dest/index.js"
   }

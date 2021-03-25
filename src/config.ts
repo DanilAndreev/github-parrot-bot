@@ -40,25 +40,38 @@ import BotCommand from "./core/BotCommand";
 import WebHookEvent from "./core/WebHookEvent";
 import IssueEvent from "./events/IssueEvent";
 import PullRequestEvent from "./events/PullRequestEvent";
+import AmqpHandler from "./core/AmqpHandler";
+import IssuesHandler from "./handlers/IssuesHandler";
+import PullRequestsHandler from "./handlers/PullRequestsHandler";
 
-export interface BotConfig {
-    token: string;
-    commands: typeof BotCommand[]
+namespace Config {
+    export interface Bot {
+        token: string;
+        commands: typeof BotCommand[]
+    }
+
+    export interface Server {
+        port: number;
+        handlers: typeof WebHookEvent[];
+    }
+
+    export interface Amqp {
+        connect: string | Amqp.Options.Connect,
+        handlers: typeof AmqpHandler[]
+    }
+
 }
 
-export interface ServerConfig {
-    port: number;
-    handlers: typeof WebHookEvent[];
-}
-
-export interface Config {
-    bot: BotConfig;
+interface Config {
+    bot: Config.Bot;
     db: ConnectionOptions;
-    server: ServerConfig;
-    rabbitmq: string | Amqp.Options.Connect,
+    server: Config.Server;
+    amqp: Config.Amqp,
 }
 
-const config: Config = {
+export default Config;
+
+export const config: Config = {
     bot: {
         token: process.env.TELEGRAM_BOT_TOKEN || "",
         commands: [
@@ -81,11 +94,12 @@ const config: Config = {
             rejectUnauthorized: false,
         }
     },
-    rabbitmq: process.env.CLOUDAMQP_URL || "",
+    amqp: {
+        connect: process.env.CLOUDAMQP_URL || "",
+        handlers: [IssuesHandler, PullRequestsHandler]
+    },
     server: {
         port: process.env.PORT ? +process.env.PORT : 3030,
         handlers: [IssueEvent, PullRequestEvent],
     }
 }
-
-export default config;

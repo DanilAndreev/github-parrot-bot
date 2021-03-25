@@ -6,7 +6,5 @@ build/
 # environment files
 .env.*
 .env
-
 # yarn
 yarn-error.log
-

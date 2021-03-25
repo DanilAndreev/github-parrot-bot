@@ -27,8 +27,8 @@
 import WebHookEvent from "../core/WebHookEvent";
 import {PullRequest} from "github-webhook-event-types";
 import * as Amqp from "amqplib";
-import {RabbitMQ} from "../main";
 import {AMQP_PULL_REQUESTS_QUEUE} from "../globals";
+import AmqpDispatcher from "../core/AmqpDispatcher";
 
 
 @WebHookEvent.Target("pull_request")
@@ -40,7 +40,7 @@ import {AMQP_PULL_REQUESTS_QUEUE} from "../globals";
 export default class PullRequestEvent extends WebHookEvent {
     public async handle(event: WebHookEvent.WebHookPayload<PullRequest>): Promise<void> {
         const {payload, ctx} = event;
-        const channel: Amqp.Channel = await RabbitMQ.createChannel();
+        const channel: Amqp.Channel = await AmqpDispatcher.getCurrent().getConnection().createChannel();
         await channel.assertQueue(AMQP_PULL_REQUESTS_QUEUE);
         channel.sendToQueue(AMQP_PULL_REQUESTS_QUEUE, new Buffer(JSON.stringify({payload, ctx})));
     }

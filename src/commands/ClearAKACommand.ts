@@ -26,7 +26,7 @@
 
 import BotCommand from "../core/BotCommand";
 import {Message} from "node-telegram-bot-api";
-import checkAdmin from "../core/checkAdmin";
+import checkAdmin from "../utils/checkAdmin";
 import CommandError from "../errors/CommandError";
 import Collaborator from "../entities/Collaborator";
 import JSONObject from "../interfaces/JSONObject";

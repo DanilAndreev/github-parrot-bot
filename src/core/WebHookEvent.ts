@@ -53,7 +53,7 @@ namespace WebHookEvent {
      * @author Danil Andreev
      */
     export function Target(event_name: string) {
-        return function BotCommandWrapper<T extends new(...args: any[]) => {}>(objectConstructor: T): T {
+        return function WebHookEventWrapper<T extends new(...args: any[]) => {}>(objectConstructor: T): T {
             return class WrappedWebHookEvent extends objectConstructor {
                 constructor(...args: any[]) {
                     super(...args);

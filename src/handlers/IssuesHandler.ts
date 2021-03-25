@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,23 +24,25 @@
  * SOFTWARE.
  */
 
-import {Issues} from "github-webhook-event-types";
-import Bot from "../core/Bot";
+import AmqpHandler from "../core/AmqpHandler";
 import WebHook from "../entities/WebHook";
-import getAkaAlias from "../core/getAkaAlias";
-import moment = require("moment");
-import useIssue from "../core/useIssue";
-import Issue from "../entities/Issue";
-import {Context} from "koa";
 import * as Crypto from "crypto";
+import getAkaAlias from "../utils/getAkaAlias";
+import * as moment from "moment";
 import {Moment} from "moment";
-import * as Amqp from "amqplib";
-import * as Handlebars from "handlebars";
 import {readFileSync} from "fs";
 import root from "../utils/root";
+import * as Handlebars from "handlebars";
+import Bot from "../core/Bot";
+import Issue from "../entities/Issue";
+import {Issues} from "github-webhook-event-types";
+import {Context} from "koa";
+import {AMQP_ISSUES_QUEUE} from "../globals";
 
-export default async function issueHandler(msg: Amqp.Message, channel: Amqp.Channel): Promise<void> {
-    async function handler(payload: Issues, ctx: Context): Promise<void> {
+
+@AmqpHandler.Handler(AMQP_ISSUES_QUEUE, 10)
+export default class IssuesHandler extends AmqpHandler {
+    protected async handle(payload: Issues, ctx: Context): Promise<void> {
         const {action, issue, repository} = payload;
 
         const webHooks: WebHook[] = await WebHook.find({where: {repository: repository.full_name}});
@@ -94,8 +96,12 @@ export default async function issueHandler(msg: Amqp.Message, channel: Amqp.Chan
             console.log(message)
 
             try {
-                const messageId = await useIssue(issue.id, webHook.chatId);
-                await Bot.getCurrent().editMessageText(message, {chat_id: webHook.chatId, message_id: messageId, parse_mode: "HTML"});
+                const messageId = await IssuesHandler.useIssue(issue.id, webHook.chatId);
+                await Bot.getCurrent().editMessageText(message, {
+                    chat_id: webHook.chatId,
+                    message_id: messageId,
+                    parse_mode: "HTML"
+                });
             } catch (error) {
                 const result = await Bot.getCurrent().sendMessage(webHook.chatId, message, {parse_mode: "HTML"});
                 const newIssue = new Issue();
@@ -106,7 +112,4 @@ export default async function issueHandler(msg: Amqp.Message, channel: Amqp.Chan
             }
         }
     }
-    const {payload, ctx} = JSON.parse(msg.content.toString());
-    await handler(payload, ctx);
-    channel.ack(msg);
 }

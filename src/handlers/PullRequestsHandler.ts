@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,18 +24,19 @@
  * SOFTWARE.
  */
 
-import {PullRequest} from "github-webhook-event-types";
+import AmqpHandler from "../core/AmqpHandler";
 import {Context} from "koa";
+import {PullRequest} from "github-webhook-event-types";
 import WebHook from "../entities/WebHook";
 import * as Crypto from "crypto";
-import getAkaAlias from "../core/getAkaAlias";
-import useIssue from "../core/useIssue";
+import getAkaAlias from "../utils/getAkaAlias";
 import Bot from "../core/Bot";
 import Issue from "../entities/Issue";
-import * as Amqp from "amqplib";
+import {AMQP_PULL_REQUESTS_QUEUE} from "../globals";
 
-export default async function pullRequestHandler(msg: Amqp.Message, channel: Amqp.Channel): Promise<void> {
-    async function handler(payload: PullRequest, ctx: Context) {
+@AmqpHandler.Handler(AMQP_PULL_REQUESTS_QUEUE, 10)
+export default class PullRequestsHandler extends AmqpHandler {
+    protected async handle(payload: PullRequest, ctx: Context): Promise<void> {
         const {action, pull_request: pullRequest, repository} = payload;
 
         const webHooks: WebHook[] = await WebHook.find({where: {repository: repository.full_name}});
@@ -75,7 +76,7 @@ export default async function pullRequestHandler(msg: Amqp.Message, channel: Amq
             ].join("\n");
 
             try {
-                const messageId = await useIssue(pullRequest.id, webHook.chatId);
+                const messageId = await PullRequestsHandler.useIssue(pullRequest.id, webHook.chatId);
                 await Bot.getCurrent().editMessageText(message, {chat_id: webHook.chatId, message_id: messageId, parse_mode: "Markdown"});
             } catch (error) {
                 const result = await Bot.getCurrent().sendMessage(webHook.chatId, message, {parse_mode: "Markdown"});
@@ -86,9 +87,5 @@ export default async function pullRequestHandler(msg: Amqp.Message, channel: Amq
                 await newIssue.save();
             }
         }
-
     }
-    const {payload, ctx} = JSON.parse(msg.content.toString());
-    await handler(payload, ctx);
-    channel.ack(msg);
 }

@@ -25,7 +25,7 @@
  */
 
 import {Connection, createConnection} from "typeorm"
-import config from "../config";
+import {config} from "../config";
 
 
 export let DBConnection: Connection | null = null;
