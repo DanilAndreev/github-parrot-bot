@@ -38,6 +38,7 @@ import Issue from "../entities/Issue";
 import {Issues} from "github-webhook-event-types";
 import {Context} from "koa";
 import {AMQP_ISSUES_QUEUE} from "../globals";
+import {SendMessageOptions} from "node-telegram-bot-api";
 
 
 @AmqpHandler.Handler(AMQP_ISSUES_QUEUE, 10)
@@ -56,44 +57,23 @@ export default class IssuesHandler extends AmqpHandler {
                 continue;
             }
 
-            let assignees: string[] = (await Promise.all(
-                    issue.assignees.map(assignee => getAkaAlias(assignee.login, webHook.chatId)))
-            );
-
-            const milestone = issue.milestone;
-            const milestoneDueData: Moment = moment(milestone.due_on);
-            const milestoneDue: string = milestoneDueData ? milestoneDueData.format("ll") : "";
-
-            // const message = [
-            //     `[${repository.full_name} #${issue.number}](${issue.html_url})`,
-            //     `#issue _${issue.state}_`,
-            //     `*${issue.title}*`,
-            //     issue.body,
-            //     `-- Assignees --`,
-            //     `Opened by: ${await getAkaAlias(issue.user.login, webHook.chatId)}`,
-            //     assignees && `Assigners: ${assignees}`,
-            //     issue.labels.length ? `-- Labels -----` : undefined,
-            //     issue.labels.length ? issue.labels.map(label => `*${label.name}*`).join("\n") : undefined,
-            //     milestone && `---------------`,
-            //     milestone && `Milestone: _${milestone.title} ${milestoneDue}_ #milestone${milestone.id}`,
-            // ].join("\n");
-
-
             const template_text: string = readFileSync(root + "/templates/issue.hbs").toString();
-            const template = Handlebars.compile(template_text)
+            const template = Handlebars.compile(template_text, {preventIndent: true});
 
             const message: string = template({
                 repository: repository.full_name,
                 tag: issue.number,
                 state: issue.state,
-                title: issue.title,
-                body: issue.body,
+                title: issue.title.trim(),
+                body: issue.body.trim(),
                 opened_by: issue.user.login,
-                assignees: issue.assignees,
+                assignees: issue.assignees.map(item => ({login: item.login})),
                 labels: issue.labels,
-                milestone: milestone,
-            });
-            console.log(message)
+                milestone: issue.milestone ? {
+                    ...issue.milestone,
+                    due_on: moment(issue.milestone.due_on).format("ll")
+                } : undefined,
+            }).replace(/  +/g, " ").replace(/\n +/g, "\n");
 
             try {
                 const messageId = await IssuesHandler.useIssue(issue.id, webHook.chatId);
@@ -103,7 +83,14 @@ export default class IssuesHandler extends AmqpHandler {
                     parse_mode: "HTML"
                 });
             } catch (error) {
-                const result = await Bot.getCurrent().sendMessage(webHook.chatId, message, {parse_mode: "HTML"});
+                const result = await Bot.getCurrent().sendMessage(webHook.chatId, message, {
+                    parse_mode: "HTML",
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{text: "View on GitHub", url: issue.html_url}],
+                        ]
+                    }
+                });
                 const newIssue = new Issue();
                 newIssue.chatId = webHook.chatId;
                 newIssue.messageId = result.message_id;

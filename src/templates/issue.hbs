@@ -1,14 +1,20 @@
 {{repository}} #{{tag}}
 #issue <i>{{state}}</i>
 <b>{{title}}</b>
-<b><i>Overview</i></b>
+<b>Overview</b>
 {{body}}
-{{#if assigness}}
-    <b><i>Assignees</i></b>
-    {{#each assignees}}
-        {{login}}
+
+
+{{#if labels}}
+    <b>Labels:</b>
+    {{#each labels}}
+        <code>{{name}}</code>
     {{/each}}
 {{/if}}
+{{#if assignees}}
+    {{#if opened_by}}<b><i>Opened by:</i></b> {{opened_by}}{{/if}}
+    <b>Assignees:</b> {{#each assignees}}{{login}} {{/each}}
+{{/if}}
 {{#if milestone}}
-<b><i>Milestone</i></b> {{milestone/title}}
+    <b><i>Milestone</i></b> {{milestone/title}} {{#if milestone/due_on}}<code>{{milestone/due_on}}</code>{{/if}}
 {{/if}}

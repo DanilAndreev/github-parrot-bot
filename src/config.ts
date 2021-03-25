@@ -57,9 +57,7 @@ const config: Config = {
     db: {
         type: "postgres",
         url: process.env.DATABASE_URL,
-        entities: [
-            WebHook, Collaborator, Issue
-        ],
+        entities: [WebHook, Collaborator, Issue],
         ssl: {
             rejectUnauthorized: false,
         }
