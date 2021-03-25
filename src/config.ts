@@ -25,7 +25,6 @@
  */
 
 import WebHook from "./entities/WebHook";
-import Chat from "./entities/Chat";
 import {ConnectionOptions} from "typeorm";
 import Collaborator from "./entities/Collaborator";
 import * as Amqp from "amqplib";
@@ -76,7 +75,7 @@ const config: Config = {
         type: "postgres",
         url: process.env.DATABASE_URL,
         entities: [
-            Chat, WebHook, Collaborator, Issue
+            WebHook, Collaborator, Issue
         ],
         ssl: {
             rejectUnauthorized: false,

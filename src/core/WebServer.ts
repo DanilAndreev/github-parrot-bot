@@ -40,29 +40,29 @@ class WebServer extends Koa {
     constructor() {
         super();
         this.handlers = config.server.handlers
-            // .filter(item => !!Reflect.getMetadata("webhook-event", item))
             .map((Handler: typeof WebHookEvent) => {
-                return new (Handler as unknown as {new()})();
+                return new Handler();
             });
+
+        this.events = new EventEmitter();
 
         for (const handler of this.handlers) {
             const target: string = Reflect.getMetadata("webhook-event-target", handler);
-            this.on(target, handler.handle);
+            this.events.on(target, handler.handle);
         }
 
-        this.events = new EventEmitter();
         this.use(BodyParser());
-        this.use(this.handleEventRequest);
+        this.use((ctx: Context, next: Next) => this.handleEventRequest(ctx, next));
     }
 
     protected async handleEventRequest(ctx: Context, next: Next) {
         try {
-            const payload: any = JSON.parse(ctx.request.body.payload);
+            const payload: any = ctx.request.body;
             if (payload.pull_request) {
-                this.events.emit("pull_request", payload);
+                this.events.emit("pull_request", {payload, ctx});
             }
             if (payload.issue) {
-                this.events.emit("issue", payload);
+                this.events.emit("issue", {payload, ctx});
             }
         } catch (error) {
             console.error("Incorrect webhook request.", error);

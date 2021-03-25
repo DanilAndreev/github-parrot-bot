@@ -28,8 +28,10 @@ import {Issues, PullRequest} from "github-webhook-event-types";
 import {Context} from "koa";
 
 
-abstract class WebHookEvent {
-    public abstract handle(event: WebHookEvent.WebHookPayload<any>): void | Promise<void>;
+class WebHookEvent {
+    public handle(event: WebHookEvent.WebHookPayload<any>): void | Promise<void> {
+        throw new ReferenceError(`Abstract method call. Inherit this class and override this method.`)
+    }
 }
 
 namespace WebHookEvent {

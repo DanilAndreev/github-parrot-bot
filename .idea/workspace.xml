@@ -11,17 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[package] Removed tg-resolve.">
-      <change afterPath="$PROJECT_DIR$/src/core/WebHookEvent.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/WebServer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/BotCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/BotCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/eventsMiddleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/eventsMiddleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/decorators/BotCommand.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/issueEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/IssueEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/pullRequestEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/PullRequestEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/WebHookEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebHookEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebServer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Chat.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -479,7 +473,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[issueEvent] Added markdown parser to message." />
     <MESSAGE value="[issueEvent] Changed message parser markdownV2" />
     <MESSAGE value="[issueEvent] Screening symbols." />
     <MESSAGE value="[issueEvent] Added hashtag to issue." />
@@ -504,7 +497,8 @@
     <MESSAGE value="[BotCommand] Added command decorators and spec with new mechanism." />
     <MESSAGE value="[Commands] Rewritten to new logic." />
     <MESSAGE value="[Commands] Changed logic to telegram user id." />
-    <option name="LAST_COMMIT_MESSAGE" value="[Commands] Changed logic to telegram user id." />
+    <MESSAGE value="[WebServer] Created mechanism." />
+    <option name="LAST_COMMIT_MESSAGE" value="[WebServer] Created mechanism." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -513,45 +507,6 @@
           <url>file://$PROJECT_DIR$/src/decorators/BotCommand.ts</url>
           <line>35</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/events/IssueEvent.ts</url>
-          <line>36</line>
-          <option name="timeStamp" value="53" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/events/PullRequestEvent.ts</url>
-          <line>36</line>
-          <option name="timeStamp" value="54" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/core/WebServer.ts</url>
-          <line>59</line>
-          <option name="timeStamp" value="55" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/core/WebServer.ts</url>
-          <line>48</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="59" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/core/WebServer.ts</url>
-          <line>41</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="60" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/core/Bot.ts</url>
-          <line>54</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="61" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/core/Bot.ts</url>
-          <line>94</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="62" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
