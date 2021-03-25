@@ -1,5 +1,5 @@
 {{repository}} #{{tag}}
-#issue <i>{{state}}</i>
+#pullrequest <i>{{state}}</i>
 
 <b>{{title}}</b>
 {{#if body}}
@@ -15,6 +15,9 @@
 {{#if assignees}}
     {{#if opened_by}}<b>Opened by:</b> {{opened_by}}{{/if}}
     <b>Assignees:</b> {{#each assignees}}{{login}} {{/each}}
+{{/if}}
+{{#if requested_reviewers}}
+    <b>Requested review: </b>{{#each requested_reviewers}}{{login}} {{/each}}
 {{/if}}
 {{#if milestone}}
     <b>Milestone</b> <i>{{milestone/title}}</i> {{#if milestone/due_on}}<code>{{milestone/due_on}}</code>{{/if}}

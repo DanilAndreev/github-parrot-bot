@@ -24,24 +24,30 @@
  * SOFTWARE.
  */
 
-import WebHookEvent from "../core/WebHookEvent";
-import {PullRequest} from "github-webhook-event-types";
-import * as Amqp from "amqplib";
-import {AMQP_PULL_REQUESTS_QUEUE} from "../globals";
-import AmqpDispatcher from "../core/AmqpDispatcher";
+import AmqpHandler from "./AmqpHandler";
+import * as Crypto from "crypto";
+import Issue from "../entities/Issue";
+import * as moment from "moment";
 
 
-@WebHookEvent.Target("pull_request")
-/**
- * PullRequestEvent - class for handling WebHook pull request events.
- * @class
- * @author Danil Andreev
- */
-export default class PullRequestEvent extends WebHookEvent {
-    public async handle(event: WebHookEvent.WebHookPayload<PullRequest>): Promise<void> {
-        const {payload, ctx} = event;
-        const channel: Amqp.Channel = await AmqpDispatcher.getCurrent().getConnection().createChannel();
-        await channel.assertQueue(AMQP_PULL_REQUESTS_QUEUE);
-        channel.sendToQueue(AMQP_PULL_REQUESTS_QUEUE, new Buffer(JSON.stringify({payload, ctx})));
+export default class WebHookAmqpHandler extends AmqpHandler {
+    static checkSignature(incomingSignature: string, payload: any, key: string): boolean {
+        const expectedSignature = "sha1=" + Crypto.createHmac("sha1", key)
+            .update(JSON.stringify(payload))
+            .digest("hex");
+        return expectedSignature === incomingSignature;
+    }
+
+    public static async useIssue(issueId: number, chatId: number): Promise<number> {
+        const result: Issue | undefined = await Issue.findOne({where: {chatId, issueId}});
+        if (result) {
+            if (result?.updatedAt && moment(result.updatedAt) <  moment().subtract(1, "hour")) {
+                await Issue.delete({id: result.id});
+                return 0;
+            }
+            await result.save()
+            return result.messageId;
+        }
+        throw new Error();
     }
 }

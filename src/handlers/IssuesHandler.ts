@@ -24,42 +24,29 @@
  * SOFTWARE.
  */
 
-import AmqpHandler from "../core/AmqpHandler";
 import WebHook from "../entities/WebHook";
-import * as Crypto from "crypto";
-import getAkaAlias from "../utils/getAkaAlias";
 import * as moment from "moment";
-import {Moment} from "moment";
-import {readFileSync} from "fs";
-import root from "../utils/root";
-import * as Handlebars from "handlebars";
 import Bot from "../core/Bot";
 import Issue from "../entities/Issue";
 import {Issues} from "github-webhook-event-types";
 import {Context} from "koa";
-import {AMQP_ISSUES_QUEUE} from "../globals";
-import {SendMessageOptions} from "node-telegram-bot-api";
+import loadTemplate from "../utils/loadTemplate";
+import WebHookAmqpHandler from "../core/WebHookAmqpHandler";
 
 
-@AmqpHandler.Handler(AMQP_ISSUES_QUEUE, 10)
-export default class IssuesHandler extends AmqpHandler {
+@WebHookAmqpHandler.Handler("issues", 10)
+export default class IssuesHandler extends  WebHookAmqpHandler {
     protected async handle(payload: Issues, ctx: Context): Promise<void> {
         const {action, issue, repository} = payload;
 
         const webHooks: WebHook[] = await WebHook.find({where: {repository: repository.full_name}});
 
         for (const webHook of webHooks) {
-            const externalSignature = ctx.request.header["x-hub-signature"];
-            const expectedSignature = "sha1=" + Crypto.createHmac("sha1", webHook.secret)
-                .update(JSON.stringify(payload))
-                .digest("hex");
-            if (expectedSignature !== externalSignature) {
+            if (!IssuesHandler.checkSignature(ctx.request.header["x-hub-signature"], payload, webHook.secret)) {
                 continue;
             }
 
-            const template_text: string = readFileSync(root + "/templates/issue.hbs").toString();
-            const template = Handlebars.compile(template_text, {preventIndent: true});
-
+            const template = await loadTemplate("issue");
             const message: string = template({
                 repository: repository.full_name,
                 tag: issue.number,
@@ -80,7 +67,12 @@ export default class IssuesHandler extends AmqpHandler {
                 await Bot.getCurrent().editMessageText(message, {
                     chat_id: webHook.chatId,
                     message_id: messageId,
-                    parse_mode: "HTML"
+                    parse_mode: "HTML",
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{text: "View on GitHub", url: issue.html_url}],
+                        ]
+                    }
                 });
             } catch (error) {
                 const result = await Bot.getCurrent().sendMessage(webHook.chatId, message, {

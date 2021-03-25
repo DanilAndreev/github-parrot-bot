@@ -26,8 +26,7 @@
 
 import * as Amqp from "amqplib";
 import {Context} from "koa";
-import Issue from "../entities/Issue";
-import * as moment from "moment";
+
 
 class AmqpHandler {
     protected handle(payload: any, ctx: Context): void | Promise<void> {
@@ -43,19 +42,6 @@ class AmqpHandler {
             channel.nack(message);
             console.error(error);
         }
-    }
-
-    public static async useIssue(issueId: number, chatId: number): Promise<number> {
-        const result: Issue | undefined = await Issue.findOne({where: {chatId, issueId}});
-        if (result) {
-            if (result?.updatedAt && moment(result.updatedAt) <  moment().subtract(1, "hour")) {
-                await Issue.delete({id: result.id});
-                return 0;
-            }
-            await result.save()
-            return result.messageId;
-        }
-        throw new Error();
     }
 }
 

@@ -25,7 +25,6 @@
  */
 
 import BotCommand from "../core/BotCommand";
-import WebHookEvent from "../core/WebHookEvent";
 import AmqpHandler from "../core/AmqpHandler";
 import {ConnectionOptions} from "typeorm";
 import * as Amqp from "amqplib";
@@ -38,7 +37,6 @@ namespace Config {
 
     export interface Server {
         port: number;
-        handlers: typeof WebHookEvent[];
     }
 
     export interface Amqp {

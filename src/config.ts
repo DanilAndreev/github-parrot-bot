@@ -34,8 +34,6 @@ import ConnectCommand from "./commands/ConnectCommand";
 import DisconnectCommand from "./commands/DisconnectCommand";
 import ListRepositoriesCommand from "./commands/ListRepositoriesCommand";
 import RemoveRepositoryCommand from "./commands/RemoveRepositoryCommand";
-import IssueEvent from "./events/IssueEvent";
-import PullRequestEvent from "./events/PullRequestEvent";
 import IssuesHandler from "./handlers/IssuesHandler";
 import PullRequestsHandler from "./handlers/PullRequestsHandler";
 import Config from "./interfaces/Config";
@@ -68,7 +66,6 @@ const config: Config = {
     },
     server: {
         port: process.env.PORT ? +process.env.PORT : 3030,
-        handlers: [IssueEvent, PullRequestEvent],
     }
 }
 

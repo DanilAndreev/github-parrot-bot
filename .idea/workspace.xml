@@ -10,10 +10,20 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Config] Moved interface to interfaces directory.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[IssuesHandler] Added handlebars mechanism.">
+      <change afterPath="$PROJECT_DIR$/src/templates/pull_request.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/loadTemplate.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/AmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/AmqpHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/WebHookEvent.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebServer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/IssueEvent.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/PullRequestEvent.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/IssuesHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/IssuesHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/PullRequestsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/PullRequestsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/Config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/templates/issue.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/issue.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,13 +121,6 @@
       <workItem from="1616605886860" duration="11394000" />
       <workItem from="1616631020470" duration="773000" />
       <workItem from="1616686027538" duration="122000" />
-    </task>
-    <task id="LOCAL-00002" summary="[typescript] Initialized.">
-      <created>1602769019310</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1602769019310</updated>
     </task>
     <task id="LOCAL-00003" summary="[koa] Added koa.">
       <created>1602770773909</created>
@@ -455,7 +458,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616639060835</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="[IssuesHandler] Added handlebars mechanism.">
+      <created>1616700599101</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1616700599102</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -474,7 +484,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[issueEvent] Screening symbols." />
     <MESSAGE value="[issueEvent] Added hashtag to issue." />
     <MESSAGE value="[issueEvent] Finished issues." />
     <MESSAGE value="[issueEvent] Styled separators." />
@@ -499,7 +508,8 @@
     <MESSAGE value="[Commands] Changed logic to telegram user id." />
     <MESSAGE value="[WebServer] Created mechanism." />
     <MESSAGE value="[WebServer] Finished work with events." />
-    <option name="LAST_COMMIT_MESSAGE" value="[WebServer] Finished work with events." />
+    <MESSAGE value="[IssuesHandler] Added handlebars mechanism." />
+    <option name="LAST_COMMIT_MESSAGE" value="[IssuesHandler] Added handlebars mechanism." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
