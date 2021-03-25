@@ -38,6 +38,9 @@ import DisconnectCommand from "./commands/DisconnectCommand";
 import ListRepositoriesCommand from "./commands/ListRepositoriesCommand";
 import RemoveRepositoryCommand from "./commands/RemoveRepositoryCommand";
 import BotCommand from "./core/BotCommand";
+import WebHookEvent from "./core/WebHookEvent";
+import IssueEvent from "./events/IssueEvent";
+import PullRequestEvent from "./events/PullRequestEvent";
 
 export interface BotConfig {
     token: string;
@@ -46,6 +49,7 @@ export interface BotConfig {
 
 export interface ServerConfig {
     port: number;
+    handlers: typeof WebHookEvent[];
 }
 
 export interface Config {
@@ -81,6 +85,7 @@ const config: Config = {
     rabbitmq: process.env.CLOUDAMQP_URL || "",
     server: {
         port: process.env.PORT ? +process.env.PORT : 3030,
+        handlers: [IssueEvent, PullRequestEvent],
     }
 }
 

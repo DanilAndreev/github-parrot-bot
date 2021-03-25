@@ -52,7 +52,8 @@ export default class Bot extends TelegramBot {
      */
     protected constructor(token?: string) {
         token = token || config.bot.token;
-        Bot.commands = config.bot.commands.map((CommandClass: typeof BotCommand) => new CommandClass());
+        Bot.commands = config.bot.commands
+            .map((CommandClass: typeof BotCommand) => new CommandClass());
 
         if (!token)
             throw new Error(`FatalError: you must specify token to run this app! "token" = "${token}".`);

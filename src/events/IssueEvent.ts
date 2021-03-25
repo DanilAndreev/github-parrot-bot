@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,14 +24,19 @@
  * SOFTWARE.
  */
 
-import {PullRequest} from "github-webhook-event-types";
-import {Context} from "koa";
+import WebHookEvent from "../core/WebHookEvent";
+import {Issues} from "github-webhook-event-types";
 import * as Amqp from "amqplib";
 import {RabbitMQ} from "../main";
-import {AMQP_PULL_REQUESTS_QUEUE} from "../globals";
+import {AMQP_ISSUES_QUEUE} from "../globals";
 
-export default async function pullRequestEvent(payload: PullRequest, ctx: Context) {
-    const channel: Amqp.Channel = await RabbitMQ.createChannel();
-    await channel.assertQueue(AMQP_PULL_REQUESTS_QUEUE);
-    channel.sendToQueue(AMQP_PULL_REQUESTS_QUEUE, new Buffer(JSON.stringify({payload, ctx})));
+
+@WebHookEvent.Target("issue")
+export default class IssueEvent extends WebHookEvent {
+    public async handle(event: WebHookEvent.WebHookPayload<Issues>): Promise<void> {
+        const {payload, ctx} = event;
+        const channel: Amqp.Channel = await RabbitMQ.createChannel();
+        await channel.assertQueue(AMQP_ISSUES_QUEUE);
+        channel.sendToQueue(AMQP_ISSUES_QUEUE, new Buffer(JSON.stringify({payload, ctx})));
+    }
 }

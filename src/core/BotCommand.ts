@@ -40,6 +40,7 @@ import JSONObject from "../interfaces/JSONObject";
  * @author Danil Andreev
  */
 @Reflect.metadata("bot-command", true)
+
 @Reflect.metadata("bot-command-allowed-unknown-option", false)
 @Reflect.metadata("bot-command-allowed-excess-arguments", false)
 class BotCommand {
@@ -80,8 +81,8 @@ class BotCommand {
      * @param options - Json with command options.
      */
     protected async handler(message: Message, args: string[], options: JSONObject<string>): Promise<void | string | string[]> {
-        throw new ReferenceError(`Abstract method. Inherit this class and override this method.`);
-    };
+        throw new ReferenceError(`Abstract method call. Inherit this class and override this method.`);
+    }
 
     /**
      * execute - method for command execution. Contain error handlers and validation process.

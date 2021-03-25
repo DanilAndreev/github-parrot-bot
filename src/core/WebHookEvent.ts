@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,18 +24,47 @@
  * SOFTWARE.
  */
 
-import {Context, Next} from "koa";
-import pullRequestEvent from "../events/pullRequestEvent";
-import issueEvent from "../events/issueEvent";
 import {Issues, PullRequest} from "github-webhook-event-types";
+import {Context} from "koa";
 
-export default async function eventsMiddleware(ctx: Context, next: Next): Promise<void> {
-    const payload = ctx.request.body;
 
-    if (payload.pull_request) {
-        // await pullRequestEvent(payload as PullRequest, ctx);
-    } else if (payload.issue) {
-        // await issueEvent(payload as Issues, ctx);
-    }
-    await next();
+abstract class WebHookEvent {
+    public abstract handle(event: WebHookEvent.WebHookPayload<any>): void | Promise<void>;
 }
+
+namespace WebHookEvent {
+    /**
+     * Target - decorator for web hook event.
+     * @param event_name - Target event name.
+     * @author Danil Andreev
+     */
+    export function Target(event_name: string) {
+        return function BotCommandWrapper<T extends new(...args: any[]) => {}>(objectConstructor: T): T {
+            return class WrappedWebHookEvent extends objectConstructor {
+                constructor(...args: any[]) {
+                    super(...args);
+                    Reflect.defineMetadata("webhook-event", true, this);
+                    Reflect.defineMetadata("webhook-event-target", event_name, this);
+                }
+            };
+        };
+    }
+
+    /**
+     * WebHookPayload - interface for web hook payload.
+     * @interface
+     * @author Danil Andreev
+     */
+    export interface WebHookPayload<T extends Issues | PullRequest> {
+        /**
+         * GitHub event payload.
+         */
+        payload: T;
+        /**
+         * Koa context.
+         */
+        ctx: Context;
+    }
+}
+
+export default WebHookEvent;
