@@ -32,11 +32,27 @@ import WebHookEvent from "./WebHookEvent";
 import config from "../config";
 
 
+/**
+ * WebServer - web server for handling WebHooks.
+ * @class
+ * @author Danil Andreev
+ */
 class WebServer extends Koa {
+    /**
+     * events - events emitter.
+     */
     public readonly events: EventEmitter;
 
+    /**
+     * handlers - server events handlers.
+     */
     protected handlers: WebHookEvent[];
 
+    /**
+     * Creates an instance of WebServer.
+     * @constructor
+     * @author Danil Andreev
+     */
     constructor() {
         super();
         this.handlers = config.server.handlers
@@ -55,6 +71,13 @@ class WebServer extends Koa {
         this.use((ctx: Context, next: Next) => this.handleEventRequest(ctx, next));
     }
 
+    /**
+     * handleEventRequest - method for handling WebHook request and determine event type.
+     * @method
+     * @param ctx - Context.
+     * @param next - Next.
+     * @author Danil Andreev
+     */
     protected async handleEventRequest(ctx: Context, next: Next) {
         try {
             const payload: any = ctx.request.body;
@@ -71,6 +94,12 @@ class WebServer extends Koa {
         await next();
     }
 
+    /**
+     * start - starts the server.
+     * @method
+     * @param port - Target port. If not defined - will be taken from env or config.
+     * @author Danil Andreev
+     */
     public start(port?: number): WebServer {
         this.listen(port || process.env.PORT || config.server.port);
         return this;

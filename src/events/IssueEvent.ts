@@ -32,6 +32,11 @@ import {AMQP_ISSUES_QUEUE} from "../globals";
 
 
 @WebHookEvent.Target("issue")
+/**
+ * IssueEvent - class for handling WebHook issue events.
+ * @class
+ * @author Danil Andreev
+ */
 export default class IssueEvent extends WebHookEvent {
     public async handle(event: WebHookEvent.WebHookPayload<Issues>): Promise<void> {
         const {payload, ctx} = event;

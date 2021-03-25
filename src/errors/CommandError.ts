@@ -24,15 +24,19 @@
  * SOFTWARE.
  */
 
+/**
+ * CommandError - class for Telegram bot command errors.
+ * @class
+ * @author Danil Andreev
+ */
 export default class CommandError extends Error {
-    constructor(...text: string[]) {
-        const message = text.join("\n");
+    /**
+     * Creates an instance of CommandError.
+     * @param text - Input params.
+     * @author Danil andreev.
+     */
+    constructor(...text: any[]) {
+        const message = text.map(item => String(item)).join("\n");
         super(message);
-    }
-    public addUsage(usage: string | string[]) {
-        let text = usage;
-        if (Array.isArray(text)) text = text.join("\n");
-        this.message = this.message + "\n" + text;
-        return this;
     }
 }

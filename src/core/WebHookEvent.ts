@@ -28,15 +28,27 @@ import {Issues, PullRequest} from "github-webhook-event-types";
 import {Context} from "koa";
 
 
+/**
+ * WebHookEvent - base class for WebHook event handlers.
+ * @class
+ * @abstract
+ * @author Danil Andreev
+ */
 class WebHookEvent {
+    /**
+     * handle - event handler method.
+     * @method
+     * @abstract
+     * @param event - Incoming event.
+     */
     public handle(event: WebHookEvent.WebHookPayload<any>): void | Promise<void> {
-        throw new ReferenceError(`Abstract method call. Inherit this class and override this method.`)
+        throw new ReferenceError(`Abstract method call. Inherit this class and override this method.`);
     }
 }
 
 namespace WebHookEvent {
     /**
-     * Target - decorator for web hook event.
+     * Target - decorator for WebHook event.
      * @param event_name - Target event name.
      * @author Danil Andreev
      */

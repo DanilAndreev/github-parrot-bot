@@ -10,12 +10,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[package] Removed tg-resolve.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[WebServer] Finished work with events.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/WebHookEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebHookEvent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebServer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/Chat.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/errors/CommandError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors/CommandError.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/IssueEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/IssueEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/PullRequestEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/PullRequestEvent.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,13 +111,6 @@
       <workItem from="1616545792931" duration="8574000" />
       <workItem from="1616605886860" duration="11394000" />
       <workItem from="1616631020470" duration="773000" />
-    </task>
-    <task id="LOCAL-00001" summary="[Global] Initialized repository.">
-      <created>1602758176185</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1602758176185</updated>
     </task>
     <task id="LOCAL-00002" summary="[typescript] Initialized.">
       <created>1602769019310</created>
@@ -454,7 +448,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616618155851</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="[WebServer] Finished work with events.">
+      <created>1616639060835</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1616639060835</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -473,7 +474,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[issueEvent] Changed message parser markdownV2" />
     <MESSAGE value="[issueEvent] Screening symbols." />
     <MESSAGE value="[issueEvent] Added hashtag to issue." />
     <MESSAGE value="[issueEvent] Finished issues." />
@@ -498,7 +498,8 @@
     <MESSAGE value="[Commands] Rewritten to new logic." />
     <MESSAGE value="[Commands] Changed logic to telegram user id." />
     <MESSAGE value="[WebServer] Created mechanism." />
-    <option name="LAST_COMMIT_MESSAGE" value="[WebServer] Created mechanism." />
+    <MESSAGE value="[WebServer] Finished work with events." />
+    <option name="LAST_COMMIT_MESSAGE" value="[WebServer] Finished work with events." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

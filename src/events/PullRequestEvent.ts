@@ -31,7 +31,12 @@ import {RabbitMQ} from "../main";
 import {AMQP_PULL_REQUESTS_QUEUE} from "../globals";
 
 
-@WebHookEvent.Target("issue")
+@WebHookEvent.Target("pull_request")
+/**
+ * PullRequestEvent - class for handling WebHook pull request events.
+ * @class
+ * @author Danil Andreev
+ */
 export default class PullRequestEvent extends WebHookEvent {
     public async handle(event: WebHookEvent.WebHookPayload<PullRequest>): Promise<void> {
         const {payload, ctx} = event;
