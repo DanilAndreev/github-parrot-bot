@@ -35,6 +35,9 @@ import {Context} from "koa";
 import * as Crypto from "crypto";
 import {Moment} from "moment";
 import * as Amqp from "amqplib";
+import * as Handlebars from "handlebars";
+import {readFileSync} from "fs";
+import root from "../utils/root";
 
 export default async function issueHandler(msg: Amqp.Message, channel: Amqp.Channel): Promise<void> {
     async function handler(payload: Issues, ctx: Context): Promise<void> {
@@ -51,33 +54,50 @@ export default async function issueHandler(msg: Amqp.Message, channel: Amqp.Chan
                 continue;
             }
 
-            let assignees: string = (await Promise.all(
+            let assignees: string[] = (await Promise.all(
                     issue.assignees.map(assignee => getAkaAlias(assignee.login, webHook.chatId)))
-            ).join(" ");
+            );
 
             const milestone = issue.milestone;
             const milestoneDueData: Moment = moment(milestone.due_on);
             const milestoneDue: string = milestoneDueData ? milestoneDueData.format("ll") : "";
 
-            const message = [
-                `[${repository.full_name} #${issue.number}](${issue.html_url})`,
-                `#issue _${issue.state}_`,
-                `*${issue.title}*`,
-                issue.body,
-                `-- Assignees --`,
-                `Opened by: ${await getAkaAlias(issue.user.login, webHook.chatId)}`,
-                assignees && `Assigners: ${assignees}`,
-                issue.labels.length ? `-- Labels -----` : undefined,
-                issue.labels.length ? issue.labels.map(label => `*${label.name}*`).join("\n") : undefined,
-                milestone && `---------------`,
-                milestone && `Milestone: _${milestone.title} ${milestoneDue}_ #milestone${milestone.id}`,
-            ].join("\n");
+            // const message = [
+            //     `[${repository.full_name} #${issue.number}](${issue.html_url})`,
+            //     `#issue _${issue.state}_`,
+            //     `*${issue.title}*`,
+            //     issue.body,
+            //     `-- Assignees --`,
+            //     `Opened by: ${await getAkaAlias(issue.user.login, webHook.chatId)}`,
+            //     assignees && `Assigners: ${assignees}`,
+            //     issue.labels.length ? `-- Labels -----` : undefined,
+            //     issue.labels.length ? issue.labels.map(label => `*${label.name}*`).join("\n") : undefined,
+            //     milestone && `---------------`,
+            //     milestone && `Milestone: _${milestone.title} ${milestoneDue}_ #milestone${milestone.id}`,
+            // ].join("\n");
+
+
+            const template_text: string = readFileSync(root + "/templates/issue.hbs").toString();
+            const template = Handlebars.compile(template_text)
+
+            const message: string = template({
+                repository: repository.full_name,
+                tag: issue.number,
+                state: issue.state,
+                title: issue.title,
+                body: issue.body,
+                opened_by: issue.user.login,
+                assignees: issue.assignees,
+                labels: issue.labels,
+                milestone: milestone,
+            });
+            console.log(message)
 
             try {
                 const messageId = await useIssue(issue.id, webHook.chatId);
-                await Bot.getCurrent().editMessageText(message, {chat_id: webHook.chatId, message_id: messageId, parse_mode: "Markdown"});
+                await Bot.getCurrent().editMessageText(message, {chat_id: webHook.chatId, message_id: messageId, parse_mode: "HTML"});
             } catch (error) {
-                const result = await Bot.getCurrent().sendMessage(webHook.chatId, message, {parse_mode: "Markdown"});
+                const result = await Bot.getCurrent().sendMessage(webHook.chatId, message, {parse_mode: "HTML"});
                 const newIssue = new Issue();
                 newIssue.chatId = webHook.chatId;
                 newIssue.messageId = result.message_id;

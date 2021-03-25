@@ -10,13 +10,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[WebServer] Finished work with events.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[WebServer] Added JSDoc.">
+      <change afterPath="$PROJECT_DIR$/src/templates/issue.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/WebHookEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebHookEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebServer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/errors/CommandError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors/CommandError.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/IssueEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/IssueEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/PullRequestEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/PullRequestEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/issueHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/issueHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,6 +110,8 @@
       <workItem from="1616545792931" duration="8574000" />
       <workItem from="1616605886860" duration="11394000" />
       <workItem from="1616631020470" duration="773000" />
+      <workItem from="1616640055443" duration="1447000" />
+      <workItem from="1616641987046" duration="998000" />
     </task>
     <task id="LOCAL-00002" summary="[typescript] Initialized.">
       <created>1602769019310</created>
@@ -508,6 +509,16 @@
           <url>file://$PROJECT_DIR$/src/decorators/BotCommand.ts</url>
           <line>35</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/issueHandler.ts</url>
+          <line>79</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/issueHandler.ts</url>
+          <line>80</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

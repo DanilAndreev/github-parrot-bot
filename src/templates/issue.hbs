@@ -1,0 +1,14 @@
+{{repository}} #{{tag}}
+#issue <i>{{state}}</i>
+<b>{{title}}</b>
+<b><i>Overview</i></b>
+{{body}}
+{{#if assigness}}
+    <b><i>Assignees</i></b>
+    {{#each assignees}}
+        {{login}}
+    {{/each}}
+{{/if}}
+{{#if milestone}}
+<b><i>Milestone</i></b> {{milestone/title}}
+{{/if}}
