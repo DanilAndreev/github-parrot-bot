@@ -11,12 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[WebServer] Finished work with events.">
+      <change afterPath="$PROJECT_DIR$/media/bot-logo.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/WebHookEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebHookEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebServer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/errors/CommandError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors/CommandError.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/IssueEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/IssueEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/PullRequestEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/PullRequestEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +32,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="adding-ampq-queue-handlers" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -68,14 +65,15 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\images" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\errors" />
       <recent name="D:\Projects\github-tracker-telegram-bot\src\core" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
