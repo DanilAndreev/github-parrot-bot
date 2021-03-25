@@ -33,6 +33,7 @@ import eventsMiddleware from "./core/eventsMiddleware";
 import * as Amqp from "amqplib";
 import setupAmqp from "./core/setupAmqp";
 import Bot from "./core/Bot";
+import WebServer from "./core/WebServer";
 
 
 export let RabbitMQ: Amqp.Connection;
@@ -42,25 +43,30 @@ export default async function main() {
     RabbitMQ = await Amqp.connect(config.rabbitmq);
     await setupAmqp();
 
-    const server = new Koa();
-    server.use(BodyParser());
+    // const server = new Koa();
+    // server.use(BodyParser());
+    //
+    // server.use(async (ctx: Context, next: Next) => {
+    //     console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    //     console.log(ctx);
+    //     console.log("--- BODY -----------------------------------------------------------------");
+    //     console.log(ctx.request.body);
+    //
+    //     let a = JSON.parse(ctx.request.body.payload);
+    //
+    //     ctx.body = "Hello"
+    //     await next;
+    // });
+    //
+    // server.use(eventsMiddleware);
+    //
+    //
+    //
+    // console.log("Server is listening on port", process.env.PORT || config.server.port);
 
-    server.use(async (ctx: Context, next: Next) => {
-        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        console.log(ctx);
-        console.log("--- BODY -----------------------------------------------------------------");
-        console.log(ctx.request.body);
-
-        ctx.body = "Hello"
-        await next;
-    });
-
-    server.use(eventsMiddleware);
-
-
-
-    console.log("Server is listening on port", process.env.PORT || config.server.port);
+    const server = new WebServer();
 
     Bot.init();
-    server.listen(process.env.PORT || config.server.port);
+    server.start();
+    // server.listen(process.env.PORT || config.server.port);
 }

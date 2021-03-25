@@ -24,17 +24,24 @@
  * SOFTWARE.
  */
 
-function BotCommand(command: string) {
-    if (command.includes(" ") || command.includes("\t") || command.includes("\n"))
-        throw new SyntaxError("Command can't contain spaces, linebreaks and tabulation");
+import WebHookEvent from "../core/WebHookEvent";
+import {Issues} from "github-webhook-event-types";
+import * as Amqp from "amqplib";
+import {RabbitMQ} from "../main";
+import {AMQP_ISSUES_QUEUE} from "../globals";
 
-    return (
-        target: any,
-        propertyKey: string,
-        descriptor: PropertyDescriptor,
-    ) => {
-        console.log(target);
+
+@WebHookEvent.Target("issue")
+/**
+ * IssueEvent - class for handling WebHook issue events.
+ * @class
+ * @author Danil Andreev
+ */
+export default class IssueEvent extends WebHookEvent {
+    public async handle(event: WebHookEvent.WebHookPayload<Issues>): Promise<void> {
+        const {payload, ctx} = event;
+        const channel: Amqp.Channel = await RabbitMQ.createChannel();
+        await channel.assertQueue(AMQP_ISSUES_QUEUE);
+        channel.sendToQueue(AMQP_ISSUES_QUEUE, new Buffer(JSON.stringify({payload, ctx})));
     }
 }
-
-export default BotCommand;

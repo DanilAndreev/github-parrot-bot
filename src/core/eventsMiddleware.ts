@@ -33,9 +33,9 @@ export default async function eventsMiddleware(ctx: Context, next: Next): Promis
     const payload = ctx.request.body;
 
     if (payload.pull_request) {
-        await pullRequestEvent(payload as PullRequest, ctx);
+        // await pullRequestEvent(payload as PullRequest, ctx);
     } else if (payload.issue) {
-        await issueEvent(payload as Issues, ctx);
+        // await issueEvent(payload as Issues, ctx);
     }
     await next();
 }
