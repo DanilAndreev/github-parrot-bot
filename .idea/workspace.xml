@@ -10,11 +10,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Config] Moved interface to interfaces directory.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[README] Added some information.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entities/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,13 +111,6 @@
       <workItem from="1616631020470" duration="773000" />
       <workItem from="1616686027538" duration="122000" />
       <workItem from="1616748336279" duration="430000" />
-    </task>
-    <task id="LOCAL-00006" summary="[git-crypt] Initialized.">
-      <created>1603110145006</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1603110145006</updated>
     </task>
     <task id="LOCAL-00007" summary="[git-crypt] Initialized.">
       <created>1603110179303</created>
@@ -457,7 +448,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616725691447</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="[README] Added some information.">
+      <created>1616772584680</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1616772584680</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -476,7 +474,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[issueEvent] Changed message cache deleting time." />
     <MESSAGE value="[makeCommand] Changed from.id to chat.id." />
     <MESSAGE value="[addRepository] Added warning on message deletion." />
     <MESSAGE value="[issueEvent] Removed stylized tags." />
@@ -501,13 +498,18 @@
     <MESSAGE value="[WebServer] Removed events emitter. Messages are pushed to RabbitMQ instantly." />
     <MESSAGE value="[Entities] Changed structure. (PROBLEM WITH FK ON DELETION)" />
     <MESSAGE value="[Entities] Fixed problems with FK constraint on deletion." />
-    <option name="LAST_COMMIT_MESSAGE" value="[Entities] Fixed problems with FK constraint on deletion." />
+    <MESSAGE value="[README] Added some information." />
+    <option name="LAST_COMMIT_MESSAGE" value="[README] Added some information." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2381" y="165" key="SettingsEditor" timestamp="1616771919694">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2381" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616771919694" />
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1616772593510">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616772593510" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
