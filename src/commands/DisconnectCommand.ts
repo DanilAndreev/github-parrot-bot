@@ -30,6 +30,7 @@ import Collaborator from "../entities/Collaborator";
 import CommandError from "../errors/CommandError";
 import JSONObject from "../interfaces/JSONObject";
 import Bot from "../core/Bot";
+import Chat from "../entities/Chat";
 
 
 @BotCommand.Command("disconnect", "[github_username]")
@@ -66,7 +67,11 @@ export default class DisconnectCommand extends BotCommand {
             }
         }
 
-        const result = await Collaborator.delete({chatId, telegramId});
+        const chat: Chat | undefined = await Chat.findOne({where: {id: chatId}});
+        if (!chat)
+            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+
+        const result = await Collaborator.delete({chat, telegramId});
 
         if (!result.affected)
             throw new CommandError(`User @${telegramName} has no AKA.`);
@@ -92,7 +97,11 @@ export default class DisconnectCommand extends BotCommand {
             }
         }
 
-        const result = await Collaborator.delete({chatId, gitHubName: ghName, telegramId});
+        const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
+        if (!chat)
+            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+
+        const result = await Collaborator.delete({chat, gitHubName: ghName, telegramId});
 
         if (!result.affected)
             throw new CommandError(`User @${telegramName} is not connected to GitHub account <b>[${ghName}]</b>.`);

@@ -24,20 +24,25 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import {BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import Chat from "./Chat";
+import WebHook from "./WebHook";
 
 @Entity()
 export default class Issue extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({type: "bigint"})
-    chatId: number;
+    @ManyToOne(type => Chat, chat => chat.issues)
+    chat: Chat;
 
-    @Column()
+    @ManyToOne(type => WebHook, webhook => webhook.issues, {onDelete: "CASCADE"})
+    webhook: WebHook;
+
+    @Column({type: "bigint"})
     issueId: number;
 
-    @Column()
+    @Column({type: "bigint"})
     messageId: number;
 
     @UpdateDateColumn()

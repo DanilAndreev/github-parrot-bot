@@ -10,21 +10,35 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[IssuesHandler] Added handlebars mechanism.">
-      <change afterPath="$PROJECT_DIR$/src/templates/pull_request.hbs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/loadTemplate.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[WebServer] Removed events emitter. Messages are pushed to RabbitMQ instantly.">
+      <change afterPath="$PROJECT_DIR$/src/entities/Chat.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entities/CheckSuite.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entities/PullRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/handlers/CheckRunHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/handlers/CheckSuiteHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/handlers/PushHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/check_run.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/check_suite.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/push.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/ClearAKACommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ClearAKACommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/ConnectCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ConnectCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/DisconnectCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/DisconnectCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/ListRepositoriesCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ListRepositoriesCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/RemoveRepositoryCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/RemoveRepositoryCommand.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/AmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/AmqpHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/WebHookEvent.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebServer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/IssueEvent.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/PullRequestEvent.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Collaborator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Collaborator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Issue.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Issue.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/WebHook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/WebHook.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/IssuesHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/IssuesHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/PullRequestsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/PullRequestsHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/Config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/templates/issue.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/issue.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/pull_request.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/pull_request.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +76,7 @@
     <property name="add_unversioned_files" value="$PROJECT_DIR$/.env" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.20.6" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/entities" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -77,6 +91,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\github-tracker-telegram-bot\src\entities" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -121,13 +136,6 @@
       <workItem from="1616605886860" duration="11394000" />
       <workItem from="1616631020470" duration="773000" />
       <workItem from="1616686027538" duration="122000" />
-    </task>
-    <task id="LOCAL-00003" summary="[koa] Added koa.">
-      <created>1602770773909</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1602770773909</updated>
     </task>
     <task id="LOCAL-00004" summary="[workspace] Small changes.">
       <created>1602770836375</created>
@@ -465,7 +473,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616700599102</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="[WebServer] Removed events emitter. Messages are pushed to RabbitMQ instantly.">
+      <created>1616708638772</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1616708638772</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -484,7 +499,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[issueEvent] Added hashtag to issue." />
     <MESSAGE value="[issueEvent] Finished issues." />
     <MESSAGE value="[issueEvent] Styled separators." />
     <MESSAGE value="[issueEvent] Changed message cache deleting time." />
@@ -509,7 +523,8 @@
     <MESSAGE value="[WebServer] Created mechanism." />
     <MESSAGE value="[WebServer] Finished work with events." />
     <MESSAGE value="[IssuesHandler] Added handlebars mechanism." />
-    <option name="LAST_COMMIT_MESSAGE" value="[IssuesHandler] Added handlebars mechanism." />
+    <MESSAGE value="[WebServer] Removed events emitter. Messages are pushed to RabbitMQ instantly." />
+    <option name="LAST_COMMIT_MESSAGE" value="[WebServer] Removed events emitter. Messages are pushed to RabbitMQ instantly." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -518,6 +533,18 @@
           <url>file://$PROJECT_DIR$/src/decorators/BotCommand.ts</url>
           <line>35</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/CheckSuiteHandler.ts</url>
+          <line>38</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/CheckRunHandler.ts</url>
+          <line>38</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

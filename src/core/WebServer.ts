@@ -65,7 +65,7 @@ class WebServer extends Koa {
                 throw new Error("Failed to get event.");
             const channel: Amqp.Channel = await AmqpDispatcher.getCurrent().getConnection().createChannel();
             await channel.assertQueue(event);
-            channel.sendToQueue(event, new Buffer(JSON.stringify({payload, ctx})), {expiration: 1000*60*30});
+            channel.sendToQueue(event, Buffer.from(JSON.stringify({payload, ctx})), {expiration: 1000*60*30});
             ctx.status = 200;
         } catch (error) {
             ctx.status = 400;

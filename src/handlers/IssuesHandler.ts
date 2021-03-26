@@ -35,11 +35,14 @@ import WebHookAmqpHandler from "../core/WebHookAmqpHandler";
 
 
 @WebHookAmqpHandler.Handler("issues", 10)
-export default class IssuesHandler extends  WebHookAmqpHandler {
+export default class IssuesHandler extends WebHookAmqpHandler {
     protected async handle(payload: Issues, ctx: Context): Promise<void> {
         const {action, issue, repository} = payload;
 
-        const webHooks: WebHook[] = await WebHook.find({where: {repository: repository.full_name}});
+        const webHooks: WebHook[] = await WebHook.find({
+            where: {repository: repository.full_name},
+            relations: ["chat"]
+        });
 
         for (const webHook of webHooks) {
             if (!IssuesHandler.checkSignature(ctx.request.header["x-hub-signature"], payload, webHook.secret)) {
@@ -63,9 +66,9 @@ export default class IssuesHandler extends  WebHookAmqpHandler {
             }).replace(/  +/g, " ").replace(/\n +/g, "\n");
 
             try {
-                const messageId = await IssuesHandler.useIssue(issue.id, webHook.chatId);
+                const messageId = await IssuesHandler.useIssue(issue.id, webHook.chat.chatId);
                 await Bot.getCurrent().editMessageText(message, {
-                    chat_id: webHook.chatId,
+                    chat_id: webHook.chat.chatId,
                     message_id: messageId,
                     parse_mode: "HTML",
                     reply_markup: {
@@ -75,7 +78,7 @@ export default class IssuesHandler extends  WebHookAmqpHandler {
                     }
                 });
             } catch (error) {
-                const result = await Bot.getCurrent().sendMessage(webHook.chatId, message, {
+                const result = await Bot.getCurrent().sendMessage(webHook.chat.chatId, message, {
                     parse_mode: "HTML",
                     reply_markup: {
                         inline_keyboard: [
@@ -84,7 +87,7 @@ export default class IssuesHandler extends  WebHookAmqpHandler {
                     }
                 });
                 const newIssue = new Issue();
-                newIssue.chatId = webHook.chatId;
+                newIssue.chat = webHook.chat;
                 newIssue.messageId = result.message_id;
                 newIssue.issueId = issue.id;
                 await newIssue.save();

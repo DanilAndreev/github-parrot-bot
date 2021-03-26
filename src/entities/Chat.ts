@@ -24,32 +24,30 @@
  * SOFTWARE.
  */
 
-import BotCommand from "../core/BotCommand";
-import {Message} from "node-telegram-bot-api";
-import WebHook from "../entities/WebHook";
-import JSONObject from "../interfaces/JSONObject";
-import Chat from "../entities/Chat";
-import CommandError from "../errors/CommandError";
+import {BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn} from "typeorm";
+import WebHook from "./WebHook";
+import Collaborator from "./Collaborator";
+import Issue from "./Issue";
+import CheckSuite from "./CheckSuite";
 
 
-@BotCommand.Command("list")
-@BotCommand.Description("Shows all GitHub repositories connected to this chat.")
-export default class ListRepositoriesCommand extends BotCommand {
-    protected async handler(message: Message, args: string[], opts: JSONObject<string>): Promise<string | string[]> {
-        const chatId: number = message.chat.id;
+@Entity()
+export default class Chat extends BaseEntity {
+    @PrimaryColumn({type: "bigint"})
+    chatId: number;
 
-        const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
-        if (!chat)
-            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+    @OneToMany(type => WebHook, webhook => webhook.chat)
+    webhooks: WebHook[];
 
-        const result: WebHook[] = await WebHook.find({where: {chat: chat}});
+    @OneToMany(type => Collaborator, collaborator => collaborator.chat)
+    collaborators: Collaborator[];
 
-        if (!result.length)
-            return `You have no repositories added.`;
+    @OneToMany(type => Issue, issue => issue.chat)
+    issues: Issue[];
 
-        return [
-            `Connected repositories:`,
-            ...result.map(repo => `<b>[${repo.repository}]</b>`),
-        ];
-    }
+    @OneToMany(type => CheckSuite, checksuite => checksuite.chat)
+    checksuits: CheckSuite[]
+
+    @CreateDateColumn()
+    createdAt: Date;
 }

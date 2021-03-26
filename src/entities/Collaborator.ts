@@ -24,21 +24,26 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import Chat from "./Chat";
+
 
 @Entity()
 export default class Collaborator extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({type: "bigint"})
-    chatId: number;
+    @ManyToOne(type => Chat, chat => chat.collaborators, {onDelete: "CASCADE"})
+    chat: Chat;
 
     @Column()
     gitHubName: string;
 
     @Column({type: "bigint"})
     telegramId: number;
+
+    @Column()
+    telegramUsername: string;
 
     @CreateDateColumn()
     createdAt: Date;

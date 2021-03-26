@@ -28,6 +28,8 @@ import AmqpHandler from "./AmqpHandler";
 import * as Crypto from "crypto";
 import Issue from "../entities/Issue";
 import * as moment from "moment";
+import Chat from "../entities/Chat";
+import CommandError from "../errors/CommandError";
 
 
 export default class WebHookAmqpHandler extends AmqpHandler {
@@ -39,10 +41,14 @@ export default class WebHookAmqpHandler extends AmqpHandler {
     }
 
     public static async useIssue(issueId: number, chatId: number): Promise<number> {
-        const result: Issue | undefined = await Issue.findOne({where: {chatId, issueId}});
+        const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
+        if (!chat)
+            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+
+        const result: Issue | undefined = await Issue.findOne({where: {chat, issueId}});
         if (result) {
             if (result?.updatedAt && moment(result.updatedAt) <  moment().subtract(1, "hour")) {
-                await Issue.delete({id: result.id});
+                await result.remove();
                 return 0;
             }
             await result.save()

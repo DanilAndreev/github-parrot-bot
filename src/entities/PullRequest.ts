@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2021 Danil Andreev
+ * Copyright (c) 2020 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,32 +24,31 @@
  * SOFTWARE.
  */
 
-import BotCommand from "../core/BotCommand";
-import {Message} from "node-telegram-bot-api";
-import WebHook from "../entities/WebHook";
-import JSONObject from "../interfaces/JSONObject";
-import Chat from "../entities/Chat";
-import CommandError from "../errors/CommandError";
+import {BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import Chat from "./Chat";
+import WebHook from "./WebHook";
+import CheckSuite from "./CheckSuite";
 
+@Entity()
+export default class PullRequest extends BaseEntity {
+    @PrimaryGeneratedColumn()
+    id: number;
 
-@BotCommand.Command("list")
-@BotCommand.Description("Shows all GitHub repositories connected to this chat.")
-export default class ListRepositoriesCommand extends BotCommand {
-    protected async handler(message: Message, args: string[], opts: JSONObject<string>): Promise<string | string[]> {
-        const chatId: number = message.chat.id;
+    @ManyToOne(type => Chat, chat => chat.issues)
+    chat: Chat;
 
-        const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
-        if (!chat)
-            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+    @ManyToOne(type => WebHook, webhook => webhook.pullRequests, {onDelete: "CASCADE"})
+    webhook: WebHook;
 
-        const result: WebHook[] = await WebHook.find({where: {chat: chat}});
+    @OneToMany(type => CheckSuite, checksuite => checksuite.pullRequest)
+    checksuits: CheckSuite;
 
-        if (!result.length)
-            return `You have no repositories added.`;
+    @Column({type: "bigint"})
+    pullRequestId: number;
 
-        return [
-            `Connected repositories:`,
-            ...result.map(repo => `<b>[${repo.repository}]</b>`),
-        ];
-    }
+    @Column({type: "bigint"})
+    messageId: number;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
 }
