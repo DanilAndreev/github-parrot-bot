@@ -1,6 +1,6 @@
 <a href="#">
     <div align="center">
-        <img alt="Ape Lang Logo" height="150" src="https://github.com/DanilAndreev/github-tracker-telegram-bot/blob/master/media/bot-logo.jpg"/>
+        <img alt="Ape Lang Logo" height="300" src="https://github.com/DanilAndreev/github-tracker-telegram-bot/blob/master/media/bot-logo.svg"/>
     </div>
     <div align="center">
         <h1>GitHub Tracker Telegram bot</h1>
