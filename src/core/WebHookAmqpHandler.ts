@@ -31,6 +31,7 @@ import * as moment from "moment";
 import Chat from "../entities/Chat";
 import CommandError from "../errors/CommandError";
 import PullRequest from "../entities/PullRequest";
+import CheckSuite from "../entities/CheckSuite";
 
 
 export default class WebHookAmqpHandler extends AmqpHandler {
@@ -44,33 +45,51 @@ export default class WebHookAmqpHandler extends AmqpHandler {
     public static async useIssue(issueId: number, chatId: number): Promise<number> {
         const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
         if (!chat)
-            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
 
         const result: Issue | undefined = await Issue.findOne({where: {chat, issueId}});
         if (result) {
             // const t1 = result?.updatedAt && moment.utc(result.updatedAt.toDateString()).format("lll")
             // const t2 = moment.utc().subtract(1, "hour").format("lll")
-            if (result?.updatedAt && moment.utc(result.updatedAt) <  moment.utc().subtract(1, "hour")) {
+            if (result?.updatedAt && moment.utc(result.updatedAt) < moment.utc().subtract(1, "hour")) {
                 await result.remove();
                 return 0;
             }
-            await result.save()
+            await result.save();
             return result.messageId;
         }
         throw new Error();
     }
+
     public static async usePullRequest(pullRequestId: number, chatId: number): Promise<number> {
         const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
         if (!chat)
-            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
 
         const result: PullRequest | undefined = await PullRequest.findOne({where: {chat, pullRequestId}});
         if (result) {
-            if (result?.updatedAt && moment.utc(result.updatedAt) <  moment.utc().subtract(1, "hour")) {
+            if (result?.updatedAt && moment.utc(result.updatedAt) < moment.utc().subtract(1, "hour")) {
                 await result.remove();
                 return 0;
             }
-            await result.save()
+            await result.save();
+            return result.messageId;
+        }
+        throw new Error();
+    }
+
+    public static async useCheckSuite(suiteId: number, chatId: number): Promise<number> {
+        const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
+        if (!chat)
+            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
+
+        const result: CheckSuite | undefined = await CheckSuite.findOne({where: {chat, suiteId}});
+        if (result) {
+            if (result?.updatedAt && moment.utc(result.updatedAt) < moment.utc().subtract(1, "hour")) {
+                await result.remove();
+                return 0;
+            }
+            await result.save();
             return result.messageId;
         }
         throw new Error();

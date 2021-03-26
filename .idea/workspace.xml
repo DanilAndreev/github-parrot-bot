@@ -12,9 +12,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Entities] Fixed problems with FK constraint on deletion.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/DataBase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/DataBase.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/PullRequestsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/PullRequestsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/CheckSuite.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/CheckSuite.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +61,7 @@
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="ts.external.directory.path" value="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\Projects\github-tracker-telegram-bot\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -112,6 +111,7 @@
       <workItem from="1616605886860" duration="11394000" />
       <workItem from="1616631020470" duration="773000" />
       <workItem from="1616686027538" duration="122000" />
+      <workItem from="1616748336279" duration="430000" />
     </task>
     <task id="LOCAL-00006" summary="[git-crypt] Initialized.">
       <created>1603110145006</created>
@@ -513,13 +513,11 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/handlers/CheckSuiteHandler.ts</url>
           <line>38</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/handlers/CheckRunHandler.ts</url>
           <line>38</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
