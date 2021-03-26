@@ -10,11 +10,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Entities] Changed structure. (PROBLEM WITH FK ON DELETION)">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Entities] Fixed problems with FK constraint on deletion.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/CheckSuite.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/CheckSuite.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/Issue.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Issue.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/PullRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/PullRequest.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/DataBase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/DataBase.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/PullRequestsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/PullRequestsHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,13 +112,6 @@
       <workItem from="1616605886860" duration="11394000" />
       <workItem from="1616631020470" duration="773000" />
       <workItem from="1616686027538" duration="122000" />
-    </task>
-    <task id="LOCAL-00005" summary="[Chat] Modified entity.">
-      <created>1603110047842</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1603110047842</updated>
     </task>
     <task id="LOCAL-00006" summary="[git-crypt] Initialized.">
       <created>1603110145006</created>
@@ -456,7 +449,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616725409227</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="[Entities] Fixed problems with FK constraint on deletion.">
+      <created>1616725691446</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1616725691447</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -475,7 +475,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[issueEvent] Styled separators." />
     <MESSAGE value="[issueEvent] Changed message cache deleting time." />
     <MESSAGE value="[makeCommand] Changed from.id to chat.id." />
     <MESSAGE value="[addRepository] Added warning on message deletion." />
@@ -500,7 +499,8 @@
     <MESSAGE value="[IssuesHandler] Added handlebars mechanism." />
     <MESSAGE value="[WebServer] Removed events emitter. Messages are pushed to RabbitMQ instantly." />
     <MESSAGE value="[Entities] Changed structure. (PROBLEM WITH FK ON DELETION)" />
-    <option name="LAST_COMMIT_MESSAGE" value="[Entities] Changed structure. (PROBLEM WITH FK ON DELETION)" />
+    <MESSAGE value="[Entities] Fixed problems with FK constraint on deletion." />
+    <option name="LAST_COMMIT_MESSAGE" value="[Entities] Fixed problems with FK constraint on deletion." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

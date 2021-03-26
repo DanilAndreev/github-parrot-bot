@@ -67,7 +67,7 @@ export default class PullRequestsHandler extends WebHookAmqpHandler {
             }).replace(/  +/g, " ").replace(/\n +/g, "\n");
 
             try {
-                const messageId = await PullRequestsHandler.useIssue(pullRequest.id, webHook.chat.chatId);
+                const messageId = await PullRequestsHandler.usePullRequest(pullRequest.id, webHook.chat.chatId);
                 await Bot.getCurrent().editMessageText(message, {
                     chat_id: webHook.chat.chatId,
                     message_id: messageId,

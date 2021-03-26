@@ -26,6 +26,8 @@
 
 import {Connection, createConnection} from "typeorm"
 import config from "../config";
+import {PostgresDriver} from "typeorm/driver/postgres/PostgresDriver";
+import * as moment from "moment";
 
 
 export let DBConnection: Connection | null = null;
@@ -33,5 +35,10 @@ export let DBConnection: Connection | null = null;
 export async function setupDbConnection() {
     console.log("Connecting to database");
     DBConnection = await createConnection(config.db);
+    const driver = DBConnection.driver as PostgresDriver;
+    // driver.postgres.defaults.parseInputDatesAsUTC = true;
+    // driver.postgres.types.setTypeParser(1114, (str: any) => {
+    //     return moment.utc(str).format();
+    // })
     await DBConnection.synchronize();
 }
