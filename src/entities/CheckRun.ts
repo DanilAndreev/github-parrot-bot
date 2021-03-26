@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,39 +24,24 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
-import Chat from "./Chat";
-import Issue from "./Issue";
-import PullRequest from "./PullRequest";
+import {BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
 import CheckSuite from "./CheckSuite";
 
 
 @Entity()
-export default class WebHook extends BaseEntity {
-    @PrimaryGeneratedColumn()
+export default class CheckRun extends BaseEntity {
+    @PrimaryGeneratedColumn({type: "bigint"})
     id: number;
 
-    @ManyToOne(type => Chat, chat => chat.webhooks, {onDelete: "CASCADE"})
-    chat: Chat;
+    @ManyToOne(type => CheckSuite, suite => suite.runs, {onDelete: "CASCADE"})
+    suite: CheckSuite;
 
-    @OneToMany(type => Issue, issue => issue.webhook)
-    issues: Issue[];
+    @Column({default: "unnamed"})
+    name: string;
 
-    @OneToMany(type => PullRequest, pullRequest => pullRequest.webhook)
-    pullRequests: PullRequest[]
+    @Column({type: "varchar", length: 30, default: "queued"})
+    status: string;
 
-    @OneToMany(type => CheckSuite, checksuite => checksuite.webhook)
-    checksuits: CheckSuite[];
-
-    @Column()
-    secret: string;
-
-    @Column()
-    secretPreview: string;
-
-    @Column()
-    repository: string;
-
-    @CreateDateColumn()
-    createdAt: Date;
+    @UpdateDateColumn()
+    updatedAt: Date;
 }

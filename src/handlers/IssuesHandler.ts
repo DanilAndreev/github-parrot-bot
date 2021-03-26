@@ -86,7 +86,7 @@ export default class IssuesHandler extends WebHookAmqpHandler {
                         ]
                     }
                 });
-                const newIssue = new Issue();
+                const newIssue: Issue = new Issue();
                 newIssue.chat = webHook.chat;
                 newIssue.messageId = result.message_id;
                 newIssue.issueId = issue.id;

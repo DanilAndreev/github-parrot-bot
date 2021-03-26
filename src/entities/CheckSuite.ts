@@ -24,9 +24,11 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import {BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
 import Chat from "./Chat";
 import PullRequest from "./PullRequest";
+import CheckRun from "./CheckRun";
+import WebHook from "./WebHook";
 
 
 @Entity()
@@ -34,8 +36,23 @@ export default class CheckSuite extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @Column({type: "varchar", length: 30, default: "queued"})
+    status: string;
+
+    @Column({type: "varchar", length: 30, nullable: true})
+    conclusion: string;
+
+    @Column()
+    branch: string;
+
     @ManyToOne(type => Chat, chat => chat.checksuits, {onDelete: "CASCADE"})
     chat: Chat;
+
+    @ManyToOne(type => WebHook, webhook => webhook.checksuits, {onDelete: "CASCADE"})
+    webhook: WebHook;
+
+    @OneToMany(type => CheckRun, run => run.suite)
+    runs: CheckRun[];
 
     @ManyToOne(type => PullRequest, pullRequest => pullRequest.checksuits, {
         onDelete: "CASCADE",

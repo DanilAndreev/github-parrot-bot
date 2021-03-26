@@ -78,20 +78,23 @@ export default class WebHookAmqpHandler extends AmqpHandler {
         throw new Error();
     }
 
-    public static async useCheckSuite(suiteId: number, chatId: number): Promise<number> {
+    public static async useCheckSuite(suiteId: number, chatId: number): Promise<CheckSuite | null> {
         const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
         if (!chat)
             throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
 
-        const result: CheckSuite | undefined = await CheckSuite.findOne({where: {chat, suiteId}});
+        const result: CheckSuite | undefined = await CheckSuite.findOne({
+            where: {chat, suiteId},
+            relations: ["runs", "webhook", "pullRequest"]
+        });
         if (result) {
             if (result?.updatedAt && moment.utc(result.updatedAt) < moment.utc().subtract(1, "hour")) {
                 await result.remove();
-                return 0;
+                return null;
             }
             await result.save();
-            return result.messageId;
+            return result;
         }
-        throw new Error();
+        return null;
     }
 }

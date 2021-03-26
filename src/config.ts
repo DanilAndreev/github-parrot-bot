@@ -43,6 +43,7 @@ import CheckSuiteHandler from "./handlers/CheckSuiteHandler";
 import Chat from "./entities/Chat";
 import CheckSuite from "./entities/CheckSuite";
 import PullRequest from "./entities/PullRequest";
+import CheckRun from "./entities/CheckRun";
 
 
 const config: Config = {
@@ -61,14 +62,14 @@ const config: Config = {
     db: {
         type: "postgres",
         url: process.env.DATABASE_URL,
-        entities: [WebHook, Collaborator, Issue, Chat, CheckSuite, PullRequest],
+        entities: [WebHook, Collaborator, Issue, Chat, CheckSuite, PullRequest, CheckRun],
         ssl: {
             rejectUnauthorized: false,
         }
     },
     amqp: {
         connect: process.env.CLOUDAMQP_URL || "",
-        handlers: [IssuesHandler, PullRequestsHandler, PushHandler, CheckRunHandler, CheckSuiteHandler]
+        handlers: [IssuesHandler, PullRequestsHandler, PushHandler, /*CheckRunHandler*/ CheckSuiteHandler]
     },
     server: {
         port: process.env.PORT ? +process.env.PORT : 3030,

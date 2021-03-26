@@ -10,9 +10,18 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[README] Added some information.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Readme] Inited.">
+      <change afterPath="$PROJECT_DIR$/src/entities/CheckRun.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/check_suite_new.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/CheckSuite.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/CheckSuite.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/PullRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/PullRequest.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/WebHook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/WebHook.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/CheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/CheckSuiteHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/IssuesHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/IssuesHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/PullRequestsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/PullRequestsHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -501,16 +510,6 @@
     <MESSAGE value="[README] Added some information." />
     <option name="LAST_COMMIT_MESSAGE" value="[README] Added some information." />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="2381" y="165" key="SettingsEditor" timestamp="1616771919694">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2381" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616771919694" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1616772593510">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616772593510" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -521,15 +520,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/handlers/CheckSuiteHandler.ts</url>
-          <line>38</line>
-          <option name="timeStamp" value="23" />
+          <line>81</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/handlers/CheckRunHandler.ts</url>
-          <line>38</line>
-          <option name="timeStamp" value="29" />
+          <url>file://$PROJECT_DIR$/src/handlers/CheckSuiteHandler.ts</url>
+          <line>54</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="32" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="NodeJSConfigurationType">
+        <watch expression="check_suite" language="TypeScript" />
+        <watch expression="check_suite.pull_requests" language="TypeScript" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

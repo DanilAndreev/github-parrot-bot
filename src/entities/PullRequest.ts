@@ -34,6 +34,9 @@ export default class PullRequest extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @Column()
+    title: string;
+
     @ManyToOne(type => Chat, chat => chat.issues, {onDelete: "CASCADE"})
     chat: Chat;
 

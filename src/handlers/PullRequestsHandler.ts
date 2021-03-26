@@ -25,18 +25,18 @@
  */
 
 import {Context} from "koa";
-import {PullRequest} from "github-webhook-event-types";
+import {PullRequest as PullRequestType} from "github-webhook-event-types";
 import WebHook from "../entities/WebHook";
 import Bot from "../core/Bot";
-import Issue from "../entities/Issue";
 import loadTemplate from "../utils/loadTemplate";
 import * as moment from "moment";
 import WebHookAmqpHandler from "../core/WebHookAmqpHandler";
+import PullRequest from "../entities/PullRequest";
 
 
 @WebHookAmqpHandler.Handler("pull_request", 10)
 export default class PullRequestsHandler extends WebHookAmqpHandler {
-    protected async handle(payload: PullRequest, ctx: Context): Promise<void> {
+    protected async handle(payload: PullRequestType, ctx: Context): Promise<void> {
         const {action, pull_request: pullRequest, repository} = payload;
 
         const webHooks: WebHook[] = await WebHook.find({
@@ -87,11 +87,11 @@ export default class PullRequestsHandler extends WebHookAmqpHandler {
                         ]
                     }
                 });
-                const newIssue = new Issue();
-                newIssue.chat = webHook.chat;
-                newIssue.messageId = result.message_id;
-                newIssue.issueId = pullRequest.id;
-                await newIssue.save();
+                const newPullRequest: PullRequest = new PullRequest();
+                newPullRequest.chat = webHook.chat;
+                newPullRequest.messageId = result.message_id;
+                newPullRequest.pullRequestId = pullRequest.id;
+                await newPullRequest.save();
             }
         }
     }
