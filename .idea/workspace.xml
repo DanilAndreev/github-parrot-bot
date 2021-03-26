@@ -10,35 +10,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[WebServer] Removed events emitter. Messages are pushed to RabbitMQ instantly.">
-      <change afterPath="$PROJECT_DIR$/src/entities/Chat.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entities/CheckSuite.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entities/PullRequest.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/handlers/CheckRunHandler.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/handlers/CheckSuiteHandler.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/handlers/PushHandler.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/templates/check_run.hbs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/templates/check_suite.hbs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/templates/push.hbs" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Entities] Changed structure. (PROBLEM WITH FK ON DELETION)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ClearAKACommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ClearAKACommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ConnectCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ConnectCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/DisconnectCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/DisconnectCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ListRepositoriesCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ListRepositoriesCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/RemoveRepositoryCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/RemoveRepositoryCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebServer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/Collaborator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Collaborator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/CheckSuite.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/CheckSuite.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entities/Issue.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Issue.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/WebHook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/WebHook.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/IssuesHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/IssuesHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/PullRequestsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/PullRequestsHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/issue.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/issue.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/pull_request.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/pull_request.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/PullRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/PullRequest.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,13 +112,6 @@
       <workItem from="1616605886860" duration="11394000" />
       <workItem from="1616631020470" duration="773000" />
       <workItem from="1616686027538" duration="122000" />
-    </task>
-    <task id="LOCAL-00004" summary="[workspace] Small changes.">
-      <created>1602770836375</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1602770836375</updated>
     </task>
     <task id="LOCAL-00005" summary="[Chat] Modified entity.">
       <created>1603110047842</created>
@@ -480,7 +449,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616708638772</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="[Entities] Changed structure. (PROBLEM WITH FK ON DELETION)">
+      <created>1616725409227</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1616725409227</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -499,7 +475,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[issueEvent] Finished issues." />
     <MESSAGE value="[issueEvent] Styled separators." />
     <MESSAGE value="[issueEvent] Changed message cache deleting time." />
     <MESSAGE value="[makeCommand] Changed from.id to chat.id." />
@@ -524,7 +499,8 @@
     <MESSAGE value="[WebServer] Finished work with events." />
     <MESSAGE value="[IssuesHandler] Added handlebars mechanism." />
     <MESSAGE value="[WebServer] Removed events emitter. Messages are pushed to RabbitMQ instantly." />
-    <option name="LAST_COMMIT_MESSAGE" value="[WebServer] Removed events emitter. Messages are pushed to RabbitMQ instantly." />
+    <MESSAGE value="[Entities] Changed structure. (PROBLEM WITH FK ON DELETION)" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Entities] Changed structure. (PROBLEM WITH FK ON DELETION)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

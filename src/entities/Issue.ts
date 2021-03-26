@@ -33,7 +33,7 @@ export default class Issue extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(type => Chat, chat => chat.issues)
+    @ManyToOne(type => Chat, chat => chat.issues, {onDelete: "CASCADE"})
     chat: Chat;
 
     @ManyToOne(type => WebHook, webhook => webhook.issues, {onDelete: "CASCADE"})

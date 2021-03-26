@@ -34,10 +34,10 @@ export default class CheckSuite extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(type => Chat, chat => chat.checksuits)
+    @ManyToOne(type => Chat, chat => chat.checksuits, {onDelete: "CASCADE"})
     chat: Chat;
 
-    @ManyToOne(type => PullRequest, pullRequest => pullRequest.checksuits)
+    @ManyToOne(type => PullRequest, pullRequest => pullRequest.checksuits, {onDelete: "CASCADE"})
     pullRequest: PullRequest;
 
     @Column({type: "bigint"})
