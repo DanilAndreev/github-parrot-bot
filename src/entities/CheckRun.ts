@@ -24,7 +24,15 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import {
+    BaseEntity,
+    Column,
+    CreateDateColumn,
+    Entity,
+    ManyToOne,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn
+} from "typeorm";
 import CheckSuite from "./CheckSuite";
 
 
@@ -42,6 +50,12 @@ export default class CheckRun extends BaseEntity {
     @Column({type: "varchar", length: 30, default: "queued"})
     status: string;
 
+    @Column({type: "bigint"})
+    runId: number;
+
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @CreateDateColumn()
+    createdAt: Date;
 }

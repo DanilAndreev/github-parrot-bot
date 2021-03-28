@@ -24,7 +24,16 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import {
+    BaseEntity,
+    Column, CreateDateColumn,
+    Entity,
+    Index,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn
+} from "typeorm";
 import Chat from "./Chat";
 import PullRequest from "./PullRequest";
 import CheckRun from "./CheckRun";
@@ -40,7 +49,11 @@ export default class CheckSuite extends BaseEntity {
     status: string;
 
     @Column({type: "varchar", length: 30, nullable: true})
-    conclusion: string;
+    conclusion?: string;
+
+    @Index()
+    @Column({type: "varchar", length: 40})
+    headSha: string;
 
     @Column()
     branch: string;
@@ -58,14 +71,21 @@ export default class CheckSuite extends BaseEntity {
         onDelete: "CASCADE",
         nullable: true
     })
-    pullRequest: PullRequest;
+    pullRequest?: PullRequest;
 
+    @Index()
     @Column({type: "bigint"})
     suiteId: number;
 
-    @Column({type: "bigint"})
+    @Column({type: "bigint", nullable: true})
     messageId: number;
+
+    @Column({type: "bigint", nullable: true})
+    messageIdUpdatedAt: number;
 
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @CreateDateColumn()
+    createdAt: Date;
 }

@@ -1,3 +1,9 @@
 <b>{{repository}}</b> CI Suite
 Branch: <b>{{branch}}</b>
 <i>Status:</i> <b><i>{{status}} {{conclusion}}</i></b>
+{{#if runs}}
+    Runs:
+    {{#each runs}}
+        <b>{{name}}</b>: <i>{{status}}</i>
+    {{/each}}
+{{/if}}

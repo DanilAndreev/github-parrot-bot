@@ -32,6 +32,9 @@ import loadTemplate from "../utils/loadTemplate";
 import WebHookAmqpHandler from "../core/WebHookAmqpHandler";
 import CheckSuite from "../entities/CheckSuite";
 import {Message} from "node-telegram-bot-api";
+import PullRequest from "../entities/PullRequest";
+import PullRequestsHandler from "./PullRequestsHandler";
+import {getConnection} from "typeorm";
 
 
 @WebHookAmqpHandler.Handler("check_suite", 10)
@@ -49,58 +52,134 @@ export default class CheckSuiteHandler extends WebHookAmqpHandler {
                 continue;
             }
 
-            const template = await loadTemplate("check_suite_new");
+            // const template = await loadTemplate("check_suite_new");
+            //
+            // let suite: CheckSuite | null = await CheckSuiteHandler.useCheckSuite(payload.check_suite.id, webHook.chat.chatId);
+            // if (suite) {
+            //     // const message: string = template({
+            //     //     repository: repository.full_name,
+            //     //     branch: check_suite.head_branch,
+            //     //     status: check_suite.status,
+            //     //     conclusion: check_suite.conclusion,
+            //     // }).replace(/  +/g, " ").replace(/\n +/g, "\n");
+            //     const message: string = template(suite)
+            //         .replace(/  +/g, " ")
+            //         .replace(/\n +/g, "\n");
+            //
+            //     await Bot.getCurrent().editMessageText(message, {
+            //         chat_id: webHook.chat.chatId,
+            //         message_id: suite.messageId,
+            //         parse_mode: "HTML",
+            //     });
+            //
+            //     suite.status = check_suite.status;
+            //     suite.conclusion = check_suite.conclusion;
+            // } else {
+            //     // const message: string = template({
+            //     //     repository: repository.full_name,
+            //     //     branch: check_suite.head_branch,
+            //     //     status: check_suite.status,
+            //     //     conclusion: check_suite.conclusion,
+            //     // }).replace(/  +/g, " ").replace(/\n +/g, "\n");
+            //
+            //     suite = new CheckSuite();
+            //     suite.chat = webHook.chat;
+            //     suite.branch = check_suite.head_branch;
+            //     suite.webhook = webHook;
+            //     suite.suiteId = check_suite.id;
+            //     suite.status = check_suite.status;
+            //     suite.conclusion = check_suite.conclusion;
+            //
+            //     const message: string = template(suite)
+            //         .replace(/  +/g, " ")
+            //         .replace(/\n +/g, "\n");
+            //
+            //     const chatMessage: Message = await Bot.getCurrent().sendMessage(webHook.chat.chatId, message, {
+            //         parse_mode: "HTML",
+            //     });
+            //
+            //     suite.messageId = chatMessage.message_id;
+            // }
+            // if (suite.status !== "completed")
+            //     await suite?.save()
+            // else
+            //     await suite.remove();
 
-            let suite: CheckSuite | null = await CheckSuiteHandler.useCheckSuite(payload.check_suite.id, webHook.chat.chatId);
-            if (suite) {
-                // const message: string = template({
-                //     repository: repository.full_name,
-                //     branch: check_suite.head_branch,
-                //     status: check_suite.status,
-                //     conclusion: check_suite.conclusion,
-                // }).replace(/  +/g, " ").replace(/\n +/g, "\n");
-                const message: string = template(suite)
-                    .replace(/  +/g, " ")
-                    .replace(/\n +/g, "\n");
+            let entity: CheckSuite | undefined = await CheckSuite.findOne({
+                where: {suiteId: check_suite.id, chat: webHook.chat},
+                relations: ["pullRequest", "chat", "runs"]
+            });
 
-                await Bot.getCurrent().editMessageText(message, {
-                    chat_id: webHook.chat.chatId,
-                    message_id: suite.messageId,
-                    parse_mode: "HTML",
+            let pullRequest: PullRequest | undefined = undefined;
+            if (check_suite.pull_requests.length) {
+                pullRequest = await PullRequest.findOne({
+                    where: {pullRequestId: check_suite.pull_requests[0].id, chat: webHook.chat}
                 });
-
-                suite.status = check_suite.status;
-                suite.conclusion = check_suite.conclusion;
-            } else {
-                // const message: string = template({
-                //     repository: repository.full_name,
-                //     branch: check_suite.head_branch,
-                //     status: check_suite.status,
-                //     conclusion: check_suite.conclusion,
-                // }).replace(/  +/g, " ").replace(/\n +/g, "\n");
-
-                suite = new CheckSuite();
-                suite.chat = webHook.chat;
-                suite.branch = check_suite.head_branch;
-                suite.webhook = webHook;
-                suite.suiteId = check_suite.id;
-                suite.status = check_suite.status;
-                suite.conclusion = check_suite.conclusion;
-
-                const message: string = template(suite)
-                    .replace(/  +/g, " ")
-                    .replace(/\n +/g, "\n");
-
-                const chatMessage: Message = await Bot.getCurrent().sendMessage(webHook.chat.chatId, message, {
-                    parse_mode: "HTML",
-                });
-
-                suite.messageId = chatMessage.message_id;
             }
-            if (suite.status === "completed")
-                await suite?.save()
-            else
-                await suite.remove();
+
+            if (!entity) {
+                entity = new CheckSuite();
+                entity.chat = webHook.chat;
+                entity.branch = check_suite.head_branch;
+                entity.suiteId = check_suite.id;
+                entity.webhook = webHook;
+                if (pullRequest) entity.pullRequest = pullRequest;
+            }
+            entity.status = check_suite.status;
+            entity.conclusion = check_suite.conclusion;
+            entity.headSha = check_suite.head_sha;
+            try {
+                if (pullRequest) {
+                    await entity.save();
+                    await PullRequestsHandler.showPullRequest(pullRequest.id, false);
+                } else {
+                    entity = await entity.save();
+                    entity.messageId = await CheckSuiteHandler.showCheckSuite(entity, webHook.chat.chatId, entity.messageId);
+                    entity.messageIdUpdatedAt = new Date().getTime();
+
+                    await getConnection().transaction(async transaction => {
+                        await transaction.save(entity);
+                        if (pullRequest) {
+                            await transaction
+                                .getRepository(CheckSuite)
+                                .createQueryBuilder()
+                                .delete()
+                                .where(
+                                    "pullRequest = :pullRequest and headSha != :head_sha",
+                                    {
+                                        head_sha: check_suite.head_sha,
+                                        pullRequest: pullRequest.id,
+                                    }
+                                )
+                                .execute();
+                        }
+                    })
+                }
+            } catch (error) {
+            }
+        }
+    }
+
+    public static async showCheckSuite(entity: CheckSuite, chatId: number, messageId?: number): Promise<number> {
+        const template = await loadTemplate("check_suite");
+        const text = template(entity)
+            .replace(/  +/g, " ")
+            .replace(/\n +/g, "\n");
+
+        try {
+            if (!messageId)
+                throw new Error();
+            await Bot.getCurrent().editMessageText(text, {
+                chat_id: chatId,
+                message_id: messageId,
+                parse_mode: "HTML",
+            });
+            return messageId;
+        } catch(error) {
+            const message: Message = await Bot.getCurrent().sendMessage(chatId, text, {
+                parse_mode: "HTML",
+            });
+            return message.message_id;
         }
     }
 }

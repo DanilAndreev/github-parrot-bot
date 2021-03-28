@@ -24,19 +24,31 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import {
+    BaseEntity,
+    Column,
+    Entity,
+    Index,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn
+} from "typeorm";
 import Chat from "./Chat";
 import WebHook from "./WebHook";
 import CheckSuite from "./CheckSuite";
+import {Moment} from "moment";
+
 
 @Entity()
-export default class PullRequest extends BaseEntity {
+class PullRequest extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
-    title: string;
+    @Column({type: "jsonb"})
+    info: PullRequest.Info;
 
+    @Index()
     @ManyToOne(type => Chat, chat => chat.issues, {onDelete: "CASCADE"})
     chat: Chat;
 
@@ -44,14 +56,38 @@ export default class PullRequest extends BaseEntity {
     webhook: WebHook;
 
     @OneToMany(type => CheckSuite, checksuite => checksuite.pullRequest)
-    checksuits: CheckSuite;
+    checksuits: CheckSuite[];
 
+    @Index()
     @Column({type: "bigint"})
     pullRequestId: number;
 
-    @Column({type: "bigint"})
+    @Column({type: "bigint", nullable: true})
     messageId: number;
+
+    @Column({type: "bigint", nullable: true})
+    messageIdUpdatedAt: number;
 
     @UpdateDateColumn()
     updatedAt: Date;
 }
+
+namespace PullRequest {
+    export interface Info {
+        html_url: string;
+        tag: number;
+        state: string;
+        title: string;
+        body?: string;
+        labels: { name: string }[];
+        assignees: { login: string }[];
+        opened_by: string;
+        requested_reviewers: { login: string }[];
+        milestone?: {
+            title: string;
+            due_on?: string;
+        }
+    }
+}
+
+export default PullRequest;

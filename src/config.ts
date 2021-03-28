@@ -69,7 +69,7 @@ const config: Config = {
     },
     amqp: {
         connect: process.env.CLOUDAMQP_URL || "",
-        handlers: [IssuesHandler, PullRequestsHandler, PushHandler, /*CheckRunHandler*/ CheckSuiteHandler]
+        handlers: [IssuesHandler, PullRequestsHandler, PushHandler, CheckRunHandler, CheckSuiteHandler]
     },
     server: {
         port: process.env.PORT ? +process.env.PORT : 3030,

@@ -24,7 +24,16 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {
+    BaseEntity,
+    Column,
+    CreateDateColumn,
+    Entity,
+    Index,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn
+} from "typeorm";
 import Chat from "./Chat";
 import Issue from "./Issue";
 import PullRequest from "./PullRequest";
@@ -54,6 +63,7 @@ export default class WebHook extends BaseEntity {
     @Column()
     secretPreview: string;
 
+    @Index()
     @Column()
     repository: string;
 

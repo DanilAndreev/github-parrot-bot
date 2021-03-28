@@ -29,9 +29,10 @@ import {PullRequest as PullRequestType} from "github-webhook-event-types";
 import WebHook from "../entities/WebHook";
 import Bot from "../core/Bot";
 import loadTemplate from "../utils/loadTemplate";
-import * as moment from "moment";
 import WebHookAmqpHandler from "../core/WebHookAmqpHandler";
 import PullRequest from "../entities/PullRequest";
+import CommandError from "../errors/CommandError";
+import CheckSuite from "../entities/CheckSuite";
 
 
 @WebHookAmqpHandler.Handler("pull_request", 10)
@@ -49,50 +50,113 @@ export default class PullRequestsHandler extends WebHookAmqpHandler {
                 continue;
             }
 
-            const template = await loadTemplate("pull_request");
-            const message: string = template({
-                repository: repository.full_name,
-                tag: pullRequest.number,
-                state: pullRequest.state,
-                title: pullRequest.title.trim(),
-                body: pullRequest.body.trim(),
-                opened_by: pullRequest.user.login,
+            let entity: PullRequest | undefined = await PullRequest.findOne({
+                where: {chat: webHook.chat, pullRequestId: pullRequest.id},
+                relations: ["chat", "webhook", "checksuits", "checksuits.runs"],
+            });
+
+            if (!entity) {
+                entity = new PullRequest();
+                entity.chat = webHook.chat;
+                entity.webhook = webHook;
+            }
+
+            entity.pullRequestId = pullRequest.id;
+            entity.info = {
                 assignees: pullRequest.assignees.map(item => ({login: item.login})),
-                labels: pullRequest.labels,
-                requested_reviewers: pullRequest.requested_reviewers,
-                milestone: pullRequest.milestone ? {
-                    ...pullRequest.milestone,
-                    due_on: moment(pullRequest.milestone.due_on).format("ll")
-                } : undefined,
-            }).replace(/  +/g, " ").replace(/\n +/g, "\n");
+                body: pullRequest.body,
+                html_url: pullRequest.html_url,
+                labels: pullRequest.labels.map(item => ({name: item.name})),
+                milestone: pullRequest.milestone && {
+                    title: pullRequest.milestone.title,
+                    due_on: pullRequest.milestone.due_on
+                },
+                opened_by: pullRequest.user.login,
+                requested_reviewers: pullRequest.requested_reviewers.map(item => ({login: item.login})),
+                state: pullRequest.state,
+                tag: pullRequest.number,
+                title: pullRequest.title,
+            };
+
+            await CheckSuite
+                .createQueryBuilder()
+                .delete()
+                .where(
+                    "pullRequest = :pullRequest and headSha != :head_sha",
+                    {
+                        head_sha: pullRequest.head.sha,
+                        pullRequest: entity.id,
+                    }
+                )
+                .execute();
+
+            entity.checksuits = entity.checksuits.filter(suite => suite.headSha == pullRequest.head.sha);
 
             try {
-                const messageId = await PullRequestsHandler.usePullRequest(pullRequest.id, webHook.chat.chatId);
-                await Bot.getCurrent().editMessageText(message, {
-                    chat_id: webHook.chat.chatId,
-                    message_id: messageId,
-                    parse_mode: "HTML",
-                    reply_markup: {
-                        inline_keyboard: [
-                            [{text: "View on GitHub", url: pullRequest.html_url}],
-                        ]
-                    }
-                });
+                await PullRequestsHandler.showPullRequest(entity);
             } catch (error) {
-                const result = await Bot.getCurrent().sendMessage(webHook.chat.chatId, message, {
-                    parse_mode: "HTML",
-                    reply_markup: {
-                        inline_keyboard: [
-                            [{text: "View on GitHub", url: pullRequest.html_url}],
-                        ]
-                    }
-                });
-                const newPullRequest: PullRequest = new PullRequest();
-                newPullRequest.chat = webHook.chat;
-                newPullRequest.messageId = result.message_id;
-                newPullRequest.pullRequestId = pullRequest.id;
-                await newPullRequest.save();
             }
         }
+    }
+
+    public static async showPullRequest(entity_data: PullRequest | number, save: boolean = true): Promise<PullRequest> {
+        let updated: boolean = false;
+        let entity: PullRequest | undefined;
+        if (typeof entity_data == "number") {
+            entity = await PullRequest.findOne({
+                where: {id: entity_data},
+                relations: ["checksuits", "checksuits.runs", "chat"]
+            });
+        } else {
+            entity = entity_data;
+        }
+        if (!entity)
+            throw new CommandError(`Pull request not found.`);
+
+        const template = await loadTemplate("pull_request_new");
+        const message = template(entity)
+            .replace(/  +/g, " ")
+            .replace(/\n +/g, "\n");
+
+        if (!entity.messageIdUpdatedAt) {
+            entity.messageIdUpdatedAt = new Date().getTime();
+            updated = true;
+        }
+
+        entity.checksuits = entity.checksuits.sort((a: CheckSuite, b: CheckSuite) => {
+            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        });
+
+        try {
+            if (!(entity.messageId && new Date().getTime() - entity.messageIdUpdatedAt < 1000 * 60 * 60))
+                throw new Error();
+            await Bot.getCurrent().editMessageText(message, {
+                chat_id: entity.chat.chatId,
+                message_id: entity.messageId,
+                parse_mode: "HTML",
+                reply_markup: {
+                    inline_keyboard: [
+                        [{text: "View on GitHub", url: entity.info.html_url}],
+                    ]
+                }
+            });
+        } catch (error) {
+            // TODO: synchronization problems. Causes multiple messages sending.
+            const newMessage = await Bot.getCurrent().sendMessage(entity.chat.chatId, message, {
+                parse_mode: "HTML",
+                reply_markup: {
+                    inline_keyboard: [
+                        [{text: "View on GitHub", url: entity.info.html_url}],
+                    ]
+                }
+            });
+            entity.messageId = newMessage.message_id;
+            entity.messageIdUpdatedAt = new Date().getTime();
+            updated = true;
+        } finally {
+            if (updated && save)
+                entity = await entity.save();
+        }
+        return entity;
     }
 }
