@@ -166,6 +166,10 @@ export default class CheckRunHandler extends WebHookAmqpHandler {
                     await PullRequestsHandler.showPullRequest(pullRequest.id, false);
                 }
             } catch (error) {
+                // TODO: Ask node-telegram-bot-api developer about better statuses for errors.
+                if (error.code !== "ETELEGRAM" || !error.message.includes("message is not modified")) {
+                    throw error;
+                }
             }
         }
     }

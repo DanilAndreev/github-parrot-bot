@@ -142,17 +142,20 @@ export default class PullRequestsHandler extends WebHookAmqpHandler {
             });
         } catch (error) {
             // TODO: synchronization problems. Causes multiple messages sending.
-            const newMessage = await Bot.getCurrent().sendMessage(entity.chat.chatId, message, {
-                parse_mode: "HTML",
-                reply_markup: {
-                    inline_keyboard: [
-                        [{text: "View on GitHub", url: entity.info.html_url}],
-                    ]
-                }
-            });
-            entity.messageId = newMessage.message_id;
-            entity.messageIdUpdatedAt = new Date().getTime();
-            updated = true;
+            // TODO: Ask node-telegram-bot-api developer about better statuses for errors.
+            if (error.code !== "ETELEGRAM" || !error.message.includes("message is not modified")) {
+                const newMessage = await Bot.getCurrent().sendMessage(entity.chat.chatId, message, {
+                    parse_mode: "HTML",
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{text: "View on GitHub", url: entity.info.html_url}],
+                        ]
+                    }
+                });
+                entity.messageId = newMessage.message_id;
+                entity.messageIdUpdatedAt = new Date().getTime();
+                updated = true;
+            }
         } finally {
             if (updated && save)
                 entity = await entity.save();

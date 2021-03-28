@@ -32,6 +32,8 @@ import {Issues} from "github-webhook-event-types";
 import {Context} from "koa";
 import loadTemplate from "../utils/loadTemplate";
 import WebHookAmqpHandler from "../core/WebHookAmqpHandler";
+import Chat from "../entities/Chat";
+import {getConnection} from "typeorm";
 
 
 @WebHookAmqpHandler.Handler("issues", 10)
@@ -66,7 +68,7 @@ export default class IssuesHandler extends WebHookAmqpHandler {
             }).replace(/  +/g, " ").replace(/\n +/g, "\n");
 
             try {
-                const messageId = await IssuesHandler.useIssue(issue.id, webHook.chat.chatId);
+                const messageId = await IssuesHandler.useIssue(issue.id, webHook.chat);
                 await Bot.getCurrent().editMessageText(message, {
                     chat_id: webHook.chat.chatId,
                     message_id: messageId,
@@ -78,20 +80,49 @@ export default class IssuesHandler extends WebHookAmqpHandler {
                     }
                 });
             } catch (error) {
-                const result = await Bot.getCurrent().sendMessage(webHook.chat.chatId, message, {
-                    parse_mode: "HTML",
-                    reply_markup: {
-                        inline_keyboard: [
-                            [{text: "View on GitHub", url: issue.html_url}],
-                        ]
-                    }
-                });
-                const newIssue: Issue = new Issue();
-                newIssue.chat = webHook.chat;
-                newIssue.messageId = result.message_id;
-                newIssue.issueId = issue.id;
-                await newIssue.save();
+                // TODO: Ask node-telegram-bot-api developer about better statuses for errors.
+                if (error.code !== "ETELEGRAM" || !error.message.includes("message is not modified")) {
+                    const result = await Bot.getCurrent().sendMessage(webHook.chat.chatId, message, {
+                        parse_mode: "HTML",
+                        reply_markup: {
+                            inline_keyboard: [
+                                [{text: "View on GitHub", url: issue.html_url}],
+                            ]
+                        }
+                    });
+                    const newIssue: Issue = new Issue();
+                    newIssue.chat = webHook.chat;
+                    newIssue.messageId = result.message_id;
+                    newIssue.issueId = issue.id;
+                    newIssue.webhook = webHook;
+                    await getConnection().transaction(async transaction => {
+                        await transaction
+                            .getRepository(Issue)
+                            .createQueryBuilder()
+                            .delete()
+                            .where("webhook = :webhook and issueId = :issueId", {
+                                webhook: webHook.id,
+                                issueId: newIssue.issueId
+                            })
+                            .execute();
+                        await transaction.save(newIssue);
+                    })
+                }
             }
         }
+    }
+
+    public static async useIssue(issueId: number, chat: Chat): Promise<number> {
+        const result: Issue | undefined = await Issue.findOne({where: {chat, issueId}});
+        if (result) {
+            if (result?.updatedAt && new Date().getTime() - new Date(result.updatedAt).getTime()  > 1000*60*60) {
+                await result.remove();
+                throw new Error("Outdated message id.");
+                // return 0;
+            }
+            // await result.save();
+            return result.messageId;
+        }
+        throw new Error("Issue not found.");
     }
 }

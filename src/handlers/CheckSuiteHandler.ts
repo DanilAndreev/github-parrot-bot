@@ -156,6 +156,10 @@ export default class CheckSuiteHandler extends WebHookAmqpHandler {
                     })
                 }
             } catch (error) {
+                // TODO: Ask node-telegram-bot-api developer about better statuses for errors.
+                if (error.code !== "ETELEGRAM" || !error.message.includes("message is not modified")) {
+                    throw error;
+                }
             }
         }
     }
@@ -176,10 +180,14 @@ export default class CheckSuiteHandler extends WebHookAmqpHandler {
             });
             return messageId;
         } catch(error) {
-            const message: Message = await Bot.getCurrent().sendMessage(chatId, text, {
-                parse_mode: "HTML",
-            });
-            return message.message_id;
+            // TODO: Ask node-telegram-bot-api developer about better statuses for errors.
+            if (error.code !== "ETELEGRAM" || !error.message.includes("message is not modified")) {
+                const message: Message = await Bot.getCurrent().sendMessage(chatId, text, {
+                    parse_mode: "HTML",
+                });
+                return message.message_id;
+            }
         }
+        throw Error("Invalid finish of CheckSuiteHandler.showCheckSuite()");
     }
 }
