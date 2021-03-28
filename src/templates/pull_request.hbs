@@ -1,24 +1,36 @@
-<b>{{repository}}</b> #{{tag}}
+<b>{{webhook/repository}}</b> #{{info/tag}}
 #pullrequest <i>{{state}}</i>
 
-<b>{{title}}</b>
-{{#if body}}
-    {{body}}
+<b>{{info/title}}</b>
+{{#if info/body}}
+    {{info/body}}
 {{/if}}
 
-{{#if labels}}
+{{#if info/labels}}
     <b>Labels:</b>
-    {{#each labels}}
+    {{#each info/labels}}
         <code>{{name}}</code>
     {{/each}}
 {{/if}}
-{{#if assignees}}
-    {{#if opened_by}}<b>Opened by:</b> {{opened_by}}{{/if}}
-    <b>Assignees:</b> {{#each assignees}}{{login}} {{/each}}
+{{#if info/assignees}}
+    {{#if info/opened_by}}<b>Opened by:</b> {{info/opened_by}}{{/if}}
+    <b>Assignees:</b> {{#each info/assignees}}{{login}} {{/each}}
 {{/if}}
-{{#if requested_reviewers}}
-    <b>Requested review: </b>{{#each requested_reviewers}}{{login}} {{/each}}
+{{#if info/requested_reviewers}}
+    <b>Requested review: </b>{{#each info/requested_reviewers}}{{login}} {{/each}}
 {{/if}}
-{{#if milestone}}
-    <b>Milestone</b> <i>{{milestone/title}}</i> {{#if milestone/due_on}}<code>{{milestone/due_on}}</code>{{/if}}
+{{#if info/milestone}}
+    <b>Milestone</b> <i>{{info/milestone/title}}</i> {{#if info/milestone/due_on}}<code>{{info/milestone/due_on}}</code>{{/if}}
+{{/if}}
+{{#if checksuits}}
+    {{#each checksuits}}
+        ───────────
+        <b>Suite:</b> <b><i>{{status}} {{conclusion}}</i></b>
+        {{#if runs}}
+            <i>Runs:</i>
+            {{#each runs}}
+                <b>{{name}}</b>: <i>{{status}}</i>
+            {{/each}}
+        {{/if}}
+    {{/each}}
 {{/if}}

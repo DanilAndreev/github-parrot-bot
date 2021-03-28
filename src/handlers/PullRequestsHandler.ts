@@ -113,7 +113,7 @@ export default class PullRequestsHandler extends WebHookAmqpHandler {
         if (!entity)
             throw new CommandError(`Pull request not found.`);
 
-        const template = await loadTemplate("pull_request_new");
+        const template = await loadTemplate("pull_request");
         const message = template(entity)
             .replace(/  +/g, " ")
             .replace(/\n +/g, "\n");
