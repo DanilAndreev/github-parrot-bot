@@ -93,13 +93,14 @@ export default class PullRequestsHandler extends WebHookAmqpHandler {
             entity.checksuits = entity.checksuits.filter(suite => suite.headSha == pullRequest.head.sha);
 
             try {
-                await PullRequestsHandler.showPullRequest(entity);
+                entity = await PullRequestsHandler.showPullRequest(entity);
+                await entity.save();
             } catch (error) {
             }
         }
     }
 
-    public static async showPullRequest(entity_data: PullRequest | number, save: boolean = true): Promise<PullRequest> {
+    public static async showPullRequest(entity_data: PullRequest | number): Promise<PullRequest> {
         let updated: boolean = false;
         let entity: PullRequest | undefined;
         if (typeof entity_data == "number") {
@@ -156,9 +157,6 @@ export default class PullRequestsHandler extends WebHookAmqpHandler {
                 entity.messageIdUpdatedAt = new Date().getTime();
                 updated = true;
             }
-        } finally {
-            if (updated && save)
-                entity = await entity.save();
         }
         return entity;
     }

@@ -78,7 +78,7 @@ export default class CheckSuiteHandler extends WebHookAmqpHandler {
             try {
                 if (pullRequest) {
                     await entity.save();
-                    await PullRequestsHandler.showPullRequest(pullRequest.id, false);
+                    await PullRequestsHandler.showPullRequest(pullRequest.id);
                 } else {
                     entity = await entity.save();
                     entity.messageId = await CheckSuiteHandler.showCheckSuite(entity, webHook.chat.chatId, entity.messageId);

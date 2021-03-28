@@ -120,7 +120,7 @@ export default class CheckRunHandler extends WebHookAmqpHandler {
 
             try {
                 if (pullRequest) {
-                    await PullRequestsHandler.showPullRequest(pullRequest.id, false);
+                    await PullRequestsHandler.showPullRequest(pullRequest.id);
                 }
             } catch (error) {
                 // TODO: Ask node-telegram-bot-api developer about better statuses for errors.
