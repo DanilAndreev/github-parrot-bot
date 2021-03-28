@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,18 +24,30 @@
  * SOFTWARE.
  */
 
-import {Context, Next} from "koa";
-import pullRequestEvent from "../events/pullRequestEvent";
-import issueEvent from "../events/issueEvent";
-import {Issues, PullRequest} from "github-webhook-event-types";
+import {BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn} from "typeorm";
+import WebHook from "./WebHook";
+import Collaborator from "./Collaborator";
+import Issue from "./Issue";
+import CheckSuite from "./CheckSuite";
 
-export default async function eventsMiddleware(ctx: Context, next: Next): Promise<void> {
-    const payload = ctx.request.body;
 
-    if (payload.pull_request) {
-        // await pullRequestEvent(payload as PullRequest, ctx);
-    } else if (payload.issue) {
-        // await issueEvent(payload as Issues, ctx);
-    }
-    await next();
+@Entity()
+export default class Chat extends BaseEntity {
+    @PrimaryColumn({type: "bigint"})
+    chatId: number;
+
+    @OneToMany(type => WebHook, webhook => webhook.chat)
+    webhooks: WebHook[];
+
+    @OneToMany(type => Collaborator, collaborator => collaborator.chat)
+    collaborators: Collaborator[];
+
+    @OneToMany(type => Issue, issue => issue.chat)
+    issues: Issue[];
+
+    @OneToMany(type => CheckSuite, checksuite => checksuite.chat)
+    checksuits: CheckSuite[]
+
+    @CreateDateColumn()
+    createdAt: Date;
 }

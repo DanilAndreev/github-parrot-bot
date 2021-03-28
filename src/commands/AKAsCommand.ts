@@ -30,6 +30,7 @@ import Collaborator from "../entities/Collaborator";
 import JSONObject from "../interfaces/JSONObject";
 import CommandError from "../errors/CommandError";
 import Bot from "../core/Bot";
+import Chat from "../entities/Chat";
 
 
 @BotCommand.Command("akas")
@@ -48,7 +49,11 @@ export default class AKAsCommand extends BotCommand {
     protected async showAll(message: Message, args: string[], opts: JSONObject<string>): Promise<string | string[]> {
         const chatId: number = message.chat.id;
 
-        const result: Collaborator[] = await Collaborator.find({where: {chatId}});
+        const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
+        if (!chat)
+            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+
+        const result: Collaborator[] = await Collaborator.find({where: {chat}});
 
         if (!result.length)
             return `This chat have no AKAs.`;
@@ -84,7 +89,11 @@ export default class AKAsCommand extends BotCommand {
             throw new CommandError("Unable to get telegram user id.");
         const telegramId: number = message.from.id;
 
-        const result: Collaborator[] = await Collaborator.find({where: {chatId, telegramId}});
+        const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
+        if (!chat)
+            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+
+        const result: Collaborator[] = await Collaborator.find({where: {chat, telegramId}});
 
         if (!result.length)
             return `User @${telegramName} have no AKA.`;

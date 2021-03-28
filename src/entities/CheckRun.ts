@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,19 +24,38 @@
  * SOFTWARE.
  */
 
-import {RabbitMQ} from "../main";
-import * as Amqp from "amqplib";
-import {AMQP_ISSUES_QUEUE, AMQP_PULL_REQUESTS_QUEUE} from "../globals";
-import issueHandler from "../handlers/issueHandler";
+import {
+    BaseEntity,
+    Column,
+    CreateDateColumn,
+    Entity,
+    ManyToOne,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn
+} from "typeorm";
+import CheckSuite from "./CheckSuite";
 
-export default async function setupAmqp(): Promise<void> {
-    const issuesChannel: Amqp.Channel = await RabbitMQ.createChannel();
-    await issuesChannel.assertQueue(AMQP_ISSUES_QUEUE);
-    await issuesChannel.prefetch(10);
-    await issuesChannel.consume(AMQP_ISSUES_QUEUE, (msg) => msg && issueHandler(msg, issuesChannel));
 
-    const pullRequestsChannel: Amqp.Channel = await RabbitMQ.createChannel();
-    await pullRequestsChannel.assertQueue(AMQP_PULL_REQUESTS_QUEUE);
-    await pullRequestsChannel.prefetch(10);
-    await pullRequestsChannel.consume(AMQP_PULL_REQUESTS_QUEUE, (msg) => msg && issueHandler(msg, pullRequestsChannel));
+@Entity()
+export default class CheckRun extends BaseEntity {
+    @PrimaryGeneratedColumn({type: "bigint"})
+    id: number;
+
+    @ManyToOne(type => CheckSuite, suite => suite.runs, {onDelete: "CASCADE"})
+    suite: CheckSuite;
+
+    @Column({default: "unnamed"})
+    name: string;
+
+    @Column({type: "varchar", length: 30, default: "queued"})
+    status: string;
+
+    @Column({type: "bigint"})
+    runId: number;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
+
+    @CreateDateColumn()
+    createdAt: Date;
 }

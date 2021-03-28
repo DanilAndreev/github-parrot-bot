@@ -26,10 +26,11 @@
 
 import BotCommand from "../core/BotCommand";
 import {Message} from "node-telegram-bot-api";
-import checkAdmin from "../core/checkAdmin";
+import checkAdmin from "../utils/checkAdmin";
 import CommandError from "../errors/CommandError";
 import Collaborator from "../entities/Collaborator";
 import JSONObject from "../interfaces/JSONObject";
+import Chat from "../entities/Chat";
 
 
 @BotCommand.Command("clear_aka")
@@ -43,7 +44,11 @@ export default class ClearAKACommand extends BotCommand {
         if (!await checkAdmin(telegramName, message))
             throw new CommandError(`User @${telegramName} have no permissions to remove AKAs.`);
 
-        const result = await Collaborator.delete({chatId});
+        const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
+        if (!chat)
+            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+
+        const result = await Collaborator.delete({chat: chat});
 
         if (!result.affected)
             throw new CommandError(`This chat has no AKAs.`);

@@ -24,61 +24,48 @@
  * SOFTWARE.
  */
 
-import {Issues, PullRequest} from "github-webhook-event-types";
+import * as Amqp from "amqplib";
 import {Context} from "koa";
 
 
-/**
- * WebHookEvent - base class for WebHook event handlers.
- * @class
- * @abstract
- * @author Danil Andreev
- */
-class WebHookEvent {
-    /**
-     * handle - event handler method.
-     * @method
-     * @abstract
-     * @param event - Incoming event.
-     */
-    public handle(event: WebHookEvent.WebHookPayload<any>): void | Promise<void> {
+class AmqpHandler {
+    protected handle(payload: any, ctx: Context): void | Promise<void> {
         throw new ReferenceError(`Abstract method call. Inherit this class and override this method.`);
+    }
+
+    public async execute(message: Amqp.Message, channel: Amqp.Channel) {
+        try {
+            const {payload, ctx} = JSON.parse(message.content.toString());
+            await this.handle(payload, ctx);
+            channel.ack(message);
+        } catch (error) {
+            channel.nack(message);
+            console.error(error);
+        }
     }
 }
 
-namespace WebHookEvent {
+namespace AmqpHandler {
     /**
-     * Target - decorator for WebHook event.
-     * @param event_name - Target event name.
+     * Handler - decorator for Amqp queue handler.
+     * @param queue - Queue name.
+     * @param prefetch - prefetch messages quantity.
      * @author Danil Andreev
      */
-    export function Target(event_name: string) {
-        return function BotCommandWrapper<T extends new(...args: any[]) => {}>(objectConstructor: T): T {
-            return class WrappedWebHookEvent extends objectConstructor {
+    export function Handler(queue: string, prefetch?: number) {
+        return function AmqpHandlerWrapper<T extends new(...args: any[]) => {}>(objectConstructor: T): T {
+            return class WrappedAmqpHandler extends objectConstructor {
                 constructor(...args: any[]) {
                     super(...args);
-                    Reflect.defineMetadata("webhook-event", true, this);
-                    Reflect.defineMetadata("webhook-event-target", event_name, this);
+                    Reflect.defineMetadata("amqp-handler", true, WrappedAmqpHandler);
+                    Reflect.defineMetadata("amqp-handler-queue", queue, WrappedAmqpHandler);
+                    Reflect.defineMetadata("amqp-handler", true, this);
+                    Reflect.defineMetadata("amqp-handler-queue", queue, this);
+                    prefetch && Reflect.defineMetadata("amqp-handler-prefetch", prefetch, this);
                 }
             };
         };
     }
-
-    /**
-     * WebHookPayload - interface for web hook payload.
-     * @interface
-     * @author Danil Andreev
-     */
-    export interface WebHookPayload<T extends Issues | PullRequest> {
-        /**
-         * GitHub event payload.
-         */
-        payload: T;
-        /**
-         * Koa context.
-         */
-        ctx: Context;
-    }
 }
 
-export default WebHookEvent;
+export default AmqpHandler;

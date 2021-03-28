@@ -24,49 +24,18 @@
  * SOFTWARE.
  */
 
-import * as Koa from "koa";
-import {Context, Next} from "koa";
-import * as BodyParser from "koa-bodyparser";
 import {setupDbConnection} from "./core/DataBase";
-import config from "./config";
-import eventsMiddleware from "./core/eventsMiddleware";
-import * as Amqp from "amqplib";
-import setupAmqp from "./core/setupAmqp";
 import Bot from "./core/Bot";
 import WebServer from "./core/WebServer";
+import AmqpDispatcher from "./core/AmqpDispatcher";
 
-
-export let RabbitMQ: Amqp.Connection;
 
 export default async function main() {
     await setupDbConnection();
-    RabbitMQ = await Amqp.connect(config.rabbitmq);
-    await setupAmqp();
-
-    // const server = new Koa();
-    // server.use(BodyParser());
-    //
-    // server.use(async (ctx: Context, next: Next) => {
-    //     console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    //     console.log(ctx);
-    //     console.log("--- BODY -----------------------------------------------------------------");
-    //     console.log(ctx.request.body);
-    //
-    //     let a = JSON.parse(ctx.request.body.payload);
-    //
-    //     ctx.body = "Hello"
-    //     await next;
-    // });
-    //
-    // server.use(eventsMiddleware);
-    //
-    //
-    //
-    // console.log("Server is listening on port", process.env.PORT || config.server.port);
 
     const server = new WebServer();
+    const bot: Bot = Bot.init();
+    const RabbitMQ: AmqpDispatcher = await AmqpDispatcher.init();
 
-    Bot.init();
     server.start();
-    // server.listen(process.env.PORT || config.server.port);
 }

@@ -24,15 +24,38 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {
+    BaseEntity,
+    Column,
+    CreateDateColumn,
+    Entity,
+    Index,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn
+} from "typeorm";
+import Chat from "./Chat";
+import Issue from "./Issue";
+import PullRequest from "./PullRequest";
+import CheckSuite from "./CheckSuite";
+
 
 @Entity()
 export default class WebHook extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({type: "bigint"})
-    chatId: number;
+    @ManyToOne(type => Chat, chat => chat.webhooks, {onDelete: "CASCADE"})
+    chat: Chat;
+
+    @OneToMany(type => Issue, issue => issue.webhook)
+    issues: Issue[];
+
+    @OneToMany(type => PullRequest, pullRequest => pullRequest.webhook)
+    pullRequests: PullRequest[]
+
+    @OneToMany(type => CheckSuite, checksuite => checksuite.webhook)
+    checksuits: CheckSuite[];
 
     @Column()
     secret: string;
@@ -40,6 +63,7 @@ export default class WebHook extends BaseEntity {
     @Column()
     secretPreview: string;
 
+    @Index()
     @Column()
     repository: string;
 

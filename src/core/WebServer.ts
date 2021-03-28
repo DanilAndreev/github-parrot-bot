@@ -27,9 +27,9 @@
 import * as Koa from "koa";
 import {Context, Next} from "koa";
 import * as BodyParser from "koa-bodyparser";
-import {EventEmitter} from "events";
-import WebHookEvent from "./WebHookEvent";
 import config from "../config";
+import * as Amqp from "amqplib";
+import AmqpDispatcher from "./AmqpDispatcher";
 
 
 /**
@@ -39,34 +39,12 @@ import config from "../config";
  */
 class WebServer extends Koa {
     /**
-     * events - events emitter.
-     */
-    public readonly events: EventEmitter;
-
-    /**
-     * handlers - server events handlers.
-     */
-    protected handlers: WebHookEvent[];
-
-    /**
      * Creates an instance of WebServer.
      * @constructor
      * @author Danil Andreev
      */
     constructor() {
         super();
-        this.handlers = config.server.handlers
-            .map((Handler: typeof WebHookEvent) => {
-                return new Handler();
-            });
-
-        this.events = new EventEmitter();
-
-        for (const handler of this.handlers) {
-            const target: string = Reflect.getMetadata("webhook-event-target", handler);
-            this.events.on(target, handler.handle);
-        }
-
         this.use(BodyParser());
         this.use((ctx: Context, next: Next) => this.handleEventRequest(ctx, next));
     }
@@ -81,16 +59,18 @@ class WebServer extends Koa {
     protected async handleEventRequest(ctx: Context, next: Next) {
         try {
             const payload: any = ctx.request.body;
-            if (payload.pull_request) {
-                this.events.emit("pull_request", {payload, ctx});
-            }
-            if (payload.issue) {
-                this.events.emit("issue", {payload, ctx});
-            }
+            const event = ctx.request.get("x-github-event");
+            console.log(event);
+            if (!event)
+                throw new Error("Failed to get event.");
+            const channel: Amqp.Channel = await AmqpDispatcher.getCurrent().getConnection().createChannel();
+            await channel.assertQueue(event);
+            channel.sendToQueue(event, Buffer.from(JSON.stringify({payload, ctx})), {expiration: 1000*60*30});
+            ctx.status = 200;
         } catch (error) {
-            console.error("Incorrect webhook request.", error);
+            ctx.status = 400;
+            ctx.body = "Incorrect webhook request." + error.message;
         }
-
         await next();
     }
 

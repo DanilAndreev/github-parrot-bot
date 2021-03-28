@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,27 +24,68 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import {
+    BaseEntity,
+    Column, CreateDateColumn,
+    Entity,
+    Index,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn
+} from "typeorm";
 import Chat from "./Chat";
+import PullRequest from "./PullRequest";
+import CheckRun from "./CheckRun";
 import WebHook from "./WebHook";
 
+
 @Entity()
-export default class Issue extends BaseEntity {
+export default class CheckSuite extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(type => Chat, chat => chat.issues, {onDelete: "CASCADE"})
+    @Column({type: "varchar", length: 30, default: "queued"})
+    status: string;
+
+    @Column({type: "varchar", length: 30, nullable: true})
+    conclusion?: string;
+
+    @Index()
+    @Column({type: "varchar", length: 40})
+    headSha: string;
+
+    @Column()
+    branch: string;
+
+    @ManyToOne(type => Chat, chat => chat.checksuits, {onDelete: "CASCADE"})
     chat: Chat;
 
-    @ManyToOne(type => WebHook, webhook => webhook.issues, {onDelete: "CASCADE"})
+    @ManyToOne(type => WebHook, webhook => webhook.checksuits, {onDelete: "CASCADE"})
     webhook: WebHook;
 
-    @Column({type: "bigint"})
-    issueId: number;
+    @OneToMany(type => CheckRun, run => run.suite)
+    runs: CheckRun[];
 
+    @ManyToOne(type => PullRequest, pullRequest => pullRequest.checksuits, {
+        onDelete: "CASCADE",
+        nullable: true
+    })
+    pullRequest?: PullRequest;
+
+    @Index()
     @Column({type: "bigint"})
+    suiteId: number;
+
+    @Column({type: "bigint", nullable: true})
     messageId: number;
+
+    @Column({type: "bigint", nullable: true})
+    messageIdUpdatedAt: number;
 
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @CreateDateColumn()
+    createdAt: Date;
 }

@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,19 +24,11 @@
  * SOFTWARE.
  */
 
+import {readFileSync} from "fs";
+import root from "./root";
+import * as Handlebars from "handlebars";
 
-import Issue from "../entities/Issue";
-import moment = require("moment");
 
-export default async function useIssue(issueId: number, chatId: number): Promise<number> {
-    const result: Issue | undefined = await Issue.findOne({where: {chatId, issueId}});
-    if (result) {
-        if (result?.updatedAt && moment(result.updatedAt) <  moment().subtract(1, "hour")) {
-            await Issue.delete({id: result.id});
-            return 0;
-        }
-        await result.save()
-        return result.messageId;
-    }
-    throw new Error("Kuku");
+export default async function loadTemplate(templateName: string): Promise<HandlebarsTemplateDelegate> {
+    return Handlebars.compile(readFileSync(root + `/templates/${templateName}.hbs`).toString());
 }

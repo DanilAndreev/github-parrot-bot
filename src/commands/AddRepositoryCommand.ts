@@ -27,9 +27,10 @@
 import BotCommand from "../core/BotCommand";
 import {Message} from "node-telegram-bot-api";
 import CommandError from "../errors/CommandError";
-import checkAdmin from "../core/checkAdmin";
+import checkAdmin from "../utils/checkAdmin";
 import WebHook from "../entities/WebHook";
 import Bot from "../core/Bot";
+import Chat from "../entities/Chat";
 
 
 @BotCommand.Command("add", "<repository> <secret>")
@@ -46,7 +47,11 @@ export default class AddRepositoryCommand extends BotCommand {
         if (!await checkAdmin(telegramName, message))
             throw new CommandError(`User @${telegramName} have no permissions to add repository.`);
 
-        if (await WebHook.findOne({where: {chatId, repository}}))
+        const chat: Chat | undefined = await Chat.findOne({where: {chatId: message.chat.id}});
+        if (!chat)
+            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+
+        if (await WebHook.findOne({where: {chat, repository}}))
             throw new CommandError(
                 `Repository <b>[${repository}]</b> is already connected.`,
                 `Use /remove command to remove repository.`
@@ -59,7 +64,7 @@ export default class AddRepositoryCommand extends BotCommand {
             throw new CommandError(error.message);
         }
         webhook.secret = secret;
-        webhook.chatId = chatId;
+        webhook.chat = chat;
         webhook.repository = repository;
         const result = await webhook.save();
         try {
@@ -91,7 +96,6 @@ export default class AddRepositoryCommand extends BotCommand {
         if (secret.length < 4) throw new RangeError("Error: secret is too short. It must be at least 4 symbols in length.");
         const head: string = secret.slice(0, 2);
         const tail: string = secret.slice(secret.length - 2, secret.length);
-        const preview: string = head + "********" + tail;
-        return preview;
+        return head + "********" + tail;
     }
 }

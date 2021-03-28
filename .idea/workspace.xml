@@ -10,8 +10,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Readme] Inited.">
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[PullRequestHandler] Renamed template and added dividers to checksuits.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/CheckRunHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/CheckRunHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/CheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/CheckSuiteHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/IssuesHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/IssuesHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/PullRequestsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/PullRequestsHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,10 +35,18 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="adding-ampq-queue-handlers" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProblemsViewState">
     <option name="selectedIndex" value="1" />
@@ -49,7 +62,7 @@
     <property name="add_unversioned_files" value="$PROJECT_DIR$/.env" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.20.6" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/entities" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -63,15 +76,16 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\github-tracker-telegram-bot\src\entities" />
+      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\images" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\errors" />
       <recent name="D:\Projects\github-tracker-telegram-bot\src\core" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -107,62 +121,9 @@
       <workItem from="1616545792931" duration="8574000" />
       <workItem from="1616605886860" duration="11394000" />
       <workItem from="1616631020470" duration="773000" />
-    </task>
-    <task id="LOCAL-00002" summary="[typescript] Initialized.">
-      <created>1602769019310</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1602769019310</updated>
-    </task>
-    <task id="LOCAL-00003" summary="[koa] Added koa.">
-      <created>1602770773909</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1602770773909</updated>
-    </task>
-    <task id="LOCAL-00004" summary="[workspace] Small changes.">
-      <created>1602770836375</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1602770836375</updated>
-    </task>
-    <task id="LOCAL-00005" summary="[Chat] Modified entity.">
-      <created>1603110047842</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1603110047842</updated>
-    </task>
-    <task id="LOCAL-00006" summary="[git-crypt] Initialized.">
-      <created>1603110145006</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1603110145006</updated>
-    </task>
-    <task id="LOCAL-00007" summary="[git-crypt] Initialized.">
-      <created>1603110179303</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1603110179303</updated>
-    </task>
-    <task id="LOCAL-00008" summary="[typescript] Added config.">
-      <created>1603111307184</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1603111307184</updated>
-    </task>
-    <task id="LOCAL-00009" summary="[typescript] Added config.">
-      <created>1603111323440</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1603111323440</updated>
+      <workItem from="1616686027538" duration="122000" />
+      <workItem from="1616748336279" duration="430000" />
+      <workItem from="1616897725933" duration="9436000" />
     </task>
     <task id="LOCAL-00010" summary="[typescript] Added config.">
       <created>1603111329864</created>
@@ -451,7 +412,63 @@
       <option name="project" value="LOCAL" />
       <updated>1616639060835</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="[IssuesHandler] Added handlebars mechanism.">
+      <created>1616700599101</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1616700599102</updated>
+    </task>
+    <task id="LOCAL-00052" summary="[WebServer] Removed events emitter. Messages are pushed to RabbitMQ instantly.">
+      <created>1616708638772</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1616708638772</updated>
+    </task>
+    <task id="LOCAL-00053" summary="[Entities] Changed structure. (PROBLEM WITH FK ON DELETION)">
+      <created>1616725409227</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1616725409227</updated>
+    </task>
+    <task id="LOCAL-00054" summary="[Entities] Fixed problems with FK constraint on deletion.">
+      <created>1616725691446</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1616725691447</updated>
+    </task>
+    <task id="LOCAL-00055" summary="[README] Added some information.">
+      <created>1616772584680</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1616772584680</updated>
+    </task>
+    <task id="LOCAL-00056" summary="[CheckSuite] Added new mechanism.">
+      <created>1616794473045</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1616794473045</updated>
+    </task>
+    <task id="LOCAL-00057" summary="[CheckSuiteHandler] Added mechanism for check suits.">
+      <created>1616899860454</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1616899860455</updated>
+    </task>
+    <task id="LOCAL-00058" summary="[PullRequestHandler] Renamed template and added dividers to checksuits.">
+      <created>1616900260240</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1616900260241</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -470,14 +487,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[issueEvent] Screening symbols." />
-    <MESSAGE value="[issueEvent] Added hashtag to issue." />
-    <MESSAGE value="[issueEvent] Finished issues." />
-    <MESSAGE value="[issueEvent] Styled separators." />
-    <MESSAGE value="[issueEvent] Changed message cache deleting time." />
-    <MESSAGE value="[makeCommand] Changed from.id to chat.id." />
-    <MESSAGE value="[addRepository] Added warning on message deletion." />
-    <MESSAGE value="[issueEvent] Removed stylized tags." />
     <MESSAGE value="[addRepository] Removed argon2 secret hashing." />
     <MESSAGE value="[issueEvent] Added debuggers." />
     <MESSAGE value="[issueEvent] Design changes." />
@@ -495,29 +504,15 @@
     <MESSAGE value="[Commands] Changed logic to telegram user id." />
     <MESSAGE value="[WebServer] Created mechanism." />
     <MESSAGE value="[WebServer] Finished work with events." />
-    <option name="LAST_COMMIT_MESSAGE" value="[WebServer] Finished work with events." />
-  </component>
-  <component name="WindowStateProjectService">
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1616685395255">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616685395255" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1616685395255">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616685395255" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1616685395255">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616685395255" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1616685395255">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616685395255" />
-    <state x="2697" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1616685068461">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2697" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616685068461" />
+    <MESSAGE value="[IssuesHandler] Added handlebars mechanism." />
+    <MESSAGE value="[WebServer] Removed events emitter. Messages are pushed to RabbitMQ instantly." />
+    <MESSAGE value="[Entities] Changed structure. (PROBLEM WITH FK ON DELETION)" />
+    <MESSAGE value="[Entities] Fixed problems with FK constraint on deletion." />
+    <MESSAGE value="[README] Added some information." />
+    <MESSAGE value="[CheckSuite] Added new mechanism." />
+    <MESSAGE value="[CheckSuiteHandler] Added mechanism for check suits." />
+    <MESSAGE value="[PullRequestHandler] Renamed template and added dividers to checksuits." />
+    <option name="LAST_COMMIT_MESSAGE" value="[PullRequestHandler] Renamed template and added dividers to checksuits." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -526,6 +521,23 @@
           <url>file://$PROJECT_DIR$/src/decorators/BotCommand.ts</url>
           <line>35</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/CheckSuiteHandler.ts</url>
+          <line>127</line>
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/CheckRunHandler.ts</url>
+          <line>165</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/IssuesHandler.ts</url>
+          <line>69</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="78" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

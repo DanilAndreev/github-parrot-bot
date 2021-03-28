@@ -27,9 +27,10 @@
 import BotCommand from "../core/BotCommand";
 import {Message} from "node-telegram-bot-api";
 import CommandError from "../errors/CommandError";
-import checkAdmin from "../core/checkAdmin";
+import checkAdmin from "../utils/checkAdmin";
 import WebHook from "../entities/WebHook";
 import JSONObject from "../interfaces/JSONObject";
+import Chat from "../entities/Chat";
 
 
 @BotCommand.Command("remove", "<repository>")
@@ -58,7 +59,11 @@ export default class RemoveRepositoryCommand extends BotCommand {
         const chatId: number = message.chat.id;
         const [repository] = args;
 
-        const result = await WebHook.delete({chatId, repository});
+        const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
+        if (!chat)
+            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+
+        const result = await WebHook.delete({chat, repository});
         if (!result.affected) throw new CommandError(`Repository <b>[${repository}]</b> not found.`);
         return `Successfully deleted repository <b>[${repository}]</b>.`;
     }
@@ -66,7 +71,11 @@ export default class RemoveRepositoryCommand extends BotCommand {
     protected async removeAll(message: Message, args: string[], opts: JSONObject<string>): Promise<string> {
         const chatId: number = message.chat.id;
 
-        const result = await WebHook.delete({chatId});
+        const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
+        if (!chat)
+            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+
+        const result = await WebHook.delete({chat});
         if (!result.affected) throw new CommandError(`You have no repositories to delete.`);
         return `Successfully deleted all repositories.`;
     }

@@ -25,9 +25,7 @@
  */
 
 import WebHook from "./entities/WebHook";
-import {ConnectionOptions} from "typeorm";
 import Collaborator from "./entities/Collaborator";
-import * as Amqp from "amqplib";
 import Issue from "./entities/Issue";
 import AddRepositoryCommand from "./commands/AddRepositoryCommand";
 import AKAsCommand from "./commands/AKAsCommand";
@@ -36,27 +34,17 @@ import ConnectCommand from "./commands/ConnectCommand";
 import DisconnectCommand from "./commands/DisconnectCommand";
 import ListRepositoriesCommand from "./commands/ListRepositoriesCommand";
 import RemoveRepositoryCommand from "./commands/RemoveRepositoryCommand";
-import BotCommand from "./core/BotCommand";
-import WebHookEvent from "./core/WebHookEvent";
-import IssueEvent from "./events/IssueEvent";
-import PullRequestEvent from "./events/PullRequestEvent";
+import IssuesHandler from "./handlers/IssuesHandler";
+import PullRequestsHandler from "./handlers/PullRequestsHandler";
+import Config from "./interfaces/Config";
+import PushHandler from "./handlers/PushHandler";
+import CheckRunHandler from "./handlers/CheckRunHandler";
+import CheckSuiteHandler from "./handlers/CheckSuiteHandler";
+import Chat from "./entities/Chat";
+import CheckSuite from "./entities/CheckSuite";
+import PullRequest from "./entities/PullRequest";
+import CheckRun from "./entities/CheckRun";
 
-export interface BotConfig {
-    token: string;
-    commands: typeof BotCommand[]
-}
-
-export interface ServerConfig {
-    port: number;
-    handlers: typeof WebHookEvent[];
-}
-
-export interface Config {
-    bot: BotConfig;
-    db: ConnectionOptions;
-    server: ServerConfig;
-    rabbitmq: string | Amqp.Options.Connect,
-}
 
 const config: Config = {
     bot: {
@@ -74,17 +62,17 @@ const config: Config = {
     db: {
         type: "postgres",
         url: process.env.DATABASE_URL,
-        entities: [
-            WebHook, Collaborator, Issue
-        ],
+        entities: [WebHook, Collaborator, Issue, Chat, CheckSuite, PullRequest, CheckRun],
         ssl: {
             rejectUnauthorized: false,
         }
     },
-    rabbitmq: process.env.CLOUDAMQP_URL || "",
+    amqp: {
+        connect: process.env.CLOUDAMQP_URL || "",
+        handlers: [IssuesHandler, PullRequestsHandler, PushHandler, CheckRunHandler, CheckSuiteHandler]
+    },
     server: {
         port: process.env.PORT ? +process.env.PORT : 3030,
-        handlers: [IssueEvent, PullRequestEvent],
     }
 }
 

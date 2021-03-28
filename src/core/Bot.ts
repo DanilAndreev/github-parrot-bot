@@ -28,6 +28,8 @@ import * as TelegramBot from "node-telegram-bot-api";
 import config from "../config";
 import BotCommand from "./BotCommand";
 import Collaborator from "../entities/Collaborator";
+import {User} from "node-telegram-bot-api";
+import Chat from "../entities/Chat";
 
 
 /**
@@ -60,6 +62,7 @@ export default class Bot extends TelegramBot {
         console.log("Creating telegram bot.");
         super(token, {polling: true});
         this.addListener("left_chat_member", this.handleMemberLeftChat);
+        this.addListener("new_chat_members", this.handleNewChatMember);
         this.updateBotCommandsHelp().catch((error: Error) => {
             console.error("Failed to update bot commands: ", error);
         });
@@ -112,7 +115,30 @@ export default class Bot extends TelegramBot {
     protected async handleMemberLeftChat(message: TelegramBot.Message) {
         if (message.left_chat_member?.id) {
             const telegramId: number = message.left_chat_member.id;
-            await Collaborator.delete({telegramId});
+            const me: User = await this.getMe();
+            if (telegramId == me.id) {
+                await Chat.delete({chatId: message.chat.id});
+            } else {
+                await Collaborator.delete({telegramId});
+            }
+        }
+    }
+
+    /**
+     * handleMemberLeftChat - handler for new chat member.
+     * @method
+     * @param message - Message object.
+     * @author Danil Andreev
+     */
+    protected async handleNewChatMember(message: TelegramBot.Message) {
+        for (const newChatMember of message.new_chat_members || []) {
+            const telegramId: number = newChatMember.id;
+            const me: User = await this.getMe();
+            if (telegramId == me.id) {
+                const chat: Chat = new Chat();
+                chat.chatId = message.chat.id;
+                await chat.save();
+            }
         }
     }
 

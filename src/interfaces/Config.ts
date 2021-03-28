@@ -24,24 +24,33 @@
  * SOFTWARE.
  */
 
-import WebHookEvent from "../core/WebHookEvent";
-import {PullRequest} from "github-webhook-event-types";
+import BotCommand from "../core/BotCommand";
+import AmqpHandler from "../core/AmqpHandler";
+import {ConnectionOptions} from "typeorm";
 import * as Amqp from "amqplib";
-import {RabbitMQ} from "../main";
-import {AMQP_PULL_REQUESTS_QUEUE} from "../globals";
 
-
-@WebHookEvent.Target("pull_request")
-/**
- * PullRequestEvent - class for handling WebHook pull request events.
- * @class
- * @author Danil Andreev
- */
-export default class PullRequestEvent extends WebHookEvent {
-    public async handle(event: WebHookEvent.WebHookPayload<PullRequest>): Promise<void> {
-        const {payload, ctx} = event;
-        const channel: Amqp.Channel = await RabbitMQ.createChannel();
-        await channel.assertQueue(AMQP_PULL_REQUESTS_QUEUE);
-        channel.sendToQueue(AMQP_PULL_REQUESTS_QUEUE, new Buffer(JSON.stringify({payload, ctx})));
+namespace Config {
+    export interface Bot {
+        token: string;
+        commands: typeof BotCommand[]
     }
+
+    export interface Server {
+        port: number;
+    }
+
+    export interface Amqp {
+        connect: string | Amqp.Options.Connect,
+        handlers: typeof AmqpHandler[]
+    }
+
 }
+
+interface Config {
+    bot: Config.Bot;
+    db: ConnectionOptions;
+    server: Config.Server;
+    amqp: Config.Amqp,
+}
+
+export default Config;

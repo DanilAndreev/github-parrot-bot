@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,16 +24,15 @@
  * SOFTWARE.
  */
 
-import Bot from "./Bot";
-import {ChatMember} from "node-telegram-bot-api";
+import AmqpHandler from "./AmqpHandler";
+import * as Crypto from "crypto";
 
-export default async function checkAdmin(username: string, message): Promise<boolean> {
-    try {
-        const admins: ChatMember[] = await Bot.getCurrent().getChatAdministrators(message.chat.id);
-        if (admins.find((member) => member.user.username === username))
-            return true;
-    } catch (error) {
-        if (message.chat.username === username) return true;
+
+export default class WebHookAmqpHandler extends AmqpHandler {
+    static checkSignature(incomingSignature: string, payload: any, key: string): boolean {
+        const expectedSignature = "sha1=" + Crypto.createHmac("sha1", key)
+            .update(JSON.stringify(payload))
+            .digest("hex");
+        return expectedSignature === incomingSignature;
     }
-    return false;
 }

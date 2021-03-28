@@ -29,6 +29,7 @@ import {Message} from "node-telegram-bot-api";
 import CommandError from "../errors/CommandError";
 import Collaborator from "../entities/Collaborator";
 import JSONObject from "../interfaces/JSONObject";
+import Chat from "../entities/Chat";
 
 
 @BotCommand.Command("connect", "<github_username>")
@@ -40,7 +41,7 @@ export default class ConnectCommand extends BotCommand {
 
         const chatId: number = message.chat.id;
         const [ghName] = args;
-        const telegramName: string = message.from?.username || "";
+        const telegramName: string = message.from?.username || message.from?.first_name || "";
         if (!message.from?.id)
             throw new CommandError("Unable to get telegram user id.");
         const telegramId: number = message.from.id;
@@ -53,7 +54,11 @@ export default class ConnectCommand extends BotCommand {
         //         return `User ${telegramName} is not belong to this chat.`;
         // }
 
-        const storedCollaborator = await Collaborator.findOne({where: {chatId, gitHubName: ghName}});
+        const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
+        if (!chat)
+            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+
+        const storedCollaborator = await Collaborator.findOne({where: {chat, gitHubName: ghName}});
         if (storedCollaborator)
             throw new CommandError(
                 `User [@${telegramName}] is already connected to GitHub account [${storedCollaborator.gitHubName}]`
@@ -62,7 +67,8 @@ export default class ConnectCommand extends BotCommand {
         const collaborator = new Collaborator();
         collaborator.gitHubName = ghName;
         collaborator.telegramId = telegramId;
-        collaborator.chatId = chatId;
+        collaborator.telegramUsername = telegramName;
+        collaborator.chat = chat;
         const result: Collaborator = await collaborator.save();
 
         return [

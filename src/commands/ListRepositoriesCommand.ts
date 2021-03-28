@@ -28,6 +28,8 @@ import BotCommand from "../core/BotCommand";
 import {Message} from "node-telegram-bot-api";
 import WebHook from "../entities/WebHook";
 import JSONObject from "../interfaces/JSONObject";
+import Chat from "../entities/Chat";
+import CommandError from "../errors/CommandError";
 
 
 @BotCommand.Command("list")
@@ -36,7 +38,11 @@ export default class ListRepositoriesCommand extends BotCommand {
     protected async handler(message: Message, args: string[], opts: JSONObject<string>): Promise<string | string[]> {
         const chatId: number = message.chat.id;
 
-        const result: WebHook[] = await WebHook.find({where: {chatId: chatId}});
+        const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
+        if (!chat)
+            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+
+        const result: WebHook[] = await WebHook.find({where: {chat: chat}});
 
         if (!result.length)
             return `You have no repositories added.`;
