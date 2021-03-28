@@ -12,11 +12,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[PullRequestHandler] Renamed template and added dividers to checksuits.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/CheckRunHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/CheckRunHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/CheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/CheckSuiteHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/IssuesHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/IssuesHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/PullRequestsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/PullRequestsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/check_suite_new.hbs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -524,19 +523,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/handlers/CheckSuiteHandler.ts</url>
-          <line>127</line>
+          <line>74</line>
           <option name="timeStamp" value="64" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/handlers/CheckRunHandler.ts</url>
-          <line>165</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/handlers/IssuesHandler.ts</url>
           <line>69</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="78" />
         </line-breakpoint>
       </breakpoints>

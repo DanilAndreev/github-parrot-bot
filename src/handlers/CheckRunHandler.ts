@@ -55,49 +55,6 @@ export default class CheckRunHandler extends WebHookAmqpHandler {
                 continue;
             }
 
-            // const template = await loadTemplate("check_suite_new");
-            //
-            // // const message: string = template({
-            // //     repository: repository.full_name,
-            // //     name: check_run.name,
-            // //     status: check_run.status,
-            // //     startedAt: moment(check_run.started_at).format("ll")
-            // // }).replace(/  +/g, " ").replace(/\n +/g, "\n");
-            //
-            // let suite: CheckSuite | null = await CheckRunHandler.useCheckSuite(check_run.check_suite.id, webHook.chat.chatId);
-            //
-            // if (suite) {
-            //     const message: string = template(suite)
-            //         .replace(/  +/g, " ")
-            //         .replace(/\n +/g, "\n");
-            //
-            //     suite.status = check_run.check_suite.status;
-            //     suite.conclusion = check_run.check_suite.conclusion;
-            // } else {
-            //     suite = new CheckSuite();
-            //
-            //     const message: string = template(suite)
-            //         .replace(/  +/g, " ")
-            //         .replace(/\n +/g, "\n");
-            //
-            //
-            //     const newMessage: Message = await Bot.getCurrent().sendMessage(webHook.chat.chatId, message, {
-            //         parse_mode: "HTML",
-            //     });
-            //
-            // }
-            // if (suite.status !== "completed") {
-            //     await suite?.save();
-            //     const run: CheckRun = new CheckRun();
-            //     run.status = check_run.status;
-            //     run.name = check_run.name;
-            //     run.suite = suite;
-            //     await run.save();
-            // } else {
-            //     await suite.remove();
-            // }
-
-
             let suite: CheckSuite | undefined = await CheckSuite.findOne({
                 where: {suiteId: check_run.check_suite.id, chat: webHook.chat},
                 relations: ["pullRequest", "chat", "runs"]

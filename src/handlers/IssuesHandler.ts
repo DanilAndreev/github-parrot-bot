@@ -118,9 +118,7 @@ export default class IssuesHandler extends WebHookAmqpHandler {
             if (result?.updatedAt && new Date().getTime() - new Date(result.updatedAt).getTime()  > 1000*60*60) {
                 await result.remove();
                 throw new Error("Outdated message id.");
-                // return 0;
             }
-            // await result.save();
             return result.messageId;
         }
         throw new Error("Issue not found.");
