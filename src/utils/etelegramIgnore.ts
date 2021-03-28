@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,28 +24,12 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, Entity, Index, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
-import Chat from "./Chat";
-import WebHook from "./WebHook";
-
-@Entity()
-@Index(["webhook", "issueId"], {unique: true})
-export default class Issue extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @ManyToOne(type => Chat, chat => chat.issues, {onDelete: "CASCADE"})
-    chat: Chat;
-
-    @ManyToOne(type => WebHook, webhook => webhook.issues, {onDelete: "CASCADE"})
-    webhook: WebHook;
-
-    @Column({type: "bigint"})
-    issueId: number;
-
-    @Column({type: "bigint", nullable: true})
-    messageId: number;
-
-    @UpdateDateColumn()
-    updatedAt: Date;
+export default function etelegramIgnore(error: any): boolean {
+    if (error.code == "ETELEGRAM") {
+        if (error.message.includes("message is not modified"))
+            return true;
+        if (error.message.includes("429 Too Many Requests"))
+            return true;
+    }
+    return false;
 }

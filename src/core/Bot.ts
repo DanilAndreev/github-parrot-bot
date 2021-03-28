@@ -60,7 +60,7 @@ export default class Bot extends TelegramBot {
         if (!token)
             throw new Error(`FatalError: you must specify token to run this app! "token" = "${token}".`);
         console.log("Creating telegram bot.");
-        super(token, {polling: true});
+        super(token, {polling: false});
         this.addListener("left_chat_member", this.handleMemberLeftChat);
         this.addListener("new_chat_members", this.handleNewChatMember);
         this.updateBotCommandsHelp().catch((error: Error) => {

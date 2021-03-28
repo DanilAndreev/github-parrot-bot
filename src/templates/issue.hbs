@@ -12,8 +12,8 @@
         <code>{{name}}</code>
     {{/each}}
 {{/if}}
+{{#if opened_by}}<b>Opened by:</b> {{opened_by}}{{/if}}
 {{#if assignees}}
-    {{#if opened_by}}<b>Opened by:</b> {{opened_by}}{{/if}}
     <b>Assignees:</b> {{#each assignees}}{{login}} {{/each}}
 {{/if}}
 {{#if milestone}}

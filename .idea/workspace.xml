@@ -10,12 +10,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[PullRequestHandler] Renamed template and added dividers to checksuits.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Handlers] Removed extra comments.">
+      <change afterPath="$PROJECT_DIR$/src/utils/etelegramIgnore.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/CheckRunHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/CheckRunHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/CheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/CheckSuiteHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Issue.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Issue.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/IssuesHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/IssuesHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/check_suite_new.hbs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/issue.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/issue.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,13 +124,6 @@
       <workItem from="1616686027538" duration="122000" />
       <workItem from="1616748336279" duration="430000" />
       <workItem from="1616897725933" duration="9436000" />
-    </task>
-    <task id="LOCAL-00010" summary="[typescript] Added config.">
-      <created>1603111329864</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1603111329864</updated>
     </task>
     <task id="LOCAL-00011" summary="[deploy] Changed package scripts for heroku deployment.">
       <created>1603111766522</created>
@@ -467,7 +461,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616900260241</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="[Handlers] Removed extra comments.">
+      <created>1616922965734</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1616922965734</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -486,7 +487,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[addRepository] Removed argon2 secret hashing." />
     <MESSAGE value="[issueEvent] Added debuggers." />
     <MESSAGE value="[issueEvent] Design changes." />
     <MESSAGE value="[pullRequestEvent] Created." />
@@ -511,7 +511,8 @@
     <MESSAGE value="[CheckSuite] Added new mechanism." />
     <MESSAGE value="[CheckSuiteHandler] Added mechanism for check suits." />
     <MESSAGE value="[PullRequestHandler] Renamed template and added dividers to checksuits." />
-    <option name="LAST_COMMIT_MESSAGE" value="[PullRequestHandler] Renamed template and added dividers to checksuits." />
+    <MESSAGE value="[Handlers] Removed extra comments." />
+    <option name="LAST_COMMIT_MESSAGE" value="[Handlers] Removed extra comments." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -528,8 +529,14 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/handlers/IssuesHandler.ts</url>
-          <line>69</line>
+          <line>70</line>
           <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/IssuesHandler.ts</url>
+          <line>113</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="80" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
