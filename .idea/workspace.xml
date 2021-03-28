@@ -10,11 +10,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[IssuesHandler] Added synchronization.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[PullRequest] Added unique constraint.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/Chat.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Chat.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/PullRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/PullRequest.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/WebHook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/WebHook.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/AmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/AmqpHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/IssuesHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/IssuesHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,13 +121,6 @@
       <workItem from="1616686027538" duration="122000" />
       <workItem from="1616748336279" duration="430000" />
       <workItem from="1616897725933" duration="9436000" />
-    </task>
-    <task id="LOCAL-00012" summary="[koa] Initialized server.">
-      <created>1603113909784</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1603113909784</updated>
     </task>
     <task id="LOCAL-00013" summary="[Server] Added request echo.">
       <created>1603114306421</created>
@@ -466,7 +458,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616961374424</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="[PullRequest] Added unique constraint.">
+      <created>1616961642944</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1616961642944</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -485,7 +484,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[issueEvent] Design changes." />
     <MESSAGE value="[pullRequestEvent] Created." />
     <MESSAGE value="[AMQP] Setted up." />
     <MESSAGE value="[AMQP] Fixed incorrect queues asserting." />
@@ -510,7 +508,8 @@
     <MESSAGE value="[PullRequestHandler] Renamed template and added dividers to checksuits." />
     <MESSAGE value="[Handlers] Removed extra comments." />
     <MESSAGE value="[IssuesHandler] Added synchronization." />
-    <option name="LAST_COMMIT_MESSAGE" value="[IssuesHandler] Added synchronization." />
+    <MESSAGE value="[PullRequest] Added unique constraint." />
+    <option name="LAST_COMMIT_MESSAGE" value="[PullRequest] Added unique constraint." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -524,17 +523,6 @@
           <url>file://$PROJECT_DIR$/src/handlers/CheckSuiteHandler.ts</url>
           <line>74</line>
           <option name="timeStamp" value="64" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/handlers/IssuesHandler.ts</url>
-          <line>70</line>
-          <option name="timeStamp" value="78" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/handlers/IssuesHandler.ts</url>
-          <line>113</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="80" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

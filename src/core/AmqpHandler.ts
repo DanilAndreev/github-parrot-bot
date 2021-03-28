@@ -29,15 +29,19 @@ import {Context} from "koa";
 
 
 class AmqpHandler {
-    protected handle(payload: any, ctx: Context): void | Promise<void> {
+    protected handle(payload: any, ctx: Context): void | Promise<void | boolean> {
         throw new ReferenceError(`Abstract method call. Inherit this class and override this method.`);
     }
 
     public async execute(message: Amqp.Message, channel: Amqp.Channel) {
         try {
             const {payload, ctx} = JSON.parse(message.content.toString());
-            await this.handle(payload, ctx);
-            channel.ack(message);
+            const result: boolean | void = await this.handle(payload, ctx);
+            if (result === false) {
+                channel.nack(message);
+            } else {
+                channel.ack(message);
+            }
         } catch (error) {
             channel.nack(message);
             console.error(error);
