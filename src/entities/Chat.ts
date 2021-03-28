@@ -24,7 +24,7 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, CreateDateColumn, Entity, OneToMany, PrimaryColumn} from "typeorm";
 import WebHook from "./WebHook";
 import Collaborator from "./Collaborator";
 import Issue from "./Issue";

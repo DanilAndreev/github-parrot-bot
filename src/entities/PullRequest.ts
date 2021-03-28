@@ -37,10 +37,10 @@ import {
 import Chat from "./Chat";
 import WebHook from "./WebHook";
 import CheckSuite from "./CheckSuite";
-import {Moment} from "moment";
 
 
 @Entity()
+@Index(["pullRequestId", "webhook"], {unique: true})
 class PullRequest extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;

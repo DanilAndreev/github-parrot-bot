@@ -41,6 +41,7 @@ import CheckSuite from "./CheckSuite";
 
 
 @Entity()
+@Index(["chat", "repository"], {unique: true})
 export default class WebHook extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
