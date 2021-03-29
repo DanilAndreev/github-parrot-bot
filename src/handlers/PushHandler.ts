@@ -34,38 +34,28 @@ import WebHookAmqpHandler from "../core/WebHookAmqpHandler";
 
 @WebHookAmqpHandler.Handler("push", 10)
 export default class PushHandler extends  WebHookAmqpHandler {
-    protected async handle(payload: Push, ctx: Context): Promise<void> {
+    protected async handleHook(webHook: WebHook, payload: Push): Promise<boolean | void> {
         const {pusher, head_commit, repository, ref} = payload;
 
-        const webHooks: WebHook[] = await WebHook.find({
-            where: {repository: repository.full_name},
-            relations: ["chat"],
+        const split = ref.split("/");
+        const branch: string = split[split.length - 1];
+
+        const template = await loadTemplate("push");
+        const message: string = template({
+            repository: repository.full_name,
+            message: head_commit.message,
+            pusher: pusher.name,
+            ref: branch
+        }).replace(/  +/g, " ").replace(/\n +/g, "\n");
+
+        await Bot.getCurrent().sendMessage(webHook.chat.chatId, message, {
+            parse_mode: "HTML",
+            reply_markup: {
+                inline_keyboard: [
+                    [{text: "View on GitHub", url: head_commit.url}],
+                ]
+            }
         });
 
-        for (const webHook of webHooks) {
-            if (!PushHandler.checkSignature(ctx.request.header["x-hub-signature"], payload, webHook.secret)) {
-                continue;
-            }
-
-            const split = ref.split("/");
-            const branch: string = split[split.length - 1];
-
-            const template = await loadTemplate("push");
-            const message: string = template({
-                repository: repository.full_name,
-                message: head_commit.message,
-                pusher: pusher.name,
-                ref: branch
-            }).replace(/  +/g, " ").replace(/\n +/g, "\n");
-
-            await Bot.getCurrent().sendMessage(webHook.chat.chatId, message, {
-                parse_mode: "HTML",
-                reply_markup: {
-                    inline_keyboard: [
-                        [{text: "View on GitHub", url: head_commit.url}],
-                    ]
-                }
-            });
-        }
     }
 }

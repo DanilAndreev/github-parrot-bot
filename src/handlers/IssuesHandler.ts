@@ -39,44 +39,52 @@ import etelegramIgnore from "../utils/etelegramIgnore";
 
 @WebHookAmqpHandler.Handler("issues", 10)
 export default class IssuesHandler extends WebHookAmqpHandler {
-    protected async handle(payload: Issues, ctx: Context): Promise<void | boolean> {
+    protected async handleHook(webHook: WebHook, payload: Issues): Promise<boolean | void> {
         const {action, issue, repository} = payload;
+        const template = await loadTemplate("issue");
+        const message: string = template({
+            repository: repository.full_name,
+            tag: issue.number,
+            state: issue.state,
+            title: issue.title.trim(),
+            body: issue.body.trim(),
+            opened_by: issue.user.login,
+            assignees: issue.assignees.map(item => ({login: item.login})),
+            labels: issue.labels,
+            milestone: issue.milestone ? {
+                ...issue.milestone,
+                due_on: moment(issue.milestone.due_on).format("ll")
+            } : undefined,
+        }).replace(/  +/g, " ").replace(/\n +/g, "\n");
 
-        const webHooks: WebHook[] = await WebHook.find({
-            where: {repository: repository.full_name},
-            relations: ["chat"]
-        });
+        try {
+            let entity: Issue = new Issue();
+            entity.chat = webHook.chat;
+            entity.issueId = issue.id;
+            entity.webhook = webHook;
 
-        for (const webHook of webHooks) {
-            if (!IssuesHandler.checkSignature(ctx.request.header["x-hub-signature"], payload, webHook.secret)) {
-                continue;
-            }
-
-            const template = await loadTemplate("issue");
-            const message: string = template({
-                repository: repository.full_name,
-                tag: issue.number,
-                state: issue.state,
-                title: issue.title.trim(),
-                body: issue.body.trim(),
-                opened_by: issue.user.login,
-                assignees: issue.assignees.map(item => ({login: item.login})),
-                labels: issue.labels,
-                milestone: issue.milestone ? {
-                    ...issue.milestone,
-                    due_on: moment(issue.milestone.due_on).format("ll")
-                } : undefined,
-            }).replace(/  +/g, " ").replace(/\n +/g, "\n");
-
-            try {
-                let entity: Issue = new Issue();
-                entity.chat = webHook.chat;
-                entity.issueId = issue.id;
-                entity.webhook = webHook;
-
-                await getConnection().transaction(async transaction => {
-                    entity = await transaction.save(entity);
-                    const result = await Bot.getCurrent().sendMessage(webHook.chat.chatId, message, {
+            await getConnection().transaction(async transaction => {
+                entity = await transaction.save(entity);
+                const result = await Bot.getCurrent().sendMessage(webHook.chat.chatId, message, {
+                    parse_mode: "HTML",
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{text: "View on GitHub", url: issue.html_url}],
+                        ]
+                    }
+                });
+                entity.messageId = result.message_id;
+                entity = await transaction.save(entity);
+            });
+        } catch (error) {
+            const entity: Issue | undefined = await Issue.findOne({
+                where: {chat: webHook.chat, issueId: issue.id}
+            });
+            if (entity) {
+                try {
+                    await Bot.getCurrent().editMessageText(message, {
+                        chat_id: webHook.chat.chatId,
+                        message_id: entity.messageId,
                         parse_mode: "HTML",
                         reply_markup: {
                             inline_keyboard: [
@@ -84,30 +92,10 @@ export default class IssuesHandler extends WebHookAmqpHandler {
                             ]
                         }
                     });
-                    entity.messageId = result.message_id;
-                    entity = await transaction.save(entity);
-                });
-            } catch (error) {
-                const entity: Issue | undefined = await Issue.findOne({
-                    where: {chat: webHook.chat, issueId: issue.id}
-                });
-                if (entity) {
-                    try {
-                        await Bot.getCurrent().editMessageText(message, {
-                            chat_id: webHook.chat.chatId,
-                            message_id: entity.messageId,
-                            parse_mode: "HTML",
-                            reply_markup: {
-                                inline_keyboard: [
-                                    [{text: "View on GitHub", url: issue.html_url}],
-                                ]
-                            }
-                        });
-                    } catch (err) {
-                        if (!etelegramIgnore(err)) {
-                            await entity.remove();
-                            return false;
-                        }
+                } catch (err) {
+                    if (!etelegramIgnore(err)) {
+                        await entity.remove();
+                        return false;
                     }
                 }
             }

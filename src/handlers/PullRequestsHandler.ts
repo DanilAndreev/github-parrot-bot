@@ -37,67 +37,56 @@ import CheckSuite from "../entities/CheckSuite";
 
 @WebHookAmqpHandler.Handler("pull_request", 10)
 export default class PullRequestsHandler extends WebHookAmqpHandler {
-    protected async handle(payload: PullRequestType, ctx: Context): Promise<void> {
+    protected async handleHook(webHook: WebHook, payload: PullRequestType): Promise<boolean | void> {
         const {action, pull_request: pullRequest, repository} = payload;
-
-        const webHooks: WebHook[] = await WebHook.find({
-            where: {repository: repository.full_name},
-            relations: ["chat"]
+        let entity: PullRequest | undefined = await PullRequest.findOne({
+            where: {chat: webHook.chat, pullRequestId: pullRequest.id},
+            relations: ["chat", "webhook", "checksuits", "checksuits.runs"],
         });
 
-        for (const webHook of webHooks) {
-            if (!PullRequestsHandler.checkSignature(ctx.request.header["x-hub-signature"], payload, webHook.secret)) {
-                continue;
-            }
-
-            let entity: PullRequest | undefined = await PullRequest.findOne({
-                where: {chat: webHook.chat, pullRequestId: pullRequest.id},
-                relations: ["chat", "webhook", "checksuits", "checksuits.runs"],
-            });
-
-            if (!entity) {
-                entity = new PullRequest();
-                entity.chat = webHook.chat;
-                entity.webhook = webHook;
-            }
-
-            entity.pullRequestId = pullRequest.id;
-            entity.info = {
-                assignees: pullRequest.assignees.map(item => ({login: item.login})),
-                body: pullRequest.body,
-                html_url: pullRequest.html_url,
-                labels: pullRequest.labels.map(item => ({name: item.name})),
-                milestone: pullRequest.milestone && {
-                    title: pullRequest.milestone.title,
-                    due_on: pullRequest.milestone.due_on
-                },
-                opened_by: pullRequest.user.login,
-                requested_reviewers: pullRequest.requested_reviewers.map(item => ({login: item.login})),
-                state: pullRequest.state,
-                tag: pullRequest.number,
-                title: pullRequest.title,
-            };
-
-            await CheckSuite
-                .createQueryBuilder()
-                .delete()
-                .where(
-                    "pullRequest = :pullRequest and headSha != :head_sha",
-                    {
-                        head_sha: pullRequest.head.sha,
-                        pullRequest: entity.id,
-                    }
-                )
-                .execute();
-
-            entity.checksuits = entity.checksuits.filter(suite => suite.headSha == pullRequest.head.sha);
-
-            try {
-                entity = await PullRequestsHandler.showPullRequest(entity);
-                await entity.save();
-            } catch (error) {
-            }
+        if (!entity) {
+            entity = new PullRequest();
+            entity.chat = webHook.chat;
+            entity.webhook = webHook;
         }
+
+        entity.pullRequestId = pullRequest.id;
+        entity.info = {
+            assignees: pullRequest.assignees.map(item => ({login: item.login})),
+            body: pullRequest.body,
+            html_url: pullRequest.html_url,
+            labels: pullRequest.labels.map(item => ({name: item.name})),
+            milestone: pullRequest.milestone && {
+                title: pullRequest.milestone.title,
+                due_on: pullRequest.milestone.due_on
+            },
+            opened_by: pullRequest.user.login,
+            requested_reviewers: pullRequest.requested_reviewers.map(item => ({login: item.login})),
+            state: pullRequest.state,
+            tag: pullRequest.number,
+            title: pullRequest.title,
+        };
+
+        await CheckSuite
+            .createQueryBuilder()
+            .delete()
+            .where(
+                "pullRequest = :pullRequest and headSha != :head_sha",
+                {
+                    head_sha: pullRequest.head.sha,
+                    pullRequest: entity.id,
+                }
+            )
+            .execute();
+
+        entity.checksuits = entity.checksuits.filter(suite => suite.headSha == pullRequest.head.sha);
+
+        try {
+            entity = await PullRequestsHandler.showPullRequest(entity);
+            await entity.save();
+        } catch (error) {
+        }
+
     }
 
     public static async showPullRequest(entity_data: PullRequest | number): Promise<PullRequest> {
