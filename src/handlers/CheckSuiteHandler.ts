@@ -39,76 +39,66 @@ import {getConnection} from "typeorm";
 
 @WebHookAmqpHandler.Handler("check_suite", 10)
 export default class CheckSuiteHandler extends WebHookAmqpHandler {
-    protected async handle(payload: CheckSuiteType, ctx: Context): Promise<void> {
+    protected async handleHook(webHook: WebHook, payload: CheckSuiteType): Promise<boolean | void> {
         const {action, check_suite, repository, sender} = payload;
 
-        const webHooks: WebHook[] = await WebHook.find({
-            where: {repository: repository.full_name},
-            relations: ["chat"],
+        let entity: CheckSuite | undefined = await CheckSuite.findOne({
+            where: {suiteId: check_suite.id, chat: webHook.chat},
+            relations: ["pullRequest", "chat", "runs"]
         });
 
-        for (const webHook of webHooks) {
-            if (!CheckSuiteHandler.checkSignature(ctx.request.header["x-hub-signature"], payload, webHook.secret)) {
-                continue;
-            }
-
-            let entity: CheckSuite | undefined = await CheckSuite.findOne({
-                where: {suiteId: check_suite.id, chat: webHook.chat},
-                relations: ["pullRequest", "chat", "runs"]
+        let pullRequest: PullRequest | undefined = undefined;
+        if (check_suite.pull_requests.length) {
+            pullRequest = await PullRequest.findOne({
+                where: {pullRequestId: check_suite.pull_requests[0].id, chat: webHook.chat}
             });
+        }
 
-            let pullRequest: PullRequest | undefined = undefined;
-            if (check_suite.pull_requests.length) {
-                pullRequest = await PullRequest.findOne({
-                    where: {pullRequestId: check_suite.pull_requests[0].id, chat: webHook.chat}
-                });
+        if (!entity) {
+            entity = new CheckSuite();
+            entity.chat = webHook.chat;
+            entity.branch = check_suite.head_branch;
+            entity.suiteId = check_suite.id;
+            entity.webhook = webHook;
+            if (pullRequest) entity.pullRequest = pullRequest;
+        }
+        entity.status = check_suite.status;
+        entity.conclusion = check_suite.conclusion;
+        entity.headSha = check_suite.head_sha;
+        try {
+            if (pullRequest) {
+                await entity.save();
+                await PullRequestsHandler.showPullRequest(pullRequest.id);
+            } else {
+                entity = await entity.save();
+                entity.messageId = await CheckSuiteHandler.showCheckSuite(entity, webHook.chat.chatId, entity.messageId);
+                entity.messageIdUpdatedAt = new Date().getTime();
+
+                await getConnection().transaction(async transaction => {
+                    await transaction.save(entity);
+                    if (pullRequest) {
+                        await transaction
+                            .getRepository(CheckSuite)
+                            .createQueryBuilder()
+                            .delete()
+                            .where(
+                                "pullRequest = :pullRequest and headSha != :head_sha",
+                                {
+                                    head_sha: check_suite.head_sha,
+                                    pullRequest: pullRequest.id,
+                                }
+                            )
+                            .execute();
+                    }
+                })
             }
-
-            if (!entity) {
-                entity = new CheckSuite();
-                entity.chat = webHook.chat;
-                entity.branch = check_suite.head_branch;
-                entity.suiteId = check_suite.id;
-                entity.webhook = webHook;
-                if (pullRequest) entity.pullRequest = pullRequest;
-            }
-            entity.status = check_suite.status;
-            entity.conclusion = check_suite.conclusion;
-            entity.headSha = check_suite.head_sha;
-            try {
-                if (pullRequest) {
-                    await entity.save();
-                    await PullRequestsHandler.showPullRequest(pullRequest.id);
-                } else {
-                    entity = await entity.save();
-                    entity.messageId = await CheckSuiteHandler.showCheckSuite(entity, webHook.chat.chatId, entity.messageId);
-                    entity.messageIdUpdatedAt = new Date().getTime();
-
-                    await getConnection().transaction(async transaction => {
-                        await transaction.save(entity);
-                        if (pullRequest) {
-                            await transaction
-                                .getRepository(CheckSuite)
-                                .createQueryBuilder()
-                                .delete()
-                                .where(
-                                    "pullRequest = :pullRequest and headSha != :head_sha",
-                                    {
-                                        head_sha: check_suite.head_sha,
-                                        pullRequest: pullRequest.id,
-                                    }
-                                )
-                                .execute();
-                        }
-                    })
-                }
-            } catch (error) {
-                // TODO: Ask node-telegram-bot-api developer about better statuses for errors.
-                if (error.code !== "ETELEGRAM" || !error.message.includes("message is not modified")) {
-                    throw error;
-                }
+        } catch (error) {
+            // TODO: Ask node-telegram-bot-api developer about better statuses for errors.
+            if (error.code !== "ETELEGRAM" || !error.message.includes("message is not modified")) {
+                throw error;
             }
         }
+
     }
 
     public static async showCheckSuite(entity: CheckSuite, chatId: number, messageId?: number): Promise<number> {

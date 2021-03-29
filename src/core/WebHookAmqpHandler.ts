@@ -26,6 +26,8 @@
 
 import AmqpHandler from "./AmqpHandler";
 import * as Crypto from "crypto";
+import {Context} from "koa";
+import WebHook from "../entities/WebHook";
 
 
 export default class WebHookAmqpHandler extends AmqpHandler {
@@ -34,5 +36,29 @@ export default class WebHookAmqpHandler extends AmqpHandler {
             .update(JSON.stringify(payload))
             .digest("hex");
         return expectedSignature === incomingSignature;
+    }
+
+    protected async handle(payload: any, ctx: Context): Promise<void | boolean> {
+        const {repository} = payload;
+
+        const webHooks: WebHook[] = await WebHook.find({
+            where: {repository: repository.full_name},
+            relations: ["chat"],
+        });
+
+        const promises: Promise<boolean | void>[] = [];
+
+        for (const webHook of webHooks) {
+            if (!WebHookAmqpHandler.checkSignature(ctx.request.header["x-hub-signature"], payload, webHook.secret)) {
+                continue;
+            }
+            promises.push(this.handleHook(webHook, payload));
+        }
+
+        return !(await Promise.all(promises)).some(item => item == false);
+    }
+
+    protected async handleHook(webHook: WebHook, payload: any): Promise<boolean | void> {
+        throw new ReferenceError(`Abstract method call. Inherit this class and override this method.`);
     }
 }
