@@ -34,12 +34,12 @@ import ConnectCommand from "./commands/ConnectCommand";
 import DisconnectCommand from "./commands/DisconnectCommand";
 import ListRepositoriesCommand from "./commands/ListRepositoriesCommand";
 import RemoveRepositoryCommand from "./commands/RemoveRepositoryCommand";
-import IssuesHandler from "./handlers/IssuesHandler";
-import PullRequestsHandler from "./handlers/PullRequestsHandler";
+import IssuesHandler from "./handlers/webhook/IssuesHandler";
+import PullRequestsHandler from "./handlers/webhook/PullRequestsHandler";
 import Config from "./interfaces/Config";
-import PushHandler from "./handlers/PushHandler";
-import CheckRunHandler from "./handlers/CheckRunHandler";
-import CheckSuiteHandler from "./handlers/CheckSuiteHandler";
+import PushHandler from "./handlers/webhook/PushHandler";
+import CheckRunHandler from "./handlers/webhook/CheckRunHandler";
+import CheckSuiteHandler from "./handlers/webhook/CheckSuiteHandler";
 import Chat from "./entities/Chat";
 import CheckSuite from "./entities/CheckSuite";
 import PullRequest from "./entities/PullRequest";
@@ -69,7 +69,11 @@ const config: Config = {
     },
     amqp: {
         connect: process.env.CLOUDAMQP_URL || "",
-        handlers: [IssuesHandler, PullRequestsHandler, PushHandler, CheckRunHandler, CheckSuiteHandler]
+        handlers: [IssuesHandler, PullRequestsHandler, PushHandler, CheckRunHandler, CheckSuiteHandler],
+        queues: {
+            PULL_REQUEST_SHOW_QUEUE: "pull-request-show-queue",
+            ISSUE_SHOW_QUEUE: "issue-show-queue",
+        }
     },
     server: {
         port: process.env.PORT ? +process.env.PORT : 3030,

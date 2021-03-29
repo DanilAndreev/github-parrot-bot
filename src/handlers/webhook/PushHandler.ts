@@ -24,12 +24,12 @@
  * SOFTWARE.
  */
 
-import WebHook from "../entities/WebHook";
-import Bot from "../core/Bot";
+import WebHook from "../../entities/WebHook";
+import Bot from "../../core/Bot";
 import {Push} from "github-webhook-event-types";
 import {Context} from "koa";
-import loadTemplate from "../utils/loadTemplate";
-import WebHookAmqpHandler from "../core/WebHookAmqpHandler";
+import loadTemplate from "../../utils/loadTemplate";
+import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
 
 
 @WebHookAmqpHandler.Handler("push", 10)

@@ -24,17 +24,17 @@
  * SOFTWARE.
  */
 
-import WebHook from "../entities/WebHook";
-import Bot from "../core/Bot";
+import WebHook from "../../entities/WebHook";
+import Bot from "../../core/Bot";
 import {CheckRun as CheckRunType} from "github-webhook-event-types";
 import {Context} from "koa";
-import loadTemplate from "../utils/loadTemplate";
-import WebHookAmqpHandler from "../core/WebHookAmqpHandler";
+import loadTemplate from "../../utils/loadTemplate";
+import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
 import * as moment from "moment";
-import CheckSuite from "../entities/CheckSuite";
+import CheckSuite from "../../entities/CheckSuite";
 import {Message} from "node-telegram-bot-api";
-import CheckRun from "../entities/CheckRun";
-import PullRequest from "../entities/PullRequest";
+import CheckRun from "../../entities/CheckRun";
+import PullRequest from "../../entities/PullRequest";
 import {getConnection} from "typeorm";
 import PullRequestsHandler from "./PullRequestsHandler";
 import CheckSuiteHandler from "./CheckSuiteHandler";

@@ -11,8 +11,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[IssueHandler] Fixed bug with message deletion.">
+      <change afterPath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/AmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/AmqpHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/CheckRunHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckRunHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/CheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/IssuesHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/IssuesHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/PullRequestsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/PushHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PushHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/Config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,16 +81,16 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Projects\github-tracker-telegram-bot\src\entities" />
-      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers\webhook" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\images" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\errors" />
       <recent name="D:\Projects\github-tracker-telegram-bot\src\core" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src" />
-      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\github-tracker-telegram-bot\src\entities" />
+      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -516,6 +525,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2104" y="86" key="MergeDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617018080552" />
+    <state x="413" y="0" width="1523" height="724" maximized="true" key="dock-window-1" timestamp="1617019349787">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="413" y="0" width="1523" height="724" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617019349787" />
     <state x="2637" y="233" key="git4idea.branch.GitSmartOperationDialog" timestamp="1617018076992">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -530,7 +543,7 @@
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/handlers/IssuesHandler.ts</url>
+          <url>file://$PROJECT_DIR$/src/handlers/webhook/IssuesHandler.ts</url>
           <line>96</line>
           <option name="timeStamp" value="67" />
         </line-breakpoint>

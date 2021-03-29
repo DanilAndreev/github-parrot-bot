@@ -28,6 +28,7 @@ import AmqpHandler from "./AmqpHandler";
 import * as Crypto from "crypto";
 import {Context} from "koa";
 import WebHook from "../entities/WebHook";
+import {Message} from "amqplib";
 
 
 export default class WebHookAmqpHandler extends AmqpHandler {
@@ -38,7 +39,8 @@ export default class WebHookAmqpHandler extends AmqpHandler {
         return expectedSignature === incomingSignature;
     }
 
-    protected async handle(payload: any, ctx: Context): Promise<void | boolean> {
+    protected async handle(content: any, message: Message): Promise<void | boolean> {
+        const {payload, ctx}: { payload: any, ctx: Context } = content;
         const {repository} = payload;
 
         const webHooks: WebHook[] = await WebHook.find({

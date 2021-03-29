@@ -26,13 +26,13 @@
 
 import {Context} from "koa";
 import {PullRequest as PullRequestType} from "github-webhook-event-types";
-import WebHook from "../entities/WebHook";
-import Bot from "../core/Bot";
-import loadTemplate from "../utils/loadTemplate";
-import WebHookAmqpHandler from "../core/WebHookAmqpHandler";
-import PullRequest from "../entities/PullRequest";
-import CommandError from "../errors/CommandError";
-import CheckSuite from "../entities/CheckSuite";
+import WebHook from "../../entities/WebHook";
+import Bot from "../../core/Bot";
+import loadTemplate from "../../utils/loadTemplate";
+import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
+import PullRequest from "../../entities/PullRequest";
+import CommandError from "../../errors/CommandError";
+import CheckSuite from "../../entities/CheckSuite";
 
 
 @WebHookAmqpHandler.Handler("pull_request", 10)

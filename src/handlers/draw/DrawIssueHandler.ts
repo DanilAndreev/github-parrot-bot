@@ -24,36 +24,13 @@
  * SOFTWARE.
  */
 
-import BotCommand from "../core/BotCommand";
-import AmqpHandler from "../core/AmqpHandler";
-import {ConnectionOptions} from "typeorm";
-import * as Amqp from "amqplib";
+import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
+import AmqpHandler from "../../core/AmqpHandler";
+import {Message as AMQPMessage} from "amqplib";
 
-namespace Config {
-    export interface Bot {
-        token: string;
-        commands: typeof BotCommand[];
+@WebHookAmqpHandler.Handler("check_run", 10)
+export default class DrawIssueHandler extends AmqpHandler {
+    protected handle(content: any, message: AMQPMessage): void | Promise<void | boolean> {
+
     }
-
-    export interface Server {
-        port: number;
-    }
-
-    export interface Amqp {
-        connect: string | Amqp.Options.Connect;
-        handlers: typeof AmqpHandler[];
-        queues: {
-            [key: string]: string;
-        }
-    }
-
 }
-
-interface Config {
-    bot: Config.Bot;
-    db: ConnectionOptions;
-    server: Config.Server;
-    amqp: Config.Amqp,
-}
-
-export default Config;

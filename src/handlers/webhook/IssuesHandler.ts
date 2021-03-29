@@ -24,17 +24,17 @@
  * SOFTWARE.
  */
 
-import WebHook from "../entities/WebHook";
+import WebHook from "../../entities/WebHook";
 import * as moment from "moment";
-import Bot from "../core/Bot";
-import Issue from "../entities/Issue";
+import Bot from "../../core/Bot";
+import Issue from "../../entities/Issue";
 import {Issues} from "github-webhook-event-types";
 import {Context} from "koa";
-import loadTemplate from "../utils/loadTemplate";
-import WebHookAmqpHandler from "../core/WebHookAmqpHandler";
-import Chat from "../entities/Chat";
+import loadTemplate from "../../utils/loadTemplate";
+import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
+import Chat from "../../entities/Chat";
 import {getConnection, QueryRunner} from "typeorm";
-import etelegramIgnore from "../utils/etelegramIgnore";
+import etelegramIgnore from "../../utils/etelegramIgnore";
 
 
 @WebHookAmqpHandler.Handler("issues", 10)
