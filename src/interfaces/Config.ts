@@ -42,9 +42,6 @@ namespace Config {
     export interface Amqp {
         connect: string | Amqp.Options.Connect;
         handlers: typeof AmqpHandler[];
-        queues: {
-            [key: string]: string;
-        }
     }
 
 }

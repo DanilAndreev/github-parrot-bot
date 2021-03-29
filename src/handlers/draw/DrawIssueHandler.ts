@@ -31,17 +31,21 @@ import Issue from "../../entities/Issue";
 import Bot from "../../core/Bot";
 import loadTemplate from "../../utils/loadTemplate";
 import etelegramIgnore from "../../utils/etelegramIgnore";
-import config from "../../config";
+import {QUEUES} from "../../globals";
+import {Message} from "node-telegram-bot-api";
+import {getConnection} from "typeorm";
+import IssueMessage from "../../entities/IssueMessage";
+import AmqpDispatcher from "../../core/AmqpDispatcher";
 
 
-@WebHookAmqpHandler.Handler(config.amqp.queues.ISSUE_SHOW_QUEUE, 10)
+@WebHookAmqpHandler.Handler(QUEUES.ISSUE_SHOW_QUEUE, 10)
 export default class DrawIssueHandler extends AmqpHandler {
     protected async handle(content: any, message: AMQPMessage): Promise<void | boolean> {
         const {issue}: { issue: number } = content;
 
-        const entity = await Issue.findOne({
+        let entity: Issue | undefined = await Issue.findOne({
             where: {id: issue},
-            relations: ["webhook", "chat"],
+            relations: ["webhook", "chat", "chatMessage"],
         });
         if (!entity) return;
 
@@ -50,22 +54,30 @@ export default class DrawIssueHandler extends AmqpHandler {
             .replace(/  +/g, " ")
             .replace(/\n +/g, "\n");
 
+
         try {
-            if (!entity.messageId)
-                throw new Error();
-            await Bot.getCurrent().editMessageText(text, {
-                chat_id: entity.chat.chatId,
-                message_id: entity.messageId,
-                parse_mode: "HTML",
-                reply_markup: {
-                    inline_keyboard: [
-                        [{text: "View on GitHub", url: entity.info.html_url}],
-                    ]
+            const issueMessage: IssueMessage = new IssueMessage();
+            issueMessage.issue = entity;
+            await getConnection().transaction(async transaction => {
+                if (entity) {
+                    await transaction.save(issueMessage);
+                    const newMessage: Message = await Bot.getCurrent().sendMessage(entity.chat.chatId, text, {
+                        parse_mode: "HTML",
+                        reply_markup: {
+                            inline_keyboard: [
+                                [{text: "View on GitHub", url: entity.info.html_url}],
+                            ]
+                        }
+                    });
+                    issueMessage.messageId = newMessage.message_id;
+                    await transaction.save(issueMessage);
                 }
             });
         } catch (error) {
-            if (!etelegramIgnore(error)) {
-                await Bot.getCurrent().sendMessage(entity.chat.chatId, text, {
+            try {
+                await Bot.getCurrent().editMessageText(text, {
+                    chat_id: entity.chat.chatId,
+                    message_id: entity.chatMessage.messageId,
                     parse_mode: "HTML",
                     reply_markup: {
                         inline_keyboard: [
@@ -73,6 +85,11 @@ export default class DrawIssueHandler extends AmqpHandler {
                         ]
                     }
                 });
+            } catch (err) {
+                if (!etelegramIgnore(err)) {
+                    await entity.chatMessage.remove();
+                    await AmqpDispatcher.getCurrent().sendToQueue(QUEUES.ISSUE_SHOW_QUEUE, content);
+                }
             }
         }
     }

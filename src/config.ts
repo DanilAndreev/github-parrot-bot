@@ -44,6 +44,8 @@ import Chat from "./entities/Chat";
 import CheckSuite from "./entities/CheckSuite";
 import PullRequest from "./entities/PullRequest";
 import CheckRun from "./entities/CheckRun";
+import DrawIssueHandler from "./handlers/draw/DrawIssueHandler";
+import IssueMessage from "./entities/IssueMessage";
 
 
 const config: Config = {
@@ -62,18 +64,22 @@ const config: Config = {
     db: {
         type: "postgres",
         url: process.env.DATABASE_URL,
-        entities: [WebHook, Collaborator, Issue, Chat, CheckSuite, PullRequest, CheckRun],
+        entities: [WebHook, Collaborator, Issue, IssueMessage, Chat, CheckSuite, PullRequest, CheckRun],
         ssl: {
             rejectUnauthorized: false,
         }
     },
     amqp: {
         connect: process.env.CLOUDAMQP_URL || "",
-        handlers: [IssuesHandler, PullRequestsHandler, PushHandler, CheckRunHandler, CheckSuiteHandler],
-        queues: {
-            PULL_REQUEST_SHOW_QUEUE: "pull-request-show-queue",
-            ISSUE_SHOW_QUEUE: "issue-show-queue",
-        }
+        handlers: [
+            IssuesHandler,
+            PullRequestsHandler,
+            PushHandler,
+            CheckRunHandler,
+            CheckSuiteHandler,
+
+            DrawIssueHandler,
+        ],
     },
     server: {
         port: process.env.PORT ? +process.env.PORT : 3030,

@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,62 +29,27 @@ import {
     Column,
     Entity,
     Index,
-    ManyToOne,
+    JoinColumn,
     OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
-import Chat from "./Chat";
-import WebHook from "./WebHook";
-import IssueMessage from "./IssueMessage";
+import Issue from "./Issue";
 
 
 @Entity()
-@Index(["webhook", "issueId"], {unique: true})
-class Issue extends BaseEntity {
+@Index(["issue", "messageId"], {unique: true})
+export default class IssueMessage extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({type: "jsonb"})
-    info: Issue.Info;
+    @Column({type: "bigint", nullable: true})
+    messageId: number;
 
-    @ManyToOne(type => Chat, chat => chat.issues, {onDelete: "CASCADE"})
-    chat: Chat;
-
-    @ManyToOne(type => WebHook, webhook => webhook.issues, {onDelete: "CASCADE"})
-    webhook: WebHook;
-
-    @Column({type: "bigint"})
-    issueId: number;
-
-    @OneToOne(type => IssueMessage, issueMessage => issueMessage.issue, {nullable: true})
-    chatMessage: IssueMessage;
-
-    // @Column({type: "bigint", nullable: true})
-    // messageId?: number;
-    //
-    // @Column({type: "bigint", nullable: true})
-    // messageIdUpdatedAt: number;
+    @OneToOne(type => Issue, issue => issue.chatMessage)
+    @JoinColumn()
+    issue: Issue;
 
     @UpdateDateColumn()
     updatedAt: Date;
 }
-
-namespace Issue {
-    export interface Info {
-        tag: number;
-        state: string;
-        title: string;
-        body?: string;
-        opened_by: string;
-        assignees: { login: string }[]
-        labels: { name: string }[];
-        milestone?: {
-            title: string;
-            due_on?: string;
-        }
-        html_url: string;
-    }
-}
-
-export default Issue;

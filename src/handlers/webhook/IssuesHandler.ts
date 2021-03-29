@@ -26,17 +26,11 @@
 
 import WebHook from "../../entities/WebHook";
 import * as moment from "moment";
-import Bot from "../../core/Bot";
 import Issue from "../../entities/Issue";
 import {Issues} from "github-webhook-event-types";
-import {Context} from "koa";
-import loadTemplate from "../../utils/loadTemplate";
 import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
-import Chat from "../../entities/Chat";
-import {getConnection, QueryRunner} from "typeorm";
-import etelegramIgnore from "../../utils/etelegramIgnore";
 import AmqpDispatcher from "../../core/AmqpDispatcher";
-import config from "../../config";
+import {QUEUES} from "../../globals";
 
 
 @WebHookAmqpHandler.Handler("issues", 10)
@@ -79,85 +73,10 @@ export default class IssuesHandler extends WebHookAmqpHandler {
             }
         } finally {
             await AmqpDispatcher.getCurrent().sendToQueue(
-                config.amqp.queues.ISSUE_SHOW_QUEUE || "issue-show-queue",
+                QUEUES.ISSUE_SHOW_QUEUE || "issue-show-queue",
                 {issue: entityId},
                 {expiration: 1000 * 60 * 30}
             );
         }
     }
-
-    // protected async handleHook(webHook: WebHook, payload: Issues): Promise<boolean | void> {
-    //     const {action, issue, repository} = payload;
-    //     const template = await loadTemplate("issue");
-    //     const message: string = template({
-    //         repository: repository.full_name,
-    //         tag: issue.number,
-    //         state: issue.state,
-    //         title: issue.title.trim(),
-    //         body: issue.body.trim(),
-    //         opened_by: issue.user.login,
-    //         assignees: issue.assignees.map(item => ({login: item.login})),
-    //         labels: issue.labels,
-    //         milestone: issue.milestone ? {
-    //             ...issue.milestone,
-    //             due_on: moment(issue.milestone.due_on).format("ll")
-    //         } : undefined,
-    //     }).replace(/  +/g, " ").replace(/\n +/g, "\n");
-    //
-    //     try {
-    //         let entity: Issue = new Issue();
-    //         entity.chat = webHook.chat;
-    //         entity.issueId = issue.id;
-    //         entity.webhook = webHook;
-    //
-    //         await getConnection().transaction(async transaction => {
-    //             entity = await transaction.save(entity);
-    //             const result = await Bot.getCurrent().sendMessage(webHook.chat.chatId, message, {
-    //                 parse_mode: "HTML",
-    //                 reply_markup: {
-    //                     inline_keyboard: [
-    //                         [{text: "View on GitHub", url: issue.html_url}],
-    //                     ]
-    //                 }
-    //             });
-    //             entity.messageId = result.message_id;
-    //             entity = await transaction.save(entity);
-    //         });
-    //     } catch (error) {
-    //         const entity: Issue | undefined = await Issue.findOne({
-    //             where: {chat: webHook.chat, issueId: issue.id}
-    //         });
-    //         if (entity) {
-    //             try {
-    //                 await Bot.getCurrent().editMessageText(message, {
-    //                     chat_id: webHook.chat.chatId,
-    //                     message_id: entity.messageId,
-    //                     parse_mode: "HTML",
-    //                     reply_markup: {
-    //                         inline_keyboard: [
-    //                             [{text: "View on GitHub", url: issue.html_url}],
-    //                         ]
-    //                     }
-    //                 });
-    //             } catch (err) {
-    //                 if (!etelegramIgnore(err)) {
-    //                     await entity.remove();
-    //                     return false;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-
-    // public static async useIssue(issueId: number, chat: Chat): Promise<number> {
-    //     const result: Issue | undefined = await Issue.findOne({where: {chat, issueId}});
-    //     if (result) {
-    //         if (result?.updatedAt && new Date().getTime() - new Date(result.updatedAt).getTime() > 1000 * 60 * 60) {
-    //             await result.remove();
-    //             throw new Error("Outdated message id.");
-    //         }
-    //         return result.messageId;
-    //     }
-    //     throw new Error("Issue not found.");
-    // }
 }
