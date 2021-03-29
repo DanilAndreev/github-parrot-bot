@@ -27,10 +27,53 @@
 import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
 import AmqpHandler from "../../core/AmqpHandler";
 import {Message as AMQPMessage} from "amqplib";
+import Issue from "../../entities/Issue";
+import Bot from "../../core/Bot";
+import loadTemplate from "../../utils/loadTemplate";
+import etelegramIgnore from "../../utils/etelegramIgnore";
+import config from "../../config";
 
-@WebHookAmqpHandler.Handler("check_run", 10)
+
+@WebHookAmqpHandler.Handler(config.amqp.queues.ISSUE_SHOW_QUEUE, 10)
 export default class DrawIssueHandler extends AmqpHandler {
-    protected handle(content: any, message: AMQPMessage): void | Promise<void | boolean> {
+    protected async handle(content: any, message: AMQPMessage): Promise<void | boolean> {
+        const {issue}: { issue: number } = content;
 
+        const entity = await Issue.findOne({
+            where: {id: issue},
+            relations: ["webhook", "chat"],
+        });
+        if (!entity) return;
+
+        const template = await loadTemplate("issue");
+        const text: string = template(entity)
+            .replace(/  +/g, " ")
+            .replace(/\n +/g, "\n");
+
+        try {
+            if (!entity.messageId)
+                throw new Error();
+            await Bot.getCurrent().editMessageText(text, {
+                chat_id: entity.chat.chatId,
+                message_id: entity.messageId,
+                parse_mode: "HTML",
+                reply_markup: {
+                    inline_keyboard: [
+                        [{text: "View on GitHub", url: entity.info.html_url}],
+                    ]
+                }
+            });
+        } catch (error) {
+            if (!etelegramIgnore(error)) {
+                await Bot.getCurrent().sendMessage(entity.chat.chatId, text, {
+                    parse_mode: "HTML",
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{text: "View on GitHub", url: entity.info.html_url}],
+                        ]
+                    }
+                });
+            }
+        }
     }
 }

@@ -30,9 +30,12 @@ import WebHook from "./WebHook";
 
 @Entity()
 @Index(["webhook", "issueId"], {unique: true})
-export default class Issue extends BaseEntity {
+class Issue extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
+
+    @Column({type: "jsonb"})
+    info: Issue.Info;
 
     @ManyToOne(type => Chat, chat => chat.issues, {onDelete: "CASCADE"})
     chat: Chat;
@@ -44,8 +47,30 @@ export default class Issue extends BaseEntity {
     issueId: number;
 
     @Column({type: "bigint", nullable: true})
-    messageId: number;
+    messageId?: number;
+
+    @Column()
+    messageIdUpdatedAt: number;
 
     @UpdateDateColumn()
     updatedAt: Date;
 }
+
+namespace Issue {
+    export interface Info {
+        tag: number;
+        state: string;
+        title: string;
+        body?: string;
+        opened_by: string;
+        assignees: { login: string }[]
+        labels: {name: string}[];
+        milestone?: {
+            title: string;
+            due_on?: string;
+        }
+        html_url: string;
+    }
+}
+
+export default Issue;

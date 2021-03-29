@@ -10,18 +10,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[IssueHandler] Fixed bug with message deletion.">
-      <change afterPath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Handlers] Structured to directories.&#10;[WebHookAmqpHandler] Changed input params in handler.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/AmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/AmqpHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/CheckRunHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckRunHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/CheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/IssuesHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/IssuesHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/PullRequestsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/PushHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PushHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/Config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/AmqpDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/AmqpDispatcher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebServer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Issue.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Issue.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/IssuesHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/IssuesHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,13 +125,6 @@
       <workItem from="1616748336279" duration="430000" />
       <workItem from="1616897725933" duration="9436000" />
       <workItem from="1617013491086" duration="1475000" />
-    </task>
-    <task id="LOCAL-00014" summary="[Bot] Added repository add.">
-      <created>1603133434940</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1603133434940</updated>
     </task>
     <task id="LOCAL-00015" summary="[Commands] Added repository management commands.">
       <created>1603149500690</created>
@@ -474,7 +462,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616962489154</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="[Handlers] Structured to directories.&#10;[WebHookAmqpHandler] Changed input params in handler.">
+      <created>1617019397125</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1617019397125</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -493,7 +488,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[AMQP] Setted up." />
     <MESSAGE value="[AMQP] Fixed incorrect queues asserting." />
     <MESSAGE value="[SECURITY] Removed git-crypt and added .env parser." />
     <MESSAGE value="[project] Changed structure a little to load envs from file." />
@@ -518,9 +512,14 @@
     <MESSAGE value="[IssuesHandler] Added synchronization." />
     <MESSAGE value="[PullRequest] Added unique constraint." />
     <MESSAGE value="[IssueHandler] Fixed bug with message deletion." />
-    <option name="LAST_COMMIT_MESSAGE" value="[IssueHandler] Fixed bug with message deletion." />
+    <MESSAGE value="[Handlers] Structured to directories.&#10;[WebHookAmqpHandler] Changed input params in handler." />
+    <option name="LAST_COMMIT_MESSAGE" value="[Handlers] Structured to directories.&#10;[WebHookAmqpHandler] Changed input params in handler." />
   </component>
   <component name="WindowStateProjectService">
+    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1617019997037">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617019997037" />
     <state x="2104" y="86" key="MergeDialog" timestamp="1617018080552">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
