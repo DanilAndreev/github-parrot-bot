@@ -46,16 +46,16 @@ export default class WebHookAmqpHandler extends AmqpHandler {
             relations: ["chat"],
         });
 
-        const flags: (boolean | void)[] = [];
+        const promises: Promise<boolean | void>[] = [];
 
         for (const webHook of webHooks) {
             if (!WebHookAmqpHandler.checkSignature(ctx.request.header["x-hub-signature"], payload, webHook.secret)) {
                 continue;
             }
-            flags.push(await this.handleHook(webHook, payload));
+            promises.push(this.handleHook(webHook, payload));
         }
 
-        return !flags.some(item => item == false);
+        return !(await Promise.all(promises)).some(item => item == false);
     }
 
     protected async handleHook(webHook: WebHook, payload: any): Promise<boolean | void> {
