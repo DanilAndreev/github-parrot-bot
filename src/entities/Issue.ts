@@ -24,16 +24,30 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, Entity, Index, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import {
+    BaseEntity,
+    Column,
+    Entity,
+    Index, JoinColumn,
+    ManyToOne,
+    OneToOne,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn
+} from "typeorm";
 import Chat from "./Chat";
 import WebHook from "./WebHook";
 
+
 @Entity()
 @Index(["webhook", "issueId"], {unique: true})
-export default class Issue extends BaseEntity {
+class Issue extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @Column({type: "jsonb"})
+    info: Issue.Info;
+
+    @Index()
     @ManyToOne(type => Chat, chat => chat.issues, {onDelete: "CASCADE"})
     chat: Chat;
 
@@ -43,9 +57,45 @@ export default class Issue extends BaseEntity {
     @Column({type: "bigint"})
     issueId: number;
 
-    @Column({type: "bigint", nullable: true})
-    messageId: number;
+    @OneToOne(type => Issue.IssueMessage, issueMessage => issueMessage.issue, {nullable: true})
+    chatMessage: Issue.IssueMessage;
 
     @UpdateDateColumn()
     updatedAt: Date;
 }
+
+namespace Issue {
+    export interface Info {
+        tag: number;
+        state: string;
+        title: string;
+        body?: string;
+        opened_by: string;
+        assignees: { login: string }[]
+        labels: { name: string }[];
+        milestone?: {
+            title: string;
+            due_on?: string;
+        }
+        html_url: string;
+    }
+
+    @Entity()
+    @Index(["issue", "messageId"], {unique: true})
+    export class IssueMessage extends BaseEntity {
+        @PrimaryGeneratedColumn()
+        id: number;
+
+        @Column({type: "bigint", nullable: true})
+        messageId: number;
+
+        @OneToOne(type => Issue, issue => issue.chatMessage)
+        @JoinColumn()
+        issue: Issue;
+
+        @UpdateDateColumn()
+        updatedAt: Date;
+    }
+}
+
+export default Issue;

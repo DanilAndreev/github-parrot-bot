@@ -26,3 +26,9 @@
 
 export const AMQP_ISSUES_QUEUE = "issues";
 export const AMQP_PULL_REQUESTS_QUEUE = "pull_requests";
+
+export const QUEUES = {
+    PULL_REQUEST_SHOW_QUEUE: "pull-request-show-queue",
+    ISSUE_SHOW_QUEUE: "issue-show-queue",
+    CHECK_SUITE_SHOW_QUEUE: "check-suite-show-queue",
+}

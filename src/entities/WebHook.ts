@@ -53,7 +53,7 @@ export default class WebHook extends BaseEntity {
     issues: Issue[];
 
     @OneToMany(type => PullRequest, pullRequest => pullRequest.webhook)
-    pullRequests: PullRequest[]
+    pullRequests: PullRequest[];
 
     @OneToMany(type => CheckSuite, checksuite => checksuite.webhook)
     checksuits: CheckSuite[];
@@ -64,7 +64,6 @@ export default class WebHook extends BaseEntity {
     @Column()
     secretPreview: string;
 
-    @Index()
     @Column()
     repository: string;
 

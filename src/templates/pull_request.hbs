@@ -25,12 +25,15 @@
 {{#if checksuits}}
     {{#each checksuits}}
         ───────────
-        <b>Suite:</b> <b><i>{{status}} {{conclusion}}</i></b>
+        <b>Suite:</b> <b><i>{{info/status}} {{info/conclusion}}</i></b>
         {{#if runs}}
             <i>Runs:</i>
             {{#each runs}}
-                <b>{{name}}</b>: <i>{{status}}</i>
+                <b>{{info/name}}</b>: <i>{{info/status}}</i>
             {{/each}}
         {{/if}}
+        {{#unless runs}}
+            <i>Suite has no runs.</i>
+        {{/unless}}
     {{/each}}
 {{/if}}

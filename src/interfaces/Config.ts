@@ -32,7 +32,7 @@ import * as Amqp from "amqplib";
 namespace Config {
     export interface Bot {
         token: string;
-        commands: typeof BotCommand[]
+        commands: typeof BotCommand[];
     }
 
     export interface Server {
@@ -40,8 +40,8 @@ namespace Config {
     }
 
     export interface Amqp {
-        connect: string | Amqp.Options.Connect,
-        handlers: typeof AmqpHandler[]
+        connect: string | Amqp.Options.Connect;
+        handlers: typeof AmqpHandler[];
     }
 
 }

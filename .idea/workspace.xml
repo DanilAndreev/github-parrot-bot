@@ -10,9 +10,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[IssueHandler] Fixed bug with message deletion.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Entities] Packed *Message entities to their parent classes.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/CheckSuite.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/CheckSuite.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,20 +68,20 @@
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="ts.external.directory.path" value="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\Projects\github-tracker-telegram-bot\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Projects\github-tracker-telegram-bot\src\entities" />
-      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers\webhook" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\images" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\errors" />
       <recent name="D:\Projects\github-tracker-telegram-bot\src\core" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src" />
-      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\github-tracker-telegram-bot\src\entities" />
+      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -121,41 +121,8 @@
       <workItem from="1616748336279" duration="430000" />
       <workItem from="1616897725933" duration="9436000" />
       <workItem from="1617013491086" duration="1475000" />
-    </task>
-    <task id="LOCAL-00014" summary="[Bot] Added repository add.">
-      <created>1603133434940</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1603133434940</updated>
-    </task>
-    <task id="LOCAL-00015" summary="[Commands] Added repository management commands.">
-      <created>1603149500690</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1603149500690</updated>
-    </task>
-    <task id="LOCAL-00016" summary="[config] Added env support.">
-      <created>1603191951249</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1603191951250</updated>
-    </task>
-    <task id="LOCAL-00017" summary="[config] Added env support.">
-      <created>1603191972977</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1603191972977</updated>
-    </task>
-    <task id="LOCAL-00018" summary="[webhook] Created basic issue event handler.">
-      <created>1603194608061</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1603194608061</updated>
+      <workItem from="1617095738683" duration="1641000" />
+      <workItem from="1617126606330" duration="9183000" />
     </task>
     <task id="LOCAL-00019" summary="[issueEvent] Added AKA mechanism.">
       <created>1603195089183</created>
@@ -465,7 +432,42 @@
       <option name="project" value="LOCAL" />
       <updated>1616962489154</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="[Handlers] Structured to directories.&#10;[WebHookAmqpHandler] Changed input params in handler.">
+      <created>1617019397125</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1617019397125</updated>
+    </task>
+    <task id="LOCAL-00064" summary="[IssuesHandler] Separated to two handlers.">
+      <created>1617054402209</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1617054402209</updated>
+    </task>
+    <task id="LOCAL-00065" summary="[CheckSuiteHandler] Separated to two parts.">
+      <created>1617128960426</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1617128960427</updated>
+    </task>
+    <task id="LOCAL-00066" summary="[CheckRunHandler] Separated to two handlers.">
+      <created>1617135229621</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1617135229621</updated>
+    </task>
+    <task id="LOCAL-00067" summary="[Entities] Packed *Message entities to their parent classes.">
+      <created>1617135665433</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1617135665433</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -484,11 +486,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[AMQP] Setted up." />
-    <MESSAGE value="[AMQP] Fixed incorrect queues asserting." />
-    <MESSAGE value="[SECURITY] Removed git-crypt and added .env parser." />
-    <MESSAGE value="[project] Changed structure a little to load envs from file." />
-    <MESSAGE value="[babel] Removed." />
     <MESSAGE value="[yarn] Removed log file." />
     <MESSAGE value="[gitignore] Updated." />
     <MESSAGE value="[BotCommand] Added result handler." />
@@ -509,17 +506,12 @@
     <MESSAGE value="[IssuesHandler] Added synchronization." />
     <MESSAGE value="[PullRequest] Added unique constraint." />
     <MESSAGE value="[IssueHandler] Fixed bug with message deletion." />
-    <option name="LAST_COMMIT_MESSAGE" value="[IssueHandler] Fixed bug with message deletion." />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="2104" y="86" key="MergeDialog" timestamp="1617018080552">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2104" y="86" key="MergeDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617018080552" />
-    <state x="2637" y="233" key="git4idea.branch.GitSmartOperationDialog" timestamp="1617018076992">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2637" y="233" key="git4idea.branch.GitSmartOperationDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617018076992" />
+    <MESSAGE value="[Handlers] Structured to directories.&#10;[WebHookAmqpHandler] Changed input params in handler." />
+    <MESSAGE value="[IssuesHandler] Separated to two handlers." />
+    <MESSAGE value="[CheckSuiteHandler] Separated to two parts." />
+    <MESSAGE value="[CheckRunHandler] Separated to two handlers." />
+    <MESSAGE value="[Entities] Packed *Message entities to their parent classes." />
+    <option name="LAST_COMMIT_MESSAGE" value="[Entities] Packed *Message entities to their parent classes." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -530,9 +522,22 @@
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/handlers/IssuesHandler.ts</url>
-          <line>96</line>
-          <option name="timeStamp" value="67" />
+          <url>file://$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts</url>
+          <line>48</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts</url>
+          <line>56</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts</url>
+          <line>76</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
