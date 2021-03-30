@@ -73,7 +73,7 @@ export default class IssuesHandler extends WebHookAmqpHandler {
             }
         } finally {
             await AmqpDispatcher.getCurrent().sendToQueue(
-                QUEUES.ISSUE_SHOW_QUEUE || "issue-show-queue",
+                QUEUES.ISSUE_SHOW_QUEUE,
                 {issue: entityId},
                 {expiration: 1000 * 60 * 30}
             );

@@ -30,7 +30,7 @@ import {
     Entity,
     Index,
     ManyToOne,
-    OneToMany,
+    OneToMany, OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
@@ -38,25 +38,30 @@ import Chat from "./Chat";
 import PullRequest from "./PullRequest";
 import CheckRun from "./CheckRun";
 import WebHook from "./WebHook";
+import CheckSuiteMessage from "./CheckSuiteMessage";
+import exp = require("constants");
 
 
 @Entity()
-export default class CheckSuite extends BaseEntity {
+class CheckSuite extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({type: "varchar", length: 30, default: "queued"})
-    status: string;
+    @Column({type: "jsonb"})
+    info: CheckSuite.Info;
 
-    @Column({type: "varchar", length: 30, nullable: true})
-    conclusion?: string;
+    // @Column({type: "varchar", length: 30, default: "queued"})
+    // status: string;
+    //
+    // @Column({type: "varchar", length: 30, nullable: true})
+    // conclusion?: string;
 
     @Index()
     @Column({type: "varchar", length: 40})
     headSha: string;
 
-    @Column()
-    branch: string;
+    // @Column()
+    // branch: string;
 
     @ManyToOne(type => Chat, chat => chat.checksuits, {onDelete: "CASCADE"})
     chat: Chat;
@@ -77,11 +82,14 @@ export default class CheckSuite extends BaseEntity {
     @Column({type: "bigint"})
     suiteId: number;
 
-    @Column({type: "bigint", nullable: true})
-    messageId: number;
+    @OneToOne(type => CheckSuiteMessage, chatMessage => chatMessage.suite, {nullable: true})
+    chatMessage: CheckSuiteMessage;
 
-    @Column({type: "bigint", nullable: true})
-    messageIdUpdatedAt: number;
+    // @Column({type: "bigint", nullable: true})
+    // messageId: number;
+    //
+    // @Column({type: "bigint", nullable: true})
+    // messageIdUpdatedAt: number;
 
     @UpdateDateColumn()
     updatedAt: Date;
@@ -89,3 +97,13 @@ export default class CheckSuite extends BaseEntity {
     @CreateDateColumn()
     createdAt: Date;
 }
+
+namespace CheckSuite {
+    export interface Info {
+        branch: string;
+        conclusion?: string;
+        status: string;
+    }
+}
+
+export default CheckSuite;

@@ -27,9 +27,10 @@
 import {
     BaseEntity,
     Column,
-    CreateDateColumn,
     Entity,
-    ManyToOne,
+    Index,
+    JoinColumn,
+    OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
@@ -37,37 +38,18 @@ import CheckSuite from "./CheckSuite";
 
 
 @Entity()
-class CheckRun extends BaseEntity {
-    @PrimaryGeneratedColumn({type: "bigint"})
+@Index(["issue", "messageId"], {unique: true})
+export default class IssueMessage extends BaseEntity {
+    @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(type => CheckSuite, suite => suite.runs, {onDelete: "CASCADE"})
+    @Column({type: "bigint", nullable: true})
+    messageId: number;
+
+    @OneToOne(type => CheckSuite, suite => suite.chatMessage)
+    @JoinColumn()
     suite: CheckSuite;
-
-    // @Column({default: "unnamed"})
-    // name: string;
-    //
-    // @Column({type: "varchar", length: 30, default: "queued"})
-    // status: string;
-
-    @Column({type: "jsonb"})
-    info: CheckRun.Info;
-
-    @Column({type: "bigint"})
-    runId: number;
 
     @UpdateDateColumn()
     updatedAt: Date;
-
-    @CreateDateColumn()
-    createdAt: Date;
 }
-
-namespace CheckRun {
-    export interface Info {
-        name: string;
-        status: string;
-    }
-}
-
-export default CheckRun;

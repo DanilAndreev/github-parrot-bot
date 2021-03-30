@@ -27,52 +27,54 @@
 import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
 import AmqpHandler from "../../core/AmqpHandler";
 import {Message as AMQPMessage} from "amqplib";
-import Issue from "../../entities/Issue";
 import Bot from "../../core/Bot";
 import loadTemplate from "../../utils/loadTemplate";
 import etelegramIgnore from "../../utils/etelegramIgnore";
 import {QUEUES} from "../../globals";
 import {Message} from "node-telegram-bot-api";
 import {getConnection} from "typeorm";
-import IssueMessage from "../../entities/IssueMessage";
 import AmqpDispatcher from "../../core/AmqpDispatcher";
-import PullRequest from "../../entities/PullRequest";
-import PullRequestMessage from "../../entities/PullRequestMessage";
+import CheckSuite from "../../entities/CheckSuite";
+import CheckSuiteMessage from "../../entities/CheckSuiteMessage";
 
 
-@WebHookAmqpHandler.Handler(QUEUES.PULL_REQUEST_SHOW_QUEUE, 10)
+@WebHookAmqpHandler.Handler(QUEUES.ISSUE_SHOW_QUEUE, 10)
 export default class DrawIssueHandler extends AmqpHandler {
     protected async handle(content: any, message: AMQPMessage): Promise<void | boolean> {
-        const {pullRequest}: { pullRequest: number } = content;
+        const {checkSuite}: { checkSuite: number } = content;
 
-        let entity: PullRequest | undefined = await PullRequest.findOne({
-            where: {id: pullRequest},
-            relations: ["webhook", "chat", "chatMessage"],
+        let entity: CheckSuite | undefined = await CheckSuite.findOne({
+            where: {id: checkSuite},
+            relations: ["webhook", "chat", "chatMessage", "pullRequest"],
         });
         if (!entity) return;
 
-        const template = await loadTemplate("pull_requests");
+        if (entity.pullRequest) {
+            await AmqpDispatcher.getCurrent().sendToQueue(
+                QUEUES.CHECK_SUITE_SHOW_QUEUE,
+                {pullRequest: entity.pullRequest.id},
+                {expiration: 1000 * 60 * 60}
+            );
+            return true;
+        }
+
+        const template = await loadTemplate("check_suite");
         const text: string = template(entity)
             .replace(/  +/g, " ")
             .replace(/\n +/g, "\n");
 
 
         try {
-            const pullRequestMessage: PullRequestMessage = new PullRequestMessage();
-            pullRequestMessage.pullRequest = entity;
+            const checkSuiteMessage: CheckSuiteMessage = new CheckSuiteMessage();
+            checkSuiteMessage.suite = entity;
             await getConnection().transaction(async transaction => {
                 if (entity) {
-                    await transaction.save(pullRequestMessage);
+                    await transaction.save(checkSuiteMessage);
                     const newMessage: Message = await Bot.getCurrent().sendMessage(entity.chat.chatId, text, {
                         parse_mode: "HTML",
-                        reply_markup: {
-                            inline_keyboard: [
-                                [{text: "View on GitHub", url: entity.info.html_url}],
-                            ]
-                        }
                     });
-                    pullRequestMessage.messageId = newMessage.message_id;
-                    await transaction.save(pullRequestMessage);
+                    checkSuiteMessage.messageId = newMessage.message_id;
+                    await transaction.save(checkSuiteMessage);
                 }
             });
         } catch (error) {
@@ -81,16 +83,11 @@ export default class DrawIssueHandler extends AmqpHandler {
                     chat_id: entity.chat.chatId,
                     message_id: entity.chatMessage.messageId,
                     parse_mode: "HTML",
-                    reply_markup: {
-                        inline_keyboard: [
-                            [{text: "View on GitHub", url: entity.info.html_url}],
-                        ]
-                    }
                 });
             } catch (err) {
                 if (!etelegramIgnore(err)) {
                     await entity.chatMessage.remove();
-                    await AmqpDispatcher.getCurrent().sendToQueue(QUEUES.PULL_REQUEST_SHOW_QUEUE, content);
+                    await AmqpDispatcher.getCurrent().sendToQueue(QUEUES.CHECK_SUITE_SHOW_QUEUE, content);
                 }
             }
         }

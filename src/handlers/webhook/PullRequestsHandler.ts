@@ -33,6 +33,8 @@ import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
 import PullRequest from "../../entities/PullRequest";
 import CommandError from "../../errors/CommandError";
 import CheckSuite from "../../entities/CheckSuite";
+import AmqpDispatcher from "../../core/AmqpDispatcher";
+import {QUEUES} from "../../globals";
 
 
 @WebHookAmqpHandler.Handler("pull_request", 10)
@@ -57,13 +59,30 @@ export default class PullRequestsHandler extends WebHookAmqpHandler {
 
         }
 
+        let entityId: number = NaN;
         try {
             let entity: PullRequest = new PullRequest();
             entity.chat = webHook.chat;
             entity.webhook = webHook;
             entity.info = info;
+            entity.pullRequestId = pullRequest.id;
+            entity = await entity.save();
+            entityId = entity.id;
         } catch (error) {
-
+            const entity: PullRequest | undefined = await PullRequest.findOne({
+                where: {chat: webHook.chat, pullRequestId: pullRequest.id}
+            });
+            if (entity) {
+                entity.info = info;
+                await entity.save();
+                entityId = entity.id;
+            }
+        } finally {
+            await AmqpDispatcher.getCurrent().sendToQueue(
+                QUEUES.PULL_REQUEST_SHOW_QUEUE,
+                {pullRequest: entityId},
+                {expiration: 1000 * 60 * 30}
+            );
         }
 
 
@@ -121,64 +140,64 @@ export default class PullRequestsHandler extends WebHookAmqpHandler {
 
     }
 
-    public static async showPullRequest(entity_data: PullRequest | number): Promise<PullRequest> {
-        let updated: boolean = false;
-        let entity: PullRequest | undefined;
-        if (typeof entity_data == "number") {
-            entity = await PullRequest.findOne({
-                where: {id: entity_data},
-                relations: ["checksuits", "checksuits.runs", "chat"]
-            });
-        } else {
-            entity = entity_data;
-        }
-        if (!entity)
-            throw new CommandError(`Pull request not found.`);
-
-        const template = await loadTemplate("pull_request");
-        const message = template(entity)
-            .replace(/  +/g, " ")
-            .replace(/\n +/g, "\n");
-
-        if (!entity.messageIdUpdatedAt) {
-            entity.messageIdUpdatedAt = new Date().getTime();
-            updated = true;
-        }
-
-        entity.checksuits = entity.checksuits.sort((a: CheckSuite, b: CheckSuite) => {
-            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-        });
-
-        try {
-            if (!(entity.messageId && new Date().getTime() - entity.messageIdUpdatedAt < 1000 * 60 * 60))
-                throw new Error();
-            await Bot.getCurrent().editMessageText(message, {
-                chat_id: entity.chat.chatId,
-                message_id: entity.messageId,
-                parse_mode: "HTML",
-                reply_markup: {
-                    inline_keyboard: [
-                        [{text: "View on GitHub", url: entity.info.html_url}],
-                    ]
-                }
-            });
-        } catch (error) {
-            // TODO: synchronization problems. Causes multiple messages sending.
-            // TODO: Ask node-telegram-bot-api developer about better statuses for errors.
-            if (error.code !== "ETELEGRAM" || !error.message.includes("message is not modified")) {
-                const newMessage = await Bot.getCurrent().sendMessage(entity.chat.chatId, message, {
-                    parse_mode: "HTML",
-                    reply_markup: {
-                        inline_keyboard: [
-                            [{text: "View on GitHub", url: entity.info.html_url}],
-                        ]
-                    }
-                });
-                entity.messageId = newMessage.message_id;
-                entity.messageIdUpdatedAt = new Date().getTime();
-                updated = true;
-            }
-        }
-        return entity;
-    }
+    // public static async showPullRequest(entity_data: PullRequest | number): Promise<PullRequest> {
+    //     let updated: boolean = false;
+    //     let entity: PullRequest | undefined;
+    //     if (typeof entity_data == "number") {
+    //         entity = await PullRequest.findOne({
+    //             where: {id: entity_data},
+    //             relations: ["checksuits", "checksuits.runs", "chat"]
+    //         });
+    //     } else {
+    //         entity = entity_data;
+    //     }
+    //     if (!entity)
+    //         throw new CommandError(`Pull request not found.`);
+    //
+    //     const template = await loadTemplate("pull_request");
+    //     const message = template(entity)
+    //         .replace(/  +/g, " ")
+    //         .replace(/\n +/g, "\n");
+    //
+    //     if (!entity.messageIdUpdatedAt) {
+    //         entity.messageIdUpdatedAt = new Date().getTime();
+    //         updated = true;
+    //     }
+    //
+    //     entity.checksuits = entity.checksuits.sort((a: CheckSuite, b: CheckSuite) => {
+    //         return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    //     });
+    //
+    //     try {
+    //         if (!(entity.messageId && new Date().getTime() - entity.messageIdUpdatedAt < 1000 * 60 * 60))
+    //             throw new Error();
+    //         await Bot.getCurrent().editMessageText(message, {
+    //             chat_id: entity.chat.chatId,
+    //             message_id: entity.messageId,
+    //             parse_mode: "HTML",
+    //             reply_markup: {
+    //                 inline_keyboard: [
+    //                     [{text: "View on GitHub", url: entity.info.html_url}],
+    //                 ]
+    //             }
+    //         });
+    //     } catch (error) {
+    //         // TODO: synchronization problems. Causes multiple messages sending.
+    //         // TODO: Ask node-telegram-bot-api developer about better statuses for errors.
+    //         if (error.code !== "ETELEGRAM" || !error.message.includes("message is not modified")) {
+    //             const newMessage = await Bot.getCurrent().sendMessage(entity.chat.chatId, message, {
+    //                 parse_mode: "HTML",
+    //                 reply_markup: {
+    //                     inline_keyboard: [
+    //                         [{text: "View on GitHub", url: entity.info.html_url}],
+    //                     ]
+    //                 }
+    //             });
+    //             entity.messageId = newMessage.message_id;
+    //             entity.messageIdUpdatedAt = new Date().getTime();
+    //             updated = true;
+    //         }
+    //     }
+    //     return entity;
+    // }
 }
