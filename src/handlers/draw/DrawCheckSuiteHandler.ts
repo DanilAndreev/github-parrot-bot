@@ -45,7 +45,7 @@ export default class DrawCheckSuiteHandler extends AmqpHandler {
 
         let entity: CheckSuite | undefined = await CheckSuite.findOne({
             where: {id: checkSuite},
-            relations: ["webhook", "chat", "chatMessage", "pullRequest"],
+            relations: ["webhook", "chat", "chatMessage", "pullRequest", "runs"],
         });
         if (!entity) return;
 

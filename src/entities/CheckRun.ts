@@ -29,6 +29,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    Index,
     ManyToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn
@@ -37,18 +38,13 @@ import CheckSuite from "./CheckSuite";
 
 
 @Entity()
+@Index(["runId", "suite"], {unique: true})
 class CheckRun extends BaseEntity {
     @PrimaryGeneratedColumn({type: "bigint"})
     id: number;
 
     @ManyToOne(type => CheckSuite, suite => suite.runs, {onDelete: "CASCADE"})
     suite: CheckSuite;
-
-    // @Column({default: "unnamed"})
-    // name: string;
-    //
-    // @Column({type: "varchar", length: 30, default: "queued"})
-    // status: string;
 
     @Column({type: "jsonb"})
     info: CheckRun.Info;

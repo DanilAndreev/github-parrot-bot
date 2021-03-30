@@ -36,7 +36,7 @@ import {QUEUES} from "../../globals";
 
 @WebHookAmqpHandler.Handler("check_suite", 10)
 export default class CheckSuiteHandler extends WebHookAmqpHandler {
-    protected async handleHook(webHook: WebHook, payload: CheckSuiteType): Promise<boolean | void> {
+    public async handleHook(webHook: WebHook, payload: CheckSuiteType, draw: boolean = true): Promise<boolean | void> {
         const {action, check_suite, repository, sender} = payload;
 
         let pullRequest: PullRequest | undefined = undefined;
@@ -93,18 +93,20 @@ export default class CheckSuiteHandler extends WebHookAmqpHandler {
                 entityId = entity.id;
             }
         } finally {
-            if (pullRequest) {
-                await AmqpDispatcher.getCurrent().sendToQueue(
-                    QUEUES.PULL_REQUEST_SHOW_QUEUE,
-                    {pullRequest: pullRequest.id},
-                    {expiration: 1000 * 60 * 30}
-                );
-            } else {
-                await AmqpDispatcher.getCurrent().sendToQueue(
-                    QUEUES.CHECK_SUITE_SHOW_QUEUE,
-                    {checkSuite: entityId},
-                    {expiration: 1000 * 60 * 30}
-                );
+            if (draw) {
+                if (pullRequest) {
+                    await AmqpDispatcher.getCurrent().sendToQueue(
+                        QUEUES.PULL_REQUEST_SHOW_QUEUE,
+                        {pullRequest: pullRequest.id},
+                        {expiration: 1000 * 60 * 30}
+                    );
+                } else {
+                    await AmqpDispatcher.getCurrent().sendToQueue(
+                        QUEUES.CHECK_SUITE_SHOW_QUEUE,
+                        {checkSuite: entityId},
+                        {expiration: 1000 * 60 * 30}
+                    );
+                }
             }
         }
     }

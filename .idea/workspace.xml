@@ -10,18 +10,18 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[IssuesHandler] Separated to two handlers.">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[CheckSuiteHandler] Separated to two parts.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/CheckRun.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/CheckRun.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entities/CheckSuite.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/CheckSuite.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/CheckSuiteMessage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/CheckSuiteMessage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/PullRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/PullRequest.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/WebHook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/WebHook.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawCheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawCheckSuiteHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/webhook/CheckRunHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckRunHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/PushHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PushHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/CommandFinalMessage.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/templates/check_suite.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/check_suite.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/templates/pull_request.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/pull_request.hbs" afterDir="false" />
     </list>
@@ -133,14 +133,7 @@
       <workItem from="1616897725933" duration="9436000" />
       <workItem from="1617013491086" duration="1475000" />
       <workItem from="1617095738683" duration="1641000" />
-      <workItem from="1617126606330" duration="2326000" />
-    </task>
-    <task id="LOCAL-00016" summary="[config] Added env support.">
-      <created>1603191951249</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1603191951250</updated>
+      <workItem from="1617126606330" duration="7267000" />
     </task>
     <task id="LOCAL-00017" summary="[config] Added env support.">
       <created>1603191972977</created>
@@ -478,7 +471,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617054402209</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="[CheckSuiteHandler] Separated to two parts.">
+      <created>1617128960426</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1617128960427</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -497,7 +497,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[SECURITY] Removed git-crypt and added .env parser." />
     <MESSAGE value="[project] Changed structure a little to load envs from file." />
     <MESSAGE value="[babel] Removed." />
     <MESSAGE value="[yarn] Removed log file." />
@@ -522,7 +521,8 @@
     <MESSAGE value="[IssueHandler] Fixed bug with message deletion." />
     <MESSAGE value="[Handlers] Structured to directories.&#10;[WebHookAmqpHandler] Changed input params in handler." />
     <MESSAGE value="[IssuesHandler] Separated to two handlers." />
-    <option name="LAST_COMMIT_MESSAGE" value="[IssuesHandler] Separated to two handlers." />
+    <MESSAGE value="[CheckSuiteHandler] Separated to two parts." />
+    <option name="LAST_COMMIT_MESSAGE" value="[CheckSuiteHandler] Separated to two parts." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -531,6 +531,18 @@
           <url>file://$PROJECT_DIR$/src/decorators/BotCommand.ts</url>
           <line>35</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts</url>
+          <line>49</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/webhook/CheckRunHandler.ts</url>
+          <line>56</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

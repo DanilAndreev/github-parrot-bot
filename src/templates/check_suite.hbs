@@ -1,9 +1,9 @@
 <b>{{repository}}</b> CI Suite
-Branch: <b>{{branch}}</b>
+Branch: <b>{{info/branch}}</b>
 <i>Status:</i> <b><i>{{info/status}} {{info/conclusion}}</i></b>
 {{#if runs}}
     Runs:
     {{#each runs}}
-        <b>{{name}}</b>: <i>{{info/status}}</i>
+        <b>{{info/name}}</b>: <i>{{info/status}}</i>
     {{/each}}
 {{/if}}

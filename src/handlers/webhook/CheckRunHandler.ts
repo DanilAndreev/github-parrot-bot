@@ -25,19 +25,13 @@
  */
 
 import WebHook from "../../entities/WebHook";
-import Bot from "../../core/Bot";
-import {CheckRun as CheckRunType} from "github-webhook-event-types";
-import {Context} from "koa";
-import loadTemplate from "../../utils/loadTemplate";
+import {CheckRun as CheckRunType, CheckSuite as CheckSuiteType} from "github-webhook-event-types";
 import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
-import * as moment from "moment";
-import CheckSuite from "../../entities/CheckSuite";
-import {Message} from "node-telegram-bot-api";
 import CheckRun from "../../entities/CheckRun";
-import PullRequest from "../../entities/PullRequest";
-import {getConnection} from "typeorm";
-import PullRequestsHandler from "./PullRequestsHandler";
 import CheckSuiteHandler from "./CheckSuiteHandler";
+import CheckSuite from "../../entities/CheckSuite";
+import AmqpDispatcher from "../../core/AmqpDispatcher";
+import {QUEUES} from "../../globals";
 
 
 @WebHookAmqpHandler.Handler("check_run", 10)
@@ -45,95 +39,46 @@ export default class CheckRunHandler extends WebHookAmqpHandler {
     protected async handleHook(webHook: WebHook, payload: CheckRunType): Promise<boolean | void> {
         const {action, check_run, repository, sender} = payload;
 
-        // const info: CheckRun.Info = {
-        //     status: check_run.status,
-        //     name: check_run.name,
-        // }
-        //
-        // try {
-        //     let entity: CheckRun = new CheckRun();
-        //     entity.info = info;
-        //     entity.runId = check_run.id;
-        // } catch (error) {
-        //
-        // } finally {
-        //
-        // }
+        await new CheckSuiteHandler().handleHook(webHook, {check_suite: check_run.check_suite} as CheckSuiteType, false);
 
+        let suite: CheckSuite | undefined = await CheckSuite.findOne({
+            where: {suiteId: check_run.check_suite.id, chat: webHook.chat},
+            relations: ["pullRequest", "chat", "runs"]
+        });
 
-        // const {action, check_run, repository, sender} = payload;
-        // let suite: CheckSuite | undefined = await CheckSuite.findOne({
-        //     where: {suiteId: check_run.check_suite.id, chat: webHook.chat},
-        //     relations: ["pullRequest", "chat", "runs"]
-        // });
-        //
-        // let pullRequest: PullRequest | undefined = undefined;
-        // if (check_run.check_suite.pull_requests.length) {
-        //     pullRequest = await PullRequest.findOne({
-        //         where: {pullRequestId: check_run.check_suite.pull_requests[0].id, chat: webHook.chat}
-        //     });
-        // }
-        //
-        // if (!suite) {
-        //     suite = new CheckSuite();
-        //     suite.chat = webHook.chat;
-        //     suite.conclusion = check_run.check_suite.conclusion;
-        //     suite.status = check_run.check_suite.status;
-        //     suite.suiteId = check_run.check_suite.id;
-        //     suite.branch = check_run.check_suite.head_branch;
-        //     suite.headSha = check_run.check_suite.head_sha;
-        //     suite.runs = [];
-        //     if (pullRequest) {
-        //         suite.pullRequest = pullRequest;
-        //     }
-        // }
-        //
-        // let entity: CheckRun | undefined = await CheckRun.findOne({where: {runId: check_run.id}});
-        // if (!entity) {
-        //     entity = new CheckRun();
-        //     entity.suite = suite;
-        //     entity.runId = check_run.id;
-        // }
-        // entity.name = check_run.name;
-        // entity.status = check_run.status;
-        //
-        // try {
-        //     if (!suite.pullRequest) {
-        //         suite.runs.push(entity);
-        //         suite.messageId = await CheckSuiteHandler.showCheckSuite(suite, webHook.chat.chatId, suite.messageId);
-        //         suite.messageIdUpdatedAt = new Date().getTime();
-        //     }
-        // } catch (error) {
-        // }
-        //
-        // await getConnection().transaction(async transaction => {
-        //     suite = await transaction.save(suite);
-        //     entity = await transaction.save(entity);
-        //     if (pullRequest) {
-        //         await transaction
-        //             .getRepository(CheckSuite)
-        //             .createQueryBuilder()
-        //             .delete()
-        //             .where(
-        //                 "pullRequest = :pullRequest and headSha != :head_sha",
-        //                 {
-        //                     head_sha: check_run.check_suite.head_sha,
-        //                     pullRequest: pullRequest.id,
-        //                 }
-        //             )
-        //             .execute();
-        //     }
-        // });
-        //
-        // try {
-        //     if (pullRequest) {
-        //         await PullRequestsHandler.showPullRequest(pullRequest.id);
-        //     }
-        // } catch (error) {
-        //     // TODO: Ask node-telegram-bot-api developer about better statuses for errors.
-        //     if (error.code !== "ETELEGRAM" || !error.message.includes("message is not modified")) {
-        //         throw error;
-        //     }
-        // }
+        if (!suite) return;
+
+        const info: CheckRun.Info = {
+            status: check_run.status,
+            name: check_run.name,
+        };
+
+        try {
+            const entity: CheckRun = new CheckRun();
+            entity.info = info;
+            entity.runId = check_run.id;
+            entity.suite = suite;
+            await entity.save();
+        } catch (error) {
+            const entity: CheckRun | undefined = await CheckRun.findOne({where: {runId: check_run.id}});
+            if (entity) {
+                entity.info = info;
+                entity?.save();
+            }
+        } finally {
+            if (suite.pullRequest) {
+                await AmqpDispatcher.getCurrent().sendToQueue(
+                    QUEUES.PULL_REQUEST_SHOW_QUEUE,
+                    {pullRequest: suite.pullRequest.id},
+                    {expiration: 1000 * 60 * 30}
+                );
+            } else {
+                await AmqpDispatcher.getCurrent().sendToQueue(
+                    QUEUES.CHECK_SUITE_SHOW_QUEUE,
+                    {checkSuite: suite.id},
+                    {expiration: 1000 * 60 * 30}
+                );
+            }
+        }
     }
 }

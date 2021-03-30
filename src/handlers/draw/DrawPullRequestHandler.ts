@@ -45,7 +45,7 @@ export default class DrawPullRequestHandler extends AmqpHandler {
 
         let entity: PullRequest | undefined = await PullRequest.findOne({
             where: {id: pullRequest},
-            relations: ["webhook", "chat", "chatMessage", "checksuits"],
+            relations: ["webhook", "chat", "chatMessage", "checksuits", "checksuits.runs"],
         });
         if (!entity) return;
 

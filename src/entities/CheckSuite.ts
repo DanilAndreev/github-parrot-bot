@@ -26,11 +26,13 @@
 
 import {
     BaseEntity,
-    Column, CreateDateColumn,
+    Column,
+    CreateDateColumn,
     Entity,
     Index,
     ManyToOne,
-    OneToMany, OneToOne,
+    OneToMany,
+    OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
@@ -39,10 +41,10 @@ import PullRequest from "./PullRequest";
 import CheckRun from "./CheckRun";
 import WebHook from "./WebHook";
 import CheckSuiteMessage from "./CheckSuiteMessage";
-import exp = require("constants");
 
 
 @Entity()
+@Index(["suiteId", "pullRequest"], {unique: true})
 class CheckSuite extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
