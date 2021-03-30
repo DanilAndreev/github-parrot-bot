@@ -35,7 +35,6 @@ import {Message} from "node-telegram-bot-api";
 import {getConnection} from "typeorm";
 import AmqpDispatcher from "../../core/AmqpDispatcher";
 import CheckSuite from "../../entities/CheckSuite";
-import CheckSuiteMessage from "../../entities/CheckSuiteMessage";
 
 
 @WebHookAmqpHandler.Handler(QUEUES.CHECK_SUITE_SHOW_QUEUE, 10)
@@ -65,7 +64,7 @@ export default class DrawCheckSuiteHandler extends AmqpHandler {
 
 
         try {
-            const checkSuiteMessage: CheckSuiteMessage = new CheckSuiteMessage();
+            const checkSuiteMessage: CheckSuite.CheckSuiteMessage = new CheckSuite.CheckSuiteMessage();
             checkSuiteMessage.suite = entity;
             await getConnection().transaction(async transaction => {
                 if (entity) {

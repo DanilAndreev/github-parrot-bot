@@ -34,7 +34,6 @@ import etelegramIgnore from "../../utils/etelegramIgnore";
 import {QUEUES} from "../../globals";
 import {Message} from "node-telegram-bot-api";
 import {getConnection} from "typeorm";
-import IssueMessage from "../../entities/IssueMessage";
 import AmqpDispatcher from "../../core/AmqpDispatcher";
 
 
@@ -56,7 +55,7 @@ export default class DrawIssueHandler extends AmqpHandler {
 
 
         try {
-            const issueMessage: IssueMessage = new IssueMessage();
+            const issueMessage: Issue.IssueMessage = new Issue.IssueMessage();
             issueMessage.issue = entity;
             await getConnection().transaction(async transaction => {
                 if (entity) {

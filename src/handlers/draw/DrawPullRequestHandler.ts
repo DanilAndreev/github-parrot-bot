@@ -35,7 +35,6 @@ import {Message} from "node-telegram-bot-api";
 import {getConnection} from "typeorm";
 import AmqpDispatcher from "../../core/AmqpDispatcher";
 import PullRequest from "../../entities/PullRequest";
-import PullRequestMessage from "../../entities/PullRequestMessage";
 
 
 @WebHookAmqpHandler.Handler(QUEUES.PULL_REQUEST_SHOW_QUEUE, 10)
@@ -56,7 +55,7 @@ export default class DrawPullRequestHandler extends AmqpHandler {
 
 
         try {
-            const pullRequestMessage: PullRequestMessage = new PullRequestMessage();
+            const pullRequestMessage: PullRequest.PullRequestMessage = new PullRequest.PullRequestMessage();
             pullRequestMessage.pullRequest = entity;
             await getConnection().transaction(async transaction => {
                 if (entity) {

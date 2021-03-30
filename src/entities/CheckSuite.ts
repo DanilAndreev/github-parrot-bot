@@ -29,7 +29,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    Index,
+    Index, JoinColumn,
     ManyToOne,
     OneToMany,
     OneToOne,
@@ -40,7 +40,6 @@ import Chat from "./Chat";
 import PullRequest from "./PullRequest";
 import CheckRun from "./CheckRun";
 import WebHook from "./WebHook";
-import CheckSuiteMessage from "./CheckSuiteMessage";
 
 
 @Entity()
@@ -56,6 +55,7 @@ class CheckSuite extends BaseEntity {
     @Column({type: "varchar", length: 40})
     headSha: string;
 
+    @Index()
     @ManyToOne(type => Chat, chat => chat.checksuits, {onDelete: "CASCADE"})
     chat: Chat;
 
@@ -75,8 +75,8 @@ class CheckSuite extends BaseEntity {
     @Column({type: "bigint"})
     suiteId: number;
 
-    @OneToOne(type => CheckSuiteMessage, chatMessage => chatMessage.suite, {nullable: true})
-    chatMessage: CheckSuiteMessage;
+    @OneToOne(type => CheckSuite.CheckSuiteMessage, chatMessage => chatMessage.suite, {nullable: true})
+    chatMessage: CheckSuite.CheckSuiteMessage;
 
     @UpdateDateColumn()
     updatedAt: Date;
@@ -90,6 +90,23 @@ namespace CheckSuite {
         branch: string;
         conclusion?: string;
         status: string;
+    }
+
+    @Entity()
+    @Index(["suite", "messageId"], {unique: true})
+    export class CheckSuiteMessage extends BaseEntity {
+        @PrimaryGeneratedColumn()
+        id: number;
+
+        @Column({type: "bigint", nullable: true})
+        messageId: number;
+
+        @OneToOne(type => CheckSuite, suite => suite.chatMessage)
+        @JoinColumn()
+        suite: CheckSuite;
+
+        @UpdateDateColumn()
+        updatedAt: Date;
     }
 }
 

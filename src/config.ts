@@ -45,9 +45,6 @@ import CheckSuite from "./entities/CheckSuite";
 import PullRequest from "./entities/PullRequest";
 import CheckRun from "./entities/CheckRun";
 import DrawIssueHandler from "./handlers/draw/DrawIssueHandler";
-import IssueMessage from "./entities/IssueMessage";
-import PullRequestMessage from "./entities/PullRequestMessage";
-import CheckSuiteMessage from "./entities/CheckSuiteMessage";
 import DrawCheckSuiteHandler from "./handlers/draw/DrawCheckSuiteHandler";
 import DrawPullRequestHandler from "./handlers/draw/DrawPullRequestHandler";
 
@@ -72,12 +69,12 @@ const config: Config = {
             WebHook,
             Collaborator,
             Issue,
-            IssueMessage,
+            Issue.IssueMessage,
             Chat,
             CheckSuite,
-            CheckSuiteMessage,
+            CheckSuite.CheckSuiteMessage,
             PullRequest,
-            PullRequestMessage,
+            PullRequest.PullRequestMessage,
             CheckRun
         ],
         ssl: {

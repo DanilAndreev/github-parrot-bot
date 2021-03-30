@@ -28,7 +28,7 @@ import {
     BaseEntity,
     Column,
     Entity,
-    Index,
+    Index, JoinColumn,
     ManyToOne,
     OneToOne,
     PrimaryGeneratedColumn,
@@ -36,7 +36,6 @@ import {
 } from "typeorm";
 import Chat from "./Chat";
 import WebHook from "./WebHook";
-import IssueMessage from "./IssueMessage";
 
 
 @Entity()
@@ -48,6 +47,7 @@ class Issue extends BaseEntity {
     @Column({type: "jsonb"})
     info: Issue.Info;
 
+    @Index()
     @ManyToOne(type => Chat, chat => chat.issues, {onDelete: "CASCADE"})
     chat: Chat;
 
@@ -57,8 +57,8 @@ class Issue extends BaseEntity {
     @Column({type: "bigint"})
     issueId: number;
 
-    @OneToOne(type => IssueMessage, issueMessage => issueMessage.issue, {nullable: true})
-    chatMessage: IssueMessage;
+    @OneToOne(type => Issue.IssueMessage, issueMessage => issueMessage.issue, {nullable: true})
+    chatMessage: Issue.IssueMessage;
 
     @UpdateDateColumn()
     updatedAt: Date;
@@ -78,6 +78,23 @@ namespace Issue {
             due_on?: string;
         }
         html_url: string;
+    }
+
+    @Entity()
+    @Index(["issue", "messageId"], {unique: true})
+    export class IssueMessage extends BaseEntity {
+        @PrimaryGeneratedColumn()
+        id: number;
+
+        @Column({type: "bigint", nullable: true})
+        messageId: number;
+
+        @OneToOne(type => Issue, issue => issue.chatMessage)
+        @JoinColumn()
+        issue: Issue;
+
+        @UpdateDateColumn()
+        updatedAt: Date;
     }
 }
 

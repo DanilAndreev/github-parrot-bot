@@ -64,7 +64,6 @@ export default class WebHook extends BaseEntity {
     @Column()
     secretPreview: string;
 
-    @Index()
     @Column()
     repository: string;
 
