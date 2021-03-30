@@ -50,18 +50,9 @@ class CheckSuite extends BaseEntity {
     @Column({type: "jsonb"})
     info: CheckSuite.Info;
 
-    // @Column({type: "varchar", length: 30, default: "queued"})
-    // status: string;
-    //
-    // @Column({type: "varchar", length: 30, nullable: true})
-    // conclusion?: string;
-
     @Index()
     @Column({type: "varchar", length: 40})
     headSha: string;
-
-    // @Column()
-    // branch: string;
 
     @ManyToOne(type => Chat, chat => chat.checksuits, {onDelete: "CASCADE"})
     chat: Chat;
@@ -84,12 +75,6 @@ class CheckSuite extends BaseEntity {
 
     @OneToOne(type => CheckSuiteMessage, chatMessage => chatMessage.suite, {nullable: true})
     chatMessage: CheckSuiteMessage;
-
-    // @Column({type: "bigint", nullable: true})
-    // messageId: number;
-    //
-    // @Column({type: "bigint", nullable: true})
-    // messageIdUpdatedAt: number;
 
     @UpdateDateColumn()
     updatedAt: Date;

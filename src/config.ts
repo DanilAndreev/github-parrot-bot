@@ -46,6 +46,10 @@ import PullRequest from "./entities/PullRequest";
 import CheckRun from "./entities/CheckRun";
 import DrawIssueHandler from "./handlers/draw/DrawIssueHandler";
 import IssueMessage from "./entities/IssueMessage";
+import PullRequestMessage from "./entities/PullRequestMessage";
+import CheckSuiteMessage from "./entities/CheckSuiteMessage";
+import DrawCheckSuiteHandler from "./handlers/draw/DrawCheckSuiteHandler";
+import DrawPullRequestHandler from "./handlers/draw/DrawPullRequestHandler";
 
 
 const config: Config = {
@@ -64,7 +68,18 @@ const config: Config = {
     db: {
         type: "postgres",
         url: process.env.DATABASE_URL,
-        entities: [WebHook, Collaborator, Issue, IssueMessage, Chat, CheckSuite, PullRequest, CheckRun],
+        entities: [
+            WebHook,
+            Collaborator,
+            Issue,
+            IssueMessage,
+            Chat,
+            CheckSuite,
+            CheckSuiteMessage,
+            PullRequest,
+            PullRequestMessage,
+            CheckRun
+        ],
         ssl: {
             rejectUnauthorized: false,
         }
@@ -79,11 +94,13 @@ const config: Config = {
             CheckSuiteHandler,
 
             DrawIssueHandler,
+            DrawPullRequestHandler,
+            DrawCheckSuiteHandler,
         ],
     },
     server: {
         port: process.env.PORT ? +process.env.PORT : 3030,
     }
-}
+};
 
 export default config;

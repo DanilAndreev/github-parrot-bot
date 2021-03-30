@@ -38,8 +38,8 @@ import CheckSuite from "../../entities/CheckSuite";
 import CheckSuiteMessage from "../../entities/CheckSuiteMessage";
 
 
-@WebHookAmqpHandler.Handler(QUEUES.ISSUE_SHOW_QUEUE, 10)
-export default class DrawIssueHandler extends AmqpHandler {
+@WebHookAmqpHandler.Handler(QUEUES.CHECK_SUITE_SHOW_QUEUE, 10)
+export default class DrawCheckSuiteHandler extends AmqpHandler {
     protected async handle(content: any, message: AMQPMessage): Promise<void | boolean> {
         const {checkSuite}: { checkSuite: number } = content;
 
@@ -86,7 +86,8 @@ export default class DrawIssueHandler extends AmqpHandler {
                 });
             } catch (err) {
                 if (!etelegramIgnore(err)) {
-                    await entity.chatMessage.remove();
+                    if (entity.chatMessage)
+                        await entity.chatMessage.remove();
                     await AmqpDispatcher.getCurrent().sendToQueue(QUEUES.CHECK_SUITE_SHOW_QUEUE, content);
                 }
             }

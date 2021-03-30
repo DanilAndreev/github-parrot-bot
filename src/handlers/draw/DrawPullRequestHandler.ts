@@ -27,31 +27,29 @@
 import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
 import AmqpHandler from "../../core/AmqpHandler";
 import {Message as AMQPMessage} from "amqplib";
-import Issue from "../../entities/Issue";
 import Bot from "../../core/Bot";
 import loadTemplate from "../../utils/loadTemplate";
 import etelegramIgnore from "../../utils/etelegramIgnore";
 import {QUEUES} from "../../globals";
 import {Message} from "node-telegram-bot-api";
 import {getConnection} from "typeorm";
-import IssueMessage from "../../entities/IssueMessage";
 import AmqpDispatcher from "../../core/AmqpDispatcher";
 import PullRequest from "../../entities/PullRequest";
 import PullRequestMessage from "../../entities/PullRequestMessage";
 
 
 @WebHookAmqpHandler.Handler(QUEUES.PULL_REQUEST_SHOW_QUEUE, 10)
-export default class DrawIssueHandler extends AmqpHandler {
+export default class DrawPullRequestHandler extends AmqpHandler {
     protected async handle(content: any, message: AMQPMessage): Promise<void | boolean> {
         const {pullRequest}: { pullRequest: number } = content;
 
         let entity: PullRequest | undefined = await PullRequest.findOne({
             where: {id: pullRequest},
-            relations: ["webhook", "chat", "chatMessage"],
+            relations: ["webhook", "chat", "chatMessage", "checksuits"],
         });
         if (!entity) return;
 
-        const template = await loadTemplate("pull_requests");
+        const template = await loadTemplate("pull_request");
         const text: string = template(entity)
             .replace(/  +/g, " ")
             .replace(/\n +/g, "\n");
@@ -89,7 +87,8 @@ export default class DrawIssueHandler extends AmqpHandler {
                 });
             } catch (err) {
                 if (!etelegramIgnore(err)) {
-                    await entity.chatMessage.remove();
+                    if (entity.chatMessage)
+                        await entity.chatMessage.remove();
                     await AmqpDispatcher.getCurrent().sendToQueue(QUEUES.PULL_REQUEST_SHOW_QUEUE, content);
                 }
             }

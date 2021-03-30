@@ -87,7 +87,8 @@ export default class DrawIssueHandler extends AmqpHandler {
                 });
             } catch (err) {
                 if (!etelegramIgnore(err)) {
-                    await entity.chatMessage.remove();
+                    if (entity.chatMessage)
+                        await entity.chatMessage.remove();
                     await AmqpDispatcher.getCurrent().sendToQueue(QUEUES.ISSUE_SHOW_QUEUE, content);
                 }
             }

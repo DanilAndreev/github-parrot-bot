@@ -38,8 +38,8 @@ import CheckSuite from "./CheckSuite";
 
 
 @Entity()
-@Index(["issue", "messageId"], {unique: true})
-export default class IssueMessage extends BaseEntity {
+@Index(["suite", "messageId"], {unique: true})
+export default class CheckSuiteMessage extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 

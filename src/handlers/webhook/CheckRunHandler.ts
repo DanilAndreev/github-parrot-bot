@@ -45,20 +45,20 @@ export default class CheckRunHandler extends WebHookAmqpHandler {
     protected async handleHook(webHook: WebHook, payload: CheckRunType): Promise<boolean | void> {
         const {action, check_run, repository, sender} = payload;
 
-        const info: CheckRun.Info = {
-            status: check_run.status,
-            name: check_run.name,
-        }
-
-        try {
-            let entity: CheckRun = new CheckRun();
-            entity.info = info;
-            entity.runId = check_run.id;
-        } catch (error) {
-
-        } finally {
-
-        }
+        // const info: CheckRun.Info = {
+        //     status: check_run.status,
+        //     name: check_run.name,
+        // }
+        //
+        // try {
+        //     let entity: CheckRun = new CheckRun();
+        //     entity.info = info;
+        //     entity.runId = check_run.id;
+        // } catch (error) {
+        //
+        // } finally {
+        //
+        // }
 
 
         // const {action, check_run, repository, sender} = payload;

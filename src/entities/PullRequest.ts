@@ -66,12 +66,6 @@ class PullRequest extends BaseEntity {
     @OneToOne(type => PullRequestMessage, chatMessage => chatMessage.pullRequest, {nullable: true})
     chatMessage: PullRequestMessage;
 
-    // @Column({type: "bigint", nullable: true})
-    // messageId: number;
-    //
-    // @Column({type: "bigint", nullable: true})
-    // messageIdUpdatedAt: number;
-
     @UpdateDateColumn()
     updatedAt: Date;
 }
