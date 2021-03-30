@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,56 +29,27 @@ import {
     Column,
     Entity,
     Index,
-    ManyToOne,
+    JoinColumn,
     OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
-import Chat from "./Chat";
-import WebHook from "./WebHook";
-import IssueMessage from "./IssueMessage";
+import PullRequest from "./PullRequest";
 
 
 @Entity()
-@Index(["webhook", "issueId"], {unique: true})
-class Issue extends BaseEntity {
+@Index(["pullRequest", "messageId"], {unique: true})
+export default class PullRequestMessage extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({type: "jsonb"})
-    info: Issue.Info;
+    @Column({type: "bigint", nullable: true})
+    messageId: number;
 
-    @ManyToOne(type => Chat, chat => chat.issues, {onDelete: "CASCADE"})
-    chat: Chat;
-
-    @ManyToOne(type => WebHook, webhook => webhook.issues, {onDelete: "CASCADE"})
-    webhook: WebHook;
-
-    @Column({type: "bigint"})
-    issueId: number;
-
-    @OneToOne(type => IssueMessage, issueMessage => issueMessage.issue, {nullable: true})
-    chatMessage: IssueMessage;
+    @OneToOne(type => PullRequest, pullRequest => pullRequest.chatMessage)
+    @JoinColumn()
+    pullRequest: PullRequest;
 
     @UpdateDateColumn()
     updatedAt: Date;
 }
-
-namespace Issue {
-    export interface Info {
-        tag: number;
-        state: string;
-        title: string;
-        body?: string;
-        opened_by: string;
-        assignees: { login: string }[]
-        labels: { name: string }[];
-        milestone?: {
-            title: string;
-            due_on?: string;
-        }
-        html_url: string;
-    }
-}
-
-export default Issue;

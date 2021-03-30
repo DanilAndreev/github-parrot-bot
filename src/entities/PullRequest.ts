@@ -30,13 +30,14 @@ import {
     Entity,
     Index,
     ManyToOne,
-    OneToMany,
+    OneToMany, OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
 import Chat from "./Chat";
 import WebHook from "./WebHook";
 import CheckSuite from "./CheckSuite";
+import PullRequestMessage from "./PullRequestMessage";
 
 
 @Entity()
@@ -62,11 +63,14 @@ class PullRequest extends BaseEntity {
     @Column({type: "bigint"})
     pullRequestId: number;
 
-    @Column({type: "bigint", nullable: true})
-    messageId: number;
+    @OneToOne(type => PullRequestMessage, chatMessage => chatMessage.pullRequest, {nullable: true})
+    chatMessage: PullRequestMessage;
 
-    @Column({type: "bigint", nullable: true})
-    messageIdUpdatedAt: number;
+    // @Column({type: "bigint", nullable: true})
+    // messageId: number;
+    //
+    // @Column({type: "bigint", nullable: true})
+    // messageIdUpdatedAt: number;
 
     @UpdateDateColumn()
     updatedAt: Date;
