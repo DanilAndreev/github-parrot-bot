@@ -10,18 +10,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Handlers] Structured to directories.&#10;[WebHookAmqpHandler] Changed input params in handler.">
-      <change afterPath="$PROJECT_DIR$/src/entities/CheckSuiteMessage.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/handlers/draw/DrawCheckSuiteHandler.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[PullRequestHandler] Separated to two handlers.&#10;[CheckSuiteHandler] Separated to two handlers.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/CheckRun.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/CheckRun.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/CheckSuite.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/CheckSuite.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/globals.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/CheckRunHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckRunHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/IssuesHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/IssuesHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
