@@ -10,19 +10,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[CheckRunHandler] Separated to two handlers.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Entities] Packed *Message entities to their parent classes.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entities/CheckSuite.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/CheckSuite.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/CheckSuiteMessage.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/Issue.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Issue.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/IssueMessage.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/PullRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/PullRequest.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/PullRequestMessage.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/WebHook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/WebHook.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawCheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawCheckSuiteHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,14 +122,7 @@
       <workItem from="1616897725933" duration="9436000" />
       <workItem from="1617013491086" duration="1475000" />
       <workItem from="1617095738683" duration="1641000" />
-      <workItem from="1617126606330" duration="7690000" />
-    </task>
-    <task id="LOCAL-00018" summary="[webhook] Created basic issue event handler.">
-      <created>1603194608061</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1603194608061</updated>
+      <workItem from="1617126606330" duration="9183000" />
     </task>
     <task id="LOCAL-00019" summary="[issueEvent] Added AKA mechanism.">
       <created>1603195089183</created>
@@ -477,7 +460,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617135229621</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="[Entities] Packed *Message entities to their parent classes.">
+      <created>1617135665433</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1617135665433</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -496,7 +486,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[babel] Removed." />
     <MESSAGE value="[yarn] Removed log file." />
     <MESSAGE value="[gitignore] Updated." />
     <MESSAGE value="[BotCommand] Added result handler." />
@@ -521,7 +510,8 @@
     <MESSAGE value="[IssuesHandler] Separated to two handlers." />
     <MESSAGE value="[CheckSuiteHandler] Separated to two parts." />
     <MESSAGE value="[CheckRunHandler] Separated to two handlers." />
-    <option name="LAST_COMMIT_MESSAGE" value="[CheckRunHandler] Separated to two handlers." />
+    <MESSAGE value="[Entities] Packed *Message entities to their parent classes." />
+    <option name="LAST_COMMIT_MESSAGE" value="[Entities] Packed *Message entities to their parent classes." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -536,6 +526,18 @@
           <line>48</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts</url>
+          <line>56</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts</url>
+          <line>76</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

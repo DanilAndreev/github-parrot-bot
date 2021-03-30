@@ -44,6 +44,7 @@ import WebHook from "./WebHook";
 
 @Entity()
 @Index(["suiteId", "pullRequest"], {unique: true})
+@Index(["suiteId", "chat"], {unique: true})
 class CheckSuite extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
