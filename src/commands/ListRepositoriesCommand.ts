@@ -42,7 +42,7 @@ export default class ListRepositoriesCommand extends BotCommand {
         if (!chat)
             throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
 
-        const result: WebHook[] = await WebHook.find({where: {chat: chat}});
+        const result: WebHook[] = await WebHook.find({where: {chat}});
 
         if (!result.length)
             return `You have no repositories added.`;
