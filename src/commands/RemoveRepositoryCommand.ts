@@ -32,10 +32,9 @@ import WebHook from "../entities/WebHook";
 import JSONObject from "../interfaces/JSONObject";
 import Chat from "../entities/Chat";
 
-
 @BotCommand.Command("remove", "<repository>")
 @BotCommand.Description("Disconnects GitHub repository from this chat", {
-    "repository": "GitHub repository full name. Example: octocat/Hello-World",
+    repository: "GitHub repository full name. Example: octocat/Hello-World",
 })
 @BotCommand.Option("-a, --all", "Remove all connected GitHub repositories.", false)
 export default class RemoveRepositoryCommand extends BotCommand {
@@ -43,11 +42,11 @@ export default class RemoveRepositoryCommand extends BotCommand {
         const telegramName: string = message.from?.username || "";
         const [repository] = args;
 
-        if (!await checkAdmin(telegramName, message))
+        if (!(await checkAdmin(telegramName, message)))
             throw new CommandError(`User @${telegramName} have no permissions to delete repositories.`);
 
         if (opts.all) {
-            return await this.removeAll(message, args, opts)
+            return await this.removeAll(message, args, opts);
         } else if (repository) {
             return await this.removeOne(message, args, opts);
         } else {
@@ -60,8 +59,7 @@ export default class RemoveRepositoryCommand extends BotCommand {
         const [repository] = args;
 
         const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
-        if (!chat)
-            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+        if (!chat) throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
 
         const result = await WebHook.delete({chat, repository});
         if (!result.affected) throw new CommandError(`Repository <b>[${repository}]</b> not found.`);
@@ -72,8 +70,7 @@ export default class RemoveRepositoryCommand extends BotCommand {
         const chatId: number = message.chat.id;
 
         const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
-        if (!chat)
-            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+        if (!chat) throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
 
         const result = await WebHook.delete({chat});
         if (!result.affected) throw new CommandError(`You have no repositories to delete.`);

@@ -36,11 +36,10 @@ import {getConnection} from "typeorm";
 import AmqpDispatcher from "../../core/AmqpDispatcher";
 import CheckSuite from "../../entities/CheckSuite";
 
-
 @WebHookAmqpHandler.Handler(QUEUES.CHECK_SUITE_SHOW_QUEUE, 10)
 export default class DrawCheckSuiteHandler extends AmqpHandler {
     protected async handle(content: any, message: AMQPMessage): Promise<void | boolean> {
-        const {checkSuite}: { checkSuite: number } = content;
+        const {checkSuite}: {checkSuite: number} = content;
 
         const entity: CheckSuite | undefined = await CheckSuite.findOne({
             where: {id: checkSuite},
@@ -58,10 +57,7 @@ export default class DrawCheckSuiteHandler extends AmqpHandler {
         }
 
         const template = await loadTemplate("check_suite");
-        const text: string = template(entity)
-            .replace(/  +/g, " ")
-            .replace(/\n +/g, "\n");
-
+        const text: string = template(entity).replace(/  +/g, " ").replace(/\n +/g, "\n");
 
         try {
             const checkSuiteMessage: CheckSuite.CheckSuiteMessage = new CheckSuite.CheckSuiteMessage();
@@ -85,8 +81,7 @@ export default class DrawCheckSuiteHandler extends AmqpHandler {
                 });
             } catch (err) {
                 if (!etelegramIgnore(err)) {
-                    if (entity.chatMessage)
-                        await entity.chatMessage.remove();
+                    if (entity.chatMessage) await entity.chatMessage.remove();
                     await AmqpDispatcher.getCurrent().sendToQueue(QUEUES.CHECK_SUITE_SHOW_QUEUE, content);
                 }
             }

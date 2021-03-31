@@ -29,18 +29,18 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    Index, JoinColumn,
+    Index,
+    JoinColumn,
     ManyToOne,
     OneToMany,
     OneToOne,
     PrimaryGeneratedColumn,
-    UpdateDateColumn
+    UpdateDateColumn,
 } from "typeorm";
 import Chat from "./Chat";
 import PullRequest from "./PullRequest";
 import CheckRun from "./CheckRun";
 import WebHook from "./WebHook";
-
 
 @Entity()
 @Index(["suiteId", "pullRequest"], {unique: true})
@@ -68,7 +68,7 @@ class CheckSuite extends BaseEntity {
 
     @ManyToOne(type => PullRequest, pullRequest => pullRequest.checksuits, {
         onDelete: "CASCADE",
-        nullable: true
+        nullable: true,
     })
     pullRequest?: PullRequest;
 

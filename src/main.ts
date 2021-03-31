@@ -32,12 +32,11 @@ import IssuesGarbageCollector from "./chrono/IssuesGarbageCollector";
 import PullRequestsGarbageCollector from "./chrono/PullRequestsGarbageCollector";
 import CheckSuitsGarbageCollector from "./chrono/CheckSuitsGarbageCollector";
 
-
 export default async function main() {
     await setupDbConnection();
-    await new IssuesGarbageCollector({interval: 1000*60*30}).start();
-    await new PullRequestsGarbageCollector({interval: 1000*60*30}).start();
-    await new CheckSuitsGarbageCollector({interval: 1000*60*30}).start();
+    await new IssuesGarbageCollector({interval: 1000 * 60 * 30}).start();
+    await new PullRequestsGarbageCollector({interval: 1000 * 60 * 30}).start();
+    await new CheckSuitsGarbageCollector({interval: 1000 * 60 * 30}).start();
 
     const server = new WebServer();
     const bot: Bot = Bot.init();

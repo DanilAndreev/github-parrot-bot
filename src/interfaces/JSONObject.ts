@@ -29,5 +29,5 @@
  * @author Danil Andreev
  */
 export default interface JSONObject<T = any> {
-    [key: string]: T
+    [key: string]: T;
 }

@@ -28,15 +28,15 @@ import {
     BaseEntity,
     Column,
     Entity,
-    Index, JoinColumn,
+    Index,
+    JoinColumn,
     ManyToOne,
     OneToOne,
     PrimaryGeneratedColumn,
-    UpdateDateColumn
+    UpdateDateColumn,
 } from "typeorm";
 import Chat from "./Chat";
 import WebHook from "./WebHook";
-
 
 @Entity()
 @Index(["webhook", "issueId"], {unique: true})
@@ -71,12 +71,12 @@ namespace Issue {
         title: string;
         body?: string;
         opened_by: string;
-        assignees: { login: string }[]
-        labels: { name: string }[];
+        assignees: {login: string}[];
+        labels: {name: string}[];
         milestone?: {
             title: string;
             due_on?: string;
-        }
+        };
         html_url: string;
     }
 

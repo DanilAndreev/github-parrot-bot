@@ -27,7 +27,6 @@
 import {BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import Chat from "./Chat";
 
-
 @Entity()
 export default class Collaborator extends BaseEntity {
     @PrimaryGeneratedColumn()

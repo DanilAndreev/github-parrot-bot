@@ -32,7 +32,6 @@ import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
 import AmqpDispatcher from "../../core/AmqpDispatcher";
 import {QUEUES} from "../../globals";
 
-
 @WebHookAmqpHandler.Handler("issues", 10)
 export default class IssuesHandler extends WebHookAmqpHandler {
     protected async handleHook(webHook: WebHook, payload: Issues): Promise<boolean | void> {
@@ -47,11 +46,13 @@ export default class IssuesHandler extends WebHookAmqpHandler {
             title: issue.title,
             body: issue.body,
             html_url: issue.html_url,
-            milestone: issue.milestone ? {
-                title: issue.milestone.title,
-                due_on: moment(issue.milestone.due_on).format("ll"),
-            } : undefined,
-        }
+            milestone: issue.milestone
+                ? {
+                      title: issue.milestone.title,
+                      due_on: moment(issue.milestone.due_on).format("ll"),
+                  }
+                : undefined,
+        };
 
         let entityId: number = NaN;
         try {
@@ -64,7 +65,7 @@ export default class IssuesHandler extends WebHookAmqpHandler {
             entityId = entity.id;
         } catch (error) {
             const entity: Issue | undefined = await Issue.findOne({
-                where: {chat: webHook.chat, issueId: issue.id}
+                where: {chat: webHook.chat, issueId: issue.id},
             });
             if (entity) {
                 entity.info = info;

@@ -28,16 +28,17 @@ import {
     BaseEntity,
     Column,
     Entity,
-    Index, JoinColumn,
+    Index,
+    JoinColumn,
     ManyToOne,
-    OneToMany, OneToOne,
+    OneToMany,
+    OneToOne,
     PrimaryGeneratedColumn,
-    UpdateDateColumn
+    UpdateDateColumn,
 } from "typeorm";
 import Chat from "./Chat";
 import WebHook from "./WebHook";
 import CheckSuite from "./CheckSuite";
-
 
 @Entity()
 @Index(["pullRequestId", "webhook"], {unique: true})
@@ -76,14 +77,14 @@ namespace PullRequest {
         state: string;
         title: string;
         body?: string;
-        labels: { name: string }[];
-        assignees: { login: string }[];
+        labels: {name: string}[];
+        assignees: {login: string}[];
         opened_by: string;
-        requested_reviewers: { login: string }[];
+        requested_reviewers: {login: string}[];
         milestone?: {
             title: string;
             due_on?: string;
-        }
+        };
     }
 
     @Entity()

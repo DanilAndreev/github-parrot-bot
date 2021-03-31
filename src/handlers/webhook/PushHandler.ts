@@ -30,9 +30,8 @@ import {Push} from "github-webhook-event-types";
 import loadTemplate from "../../utils/loadTemplate";
 import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
 
-
 @WebHookAmqpHandler.Handler("push", 10)
-export default class PushHandler extends  WebHookAmqpHandler {
+export default class PushHandler extends WebHookAmqpHandler {
     protected async handleHook(webHook: WebHook, payload: Push): Promise<boolean | void> {
         const {pusher, head_commit, repository, ref} = payload;
 
@@ -44,16 +43,16 @@ export default class PushHandler extends  WebHookAmqpHandler {
             repository: repository.full_name,
             message: head_commit.message,
             pusher: pusher.name,
-            ref: branch
-        }).replace(/  +/g, " ").replace(/\n +/g, "\n");
+            ref: branch,
+        })
+            .replace(/  +/g, " ")
+            .replace(/\n +/g, "\n");
 
         await Bot.getCurrent().sendMessage(webHook.chat.chatId, message, {
             parse_mode: "HTML",
             reply_markup: {
-                inline_keyboard: [
-                    [{text: "View on GitHub", url: head_commit.url}],
-                ]
-            }
+                inline_keyboard: [[{text: "View on GitHub", url: head_commit.url}]],
+            },
         });
     }
 }

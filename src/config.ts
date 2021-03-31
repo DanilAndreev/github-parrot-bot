@@ -48,7 +48,6 @@ import DrawIssueHandler from "./handlers/draw/DrawIssueHandler";
 import DrawCheckSuiteHandler from "./handlers/draw/DrawCheckSuiteHandler";
 import DrawPullRequestHandler from "./handlers/draw/DrawPullRequestHandler";
 
-
 const config: Config = {
     bot: {
         token: process.env.TELEGRAM_BOT_TOKEN || "",
@@ -59,8 +58,8 @@ const config: Config = {
             ConnectCommand,
             DisconnectCommand,
             ListRepositoriesCommand,
-            RemoveRepositoryCommand
-        ]
+            RemoveRepositoryCommand,
+        ],
     },
     db: {
         type: "postgres",
@@ -75,11 +74,11 @@ const config: Config = {
             CheckSuite.CheckSuiteMessage,
             PullRequest,
             PullRequest.PullRequestMessage,
-            CheckRun
+            CheckRun,
         ],
         ssl: {
             rejectUnauthorized: false,
-        }
+        },
     },
     amqp: {
         connect: process.env.CLOUDAMQP_URL || "",
@@ -97,7 +96,7 @@ const config: Config = {
     },
     server: {
         port: process.env.PORT ? +process.env.PORT : 3030,
-    }
+    },
 };
 
 export default config;

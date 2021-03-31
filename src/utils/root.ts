@@ -26,17 +26,14 @@
 
 import * as path from "path";
 
-
 /**
  * getProjectRoot - returns project root directory path or undefined if error occured.
  * @function
  * @author Danil Andreev
  */
 export function getProjectRoot(): string | undefined {
-    if (!require?.main?.filename && !process?.mainModule?.filename)
-        return undefined;
+    if (!require?.main?.filename && !process?.mainModule?.filename) return undefined;
     return path.dirname(require?.main?.filename || process?.mainModule?.filename || "");
-
 }
 
 /**

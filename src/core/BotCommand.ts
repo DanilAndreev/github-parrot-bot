@@ -32,7 +32,6 @@ import {Command as CommanderCommand, CommanderError, Option as CommanderOption} 
 import stringArgv from "string-argv";
 import JSONObject from "../interfaces/JSONObject";
 
-
 /**
  * BotCommand - basic class for creating Telegram bot commands.
  * You should override handler method and use it as entry point for your command handler.
@@ -40,7 +39,6 @@ import JSONObject from "../interfaces/JSONObject";
  * @author Danil Andreev
  */
 @Reflect.metadata("bot-command", true)
-
 @Reflect.metadata("bot-command-allowed-unknown-option", false)
 @Reflect.metadata("bot-command-allowed-excess-arguments", false)
 class BotCommand {
@@ -80,7 +78,11 @@ class BotCommand {
      * @param args - Command arguments list.
      * @param options - Json with command options.
      */
-    protected async handler(message: Message, args: string[], options: JSONObject<string>): Promise<void | string | string[]> {
+    protected async handler(
+        message: Message,
+        args: string[],
+        options: JSONObject<string>
+    ): Promise<void | string | string[]> {
         throw new ReferenceError(`Abstract method call. Inherit this class and override this method.`);
     }
 
@@ -102,8 +104,7 @@ class BotCommand {
             } catch (error) {
                 if (error instanceof CommandError) {
                     const out_message = error.message;
-                    Bot
-                        .getCurrent()
+                    Bot.getCurrent()
                         .sendMessage(message.chat.id, "<i>Error:</i> \n" + out_message, {parse_mode: "HTML"})
                         .catch(err => {
                             throw err;
@@ -120,9 +121,10 @@ class BotCommand {
             this.validation.parse(argv, {from: "user"});
         } catch (error) {
             if (error instanceof CommanderError) {
-                await Bot
-                    .getCurrent()
-                    .sendMessage(message.chat.id, error.message + "\n\n" + this.validation.helpInformation());
+                await Bot.getCurrent().sendMessage(
+                    message.chat.id,
+                    error.message + "\n\n" + this.validation.helpInformation()
+                );
             } else {
                 await Bot.getCurrent().sendMessage(message.chat.id, "Unrecognized error");
                 console.error(error);
@@ -156,7 +158,7 @@ namespace BotCommand {
      * @param args_pattern - command arguments pattern.
      */
     export function Command(name: string, args_pattern: string = "") {
-        return function BotCommandWrapper<T extends new(...args: any[]) => {}>(objectConstructor: T): T {
+        return function BotCommandWrapper<T extends new (...args: any[]) => {}>(objectConstructor: T): T {
             return class WrappedBotCommand extends objectConstructor {
                 constructor(...args: any[]) {
                     super(...args);
@@ -182,7 +184,7 @@ namespace BotCommand {
      * @param defaultValue - Default flag value.
      */
     export function Option(flags: string | CommanderOption, description?: string, defaultValue?: string | boolean) {
-        return function BotCommandWrapper<T extends new(...args: any[]) => {}>(objectConstructor: T): T {
+        return function BotCommandWrapper<T extends new (...args: any[]) => {}>(objectConstructor: T): T {
             return class WrappedBotCommand extends objectConstructor {
                 constructor(...args: any[]) {
                     super(...args);
@@ -206,14 +208,18 @@ namespace BotCommand {
      * @param str - Description string.
      * @param argsDescription - Object with arguments descriptions. Key - argument name.
      */
-    export function Description(str: string, argsDescription?: { [p: string]: string } | undefined) {
-        return function BotCommandWrapper<T extends new(...args: any[]) => {}>(objectConstructor: T): T {
+    export function Description(str: string, argsDescription?: {[p: string]: string} | undefined) {
+        return function BotCommandWrapper<T extends new (...args: any[]) => {}>(objectConstructor: T): T {
             return class WrappedBotCommand extends objectConstructor {
                 constructor(...args: any[]) {
                     super(...args);
                     if (this instanceof BotCommand) {
                         Reflect.defineMetadata("bot-command-description", str, WrappedBotCommand.prototype);
-                        Reflect.defineMetadata("bot-command-arguments-description", argsDescription, WrappedBotCommand.prototype);
+                        Reflect.defineMetadata(
+                            "bot-command-arguments-description",
+                            argsDescription,
+                            WrappedBotCommand.prototype
+                        );
                         this.validation.description(str, argsDescription);
                     } else {
                         throw new TypeError(`Invalid decorated class, expected BotCommand or derived from it.`);
@@ -228,12 +234,16 @@ namespace BotCommand {
      * @author Danil Andreev
      */
     export function AllowExcessArguments() {
-        return function BotCommandWrapper<T extends new(...args: any[]) => {}>(objectConstructor: T): T {
+        return function BotCommandWrapper<T extends new (...args: any[]) => {}>(objectConstructor: T): T {
             return class WrappedBotCommand extends objectConstructor {
                 constructor(...args: any[]) {
                     super(...args);
                     if (this instanceof BotCommand) {
-                        Reflect.defineMetadata("bot-command-allowed-excess-arguments", true, WrappedBotCommand.prototype);
+                        Reflect.defineMetadata(
+                            "bot-command-allowed-excess-arguments",
+                            true,
+                            WrappedBotCommand.prototype
+                        );
                         this.validation.allowExcessArguments(true);
                     } else {
                         throw new TypeError(`Invalid decorated class, expected BotCommand or derived from it.`);
@@ -248,7 +258,7 @@ namespace BotCommand {
      * @author Danil Andreev
      */
     export function AllowUnknownOptions() {
-        return function BotCommandWrapper<T extends new(...args: any[]) => {}>(objectConstructor: T): T {
+        return function BotCommandWrapper<T extends new (...args: any[]) => {}>(objectConstructor: T): T {
             return class WrappedBotCommand extends objectConstructor {
                 constructor(...args: any[]) {
                     super(...args);
@@ -270,7 +280,7 @@ namespace BotCommand {
      * @param text - Help text.
      */
     export function HelpText(position: commander.AddHelpTextPosition, text: string) {
-        return function BotCommandWrapper<T extends new(...args: any[]) => {}>(objectConstructor: T): T {
+        return function BotCommandWrapper<T extends new (...args: any[]) => {}>(objectConstructor: T): T {
             return class WrappedBotCommand extends objectConstructor {
                 constructor(...args: any[]) {
                     super(...args);
@@ -285,7 +295,7 @@ namespace BotCommand {
         };
     }
 
-    export type CallbackFunction = (message: Message, match: RegExpExecArray) => Promise<void>
+    export type CallbackFunction = (message: Message, match: RegExpExecArray) => Promise<void>;
 }
 
 export default BotCommand;

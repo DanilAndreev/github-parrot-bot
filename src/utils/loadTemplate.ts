@@ -28,7 +28,6 @@ import {readFileSync} from "fs";
 import root from "./root";
 import * as Handlebars from "handlebars";
 
-
 export default async function loadTemplate(templateName: string): Promise<HandlebarsTemplateDelegate> {
     return Handlebars.compile(readFileSync(root + `/templates/${templateName}.hbs`).toString());
 }

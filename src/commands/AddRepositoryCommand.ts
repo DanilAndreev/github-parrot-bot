@@ -32,11 +32,10 @@ import WebHook from "../entities/WebHook";
 import Bot from "../core/Bot";
 import Chat from "../entities/Chat";
 
-
 @BotCommand.Command("add", "<repository> <secret>")
 @BotCommand.Description("Connects GitHub repository to this chat", {
-    "repository": "GitHub repository full name. Example: octocat/Hello-World",
-    "secret": "Secret string key from GitHub webhook."
+    repository: "GitHub repository full name. Example: octocat/Hello-World",
+    secret: "Secret string key from GitHub webhook.",
 })
 export default class AddRepositoryCommand extends BotCommand {
     protected async handler(message: Message, args: string[], opts): Promise<string[]> {
@@ -44,12 +43,11 @@ export default class AddRepositoryCommand extends BotCommand {
         const telegramName: string = message.from?.username || "";
         const [repository, secret] = args;
 
-        if (!await checkAdmin(telegramName, message))
+        if (!(await checkAdmin(telegramName, message)))
             throw new CommandError(`User @${telegramName} have no permissions to add repository.`);
 
         const chat: Chat | undefined = await Chat.findOne({where: {chatId: message.chat.id}});
-        if (!chat)
-            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+        if (!chat) throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
 
         if (await WebHook.findOne({where: {chat, repository}}))
             throw new CommandError(
@@ -70,12 +68,15 @@ export default class AddRepositoryCommand extends BotCommand {
         try {
             await Bot.getCurrent().deleteMessage(chatId, "" + message.message_id);
         } catch (error) {
-            await Bot.getCurrent().sendMessage(chatId, `Warning: You should give permissions to delete messages for GitHub Tracker bot.`);
+            await Bot.getCurrent().sendMessage(
+                chatId,
+                `Warning: You should give permissions to delete messages for GitHub Tracker bot.`
+            );
         }
         return [
             `Successfully added repository.`,
             `Name: <b>${result.repository}</b>`,
-            `Secret: <code>${result.secretPreview}</code>`
+            `Secret: <code>${result.secretPreview}</code>`,
         ];
     }
 
@@ -93,7 +94,8 @@ export default class AddRepositoryCommand extends BotCommand {
      * @throws RangeError
      */
     public static createSecretPreview(secret: string) {
-        if (secret.length < 4) throw new RangeError("Error: secret is too short. It must be at least 4 symbols in length.");
+        if (secret.length < 4)
+            throw new RangeError("Error: secret is too short. It must be at least 4 symbols in length.");
         const head: string = secret.slice(0, 2);
         const tail: string = secret.slice(secret.length - 2, secret.length);
         return head + "********" + tail;

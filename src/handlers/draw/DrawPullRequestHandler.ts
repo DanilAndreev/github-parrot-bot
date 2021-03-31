@@ -36,11 +36,10 @@ import {getConnection} from "typeorm";
 import AmqpDispatcher from "../../core/AmqpDispatcher";
 import PullRequest from "../../entities/PullRequest";
 
-
 @WebHookAmqpHandler.Handler(QUEUES.PULL_REQUEST_SHOW_QUEUE, 10)
 export default class DrawPullRequestHandler extends AmqpHandler {
     protected async handle(content: any, message: AMQPMessage): Promise<void | boolean> {
-        const {pullRequest}: { pullRequest: number } = content;
+        const {pullRequest}: {pullRequest: number} = content;
 
         const entity: PullRequest | undefined = await PullRequest.findOne({
             where: {id: pullRequest},
@@ -49,10 +48,7 @@ export default class DrawPullRequestHandler extends AmqpHandler {
         if (!entity) return;
 
         const template = await loadTemplate("pull_request");
-        const text: string = template(entity)
-            .replace(/  +/g, " ")
-            .replace(/\n +/g, "\n");
-
+        const text: string = template(entity).replace(/  +/g, " ").replace(/\n +/g, "\n");
 
         try {
             const pullRequestMessage: PullRequest.PullRequestMessage = new PullRequest.PullRequestMessage();
@@ -63,10 +59,8 @@ export default class DrawPullRequestHandler extends AmqpHandler {
                     const newMessage: Message = await Bot.getCurrent().sendMessage(entity.chat.chatId, text, {
                         parse_mode: "HTML",
                         reply_markup: {
-                            inline_keyboard: [
-                                [{text: "View on GitHub", url: entity.info.html_url}],
-                            ]
-                        }
+                            inline_keyboard: [[{text: "View on GitHub", url: entity.info.html_url}]],
+                        },
                     });
                     pullRequestMessage.messageId = newMessage.message_id;
                     await transaction.save(pullRequestMessage);
@@ -79,15 +73,12 @@ export default class DrawPullRequestHandler extends AmqpHandler {
                     message_id: entity.chatMessage.messageId,
                     parse_mode: "HTML",
                     reply_markup: {
-                        inline_keyboard: [
-                            [{text: "View on GitHub", url: entity.info.html_url}],
-                        ]
-                    }
+                        inline_keyboard: [[{text: "View on GitHub", url: entity.info.html_url}]],
+                    },
                 });
             } catch (err) {
                 if (!etelegramIgnore(err)) {
-                    if (entity.chatMessage)
-                        await entity.chatMessage.remove();
+                    if (entity.chatMessage) await entity.chatMessage.remove();
                     await AmqpDispatcher.getCurrent().sendToQueue(QUEUES.PULL_REQUEST_SHOW_QUEUE, content);
                 }
             }
