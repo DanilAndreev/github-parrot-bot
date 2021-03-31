@@ -41,5 +41,3 @@ export function getProjectRoot(): string | undefined {
  */
 const root: string | undefined = getProjectRoot();
 export default root;
-
-

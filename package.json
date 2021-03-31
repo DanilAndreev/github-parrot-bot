@@ -62,7 +62,7 @@
     "eslint": "^7.23.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
-    "husky": "^6.0.0",
+    "husky": "4.3.0",
     "jest": "^26.5.3",
     "prettier": "^2.2.1",
     "telegram-test-api": "^2.5.0",
@@ -82,7 +82,7 @@
     "build": "yarn run build:compile && yarn run build:copyfiles",
     "start:dev": "ts-node",
     "start": "node dest/index.js",
-    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
+    "prettier-format": "prettier --config .prettierrc.yaml \"src/**/*.ts\" --write",
     "lint": "eslint src --ext .ts"
   }
 }

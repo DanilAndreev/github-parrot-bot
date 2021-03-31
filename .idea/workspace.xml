@@ -10,9 +10,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[eslintrc] Added indent rule.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[husky] Test commit.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/root.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/root.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
@@ -493,7 +496,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[Commands] Rewritten to new logic." />
     <MESSAGE value="[Commands] Changed logic to telegram user id." />
     <MESSAGE value="[WebServer] Created mechanism." />
     <MESSAGE value="[WebServer] Finished work with events." />
@@ -518,17 +520,18 @@
     <MESSAGE value="[prettier] Configured." />
     <MESSAGE value="[GLOBAL] Reformatted all source files with prettier." />
     <MESSAGE value="[eslintrc] Added indent rule." />
-    <option name="LAST_COMMIT_MESSAGE" value="[eslintrc] Added indent rule." />
+    <MESSAGE value="[husky] Test commit." />
+    <option name="LAST_COMMIT_MESSAGE" value="[husky] Test commit." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2594" y="257" key="#ESLint" timestamp="1617190925998">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2594" y="257" key="#ESLint/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617190925998" />
-    <state x="2659" y="261" key="FileChooserDialogImpl" timestamp="1617190770058">
+    <state x="2659" y="261" key="FileChooserDialogImpl" timestamp="1617200613084">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2659" y="261" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617190770058" />
+    <state x="2659" y="261" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617200613084" />
     <state width="1899" height="260" key="GridCell.Tab.0.bottom" timestamp="1617197060807">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
