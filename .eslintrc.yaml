@@ -12,6 +12,9 @@ rules:
   "@typescript-eslint/no-namespace": 'off'
   "@typescript-eslint/no-inferrable-types": 'off'
   "@typescript-eslint/ban-types": 'off'
+  indent:
+    - warn
+    - 4
   only-arrow-functions:
     - 'off'
   quotes:
