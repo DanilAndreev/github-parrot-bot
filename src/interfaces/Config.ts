@@ -27,7 +27,7 @@
 import BotCommand from "../core/BotCommand";
 import AmqpHandler from "../core/AmqpHandler";
 import {ConnectionOptions} from "typeorm";
-import * as Amqp from "amqplib";
+import * as AMQP from "amqplib";
 
 namespace Config {
     export interface Bot {
@@ -40,7 +40,7 @@ namespace Config {
     }
 
     export interface Amqp {
-        connect: string | Amqp.Options.Connect;
+        connect: string | AMQP.Options.Connect;
         handlers: typeof AmqpHandler[];
     }
 

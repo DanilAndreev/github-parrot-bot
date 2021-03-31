@@ -42,7 +42,7 @@ export default class DrawPullRequestHandler extends AmqpHandler {
     protected async handle(content: any, message: AMQPMessage): Promise<void | boolean> {
         const {pullRequest}: { pullRequest: number } = content;
 
-        let entity: PullRequest | undefined = await PullRequest.findOne({
+        const entity: PullRequest | undefined = await PullRequest.findOne({
             where: {id: pullRequest},
             relations: ["webhook", "chat", "chatMessage", "checksuits", "checksuits.runs"],
         });

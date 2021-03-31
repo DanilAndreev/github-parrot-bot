@@ -42,7 +42,7 @@ export default class DrawCheckSuiteHandler extends AmqpHandler {
     protected async handle(content: any, message: AMQPMessage): Promise<void | boolean> {
         const {checkSuite}: { checkSuite: number } = content;
 
-        let entity: CheckSuite | undefined = await CheckSuite.findOne({
+        const entity: CheckSuite | undefined = await CheckSuite.findOne({
             where: {id: checkSuite},
             relations: ["webhook", "chat", "chatMessage", "pullRequest", "runs"],
         });

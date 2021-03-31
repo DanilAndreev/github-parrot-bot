@@ -69,15 +69,15 @@ export default class Bot extends TelegramBot {
 
         if (Bot.commands.length) {
             for (const command of Bot.commands) {
-                this.onText(new RegExp(`\/${command.getCommandPattern()} (.+)`), command.getCallback());
-                this.onText(new RegExp(`^\/${command.getCommandPattern()}$`), command.getCallback());
+                this.onText(new RegExp(`/${command.getCommandPattern()} (.+)`), command.getCallback());
+                this.onText(new RegExp(`^/${command.getCommandPattern()}$`), command.getCallback());
                 if (process.env.TELEGRAM_TAG) {
                     let telegramTag: string = process.env.TELEGRAM_TAG;
                     if (telegramTag[0] !== "@") {
                         telegramTag = "@" + telegramTag;
                     }
-                    this.onText(new RegExp(`\/${command.getCommandPattern()}${telegramTag} (.+)`), command.getCallback());
-                    this.onText(new RegExp(`^\/${command.getCommandPattern()}${telegramTag}$`), command.getCallback());
+                    this.onText(new RegExp(`/${command.getCommandPattern()}${telegramTag} (.+)`), command.getCallback());
+                    this.onText(new RegExp(`^/${command.getCommandPattern()}${telegramTag}$`), command.getCallback());
                 }
             }
         } else {
