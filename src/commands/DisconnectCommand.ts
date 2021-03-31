@@ -32,7 +32,6 @@ import JSONObject from "../interfaces/JSONObject";
 import Bot from "../core/Bot";
 import Chat from "../entities/Chat";
 
-
 @BotCommand.Command("disconnect", "[github_username]")
 @BotCommand.Description("Breaks link between telegram and github user (by default - you).")
 @BotCommand.Option("-a, --all", "Apply this action for each connection for selected user.", false)
@@ -55,8 +54,7 @@ export default class DisconnectCommand extends BotCommand {
         let telegramName: string = message.from?.username || message.from?.first_name || "";
         const telegramId: number | undefined = (opts.user ? +opts.user : undefined) || message.from?.id;
 
-        if (!telegramId)
-            throw new CommandError(`Unable to get telegram user.`);
+        if (!telegramId) throw new CommandError(`Unable to get telegram user.`);
 
         if (opts.user) {
             try {
@@ -68,13 +66,11 @@ export default class DisconnectCommand extends BotCommand {
         }
 
         const chat: Chat | undefined = await Chat.findOne({where: {id: chatId}});
-        if (!chat)
-            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+        if (!chat) throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
 
         const result = await Collaborator.delete({chat, telegramId});
 
-        if (!result.affected)
-            throw new CommandError(`User @${telegramName} has no AKA.`);
+        if (!result.affected) throw new CommandError(`User @${telegramName} has no AKA.`);
 
         return `Successfully deleted all AKAs for @${telegramName}`;
     }
@@ -85,8 +81,7 @@ export default class DisconnectCommand extends BotCommand {
         let telegramName: string = message.from?.username || message.from?.first_name || "";
         const telegramId: number | undefined = (opts.user ? +opts.user : undefined) || message.from?.id;
 
-        if (!telegramId)
-            throw new CommandError(`Unable to get telegram user.`);
+        if (!telegramId) throw new CommandError(`Unable to get telegram user.`);
 
         if (opts.user) {
             try {
@@ -98,8 +93,7 @@ export default class DisconnectCommand extends BotCommand {
         }
 
         const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
-        if (!chat)
-            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+        if (!chat) throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
 
         const result = await Collaborator.delete({chat, gitHubName: ghName, telegramId});
 

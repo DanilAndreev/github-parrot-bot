@@ -28,9 +28,7 @@ import * as Koa from "koa";
 import {Context, Next} from "koa";
 import * as BodyParser from "koa-bodyparser";
 import config from "../config";
-import * as Amqp from "amqplib";
 import AmqpDispatcher from "./AmqpDispatcher";
-
 
 /**
  * WebServer - web server for handling WebHooks.
@@ -61,9 +59,8 @@ class WebServer extends Koa {
             const payload: any = ctx.request.body;
             const event = ctx.request.get("x-github-event");
             console.log(event);
-            if (!event)
-                throw new Error("Failed to get event.");
-            await AmqpDispatcher.getCurrent().sendToQueue(event, {payload, ctx}, {expiration: 1000*60*30});
+            if (!event) throw new Error("Failed to get event.");
+            await AmqpDispatcher.getCurrent().sendToQueue(event, {payload, ctx}, {expiration: 1000 * 60 * 30});
             ctx.status = 200;
         } catch (error) {
             ctx.status = 400;

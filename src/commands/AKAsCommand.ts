@@ -32,7 +32,6 @@ import CommandError from "../errors/CommandError";
 import Bot from "../core/Bot";
 import Chat from "../entities/Chat";
 
-
 @BotCommand.Command("akas")
 @BotCommand.Description("Shows all links between Telegram and GtiHub users for this chat.")
 @BotCommand.Option("-m, --my", "Show only my AKAs.", false)
@@ -45,23 +44,23 @@ export default class AKAsCommand extends BotCommand {
         }
     }
 
-
     protected async showAll(message: Message, args: string[], opts: JSONObject<string>): Promise<string | string[]> {
         const chatId: number = message.chat.id;
 
         const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
-        if (!chat)
-            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+        if (!chat) throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
 
         const result: Collaborator[] = await Collaborator.find({where: {chat}});
 
-        if (!result.length)
-            return `This chat have no AKAs.`;
+        if (!result.length) return `This chat have no AKAs.`;
 
-        const text: string[] = await Promise
-            .all(result.map(async (collaboration: Collaborator) => {
+        const text: string[] = await Promise.all(
+            result.map(async (collaboration: Collaborator) => {
                 try {
-                    const chatMember: ChatMember = await Bot.getCurrent().getChatMember(chatId, "" + collaboration.telegramId);
+                    const chatMember: ChatMember = await Bot.getCurrent().getChatMember(
+                        chatId,
+                        "" + collaboration.telegramId
+                    );
                     if (chatMember.status === "left") {
                         throw Error();
                     }
@@ -70,32 +69,26 @@ export default class AKAsCommand extends BotCommand {
                 } catch (error) {
                     return "";
                 }
-            }))
-            .catch((error: Error) => {
-                throw new CommandError(error.message);
-            });
+            })
+        ).catch((error: Error) => {
+            throw new CommandError(error.message);
+        });
 
-        return [
-            `All AKAs for this chat:`,
-            ...text
-        ];
+        return [`All AKAs for this chat:`, ...text];
     }
 
     protected async showMy(message: Message, args: string[], opts: JSONObject<string>): Promise<string | string[]> {
         const chatId: number = message.chat.id;
         const telegramName: string = message.from?.username || "";
-        if (!message.from?.id)
-            throw new CommandError("Unable to get telegram user id.");
+        if (!message.from?.id) throw new CommandError("Unable to get telegram user id.");
         const telegramId: number = message.from.id;
 
         const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
-        if (!chat)
-            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+        if (!chat) throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
 
         const result: Collaborator[] = await Collaborator.find({where: {chat, telegramId}});
 
-        if (!result.length)
-            return `User @${telegramName} have no AKA.`;
+        if (!result.length) return `User @${telegramName} have no AKA.`;
 
         return [
             `User @${telegramName} <i>[${telegramId}]</i>:`,

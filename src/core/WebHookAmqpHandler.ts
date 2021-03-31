@@ -30,17 +30,15 @@ import {Context} from "koa";
 import WebHook from "../entities/WebHook";
 import {Message} from "amqplib";
 
-
 export default class WebHookAmqpHandler extends AmqpHandler {
     static checkSignature(incomingSignature: string, payload: any, key: string): boolean {
-        const expectedSignature = "sha1=" + Crypto.createHmac("sha1", key)
-            .update(JSON.stringify(payload))
-            .digest("hex");
+        const hmac: string = Crypto.createHmac("sha1", key).update(JSON.stringify(payload)).digest("hex");
+        const expectedSignature = "sha1=" + hmac;
         return expectedSignature === incomingSignature;
     }
 
     protected async handle(content: any, message: Message): Promise<void | boolean> {
-        const {payload, ctx}: { payload: any, ctx: Context } = content;
+        const {payload, ctx}: {payload: any; ctx: Context} = content;
         const {repository} = payload;
 
         const webHooks: WebHook[] = await WebHook.find({

@@ -30,8 +30,7 @@ import {ChatMember} from "node-telegram-bot-api";
 export default async function checkAdmin(username: string, message): Promise<boolean> {
     try {
         const admins: ChatMember[] = await Bot.getCurrent().getChatAdministrators(message.chat.id);
-        if (admins.find((member) => member.user.username === username))
-            return true;
+        if (admins.find(member => member.user.username === username)) return true;
     } catch (error) {
         if (message.chat.username === username) return true;
     }

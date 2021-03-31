@@ -60,7 +60,11 @@
     "@typescript-eslint/parser": "^4.20.0",
     "copyfiles": "^2.4.1",
     "eslint": "^7.23.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "husky": "^6.0.0",
     "jest": "^26.5.3",
+    "prettier": "^2.2.1",
     "telegram-test-api": "^2.5.0",
     "ts-jest": "^26.4.1",
     "ts-node": "^9.0.0",
@@ -72,6 +76,8 @@
     "build:copyfiles": "copyfiles --up 1 \"./src/**/*.hbs\" \"./dest/\" --verbose --error",
     "build": "yarn run build:compile && yarn run build:copyfiles",
     "start:dev": "ts-node",
-    "start": "node dest/index.js"
+    "start": "node dest/index.js",
+    "prettier-format": "prettier --config .prettierrc.yaml \"src/**/*.ts\" --write",
+    "lint": "eslint src --ext .ts"
   }
 }

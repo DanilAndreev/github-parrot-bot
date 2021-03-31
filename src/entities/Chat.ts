@@ -30,7 +30,6 @@ import Collaborator from "./Collaborator";
 import Issue from "./Issue";
 import CheckSuite from "./CheckSuite";
 
-
 @Entity()
 export default class Chat extends BaseEntity {
     @PrimaryColumn({type: "bigint"})
@@ -46,7 +45,7 @@ export default class Chat extends BaseEntity {
     issues: Issue[];
 
     @OneToMany(type => CheckSuite, checksuite => checksuite.chat)
-    checksuits: CheckSuite[]
+    checksuits: CheckSuite[];
 
     @CreateDateColumn()
     createdAt: Date;

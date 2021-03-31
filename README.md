@@ -21,5 +21,3 @@
 ## Giving rights
 
 # Source usage
-
-

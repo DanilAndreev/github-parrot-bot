@@ -30,7 +30,6 @@ import config from "../config";
 import AmqpHandler from "./AmqpHandler";
 import JSONObject from "../interfaces/JSONObject";
 
-
 class AmqpDispatcher {
     protected static current: AmqpDispatcher;
 
@@ -41,12 +40,12 @@ class AmqpDispatcher {
         this.connection = connection;
 
         this.handlers = config.amqp.handlers.map((HandlerClass: typeof AmqpHandler) => {
-            return new HandlerClass()
-        })
+            return new HandlerClass();
+        });
 
         for (const handler of this.handlers) {
             this.hook(handler).catch((error: Error) => {
-                throw error
+                throw error;
             });
         }
     }
@@ -55,11 +54,13 @@ class AmqpDispatcher {
         const queueName = Reflect.getMetadata("amqp-handler-queue", handler);
         const prefetch = Reflect.getMetadata("amqp-handler-prefetch", handler);
         if (typeof queueName !== "string")
-            throw new TypeError(`Invalid handler. You have to inherit your handler from AmqpHandler and decorate it with AmqpHandler.Handler decorator.`);
+            throw new TypeError(
+                `Invalid handler. You have to inherit your handler from AmqpHandler and decorate it with AmqpHandler.Handler decorator.`
+            );
         const channel: Amqp.Channel = await this.connection.createChannel();
         await channel.assertQueue(queueName);
         await channel.prefetch(prefetch || 10);
-        await channel.consume(queueName, (msg) => msg && handler.execute(msg, channel));
+        await channel.consume(queueName, msg => msg && handler.execute(msg, channel));
     }
 
     public async sendToQueue(queueName: string, message: JSONObject, options?: Amqp.Options.Publish) {

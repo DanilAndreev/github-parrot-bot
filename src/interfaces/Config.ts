@@ -43,14 +43,13 @@ namespace Config {
         connect: string | AMQP.Options.Connect;
         handlers: typeof AmqpHandler[];
     }
-
 }
 
 interface Config {
     bot: Config.Bot;
     db: ConnectionOptions;
     server: Config.Server;
-    amqp: Config.Amqp,
+    amqp: Config.Amqp;
 }
 
 export default Config;

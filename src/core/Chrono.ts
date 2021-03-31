@@ -73,8 +73,7 @@ abstract class Chrono {
      * @author Danil Andreev
      */
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    protected beforeLaunch(): void | Promise<void> {
-    }
+    protected beforeLaunch(): void | Promise<void> {}
 
     /**
      * start - starts the chron function.
@@ -83,10 +82,7 @@ abstract class Chrono {
      * @author Danil Andreev.
      */
     public async start(...args: any[]): Promise<Chrono> {
-        const {
-            interval = 1000,
-            noInstantRun = false,
-        } = this.options;
+        const {interval = 1000, noInstantRun = false} = this.options;
         await this.beforeLaunch();
         if (!noInstantRun) this.run();
         this.chronHandle = setInterval(this.run, interval, args);

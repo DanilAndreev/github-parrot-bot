@@ -33,17 +33,20 @@ import CheckSuite from "../../entities/CheckSuite";
 import AmqpDispatcher from "../../core/AmqpDispatcher";
 import {QUEUES} from "../../globals";
 
-
 @WebHookAmqpHandler.Handler("check_run", 10)
 export default class CheckRunHandler extends WebHookAmqpHandler {
     protected async handleHook(webHook: WebHook, payload: CheckRunType): Promise<boolean | void> {
         const {action, check_run, repository, sender} = payload;
 
-        await new CheckSuiteHandler().handleHook(webHook, {check_suite: check_run.check_suite} as CheckSuiteType, false);
+        await new CheckSuiteHandler().handleHook(
+            webHook,
+            {check_suite: check_run.check_suite} as CheckSuiteType,
+            false
+        );
 
         const suite: CheckSuite | undefined = await CheckSuite.findOne({
             where: {suiteId: check_run.check_suite.id, chat: webHook.chat},
-            relations: ["pullRequest", "chat", "runs"]
+            relations: ["pullRequest", "chat", "runs"],
         });
 
         if (!suite) return;

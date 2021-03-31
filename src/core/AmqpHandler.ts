@@ -25,9 +25,7 @@
  */
 
 import * as Amqp from "amqplib";
-import {Context} from "koa";
 import {Message} from "amqplib";
-
 
 class AmqpHandler {
     protected handle(content: any, message: Message): void | Promise<void | boolean> {
@@ -58,7 +56,7 @@ namespace AmqpHandler {
      * @author Danil Andreev
      */
     export function Handler(queue: string, prefetch?: number) {
-        return function AmqpHandlerWrapper<T extends new(...args: any[]) => {}>(objectConstructor: T): T {
+        return function AmqpHandlerWrapper<T extends new (...args: any[]) => {}>(objectConstructor: T): T {
             return class WrappedAmqpHandler extends objectConstructor {
                 constructor(...args: any[]) {
                     super(...args);

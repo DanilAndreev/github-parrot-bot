@@ -32,13 +32,12 @@ import {
     Index,
     ManyToOne,
     OneToMany,
-    PrimaryGeneratedColumn
+    PrimaryGeneratedColumn,
 } from "typeorm";
 import Chat from "./Chat";
 import Issue from "./Issue";
 import PullRequest from "./PullRequest";
 import CheckSuite from "./CheckSuite";
-
 
 @Entity()
 @Index(["chat", "repository"], {unique: true})

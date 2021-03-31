@@ -26,10 +26,8 @@
 
 export default function etelegramIgnore(error: any): boolean {
     if (error.code == "ETELEGRAM") {
-        if (error.message.includes("message is not modified"))
-            return true;
-        if (error.message.includes("429 Too Many Requests"))
-            return true;
+        if (error.message.includes("message is not modified")) return true;
+        if (error.message.includes("429 Too Many Requests")) return true;
     }
     return false;
 }

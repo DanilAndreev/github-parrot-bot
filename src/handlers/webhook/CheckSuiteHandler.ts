@@ -33,7 +33,6 @@ import {getConnection} from "typeorm";
 import AmqpDispatcher from "../../core/AmqpDispatcher";
 import {QUEUES} from "../../globals";
 
-
 @WebHookAmqpHandler.Handler("check_suite", 10)
 export default class CheckSuiteHandler extends WebHookAmqpHandler {
     public async handleHook(webHook: WebHook, payload: CheckSuiteType, draw: boolean = true): Promise<boolean | void> {
@@ -42,7 +41,7 @@ export default class CheckSuiteHandler extends WebHookAmqpHandler {
         let pullRequest: PullRequest | undefined = undefined;
         if (check_suite.pull_requests.length) {
             pullRequest = await PullRequest.findOne({
-                where: {pullRequestId: check_suite.pull_requests[0].id, chat: webHook.chat}
+                where: {pullRequestId: check_suite.pull_requests[0].id, chat: webHook.chat},
             });
         }
 
@@ -75,7 +74,7 @@ export default class CheckSuiteHandler extends WebHookAmqpHandler {
             entityId = entity.id;
         } catch (error) {
             const entity: CheckSuite | undefined = await CheckSuite.findOne({
-                where: {chat: webHook.chat, suiteId: check_suite.id}
+                where: {chat: webHook.chat, suiteId: check_suite.id},
             });
             if (entity) {
                 entity.info = info;

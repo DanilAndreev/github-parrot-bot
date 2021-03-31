@@ -31,7 +31,6 @@ import JSONObject from "../interfaces/JSONObject";
 import Chat from "../entities/Chat";
 import CommandError from "../errors/CommandError";
 
-
 @BotCommand.Command("list")
 @BotCommand.Description("Shows all GitHub repositories connected to this chat.")
 export default class ListRepositoriesCommand extends BotCommand {
@@ -39,17 +38,12 @@ export default class ListRepositoriesCommand extends BotCommand {
         const chatId: number = message.chat.id;
 
         const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
-        if (!chat)
-            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+        if (!chat) throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
 
         const result: WebHook[] = await WebHook.find({where: {chat}});
 
-        if (!result.length)
-            return `You have no repositories added.`;
+        if (!result.length) return `You have no repositories added.`;
 
-        return [
-            `Connected repositories:`,
-            ...result.map(repo => `<b>[${repo.repository}]</b>`),
-        ];
+        return [`Connected repositories:`, ...result.map(repo => `<b>[${repo.repository}]</b>`)];
     }
 }

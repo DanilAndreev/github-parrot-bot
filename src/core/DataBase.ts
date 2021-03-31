@@ -24,11 +24,9 @@
  * SOFTWARE.
  */
 
-import {Connection, createConnection} from "typeorm"
+import {Connection, createConnection} from "typeorm";
 import config from "../config";
 import {PostgresDriver} from "typeorm/driver/postgres/PostgresDriver";
-import * as moment from "moment";
-
 
 export let DBConnection: Connection | null = null;
 

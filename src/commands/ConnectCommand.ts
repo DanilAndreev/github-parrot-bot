@@ -31,19 +31,16 @@ import Collaborator from "../entities/Collaborator";
 import JSONObject from "../interfaces/JSONObject";
 import Chat from "../entities/Chat";
 
-
 @BotCommand.Command("connect", "<github_username>")
 @BotCommand.Description("Creates link between telegram and github user to show notifications.", {
-    "github_username": "GitHub username. Example: octocat",
+    github_username: "GitHub username. Example: octocat",
 })
 export default class ConnectCommand extends BotCommand {
     protected async handler(message: Message, args: string[], opts: JSONObject<string>): Promise<string[]> {
-
         const chatId: number = message.chat.id;
         const [ghName] = args;
         const telegramName: string = message.from?.username || message.from?.first_name || "";
-        if (!message.from?.id)
-            throw new CommandError("Unable to get telegram user id.");
+        if (!message.from?.id) throw new CommandError("Unable to get telegram user id.");
         const telegramId: number = message.from.id;
 
         // TODO: fix bug in groups.
@@ -55,8 +52,7 @@ export default class ConnectCommand extends BotCommand {
         // }
 
         const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
-        if (!chat)
-            throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
+        if (!chat) throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
 
         const storedCollaborator = await Collaborator.findOne({where: {chat, gitHubName: ghName}});
         if (storedCollaborator)
@@ -74,7 +70,7 @@ export default class ConnectCommand extends BotCommand {
         return [
             `Successfully added collaborator.`,
             `GitHub: <b>${result.gitHubName}</b>`,
-            `Telegram: @${telegramName}`
+            `Telegram: @${telegramName}`,
         ];
     }
 }

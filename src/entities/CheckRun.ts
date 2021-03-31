@@ -32,10 +32,9 @@ import {
     Index,
     ManyToOne,
     PrimaryGeneratedColumn,
-    UpdateDateColumn
+    UpdateDateColumn,
 } from "typeorm";
 import CheckSuite from "./CheckSuite";
-
 
 @Entity()
 @Index(["runId", "suite"], {unique: true})

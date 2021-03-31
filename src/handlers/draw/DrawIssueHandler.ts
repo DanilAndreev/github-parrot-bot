@@ -36,11 +36,10 @@ import {Message} from "node-telegram-bot-api";
 import {getConnection} from "typeorm";
 import AmqpDispatcher from "../../core/AmqpDispatcher";
 
-
 @WebHookAmqpHandler.Handler(QUEUES.ISSUE_SHOW_QUEUE, 10)
 export default class DrawIssueHandler extends AmqpHandler {
     protected async handle(content: any, message: AMQPMessage): Promise<void | boolean> {
-        const {issue}: { issue: number } = content;
+        const {issue}: {issue: number} = content;
 
         const entity: Issue | undefined = await Issue.findOne({
             where: {id: issue},
@@ -49,10 +48,7 @@ export default class DrawIssueHandler extends AmqpHandler {
         if (!entity) return;
 
         const template = await loadTemplate("issue");
-        const text: string = template(entity)
-            .replace(/  +/g, " ")
-            .replace(/\n +/g, "\n");
-
+        const text: string = template(entity).replace(/  +/g, " ").replace(/\n +/g, "\n");
 
         try {
             const issueMessage: Issue.IssueMessage = new Issue.IssueMessage();
@@ -63,10 +59,8 @@ export default class DrawIssueHandler extends AmqpHandler {
                     const newMessage: Message = await Bot.getCurrent().sendMessage(entity.chat.chatId, text, {
                         parse_mode: "HTML",
                         reply_markup: {
-                            inline_keyboard: [
-                                [{text: "View on GitHub", url: entity.info.html_url}],
-                            ]
-                        }
+                            inline_keyboard: [[{text: "View on GitHub", url: entity.info.html_url}]],
+                        },
                     });
                     issueMessage.messageId = newMessage.message_id;
                     await transaction.save(issueMessage);
@@ -79,15 +73,12 @@ export default class DrawIssueHandler extends AmqpHandler {
                     message_id: entity.chatMessage.messageId,
                     parse_mode: "HTML",
                     reply_markup: {
-                        inline_keyboard: [
-                            [{text: "View on GitHub", url: entity.info.html_url}],
-                        ]
-                    }
+                        inline_keyboard: [[{text: "View on GitHub", url: entity.info.html_url}]],
+                    },
                 });
             } catch (err) {
                 if (!etelegramIgnore(err)) {
-                    if (entity.chatMessage)
-                        await entity.chatMessage.remove();
+                    if (entity.chatMessage) await entity.chatMessage.remove();
                     await AmqpDispatcher.getCurrent().sendToQueue(QUEUES.ISSUE_SHOW_QUEUE, content);
                 }
             }

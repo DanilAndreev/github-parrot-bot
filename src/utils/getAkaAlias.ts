@@ -26,7 +26,6 @@
 
 import Collaborator from "../entities/Collaborator";
 
-
 export default async function getAkaAlias(githubUsername: string, chatId: number) {
     const aka: Collaborator | undefined = await Collaborator.findOne({where: {chatId, gitHubName: githubUsername}});
     // if (aka) return "@" + aka.telegramName;

@@ -31,7 +31,6 @@ import PullRequest from "../../entities/PullRequest";
 import AmqpDispatcher from "../../core/AmqpDispatcher";
 import {QUEUES} from "../../globals";
 
-
 @WebHookAmqpHandler.Handler("pull_request", 10)
 export default class PullRequestsHandler extends WebHookAmqpHandler {
     protected async handleHook(webHook: WebHook, payload: PullRequestType): Promise<boolean | void> {
@@ -44,14 +43,13 @@ export default class PullRequestsHandler extends WebHookAmqpHandler {
             labels: pullRequest.labels.map(item => ({name: item.name})),
             milestone: pullRequest.milestone && {
                 title: pullRequest.milestone.title,
-                due_on: pullRequest.milestone.due_on
+                due_on: pullRequest.milestone.due_on,
             },
             opened_by: pullRequest.user.login,
             requested_reviewers: pullRequest.requested_reviewers.map(item => ({login: item.login})),
             state: pullRequest.state,
             tag: pullRequest.number,
             title: pullRequest.title,
-
         };
 
         let entityId: number = NaN;
@@ -65,7 +63,7 @@ export default class PullRequestsHandler extends WebHookAmqpHandler {
             entityId = entity.id;
         } catch (error) {
             const entity: PullRequest | undefined = await PullRequest.findOne({
-                where: {chat: webHook.chat, pullRequestId: pullRequest.id}
+                where: {chat: webHook.chat, pullRequestId: pullRequest.id},
             });
             if (entity) {
                 entity.info = info;

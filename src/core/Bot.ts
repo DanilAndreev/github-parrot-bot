@@ -25,12 +25,11 @@
  */
 
 import * as TelegramBot from "node-telegram-bot-api";
+import {User} from "node-telegram-bot-api";
 import config from "../config";
 import BotCommand from "./BotCommand";
 import Collaborator from "../entities/Collaborator";
-import {User} from "node-telegram-bot-api";
 import Chat from "../entities/Chat";
-
 
 /**
  * Bot - class for telegram bot api.
@@ -54,11 +53,9 @@ export default class Bot extends TelegramBot {
      */
     protected constructor(token?: string) {
         token = token || config.bot.token;
-        Bot.commands = config.bot.commands
-            .map((CommandClass: typeof BotCommand) => new CommandClass());
+        Bot.commands = config.bot.commands.map((CommandClass: typeof BotCommand) => new CommandClass());
 
-        if (!token)
-            throw new Error(`FatalError: you must specify token to run this app! "token" = "${token}".`);
+        if (!token) throw new Error(`FatalError: you must specify token to run this app! "token" = "${token}".`);
         console.log("Creating telegram bot.");
         super(token, {polling: false});
         this.addListener("left_chat_member", this.handleMemberLeftChat);
@@ -76,7 +73,10 @@ export default class Bot extends TelegramBot {
                     if (telegramTag[0] !== "@") {
                         telegramTag = "@" + telegramTag;
                     }
-                    this.onText(new RegExp(`/${command.getCommandPattern()}${telegramTag} (.+)`), command.getCallback());
+                    this.onText(
+                        new RegExp(`/${command.getCommandPattern()}${telegramTag} (.+)`),
+                        command.getCallback()
+                    );
                     this.onText(new RegExp(`^/${command.getCommandPattern()}${telegramTag}$`), command.getCallback());
                 }
             }
@@ -100,7 +100,7 @@ export default class Bot extends TelegramBot {
                     const description: string = Reflect.getMetadata("bot-command-description", command);
                     return {
                         command: name,
-                        description: [args, description].filter(i => i).join(" ")
+                        description: [args, description].filter(i => i).join(" "),
                     };
                 })
         );
@@ -147,8 +147,7 @@ export default class Bot extends TelegramBot {
      * @param token - Telegram bot token.
      */
     public static init(token?: string): Bot {
-        if (this.current)
-            throw new ReferenceError("Class instance is already created.");
+        if (this.current) throw new ReferenceError("Class instance is already created.");
         this.current = new Bot(token);
         return this.current;
     }
@@ -158,8 +157,7 @@ export default class Bot extends TelegramBot {
      * If bot hasn't been initialized - it will be initialized automatically.
      */
     public static getCurrent(): Bot {
-        if (!this.current)
-            this.init();
+        if (!this.current) this.init();
         return this.current;
     }
 }
