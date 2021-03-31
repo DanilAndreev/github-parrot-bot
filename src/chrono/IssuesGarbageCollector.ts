@@ -32,7 +32,7 @@ export default class IssuesGarbageCollector extends Chrono {
     protected async run(): Promise<void> {
         const result: DeleteResult = await Issue.createQueryBuilder()
             .delete()
-            .where("updatedAt < current_timestamp - interval '1 minute'")
+            .where("updatedAt < current_timestamp - interval '1 hour'")
             .execute();
         console.log(`Issues garbage collector: deleted ${result.affected} items.`);
     }
