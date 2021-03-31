@@ -53,7 +53,7 @@ abstract class Chrono {
      * @param args - Any args you need in your function.
      * @author Danil Andreev
      */
-    protected abstract run(...args: any[]): void;
+    protected abstract run(...args: any[]): void | Promise<void>;
 
     /**
      * Creates an instance of Chrono.
@@ -66,15 +66,28 @@ abstract class Chrono {
     }
 
     /**
+     * beforeLaunch - function, which will be called before interval loop launch.
+     * Override it to add functional.
+     * @method
+     * @abstract
+     * @author Danil Andreev
+     */
+    protected beforeLaunch(): void | Promise<void> {
+    }
+
+    /**
      * start - starts the chron function.
      * @method
      * @param args - Chrono function arguments.
      * @author Danil Andreev.
      */
-    public start(...args: any[]): Chrono {
+    public async start(...args: any[]): Promise<Chrono> {
         const {
             interval = 1000,
+            noInstantRun = false,
         } = this.options;
+        await this.beforeLaunch();
+        if (!noInstantRun) this.run();
         this.chronHandle = setInterval(this.run, interval, arguments);
         return this;
     }
@@ -96,6 +109,11 @@ namespace Chrono {
          * @default 1000
          */
         interval?: number;
+        /**
+         * noInstantRun - if true, cron func will be called first time after interval delay.
+         * @default false
+         */
+        noInstantRun?: boolean;
     }
 }
 

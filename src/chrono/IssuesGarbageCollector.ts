@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,20 +24,16 @@
  * SOFTWARE.
  */
 
-import {setupDbConnection} from "./core/DataBase";
-import Bot from "./core/Bot";
-import WebServer from "./core/WebServer";
-import AmqpDispatcher from "./core/AmqpDispatcher";
-import IssuesGarbageCollector from "./chrono/IssuesGarbageCollector";
+import Chrono from "../core/Chrono";
+import Issue from "../entities/Issue";
+import {DeleteResult} from "typeorm";
 
-
-export default async function main() {
-    await setupDbConnection();
-    await new IssuesGarbageCollector({interval: 1000*60*30}).start();
-
-    const server = new WebServer();
-    const bot: Bot = Bot.init();
-    const RabbitMQ: AmqpDispatcher = await AmqpDispatcher.init();
-
-    server.start();
+export default class IssuesGarbageCollector extends Chrono {
+    protected async run(): Promise<void> {
+        const result: DeleteResult = await Issue.createQueryBuilder()
+            .delete()
+            .where("updatedAt < current_timestamp - interval '1 minute'")
+            .execute();
+        console.log(`Issues garbage collector: deleted ${result.affected} items.`);
+    }
 }
