@@ -12,12 +12,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - name: "Setup eslint package."
-        run: npm install -g eslint
-      - name: "Setup eslint plugin: typescript-eslint/eslint-plugin."
-        run: npm install @typescript-eslint/eslint-plugin --dev
-      - name: "Setup eslint plugin: @typescript-eslint/parser."
-        run: npm install @typescript-eslint/parser --dev
+      - name: "Install dependencies"
+        run: yarn install
       - name: Run ESLint check.
         run: eslint ./src
         
