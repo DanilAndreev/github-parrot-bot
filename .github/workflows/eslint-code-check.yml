@@ -15,9 +15,9 @@ jobs:
       - name: "Setup eslint package."
         run: npm install -g eslint
       - name: "Setup eslint plugin: typescript-eslint/eslint-plugin."
-        run: npm install -g @typescript-eslint/eslint-plugin
+        run: npm install @typescript-eslint/eslint-plugin --dev
       - name: "Setup eslint plugin: @typescript-eslint/parser."
-        run: npm install -g @typescript-eslint/parser
+        run: npm install @typescript-eslint/parser --dev
       - name: Run ESLint check.
         run: eslint ./src
         
