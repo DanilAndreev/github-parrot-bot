@@ -10,9 +10,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[GLOBAL] Reformatted all source files with prettier.">
-      <change beforePath="$PROJECT_DIR$/.eslintrc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.yaml" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[eslintrc] Added indent rule.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/root.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/root.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,13 +130,6 @@
       <workItem from="1617095738683" duration="1641000" />
       <workItem from="1617126606330" duration="9183000" />
       <workItem from="1617190800474" duration="497000" />
-    </task>
-    <task id="LOCAL-00022" summary="[issueEvent] Added markdown parser to message.">
-      <created>1603196456180</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1603196456180</updated>
     </task>
     <task id="LOCAL-00023" summary="[issueEvent] Changed message parser markdownV2">
       <created>1603197150779</created>
@@ -472,7 +467,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617198626078</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="[eslintrc] Added indent rule.">
+      <created>1617198832039</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1617198832039</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -491,7 +493,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[BotCommand] Added command decorators and spec with new mechanism." />
     <MESSAGE value="[Commands] Rewritten to new logic." />
     <MESSAGE value="[Commands] Changed logic to telegram user id." />
     <MESSAGE value="[WebServer] Created mechanism." />
@@ -516,7 +517,8 @@
     <MESSAGE value="[TBot] Adding new bot commands logic." />
     <MESSAGE value="[prettier] Configured." />
     <MESSAGE value="[GLOBAL] Reformatted all source files with prettier." />
-    <option name="LAST_COMMIT_MESSAGE" value="[GLOBAL] Reformatted all source files with prettier." />
+    <MESSAGE value="[eslintrc] Added indent rule." />
+    <option name="LAST_COMMIT_MESSAGE" value="[eslintrc] Added indent rule." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2594" y="257" key="#ESLint" timestamp="1617190925998">
@@ -547,10 +549,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2381" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617198359133" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1617198210893">
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1617198835451">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617198210893" />
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617198835451" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
