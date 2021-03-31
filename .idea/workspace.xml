@@ -11,11 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[CheckSuite] Added index by suiteId and chat.">
-      <change afterPath="$PROJECT_DIR$/src/chrono/CheckSuitsGarbageCollector.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/chrono/PullRequestsGarbageCollector.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chrono/IssuesGarbageCollector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/chrono/IssuesGarbageCollector.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +59,7 @@
     <property name="add_unversioned_files" value="$PROJECT_DIR$/.env" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.20.6" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/chrono" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -86,7 +84,6 @@
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\chrono" />
       <recent name="D:\Projects\github-tracker-telegram-bot\src\entities" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers" />
     </key>
@@ -530,18 +527,14 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2659" y="261" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617190770058" />
-    <state x="2104" y="86" key="MergeDialog" timestamp="1617194690192">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2104" y="86" key="MergeDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617194690192" />
     <state x="2381" y="165" key="SettingsEditor" timestamp="1617190671523">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2381" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617190671523" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1617194693635">
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1617190349927">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617194693635" />
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617190349927" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
