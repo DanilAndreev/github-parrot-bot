@@ -72,6 +72,7 @@ abstract class Chrono {
      * @abstract
      * @author Danil Andreev
      */
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     protected beforeLaunch(): void | Promise<void> {
     }
 
@@ -88,7 +89,7 @@ abstract class Chrono {
         } = this.options;
         await this.beforeLaunch();
         if (!noInstantRun) this.run();
-        this.chronHandle = setInterval(this.run, interval, arguments);
+        this.chronHandle = setInterval(this.run, interval, args);
         return this;
     }
 
