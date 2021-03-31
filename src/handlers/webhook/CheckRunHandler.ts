@@ -41,7 +41,7 @@ export default class CheckRunHandler extends WebHookAmqpHandler {
 
         await new CheckSuiteHandler().handleHook(webHook, {check_suite: check_run.check_suite} as CheckSuiteType, false);
 
-        let suite: CheckSuite | undefined = await CheckSuite.findOne({
+        const suite: CheckSuite | undefined = await CheckSuite.findOne({
             where: {suiteId: check_run.check_suite.id, chat: webHook.chat},
             relations: ["pullRequest", "chat", "runs"]
         });

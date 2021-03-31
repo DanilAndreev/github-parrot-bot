@@ -42,7 +42,7 @@ export default class DrawIssueHandler extends AmqpHandler {
     protected async handle(content: any, message: AMQPMessage): Promise<void | boolean> {
         const {issue}: { issue: number } = content;
 
-        let entity: Issue | undefined = await Issue.findOne({
+        const entity: Issue | undefined = await Issue.findOne({
             where: {id: issue},
             relations: ["webhook", "chat", "chatMessage"],
         });

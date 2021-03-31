@@ -28,7 +28,7 @@ import {Message} from "node-telegram-bot-api";
 import Bot from "./Bot";
 import CommandError from "../errors/CommandError";
 import * as commander from "commander";
-import {Command, CommanderError, Option} from "commander";
+import {Command as CommanderCommand, CommanderError, Option as CommanderOption} from "commander";
 import stringArgv from "string-argv";
 import JSONObject from "../interfaces/JSONObject";
 
@@ -60,7 +60,7 @@ class BotCommand {
      * @author Danil Andreev
      */
     public constructor() {
-        this.validation = new Command();
+        this.validation = new CommanderCommand();
         this.validation
             .exitOverride((error: CommanderError) => {
                 throw error;
@@ -93,7 +93,7 @@ class BotCommand {
     public async execute(message: Message, match: RegExpExecArray) {
         this.validation.action(async (...params) => {
             try {
-                const command: Command = params[params.length - 1];
+                const command: CommanderCommand = params[params.length - 1];
                 let result: string | string[] | void = await this.handler(message, command.args, command.opts());
                 if (Array.isArray(result)) result = result.join("\n");
                 if (result) {
@@ -181,14 +181,14 @@ namespace BotCommand {
      * @param description - Flag description.
      * @param defaultValue - Default flag value.
      */
-    export function Option(flags: string | Option, description?: string, defaultValue?: string | boolean) {
+    export function Option(flags: string | CommanderOption, description?: string, defaultValue?: string | boolean) {
         return function BotCommandWrapper<T extends new(...args: any[]) => {}>(objectConstructor: T): T {
             return class WrappedBotCommand extends objectConstructor {
                 constructor(...args: any[]) {
                     super(...args);
                     if (this instanceof BotCommand) {
                         if (flags instanceof Option) {
-                            this.validation.addOption(flags as Option);
+                            this.validation.addOption(flags as CommanderOption);
                         } else {
                             this.validation.option(flags as string, description, defaultValue);
                         }
