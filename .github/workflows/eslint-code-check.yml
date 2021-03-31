@@ -1,0 +1,23 @@
+name: ESLint code check
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2      
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: "Setup eslint package."
+        run: npm install -g eslint
+      - name: "Setup eslint plugin: typescript-eslint/eslint-plugin."
+        run: npm install -g @typescript-eslint/eslint-plugin
+      - name: "Setup eslint plugin: @typescript-eslint/parser."
+        run: npm install -g @typescript-eslint/parser
+      - name: Run ESLint check.
+        run: eslint ./src
+        

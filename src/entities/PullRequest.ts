@@ -28,9 +28,9 @@ import {
     BaseEntity,
     Column,
     Entity,
-    Index,
+    Index, JoinColumn,
     ManyToOne,
-    OneToMany,
+    OneToMany, OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
@@ -62,11 +62,8 @@ class PullRequest extends BaseEntity {
     @Column({type: "bigint"})
     pullRequestId: number;
 
-    @Column({type: "bigint", nullable: true})
-    messageId: number;
-
-    @Column({type: "bigint", nullable: true})
-    messageIdUpdatedAt: number;
+    @OneToOne(type => PullRequest.PullRequestMessage, chatMessage => chatMessage.pullRequest, {nullable: true})
+    chatMessage: PullRequest.PullRequestMessage;
 
     @UpdateDateColumn()
     updatedAt: Date;
@@ -87,6 +84,23 @@ namespace PullRequest {
             title: string;
             due_on?: string;
         }
+    }
+
+    @Entity()
+    @Index(["pullRequest", "messageId"], {unique: true})
+    export class PullRequestMessage extends BaseEntity {
+        @PrimaryGeneratedColumn()
+        id: number;
+
+        @Column({type: "bigint", nullable: true})
+        messageId: number;
+
+        @OneToOne(type => PullRequest, pullRequest => pullRequest.chatMessage)
+        @JoinColumn()
+        pullRequest: PullRequest;
+
+        @UpdateDateColumn()
+        updatedAt: Date;
     }
 }
 

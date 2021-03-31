@@ -34,16 +34,19 @@ import ConnectCommand from "./commands/ConnectCommand";
 import DisconnectCommand from "./commands/DisconnectCommand";
 import ListRepositoriesCommand from "./commands/ListRepositoriesCommand";
 import RemoveRepositoryCommand from "./commands/RemoveRepositoryCommand";
-import IssuesHandler from "./handlers/IssuesHandler";
-import PullRequestsHandler from "./handlers/PullRequestsHandler";
+import IssuesHandler from "./handlers/webhook/IssuesHandler";
+import PullRequestsHandler from "./handlers/webhook/PullRequestsHandler";
 import Config from "./interfaces/Config";
-import PushHandler from "./handlers/PushHandler";
-import CheckRunHandler from "./handlers/CheckRunHandler";
-import CheckSuiteHandler from "./handlers/CheckSuiteHandler";
+import PushHandler from "./handlers/webhook/PushHandler";
+import CheckRunHandler from "./handlers/webhook/CheckRunHandler";
+import CheckSuiteHandler from "./handlers/webhook/CheckSuiteHandler";
 import Chat from "./entities/Chat";
 import CheckSuite from "./entities/CheckSuite";
 import PullRequest from "./entities/PullRequest";
 import CheckRun from "./entities/CheckRun";
+import DrawIssueHandler from "./handlers/draw/DrawIssueHandler";
+import DrawCheckSuiteHandler from "./handlers/draw/DrawCheckSuiteHandler";
+import DrawPullRequestHandler from "./handlers/draw/DrawPullRequestHandler";
 
 
 const config: Config = {
@@ -62,18 +65,39 @@ const config: Config = {
     db: {
         type: "postgres",
         url: process.env.DATABASE_URL,
-        entities: [WebHook, Collaborator, Issue, Chat, CheckSuite, PullRequest, CheckRun],
+        entities: [
+            WebHook,
+            Collaborator,
+            Issue,
+            Issue.IssueMessage,
+            Chat,
+            CheckSuite,
+            CheckSuite.CheckSuiteMessage,
+            PullRequest,
+            PullRequest.PullRequestMessage,
+            CheckRun
+        ],
         ssl: {
             rejectUnauthorized: false,
         }
     },
     amqp: {
         connect: process.env.CLOUDAMQP_URL || "",
-        handlers: [IssuesHandler, PullRequestsHandler, PushHandler, CheckRunHandler, CheckSuiteHandler]
+        handlers: [
+            IssuesHandler,
+            PullRequestsHandler,
+            PushHandler,
+            CheckRunHandler,
+            CheckSuiteHandler,
+
+            DrawIssueHandler,
+            DrawPullRequestHandler,
+            DrawCheckSuiteHandler,
+        ],
     },
     server: {
         port: process.env.PORT ? +process.env.PORT : 3030,
     }
-}
+};
 
 export default config;

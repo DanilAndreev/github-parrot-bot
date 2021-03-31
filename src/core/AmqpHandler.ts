@@ -26,17 +26,18 @@
 
 import * as Amqp from "amqplib";
 import {Context} from "koa";
+import {Message} from "amqplib";
 
 
 class AmqpHandler {
-    protected handle(payload: any, ctx: Context): void | Promise<void | boolean> {
+    protected handle(content: any, message: Message): void | Promise<void | boolean> {
         throw new ReferenceError(`Abstract method call. Inherit this class and override this method.`);
     }
 
     public async execute(message: Amqp.Message, channel: Amqp.Channel) {
         try {
-            const {payload, ctx} = JSON.parse(message.content.toString());
-            const result: boolean | void = await this.handle(payload, ctx);
+            const content: any = JSON.parse(message.content.toString());
+            const result: boolean | void = await this.handle(content, message);
             if (result === false) {
                 channel.nack(message);
             } else {

@@ -28,6 +28,7 @@ import * as Amqp from "amqplib";
 import {Connection} from "amqplib";
 import config from "../config";
 import AmqpHandler from "./AmqpHandler";
+import JSONObject from "../interfaces/JSONObject";
 
 
 class AmqpDispatcher {
@@ -50,7 +51,6 @@ class AmqpDispatcher {
         }
     }
 
-
     public async hook(handler: AmqpHandler) {
         const queueName = Reflect.getMetadata("amqp-handler-queue", handler);
         const prefetch = Reflect.getMetadata("amqp-handler-prefetch", handler);
@@ -60,6 +60,13 @@ class AmqpDispatcher {
         await channel.assertQueue(queueName);
         await channel.prefetch(prefetch || 10);
         await channel.consume(queueName, (msg) => msg && handler.execute(msg, channel));
+    }
+
+    public async sendToQueue(queueName: string, message: JSONObject, options?: Amqp.Options.Publish) {
+        const channel: Amqp.Channel = await this.connection.createChannel();
+        await channel.assertQueue(queueName);
+        channel.sendToQueue(queueName, Buffer.from(JSON.stringify(message)), options);
+        await channel.close();
     }
 
     public static async init(): Promise<AmqpDispatcher> {

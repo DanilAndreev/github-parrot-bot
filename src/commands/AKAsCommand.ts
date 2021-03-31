@@ -68,9 +68,8 @@ export default class AKAsCommand extends BotCommand {
                     const telegramName: string = chatMember.user.username || chatMember.user.first_name;
                     return `AKA: <i>[${collaboration.gitHubName}]</i> -> @${telegramName} <i>[${collaboration.telegramId}]</i>`;
                 } catch (error) {
-
+                    return "";
                 }
-                return "";
             }))
             .catch((error: Error) => {
                 throw new CommandError(error.message);

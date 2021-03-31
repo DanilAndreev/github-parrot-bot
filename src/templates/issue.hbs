@@ -1,21 +1,21 @@
-<b>{{repository}}</b> #{{tag}}
-#issue <i>{{state}}</i>
+<b>{{webhook/repository}}</b> #{{info/tag}}
+#issue <i>{{info/state}}</i>
 
-<b>{{title}}</b>
-{{#if body}}
-    {{body}}
+<b>{{info/title}}</b>
+{{#if info/body}}
+    {{info/body}}
 {{/if}}
 
-{{#if labels}}
+{{#if info/labels}}
     <b>Labels:</b>
-    {{#each labels}}
+    {{#each info/labels}}
         <code>{{name}}</code>
     {{/each}}
 {{/if}}
-{{#if opened_by}}<b>Opened by:</b> {{opened_by}}{{/if}}
-{{#if assignees}}
-    <b>Assignees:</b> {{#each assignees}}{{login}} {{/each}}
+{{#if info/opened_by}}<b>Opened by:</b> {{info/opened_by}}{{/if}}
+{{#if info/assignees}}
+    <b>Assignees:</b> {{#each info/assignees}}{{login}} {{/each}}
 {{/if}}
-{{#if milestone}}
-    <b>Milestone</b> <i>{{milestone/title}}</i> {{#if milestone/due_on}}<code>{{milestone/due_on}}</code>{{/if}}
+{{#if info/milestone}}
+    <b>Milestone</b> <i>{{info/milestone/title}}</i> {{#if info/milestone/due_on}}<code>{{info/milestone/due_on}}</code>{{/if}}
 {{/if}}

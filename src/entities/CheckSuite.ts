@@ -26,11 +26,13 @@
 
 import {
     BaseEntity,
-    Column, CreateDateColumn,
+    Column,
+    CreateDateColumn,
     Entity,
-    Index,
+    Index, JoinColumn,
     ManyToOne,
     OneToMany,
+    OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
@@ -41,23 +43,20 @@ import WebHook from "./WebHook";
 
 
 @Entity()
-export default class CheckSuite extends BaseEntity {
+@Index(["suiteId", "pullRequest"], {unique: true})
+@Index(["suiteId", "chat"], {unique: true})
+class CheckSuite extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({type: "varchar", length: 30, default: "queued"})
-    status: string;
-
-    @Column({type: "varchar", length: 30, nullable: true})
-    conclusion?: string;
+    @Column({type: "jsonb"})
+    info: CheckSuite.Info;
 
     @Index()
     @Column({type: "varchar", length: 40})
     headSha: string;
 
-    @Column()
-    branch: string;
-
+    @Index()
     @ManyToOne(type => Chat, chat => chat.checksuits, {onDelete: "CASCADE"})
     chat: Chat;
 
@@ -77,11 +76,8 @@ export default class CheckSuite extends BaseEntity {
     @Column({type: "bigint"})
     suiteId: number;
 
-    @Column({type: "bigint", nullable: true})
-    messageId: number;
-
-    @Column({type: "bigint", nullable: true})
-    messageIdUpdatedAt: number;
+    @OneToOne(type => CheckSuite.CheckSuiteMessage, chatMessage => chatMessage.suite, {nullable: true})
+    chatMessage: CheckSuite.CheckSuiteMessage;
 
     @UpdateDateColumn()
     updatedAt: Date;
@@ -89,3 +85,30 @@ export default class CheckSuite extends BaseEntity {
     @CreateDateColumn()
     createdAt: Date;
 }
+
+namespace CheckSuite {
+    export interface Info {
+        branch: string;
+        conclusion?: string;
+        status: string;
+    }
+
+    @Entity()
+    @Index(["suite", "messageId"], {unique: true})
+    export class CheckSuiteMessage extends BaseEntity {
+        @PrimaryGeneratedColumn()
+        id: number;
+
+        @Column({type: "bigint", nullable: true})
+        messageId: number;
+
+        @OneToOne(type => CheckSuite, suite => suite.chatMessage)
+        @JoinColumn()
+        suite: CheckSuite;
+
+        @UpdateDateColumn()
+        updatedAt: Date;
+    }
+}
+
+export default CheckSuite;

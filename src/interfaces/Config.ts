@@ -27,12 +27,12 @@
 import BotCommand from "../core/BotCommand";
 import AmqpHandler from "../core/AmqpHandler";
 import {ConnectionOptions} from "typeorm";
-import * as Amqp from "amqplib";
+import * as AMQP from "amqplib";
 
 namespace Config {
     export interface Bot {
         token: string;
-        commands: typeof BotCommand[]
+        commands: typeof BotCommand[];
     }
 
     export interface Server {
@@ -40,8 +40,8 @@ namespace Config {
     }
 
     export interface Amqp {
-        connect: string | Amqp.Options.Connect,
-        handlers: typeof AmqpHandler[]
+        connect: string | AMQP.Options.Connect;
+        handlers: typeof AmqpHandler[];
     }
 
 }

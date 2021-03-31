@@ -48,7 +48,7 @@ export default class ClearAKACommand extends BotCommand {
         if (!chat)
             throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`)
 
-        const result = await Collaborator.delete({chat: chat});
+        const result = await Collaborator.delete({chat});
 
         if (!result.affected)
             throw new CommandError(`This chat has no AKAs.`);
