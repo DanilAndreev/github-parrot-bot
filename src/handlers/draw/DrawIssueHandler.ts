@@ -26,7 +26,6 @@
 
 import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
 import AmqpHandler from "../../core/AmqpHandler";
-import {Message as AMQPMessage} from "amqplib";
 import Issue from "../../entities/Issue";
 import Bot from "../../core/Bot";
 import loadTemplate from "../../utils/loadTemplate";
@@ -38,8 +37,8 @@ import AmqpDispatcher from "../../core/AmqpDispatcher";
 
 @WebHookAmqpHandler.Handler(QUEUES.ISSUE_SHOW_QUEUE, 10)
 export default class DrawIssueHandler extends AmqpHandler {
-    protected async handle(content: any, message: AMQPMessage): Promise<void | boolean> {
-        const {issue}: {issue: number} = content;
+    protected async handle(content: {issue: number}): Promise<void | boolean> {
+        const {issue} = content;
 
         const entity: Issue | undefined = await Issue.findOne({
             where: {id: issue},

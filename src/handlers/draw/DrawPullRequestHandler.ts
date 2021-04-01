@@ -26,7 +26,6 @@
 
 import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
 import AmqpHandler from "../../core/AmqpHandler";
-import {Message as AMQPMessage} from "amqplib";
 import Bot from "../../core/Bot";
 import loadTemplate from "../../utils/loadTemplate";
 import etelegramIgnore from "../../utils/etelegramIgnore";
@@ -38,8 +37,8 @@ import PullRequest from "../../entities/PullRequest";
 
 @WebHookAmqpHandler.Handler(QUEUES.PULL_REQUEST_SHOW_QUEUE, 10)
 export default class DrawPullRequestHandler extends AmqpHandler {
-    protected async handle(content: any, message: AMQPMessage): Promise<void | boolean> {
-        const {pullRequest}: {pullRequest: number} = content;
+    protected async handle(content: {pullRequest: number}): Promise<void | boolean> {
+        const {pullRequest} = content;
 
         const entity: PullRequest | undefined = await PullRequest.findOne({
             where: {id: pullRequest},
