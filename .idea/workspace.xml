@@ -16,13 +16,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[webstorm] Added prettier config.">
-      <change afterPath="$PROJECT_DIR$/src/errors/AMQPAck.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/errors/AMQPNack.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/AmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/AmqpHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Enqueuer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Enqueuer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Enqueuer] Finished.&#10;[DrawMessageHandler] Finished.">
+      <change beforePath="$PROJECT_DIR$/src/errors/AMQPAck.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors/AMQPAck.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/errors/AMQPNack.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors/AMQPNack.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,14 +135,7 @@
       <workItem from="1617126606330" duration="9183000" />
       <workItem from="1617190800474" duration="497000" />
       <workItem from="1617279086917" duration="6361000" />
-      <workItem from="1617366432160" duration="2024000" />
-    </task>
-    <task id="LOCAL-00020" summary="[issueEvent] Debug logs added.">
-      <created>1603195486196</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1603195486196</updated>
+      <workItem from="1617366432160" duration="2052000" />
     </task>
     <task id="LOCAL-00021" summary="[index] Small changes.">
       <created>1603195699204</created>
@@ -484,7 +473,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617190345097</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="[Enqueuer] Finished.&#10;[DrawMessageHandler] Finished.">
+      <created>1617368516709</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1617368516709</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -515,7 +511,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[gitignore] Updated." />
     <MESSAGE value="[BotCommand] Added result handler." />
     <MESSAGE value="[BotCommand] Added command decorators and spec with new mechanism." />
     <MESSAGE value="[Commands] Rewritten to new logic." />
@@ -540,7 +535,8 @@
     <MESSAGE value="[CheckRunHandler] Separated to two handlers." />
     <MESSAGE value="[Entities] Packed *Message entities to their parent classes." />
     <MESSAGE value="[TBot] Adding new bot commands logic." />
-    <option name="LAST_COMMIT_MESSAGE" value="[TBot] Adding new bot commands logic." />
+    <MESSAGE value="[Enqueuer] Finished.&#10;[DrawMessageHandler] Finished." />
+    <option name="LAST_COMMIT_MESSAGE" value="[Enqueuer] Finished.&#10;[DrawMessageHandler] Finished." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2594" y="257" key="#ESLint" timestamp="1617190925998">
