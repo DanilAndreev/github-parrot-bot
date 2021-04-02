@@ -33,6 +33,7 @@ import {
     SendMessageOptions,
 } from "node-telegram-bot-api";
 import {QUEUES} from "../globals";
+import JSONObject from "../interfaces/JSONObject";
 
 class Enqueuer {
     protected amqp: AmqpDispatcher;
@@ -122,13 +123,41 @@ class Enqueuer {
         await this.amqp.sendToQueue(
             "messages",
             {
-                type: "send-message",
+                type: "edit-message-live-location",
                 latitude,
                 longitude,
                 options,
             },
             {expiration: 1000 * 60 * 10}
         );
+    }
+}
+
+namespace Enqueuer {
+    export interface ChatMessageEvent extends JSONObject {
+        type: string;
+    }
+
+    export interface SendChatMessageEvent extends ChatMessageEvent {
+        chatId: string | number;
+        text: string;
+        options: SendMessageOptions;
+    }
+
+    export interface EditMessageTextEvent extends ChatMessageEvent {
+        text: string;
+        options: EditMessageTextOptions;
+    }
+
+    export interface EditMessageReplyMarkupEvent extends ChatMessageEvent {
+        replyMarkup: InlineKeyboardMarkup;
+        options: EditMessageReplyMarkupOptions;
+    }
+
+    export interface EditMessageLiveLocationEvent extends ChatMessageEvent {
+        latitude: number;
+        longitude: number;
+        options?: EditMessageCaptionOptions;
     }
 }
 

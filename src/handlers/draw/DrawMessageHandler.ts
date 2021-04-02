@@ -27,70 +27,90 @@
 import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
 import {QUEUES} from "../../globals";
 import AmqpHandler from "../../core/AmqpHandler";
-import JSONObject from "../../interfaces/JSONObject";
 import Bot from "../../core/Bot";
-import {
-    EditMessageCaptionOptions,
-    EditMessageLiveLocationOptions,
-    EditMessageReplyMarkupOptions,
-    EditMessageTextOptions,
-    SendMessageOptions,
-} from "node-telegram-bot-api";
-import loadTemplate from "../../utils/loadTemplate";
+import Enqueuer from "../../core/Enqueuer";
+import etelegramIgnore from "../../utils/etelegramIgnore";
+import AMQPAck from "../../errors/AMQPAck";
+import AMQPNack from "../../errors/AMQPNack";
+import {Message as AMQPMessage} from "amqplib";
 
 @WebHookAmqpHandler.Handler(QUEUES.PULL_REQUEST_SHOW_QUEUE, 10)
 class DrawMessageHandler extends AmqpHandler {
-    // protected async handle(message: DrawMessageHandler.HandlerMessageType): Promise<void | boolean> {
-    //
-    //
-    //
-    //     switch (message.type) {
-    //
-    //     }
-    // }
-    //
-    // protected async sendMessage(text: string, message: DrawMessageHandler.Message): Promise<void> {
-    //     try {
-    //         await Bot.getCurrent().sendMessage(message.options.chatId);
-    //     } catch (error) {
-    //     }
-    // }
-}
-
-namespace DrawMessageEvent {
-    export type MessageText<T> = string | string[] | HandlebarsMessageConfig<T>;
-
-    export type HandlerMessageType = Message<| SendMessageOptions
-        | EditMessageCaptionOptions
-        | EditMessageLiveLocationOptions
-        | EditMessageReplyMarkupOptions
-        | EditMessageTextOptions>;
-
-    export interface Message<O extends | SendMessageOptions
-        | EditMessageCaptionOptions
-        | EditMessageLiveLocationOptions
-        | EditMessageReplyMarkupOptions
-        | EditMessageTextOptions,
-        T = never> {
-        text: O extends SendMessageOptions ? MessageText<T> : never;
-        options: O extends SendMessageOptions ? O : O | undefined;
-        type: O extends SendMessageOptions
-            ? "send"
-            : O extends EditMessageCaptionOptions
-                ? "edit-caption"
-                : O extends EditMessageLiveLocationOptions
-                    ? "edit-live-location"
-                    : O extends EditMessageReplyMarkupOptions
-                        ? "edit-reply-markup"
-                        : O extends EditMessageTextOptions
-                            ? "edit-text"
-                            : never;
+    protected async handle(event: Enqueuer.ChatMessageEvent, message: AMQPMessage): Promise<void | boolean> {
+        switch (event.type) {
+            case "send-chat-message":
+                return await this.sendChatMessage(event as Enqueuer.SendChatMessageEvent, message);
+            case "edit-message-text":
+                return await this.editMessageText(event as Enqueuer.EditMessageTextEvent, message);
+            case "edit-message-reply-markup":
+                return await this.editMessageReplyMarkup(event as Enqueuer.EditMessageReplyMarkupEvent, message);
+            case "edit-message-live-location":
+                return await this.editMessageLiveLocation(event as Enqueuer.EditMessageLiveLocationEvent, message);
+            default:
+                throw new AMQPAck(`Incorrect message type. Got: "${event.type}"`, message.properties.messageId);
+        }
     }
 
-    export interface HandlebarsMessageConfig<T extends JSONObject> {
-        template: string | { text: string };
-        context: T;
-        options?: CompileOptions;
+    protected async sendChatMessage(
+        event: Enqueuer.SendChatMessageEvent,
+        message: AMQPMessage
+    ): Promise<void | boolean> {
+        try {
+            await Bot.getCurrent().sendMessage(event.chatId, event.text, event.options);
+        } catch (error) {
+            throw new AMQPNack(`Failed to send message to chat ${event.chatId}.`, message.properties.messageId);
+        }
+    }
+
+    protected async editMessageText(
+        event: Enqueuer.EditMessageTextEvent,
+        message: AMQPMessage
+    ): Promise<void | boolean> {
+        try {
+            await Bot.getCurrent().editMessageText(event.text, event.options);
+        } catch (error) {
+            if (!etelegramIgnore(error)) {
+                try {
+                    if (event.options.chat_id)
+                        await Bot.getCurrent().sendMessage(event.options.chat_id, event.text, event.options);
+                } catch (err) {
+                    throw new AMQPNack(
+                        `Failed to edit telegram message ${event.options.message_id}`,
+                        message.properties.messageId
+                    );
+                }
+            }
+        }
+    }
+
+    protected async editMessageReplyMarkup(
+        event: Enqueuer.EditMessageReplyMarkupEvent,
+        message: AMQPMessage
+    ): Promise<void | boolean> {
+        try {
+            await Bot.getCurrent().editMessageReplyMarkup(event.replyMarkup, event.options);
+        } catch (error) {
+            if (!etelegramIgnore(error))
+                throw new AMQPNack(
+                    `Failed to edit message ${event.options.message_id} reply markup.`,
+                    message.properties.messageId
+                );
+        }
+    }
+
+    protected async editMessageLiveLocation(
+        event: Enqueuer.EditMessageLiveLocationEvent,
+        message: AMQPMessage
+    ): Promise<void | boolean> {
+        try {
+            await Bot.getCurrent().editMessageLiveLocation(event.latitude, event.latitude, event.options);
+        } catch (error) {
+            if (!etelegramIgnore(error))
+                throw new AMQPNack(
+                    `Failed to edit message ${event.options?.message_id} live location`,
+                    message.properties.messageId
+                );
+        }
     }
 }
 
