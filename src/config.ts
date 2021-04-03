@@ -47,6 +47,8 @@ import CheckRun from "./entities/CheckRun";
 import DrawIssueHandler from "./handlers/draw/DrawIssueHandler";
 import DrawCheckSuiteHandler from "./handlers/draw/DrawCheckSuiteHandler";
 import DrawPullRequestHandler from "./handlers/draw/DrawPullRequestHandler";
+import CommandsHandler from "./handlers/telegram/CommandsHandler";
+import DrawMessageHandler from "./handlers/draw/DrawMessageHandler";
 
 const config: Config = {
     bot: {
@@ -92,6 +94,8 @@ const config: Config = {
             DrawIssueHandler,
             DrawPullRequestHandler,
             DrawCheckSuiteHandler,
+            DrawMessageHandler,
+            CommandsHandler,
         ],
     },
     server: {

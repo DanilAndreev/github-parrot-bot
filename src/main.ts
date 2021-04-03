@@ -39,7 +39,7 @@ export default async function main() {
     await new CheckSuitsGarbageCollector({interval: 1000 * 60 * 30}).start();
 
     const server = new WebServer();
-    const bot: Bot = Bot.init();
+    const bot: Bot = Bot.init(process.env.TELEGRAM_BOT_TOKEN);
     const RabbitMQ: AmqpDispatcher = await AmqpDispatcher.init();
 
     server.start();

@@ -63,7 +63,7 @@ class AmqpDispatcher {
         await channel.consume(queueName, msg => msg && handler.execute(msg, channel));
     }
 
-    public async sendToQueue(queueName: string, message: JSONObject, options?: Amqp.Options.Publish) {
+    public async sendToQueue<T extends JSONObject>(queueName: string, message: T, options?: Amqp.Options.Publish) {
         const channel: Amqp.Channel = await this.connection.createChannel();
         await channel.assertQueue(queueName);
         channel.sendToQueue(queueName, Buffer.from(JSON.stringify(message)), options);

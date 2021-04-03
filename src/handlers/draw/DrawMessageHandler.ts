@@ -34,7 +34,7 @@ import AMQPAck from "../../errors/AMQPAck";
 import AMQPNack from "../../errors/AMQPNack";
 import {Message as AMQPMessage} from "amqplib";
 
-@WebHookAmqpHandler.Handler(QUEUES.PULL_REQUEST_SHOW_QUEUE, 10)
+@WebHookAmqpHandler.Handler(QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE, 10)
 class DrawMessageHandler extends AmqpHandler {
     protected async handle(event: Enqueuer.ChatMessageEvent, message: AMQPMessage): Promise<void | boolean> {
         switch (event.type) {
@@ -71,11 +71,11 @@ class DrawMessageHandler extends AmqpHandler {
         } catch (error) {
             if (!etelegramIgnore(error)) {
                 try {
-                    if (event.options.chat_id)
+                    if (event.options?.chat_id)
                         await Bot.getCurrent().sendMessage(event.options.chat_id, event.text, event.options);
                 } catch (err) {
                     throw new AMQPNack(
-                        `Failed to edit telegram message ${event.options.message_id}`,
+                        `Failed to edit telegram message ${event.options?.message_id}`,
                         message.properties.messageId
                     );
                 }
@@ -92,7 +92,7 @@ class DrawMessageHandler extends AmqpHandler {
         } catch (error) {
             if (!etelegramIgnore(error))
                 throw new AMQPNack(
-                    `Failed to edit message ${event.options.message_id} reply markup.`,
+                    `Failed to edit message ${event.options?.message_id} reply markup.`,
                     message.properties.messageId
                 );
         }

@@ -30,20 +30,15 @@ import {
     EditMessageReplyMarkupOptions,
     EditMessageTextOptions,
     InlineKeyboardMarkup,
+    Message,
     SendMessageOptions,
 } from "node-telegram-bot-api";
 import {QUEUES} from "../globals";
 import JSONObject from "../interfaces/JSONObject";
 
 class Enqueuer {
-    protected amqp: AmqpDispatcher;
-
-    constructor(amqp: AmqpDispatcher) {
-        this.amqp = amqp;
-    }
-
-    public async drawPullRequest(pullRequest: number, forceNewMessage: boolean = false): Promise<void> {
-        await this.amqp.sendToQueue(
+    public static async drawPullRequest(pullRequest: number, forceNewMessage: boolean = false): Promise<void> {
+        await AmqpDispatcher.getCurrent().sendToQueue(
             QUEUES.PULL_REQUEST_SHOW_QUEUE,
             {
                 pullRequest,
@@ -53,8 +48,8 @@ class Enqueuer {
         );
     }
 
-    public async drawCheckSuite(checkSuite: number, forceNewMessage: boolean = false): Promise<void> {
-        await this.amqp.sendToQueue(
+    public static async drawCheckSuite(checkSuite: number, forceNewMessage: boolean = false): Promise<void> {
+        await AmqpDispatcher.getCurrent().sendToQueue(
             QUEUES.CHECK_SUITE_SHOW_QUEUE,
             {
                 checkSuite,
@@ -64,8 +59,8 @@ class Enqueuer {
         );
     }
 
-    public async drawIssue(issue: number, forceNewMessage: boolean = false): Promise<void> {
-        await this.amqp.sendToQueue(
+    public static async drawIssue(issue: number, forceNewMessage: boolean = false): Promise<void> {
+        await AmqpDispatcher.getCurrent().sendToQueue(
             QUEUES.ISSUE_SHOW_QUEUE,
             {
                 issue,
@@ -75,9 +70,13 @@ class Enqueuer {
         );
     }
 
-    public async sendChatMessage(chatId: string | number, text: string, options?: SendMessageOptions): Promise<void> {
-        await this.amqp.sendToQueue(
-            "messages",
+    public static async sendChatMessage(
+        chatId: string | number,
+        text: string,
+        options?: SendMessageOptions
+    ): Promise<void> {
+        await AmqpDispatcher.getCurrent().sendToQueue<Enqueuer.ChatMessageEvent>(
+            QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
             {
                 type: "send-chat-message",
                 chatId,
@@ -88,9 +87,9 @@ class Enqueuer {
         );
     }
 
-    public async editMessageText(text: string, options?: EditMessageTextOptions): Promise<void> {
-        await this.amqp.sendToQueue(
-            "messages",
+    public static async editMessageText(text: string, options?: EditMessageTextOptions): Promise<void> {
+        await AmqpDispatcher.getCurrent().sendToQueue<Enqueuer.EditMessageTextEvent>(
+            QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
             {
                 type: "edit-message-text",
                 text,
@@ -100,12 +99,12 @@ class Enqueuer {
         );
     }
 
-    public async editMessageReplyMarkup(
+    public static async editMessageReplyMarkup(
         replyMarkup: InlineKeyboardMarkup,
         options?: EditMessageReplyMarkupOptions
     ): Promise<void> {
-        await this.amqp.sendToQueue(
-            "messages",
+        await AmqpDispatcher.getCurrent().sendToQueue<Enqueuer.EditMessageReplyMarkupEvent>(
+            QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
             {
                 type: "edit-message-reply-markup",
                 replyMarkup,
@@ -115,18 +114,41 @@ class Enqueuer {
         );
     }
 
-    public async editMessageLiveLocation(
+    public static async editMessageLiveLocation(
         latitude: number,
         longitude: number,
         options?: EditMessageCaptionOptions
     ): Promise<void> {
-        await this.amqp.sendToQueue(
-            "messages",
+        await AmqpDispatcher.getCurrent().sendToQueue<Enqueuer.EditMessageLiveLocationEvent>(
+            QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
             {
                 type: "edit-message-live-location",
                 latitude,
                 longitude,
                 options,
+            },
+            {expiration: 1000 * 60 * 10}
+        );
+    }
+
+    public static async deleteChatMessage(chatId: string | number, messageId: string, options?: any): Promise<void> {
+        await AmqpDispatcher.getCurrent().sendToQueue<Enqueuer.DeleteChatMessageEvent>(
+            QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
+            {
+                type: "delete-chat-message",
+                chatId,
+                messageId,
+                options,
+            }
+        );
+    }
+
+    public static async chatCommand(message: Message, match: RegExpMatchArray | null): Promise<void> {
+        await AmqpDispatcher.getCurrent().sendToQueue(
+            QUEUES.TELEGRAM_CHAT_COMMAND,
+            {
+                message,
+                match,
             },
             {expiration: 1000 * 60 * 10}
         );
@@ -141,23 +163,29 @@ namespace Enqueuer {
     export interface SendChatMessageEvent extends ChatMessageEvent {
         chatId: string | number;
         text: string;
-        options: SendMessageOptions;
+        options?: SendMessageOptions;
     }
 
     export interface EditMessageTextEvent extends ChatMessageEvent {
         text: string;
-        options: EditMessageTextOptions;
+        options?: EditMessageTextOptions;
     }
 
     export interface EditMessageReplyMarkupEvent extends ChatMessageEvent {
         replyMarkup: InlineKeyboardMarkup;
-        options: EditMessageReplyMarkupOptions;
+        options?: EditMessageReplyMarkupOptions;
     }
 
     export interface EditMessageLiveLocationEvent extends ChatMessageEvent {
         latitude: number;
         longitude: number;
         options?: EditMessageCaptionOptions;
+    }
+
+    export interface DeleteChatMessageEvent extends ChatMessageEvent {
+        chatId: string | number;
+        messageId: string;
+        options?: any;
     }
 }
 
