@@ -46,6 +46,8 @@ class DrawMessageHandler extends AmqpHandler {
                 return await this.editMessageReplyMarkup(event as Enqueuer.EditMessageReplyMarkupEvent, message);
             case "edit-message-live-location":
                 return await this.editMessageLiveLocation(event as Enqueuer.EditMessageLiveLocationEvent, message);
+            case "delete-chat-message":
+                return await this.deleteMessage(event as Enqueuer.DeleteChatMessageEvent, message);
             default:
                 throw new AMQPAck(`Incorrect message type. Got: "${event.type}"`, message.properties.messageId);
         }
@@ -110,6 +112,30 @@ class DrawMessageHandler extends AmqpHandler {
                     `Failed to edit message ${event.options?.message_id} live location`,
                     message.properties.messageId
                 );
+        }
+    }
+
+    protected async deleteMessage(
+        event: Enqueuer.DeleteChatMessageEvent,
+        message: AMQPMessage
+    ): Promise<void | boolean> {
+        try {
+            await Bot.getCurrent().deleteMessage(event.chatId, event.messageId, event.options);
+        } catch {
+            if (event.showMessageOnError) {
+                try {
+                    await Bot.getCurrent().sendMessage(
+                        event.chatId,
+                        "Warning: You should give permissions to delete messages for GitHub Tracker bot."
+                    );
+                } catch (error) {
+                    if (!etelegramIgnore(error))
+                        throw new AMQPNack(
+                            `Failed to send message to chat ${event.chatId}.`,
+                            message.properties.messageId
+                        );
+                }
+            }
         }
     }
 }

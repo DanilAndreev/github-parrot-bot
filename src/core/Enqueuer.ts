@@ -131,7 +131,12 @@ class Enqueuer {
         );
     }
 
-    public static async deleteChatMessage(chatId: string | number, messageId: string, options?: any): Promise<void> {
+    public static async deleteChatMessage(
+        chatId: string | number,
+        messageId: string,
+        options?: JSONObject,
+        showMessageOnError?: boolean
+    ): Promise<void> {
         await AmqpDispatcher.getCurrent().sendToQueue<Enqueuer.DeleteChatMessageEvent>(
             QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
             {
@@ -139,6 +144,7 @@ class Enqueuer {
                 chatId,
                 messageId,
                 options,
+                showMessageOnError,
             }
         );
     }
@@ -185,7 +191,8 @@ namespace Enqueuer {
     export interface DeleteChatMessageEvent extends ChatMessageEvent {
         chatId: string | number;
         messageId: string;
-        options?: any;
+        options?: JSONObject;
+        showMessageOnError?: boolean;
     }
 }
 
