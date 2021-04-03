@@ -26,6 +26,7 @@
 
 import * as Amqp from "amqplib";
 import {Message} from "amqplib";
+import AMQPAck from "../errors/AMQPAck";
 
 class AmqpHandler {
     protected handle(content: any, message: Message): void | Promise<void | boolean> {
@@ -42,8 +43,11 @@ class AmqpHandler {
                 channel.ack(message);
             }
         } catch (error) {
-            channel.nack(message);
-            console.error(error);
+            if (error instanceof AMQPAck) {
+                channel.ack(message);
+            } else {
+                channel.nack(message);
+            }
         }
     }
 }

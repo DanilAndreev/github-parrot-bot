@@ -31,6 +31,7 @@ import * as commander from "commander";
 import {Command as CommanderCommand, CommanderError, Option as CommanderOption} from "commander";
 import stringArgv from "string-argv";
 import JSONObject from "../interfaces/JSONObject";
+import Enqueuer from "./Enqueuer";
 
 /**
  * BotCommand - basic class for creating Telegram bot commands.
@@ -99,34 +100,34 @@ class BotCommand {
                 let result: string | string[] | void = await this.handler(message, command.args, command.opts());
                 if (Array.isArray(result)) result = result.join("\n");
                 if (result) {
-                    await Bot.getCurrent().sendMessage(message.chat.id, result, {parse_mode: "HTML"});
+                    await Enqueuer.sendChatMessage(message.chat.id, result, {parse_mode: "HTML"});
                 }
             } catch (error) {
                 if (error instanceof CommandError) {
                     const out_message = error.message;
-                    Bot.getCurrent()
-                        .sendMessage(message.chat.id, "<i>Error:</i> \n" + out_message, {parse_mode: "HTML"})
-                        .catch(err => {
-                            throw err;
-                        });
+                    Enqueuer.sendChatMessage(message.chat.id, "<i>Error:</i> \n" + out_message, {
+                        parse_mode: "HTML",
+                    }).catch(err => {
+                        throw err;
+                    });
                 } else {
-                    await Bot.getCurrent().sendMessage(message.chat.id, "Unrecognized error");
+                    await Enqueuer.sendChatMessage(message.chat.id, "Unrecognized error");
                     console.error(error);
                 }
             }
         });
 
         try {
-            const argv = stringArgv(match[1] || "");
+            const argv = stringArgv(match[2] || "");
             this.validation.parse(argv, {from: "user"});
         } catch (error) {
             if (error instanceof CommanderError) {
-                await Bot.getCurrent().sendMessage(
+                await Enqueuer.sendChatMessage(
                     message.chat.id,
                     error.message + "\n\n" + this.validation.helpInformation()
                 );
             } else {
-                await Bot.getCurrent().sendMessage(message.chat.id, "Unrecognized error");
+                await Enqueuer.sendChatMessage(message.chat.id, "Unrecognized error");
                 console.error(error);
             }
         }

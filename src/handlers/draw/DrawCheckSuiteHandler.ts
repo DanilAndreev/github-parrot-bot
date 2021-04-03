@@ -26,7 +26,6 @@
 
 import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
 import AmqpHandler from "../../core/AmqpHandler";
-import {Message as AMQPMessage} from "amqplib";
 import Bot from "../../core/Bot";
 import loadTemplate from "../../utils/loadTemplate";
 import etelegramIgnore from "../../utils/etelegramIgnore";
@@ -38,8 +37,8 @@ import CheckSuite from "../../entities/CheckSuite";
 
 @WebHookAmqpHandler.Handler(QUEUES.CHECK_SUITE_SHOW_QUEUE, 10)
 export default class DrawCheckSuiteHandler extends AmqpHandler {
-    protected async handle(content: any, message: AMQPMessage): Promise<void | boolean> {
-        const {checkSuite}: {checkSuite: number} = content;
+    protected async handle(content: {checkSuite: number}): Promise<void | boolean> {
+        const {checkSuite} = content;
 
         const entity: CheckSuite | undefined = await CheckSuite.findOne({
             where: {id: checkSuite},

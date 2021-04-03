@@ -31,6 +31,7 @@ import checkAdmin from "../utils/checkAdmin";
 import WebHook from "../entities/WebHook";
 import Bot from "../core/Bot";
 import Chat from "../entities/Chat";
+import Enqueuer from "../core/Enqueuer";
 
 @BotCommand.Command("add", "<repository> <secret>")
 @BotCommand.Description("Connects GitHub repository to this chat", {
@@ -65,14 +66,17 @@ export default class AddRepositoryCommand extends BotCommand {
         webhook.chat = chat;
         webhook.repository = repository;
         const result = await webhook.save();
-        try {
-            await Bot.getCurrent().deleteMessage(chatId, "" + message.message_id);
-        } catch (error) {
-            await Bot.getCurrent().sendMessage(
-                chatId,
-                `Warning: You should give permissions to delete messages for GitHub Tracker bot.`
-            );
-        }
+
+        await Enqueuer.deleteChatMessage(chatId, "" + message.message_id, undefined, true);
+
+        // try {
+        //     await Bot.getCurrent().deleteMessage(chatId, "" + message.message_id);
+        // } catch (error) {
+        //     await Bot.getCurrent().sendMessage(
+        //         chatId,
+        //         `Warning: You should give permissions to delete messages for GitHub Tracker bot.`
+        //     );
+        // }
         return [
             `Successfully added repository.`,
             `Name: <b>${result.repository}</b>`,

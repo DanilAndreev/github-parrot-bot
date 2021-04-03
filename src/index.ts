@@ -25,8 +25,9 @@
  */
 
 import * as dotenv from "dotenv";
-import main from "./main";
 
 dotenv.config();
+
+import main from "./main";
 
 main().catch(console.error);

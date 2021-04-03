@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,23 +24,11 @@
  * SOFTWARE.
  */
 
-import {setupDbConnection} from "./core/DataBase";
-import Bot from "./core/Bot";
-import WebServer from "./core/WebServer";
-import AmqpDispatcher from "./core/AmqpDispatcher";
-import IssuesGarbageCollector from "./chrono/IssuesGarbageCollector";
-import PullRequestsGarbageCollector from "./chrono/PullRequestsGarbageCollector";
-import CheckSuitsGarbageCollector from "./chrono/CheckSuitsGarbageCollector";
+export default class AMQPNack extends Error {
+    public readonly messageId?: number;
 
-export default async function main() {
-    await setupDbConnection();
-    await new IssuesGarbageCollector({interval: 1000 * 60 * 30}).start();
-    await new PullRequestsGarbageCollector({interval: 1000 * 60 * 30}).start();
-    await new CheckSuitsGarbageCollector({interval: 1000 * 60 * 30}).start();
-
-    const server = new WebServer();
-    const bot: Bot = Bot.init(process.env.TELEGRAM_BOT_TOKEN);
-    const RabbitMQ: AmqpDispatcher = await AmqpDispatcher.init();
-
-    server.start();
+    constructor(reason?: string, messageId?: number) {
+        super(reason);
+        this.messageId = messageId;
+    }
 }

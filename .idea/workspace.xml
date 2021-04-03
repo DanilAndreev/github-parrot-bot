@@ -7,11 +7,23 @@
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[husky] Test commit.">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Commands] Changed to AMQP logic.">
+      <change afterPath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Enqueuer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Enqueuer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/globals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/globals.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +69,7 @@
     <property name="add_unversioned_files" value="$PROJECT_DIR$/.env" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.20.6" />
+    <property name="last.edited.regexp" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -69,9 +82,9 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\node_modules\prettier" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="D:\Projects\github-tracker-telegram-bot\node_modules\prettier" />
     <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
-    <property name="ts.external.directory.path" value="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\Projects\github-tracker-telegram-bot\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -127,6 +140,23 @@
       <workItem from="1617095738683" duration="1641000" />
       <workItem from="1617126606330" duration="9183000" />
       <workItem from="1617190800474" duration="497000" />
+      <workItem from="1617279086917" duration="6361000" />
+      <workItem from="1617366432160" duration="2052000" />
+      <workItem from="1617443608555" duration="14392000" />
+    </task>
+    <task id="LOCAL-00023" summary="[issueEvent] Changed message parser markdownV2">
+      <created>1603197150779</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1603197150779</updated>
+    </task>
+    <task id="LOCAL-00024" summary="[issueEvent] Screening symbols.">
+      <created>1603197525663</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1603197525663</updated>
     </task>
     <task id="LOCAL-00025" summary="[issueEvent] Screening symbols.">
       <created>1603197953351</created>
@@ -436,42 +466,28 @@
       <option name="project" value="LOCAL" />
       <updated>1617190345097</updated>
     </task>
-    <task id="LOCAL-00069" summary="[prettier] Configured.">
-      <created>1617198205649</created>
+    <task id="LOCAL-00069" summary="[Enqueuer] Finished.&#10;[DrawMessageHandler] Finished.">
+      <created>1617368516709</created>
       <option name="number" value="00069" />
       <option name="presentableId" value="LOCAL-00069" />
       <option name="project" value="LOCAL" />
-      <updated>1617198205649</updated>
+      <updated>1617368516709</updated>
     </task>
-    <task id="LOCAL-00070" summary="[GLOBAL] Reformatted all source files with prettier.">
-      <created>1617198626078</created>
+    <task id="LOCAL-00070" summary="[CommandHandler] Added amqp logic to commands handler.">
+      <created>1617468057198</created>
       <option name="number" value="00070" />
       <option name="presentableId" value="LOCAL-00070" />
       <option name="project" value="LOCAL" />
-      <updated>1617198626078</updated>
+      <updated>1617468057199</updated>
     </task>
-    <task id="LOCAL-00071" summary="[eslintrc] Added indent rule.">
-      <created>1617198832039</created>
+    <task id="LOCAL-00071" summary="[Commands] Changed to AMQP logic.">
+      <created>1617469695866</created>
       <option name="number" value="00071" />
       <option name="presentableId" value="LOCAL-00071" />
       <option name="project" value="LOCAL" />
-      <updated>1617198832039</updated>
+      <updated>1617469695866</updated>
     </task>
-    <task id="LOCAL-00072" summary="[husky] Test commit.">
-      <created>1617201437286</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1617201437287</updated>
-    </task>
-    <task id="LOCAL-00073" summary="[husky] Test commit.">
-      <created>1617201716297</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1617201716297</updated>
-    </task>
-    <option name="localTasksCounter" value="74" />
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -482,7 +498,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -490,6 +518,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="[Commands] Rewritten to new logic." />
     <MESSAGE value="[Commands] Changed logic to telegram user id." />
     <MESSAGE value="[WebServer] Created mechanism." />
     <MESSAGE value="[WebServer] Finished work with events." />
@@ -511,53 +540,10 @@
     <MESSAGE value="[CheckRunHandler] Separated to two handlers." />
     <MESSAGE value="[Entities] Packed *Message entities to their parent classes." />
     <MESSAGE value="[TBot] Adding new bot commands logic." />
-    <MESSAGE value="[prettier] Configured." />
-    <MESSAGE value="[GLOBAL] Reformatted all source files with prettier." />
-    <MESSAGE value="[eslintrc] Added indent rule." />
-    <MESSAGE value="[husky] Test commit." />
-    <option name="LAST_COMMIT_MESSAGE" value="[husky] Test commit." />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="2594" y="257" key="#ESLint" timestamp="1617190925998">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2594" y="257" key="#ESLint/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617190925998" />
-    <state x="2633" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1617201600440">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2633" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617201600440" />
-    <state x="2659" y="261" key="FileChooserDialogImpl" timestamp="1617200613084">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2659" y="261" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617200613084" />
-    <state width="1899" height="260" key="GridCell.Tab.0.bottom" timestamp="1617197060807">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="260" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617197060807" />
-    <state width="1899" height="260" key="GridCell.Tab.0.center" timestamp="1617197060807">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="260" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617197060807" />
-    <state width="1899" height="260" key="GridCell.Tab.0.left" timestamp="1617197060807">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="260" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617197060807" />
-    <state width="1899" height="260" key="GridCell.Tab.0.right" timestamp="1617197060807">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="260" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617197060807" />
-    <state x="2624" y="222" key="RollbackChangesDialog" timestamp="1617202401831">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2624" y="222" key="RollbackChangesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617202401831" />
-    <state x="2381" y="165" key="SettingsEditor" timestamp="1617198359133">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2381" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617198359133" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1617202398427">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617202398427" />
+    <MESSAGE value="[Enqueuer] Finished.&#10;[DrawMessageHandler] Finished." />
+    <MESSAGE value="[CommandHandler] Added amqp logic to commands handler." />
+    <MESSAGE value="[Commands] Changed to AMQP logic." />
+    <option name="LAST_COMMIT_MESSAGE" value="[Commands] Changed to AMQP logic." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -569,20 +555,14 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts</url>
-          <line>47</line>
+          <line>44</line>
           <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts</url>
-          <line>55</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts</url>
-          <line>75</line>
-          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
