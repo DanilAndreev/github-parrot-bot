@@ -75,7 +75,7 @@ class Enqueuer {
         text: string,
         options?: SendMessageOptions
     ): Promise<void> {
-        await AmqpDispatcher.getCurrent().sendToQueue<Enqueuer.ChatMessageEvent>(
+        await AmqpDispatcher.getCurrent().sendToQueue<Enqueuer.AMQPEvent>(
             QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
             {
                 type: "send-chat-message",
@@ -159,40 +159,73 @@ class Enqueuer {
             {expiration: 1000 * 60 * 10}
         );
     }
+
+    public static async telegramEvent(
+        event:
+            | "channel_post"
+            | "edited_message"
+            | "edited_message_text"
+            | "edited_message_caption"
+            | "edited_channel_post"
+            | "edited_channel_post_text"
+            | "edited_channel_post_caption"
+            | "new_chat_members"
+            | "left_chat_member",
+        message: Message
+    ): Promise<void> {
+        await AmqpDispatcher.getCurrent().sendToQueue<Enqueuer.TelegramEvent>(QUEUES.TELEGRAM_EVENTS_QUEUE, {
+            type: event,
+            message,
+        });
+    }
 }
 
 namespace Enqueuer {
-    export interface ChatMessageEvent extends JSONObject {
+    export interface AMQPEvent extends JSONObject {
         type: string;
     }
 
-    export interface SendChatMessageEvent extends ChatMessageEvent {
+    export interface SendChatMessageEvent extends AMQPEvent {
         chatId: string | number;
         text: string;
         options?: SendMessageOptions;
     }
 
-    export interface EditMessageTextEvent extends ChatMessageEvent {
+    export interface EditMessageTextEvent extends AMQPEvent {
         text: string;
         options?: EditMessageTextOptions;
     }
 
-    export interface EditMessageReplyMarkupEvent extends ChatMessageEvent {
+    export interface EditMessageReplyMarkupEvent extends AMQPEvent {
         replyMarkup: InlineKeyboardMarkup;
         options?: EditMessageReplyMarkupOptions;
     }
 
-    export interface EditMessageLiveLocationEvent extends ChatMessageEvent {
+    export interface EditMessageLiveLocationEvent extends AMQPEvent {
         latitude: number;
         longitude: number;
         options?: EditMessageCaptionOptions;
     }
 
-    export interface DeleteChatMessageEvent extends ChatMessageEvent {
+    export interface DeleteChatMessageEvent extends AMQPEvent {
         chatId: string | number;
         messageId: string;
         options?: JSONObject;
         showMessageOnError?: boolean;
+    }
+
+    export interface TelegramEvent extends AMQPEvent {
+        type:
+            | "channel_post"
+            | "edited_message"
+            | "edited_message_text"
+            | "edited_message_caption"
+            | "edited_channel_post"
+            | "edited_channel_post_text"
+            | "edited_channel_post_caption"
+            | "new_chat_members"
+            | "left_chat_member";
+        message: Message;
     }
 }
 

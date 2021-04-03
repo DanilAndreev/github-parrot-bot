@@ -36,7 +36,7 @@ import {Message as AMQPMessage} from "amqplib";
 
 @WebHookAmqpHandler.Handler(QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE, 10)
 class DrawMessageHandler extends AmqpHandler {
-    protected async handle(event: Enqueuer.ChatMessageEvent, message: AMQPMessage): Promise<void | boolean> {
+    protected async handle(event: Enqueuer.AMQPEvent, message: AMQPMessage): Promise<void | boolean> {
         switch (event.type) {
             case "send-chat-message":
                 return await this.sendChatMessage(event as Enqueuer.SendChatMessageEvent, message);

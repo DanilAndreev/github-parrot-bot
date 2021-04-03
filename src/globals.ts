@@ -33,4 +33,5 @@ export const QUEUES = {
     CHECK_SUITE_SHOW_QUEUE: "check-suite-show-queue",
     TELEGRAM_CHAT_COMMAND: "telegram-chat-command",
     DRAW_TELEGRAM_MESSAGE_QUEUE: "messages",
+    TELEGRAM_EVENTS_QUEUE: "telegram-events-queue",
 };
