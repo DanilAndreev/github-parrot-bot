@@ -31,15 +31,17 @@ import AmqpDispatcher from "./core/AmqpDispatcher";
 import IssuesGarbageCollector from "./chrono/IssuesGarbageCollector";
 import PullRequestsGarbageCollector from "./chrono/PullRequestsGarbageCollector";
 import CheckSuitsGarbageCollector from "./chrono/CheckSuitsGarbageCollector";
+import SystemConfig from "./core/SystemConfig";
+import Config from "./interfaces/Config";
 
-export default async function main() {
+export default async function main(): Promise<void> {
     await setupDbConnection();
     await new IssuesGarbageCollector({interval: 1000 * 60 * 30}).start();
     await new PullRequestsGarbageCollector({interval: 1000 * 60 * 30}).start();
     await new CheckSuitsGarbageCollector({interval: 1000 * 60 * 30}).start();
 
     const server = new WebServer();
-    const bot: Bot = Bot.init(process.env.TELEGRAM_BOT_TOKEN);
+    const bot: Bot = Bot.init(SystemConfig.getConfig<Config>().bot.token);
     const RabbitMQ: AmqpDispatcher = await AmqpDispatcher.init();
 
     server.start();

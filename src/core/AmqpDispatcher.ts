@@ -26,9 +26,10 @@
 
 import * as Amqp from "amqplib";
 import {Connection} from "amqplib";
-import config from "../config";
 import AmqpHandler from "./AmqpHandler";
 import JSONObject from "../interfaces/JSONObject";
+import Config from "../interfaces/Config";
+import SystemConfig from "./SystemConfig";
 
 class AmqpDispatcher {
     protected static current: AmqpDispatcher;
@@ -39,7 +40,7 @@ class AmqpDispatcher {
     constructor(connection: Connection) {
         this.connection = connection;
 
-        this.handlers = config.amqp.handlers.map((HandlerClass: typeof AmqpHandler) => {
+        this.handlers = SystemConfig.getConfig<Config>().amqp.handlers.map((HandlerClass: typeof AmqpHandler) => {
             return new HandlerClass();
         });
 
@@ -71,7 +72,7 @@ class AmqpDispatcher {
     }
 
     public static async init(): Promise<AmqpDispatcher> {
-        const connection: Connection = await Amqp.connect(config.amqp.connect);
+        const connection: Connection = await Amqp.connect(SystemConfig.getConfig<Config>().amqp.connect);
         AmqpDispatcher.current = new AmqpDispatcher(connection);
 
         return AmqpDispatcher.current;

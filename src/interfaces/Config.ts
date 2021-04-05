@@ -32,6 +32,7 @@ import * as AMQP from "amqplib";
 namespace Config {
     export interface Bot {
         token: string;
+        tag?: string;
         commands: typeof BotCommand[];
     }
 

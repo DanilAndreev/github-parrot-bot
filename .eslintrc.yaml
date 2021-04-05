@@ -15,6 +15,7 @@ rules:
   indent:
     - warn
     - 4
+    - SwitchCase: 1
   only-arrow-functions:
     - 'off'
   quotes:

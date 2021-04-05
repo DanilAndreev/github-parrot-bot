@@ -53,7 +53,7 @@ import TelegramEventsHandler from "./handlers/telegram/TelegramEventsHandler";
 
 const config: Config = {
     bot: {
-        token: process.env.TELEGRAM_BOT_TOKEN || "",
+        token: "you-should-pass-telegram-token-as-env-variable",
         commands: [
             AddRepositoryCommand,
             AKAsCommand,
@@ -102,7 +102,7 @@ const config: Config = {
         ],
     },
     server: {
-        port: process.env.PORT ? +process.env.PORT : 3030,
+        port: 3030,
     },
 };
 

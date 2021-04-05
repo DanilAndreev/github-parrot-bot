@@ -24,10 +24,21 @@
  * SOFTWARE.
  */
 
-import * as dotenv from "dotenv";
+// import * as dotenv from "dotenv";
+//
+// dotenv.config();
 
-dotenv.config();
+import SystemConfig from "./core/SystemConfig";
+import config from "./config";
+import envDispatcher from "./envDispatcher";
 
-import main from "./main";
+SystemConfig.setOptions({
+    envMask: /GHTB_(.+)/,
+    additionalConfigs: [config],
+    envDispatcher
+});
+SystemConfig.getCurrent();
 
-main().catch(console.error);
+import main = require("./main");
+
+main.default().catch(console.error);

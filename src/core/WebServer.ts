@@ -27,8 +27,9 @@
 import * as Koa from "koa";
 import {Context, Next} from "koa";
 import * as BodyParser from "koa-bodyparser";
-import config from "../config";
 import AmqpDispatcher from "./AmqpDispatcher";
+import Config from "../interfaces/Config";
+import SystemConfig from "./SystemConfig";
 
 /**
  * WebServer - web server for handling WebHooks.
@@ -76,7 +77,7 @@ class WebServer extends Koa {
      * @author Danil Andreev
      */
     public start(port?: number): WebServer {
-        this.listen(port || process.env.PORT || config.server.port);
+        this.listen(port || SystemConfig.getConfig<Config>().server.port || 3030);
         return this;
     }
 }
