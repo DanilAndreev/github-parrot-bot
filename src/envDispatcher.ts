@@ -41,9 +41,23 @@ export default function envDispatcher(configRef: Ref<Config>, value: string, exe
             case "cloudamqp_url":
                 configRef.current.amqp.connect = value;
                 break;
+
             case "database_url":
                 (configRef.current.db as JSONObject).url = value;
                 break;
+            case "database_host":
+                (configRef.current.db as JSONObject).host = value;
+                break;
+            case "database_port":
+                (configRef.current.db as JSONObject).port = +value;
+                break;
+            case "database_password":
+                (configRef.current.db as JSONObject).password = value;
+                break;
+            case "database_database":
+                (configRef.current.db as JSONObject).database = value;
+                break;
+
             case "telegram_bot_token":
                 configRef.current.bot.token = value;
                 break;

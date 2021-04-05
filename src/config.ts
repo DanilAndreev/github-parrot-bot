@@ -66,7 +66,7 @@ const config: Config = {
     },
     db: {
         type: "postgres",
-        url: process.env.DATABASE_URL,
+        url: "you-should-pass-database-url-as-env-variable",
         entities: [
             WebHook,
             Collaborator,
@@ -84,7 +84,7 @@ const config: Config = {
         },
     },
     amqp: {
-        connect: process.env.CLOUDAMQP_URL || "",
+        connect: "you-should-pass-amqp-url-as-env-variable",
         handlers: [
             IssuesHandler,
             PullRequestsHandler,

@@ -16,23 +16,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Commands] Changed to AMQP logic.">
-      <change afterPath="$PROJECT_DIR$/.prettierignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/SystemConfig.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/envDispatcher.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interfaces/Ref.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/createRef.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintrc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.yaml" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[SystemConfig] Added system config gathering system.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/AmqpDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/AmqpDispatcher.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/DataBase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/DataBase.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebServer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/Config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/envDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/envDispatcher.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +38,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="provide-comands-amqp-logic" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -155,14 +142,7 @@
       <workItem from="1617625194255" duration="207000" />
       <workItem from="1617626058984" duration="160000" />
       <workItem from="1617626235301" duration="113000" />
-      <workItem from="1617626353131" duration="5595000" />
-    </task>
-    <task id="LOCAL-00023" summary="[issueEvent] Changed message parser markdownV2">
-      <created>1603197150779</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1603197150779</updated>
+      <workItem from="1617626353131" duration="5957000" />
     </task>
     <task id="LOCAL-00024" summary="[issueEvent] Screening symbols.">
       <created>1603197525663</created>
@@ -500,7 +480,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617469695866</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="[SystemConfig] Added system config gathering system.">
+      <created>1617632042946</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1617632042946</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -531,7 +518,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[Commands] Rewritten to new logic." />
     <MESSAGE value="[Commands] Changed logic to telegram user id." />
     <MESSAGE value="[WebServer] Created mechanism." />
     <MESSAGE value="[WebServer] Finished work with events." />
@@ -556,7 +542,8 @@
     <MESSAGE value="[Enqueuer] Finished.&#10;[DrawMessageHandler] Finished." />
     <MESSAGE value="[CommandHandler] Added amqp logic to commands handler." />
     <MESSAGE value="[Commands] Changed to AMQP logic." />
-    <option name="LAST_COMMIT_MESSAGE" value="[Commands] Changed to AMQP logic." />
+    <MESSAGE value="[SystemConfig] Added system config gathering system." />
+    <option name="LAST_COMMIT_MESSAGE" value="[SystemConfig] Added system config gathering system." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2744" y="399" key="#ESLint" timestamp="1617629668932">
@@ -567,22 +554,22 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2627" y="310" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617630599620" />
-    <state width="1899" height="213" key="GridCell.Tab.0.bottom" timestamp="1617631506902">
+    <state width="1899" height="253" key="GridCell.Tab.0.bottom" timestamp="1617632177331">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="213" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617631506902" />
-    <state width="1899" height="213" key="GridCell.Tab.0.center" timestamp="1617631506902">
+    <state width="1899" height="253" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617632177331" />
+    <state width="1899" height="253" key="GridCell.Tab.0.center" timestamp="1617632177331">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="213" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617631506902" />
-    <state width="1899" height="213" key="GridCell.Tab.0.left" timestamp="1617631506902">
+    <state width="1899" height="253" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617632177331" />
+    <state width="1899" height="253" key="GridCell.Tab.0.left" timestamp="1617632177331">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="213" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617631506902" />
-    <state width="1899" height="213" key="GridCell.Tab.0.right" timestamp="1617631506902">
+    <state width="1899" height="253" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617632177331" />
+    <state width="1899" height="253" key="GridCell.Tab.0.right" timestamp="1617632177331">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="213" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617631506902" />
+    <state width="1899" height="253" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617632177331" />
     <state width="1899" height="213" key="GridCell.Tab.1.bottom" timestamp="1617631506902">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -635,6 +622,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2381" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617626162387" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617632046847">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617632046847" />
     <state x="434" y="0" width="1502" height="736" maximized="true" key="dock-window-1" timestamp="1617629928455">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
