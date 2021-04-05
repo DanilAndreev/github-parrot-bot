@@ -68,6 +68,23 @@ export default function envDispatcher(configRef: Ref<Config>, value: string, exe
             case "web_server_port":
                 configRef.current.server.port = +value;
                 break;
+
+            case "enable_webserver":
+                configRef.current.system.webserver = value === "true" && true;
+                break;
+            case "enable_github_events_handlers":
+                configRef.current.system.githubEventsHandlers = value === "true" && true;
+                break;
+            case "enable_commands_events_handlers":
+                configRef.current.system.commandsEventHandlers = value === "true" && true;
+                break;
+            case "enable_draw_events_handlers":
+                configRef.current.system.drawEventsHandlers = value === "true" && true;
+                break;
+            case "enable_cron_database_garbage_collectors":
+                configRef.current.system.cronDatabaseGarbageCollectors = value === "true" && true;
+                break;
+
             default:
                 SystemConfig.defaultEnvDispatcher(configRef, value, execArray, regExp);
         }

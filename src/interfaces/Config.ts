@@ -44,6 +44,14 @@ namespace Config {
         connect: string | AMQP.Options.Connect;
         handlers: typeof AmqpHandler[];
     }
+
+    export interface System {
+        webserver?: boolean;
+        githubEventsHandlers?: boolean;
+        commandsEventHandlers?: boolean;
+        drawEventsHandlers?: boolean;
+        cronDatabaseGarbageCollectors?: boolean;
+    }
 }
 
 interface Config {
@@ -51,6 +59,7 @@ interface Config {
     db: ConnectionOptions;
     server: Config.Server;
     amqp: Config.Amqp;
+    system: Config.System;
 }
 
 export default Config;

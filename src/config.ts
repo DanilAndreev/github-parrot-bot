@@ -104,6 +104,7 @@ const config: Config = {
     server: {
         port: 3030,
     },
+    system: {}
 };
 
 export default config;
