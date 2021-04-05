@@ -34,15 +34,34 @@ import CheckSuitsGarbageCollector from "./chrono/CheckSuitsGarbageCollector";
 import SystemConfig from "./core/SystemConfig";
 import Config from "./interfaces/Config";
 
+function requiredFor(...args: string[]): boolean {
+    return args.every((key: string) => SystemConfig.getConfig<Config>().system[key]);
+}
+
 export default async function main(): Promise<void> {
-    await setupDbConnection();
-    await new IssuesGarbageCollector({interval: 1000 * 60 * 30}).start();
-    await new PullRequestsGarbageCollector({interval: 1000 * 60 * 30}).start();
-    await new CheckSuitsGarbageCollector({interval: 1000 * 60 * 30}).start();
+    if (requiredFor("drawEventsHandlers", "commandsEventHandlers", "githubEventsHandlers", "cronDatabaseGarbageCollectors")) {
+        await setupDbConnection();
+    }
+    if (requiredFor("cronDatabaseGarbageCollectors")) {
+        await new IssuesGarbageCollector({interval: 1000 * 60 * 30}).start();
+        await new PullRequestsGarbageCollector({interval: 1000 * 60 * 30}).start();
+        await new CheckSuitsGarbageCollector({interval: 1000 * 60 * 30}).start();
+    }
 
-    const server = new WebServer();
-    const bot: Bot = Bot.init(SystemConfig.getConfig<Config>().bot.token);
-    const RabbitMQ: AmqpDispatcher = await AmqpDispatcher.init();
+    let server: WebServer | undefined;
+    if (requiredFor("webserver")) {
+        server = new WebServer();
+    }
+    if (requiredFor("drawEventsHandlers", "commandsProxy")) {
+        const bot: Bot = Bot.init(
+            SystemConfig.getConfig<Config>().bot.token,
+            SystemConfig.getConfig<Config>().system.commandsProxy
+        );
+    }
 
-    server.start();
+    if (requiredFor("commandsProxy", "webserver", "githubEventsHandlers", "commandsEventHandlers", "drawEventsHandlers")) {
+        const RabbitMQ: AmqpDispatcher = await AmqpDispatcher.init();
+    }
+
+    server && server.start();
 }

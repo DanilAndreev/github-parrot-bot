@@ -16,11 +16,12 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[envDispatcher] Added more params for database setup.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[envDispatcher] Added system settings.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/envDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/envDispatcher.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/interfaces/Config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,14 +144,7 @@
       <workItem from="1617625194255" duration="207000" />
       <workItem from="1617626058984" duration="160000" />
       <workItem from="1617626235301" duration="113000" />
-      <workItem from="1617626353131" duration="6754000" />
-    </task>
-    <task id="LOCAL-00025" summary="[issueEvent] Screening symbols.">
-      <created>1603197953351</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1603197953351</updated>
+      <workItem from="1617626353131" duration="7600000" />
     </task>
     <task id="LOCAL-00026" summary="[issueEvent] Added hashtag to issue.">
       <created>1603198230493</created>
@@ -488,7 +482,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617632401906</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="[envDispatcher] Added system settings.">
+      <created>1617633192489</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1617633192489</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -519,7 +520,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[WebServer] Created mechanism." />
     <MESSAGE value="[WebServer] Finished work with events." />
     <MESSAGE value="[IssuesHandler] Added handlebars mechanism." />
     <MESSAGE value="[WebServer] Removed events emitter. Messages are pushed to RabbitMQ instantly." />
@@ -544,7 +544,8 @@
     <MESSAGE value="[Commands] Changed to AMQP logic." />
     <MESSAGE value="[SystemConfig] Added system config gathering system." />
     <MESSAGE value="[envDispatcher] Added more params for database setup." />
-    <option name="LAST_COMMIT_MESSAGE" value="[envDispatcher] Added more params for database setup." />
+    <MESSAGE value="[envDispatcher] Added system settings." />
+    <option name="LAST_COMMIT_MESSAGE" value="[envDispatcher] Added system settings." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2744" y="399" key="#ESLint" timestamp="1617629668932">
@@ -623,10 +624,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2381" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617626162387" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617632404419">
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617633195065">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617632404419" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617633195065" />
     <state x="434" y="0" width="1502" height="736" maximized="true" key="dock-window-1" timestamp="1617629928455">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

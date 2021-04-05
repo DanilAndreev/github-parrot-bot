@@ -41,12 +41,13 @@ export default class Bot extends TelegramBot {
     /**
      * Creates an instance of Bot.
      * @param token - Telegram bot token.
+     * @param polling - Updates getting method.
      * @protected
      */
-    protected constructor(token?: string) {
+    protected constructor(token?: string, polling: boolean = false) {
         if (!token) throw new Error(`FatalError: you must specify token to run this app! "token" = "${token}".`);
         console.log("Creating telegram bot.");
-        super(token, {polling: true});
+        super(token, {polling});
         this.addListener("left_chat_member", this.handleMemberLeftChat);
         this.addListener("new_chat_members", this.handleNewChatMember);
         this.onText(/^\/([^\s@]+)(?:@GitHubIssuesPullsTrackingBot)?(?:\s)?(.*)?/, (message, match) =>
@@ -102,10 +103,11 @@ export default class Bot extends TelegramBot {
     /**
      * init - initializes an instance of Bot and stores it in current.
      * @param token - Telegram bot token.
+     * @param polling - Updates getting method.
      */
-    public static init(token?: string): Bot {
+    public static init(token?: string, polling?: boolean): Bot {
         if (this.current) throw new ReferenceError("Class instance is already created.");
-        this.current = new Bot(token);
+        this.current = new Bot(token, polling);
         return this.current;
     }
 

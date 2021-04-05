@@ -46,6 +46,7 @@ namespace Config {
     }
 
     export interface System {
+        commandsProxy?: boolean;
         webserver?: boolean;
         githubEventsHandlers?: boolean;
         commandsEventHandlers?: boolean;

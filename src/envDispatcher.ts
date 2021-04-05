@@ -84,6 +84,9 @@ export default function envDispatcher(configRef: Ref<Config>, value: string, exe
             case "enable_cron_database_garbage_collectors":
                 configRef.current.system.cronDatabaseGarbageCollectors = value === "true" && true;
                 break;
+            case "enable_commands_proxy":
+                configRef.current.system.commandsProxy = value === "true" && true;
+                break;
 
             default:
                 SystemConfig.defaultEnvDispatcher(configRef, value, execArray, regExp);
