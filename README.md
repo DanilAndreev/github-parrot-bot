@@ -3,7 +3,7 @@
         <img alt="Ape Lang Logo" height="250" src="https://github.com/DanilAndreev/github-tracker-telegram-bot/blob/master/media/bot-logo.svg"/>
     </div>
     <div align="center">
-        <h1>GitHub Tracker Telegram bot</h1>
+        <h1>GitHub Parrot</h1>
     </div>
     <div align="center">
         <img alt="GitHub" src="https://img.shields.io/github/license/DanilAndreev/github-tracker-telegram-bot"/>
