@@ -25,3 +25,8 @@ async function main(): Promise<void> {
     print(template(context));
 }
 ```
+##### RESULT
+```handlebars
+<i>Hello from tempalte</i>
+<b>John</b>
+```
