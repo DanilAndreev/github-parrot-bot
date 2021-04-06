@@ -26,6 +26,9 @@
 
 import * as TelegramBot from "node-telegram-bot-api";
 import Enqueuer from "./Enqueuer";
+import Logger from "./Logger";
+import Config from "../interfaces/Config";
+import SystemConfig from "./SystemConfig";
 
 /**
  * Bot - class for telegram bot api.
@@ -46,13 +49,16 @@ export default class Bot extends TelegramBot {
      */
     protected constructor(token?: string, polling: boolean = false) {
         if (!token) throw new Error(`FatalError: you must specify token to run this app! "token" = "${token}".`);
-        console.log("Creating telegram bot.");
+        Logger.info(`Creating telegram bot. Polling: ${polling}. Tag: ${SystemConfig.getConfig<Config>().bot.tag}`);
         super(token, {polling});
         this.addListener("left_chat_member", this.handleMemberLeftChat);
+        Logger.silly(`Added listener of "left_chat_member" for bot.`);
         this.addListener("new_chat_members", this.handleNewChatMember);
-        this.onText(/^\/([^\s@]+)(?:@GitHubIssuesPullsTrackingBot)?(?:\s)?(.*)?/, (message, match) =>
-            Enqueuer.chatCommand(message, match)
-        );
+        Logger.silly(`Added listener of "new_chat_members" for bot.`);
+        let regExp: RegExp = /^\/([^\s@]+)(?:\s)?(.*)?/;
+        if (SystemConfig.getConfig<Config>().bot.tag)
+            regExp = new RegExp(`^/([^\s@]+)(?:${SystemConfig.getConfig<Config>().bot.tag})?(?:\s)?(.*)?`)
+        this.onText(regExp, (message, match) => Enqueuer.chatCommand(message, match));
         // this.updateBotCommandsHelp().catch((error: Error) => {
         //     console.error("Failed to update bot commands: ", error);
         // });

@@ -88,6 +88,10 @@ export default function envDispatcher(configRef: Ref<Config>, value: string, exe
                 configRef.current.system.commandsProxy = value === "true" && true;
                 break;
 
+            case "log_level":
+                configRef.current.system.logLevel = value;
+                break;
+
             default:
                 SystemConfig.defaultEnvDispatcher(configRef, value, execArray, regExp);
         }

@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,22 +24,25 @@
  * SOFTWARE.
  */
 
-import {Connection, createConnection} from "typeorm";
-import SystemConfig from "./SystemConfig";
-import Config from "../interfaces/Config";
-import Logger from "./Logger";
+import {createLogger, Logger as LoggerType, format, transports} from "winston";
+import * as moment from "moment";
 
-export let DBConnection: Connection | null = null;
+const logLevel: string = process.env.GHTB_LOG_LEVEL || "error";
 
-export async function setupDbConnection(): Promise<void> {
-    try {
-        Logger.info("Connecting to database...");
-        DBConnection = await createConnection(SystemConfig.getConfig<Config>().db);
-        Logger.info("Connected to database.");
-        await DBConnection.synchronize();
-        Logger.info("Typeorm entities synchronized.");
-    } catch (error) {
-        Logger.error("Failed to connect to database!", error);
-        process.exit(1)
-    }
-}
+const logFormat = format.printf(({ level, message, label, timestamp }) => {
+    return `${label}[${moment(timestamp).format("LLL")}] <${level}>: ${message}`;
+});
+
+const logTransports: transports.ConsoleTransportInstance[] = [new transports.Console()];
+
+const Logger: LoggerType = createLogger({
+    level: logLevel,
+    format: format.combine(
+        format.label({ label: "GHTB" }),
+        format.timestamp(),
+        logFormat
+    ),
+    transports: logTransports,
+});
+
+export default Logger;

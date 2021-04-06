@@ -7,6 +7,7 @@
       <env name="GHTB_ENABLE_DRAW_EVENTS_HANDLERS" value="true" />
       <env name="GHTB_ENABLE_CRON_DATABASE_GARBAGE_COLLECTORS" value="true" />
       <env name="GHTB_ENABLE_COMMANDS_PROXY" value="true" />
+      <env name="GHTB_LOG_LEVEL" value="silly" />
     </envs>
     <method v="2">
       <option name="NpmBeforeRunTask" enabled="true">

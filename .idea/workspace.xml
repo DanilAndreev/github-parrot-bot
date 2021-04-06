@@ -16,20 +16,18 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[envDispatcher] Added system settings.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Handlers] Added settings.">
+      <change afterPath="$PROJECT_DIR$/src/core/Logger.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Run_with_ts_node.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Run_with_ts_node.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/AmqpDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/AmqpDispatcher.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawCheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawCheckSuiteHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/CheckRunHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckRunHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/IssuesHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/IssuesHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/PushHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PushHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/DataBase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/DataBase.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/envDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/envDispatcher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/Config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +88,7 @@
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="D:\Projects\github-tracker-telegram-bot\node_modules\prettier" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="ts.external.directory.path" value="D:\Projects\github-tracker-telegram-bot\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -165,6 +163,10 @@
       <workItem from="1617626235301" duration="113000" />
       <workItem from="1617626353131" duration="7600000" />
       <workItem from="1617705320409" duration="114000" />
+      <workItem from="1617709979264" duration="3064000" />
+      <workItem from="1617713077405" duration="59000" />
+      <workItem from="1617713141772" duration="169000" />
+      <workItem from="1617713317262" duration="416000" />
     </task>
     <task id="LOCAL-00026" summary="[issueEvent] Added hashtag to issue.">
       <created>1603198230493</created>
@@ -568,38 +570,82 @@
     <option name="LAST_COMMIT_MESSAGE" value="[envDispatcher] Added system settings." />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="212" key="GridCell.Tab.0.bottom" timestamp="1617707601838">
+    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1617713622314">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="212" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617707601838" />
-    <state width="1877" height="212" key="GridCell.Tab.0.center" timestamp="1617707601838">
+    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713622314" />
+    <state x="2745" y="118" width="775" height="780" key="EnvironmentVariablesDialog" timestamp="1617713621496">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="212" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617707601838" />
-    <state width="1877" height="212" key="GridCell.Tab.0.left" timestamp="1617707601838">
+    <state x="2745" y="118" width="775" height="780" key="EnvironmentVariablesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713621496" />
+    <state width="1877" height="335" key="GridCell.Tab.0.bottom" timestamp="1617713668622">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="212" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617707601838" />
-    <state width="1877" height="212" key="GridCell.Tab.0.right" timestamp="1617707601838">
+    <state width="1877" height="335" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713668622" />
+    <state width="1877" height="335" key="GridCell.Tab.0.center" timestamp="1617713668622">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="212" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617707601838" />
-    <state width="1877" height="265" key="GridCell.Tab.1.bottom" timestamp="1617707614701">
+    <state width="1877" height="335" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713668622" />
+    <state width="1877" height="335" key="GridCell.Tab.0.left" timestamp="1617713668622">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="265" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617707614701" />
-    <state width="1877" height="265" key="GridCell.Tab.1.center" timestamp="1617707614701">
+    <state width="1877" height="335" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713668622" />
+    <state width="1877" height="335" key="GridCell.Tab.0.right" timestamp="1617713668622">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="265" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617707614701" />
-    <state width="1877" height="265" key="GridCell.Tab.1.left" timestamp="1617707614701">
+    <state width="1877" height="335" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713668622" />
+    <state width="1877" height="391" key="GridCell.Tab.1.bottom" timestamp="1617713574229">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="265" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617707614701" />
-    <state width="1877" height="265" key="GridCell.Tab.1.right" timestamp="1617707614701">
+    <state width="1877" height="391" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713574229" />
+    <state width="1877" height="391" key="GridCell.Tab.1.center" timestamp="1617713574229">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="265" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617707614701" />
+    <state width="1877" height="391" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713574229" />
+    <state width="1877" height="391" key="GridCell.Tab.1.left" timestamp="1617713574229">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="391" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713574229" />
+    <state width="1877" height="391" key="GridCell.Tab.1.right" timestamp="1617713574229">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="391" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713574229" />
+    <state width="1877" height="391" key="GridCell.Tab.2.bottom" timestamp="1617713574229">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="391" key="GridCell.Tab.2.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713574229" />
+    <state width="1877" height="391" key="GridCell.Tab.2.center" timestamp="1617713574229">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="391" key="GridCell.Tab.2.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713574229" />
+    <state width="1877" height="391" key="GridCell.Tab.2.left" timestamp="1617713574229">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="391" key="GridCell.Tab.2.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713574229" />
+    <state width="1877" height="391" key="GridCell.Tab.2.right" timestamp="1617713574229">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="391" key="GridCell.Tab.2.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713574229" />
+    <state width="1877" height="391" key="GridCell.Tab.3.bottom" timestamp="1617713574244">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="391" key="GridCell.Tab.3.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713574244" />
+    <state width="1877" height="391" key="GridCell.Tab.3.center" timestamp="1617713574244">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="391" key="GridCell.Tab.3.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713574244" />
+    <state width="1877" height="391" key="GridCell.Tab.3.left" timestamp="1617713574229">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="391" key="GridCell.Tab.3.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713574229" />
+    <state width="1877" height="391" key="GridCell.Tab.3.right" timestamp="1617713574244">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="391" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713574244" />
+    <state x="469" y="3" width="1467" height="659" maximized="true" key="dock-window-1" timestamp="1617713571730">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="469" y="3" width="1467" height="659" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713571730" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -615,9 +661,19 @@
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/core/Bot.ts</url>
+          <line>51</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/index.ts</url>
           <line>41</line>
-          <option name="timeStamp" value="20" />
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/core/SystemConfig.ts</url>
+          <line>149</line>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

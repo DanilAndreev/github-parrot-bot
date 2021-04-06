@@ -24,6 +24,7 @@ rules:
     - allowTemplateLiterals: true
   object-shorthand: warn
   no-console: warn
+  no-useless-escape: warn
   no-empty: warn
   no-shadow:
     - error
