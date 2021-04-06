@@ -30,21 +30,41 @@ import {ConnectionOptions} from "typeorm";
 import * as AMQP from "amqplib";
 
 namespace Config {
+    /**
+     * Bot - telegram bot configuration settings.
+     * @interface
+     * @author Danil Andreev
+     */
     export interface Bot {
         token: string;
         tag?: string;
         commands: typeof BotCommand[];
     }
 
+    /**
+     * Server - web server configuration settings.
+     * @interface
+     * @author Danil Andreev
+     */
     export interface Server {
         port: number;
     }
 
+    /**
+     * Amqp - AMQP client configuration settings.
+     * @interface
+     * @author Danil Andreev
+     */
     export interface Amqp {
         connect: string | AMQP.Options.Connect;
         handlers: typeof AmqpHandler[];
     }
 
+    /**
+     * System - system configuration settings.
+     * @interface
+     * @author Danil Andreev
+     */
     export interface System {
         logLevel: string;
         commandsProxy?: boolean;
@@ -56,6 +76,11 @@ namespace Config {
     }
 }
 
+/**
+ * Config - interface for system configuration.
+ * @interface
+ * @author Danil Andreev
+ */
 interface Config {
     bot: Config.Bot;
     db: ConnectionOptions;

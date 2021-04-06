@@ -34,10 +34,22 @@ import CheckSuitsGarbageCollector from "./chrono/CheckSuitsGarbageCollector";
 import SystemConfig from "./core/SystemConfig";
 import Config from "./interfaces/Config";
 
+/**
+ * requiredFor - function, designed to determine if some functional is required.
+ * @function
+ * @param args - Config system settings next functional required for.
+ * @author Danil Andreev
+ */
 function requiredFor(...args: string[]): boolean {
     return args.some((key: string) => SystemConfig.getConfig<Config>().system[key]);
 }
 
+/**
+ * main process function.
+ * @function
+ * @main
+ * @author Danil Andreev
+ */
 export default async function main(): Promise<void> {
     if (requiredFor("drawEventsHandlers", "commandsEventHandlers", "githubEventsHandlers", "cronDatabaseGarbageCollectors")) {
         await setupDbConnection();

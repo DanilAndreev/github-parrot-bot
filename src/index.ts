@@ -24,14 +24,12 @@
  * SOFTWARE.
  */
 
-// import * as dotenv from "dotenv";
-//
-// dotenv.config();
 
 import SystemConfig from "./core/SystemConfig";
 import config from "./config";
 import envDispatcher from "./envDispatcher";
 import {initLogger} from "./core/Logger";
+import Config from "./interfaces/Config";
 
 SystemConfig.setOptions({
     envMask: /GHTB_(.+)/,
@@ -42,6 +40,5 @@ initLogger();
 console.log(`Logger level: ${SystemConfig.getConfig<Config>().system.logLevel}`);
 
 import main = require("./main");
-import Config from "./interfaces/Config";
 
 main.default().catch(console.error);
