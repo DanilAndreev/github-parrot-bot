@@ -27,11 +27,19 @@
 import {Connection, createConnection} from "typeorm";
 import SystemConfig from "./SystemConfig";
 import Config from "../interfaces/Config";
+import {Logger} from "./Logger";
 
 export let DBConnection: Connection | null = null;
 
-export async function setupDbConnection() {
-    console.log("Connecting to database");
-    DBConnection = await createConnection(SystemConfig.getConfig<Config>().db);
-    await DBConnection.synchronize();
+export async function setupDbConnection(): Promise<void> {
+    try {
+        Logger?.info("Connecting to database...");
+        DBConnection = await createConnection(SystemConfig.getConfig<Config>().db);
+        Logger?.info("Connected to database.");
+        await DBConnection.synchronize();
+        Logger?.info("Typeorm entities synchronized.");
+    } catch (error) {
+        Logger?.error("Failed to connect to database!", error);
+        process.exit(1)
+    }
 }

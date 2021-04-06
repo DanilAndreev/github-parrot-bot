@@ -104,7 +104,9 @@ const config: Config = {
     server: {
         port: 3030,
     },
-    system: {}
+    system: {
+        logLevel: "error",
+    }
 };
 
 export default config;

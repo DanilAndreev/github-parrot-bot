@@ -27,6 +27,7 @@
 import Chrono from "../core/Chrono";
 import {DeleteResult} from "typeorm";
 import PullRequest from "../entities/PullRequest";
+import {Logger} from "../core/Logger";
 
 export default class PullRequestsGarbageCollector extends Chrono {
     protected async run(): Promise<void> {
@@ -34,6 +35,6 @@ export default class PullRequestsGarbageCollector extends Chrono {
             .delete()
             .where("updatedAt < current_timestamp - interval '1 hour'")
             .execute();
-        console.log(`Issues garbage collector: deleted ${result.affected} items.`);
+        Logger?.info(`Issues garbage collector: deleted ${result.affected} items.`);
     }
 }

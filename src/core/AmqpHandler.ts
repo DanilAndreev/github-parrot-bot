@@ -27,6 +27,7 @@
 import * as Amqp from "amqplib";
 import {Message} from "amqplib";
 import AMQPAck from "../errors/AMQPAck";
+import {Logger} from "./Logger";
 
 class AmqpHandler {
     protected handle(content: any, message: Message): void | Promise<void | boolean> {
@@ -35,17 +36,22 @@ class AmqpHandler {
 
     public async execute(message: Amqp.Message, channel: Amqp.Channel) {
         try {
+            Logger?.debug(`Got AMQP message. ${JSON.stringify({id: message.properties.messageId, queue: message.fields.routingKey})}`);
             const content: any = JSON.parse(message.content.toString());
             const result: boolean | void = await this.handle(content, message);
             if (result === false) {
+                Logger?.debug(`Got AMQP message NACKed. Queue: ${message.fields.routingKey}. Reason: Handler returned false value.`);
                 channel.nack(message);
             } else {
+                Logger?.silly(`AMQP message ACKed. Queue: ${message.fields.routingKey}`);
                 channel.ack(message);
             }
         } catch (error) {
             if (error instanceof AMQPAck) {
+                Logger?.silly(`AMQP message ACKed. Queue: ${message.fields.routingKey}`);
                 channel.ack(message);
             } else {
+                Logger?.debug(`Got AMQP message NACKed. Queue: ${message.fields.routingKey}. Reason: ${error}`);
                 channel.nack(message);
             }
         }

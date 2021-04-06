@@ -46,6 +46,7 @@ namespace Config {
     }
 
     export interface System {
+        logLevel: string;
         commandsProxy?: boolean;
         webserver?: boolean;
         githubEventsHandlers?: boolean;

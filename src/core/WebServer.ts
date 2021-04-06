@@ -30,6 +30,7 @@ import * as BodyParser from "koa-bodyparser";
 import AmqpDispatcher from "./AmqpDispatcher";
 import Config from "../interfaces/Config";
 import SystemConfig from "./SystemConfig";
+import {Logger} from "./Logger";
 
 /**
  * WebServer - web server for handling WebHooks.
@@ -59,11 +60,12 @@ class WebServer extends Koa {
         try {
             const payload: any = ctx.request.body;
             const event = ctx.request.get("x-github-event");
-            console.log(event);
-            if (!event) throw new Error("Failed to get event.");
+            Logger?.debug(`Got WebHook message. Event: ${event}. Origin: ${ctx.req.url}`);
+            if (!event) throw new Error(`Failed to get event from "x-github-event" header.`);
             await AmqpDispatcher.getCurrent().sendToQueue(event, {payload, ctx}, {expiration: 1000 * 60 * 30});
             ctx.status = 200;
         } catch (error) {
+            Logger?.http(`Incorrect webhook request. Origin: ${ctx.req.url}. ${error}`);
             ctx.status = 400;
             ctx.body = "Incorrect webhook request." + error.message;
         }
@@ -77,7 +79,9 @@ class WebServer extends Koa {
      * @author Danil Andreev
      */
     public start(port?: number): WebServer {
-        this.listen(port || SystemConfig.getConfig<Config>().server.port || 3030);
+        const targetPort: number = port || SystemConfig.getConfig<Config>().server.port || 3030;
+        Logger?.info(`Web server started on port ${targetPort}.`)
+        this.listen(targetPort);
         return this;
     }
 }

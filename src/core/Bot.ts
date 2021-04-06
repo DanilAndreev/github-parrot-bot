@@ -26,6 +26,9 @@
 
 import * as TelegramBot from "node-telegram-bot-api";
 import Enqueuer from "./Enqueuer";
+import {Logger} from "./Logger";
+import Config from "../interfaces/Config";
+import SystemConfig from "./SystemConfig";
 
 /**
  * Bot - class for telegram bot api.
@@ -46,13 +49,20 @@ export default class Bot extends TelegramBot {
      */
     protected constructor(token?: string, polling: boolean = false) {
         if (!token) throw new Error(`FatalError: you must specify token to run this app! "token" = "${token}".`);
-        console.log("Creating telegram bot.");
+        Logger?.info(`Creating telegram bot. Polling: ${polling}. Tag: ${SystemConfig.getConfig<Config>().bot.tag}`);
         super(token, {polling});
         this.addListener("left_chat_member", this.handleMemberLeftChat);
+        Logger?.silly(`Added listener of "left_chat_member" for bot.`);
         this.addListener("new_chat_members", this.handleNewChatMember);
-        this.onText(/^\/([^\s@]+)(?:@GitHubIssuesPullsTrackingBot)?(?:\s)?(.*)?/, (message, match) =>
-            Enqueuer.chatCommand(message, match)
-        );
+        Logger?.silly(`Added listener of "new_chat_members" for bot.`);
+        let regExp: RegExp = /^\/([^\s@]+)(?:\s)?(.*)?/;
+        if (SystemConfig.getConfig<Config>().bot.tag)
+            regExp = new RegExp(`^/([^\s@]+)(?:${SystemConfig.getConfig<Config>().bot.tag})?(?:\s)?(.*)?`)
+        this.onText(regExp, (message, match) => {
+            Logger?.debug(`Got command from chat id: ${message.chat.id}. Command: "${match && match[0]}"`);
+            Enqueuer.chatCommand(message, match).then();
+        });
+        Logger?.silly(`Added listener for telegram messages.`);
         // this.updateBotCommandsHelp().catch((error: Error) => {
         //     console.error("Failed to update bot commands: ", error);
         // });
@@ -87,6 +97,9 @@ export default class Bot extends TelegramBot {
      * @author Danil Andreev
      */
     protected async handleMemberLeftChat(message: TelegramBot.Message): Promise<void> {
+        Logger?.debug(
+            `Caught event "left_chat_member" on chat id ${message.chat.id}. Member id: ${message.left_chat_member?.id}`
+        );
         await Enqueuer.telegramEvent("left_chat_member", message);
     }
 
@@ -97,6 +110,9 @@ export default class Bot extends TelegramBot {
      * @author Danil Andreev
      */
     protected async handleNewChatMember(message: TelegramBot.Message): Promise<void> {
+        Logger?.debug(
+            `Caught event "new_chat_members" on chat id ${message.chat.id}. Member ids: ${message.new_chat_members?.map(member => member.id)}.`
+        );
         await Enqueuer.telegramEvent("new_chat_members", message);
     }
 
@@ -106,6 +122,9 @@ export default class Bot extends TelegramBot {
      * @param polling - Updates getting method.
      */
     public static init(token?: string, polling?: boolean): Bot {
+        Logger?.silly(
+            `Bot initialization...`
+        );
         if (this.current) throw new ReferenceError("Class instance is already created.");
         this.current = new Bot(token, polling);
         return this.current;

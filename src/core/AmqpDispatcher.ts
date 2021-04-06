@@ -30,6 +30,7 @@ import AmqpHandler from "./AmqpHandler";
 import JSONObject from "../interfaces/JSONObject";
 import Config from "../interfaces/Config";
 import SystemConfig from "./SystemConfig";
+import {Logger} from "./Logger";
 
 class AmqpDispatcher {
     protected static current: AmqpDispatcher;
@@ -87,9 +88,11 @@ class AmqpDispatcher {
         await channel.assertQueue(queueName);
         await channel.prefetch(prefetch || 10);
         await channel.consume(queueName, msg => msg && handler.execute(msg, channel));
+        Logger?.silly(`Hooked AMQP handler to queue: "${queueName}"`);
     }
 
     public async sendToQueue<T extends JSONObject>(queueName: string, message: T, options?: Amqp.Options.Publish) {
+        Logger?.debug(`Sent message to AMQP queue: "${queueName}".`);
         const channel: Amqp.Channel = await this.connection.createChannel();
         await channel.assertQueue(queueName);
         channel.sendToQueue(queueName, Buffer.from(JSON.stringify(message)), options);
@@ -97,9 +100,9 @@ class AmqpDispatcher {
     }
 
     public static async init(): Promise<AmqpDispatcher> {
+        Logger?.debug(`Initialized AMQP dispatcher.`);
         const connection: Connection = await Amqp.connect(SystemConfig.getConfig<Config>().amqp.connect);
         AmqpDispatcher.current = new AmqpDispatcher(connection);
-
         return AmqpDispatcher.current;
     }
 

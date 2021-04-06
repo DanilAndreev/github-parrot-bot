@@ -24,18 +24,30 @@
  * SOFTWARE.
  */
 
-import Chrono from "../core/Chrono";
-import {DeleteResult} from "typeorm";
-import CheckSuite from "../entities/CheckSuite";
-import {Logger} from "../core/Logger";
+import {createLogger, Logger as LoggerType, format, transports} from "winston";
+import * as moment from "moment";
+import Config from "../interfaces/Config";
+import SystemConfig from "./SystemConfig";
 
-export default class CheckSuitsGarbageCollector extends Chrono {
-    protected async run(): Promise<void> {
-        const result: DeleteResult = await CheckSuite.createQueryBuilder()
-            .delete()
-            .where("updatedAt < current_timestamp - interval '1 hour'")
-            .andWhere("pullRequest IS NOT NULL")
-            .execute();
-        Logger?.info(`Issues garbage collector: deleted ${result.affected} items.`);
-    }
+export let Logger: LoggerType | undefined;
+
+export function initLogger(): LoggerType {
+    const logLevel: string = SystemConfig.getConfig<Config>().system.logLevel || "error";
+
+    const logFormat = format.printf(({ level, message, label, timestamp }) => {
+        return `${label}[${moment(timestamp).format("LLL")}] <${level}>: ${message}`;
+    });
+
+    const logTransports: transports.ConsoleTransportInstance[] = [new transports.Console()];
+
+    Logger = createLogger({
+        level: logLevel,
+        format: format.combine(
+            format.label({ label: "GHTB" }),
+            format.timestamp(),
+            logFormat
+        ),
+        transports: logTransports,
+    });
+    return Logger;
 }

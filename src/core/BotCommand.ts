@@ -32,6 +32,7 @@ import {Command as CommanderCommand, CommanderError, Option as CommanderOption} 
 import stringArgv from "string-argv";
 import JSONObject from "../interfaces/JSONObject";
 import Enqueuer from "./Enqueuer";
+import {Logger} from "./Logger";
 
 /**
  * BotCommand - basic class for creating Telegram bot commands.
@@ -94,6 +95,7 @@ class BotCommand {
      * @param match - RegExp match object.
      */
     public async execute(message: Message, match: RegExpExecArray) {
+        Logger?.debug(`Handling Telegram chat command "${match[0]}".`);
         this.validation.action(async (...params) => {
             try {
                 const command: CommanderCommand = params[params.length - 1];
