@@ -35,7 +35,7 @@ import AMQPNack from "../../errors/AMQPNack";
 import {Message as AMQPMessage} from "amqplib";
 
 @WebHookAmqpHandler.Handler(QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE, 10)
-@Reflect.metadata("draw-event-handler", true)
+@Reflect.metadata("amqp-handler-type", "draw-event-handler")
 class DrawMessageHandler extends AmqpHandler {
     protected async handle(event: Enqueuer.AMQPEvent, message: AMQPMessage): Promise<void | boolean> {
         switch (event.type) {

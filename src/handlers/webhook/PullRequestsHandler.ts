@@ -32,7 +32,7 @@ import AmqpDispatcher from "../../core/AmqpDispatcher";
 import {QUEUES} from "../../globals";
 
 @WebHookAmqpHandler.Handler("pull_request", 10)
-@Reflect.metadata("github-event-handler", true)
+@Reflect.metadata("amqp-handler-type", "github-event-handler")
 export default class PullRequestsHandler extends WebHookAmqpHandler {
     protected async handleHook(webHook: WebHook, payload: PullRequestType): Promise<boolean | void> {
         const {action, pull_request: pullRequest, repository} = payload;

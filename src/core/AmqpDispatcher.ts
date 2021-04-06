@@ -40,15 +40,40 @@ class AmqpDispatcher {
     constructor(connection: Connection) {
         this.connection = connection;
 
-        this.handlers = SystemConfig.getConfig<Config>().amqp.handlers.map((HandlerClass: typeof AmqpHandler) => {
-            return new HandlerClass();
-        });
+        this.handlers = SystemConfig
+            .getConfig<Config>()
+            .amqp
+            .handlers
+            .filter((HandlerClass: typeof AmqpHandler): boolean => AmqpDispatcher.determineHandlerIsRequired(HandlerClass))
+            .map((HandlerClass: typeof AmqpHandler) => new HandlerClass());
 
         for (const handler of this.handlers) {
             this.hook(handler).catch((error: Error) => {
                 throw error;
             });
         }
+    }
+
+    private static determineHandlerIsRequired(HandlerClass: typeof AmqpHandler): boolean {
+        const type: string = Reflect.getMetadata("amqp-handler-type", HandlerClass);
+        if (
+            SystemConfig.getConfig<Config>().system.commandsEventHandlers && (
+                type === "commands-event-handler"
+                || type === "telegram-events-handler"
+            )
+        )
+            return true;
+        if (
+            SystemConfig.getConfig<Config>().system.drawEventsHandlers
+            && type === "draw-event-handler"
+        )
+            return true;
+        if (
+            SystemConfig.getConfig<Config>().system.githubEventsHandlers
+            && type === "github-event-handler"
+        )
+            return true;
+        return false;
     }
 
     public async hook(handler: AmqpHandler) {
