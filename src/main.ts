@@ -35,7 +35,7 @@ import SystemConfig from "./core/SystemConfig";
 import Config from "./interfaces/Config";
 
 function requiredFor(...args: string[]): boolean {
-    return args.every((key: string) => SystemConfig.getConfig<Config>().system[key]);
+    return args.some((key: string) => SystemConfig.getConfig<Config>().system[key]);
 }
 
 export default async function main(): Promise<void> {

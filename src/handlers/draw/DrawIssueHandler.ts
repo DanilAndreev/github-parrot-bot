@@ -36,6 +36,7 @@ import {getConnection} from "typeorm";
 import AmqpDispatcher from "../../core/AmqpDispatcher";
 
 @WebHookAmqpHandler.Handler(QUEUES.ISSUE_SHOW_QUEUE, 10)
+@Reflect.metadata("draw-event-handler", true)
 export default class DrawIssueHandler extends AmqpHandler {
     protected async handle(content: {issue: number}): Promise<void | boolean> {
         const {issue} = content;
