@@ -16,10 +16,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[GLOBAL] Added JSDocs.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[README] updated readme for src.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,14 +159,7 @@
       <workItem from="1617713141772" duration="169000" />
       <workItem from="1617713317262" duration="1553000" />
       <workItem from="1617714889086" duration="2376000" />
-      <workItem from="1617717841116" duration="2272000" />
-    </task>
-    <task id="LOCAL-00028" summary="[issueEvent] Finished issues.">
-      <created>1603198620419</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1603198620419</updated>
+      <workItem from="1617717841116" duration="2824000" />
     </task>
     <task id="LOCAL-00029" summary="[issueEvent] Styled separators.">
       <created>1603198921166</created>
@@ -505,7 +497,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617718482321</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="[README] updated readme for src.">
+      <created>1617720146513</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1617720146513</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,7 +535,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[WebServer] Removed events emitter. Messages are pushed to RabbitMQ instantly." />
     <MESSAGE value="[Entities] Changed structure. (PROBLEM WITH FK ON DELETION)" />
     <MESSAGE value="[Entities] Fixed problems with FK constraint on deletion." />
     <MESSAGE value="[README] Added some information." />
@@ -561,7 +559,8 @@
     <MESSAGE value="[envDispatcher] Added system settings." />
     <MESSAGE value="[Bot] Added some log messages." />
     <MESSAGE value="[GLOBAL] Added JSDocs." />
-    <option name="LAST_COMMIT_MESSAGE" value="[GLOBAL] Added JSDocs." />
+    <MESSAGE value="[README] updated readme for src." />
+    <option name="LAST_COMMIT_MESSAGE" value="[README] updated readme for src." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1617718940185">
@@ -636,10 +635,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="391" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617717836166" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617718485834">
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617720149502">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617718485834" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617720149502" />
     <state x="469" y="3" width="1467" height="659" maximized="true" key="dock-window-1" timestamp="1617714923387">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
