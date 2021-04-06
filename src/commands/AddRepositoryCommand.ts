@@ -29,7 +29,6 @@ import {Message} from "node-telegram-bot-api";
 import CommandError from "../errors/CommandError";
 import checkAdmin from "../utils/checkAdmin";
 import WebHook from "../entities/WebHook";
-import Bot from "../core/Bot";
 import Chat from "../entities/Chat";
 import Enqueuer from "../core/Enqueuer";
 

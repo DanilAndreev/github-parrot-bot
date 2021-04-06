@@ -31,14 +31,17 @@
 import SystemConfig from "./core/SystemConfig";
 import config from "./config";
 import envDispatcher from "./envDispatcher";
+import {initLogger} from "./core/Logger";
 
 SystemConfig.setOptions({
     envMask: /GHTB_(.+)/,
     additionalConfigs: [config],
     envDispatcher
 });
-SystemConfig.getCurrent();
+initLogger();
+console.log(`Logger level: ${SystemConfig.getConfig<Config>().system.logLevel}`);
 
 import main = require("./main");
+import Config from "./interfaces/Config";
 
 main.default().catch(console.error);

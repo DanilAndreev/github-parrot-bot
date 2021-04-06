@@ -26,23 +26,28 @@
 
 import {createLogger, Logger as LoggerType, format, transports} from "winston";
 import * as moment from "moment";
+import Config from "../interfaces/Config";
+import SystemConfig from "./SystemConfig";
 
-const logLevel: string = process.env.GHTB_LOG_LEVEL || "error";
+export let Logger: LoggerType | undefined;
 
-const logFormat = format.printf(({ level, message, label, timestamp }) => {
-    return `${label}[${moment(timestamp).format("LLL")}] <${level}>: ${message}`;
-});
+export function initLogger(): LoggerType {
+    const logLevel: string = SystemConfig.getConfig<Config>().system.logLevel || "error";
 
-const logTransports: transports.ConsoleTransportInstance[] = [new transports.Console()];
+    const logFormat = format.printf(({ level, message, label, timestamp }) => {
+        return `${label}[${moment(timestamp).format("LLL")}] <${level}>: ${message}`;
+    });
 
-const Logger: LoggerType = createLogger({
-    level: logLevel,
-    format: format.combine(
-        format.label({ label: "GHTB" }),
-        format.timestamp(),
-        logFormat
-    ),
-    transports: logTransports,
-});
+    const logTransports: transports.ConsoleTransportInstance[] = [new transports.Console()];
 
-export default Logger;
+    Logger = createLogger({
+        level: logLevel,
+        format: format.combine(
+            format.label({ label: "GHTB" }),
+            format.timestamp(),
+            logFormat
+        ),
+        transports: logTransports,
+    });
+    return Logger;
+}

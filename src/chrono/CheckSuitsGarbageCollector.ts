@@ -27,6 +27,7 @@
 import Chrono from "../core/Chrono";
 import {DeleteResult} from "typeorm";
 import CheckSuite from "../entities/CheckSuite";
+import {Logger} from "../core/Logger";
 
 export default class CheckSuitsGarbageCollector extends Chrono {
     protected async run(): Promise<void> {
@@ -35,6 +36,6 @@ export default class CheckSuitsGarbageCollector extends Chrono {
             .where("updatedAt < current_timestamp - interval '1 hour'")
             .andWhere("pullRequest IS NOT NULL")
             .execute();
-        console.log(`Issues garbage collector: deleted ${result.affected} items.`);
+        Logger?.info(`Issues garbage collector: deleted ${result.affected} items.`);
     }
 }
