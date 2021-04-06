@@ -32,6 +32,7 @@ import config from "../../config";
 import Enqueuer from "../../core/Enqueuer";
 
 @AmqpHandler.Handler(QUEUES.TELEGRAM_CHAT_COMMAND, 10)
+@Reflect.metadata("amqp-handler-type", "commands-event-handler")
 class CommandsHandler extends AmqpHandler {
     protected commands: BotCommand[] = [];
 

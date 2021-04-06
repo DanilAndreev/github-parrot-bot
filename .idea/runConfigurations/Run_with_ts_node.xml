@@ -1,5 +1,13 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Run with ts-node" type="NodeJSConfigurationType" application-parameters="--project tsconfig.json" node-parameters="--require ts-node/register" path-to-js-file="src/index.ts" working-dir="$PROJECT_DIR$">
+    <envs>
+      <env name="GHTB_ENABLE_WEBSERVER" value="true" />
+      <env name="GHTB_ENABLE_GITHUB_EVENTS_HANDLERS" value="true" />
+      <env name="GHTB_ENABLE_COMMANDS_EVENTS_HANDLERS" value="true" />
+      <env name="GHTB_ENABLE_DRAW_EVENTS_HANDLERS" value="true" />
+      <env name="GHTB_ENABLE_CRON_DATABASE_GARBAGE_COLLECTORS" value="true" />
+      <env name="GHTB_ENABLE_COMMANDS_PROXY" value="true" />
+    </envs>
     <method v="2">
       <option name="NpmBeforeRunTask" enabled="true">
         <package-json value="$PROJECT_DIR$/package.json" />

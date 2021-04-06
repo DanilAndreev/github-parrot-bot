@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,14 +24,15 @@
  * SOFTWARE.
  */
 
-import {Connection, createConnection} from "typeorm";
-import SystemConfig from "./SystemConfig";
-import Config from "../interfaces/Config";
+import Ref from "../interfaces/Ref";
 
-export let DBConnection: Connection | null = null;
 
-export async function setupDbConnection() {
-    console.log("Connecting to database");
-    DBConnection = await createConnection(SystemConfig.getConfig<Config>().db);
-    await DBConnection.synchronize();
+/**
+ * createRef - creates Ref object with passed value.
+ * @function
+ * @param value - Initial value.
+ * @author Danil Andreev
+ */
+export default function createRef<T>(value: T): Ref<T> {
+    return {current: value};
 }

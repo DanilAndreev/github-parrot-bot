@@ -16,14 +16,20 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Commands] Changed to AMQP logic.">
-      <change afterPath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[envDispatcher] Added system settings.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Enqueuer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Enqueuer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/globals.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/AmqpDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/AmqpDispatcher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawCheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawCheckSuiteHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/CheckRunHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckRunHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/IssuesHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/IssuesHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/PushHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PushHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +74,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/.env" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
-    <property name="javascript.nodejs.core.library.typings.version" value="12.20.6" />
+    <property name="javascript.nodejs.core.library.typings.version" value="12.20.7" />
     <property name="last.edited.regexp" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -83,7 +89,7 @@
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="D:\Projects\github-tracker-telegram-bot\node_modules\prettier" />
-    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="D:\Projects\github-tracker-telegram-bot\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -99,6 +105,17 @@
       <recent name="D:\Projects\github-tracker-telegram-bot\src\core" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src" />
     </key>
+  </component>
+  <component name="RunManager" selected="Node.js.Run with ts-node">
+    <list>
+      <item itemvalue="Node.js.Run with ts-node" />
+      <item itemvalue="Node.js.CRON_DATABASE_GARBAGE_COLLECTORS" />
+      <item itemvalue="Node.js.DRAW_EVENTS_HANDLERS" />
+      <item itemvalue="Node.js.COMMANDS_EVENTS_HANDLERS" />
+      <item itemvalue="Node.js.GITHUB_EVENTS_HANDLERS" />
+      <item itemvalue="Node.js.WEBSERVER" />
+      <item itemvalue="Node.js.COMMANDS_PROXY" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -143,27 +160,11 @@
       <workItem from="1617279086917" duration="6361000" />
       <workItem from="1617366432160" duration="2052000" />
       <workItem from="1617443608555" duration="14392000" />
-    </task>
-    <task id="LOCAL-00023" summary="[issueEvent] Changed message parser markdownV2">
-      <created>1603197150779</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1603197150779</updated>
-    </task>
-    <task id="LOCAL-00024" summary="[issueEvent] Screening symbols.">
-      <created>1603197525663</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1603197525663</updated>
-    </task>
-    <task id="LOCAL-00025" summary="[issueEvent] Screening symbols.">
-      <created>1603197953351</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1603197953351</updated>
+      <workItem from="1617625194255" duration="207000" />
+      <workItem from="1617626058984" duration="160000" />
+      <workItem from="1617626235301" duration="113000" />
+      <workItem from="1617626353131" duration="7600000" />
+      <workItem from="1617705320409" duration="114000" />
     </task>
     <task id="LOCAL-00026" summary="[issueEvent] Added hashtag to issue.">
       <created>1603198230493</created>
@@ -487,7 +488,28 @@
       <option name="project" value="LOCAL" />
       <updated>1617469695866</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="[SystemConfig] Added system config gathering system.">
+      <created>1617632042946</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1617632042946</updated>
+    </task>
+    <task id="LOCAL-00073" summary="[envDispatcher] Added more params for database setup.">
+      <created>1617632401906</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1617632401906</updated>
+    </task>
+    <task id="LOCAL-00074" summary="[envDispatcher] Added system settings.">
+      <created>1617633192489</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1617633192489</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -518,9 +540,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[Commands] Rewritten to new logic." />
-    <MESSAGE value="[Commands] Changed logic to telegram user id." />
-    <MESSAGE value="[WebServer] Created mechanism." />
     <MESSAGE value="[WebServer] Finished work with events." />
     <MESSAGE value="[IssuesHandler] Added handlebars mechanism." />
     <MESSAGE value="[WebServer] Removed events emitter. Messages are pushed to RabbitMQ instantly." />
@@ -543,7 +562,44 @@
     <MESSAGE value="[Enqueuer] Finished.&#10;[DrawMessageHandler] Finished." />
     <MESSAGE value="[CommandHandler] Added amqp logic to commands handler." />
     <MESSAGE value="[Commands] Changed to AMQP logic." />
-    <option name="LAST_COMMIT_MESSAGE" value="[Commands] Changed to AMQP logic." />
+    <MESSAGE value="[SystemConfig] Added system config gathering system." />
+    <MESSAGE value="[envDispatcher] Added more params for database setup." />
+    <MESSAGE value="[envDispatcher] Added system settings." />
+    <option name="LAST_COMMIT_MESSAGE" value="[envDispatcher] Added system settings." />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1877" height="212" key="GridCell.Tab.0.bottom" timestamp="1617707601838">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="212" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617707601838" />
+    <state width="1877" height="212" key="GridCell.Tab.0.center" timestamp="1617707601838">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="212" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617707601838" />
+    <state width="1877" height="212" key="GridCell.Tab.0.left" timestamp="1617707601838">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="212" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617707601838" />
+    <state width="1877" height="212" key="GridCell.Tab.0.right" timestamp="1617707601838">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="212" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617707601838" />
+    <state width="1877" height="265" key="GridCell.Tab.1.bottom" timestamp="1617707614701">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="265" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617707614701" />
+    <state width="1877" height="265" key="GridCell.Tab.1.center" timestamp="1617707614701">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="265" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617707614701" />
+    <state width="1877" height="265" key="GridCell.Tab.1.left" timestamp="1617707614701">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="265" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617707614701" />
+    <state width="1877" height="265" key="GridCell.Tab.1.right" timestamp="1617707614701">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="265" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617707614701" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -555,8 +611,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts</url>
-          <line>44</line>
+          <line>45</line>
           <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/index.ts</url>
+          <line>41</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

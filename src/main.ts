@@ -31,16 +31,37 @@ import AmqpDispatcher from "./core/AmqpDispatcher";
 import IssuesGarbageCollector from "./chrono/IssuesGarbageCollector";
 import PullRequestsGarbageCollector from "./chrono/PullRequestsGarbageCollector";
 import CheckSuitsGarbageCollector from "./chrono/CheckSuitsGarbageCollector";
+import SystemConfig from "./core/SystemConfig";
+import Config from "./interfaces/Config";
 
-export default async function main() {
-    await setupDbConnection();
-    await new IssuesGarbageCollector({interval: 1000 * 60 * 30}).start();
-    await new PullRequestsGarbageCollector({interval: 1000 * 60 * 30}).start();
-    await new CheckSuitsGarbageCollector({interval: 1000 * 60 * 30}).start();
+function requiredFor(...args: string[]): boolean {
+    return args.some((key: string) => SystemConfig.getConfig<Config>().system[key]);
+}
 
-    const server = new WebServer();
-    const bot: Bot = Bot.init(process.env.TELEGRAM_BOT_TOKEN);
-    const RabbitMQ: AmqpDispatcher = await AmqpDispatcher.init();
+export default async function main(): Promise<void> {
+    if (requiredFor("drawEventsHandlers", "commandsEventHandlers", "githubEventsHandlers", "cronDatabaseGarbageCollectors")) {
+        await setupDbConnection();
+    }
+    if (requiredFor("cronDatabaseGarbageCollectors")) {
+        await new IssuesGarbageCollector({interval: 1000 * 60 * 30}).start();
+        await new PullRequestsGarbageCollector({interval: 1000 * 60 * 30}).start();
+        await new CheckSuitsGarbageCollector({interval: 1000 * 60 * 30}).start();
+    }
 
-    server.start();
+    let server: WebServer | undefined;
+    if (requiredFor("webserver")) {
+        server = new WebServer();
+    }
+    if (requiredFor("drawEventsHandlers", "commandsProxy")) {
+        const bot: Bot = Bot.init(
+            SystemConfig.getConfig<Config>().bot.token,
+            SystemConfig.getConfig<Config>().system.commandsProxy
+        );
+    }
+
+    if (requiredFor("commandsProxy", "webserver", "githubEventsHandlers", "commandsEventHandlers", "drawEventsHandlers")) {
+        const RabbitMQ: AmqpDispatcher = await AmqpDispatcher.init();
+    }
+
+    server && server.start();
 }

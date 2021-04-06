@@ -35,6 +35,7 @@ import Bot from "../../core/Bot";
 import AMQPNack from "../../errors/AMQPNack";
 
 @AmqpHandler.Handler(QUEUES.TELEGRAM_EVENTS_QUEUE, 10)
+@Reflect.metadata("amqp-handler-type", "telegram-events-handler")
 export default class TelegramEventsHandler extends AmqpHandler {
     protected async handle(event: Enqueuer.TelegramEvent, message: AMQPMessage): Promise<void | boolean> {
         switch (event.type) {

@@ -53,7 +53,7 @@ import TelegramEventsHandler from "./handlers/telegram/TelegramEventsHandler";
 
 const config: Config = {
     bot: {
-        token: process.env.TELEGRAM_BOT_TOKEN || "",
+        token: "you-should-pass-telegram-token-as-env-variable",
         commands: [
             AddRepositoryCommand,
             AKAsCommand,
@@ -66,7 +66,7 @@ const config: Config = {
     },
     db: {
         type: "postgres",
-        url: process.env.DATABASE_URL,
+        url: "you-should-pass-database-url-as-env-variable",
         entities: [
             WebHook,
             Collaborator,
@@ -84,7 +84,7 @@ const config: Config = {
         },
     },
     amqp: {
-        connect: process.env.CLOUDAMQP_URL || "",
+        connect: "you-should-pass-amqp-url-as-env-variable",
         handlers: [
             IssuesHandler,
             PullRequestsHandler,
@@ -102,8 +102,9 @@ const config: Config = {
         ],
     },
     server: {
-        port: process.env.PORT ? +process.env.PORT : 3030,
+        port: 3030,
     },
+    system: {}
 };
 
 export default config;

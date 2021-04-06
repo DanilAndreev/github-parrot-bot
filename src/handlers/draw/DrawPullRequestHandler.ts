@@ -36,6 +36,7 @@ import AmqpDispatcher from "../../core/AmqpDispatcher";
 import PullRequest from "../../entities/PullRequest";
 
 @WebHookAmqpHandler.Handler(QUEUES.PULL_REQUEST_SHOW_QUEUE, 10)
+@Reflect.metadata("amqp-handler-type", "draw-event-handler")
 export default class DrawPullRequestHandler extends AmqpHandler {
     protected async handle(content: {pullRequest: number}): Promise<void | boolean> {
         const {pullRequest} = content;

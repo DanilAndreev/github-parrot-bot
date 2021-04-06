@@ -36,6 +36,7 @@ import AmqpDispatcher from "../../core/AmqpDispatcher";
 import CheckSuite from "../../entities/CheckSuite";
 
 @WebHookAmqpHandler.Handler(QUEUES.CHECK_SUITE_SHOW_QUEUE, 10)
+@Reflect.metadata("amqp-handler-type", "draw-event-handler")
 export default class DrawCheckSuiteHandler extends AmqpHandler {
     protected async handle(content: {checkSuite: number}): Promise<void | boolean> {
         const {checkSuite} = content;

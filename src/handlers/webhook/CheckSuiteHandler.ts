@@ -34,6 +34,7 @@ import AmqpDispatcher from "../../core/AmqpDispatcher";
 import {QUEUES} from "../../globals";
 
 @WebHookAmqpHandler.Handler("check_suite", 10)
+@Reflect.metadata("amqp-handler-type", "github-event-handler")
 export default class CheckSuiteHandler extends WebHookAmqpHandler {
     public async handleHook(webHook: WebHook, payload: CheckSuiteType, draw: boolean = true): Promise<boolean | void> {
         const {action, check_suite, repository, sender} = payload;

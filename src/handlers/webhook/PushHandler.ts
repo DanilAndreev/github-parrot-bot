@@ -31,6 +31,7 @@ import loadTemplate from "../../utils/loadTemplate";
 import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
 
 @WebHookAmqpHandler.Handler("push", 10)
+@Reflect.metadata("amqp-handler-type", "github-event-handler")
 export default class PushHandler extends WebHookAmqpHandler {
     protected async handleHook(webHook: WebHook, payload: Push): Promise<boolean | void> {
         const {pusher, head_commit, repository, ref} = payload;

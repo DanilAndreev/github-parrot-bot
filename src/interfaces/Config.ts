@@ -32,6 +32,7 @@ import * as AMQP from "amqplib";
 namespace Config {
     export interface Bot {
         token: string;
+        tag?: string;
         commands: typeof BotCommand[];
     }
 
@@ -43,6 +44,15 @@ namespace Config {
         connect: string | AMQP.Options.Connect;
         handlers: typeof AmqpHandler[];
     }
+
+    export interface System {
+        commandsProxy?: boolean;
+        webserver?: boolean;
+        githubEventsHandlers?: boolean;
+        commandsEventHandlers?: boolean;
+        drawEventsHandlers?: boolean;
+        cronDatabaseGarbageCollectors?: boolean;
+    }
 }
 
 interface Config {
@@ -50,6 +60,7 @@ interface Config {
     db: ConnectionOptions;
     server: Config.Server;
     amqp: Config.Amqp;
+    system: Config.System;
 }
 
 export default Config;
