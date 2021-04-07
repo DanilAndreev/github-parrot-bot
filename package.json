@@ -1,7 +1,7 @@
 {
-  "name": "github-tracker-telegram-bot",
+  "name": "github-parrot-bot",
   "version": "0.1.0",
-  "description": "GitHub issues and pull requests tracker bot for telegram.",
+  "description": "GitHub actions tracking bot for Telegram.",
   "keywords": [
     "github",
     "bot",
