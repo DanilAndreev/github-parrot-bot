@@ -30,13 +30,31 @@ import {Context} from "koa";
 import WebHook from "../entities/WebHook";
 import {Message} from "amqplib";
 
+/**
+ * WebHookAmqpHandler - base class for github webhook events AMQP handlers.
+ * @class
+ * @author Danil Andreev
+ */
 export default class WebHookAmqpHandler extends AmqpHandler {
+    /**
+     * checkSignature - checks GitHub signature with WebHook secret key.
+     * @param incomingSignature - Incoming signature.
+     * @param payload - incoming payload.
+     * @param key - Secret key.
+     */
     static checkSignature(incomingSignature: string, payload: any, key: string): boolean {
         const hmac: string = Crypto.createHmac("sha1", key).update(JSON.stringify(payload)).digest("hex");
         const expectedSignature = "sha1=" + hmac;
         return expectedSignature === incomingSignature;
     }
 
+    /**
+     * handle - handles AMQP message and looping over webhooks.
+     * @method
+     * @param content - AMQP message payload.
+     * @param message - AMQP message.
+     * @author Danil Andreev
+     */
     protected async handle(content: any, message: Message): Promise<void | boolean> {
         const {payload, ctx}: {payload: any; ctx: Context} = content;
         const {repository} = payload;
@@ -58,6 +76,14 @@ export default class WebHookAmqpHandler extends AmqpHandler {
         return !(await Promise.all(promises)).some(item => item == false);
     }
 
+    /**
+     * handleHook - handler for each webhook with the same signature.
+     * @abstract
+     * @method
+     * @param webHook - Target WebHook entity object.
+     * @param payload - Payload.
+     * @author Danil Andreev
+     */
     protected async handleHook(webHook: WebHook, payload: any): Promise<boolean | void> {
         throw new ReferenceError(`Abstract method call. Inherit this class and override this method.`);
     }

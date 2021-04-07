@@ -29,8 +29,16 @@ import SystemConfig from "./SystemConfig";
 import Config from "../interfaces/Config";
 import {Logger} from "./Logger";
 
+/**
+ * DBConnection - current database connection.
+ */
 export let DBConnection: Connection | null = null;
 
+/**
+ * setupDbConnection - setting up database connection and synchronizes entities structure.
+ * @function
+ * @author Danil Andreev
+ */
 export async function setupDbConnection(): Promise<void> {
     try {
         Logger?.info("Connecting to database...");

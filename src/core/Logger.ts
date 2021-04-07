@@ -31,6 +31,11 @@ import SystemConfig from "./SystemConfig";
 
 export let Logger: LoggerType | undefined;
 
+/**
+ * initLogger - creates logger.
+ * @function
+ * @author Danil Andreev
+ */
 export function initLogger(): LoggerType {
     const logLevel: string = SystemConfig.getConfig<Config>().system.logLevel || "error";
 

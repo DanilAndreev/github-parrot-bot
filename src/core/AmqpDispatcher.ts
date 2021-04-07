@@ -32,12 +32,34 @@ import Config from "../interfaces/Config";
 import SystemConfig from "./SystemConfig";
 import {Logger} from "./Logger";
 
+/**
+ * AmqpDispatcher - dispatcher for AMQP handlers.
+ * @class
+ * @author Danil Andreev
+ */
 class AmqpDispatcher {
+    /**
+     * current - current class instance. Singleton.
+     */
     protected static current: AmqpDispatcher;
 
+    /**
+     * handlers - AMQP handlers connected to dispathcer.
+     */
     protected handlers: AmqpHandler[] = [];
+    /**
+     * connection - AMQP connection.
+     */
     protected connection: Connection;
 
+    /**
+     * Creates an instance of AmqpDispatcher.
+     * @constructor
+     * @param connection - AMQP connection object.
+     * @throws Error
+     * @throws TypeError
+     * @author Danil Andreev
+     */
     constructor(connection: Connection) {
         this.connection = connection;
 
@@ -55,6 +77,12 @@ class AmqpDispatcher {
         }
     }
 
+    /**
+     * determineHandlerIsRequired - function for deciding if handler should be connected to AMQP.
+     * @method
+     * @param HandlerClass - Target handler class.
+     * @author Danil Andreev
+     */
     private static determineHandlerIsRequired(HandlerClass: typeof AmqpHandler): boolean {
         const type: string = Reflect.getMetadata("amqp-handler-type", HandlerClass);
         if (
@@ -77,6 +105,12 @@ class AmqpDispatcher {
         return false;
     }
 
+    /**
+     * hook - method for connecting handlers to AMQP queues.
+     * @method
+     * @param handler - instance of handler class.
+     * @author Danil Andreev
+     */
     public async hook(handler: AmqpHandler) {
         const queueName = Reflect.getMetadata("amqp-handler-queue", handler);
         const prefetch = Reflect.getMetadata("amqp-handler-prefetch", handler);
@@ -91,6 +125,12 @@ class AmqpDispatcher {
         Logger?.silly(`Hooked AMQP handler to queue: "${queueName}"`);
     }
 
+    /**
+     * sendToQueue - method, designed to queue message.
+     * @param queueName - Target AMQP queue name.
+     * @param message  - JSON object to send.
+     * @param options - Send options.
+     */
     public async sendToQueue<T extends JSONObject>(queueName: string, message: T, options?: Amqp.Options.Publish) {
         Logger?.debug(`Sent message to AMQP queue: "${queueName}".`);
         const channel: Amqp.Channel = await this.connection.createChannel();
@@ -99,6 +139,11 @@ class AmqpDispatcher {
         await channel.close();
     }
 
+    /**
+     * init - initializes AmqpDispatcher.
+     * @constructor
+     * @author Danil Andreev
+     */
     public static async init(): Promise<AmqpDispatcher> {
         Logger?.debug(`Initialized AMQP dispatcher.`);
         const connection: Connection = await Amqp.connect(SystemConfig.getConfig<Config>().amqp.connect);
@@ -106,10 +151,20 @@ class AmqpDispatcher {
         return AmqpDispatcher.current;
     }
 
+    /**
+     * getCurrent - returns current instance of dispatcher.
+     * @method
+     * @author Danil Andreev
+     */
     public static getCurrent(): AmqpDispatcher {
         return this.current;
     }
 
+    /**
+     * getConnection - returns AMQP connection object.
+     * @method
+     * @author Danil Andreev
+     */
     public getConnection(): Connection {
         return this.connection;
     }

@@ -36,6 +36,11 @@ import {
 import {QUEUES} from "../globals";
 import JSONObject from "../interfaces/JSONObject";
 
+/**
+ * Enqueuer - class for queuing AMQP messages with function interface.
+ * @class
+ * @author Danil Andreev
+ */
 class Enqueuer {
     public static async drawPullRequest(pullRequest: number, forceNewMessage: boolean = false): Promise<void> {
         await AmqpDispatcher.getCurrent().sendToQueue(

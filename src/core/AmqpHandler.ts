@@ -29,11 +29,31 @@ import {Message} from "amqplib";
 import AMQPAck from "../errors/AMQPAck";
 import {Logger} from "./Logger";
 
+/**
+ * AmqpHandler - base class for AMQP queue handlers.
+ * @class
+ * @author Danil Andreev
+ */
 class AmqpHandler {
+    /**
+     * handle - handler method. Override it in your derived class.
+     * @method
+     * @abstract
+     * @param content - Message payload.
+     * @param message - AMQP message object,
+     * @author Danil Andreev
+     */
     protected handle(content: any, message: Message): void | Promise<void | boolean> {
         throw new ReferenceError(`Abstract method call. Inherit this class and override this method.`);
     }
 
+    /**
+     * execute - method for handler execution.
+     * @method
+     * @param message - AMQP message.
+     * @param channel - AMQP channel.
+     * @author Danil Andreev
+     */
     public async execute(message: Amqp.Message, channel: Amqp.Channel) {
         try {
             Logger?.debug(`Got AMQP message. ${JSON.stringify({id: message.properties.messageId, queue: message.fields.routingKey})}`);
