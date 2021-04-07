@@ -4,6 +4,7 @@
     </div>
     <div align="center">
         <h1>GitHub Parrot</h1>
+        <h5>Safe GitHub repositories tracking in your Telegram.</h5>
     </div>
     <div align="center">
         <img alt="GitHub" src="https://img.shields.io/github/license/DanilAndreev/github-tracker-telegram-bot"/>
