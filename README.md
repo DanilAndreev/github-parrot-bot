@@ -79,6 +79,11 @@ Now your GitHub repository issues, pull requests and other will appear in Telegr
 ## Giving rights :cop:
 [instruction how to give bot rights]
 
+# Feedback :doughnut:
+- [Give feedback](https://github.com/DanilAndreev/github-parrot-bot/discussions/38)
+- [Report bugs](https://github.com/DanilAndreev/github-parrot-bot/issues)
+- [Ideas](https://github.com/DanilAndreev/github-parrot-bot/discussions/categories/ideas)
+
 # For developers :wrench: | Source usage :mortar_board:
 You can find information about source code usage in [Wiki](https://github.com/DanilAndreev/github-parrot-bot/wiki).  
 Also, you can find short information in source code directories using ```README.md``` files. 
