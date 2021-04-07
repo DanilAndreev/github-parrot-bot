@@ -80,7 +80,7 @@ class WebServer extends Koa {
      */
     public start(port?: number): WebServer {
         const targetPort: number = port || SystemConfig.getConfig<Config>().server.port || 3030;
-        Logger?.info(`Web server started on port ${targetPort}.`)
+        Logger?.info(`Web server started on port ${targetPort}.`);
         this.listen(targetPort);
         return this;
     }

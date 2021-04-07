@@ -34,7 +34,12 @@ import JSONObject from "./interfaces/JSONObject";
  * @function
  * @author Danil Andreev
  */
-export default function envDispatcher(configRef: Ref<Config>, value: string, execArray: RegExpExecArray, regExp: RegExp): void {
+export default function envDispatcher(
+    configRef: Ref<Config>,
+    value: string,
+    execArray: RegExpExecArray,
+    regExp: RegExp
+): void {
     try {
         const name: string = execArray[1].toLowerCase();
         switch (name) {

@@ -48,6 +48,6 @@ export async function setupDbConnection(): Promise<void> {
         Logger?.info("Typeorm entities synchronized.");
     } catch (error) {
         Logger?.error("Failed to connect to database!", error);
-        process.exit(1)
+        process.exit(1);
     }
 }

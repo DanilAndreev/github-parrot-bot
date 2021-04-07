@@ -1,19 +1,25 @@
 # Templates
+
 ## Overview
-Here are stored [__Handlebars__](https://handlebarsjs.com/) templates. Handlebars library is used for simple 
+
+Here are stored [**Handlebars**](https://handlebarsjs.com/) templates. Handlebars library is used for simple
 constructing telegram messages layout or something.
 
 ## Usage
-You can get compiled template using ```utils/loadTemplate.ts``` function.
+
+You can get compiled template using `utils/loadTemplate.ts` function.
+
 ### Example
 
 ##### example_template.hbs
+
 ```handlebars
 <i>Hello from tempalte</i>
 <b>{{name}}</b>
 ```
 
 ##### main.ts
+
 ```typescript
 import loadTemplate from "utils/loadTemplate";
 
@@ -25,7 +31,9 @@ async function main(): Promise<void> {
     print(template(context));
 }
 ```
+
 ##### RESULT
+
 ```handlebars
 <i>Hello from tempalte</i>
 <b>John</b>

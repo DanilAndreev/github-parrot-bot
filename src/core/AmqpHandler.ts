@@ -56,11 +56,18 @@ class AmqpHandler {
      */
     public async execute(message: Amqp.Message, channel: Amqp.Channel) {
         try {
-            Logger?.debug(`Got AMQP message. ${JSON.stringify({id: message.properties.messageId, queue: message.fields.routingKey})}`);
+            Logger?.debug(
+                `Got AMQP message. ${JSON.stringify({
+                    id: message.properties.messageId,
+                    queue: message.fields.routingKey,
+                })}`
+            );
             const content: any = JSON.parse(message.content.toString());
             const result: boolean | void = await this.handle(content, message);
             if (result === false) {
-                Logger?.debug(`Got AMQP message NACKed. Queue: ${message.fields.routingKey}. Reason: Handler returned false value.`);
+                Logger?.debug(
+                    `Got AMQP message NACKed. Queue: ${message.fields.routingKey}. Reason: Handler returned false value.`
+                );
                 channel.nack(message);
             } else {
                 Logger?.silly(`AMQP message ACKed. Queue: ${message.fields.routingKey}`);

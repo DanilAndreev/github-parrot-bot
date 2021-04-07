@@ -51,7 +51,14 @@ function requiredFor(...args: string[]): boolean {
  * @author Danil Andreev
  */
 export default async function main(): Promise<void> {
-    if (requiredFor("drawEventsHandlers", "commandsEventHandlers", "githubEventsHandlers", "cronDatabaseGarbageCollectors")) {
+    if (
+        requiredFor(
+            "drawEventsHandlers",
+            "commandsEventHandlers",
+            "githubEventsHandlers",
+            "cronDatabaseGarbageCollectors"
+        )
+    ) {
         await setupDbConnection();
     }
     if (requiredFor("cronDatabaseGarbageCollectors")) {
@@ -71,7 +78,9 @@ export default async function main(): Promise<void> {
         );
     }
 
-    if (requiredFor("commandsProxy", "webserver", "githubEventsHandlers", "commandsEventHandlers", "drawEventsHandlers")) {
+    if (
+        requiredFor("commandsProxy", "webserver", "githubEventsHandlers", "commandsEventHandlers", "drawEventsHandlers")
+    ) {
         const RabbitMQ: AmqpDispatcher = await AmqpDispatcher.init();
     }
 

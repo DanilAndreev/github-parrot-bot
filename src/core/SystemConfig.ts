@@ -32,13 +32,17 @@ import createRef from "../utils/createRef";
 import Ref from "../interfaces/Ref";
 import root from "../utils/root";
 
-
 namespace SystemConfig {
     /**
      * EnvDispatcher - type for environment dispatcher function.
      * This function should place data from ENV to right place in config.
      */
-    export type EnvDispatcher = (configRef: Ref<JSONObject>, value: string | undefined, execArray: RegExpExecArray | null, regExp?: RegExp) => void;
+    export type EnvDispatcher = (
+        configRef: Ref<JSONObject>,
+        value: string | undefined,
+        execArray: RegExpExecArray | null,
+        regExp?: RegExp
+    ) => void;
 
     /**
      * Options - interface for SystemConfig additional options.
@@ -95,7 +99,7 @@ class SystemConfig<T extends JSONObject> {
             root + "/../.env.production",
             root + "/../.env.development",
             root + "/../.env.local",
-        ]
+        ],
     };
     protected static current: SystemConfig<JSONObject>;
 
@@ -146,7 +150,8 @@ class SystemConfig<T extends JSONObject> {
         for (const key in process.env) {
             if (!regExp || regExp.test(key)) {
                 const execArray: RegExpExecArray | null = regExp ? regExp.exec(key) : null;
-                const envDispatcher: SystemConfig.EnvDispatcher = SystemConfig.options?.envDispatcher || SystemConfig.defaultEnvDispatcher;
+                const envDispatcher: SystemConfig.EnvDispatcher =
+                    SystemConfig.options?.envDispatcher || SystemConfig.defaultEnvDispatcher;
                 envDispatcher(configRef, process.env[key], execArray, regExp);
             }
         }
@@ -172,9 +177,8 @@ class SystemConfig<T extends JSONObject> {
                 if (error.code === "ENOENT")
                     // Logger.warn({disableDB: true, verbosity: 4})(`Could not find env file "${pathname}", skipping`);
                     console.warn(`Could not find env file "${pathname}", skipping`);
-                else
-                    // Logger.error({disableDB: true, verbosity: 1})(error.message, error.stack);
-                    console.warn(error.message, error.stack)
+                // Logger.error({disableDB: true, verbosity: 1})(error.message, error.stack);
+                else console.warn(error.message, error.stack);
             }
         }
 
@@ -195,7 +199,12 @@ class SystemConfig<T extends JSONObject> {
      * @param regExp - regular expression.
      * @author Danil Andreev
      */
-    public static defaultEnvDispatcher(configRef: Ref<JSONObject>, value: string, execArray: RegExpExecArray, regExp: RegExp): void {
+    public static defaultEnvDispatcher(
+        configRef: Ref<JSONObject>,
+        value: string,
+        execArray: RegExpExecArray,
+        regExp: RegExp
+    ): void {
         configRef.current[execArray.input] = value;
     }
 
@@ -223,10 +232,8 @@ class SystemConfig<T extends JSONObject> {
      */
     public static setOptions(options: SystemConfig.Options): typeof SystemConfig {
         if (options) {
-            if (options.disableOptionsMerging)
-                this.options = options;
-            else
-                _.merge(this.options, options);
+            if (options.disableOptionsMerging) this.options = options;
+            else _.merge(this.options, options);
         }
         return this;
     }
