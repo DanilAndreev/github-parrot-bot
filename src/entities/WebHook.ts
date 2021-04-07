@@ -39,6 +39,10 @@ import Issue from "./Issue";
 import PullRequest from "./PullRequest";
 import CheckSuite from "./CheckSuite";
 
+/**
+ * PullRequest - entity for storing webhook settings.
+ * @author Danil Andreev
+ */
 @Entity()
 @Index(["chat", "repository"], {unique: true})
 export default class WebHook extends BaseEntity {

@@ -31,6 +31,12 @@ import JSONObject from "../interfaces/JSONObject";
 import Chat from "../entities/Chat";
 import CommandError from "../errors/CommandError";
 
+/**
+ * Handler for command:
+ * Listing repositories connected to chat.
+ * @class
+ * @author Danil Andreev
+ */
 @BotCommand.Command("list")
 @BotCommand.Description("Shows all GitHub repositories connected to this chat.")
 export default class ListRepositoriesCommand extends BotCommand {

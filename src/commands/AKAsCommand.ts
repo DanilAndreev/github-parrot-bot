@@ -32,6 +32,12 @@ import CommandError from "../errors/CommandError";
 import Bot from "../core/Bot";
 import Chat from "../entities/Chat";
 
+/**
+ * Handler for command:
+ * Lists repository AKAs.
+ * @class
+ * @author Danil Andreev
+ */
 @BotCommand.Command("akas")
 @BotCommand.Description("Shows all links between Telegram and GtiHub users for this chat.")
 @BotCommand.Option("-m, --my", "Show only my AKAs.", false)

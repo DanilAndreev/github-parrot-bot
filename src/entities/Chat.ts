@@ -30,6 +30,10 @@ import Collaborator from "./Collaborator";
 import Issue from "./Issue";
 import CheckSuite from "./CheckSuite";
 
+/**
+ * Chat - entity for storing connected telegram chat.
+ * @author Danil Andreev
+ */
 @Entity()
 export default class Chat extends BaseEntity {
     @PrimaryColumn({type: "bigint"})

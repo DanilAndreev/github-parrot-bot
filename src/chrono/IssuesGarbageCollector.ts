@@ -29,6 +29,11 @@ import Issue from "../entities/Issue";
 import {DeleteResult} from "typeorm";
 import {Logger} from "../core/Logger";
 
+/**
+ * IssuesGarbageCollector - class for deleting outdated issues.
+ * @class
+ * @author Danil Andreev
+ */
 export default class IssuesGarbageCollector extends Chrono {
     protected async run(): Promise<void> {
         const result: DeleteResult = await Issue.createQueryBuilder()

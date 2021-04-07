@@ -29,6 +29,11 @@ import {DeleteResult} from "typeorm";
 import PullRequest from "../entities/PullRequest";
 import {Logger} from "../core/Logger";
 
+/**
+ * PullRequestsGarbageCollector - class for deleting outdated pull requests.
+ * @class
+ * @author Danil Andreev
+ */
 export default class PullRequestsGarbageCollector extends Chrono {
     protected async run(): Promise<void> {
         const result: DeleteResult = await PullRequest.createQueryBuilder()

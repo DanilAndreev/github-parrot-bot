@@ -27,6 +27,10 @@
 import {BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import Chat from "./Chat";
 
+/**
+ * Collaborator - entity for storing AKA.
+ * @author Danil Andreev
+ */
 @Entity()
 export default class Collaborator extends BaseEntity {
     @PrimaryGeneratedColumn()
