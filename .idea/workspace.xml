@@ -17,7 +17,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[README] Updated.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -161,13 +160,6 @@
       <workItem from="1617714889086" duration="2376000" />
       <workItem from="1617721356381" duration="56000" />
       <workItem from="1617795024124" duration="53000" />
-    </task>
-    <task id="LOCAL-00030" summary="[issueEvent] Changed message cache deleting time.">
-      <created>1603203372841</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1603203372841</updated>
     </task>
     <task id="LOCAL-00031" summary="[makeCommand] Changed from.id to chat.id.">
       <created>1603283490889</created>
@@ -505,7 +497,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617797684221</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="[README] Updated.">
+      <created>1617798101217</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1617798101217</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -636,10 +635,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="391" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617716072611" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617797686712">
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617798103428">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617797686712" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617798103428" />
     <state x="469" y="3" width="1467" height="659" maximized="true" key="dock-window-1" timestamp="1617714923387">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

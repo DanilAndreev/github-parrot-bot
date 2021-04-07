@@ -13,7 +13,7 @@
     </div>   
 </a>
 
-# Overview
+# Overview :mag:
 GitHub Parrot Bot - telegram bot for tracking GitHub repository events, such as:
 - Issues
 - Pull request
@@ -22,11 +22,11 @@ GitHub Parrot Bot - telegram bot for tracking GitHub repository events, such as:
 
 Also, you can connect your GitHub username to telegram username and bot will tag you if issue ot pull request refers to you.
 
-## Why GitHub Parrot?
+## Why GitHub Parrot? :thought_balloon:
 Because it uses webhooks to get updates. __No OAuth and right privileges!__. Just safe webhooks. Sounds good, right? :smiley: 
 
-# Getting started
-## Inviting the bot to Telegram chat
+# Getting started :crystal_ball:
+## Inviting the bot to Telegram chat :satellite:
 To connect the bot to Telegram chat follow steps:
 1. Open the chat where you want to add the bot.
 2. Open chat settings.
@@ -35,7 +35,7 @@ To connect the bot to Telegram chat follow steps:
 5. Add the bot.
 6. Give the bot rights to delete messages.
 
-## Connecting bot to the __GitHub__ repository
+## Connecting the bot to the __GitHub__ repository :link:
 So, when you have added the bot to your telegram chat - it's time to add repository for tracking. One chat can be connected to several repositories as well as one repository to several chats.  
 To add the repository link follow steps:
 1. Come up with the secret word. Is can be any word from 4 to 255 symbols.
@@ -57,7 +57,7 @@ To add the repository link follow steps:
 10. Ensure that the __Active__ flag is checked.
 11. Press __Add webhook__ button.
 
-## Adding your GitHub nickname to bot:
+## Adding your GitHub nickname to bot :sunglasses:
 When you have connected your repository you can create link between your Telegram and GitHub accounts. It means, that when bot sends updates it will tag you in chat if you are related to the issue or pull request. That called ```AKA```.  
 To create AKA use following command in the chat:
 ```
@@ -69,16 +69,16 @@ Example:
 ```
 Now, bot can tag you on new information updates.
 
-## Congratulations
+## Congratulations :rocket:
 Congratulations, you have made basic bot setup and now you can track repository updates. Hope, you are pleased :smiley:.
 
-## What's next
+## What's next :thought_balloon:
 Now your GitHub repository issues, pull requests and other will appear in Telegram chat. :bell:
 
-## Giving rights
+## Giving rights :cop:
 [instruction how to give bot rights]
 
-# For developers | Source usage
+# For developers :wrench: | Source usage :mortar_board:
 You can find information about source code usage in [Wiki](https://github.com/DanilAndreev/github-parrot-bot/wiki).  
 Also, you can find short information in source code directories using ```README.md``` files. 
 
