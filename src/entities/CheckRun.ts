@@ -36,6 +36,10 @@ import {
 } from "typeorm";
 import CheckSuite from "./CheckSuite";
 
+/**
+ * CheckRun - entity for storing github check runs information.
+ * @author Danil Andreev
+ */
 @Entity()
 @Index(["runId", "suite"], {unique: true})
 class CheckRun extends BaseEntity {
@@ -59,6 +63,11 @@ class CheckRun extends BaseEntity {
 }
 
 namespace CheckRun {
+    /**
+     * Info - GitHub check run info.
+     * @interface
+     * @author Danil Andreev
+     */
     export interface Info {
         name: string;
         status: string;

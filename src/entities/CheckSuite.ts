@@ -42,6 +42,10 @@ import PullRequest from "./PullRequest";
 import CheckRun from "./CheckRun";
 import WebHook from "./WebHook";
 
+/**
+ * CheckSuite - entity for storing github check suits information.
+ * @author Danil Andreev
+ */
 @Entity()
 @Index(["suiteId", "pullRequest"], {unique: true})
 @Index(["suiteId", "chat"], {unique: true})
@@ -87,12 +91,21 @@ class CheckSuite extends BaseEntity {
 }
 
 namespace CheckSuite {
+    /**
+     * info - GitHub check suite info.
+     * @interface
+     * @author Danil Andreev
+     */
     export interface Info {
         branch: string;
         conclusion?: string;
         status: string;
     }
 
+    /**
+     * CheckSuiteMessage - entity for storing check suite active telegram chat message.
+     * @author Danil Andreev
+     */
     @Entity()
     @Index(["suite", "messageId"], {unique: true})
     export class CheckSuiteMessage extends BaseEntity {

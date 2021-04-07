@@ -32,6 +32,12 @@ import WebHook from "../entities/WebHook";
 import JSONObject from "../interfaces/JSONObject";
 import Chat from "../entities/Chat";
 
+/**
+ * Handler for command:
+ * Removes repository from chat.
+ * @class
+ * @author Danil Andreev
+ */
 @BotCommand.Command("remove", "<repository>")
 @BotCommand.Description("Disconnects GitHub repository from this chat", {
     repository: "GitHub repository full name. Example: octocat/Hello-World",

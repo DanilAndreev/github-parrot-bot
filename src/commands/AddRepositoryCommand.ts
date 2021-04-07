@@ -32,6 +32,12 @@ import WebHook from "../entities/WebHook";
 import Chat from "../entities/Chat";
 import Enqueuer from "../core/Enqueuer";
 
+/**
+ * Handler for command:
+ * Creates WebHook object in database and connects it to chat.
+ * @class
+ * @author Danil Andreev
+ */
 @BotCommand.Command("add", "<repository> <secret>")
 @BotCommand.Description("Connects GitHub repository to this chat", {
     repository: "GitHub repository full name. Example: octocat/Hello-World",

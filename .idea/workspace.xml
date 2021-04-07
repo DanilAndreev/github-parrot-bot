@@ -16,11 +16,8 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Bot] Added some log messages.">
-      <change beforePath="$PROJECT_DIR$/.idea/github-tracker-telegram-bot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/github-parrot-bot.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[README] Updated.">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +78,7 @@
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="D:\Projects\github-tracker-telegram-bot\node_modules\prettier" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="ts.external.directory.path" value="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="C:\Users\onepl\WebstormProjects\github-parrot-bot\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -163,34 +160,6 @@
       <workItem from="1617714889086" duration="2376000" />
       <workItem from="1617721356381" duration="56000" />
       <workItem from="1617795024124" duration="53000" />
-    </task>
-    <task id="LOCAL-00027" summary="[issueEvent] Added hashtag to issue.">
-      <created>1603198250883</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1603198250883</updated>
-    </task>
-    <task id="LOCAL-00028" summary="[issueEvent] Finished issues.">
-      <created>1603198620419</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1603198620419</updated>
-    </task>
-    <task id="LOCAL-00029" summary="[issueEvent] Styled separators.">
-      <created>1603198921166</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1603198921166</updated>
-    </task>
-    <task id="LOCAL-00030" summary="[issueEvent] Changed message cache deleting time.">
-      <created>1603203372841</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1603203372841</updated>
     </task>
     <task id="LOCAL-00031" summary="[makeCommand] Changed from.id to chat.id.">
       <created>1603283490889</created>
@@ -507,7 +476,35 @@
       <option name="project" value="LOCAL" />
       <updated>1617713754183</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="[Core] Added JSDocs.">
+      <created>1617796227894</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1617796227894</updated>
+    </task>
+    <task id="LOCAL-00077" summary="[GLOBAL] Code formatted.">
+      <created>1617796993027</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1617796993027</updated>
+    </task>
+    <task id="LOCAL-00078" summary="[README] Updated.">
+      <created>1617797684221</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1617797684221</updated>
+    </task>
+    <task id="LOCAL-00079" summary="[README] Updated.">
+      <created>1617798101217</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1617798101217</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -538,9 +535,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[IssuesHandler] Added handlebars mechanism." />
-    <MESSAGE value="[WebServer] Removed events emitter. Messages are pushed to RabbitMQ instantly." />
-    <MESSAGE value="[Entities] Changed structure. (PROBLEM WITH FK ON DELETION)" />
     <MESSAGE value="[Entities] Fixed problems with FK constraint on deletion." />
     <MESSAGE value="[README] Added some information." />
     <MESSAGE value="[CheckSuite] Added new mechanism." />
@@ -563,7 +557,10 @@
     <MESSAGE value="[envDispatcher] Added more params for database setup." />
     <MESSAGE value="[envDispatcher] Added system settings." />
     <MESSAGE value="[Bot] Added some log messages." />
-    <option name="LAST_COMMIT_MESSAGE" value="[Bot] Added some log messages." />
+    <MESSAGE value="[Core] Added JSDocs." />
+    <MESSAGE value="[GLOBAL] Code formatted." />
+    <MESSAGE value="[README] Updated." />
+    <option name="LAST_COMMIT_MESSAGE" value="[README] Updated." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1617716084335">
@@ -638,10 +635,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="391" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617716072611" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617713756875">
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617798103428">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617713756875" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617798103428" />
     <state x="469" y="3" width="1467" height="659" maximized="true" key="dock-window-1" timestamp="1617714923387">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

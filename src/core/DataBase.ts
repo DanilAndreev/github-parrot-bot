@@ -29,8 +29,16 @@ import SystemConfig from "./SystemConfig";
 import Config from "../interfaces/Config";
 import {Logger} from "./Logger";
 
+/**
+ * DBConnection - current database connection.
+ */
 export let DBConnection: Connection | null = null;
 
+/**
+ * setupDbConnection - setting up database connection and synchronizes entities structure.
+ * @function
+ * @author Danil Andreev
+ */
 export async function setupDbConnection(): Promise<void> {
     try {
         Logger?.info("Connecting to database...");
@@ -40,6 +48,6 @@ export async function setupDbConnection(): Promise<void> {
         Logger?.info("Typeorm entities synchronized.");
     } catch (error) {
         Logger?.error("Failed to connect to database!", error);
-        process.exit(1)
+        process.exit(1);
     }
 }

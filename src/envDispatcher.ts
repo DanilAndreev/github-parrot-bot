@@ -34,7 +34,12 @@ import JSONObject from "./interfaces/JSONObject";
  * @function
  * @author Danil Andreev
  */
-export default function envDispatcher(configRef: Ref<Config>, value: string, execArray: RegExpExecArray, regExp: RegExp): void {
+export default function envDispatcher(
+    configRef: Ref<Config>,
+    value: string,
+    execArray: RegExpExecArray,
+    regExp: RegExp
+): void {
     try {
         const name: string = execArray[1].toLowerCase();
         switch (name) {
@@ -96,10 +101,6 @@ export default function envDispatcher(configRef: Ref<Config>, value: string, exe
                 SystemConfig.defaultEnvDispatcher(configRef, value, execArray, regExp);
         }
     } catch (error) {
-        // Logger.error({
-        //     verbosity: 3,
-        //     disableDB: true
-        // })(`Invalid ENV variable "${execArray.input}", skipping. Details:\n`, error.message);
         console.error(`Invalid ENV variable "${execArray.input}", skipping. Details:\n`, error.message);
     }
 }

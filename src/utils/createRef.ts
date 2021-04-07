@@ -26,7 +26,6 @@
 
 import Ref from "../interfaces/Ref";
 
-
 /**
  * createRef - creates Ref object with passed value.
  * @function

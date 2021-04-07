@@ -32,6 +32,12 @@ import JSONObject from "../interfaces/JSONObject";
 import Bot from "../core/Bot";
 import Chat from "../entities/Chat";
 
+/**
+ * Handler for command:
+ * Removes AKA using GitHub username.
+ * @class
+ * @author Danil Andreev
+ */
 @BotCommand.Command("disconnect", "[github_username]")
 @BotCommand.Description("Breaks link between telegram and github user (by default - you).")
 @BotCommand.Option("-a, --all", "Apply this action for each connection for selected user.", false)

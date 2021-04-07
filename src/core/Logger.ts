@@ -31,10 +31,15 @@ import SystemConfig from "./SystemConfig";
 
 export let Logger: LoggerType | undefined;
 
+/**
+ * initLogger - creates logger.
+ * @function
+ * @author Danil Andreev
+ */
 export function initLogger(): LoggerType {
     const logLevel: string = SystemConfig.getConfig<Config>().system.logLevel || "error";
 
-    const logFormat = format.printf(({ level, message, label, timestamp }) => {
+    const logFormat = format.printf(({level, message, label, timestamp}) => {
         return `${label}[${moment(timestamp).format("LLL")}] <${level}>: ${message}`;
     });
 
@@ -42,11 +47,7 @@ export function initLogger(): LoggerType {
 
     Logger = createLogger({
         level: logLevel,
-        format: format.combine(
-            format.label({ label: "GHTB" }),
-            format.timestamp(),
-            logFormat
-        ),
+        format: format.combine(format.label({label: "GHTB"}), format.timestamp(), logFormat),
         transports: logTransports,
     });
     return Logger;

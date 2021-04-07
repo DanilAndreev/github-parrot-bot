@@ -106,7 +106,7 @@ const config: Config = {
     },
     system: {
         logLevel: "error",
-    }
+    },
 };
 
 export default config;

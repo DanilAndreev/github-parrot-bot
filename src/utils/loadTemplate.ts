@@ -28,6 +28,13 @@ import {readFileSync} from "fs";
 import root from "./root";
 import * as Handlebars from "handlebars";
 
+/**
+ * loadTemplate - loads handlebars template and compiles it.
+ * @function
+ * @param templateName - Template file name without extension.
+ * @param options - Compile options.
+ * @author Danil Andreev
+ */
 export default async function loadTemplate(
     templateName: string,
     options?: CompileOptions

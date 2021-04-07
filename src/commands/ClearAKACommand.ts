@@ -32,6 +32,12 @@ import Collaborator from "../entities/Collaborator";
 import JSONObject from "../interfaces/JSONObject";
 import Chat from "../entities/Chat";
 
+/**
+ * Handler for command:
+ * Removes AKA from chat.
+ * @class
+ * @author Danil Andreev
+ */
 @BotCommand.Command("clear_aka")
 @BotCommand.Description("Removes all AKAs in this chat.")
 export default class ClearAKACommand extends BotCommand {

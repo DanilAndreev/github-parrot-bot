@@ -24,6 +24,11 @@
  * SOFTWARE.
  */
 
+/**
+ * AMQPAck - exception for acking AMQP message.
+ * @class
+ * @author Danil Andreev
+ */
 export default class AMQPAck extends Error {
     public readonly messageId?: number;
 

@@ -31,6 +31,12 @@ import Collaborator from "../entities/Collaborator";
 import JSONObject from "../interfaces/JSONObject";
 import Chat from "../entities/Chat";
 
+/**
+ * Handler for command:
+ * Creates AKA.
+ * @class
+ * @author Danil Andreev
+ */
 @BotCommand.Command("connect", "<github_username>")
 @BotCommand.Description("Creates link between telegram and github user to show notifications.", {
     github_username: "GitHub username. Example: octocat",

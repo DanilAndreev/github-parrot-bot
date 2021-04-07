@@ -24,6 +24,12 @@
  * SOFTWARE.
  */
 
+/**
+ * etelegramIgnore - function for determining error fatality.
+ * @function
+ * @param error - Telegram error.
+ * @author Danil Andreev
+ */
 export default function etelegramIgnore(error: any): boolean {
     if (error.code == "ETELEGRAM") {
         if (error.message.includes("message is not modified")) return true;

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains event handlers from AMQP queues. 
+This directory contains event handlers from AMQP queues.
 
 ## Structure
 

@@ -4,6 +4,7 @@
     </div>
     <div align="center">
         <h1>GitHub Parrot</h1>
+        <h5>Safe GitHub repositories tracking in your Telegram.</h5>
     </div>
     <div align="center">
         <img alt="GitHub" src="https://img.shields.io/github/license/DanilAndreev/github-tracker-telegram-bot"/>
@@ -13,11 +14,74 @@
     </div>   
 </a>
 
-# Overview
+# Overview :mag:
+GitHub Parrot Bot - telegram bot for tracking GitHub repository events, such as:
+- Issues
+- Pull request
+- Check suits.
+- Check runs.
 
-# Usage
-## Adding bot to chat
+Also, you can connect your GitHub username to telegram username and bot will tag you if issue ot pull request refers to you.
 
-## Giving rights
+## Why GitHub Parrot? :thought_balloon:
+Because it uses webhooks to get updates. __No OAuth and right privileges!__. Just safe webhooks. Sounds good, right? :smiley: 
 
-# Source usage
+# Getting started :crystal_ball:
+## Inviting the bot to Telegram chat :satellite:
+To connect the bot to Telegram chat follow steps:
+1. Open the chat where you want to add the bot.
+2. Open chat settings.
+3. Press the __Add Memeber__ button.
+4. Find bot using tag ```@GitHubIssuesPullsTrackingBot```.
+5. Add the bot.
+6. Give the bot rights to delete messages.
+
+## Connecting the bot to the __GitHub__ repository :link:
+So, when you have added the bot to your telegram chat - it's time to add repository for tracking. One chat can be connected to several repositories as well as one repository to several chats.  
+To add the repository link follow steps:
+1. Come up with the secret word. Is can be any word from 4 to 255 symbols.
+2. Use next command in your Telegram chat to create a repository link: 
+  ```
+  /add <repository name> <your secret word>
+  ```
+  Example:
+  ```
+  /add "octocat/hello-worId" hellodarkness
+  ```
+3. Now move to your GitHub repository.
+4. Open repository setting and go to the __Webhooks__ section.
+5. Press __Add webhook__.
+6. Set the __Payload URL__ field to: ``` here will be url ```.
+7. Set the __Content type__ field to: ```application/json```!
+8. Fill the __Secret__ field with your secret word.
+9. Select webhook events or select ```send me everything``` option.
+10. Ensure that the __Active__ flag is checked.
+11. Press __Add webhook__ button.
+
+## Adding your GitHub nickname to bot :sunglasses:
+When you have connected your repository you can create link between your Telegram and GitHub accounts. It means, that when bot sends updates it will tag you in chat if you are related to the issue or pull request. That called ```AKA```.  
+To create AKA use following command in the chat:
+```
+/connect <github username>
+```
+Example:
+```
+/connect Octocat
+```
+Now, bot can tag you on new information updates.
+
+## Congratulations :rocket:
+Congratulations, you have made basic bot setup and now you can track repository updates. Hope, you are pleased :smiley:.
+
+## What's next :thought_balloon:
+Now your GitHub repository issues, pull requests and other will appear in Telegram chat. :bell:
+
+## Giving rights :cop:
+[instruction how to give bot rights]
+
+# For developers :wrench: | Source usage :mortar_board:
+You can find information about source code usage in [Wiki](https://github.com/DanilAndreev/github-parrot-bot/wiki).  
+Also, you can find short information in source code directories using ```README.md``` files. 
+
+# Author :ghost:
+Danil Andreev | https://github.com/DanilAndreev | danssg08@gmail.com

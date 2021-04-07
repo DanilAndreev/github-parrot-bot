@@ -29,6 +29,11 @@ import {DeleteResult} from "typeorm";
 import CheckSuite from "../entities/CheckSuite";
 import {Logger} from "../core/Logger";
 
+/**
+ * CheckSuitsGarbageCollector - class for deleting outdated check suits.
+ * @class
+ * @author Danil Andreev
+ */
 export default class CheckSuitsGarbageCollector extends Chrono {
     protected async run(): Promise<void> {
         const result: DeleteResult = await CheckSuite.createQueryBuilder()

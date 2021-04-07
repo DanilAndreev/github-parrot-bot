@@ -40,6 +40,10 @@ import Chat from "./Chat";
 import WebHook from "./WebHook";
 import CheckSuite from "./CheckSuite";
 
+/**
+ * PullRequest - entity for storing github pull requests information.
+ * @author Danil Andreev
+ */
 @Entity()
 @Index(["pullRequestId", "webhook"], {unique: true})
 class PullRequest extends BaseEntity {
@@ -71,6 +75,11 @@ class PullRequest extends BaseEntity {
 }
 
 namespace PullRequest {
+    /**
+     * Info - GitHub pull request info.
+     * @interface
+     * @author Danil Andreev
+     */
     export interface Info {
         html_url: string;
         tag: number;
@@ -87,6 +96,10 @@ namespace PullRequest {
         };
     }
 
+    /**
+     * PullRequestMessage - entity for storing pull request active telegram chat message.
+     * @author Danil Andreev
+     */
     @Entity()
     @Index(["pullRequest", "messageId"], {unique: true})
     export class PullRequestMessage extends BaseEntity {

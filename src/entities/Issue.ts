@@ -38,6 +38,10 @@ import {
 import Chat from "./Chat";
 import WebHook from "./WebHook";
 
+/**
+ * Issue - entity for storing github issues information.
+ * @author Danil Andreev
+ */
 @Entity()
 @Index(["webhook", "issueId"], {unique: true})
 class Issue extends BaseEntity {
@@ -65,6 +69,11 @@ class Issue extends BaseEntity {
 }
 
 namespace Issue {
+    /**
+     * Info - GitHub issue info.
+     * @interface
+     * @author Danil Andreev
+     */
     export interface Info {
         tag: number;
         state: string;
@@ -80,6 +89,10 @@ namespace Issue {
         html_url: string;
     }
 
+    /**
+     * IssueMessage - entity for storing issue active telegram chat message.
+     * @author Danil Andreev
+     */
     @Entity()
     @Index(["issue", "messageId"], {unique: true})
     export class IssueMessage extends BaseEntity {
