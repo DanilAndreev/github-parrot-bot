@@ -73,13 +73,14 @@ Now, bot can tag you on new information updates.
 Congratulations, you have made basic bot setup and now you can track repository updates. Hope, you are pleased :smiley:.
 
 ## What's next
-
+Now your GitHub repository issues, pull requests and other will appear in Telegram chat. :bell:
 
 ## Giving rights
+[instruction how to give bot rights]
 
-# Source usage
+# For developers | Source usage
 You can find information about source code usage in [Wiki](https://github.com/DanilAndreev/github-parrot-bot/wiki).  
 Also, you can find short information in source code directories using ```README.md``` files. 
 
-# Author
+# Author :ghost:
 Danil Andreev | https://github.com/DanilAndreev | danssg08@gmail.com
