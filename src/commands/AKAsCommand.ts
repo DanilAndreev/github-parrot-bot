@@ -58,7 +58,7 @@ export default class AKAsCommand extends BotCommand {
 
         const result: Collaborator[] = await Collaborator.find({where: {chat}});
 
-        if (!result.length) return `This chat have no AKAs.`;
+        if (!result.length) return `This chat has no AKAs.`;
 
         const text: string[] = await Promise.all(
             result.map(async (collaboration: Collaborator) => {
@@ -94,8 +94,7 @@ export default class AKAsCommand extends BotCommand {
 
         const result: Collaborator[] = await Collaborator.find({where: {chat, telegramId}});
 
-        if (!result.length) return `User @${telegramName} have no AKA.`;
-
+        if (!result.length) return `User @${telegramName} has no AKA.`;
         return [
             `User @${telegramName} <i>[${telegramId}]</i>:`,
             ...result.map(collaboration => `AKA: <b>[${collaboration.gitHubName}]</b>`),

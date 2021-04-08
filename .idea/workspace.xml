@@ -16,11 +16,12 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[EnvDispatcher] Removed GHTB prefix to envs.">
-      <change beforePath="$PROJECT_DIR$/.eslintrc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/COMMANDS_EVENTS_HANDLERS.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/COMMANDS_EVENTS_HANDLERS.xml" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Bot] Fixed problem with commands regexp.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,13 +164,6 @@
       <workItem from="1617714889086" duration="2376000" />
       <workItem from="1617721356381" duration="56000" />
       <workItem from="1617795024124" duration="53000" />
-    </task>
-    <task id="LOCAL-00033" summary="[issueEvent] Removed stylized tags.">
-      <created>1603284770732</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1603284770732</updated>
     </task>
     <task id="LOCAL-00034" summary="[addRepository] Removed argon2 secret hashing.">
       <created>1603285606270</created>
@@ -507,7 +501,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617881826679</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="[Bot] Fixed problem with commands regexp.">
+      <created>1617882958341</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1617882958341</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -538,7 +539,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[CheckSuite] Added new mechanism." />
     <MESSAGE value="[CheckSuiteHandler] Added mechanism for check suits." />
     <MESSAGE value="[PullRequestHandler] Renamed template and added dividers to checksuits." />
     <MESSAGE value="[Handlers] Removed extra comments." />
@@ -563,7 +563,8 @@
     <MESSAGE value="[README] Updated." />
     <MESSAGE value="[Dockerfile] Created." />
     <MESSAGE value="[EnvDispatcher] Removed GHTB prefix to envs." />
-    <option name="LAST_COMMIT_MESSAGE" value="[EnvDispatcher] Removed GHTB prefix to envs." />
+    <MESSAGE value="[Bot] Fixed problem with commands regexp." />
+    <option name="LAST_COMMIT_MESSAGE" value="[Bot] Fixed problem with commands regexp." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1617882797598">
@@ -642,10 +643,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="391" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617716072611" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617881829944">
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617882962242">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617881829944" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617882962242" />
     <state x="2698" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1617799074011">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>

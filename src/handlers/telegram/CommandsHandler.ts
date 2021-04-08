@@ -51,7 +51,9 @@ class CommandsHandler extends AmqpHandler {
             }
         }
         if (!flag) {
-            await Enqueuer.sendChatMessage(message.chat.id, "Invalid command.");
+            await Enqueuer.sendChatMessage(message.chat.id, "Invalid command.", {
+                reply_to_message_id: message.message_id,
+            });
         }
     }
 }

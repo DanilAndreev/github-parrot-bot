@@ -60,8 +60,15 @@ class DrawMessageHandler extends AmqpHandler {
     ): Promise<void | boolean> {
         try {
             await Bot.getCurrent().sendMessage(event.chatId, event.text, event.options);
-        } catch (error) {
-            throw new AMQPNack(`Failed to send message to chat ${event.chatId}.`, message.properties.messageId);
+        } catch {
+            try {
+                await Bot.getCurrent().sendMessage(event.chatId, event.text, {
+                    ...event.options,
+                    reply_to_message_id: undefined
+                });
+            } catch (error) {
+                throw new AMQPNack(`Failed to send message to chat ${event.chatId}.`, message.properties.messageId);
+            }
         }
     }
 
