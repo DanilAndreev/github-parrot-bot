@@ -31,6 +31,7 @@ import checkAdmin from "../utils/checkAdmin";
 import WebHook from "../entities/WebHook";
 import Chat from "../entities/Chat";
 import Enqueuer from "../core/Enqueuer";
+import JSONObject from "../interfaces/JSONObject";
 
 /**
  * Handler for command:
@@ -44,7 +45,7 @@ import Enqueuer from "../core/Enqueuer";
     secret: "Secret string key from GitHub webhook.",
 })
 export default class AddRepositoryCommand extends BotCommand {
-    protected async handler(message: Message, args: string[], opts): Promise<string[]> {
+    protected async handler(message: Message, args: string[], opts: JSONObject<string>): Promise<string[]> {
         const chatId: number = message.chat.id;
         const telegramName: string = message.from?.username || "";
         const [repository, secret] = args;
