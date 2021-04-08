@@ -57,7 +57,7 @@ export default class Bot extends TelegramBot {
         Logger?.silly(`Added listener of "new_chat_members" for bot.`);
         let regExp: RegExp = /^\/([^\s@]+)(?:\s)?(.*)?/;
         if (SystemConfig.getConfig<Config>().bot.tag)
-            regExp = new RegExp(`^/([^\s@]+)(?:${SystemConfig.getConfig<Config>().bot.tag})?(?:\s)?(.*)?`);
+            regExp = new RegExp(`^/([^\\s@]+)(?:${SystemConfig.getConfig<Config>().bot.tag})?(?:\\s)?(.*)?`);
         this.onText(regExp, (message, match) => {
             Logger?.debug(`Got command from chat id: ${message.chat.id}. Command: "${match && match[0]}"`);
             Enqueuer.chatCommand(message, match).then();

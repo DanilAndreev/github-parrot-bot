@@ -16,11 +16,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Dockerfile] Created.">
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Run_with_ts_node.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Run_with_ts_node.xml" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[EnvDispatcher] Removed GHTB prefix to envs.">
+      <change beforePath="$PROJECT_DIR$/.eslintrc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/COMMANDS_EVENTS_HANDLERS.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/COMMANDS_EVENTS_HANDLERS.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/envDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/envDispatcher.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +97,7 @@
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.Run with ts-node">
+  <component name="RunManager" selected="Node.js.COMMANDS_EVENTS_HANDLERS">
     <list>
       <item itemvalue="Node.js.Run with ts-node" />
       <item itemvalue="Node.js.CRON_DATABASE_GARBAGE_COLLECTORS" />
@@ -163,13 +163,6 @@
       <workItem from="1617714889086" duration="2376000" />
       <workItem from="1617721356381" duration="56000" />
       <workItem from="1617795024124" duration="53000" />
-    </task>
-    <task id="LOCAL-00032" summary="[addRepository] Added warning on message deletion.">
-      <created>1603284130526</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1603284130526</updated>
     </task>
     <task id="LOCAL-00033" summary="[issueEvent] Removed stylized tags.">
       <created>1603284770732</created>
@@ -507,7 +500,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617799385295</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="[EnvDispatcher] Removed GHTB prefix to envs.">
+      <created>1617881826679</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1617881826679</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -538,7 +538,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[README] Added some information." />
     <MESSAGE value="[CheckSuite] Added new mechanism." />
     <MESSAGE value="[CheckSuiteHandler] Added mechanism for check suits." />
     <MESSAGE value="[PullRequestHandler] Renamed template and added dividers to checksuits." />
@@ -563,53 +562,54 @@
     <MESSAGE value="[GLOBAL] Code formatted." />
     <MESSAGE value="[README] Updated." />
     <MESSAGE value="[Dockerfile] Created." />
-    <option name="LAST_COMMIT_MESSAGE" value="[Dockerfile] Created." />
+    <MESSAGE value="[EnvDispatcher] Removed GHTB prefix to envs." />
+    <option name="LAST_COMMIT_MESSAGE" value="[EnvDispatcher] Removed GHTB prefix to envs." />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1617881795202">
+    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1617882797598">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617881795202" />
+    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617882797598" />
     <state x="2643" y="318" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1617799504091">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2643" y="318" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617799504091" />
-    <state x="2745" y="118" width="775" height="780" key="EnvironmentVariablesDialog" timestamp="1617881793812">
+    <state x="2745" y="118" width="775" height="780" key="EnvironmentVariablesDialog" timestamp="1617882795179">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2745" y="118" width="775" height="780" key="EnvironmentVariablesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617881793812" />
-    <state width="1877" height="318" key="GridCell.Tab.0.bottom" timestamp="1617881749178">
+    <state x="2745" y="118" width="775" height="780" key="EnvironmentVariablesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617882795179" />
+    <state width="1877" height="391" key="GridCell.Tab.0.bottom" timestamp="1617882393552">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="318" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617881749178" />
-    <state width="1877" height="318" key="GridCell.Tab.0.center" timestamp="1617881749178">
+    <state width="1877" height="391" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617882393552" />
+    <state width="1877" height="391" key="GridCell.Tab.0.center" timestamp="1617882393552">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="318" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617881749178" />
-    <state width="1877" height="318" key="GridCell.Tab.0.left" timestamp="1617881749178">
+    <state width="1877" height="391" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617882393552" />
+    <state width="1877" height="391" key="GridCell.Tab.0.left" timestamp="1617882393552">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="318" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617881749178" />
-    <state width="1877" height="318" key="GridCell.Tab.0.right" timestamp="1617881749178">
+    <state width="1877" height="391" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617882393552" />
+    <state width="1877" height="391" key="GridCell.Tab.0.right" timestamp="1617882393552">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="318" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617881749178" />
-    <state width="1877" height="391" key="GridCell.Tab.1.bottom" timestamp="1617716072610">
+    <state width="1877" height="391" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617882393552" />
+    <state width="1877" height="391" key="GridCell.Tab.1.bottom" timestamp="1617882418533">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="391" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617716072610" />
-    <state width="1877" height="391" key="GridCell.Tab.1.center" timestamp="1617716072610">
+    <state width="1877" height="391" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617882418533" />
+    <state width="1877" height="391" key="GridCell.Tab.1.center" timestamp="1617882418532">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="391" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617716072610" />
-    <state width="1877" height="391" key="GridCell.Tab.1.left" timestamp="1617716072609">
+    <state width="1877" height="391" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617882418532" />
+    <state width="1877" height="391" key="GridCell.Tab.1.left" timestamp="1617882418532">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="391" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617716072609" />
-    <state width="1877" height="391" key="GridCell.Tab.1.right" timestamp="1617716072610">
+    <state width="1877" height="391" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617882418532" />
+    <state width="1877" height="391" key="GridCell.Tab.1.right" timestamp="1617882418532">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="391" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617716072610" />
+    <state width="1877" height="391" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617882418532" />
     <state width="1877" height="391" key="GridCell.Tab.2.bottom" timestamp="1617716072610">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -642,10 +642,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="391" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617716072611" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617799389376">
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617881829944">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617799389376" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617881829944" />
     <state x="2698" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1617799074011">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -671,6 +671,12 @@
           <url>file://$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts</url>
           <line>45</line>
           <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts</url>
+          <line>44</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
