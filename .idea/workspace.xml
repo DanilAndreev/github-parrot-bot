@@ -16,9 +16,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[CommandsHandler] Added reply to message on Incorrect message.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[WebServer] Added events list.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/BotCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/BotCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebServer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/Config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,13 +163,6 @@
       <workItem from="1617714889086" duration="2376000" />
       <workItem from="1617721356381" duration="56000" />
       <workItem from="1617795024124" duration="53000" />
-    </task>
-    <task id="LOCAL-00035" summary="[issueEvent] Added debuggers.">
-      <created>1603286398322</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1603286398322</updated>
     </task>
     <task id="LOCAL-00036" summary="[issueEvent] Added debuggers.">
       <created>1603286925176</created>
@@ -505,7 +500,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617883248035</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="[Commands] Added messages reply mechanism.">
+      <created>1617883876380</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1617883876380</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,8 +538,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[PullRequestHandler] Renamed template and added dividers to checksuits." />
-    <MESSAGE value="[Handlers] Removed extra comments." />
     <MESSAGE value="[IssuesHandler] Added synchronization." />
     <MESSAGE value="[PullRequest] Added unique constraint." />
     <MESSAGE value="[IssueHandler] Fixed bug with message deletion." />
@@ -561,7 +561,9 @@
     <MESSAGE value="[EnvDispatcher] Removed GHTB prefix to envs." />
     <MESSAGE value="[Bot] Fixed problem with commands regexp." />
     <MESSAGE value="[CommandsHandler] Added reply to message on Incorrect message." />
-    <option name="LAST_COMMIT_MESSAGE" value="[CommandsHandler] Added reply to message on Incorrect message." />
+    <MESSAGE value="[Commands] Added messages reply mechanism." />
+    <MESSAGE value="[WebServer] Added events list." />
+    <option name="LAST_COMMIT_MESSAGE" value="[WebServer] Added events list." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1617882797598">
@@ -640,10 +642,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="276" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617883640668" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617883251407">
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617883898127">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617883251407" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617883898127" />
     <state x="2698" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1617799074011">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>

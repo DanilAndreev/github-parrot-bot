@@ -48,6 +48,7 @@ namespace Config {
      */
     export interface Server {
         port: number;
+        acceptEvents: string[];
     }
 
     /**

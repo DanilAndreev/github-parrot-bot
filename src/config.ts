@@ -103,6 +103,13 @@ const config: Config = {
     },
     server: {
         port: 3030,
+        acceptEvents: [
+            "check_run",
+            "check_suite",
+            "create",
+            "pull_request",
+            "push",
+        ]
     },
     system: {
         logLevel: "error",

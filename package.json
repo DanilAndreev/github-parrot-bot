@@ -1,6 +1,6 @@
 {
   "name": "github-parrot-bot",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "GitHub actions tracking bot for Telegram.",
   "keywords": [
     "github",
