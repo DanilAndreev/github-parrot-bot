@@ -42,9 +42,9 @@ export default class VersionCommand extends BotCommand {
     protected async handler(message: Message, args: string[], options: JSONObject<string>): Promise<string[]> {
         let version: string;
         try {
-            version = require(root + "/package.json").version;
-        } catch {
-            Logger?.warn("Unable to get version from package.json!");
+            version = require(root + "/../package.json").version;
+        } catch (error) {
+            Logger?.warn("Unable to get version from package.json!", error);
             version = "Unavailable";
         }
 
