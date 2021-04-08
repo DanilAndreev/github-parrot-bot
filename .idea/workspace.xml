@@ -16,11 +16,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[WebServer] Added events list.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[VersionCommand] Added command for getting version.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/VersionCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/VersionCommand.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebServer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/Config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,20 +162,6 @@
       <workItem from="1617714889086" duration="2376000" />
       <workItem from="1617721356381" duration="56000" />
       <workItem from="1617795024124" duration="53000" />
-    </task>
-    <task id="LOCAL-00036" summary="[issueEvent] Added debuggers.">
-      <created>1603286925176</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1603286925176</updated>
-    </task>
-    <task id="LOCAL-00037" summary="[pullRequestEvent] Created.">
-      <created>1603455944809</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1603455944809</updated>
     </task>
     <task id="LOCAL-00038" summary="[AMQP] Setted up.">
       <created>1603458509420</created>
@@ -507,7 +492,21 @@
       <option name="project" value="LOCAL" />
       <updated>1617883876380</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="[WebServer] Added events list.">
+      <created>1617884846070</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1617884846070</updated>
+    </task>
+    <task id="LOCAL-00086" summary="[VersionCommand] Added command for getting version.">
+      <created>1617885207032</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1617885207032</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -538,7 +537,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[IssuesHandler] Added synchronization." />
     <MESSAGE value="[PullRequest] Added unique constraint." />
     <MESSAGE value="[IssueHandler] Fixed bug with message deletion." />
     <MESSAGE value="[Handlers] Structured to directories.&#10;[WebHookAmqpHandler] Changed input params in handler." />
@@ -563,7 +561,8 @@
     <MESSAGE value="[CommandsHandler] Added reply to message on Incorrect message." />
     <MESSAGE value="[Commands] Added messages reply mechanism." />
     <MESSAGE value="[WebServer] Added events list." />
-    <option name="LAST_COMMIT_MESSAGE" value="[WebServer] Added events list." />
+    <MESSAGE value="[VersionCommand] Added command for getting version." />
+    <option name="LAST_COMMIT_MESSAGE" value="[VersionCommand] Added command for getting version." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1617882797598">
@@ -642,18 +641,18 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="276" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617883640668" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617883898127">
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617885209866">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617883898127" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617885209866" />
     <state x="2698" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1617799074011">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2698" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617799074011" />
-    <state x="469" y="3" width="1467" height="659" maximized="true" key="dock-window-1" timestamp="1617714923387">
+    <state x="573" y="0" width="1363" height="718" maximized="true" key="dock-window-1" timestamp="1617884956824">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="469" y="3" width="1467" height="659" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617714923387" />
+    <state x="573" y="0" width="1363" height="718" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617884956824" />
     <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1617716023065">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>

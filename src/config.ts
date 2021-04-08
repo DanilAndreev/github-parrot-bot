@@ -50,6 +50,7 @@ import DrawPullRequestHandler from "./handlers/draw/DrawPullRequestHandler";
 import CommandsHandler from "./handlers/telegram/CommandsHandler";
 import DrawMessageHandler from "./handlers/draw/DrawMessageHandler";
 import TelegramEventsHandler from "./handlers/telegram/TelegramEventsHandler";
+import VersionCommand from "./commands/VersionCommand";
 
 const config: Config = {
     bot: {
@@ -62,6 +63,7 @@ const config: Config = {
             DisconnectCommand,
             ListRepositoriesCommand,
             RemoveRepositoryCommand,
+            VersionCommand,
         ],
     },
     db: {
