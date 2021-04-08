@@ -102,18 +102,24 @@ class BotCommand {
                 let result: string | string[] | void = await this.handler(message, command.args, command.opts());
                 if (Array.isArray(result)) result = result.join("\n");
                 if (result) {
-                    await Enqueuer.sendChatMessage(message.chat.id, result, {parse_mode: "HTML"});
+                    await Enqueuer.sendChatMessage(message.chat.id, result, {
+                        parse_mode: "HTML",
+                        reply_to_message_id: message.message_id,
+                    });
                 }
             } catch (error) {
                 if (error instanceof CommandError) {
                     const out_message = error.message;
                     Enqueuer.sendChatMessage(message.chat.id, "<i>Error:</i> \n" + out_message, {
                         parse_mode: "HTML",
+                        reply_to_message_id: message.message_id,
                     }).catch(err => {
                         throw err;
                     });
                 } else {
-                    await Enqueuer.sendChatMessage(message.chat.id, "Unrecognized error");
+                    await Enqueuer.sendChatMessage(message.chat.id, "Unrecognized error", {
+                        reply_to_message_id: message.message_id,
+                    });
                     console.error(error);
                 }
             }
