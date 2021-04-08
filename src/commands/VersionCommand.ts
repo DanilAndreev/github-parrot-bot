@@ -27,6 +27,8 @@
 import BotCommand from "../core/BotCommand";
 import JSONObject from "../interfaces/JSONObject";
 import {Message} from "node-telegram-bot-api";
+import root from "../utils/root";
+import {Logger} from "../core/Logger";
 
 /**
  * Handler for command:
@@ -38,9 +40,17 @@ import {Message} from "node-telegram-bot-api";
 @BotCommand.Description("Shows bot version.")
 export default class VersionCommand extends BotCommand {
     protected async handler(message: Message, args: string[], options: JSONObject<string>): Promise<string[]> {
+        let version: string;
+        try {
+            version = require(root + "/package.json").version;
+        } catch {
+            Logger?.warn("Unable to get version from package.json!");
+            version = "Unavailable";
+        }
+
         return [
             "GitHub Parrot Bot",
-            `<i>version:<i> <b>${process.env.npm_package_version || "Unavailable"}</b>`
+            `<i>version:</i> <b>${version || "Unavailable"}</b>`
         ];
     }
 }
