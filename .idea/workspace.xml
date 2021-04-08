@@ -17,8 +17,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Dockerfile] Created.">
-      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Run_with_ts_node.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Run_with_ts_node.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/envDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/envDispatcher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -564,34 +566,34 @@
     <option name="LAST_COMMIT_MESSAGE" value="[Dockerfile] Created." />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1617716084335">
+    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1617881795202">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617716084335" />
+    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617881795202" />
     <state x="2643" y="318" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1617799504091">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2643" y="318" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617799504091" />
-    <state x="2745" y="118" width="775" height="780" key="EnvironmentVariablesDialog" timestamp="1617716083550">
+    <state x="2745" y="118" width="775" height="780" key="EnvironmentVariablesDialog" timestamp="1617881793812">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2745" y="118" width="775" height="780" key="EnvironmentVariablesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617716083550" />
-    <state width="1877" height="318" key="GridCell.Tab.0.bottom" timestamp="1617721429511">
+    <state x="2745" y="118" width="775" height="780" key="EnvironmentVariablesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617881793812" />
+    <state width="1877" height="318" key="GridCell.Tab.0.bottom" timestamp="1617881749178">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="318" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617721429511" />
-    <state width="1877" height="318" key="GridCell.Tab.0.center" timestamp="1617721429496">
+    <state width="1877" height="318" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617881749178" />
+    <state width="1877" height="318" key="GridCell.Tab.0.center" timestamp="1617881749178">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="318" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617721429496" />
-    <state width="1877" height="318" key="GridCell.Tab.0.left" timestamp="1617721429496">
+    <state width="1877" height="318" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617881749178" />
+    <state width="1877" height="318" key="GridCell.Tab.0.left" timestamp="1617881749178">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="318" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617721429496" />
-    <state width="1877" height="318" key="GridCell.Tab.0.right" timestamp="1617721429496">
+    <state width="1877" height="318" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617881749178" />
+    <state width="1877" height="318" key="GridCell.Tab.0.right" timestamp="1617881749178">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="318" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617721429496" />
+    <state width="1877" height="318" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617881749178" />
     <state width="1877" height="391" key="GridCell.Tab.1.bottom" timestamp="1617716072610">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>

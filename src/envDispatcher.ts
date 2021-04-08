@@ -70,7 +70,7 @@ export default function envDispatcher(
                 configRef.current.bot.tag = value;
                 break;
 
-            case "web_server_port":
+            case "port":
                 configRef.current.server.port = +value;
                 break;
 

@@ -32,7 +32,7 @@ import {initLogger} from "./core/Logger";
 import Config from "./interfaces/Config";
 
 SystemConfig.setOptions({
-    envMask: /GHTB_(.+)/,
+    envMask: /(.+)/,
     additionalConfigs: [config],
     envDispatcher
 });
