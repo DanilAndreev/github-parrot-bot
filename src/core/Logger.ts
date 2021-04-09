@@ -37,14 +37,15 @@ export let Logger: LoggerType | undefined;
 
 class PostgresTransport extends Transport {
     protected db:  IDatabase<any> & any | null;
+    protected hostname: string;
 
     public constructor(options) {
         super(options);
         const {
-            name = "Postgres",
+            hostname = "Postgres",
             level = "info",
-            silent = false,
         } = options;
+        this.hostname = hostname;
 
         try {
             const url = SystemConfig.getConfig<Config>().log.database_url;
@@ -65,8 +66,8 @@ class PostgresTransport extends Transport {
             if (!this.db) return;
             await this.db
                 .query(
-                        `INSERT INTO "log" ("timestamp", "level", "message", "meta") VALUES ($1, $2, $3, $4)`,
-                    [timestamp, level, message, meta]
+                        `INSERT INTO "log" ("timestamp", "level", "message", "meta", "host") VALUES ($1, $2, $3, $4, $5)`,
+                    [timestamp, level, message, meta, this.hostname]
                 );
         } catch (error) {
             console.log(error);

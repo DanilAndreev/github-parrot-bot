@@ -16,7 +16,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[VersionCommand] Fixed command for getting version.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Logger] Added database support.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/Logger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Logger.ts" afterDir="false" />
     </list>
@@ -163,13 +163,6 @@
       <workItem from="1617795024124" duration="53000" />
       <workItem from="1617969495110" duration="2855000" />
       <workItem from="1617972574453" duration="5102000" />
-    </task>
-    <task id="LOCAL-00039" summary="[AMQP] Fixed incorrect queues asserting.">
-      <created>1603459024722</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1603459024722</updated>
     </task>
     <task id="LOCAL-00040" summary="[AMQP] Fixed incorrect queues asserting.">
       <created>1603459364268</created>
@@ -507,7 +500,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617886497388</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="[Logger] Added database support.">
+      <created>1617981780163</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1617981780164</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -538,7 +538,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[PullRequest] Added unique constraint." />
     <MESSAGE value="[IssueHandler] Fixed bug with message deletion." />
     <MESSAGE value="[Handlers] Structured to directories.&#10;[WebHookAmqpHandler] Changed input params in handler." />
     <MESSAGE value="[IssuesHandler] Separated to two handlers." />
@@ -563,7 +562,8 @@
     <MESSAGE value="[Commands] Added messages reply mechanism." />
     <MESSAGE value="[WebServer] Added events list." />
     <MESSAGE value="[VersionCommand] Fixed command for getting version." />
-    <option name="LAST_COMMIT_MESSAGE" value="[VersionCommand] Fixed command for getting version." />
+    <MESSAGE value="[Logger] Added database support." />
+    <option name="LAST_COMMIT_MESSAGE" value="[Logger] Added database support." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
