@@ -63,6 +63,10 @@ export default function envDispatcher(
                 (configRef.current.db as JSONObject).database = value;
                 break;
 
+            case "logs_database_url":
+                configRef.current.log.database_url = value;
+                break;
+
             case "telegram_bot_token":
                 configRef.current.bot.token = value;
                 break;
@@ -94,7 +98,7 @@ export default function envDispatcher(
                 break;
 
             case "log_level":
-                configRef.current.system.logLevel = value;
+                configRef.current.log.logLevel = value;
                 break;
 
             default:

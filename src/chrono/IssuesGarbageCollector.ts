@@ -36,10 +36,14 @@ import {Logger} from "../core/Logger";
  */
 export default class IssuesGarbageCollector extends Chrono {
     protected async run(): Promise<void> {
-        const result: DeleteResult = await Issue.createQueryBuilder()
-            .delete()
-            .where("updatedAt < current_timestamp - interval '1 hour'")
-            .execute();
-        Logger?.info(`Issues garbage collector: deleted ${result.affected} items.`);
+        try {
+            const result: DeleteResult = await Issue.createQueryBuilder()
+                .delete()
+                .where("updatedAt < current_timestamp - interval '1 hour'")
+                .execute();
+            Logger?.info(`Issues garbage collector: deleted ${result.affected} items.`);
+        } catch (error) {
+            Logger?.error(`Failed to execute cron function IssuesGarbageCollector.`, error);
+        }
     }
 }

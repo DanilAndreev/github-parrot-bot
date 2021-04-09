@@ -113,7 +113,8 @@ const config: Config = {
             "push",
         ]
     },
-    system: {
+    system: {},
+    log: {
         logLevel: "error",
     },
 };

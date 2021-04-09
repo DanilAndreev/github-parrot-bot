@@ -24,12 +24,65 @@
  * SOFTWARE.
  */
 
-import {createLogger, Logger as LoggerType, format, transports} from "winston";
+import {createLogger, format, Logger as LoggerType, transports} from "winston";
+import * as Transport from "winston-transport";
 import * as moment from "moment";
 import Config from "../interfaces/Config";
 import SystemConfig from "./SystemConfig";
+import JSONObject from "../interfaces/JSONObject";
+import * as PGP from "pg-promise";
 
 export let Logger: LoggerType | undefined;
+
+class PostgresTransport extends Transport {
+    protected db: PGP.IDatabase<{}> | null;
+
+    public constructor(options) {
+        super(options);
+        const {
+            name = "Postgres",
+            level = "info",
+            silent = false,
+        } = options;
+
+        try {
+            const url = SystemConfig.getConfig<Config>().log.database_url;
+            if (!url) return;
+            this.db = PGP()(url);
+        } catch {
+            console.error("Logger: failed to connect to database");
+            this.db = null;
+        }
+    }
+
+    public async log(info: JSONObject, next: Function): Promise<void> {
+        const {message, level, timestamp, ...meta} = info;
+        try {
+            if (!this.db) return;
+            await this.db
+                .query(
+                        `INSERT INTO "log" ("timestamp", "level", "message", "meta") VALUES ($1, $2, $3, $4)`,
+                    [timestamp, level, message, meta,]
+                );
+        } finally {
+            if (next) {
+                next();
+            }
+        }
+    }
+}
+
+namespace PostgresTransport {
+
+}
+
+const Colors = {
+    info: "\x1b[36m",
+    error: "\x1b[31m",
+    warn: "\x1b[33m",
+    verbose: "\x1b[43m",
+};
+
 
 /**
  * initLogger - creates logger.
@@ -37,18 +90,30 @@ export let Logger: LoggerType | undefined;
  * @author Danil Andreev
  */
 export function initLogger(): LoggerType {
-    const logLevel: string = SystemConfig.getConfig<Config>().system.logLevel || "error";
+    const logLevel: string = SystemConfig.getConfig<Config>().log.logLevel || "error";
 
     const logFormat = format.printf(({level, message, label, timestamp}) => {
-        return `${label}[${moment(timestamp).format("LLL")}] <${level}>: ${message}`;
+        return `${Colors[level] || ""}${label}[${moment(timestamp).format("LLL")}] <${level}>: ${message}`;
     });
 
-    const logTransports: transports.ConsoleTransportInstance[] = [new transports.Console()];
+    const logTransports: Transport[] = [new transports.Console()];
+
+    const logDatabaseUrl: string | undefined = SystemConfig.getConfig<Config>().log.database_url;
+    if (logDatabaseUrl) {
+        logTransports.push(
+            new PostgresTransport({
+                connectionString: SystemConfig.getConfig<Config>().log.database_url,
+                level: logLevel,
+                tableName: "log"
+            })
+        );
+    }
 
     Logger = createLogger({
         level: logLevel,
         format: format.combine(format.label({label: "GHTB"}), format.timestamp(), logFormat),
         transports: logTransports,
+
     });
     return Logger;
 }

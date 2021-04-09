@@ -18,7 +18,16 @@
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[VersionCommand] Fixed command for getting version.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/VersionCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/VersionCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chrono/CheckSuitsGarbageCollector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/chrono/CheckSuitsGarbageCollector.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chrono/IssuesGarbageCollector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/chrono/IssuesGarbageCollector.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chrono/PullRequestsGarbageCollector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/chrono/PullRequestsGarbageCollector.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Logger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Logger.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/envDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/envDispatcher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/Config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +104,7 @@
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.COMMANDS_EVENTS_HANDLERS">
+  <component name="RunManager" selected="Node.js.Run with ts-node">
     <list>
       <item itemvalue="Node.js.Run with ts-node" />
       <item itemvalue="Node.js.CRON_DATABASE_GARBAGE_COLLECTORS" />
@@ -161,13 +170,8 @@
       <workItem from="1617714889086" duration="2376000" />
       <workItem from="1617721356381" duration="56000" />
       <workItem from="1617795024124" duration="53000" />
-    </task>
-    <task id="LOCAL-00038" summary="[AMQP] Setted up.">
-      <created>1603458509420</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1603458509420</updated>
+      <workItem from="1617969495110" duration="2855000" />
+      <workItem from="1617972574453" duration="5102000" />
     </task>
     <task id="LOCAL-00039" summary="[AMQP] Fixed incorrect queues asserting.">
       <created>1603459024722</created>
@@ -505,7 +509,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617886229618</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="[VersionCommand] Fixed command for getting version.">
+      <created>1617886497388</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1617886497388</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -572,26 +583,34 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2643" y="318" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617799504091" />
+    <state x="2610" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1617978438268">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2610" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617978438268" />
     <state x="2745" y="118" width="775" height="780" key="EnvironmentVariablesDialog" timestamp="1617882795179">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2745" y="118" width="775" height="780" key="EnvironmentVariablesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617882795179" />
-    <state width="1877" height="203" key="GridCell.Tab.0.bottom" timestamp="1617886459599">
+    <state x="2660" y="275" key="FileChooserDialogImpl" timestamp="1617969729711">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="203" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886459599" />
-    <state width="1877" height="203" key="GridCell.Tab.0.center" timestamp="1617886459599">
+    <state x="2660" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617969729711" />
+    <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1617977448619">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="203" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886459599" />
-    <state width="1877" height="203" key="GridCell.Tab.0.left" timestamp="1617886459599">
+    <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617977448619" />
+    <state width="1877" height="348" key="GridCell.Tab.0.center" timestamp="1617977448619">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="203" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886459599" />
-    <state width="1877" height="203" key="GridCell.Tab.0.right" timestamp="1617886459599">
+    <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617977448619" />
+    <state width="1877" height="348" key="GridCell.Tab.0.left" timestamp="1617977448619">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="203" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886459599" />
+    <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617977448619" />
+    <state width="1877" height="348" key="GridCell.Tab.0.right" timestamp="1617977448619">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617977448619" />
     <state width="1877" height="405" key="GridCell.Tab.1.bottom" timestamp="1617886458949">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -640,10 +659,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="405" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886458949" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617886235480">
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617886501041">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886235480" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886501041" />
     <state x="2698" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1617799074011">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -656,6 +675,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="508" y="0" width="1363" height="593" maximized="true" key="dock-window-2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617885955852" />
+    <state x="2536" y="240" key="run.anything.popup" timestamp="1617978115861">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2536" y="240" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617978115861" />
     <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1617716023065">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -677,7 +700,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts</url>
           <line>44</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
