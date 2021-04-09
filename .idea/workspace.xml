@@ -19,6 +19,9 @@
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Logger] Added database support.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/Logger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Logger.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/CheckSuite.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/CheckSuite.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Issue.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Issue.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/PullRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/PullRequest.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,13 +166,6 @@
       <workItem from="1617795024124" duration="53000" />
       <workItem from="1617969495110" duration="2855000" />
       <workItem from="1617972574453" duration="5102000" />
-    </task>
-    <task id="LOCAL-00040" summary="[AMQP] Fixed incorrect queues asserting.">
-      <created>1603459364268</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1603459364268</updated>
     </task>
     <task id="LOCAL-00041" summary="[SECURITY] Removed git-crypt and added .env parser.">
       <created>1616419232631</created>
@@ -507,7 +503,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617981780164</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="[Logger] Added database support.">
+      <created>1617982173151</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1617982173151</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

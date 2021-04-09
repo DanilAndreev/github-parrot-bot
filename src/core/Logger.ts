@@ -42,7 +42,7 @@ class PostgresTransport extends Transport {
     public constructor(options) {
         super(options);
         const {
-            hostname = "Postgres",
+            hostname = process.env.COMPUTERNAME,
             level = "info",
         } = options;
         this.hostname = hostname;

@@ -102,7 +102,7 @@ namespace Issue {
         @Column({type: "bigint", nullable: true})
         messageId: number;
 
-        @OneToOne(type => Issue, issue => issue.chatMessage)
+        @OneToOne(type => Issue, issue => issue.chatMessage, {onDelete: "CASCADE"})
         @JoinColumn()
         issue: Issue;
 
