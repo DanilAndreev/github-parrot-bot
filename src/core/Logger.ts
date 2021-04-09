@@ -30,12 +30,13 @@ import * as moment from "moment";
 import Config from "../interfaces/Config";
 import SystemConfig from "./SystemConfig";
 import JSONObject from "../interfaces/JSONObject";
-import * as PGP from "pg-promise";
+import * as PgPromise from "pg-promise";
+import {IDatabase} from "pg-promise";
 
 export let Logger: LoggerType | undefined;
 
 class PostgresTransport extends Transport {
-    protected db: PGP.IDatabase<{}> | null;
+    protected db:  IDatabase<any> & any | null;
 
     public constructor(options) {
         super(options);
@@ -48,9 +49,12 @@ class PostgresTransport extends Transport {
         try {
             const url = SystemConfig.getConfig<Config>().log.database_url;
             if (!url) return;
-            this.db = PGP()(url);
+            const connect = PgPromise();
+            connect.pg.defaults.ssl = {
+                rejectUnauthorized: false,
+            };
+            this.db = connect(url);
         } catch {
-            console.error("Logger: failed to connect to database");
             this.db = null;
         }
     }
@@ -62,8 +66,10 @@ class PostgresTransport extends Transport {
             await this.db
                 .query(
                         `INSERT INTO "log" ("timestamp", "level", "message", "meta") VALUES ($1, $2, $3, $4)`,
-                    [timestamp, level, message, meta,]
+                    [timestamp, level, message, meta]
                 );
+        } catch (error) {
+            console.log(error);
         } finally {
             if (next) {
                 next();
