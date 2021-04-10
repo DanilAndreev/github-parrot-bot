@@ -64,7 +64,13 @@ export default function envDispatcher(
                 break;
 
             case "logs_database_url":
-                configRef.current.log.database_url = value;
+                configRef.current.log.databaseUrl = value;
+                break;
+            case "logs_database_level":
+                configRef.current.log.databaseLogLevel = value;
+                break;
+            case "logs_database_table":
+                configRef.current.log.databaseTable = value;
                 break;
 
             case "telegram_bot_token":

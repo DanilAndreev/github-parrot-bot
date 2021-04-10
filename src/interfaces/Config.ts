@@ -77,7 +77,9 @@ namespace Config {
 
     export interface Log {
         logLevel?: string;
-        database_url?: string;
+        databaseUrl?: string;
+        databaseLogLevel?: string;
+        databaseTable?: string;
     }
 }
 
