@@ -16,8 +16,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[VersionCommand] Fixed command for getting version.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[main] Added process error handler.">
       <change beforePath="$PROJECT_DIR$/src/commands/VersionCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/VersionCommand.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +78,7 @@
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="D:\Projects\github-tracker-telegram-bot\node_modules\prettier" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="ts.external.directory.path" value="C:\Users\onepl\WebstormProjects\github-parrot-bot\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\Projects\github-parrot-bot\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -95,7 +94,7 @@
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.COMMANDS_EVENTS_HANDLERS">
+  <component name="RunManager" selected="Node.js.Run with ts-node">
     <list>
       <item itemvalue="Node.js.Run with ts-node" />
       <item itemvalue="Node.js.CRON_DATABASE_GARBAGE_COLLECTORS" />
@@ -161,55 +160,8 @@
       <workItem from="1617714889086" duration="2376000" />
       <workItem from="1617721356381" duration="56000" />
       <workItem from="1617795024124" duration="53000" />
-    </task>
-    <task id="LOCAL-00038" summary="[AMQP] Setted up.">
-      <created>1603458509420</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1603458509420</updated>
-    </task>
-    <task id="LOCAL-00039" summary="[AMQP] Fixed incorrect queues asserting.">
-      <created>1603459024722</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1603459024722</updated>
-    </task>
-    <task id="LOCAL-00040" summary="[AMQP] Fixed incorrect queues asserting.">
-      <created>1603459364268</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1603459364268</updated>
-    </task>
-    <task id="LOCAL-00041" summary="[SECURITY] Removed git-crypt and added .env parser.">
-      <created>1616419232631</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1616419232631</updated>
-    </task>
-    <task id="LOCAL-00042" summary="[project] Changed structure a little to load envs from file.">
-      <created>1616420786356</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1616420786356</updated>
-    </task>
-    <task id="LOCAL-00043" summary="[babel] Removed.">
-      <created>1616422400306</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1616422400306</updated>
-    </task>
-    <task id="LOCAL-00044" summary="[yarn] Removed log file.">
-      <created>1616422637275</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1616422637275</updated>
+      <workItem from="1617969495110" duration="2855000" />
+      <workItem from="1617972574453" duration="5102000" />
     </task>
     <task id="LOCAL-00045" summary="[gitignore] Updated.">
       <created>1616422663271</created>
@@ -505,7 +457,56 @@
       <option name="project" value="LOCAL" />
       <updated>1617886229618</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="[VersionCommand] Fixed command for getting version.">
+      <created>1617886497388</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1617886497388</updated>
+    </task>
+    <task id="LOCAL-00088" summary="[Logger] Added database support.">
+      <created>1617981780163</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1617981780164</updated>
+    </task>
+    <task id="LOCAL-00089" summary="[Logger] Added database support.">
+      <created>1617982173151</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1617982173151</updated>
+    </task>
+    <task id="LOCAL-00090" summary="[Entities] Added cascade deletion to message tables.">
+      <created>1618012069468</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1618012069468</updated>
+    </task>
+    <task id="LOCAL-00091" summary="[Logger] Added database logging.">
+      <created>1618015170116</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1618015170116</updated>
+    </task>
+    <task id="LOCAL-00092" summary="[main] Added process error handler.">
+      <created>1618015267928</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1618015267928</updated>
+    </task>
+    <task id="LOCAL-00093" summary="[main] Added process error handler.">
+      <created>1618015516076</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1618015516076</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,10 +537,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[PullRequest] Added unique constraint." />
-    <MESSAGE value="[IssueHandler] Fixed bug with message deletion." />
-    <MESSAGE value="[Handlers] Structured to directories.&#10;[WebHookAmqpHandler] Changed input params in handler." />
-    <MESSAGE value="[IssuesHandler] Separated to two handlers." />
     <MESSAGE value="[CheckSuiteHandler] Separated to two parts." />
     <MESSAGE value="[CheckRunHandler] Separated to two handlers." />
     <MESSAGE value="[Entities] Packed *Message entities to their parent classes." />
@@ -561,105 +558,11 @@
     <MESSAGE value="[Commands] Added messages reply mechanism." />
     <MESSAGE value="[WebServer] Added events list." />
     <MESSAGE value="[VersionCommand] Fixed command for getting version." />
-    <option name="LAST_COMMIT_MESSAGE" value="[VersionCommand] Fixed command for getting version." />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1617882797598">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617882797598" />
-    <state x="2643" y="318" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1617799504091">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2643" y="318" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617799504091" />
-    <state x="2745" y="118" width="775" height="780" key="EnvironmentVariablesDialog" timestamp="1617882795179">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2745" y="118" width="775" height="780" key="EnvironmentVariablesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617882795179" />
-    <state width="1877" height="203" key="GridCell.Tab.0.bottom" timestamp="1617886459599">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="203" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886459599" />
-    <state width="1877" height="203" key="GridCell.Tab.0.center" timestamp="1617886459599">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="203" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886459599" />
-    <state width="1877" height="203" key="GridCell.Tab.0.left" timestamp="1617886459599">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="203" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886459599" />
-    <state width="1877" height="203" key="GridCell.Tab.0.right" timestamp="1617886459599">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="203" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886459599" />
-    <state width="1877" height="405" key="GridCell.Tab.1.bottom" timestamp="1617886458949">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="405" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886458949" />
-    <state width="1877" height="405" key="GridCell.Tab.1.center" timestamp="1617886458948">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="405" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886458948" />
-    <state width="1877" height="405" key="GridCell.Tab.1.left" timestamp="1617886458948">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="405" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886458948" />
-    <state width="1877" height="405" key="GridCell.Tab.1.right" timestamp="1617886458949">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="405" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886458949" />
-    <state width="1877" height="405" key="GridCell.Tab.2.bottom" timestamp="1617886458949">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="405" key="GridCell.Tab.2.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886458949" />
-    <state width="1877" height="405" key="GridCell.Tab.2.center" timestamp="1617886458949">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="405" key="GridCell.Tab.2.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886458949" />
-    <state width="1877" height="405" key="GridCell.Tab.2.left" timestamp="1617886458949">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="405" key="GridCell.Tab.2.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886458949" />
-    <state width="1877" height="405" key="GridCell.Tab.2.right" timestamp="1617886458949">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="405" key="GridCell.Tab.2.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886458949" />
-    <state width="1877" height="405" key="GridCell.Tab.3.bottom" timestamp="1617886458949">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="405" key="GridCell.Tab.3.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886458949" />
-    <state width="1877" height="405" key="GridCell.Tab.3.center" timestamp="1617886458949">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="405" key="GridCell.Tab.3.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886458949" />
-    <state width="1877" height="405" key="GridCell.Tab.3.left" timestamp="1617886458949">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="405" key="GridCell.Tab.3.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886458949" />
-    <state width="1877" height="405" key="GridCell.Tab.3.right" timestamp="1617886458949">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="405" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886458949" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1617886235480">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617886235480" />
-    <state x="2698" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1617799074011">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2698" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617799074011" />
-    <state x="573" y="0" width="1363" height="718" maximized="true" key="dock-window-1" timestamp="1617884956824">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="573" y="0" width="1363" height="718" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617884956824" />
-    <state x="508" y="0" width="1363" height="593" maximized="true" key="dock-window-2" timestamp="1617885955852">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="508" y="0" width="1363" height="593" maximized="true" key="dock-window-2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617885955852" />
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1617716023065">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617716023065" />
+    <MESSAGE value="[Logger] Added database support." />
+    <MESSAGE value="[Entities] Added cascade deletion to message tables." />
+    <MESSAGE value="[Logger] Added database logging." />
+    <MESSAGE value="[main] Added process error handler." />
+    <option name="LAST_COMMIT_MESSAGE" value="[main] Added process error handler." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -677,7 +580,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts</url>
           <line>44</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>

@@ -24,26 +24,20 @@
  * SOFTWARE.
  */
 
-import Chrono from "../core/Chrono";
-import Issue from "../entities/Issue";
-import {DeleteResult} from "typeorm";
-import {Logger} from "../core/Logger";
-
 /**
- * IssuesGarbageCollector - class for deleting outdated issues.
+ * FatalError - class for fatal errors.
  * @class
  * @author Danil Andreev
  */
-export default class IssuesGarbageCollector extends Chrono {
-    protected async run(): Promise<void> {
-        try {
-            const result: DeleteResult = await Issue.createQueryBuilder()
-                .delete()
-                .where("updatedAt < current_timestamp - interval '1 hour'")
-                .execute();
-            Logger?.info(`Issues garbage collector: deleted ${result.affected} items.`);
-        } catch (error) {
-            Logger?.error(`Failed to execute cron function IssuesGarbageCollector.`, error);
-        }
+export default class FatalError extends Error {
+    /**
+     * FatalError - creates an instance of FatalError.
+     * @constructor
+     * @param args - arguments as in console error.
+     * @author Danil Andreev
+     */
+    constructor(...args: any[]) {
+        const message: string = args.map(item => typeof item === "object" ? JSON.stringify(item) : String(item)).join(" ");
+        super(message);
     }
 }

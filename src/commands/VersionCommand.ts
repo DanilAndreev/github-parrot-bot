@@ -42,6 +42,7 @@ export default class VersionCommand extends BotCommand {
     protected async handler(message: Message, args: string[], options: JSONObject<string>): Promise<string[]> {
         let version: string;
         try {
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
             version = require(root + "/../package.json").version;
         } catch (error) {
             Logger?.warn("Unable to get version from package.json!", error);

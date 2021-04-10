@@ -33,6 +33,8 @@ import PullRequestsGarbageCollector from "./chrono/PullRequestsGarbageCollector"
 import CheckSuitsGarbageCollector from "./chrono/CheckSuitsGarbageCollector";
 import SystemConfig from "./core/SystemConfig";
 import Config from "./interfaces/Config";
+import {Logger} from "./core/Logger";
+import FatalError from "./errors/FatalError";
 
 /**
  * requiredFor - function, designed to determine if some functional is required.
@@ -51,38 +53,45 @@ function requiredFor(...args: string[]): boolean {
  * @author Danil Andreev
  */
 export default async function main(): Promise<void> {
-    if (
-        requiredFor(
-            "drawEventsHandlers",
-            "commandsEventHandlers",
-            "githubEventsHandlers",
-            "cronDatabaseGarbageCollectors"
-        )
-    ) {
-        await setupDbConnection();
-    }
-    if (requiredFor("cronDatabaseGarbageCollectors")) {
-        await new IssuesGarbageCollector({interval: 1000 * 60 * 30}).start();
-        await new PullRequestsGarbageCollector({interval: 1000 * 60 * 30}).start();
-        await new CheckSuitsGarbageCollector({interval: 1000 * 60 * 30}).start();
-    }
+    try {
+        if (
+            requiredFor(
+                "drawEventsHandlers",
+                "commandsEventHandlers",
+                "githubEventsHandlers",
+                "cronDatabaseGarbageCollectors"
+            )
+        ) {
+            await setupDbConnection();
+        }
+        if (requiredFor("cronDatabaseGarbageCollectors")) {
+            await new IssuesGarbageCollector({interval: 1000 * 60 * 30}).start();
+            await new PullRequestsGarbageCollector({interval: 1000 * 60 * 30}).start();
+            await new CheckSuitsGarbageCollector({interval: 1000 * 60 * 30}).start();
+        }
 
-    let server: WebServer | undefined;
-    if (requiredFor("webserver")) {
-        server = new WebServer();
-    }
-    if (requiredFor("drawEventsHandlers", "commandsProxy")) {
-        const bot: Bot = Bot.init(
-            SystemConfig.getConfig<Config>().bot.token,
-            SystemConfig.getConfig<Config>().system.commandsProxy
-        );
-    }
+        let server: WebServer | undefined;
+        if (requiredFor("webserver")) {
+            server = new WebServer();
+        }
+        if (requiredFor("drawEventsHandlers", "commandsProxy")) {
+            const bot: Bot = Bot.init(
+                SystemConfig.getConfig<Config>().bot.token,
+                SystemConfig.getConfig<Config>().system.commandsProxy
+            );
+        }
 
-    if (
-        requiredFor("commandsProxy", "webserver", "githubEventsHandlers", "commandsEventHandlers", "drawEventsHandlers")
-    ) {
-        const RabbitMQ: AmqpDispatcher = await AmqpDispatcher.init();
-    }
+        if (
+            requiredFor("commandsProxy", "webserver", "githubEventsHandlers", "commandsEventHandlers", "drawEventsHandlers")
+        ) {
+            const RabbitMQ: AmqpDispatcher = await AmqpDispatcher.init();
+        }
 
-    server && server.start();
+        server && server.start();
+    } catch (error) {
+        if (error instanceof FatalError) {
+            throw error;
+        }
+        Logger?.error("Unhandled non fatal error in main thread: ", error);
+    }
 }

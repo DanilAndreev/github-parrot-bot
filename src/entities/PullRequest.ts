@@ -86,10 +86,10 @@ namespace PullRequest {
         state: string;
         title: string;
         body?: string;
-        labels: {name: string}[];
-        assignees: {login: string}[];
+        labels: { name: string }[];
+        assignees: { login: string }[];
         opened_by: string;
-        requested_reviewers: {login: string}[];
+        requested_reviewers: { login: string }[];
         milestone?: {
             title: string;
             due_on?: string;
@@ -109,7 +109,7 @@ namespace PullRequest {
         @Column({type: "bigint", nullable: true})
         messageId: number;
 
-        @OneToOne(type => PullRequest, pullRequest => pullRequest.chatMessage)
+        @OneToOne(type => PullRequest, pullRequest => pullRequest.chatMessage, {onDelete: "CASCADE"})
         @JoinColumn()
         pullRequest: PullRequest;
 

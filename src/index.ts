@@ -37,7 +37,7 @@ SystemConfig.setOptions({
     envDispatcher
 });
 initLogger();
-console.log(`Logger level: ${SystemConfig.getConfig<Config>().system.logLevel}`);
+console.log(`Logger level: ${SystemConfig.getConfig<Config>().log.logLevel}`);
 
 import main = require("./main");
 

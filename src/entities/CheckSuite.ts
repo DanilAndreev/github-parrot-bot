@@ -115,7 +115,7 @@ namespace CheckSuite {
         @Column({type: "bigint", nullable: true})
         messageId: number;
 
-        @OneToOne(type => CheckSuite, suite => suite.chatMessage)
+        @OneToOne(type => CheckSuite, suite => suite.chatMessage, {onDelete: "CASCADE"})
         @JoinColumn()
         suite: CheckSuite;
 

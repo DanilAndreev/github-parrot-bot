@@ -67,13 +67,19 @@ namespace Config {
      * @author Danil Andreev
      */
     export interface System {
-        logLevel: string;
         commandsProxy?: boolean;
         webserver?: boolean;
         githubEventsHandlers?: boolean;
         commandsEventHandlers?: boolean;
         drawEventsHandlers?: boolean;
         cronDatabaseGarbageCollectors?: boolean;
+    }
+
+    export interface Log {
+        logLevel?: string;
+        databaseUrl?: string;
+        databaseLogLevel?: string;
+        databaseTable?: string;
     }
 }
 
@@ -88,6 +94,7 @@ interface Config {
     server: Config.Server;
     amqp: Config.Amqp;
     system: Config.System;
+    log: Config.Log;
 }
 
 export default Config;
