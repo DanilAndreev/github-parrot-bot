@@ -34,6 +34,7 @@ import CheckSuitsGarbageCollector from "./chrono/CheckSuitsGarbageCollector";
 import SystemConfig from "./core/SystemConfig";
 import Config from "./interfaces/Config";
 import {Logger} from "./core/Logger";
+import FatalError from "./errors/FatalError";
 
 /**
  * requiredFor - function, designed to determine if some functional is required.
@@ -88,6 +89,9 @@ export default async function main(): Promise<void> {
 
         server && server.start();
     } catch (error) {
-        Logger?.error("Unhandled error in main thread: ", error);
+        if (error instanceof FatalError) {
+            throw error;
+        }
+        Logger?.error("Unhandled non fatal error in main thread: ", error);
     }
 }

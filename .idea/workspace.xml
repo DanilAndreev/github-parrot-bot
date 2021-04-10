@@ -16,7 +16,8 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Logger] Added database logging.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[main] Added process error handler.">
+      <change afterPath="$PROJECT_DIR$/src/errors/FatalError.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
     </list>
@@ -163,13 +164,6 @@
       <workItem from="1617795024124" duration="53000" />
       <workItem from="1617969495110" duration="2855000" />
       <workItem from="1617972574453" duration="5102000" />
-    </task>
-    <task id="LOCAL-00043" summary="[babel] Removed.">
-      <created>1616422400306</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1616422400306</updated>
     </task>
     <task id="LOCAL-00044" summary="[yarn] Removed log file.">
       <created>1616422637275</created>
@@ -507,7 +501,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618015170116</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="[main] Added process error handler.">
+      <created>1618015267928</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1618015267928</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -538,7 +539,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[IssuesHandler] Separated to two handlers." />
     <MESSAGE value="[CheckSuiteHandler] Separated to two parts." />
     <MESSAGE value="[CheckRunHandler] Separated to two handlers." />
     <MESSAGE value="[Entities] Packed *Message entities to their parent classes." />
@@ -563,7 +563,8 @@
     <MESSAGE value="[Logger] Added database support." />
     <MESSAGE value="[Entities] Added cascade deletion to message tables." />
     <MESSAGE value="[Logger] Added database logging." />
-    <option name="LAST_COMMIT_MESSAGE" value="[Logger] Added database logging." />
+    <MESSAGE value="[main] Added process error handler." />
+    <option name="LAST_COMMIT_MESSAGE" value="[main] Added process error handler." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
