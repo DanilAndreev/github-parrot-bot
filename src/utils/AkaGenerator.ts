@@ -59,7 +59,7 @@ class AkaGenerator {
                 .addSelect("gitHubName", "login")
                 .addSelect("telegramUsername", "tag")
                 .where("chatId = :chatId", {chatId: this.chatId})
-                .andWhere("gitHubName IN(:login)", {logins})
+                .andWhere("gitHubName IN(:logins)", {logins})
                 .getRawMany();
 
             const combined: AkaGenerator.User[] = fromKeyPair({

@@ -16,8 +16,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Handlers] Added AKA mechanism.">
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[config] Added issues event to github webhook.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/AkaGenerator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/AkaGenerator.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,14 +165,7 @@
       <workItem from="1617972574453" duration="5102000" />
       <workItem from="1618185681276" duration="465000" />
       <workItem from="1618186150208" duration="346000" />
-      <workItem from="1618237943212" duration="943000" />
-    </task>
-    <task id="LOCAL-00047" summary="[BotCommand] Added command decorators and spec with new mechanism.">
-      <created>1616552924001</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1616552924001</updated>
+      <workItem from="1618237943212" duration="1225000" />
     </task>
     <task id="LOCAL-00048" summary="[Commands] Rewritten to new logic.">
       <created>1616599743798</created>
@@ -509,7 +503,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618238614359</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="[config] Added issues event to github webhook.">
+      <created>1618238911917</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1618238911917</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -540,7 +541,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[Entities] Packed *Message entities to their parent classes." />
     <MESSAGE value="[TBot] Adding new bot commands logic." />
     <MESSAGE value="[Enqueuer] Finished.&#10;[DrawMessageHandler] Finished." />
     <MESSAGE value="[CommandHandler] Added amqp logic to commands handler." />
@@ -565,7 +565,8 @@
     <MESSAGE value="[main] Added process error handler." />
     <MESSAGE value="[sql] Added log database creation script." />
     <MESSAGE value="[Handlers] Added AKA mechanism." />
-    <option name="LAST_COMMIT_MESSAGE" value="[Handlers] Added AKA mechanism." />
+    <MESSAGE value="[config] Added issues event to github webhook." />
+    <option name="LAST_COMMIT_MESSAGE" value="[config] Added issues event to github webhook." />
   </component>
   <component name="WindowStateProjectService">
     <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1618238240776">
@@ -584,10 +585,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618238240776" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1618238617350">
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1618238914797">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618238617350" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618238914797" />
     <state x="2698" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1618237836088">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
