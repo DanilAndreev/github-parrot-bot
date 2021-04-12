@@ -16,9 +16,14 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[main] Added process error handler.">
-      <change afterPath="$PROJECT_DIR$/sql/log_database_init.sql" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[sql] Added log database creation script.">
+      <change afterPath="$PROJECT_DIR$/src/utils/fromKeyPair.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/toKeyPair.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Collaborator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Collaborator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Issue.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Issue.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/PullRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/PullRequest.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/getAkaAlias.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/AkaGenerator.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,8 +82,8 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="prettierjs.PrettierConfiguration.Package" value="D:\Projects\github-tracker-telegram-bot\node_modules\prettier" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="D:\Projects\github-parrot-bot\node_modules\prettier" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
     <property name="ts.external.directory.path" value="D:\Projects\github-parrot-bot\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -163,13 +168,8 @@
       <workItem from="1617795024124" duration="53000" />
       <workItem from="1617969495110" duration="2855000" />
       <workItem from="1617972574453" duration="5102000" />
-    </task>
-    <task id="LOCAL-00045" summary="[gitignore] Updated.">
-      <created>1616422663271</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1616422663271</updated>
+      <workItem from="1618185681276" duration="465000" />
+      <workItem from="1618186150208" duration="346000" />
     </task>
     <task id="LOCAL-00046" summary="[BotCommand] Added result handler.">
       <created>1616503586423</created>
@@ -507,7 +507,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618015516076</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="[sql] Added log database creation script.">
+      <created>1618017045931</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1618017045931</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -538,7 +545,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[CheckSuiteHandler] Separated to two parts." />
     <MESSAGE value="[CheckRunHandler] Separated to two handlers." />
     <MESSAGE value="[Entities] Packed *Message entities to their parent classes." />
     <MESSAGE value="[TBot] Adding new bot commands logic." />
@@ -563,7 +569,8 @@
     <MESSAGE value="[Entities] Added cascade deletion to message tables." />
     <MESSAGE value="[Logger] Added database logging." />
     <MESSAGE value="[main] Added process error handler." />
-    <option name="LAST_COMMIT_MESSAGE" value="[main] Added process error handler." />
+    <MESSAGE value="[sql] Added log database creation script." />
+    <option name="LAST_COMMIT_MESSAGE" value="[sql] Added log database creation script." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
