@@ -54,12 +54,12 @@ class AkaGenerator {
 
     public async getAkas(logins: string[]): Promise<AkaGenerator.User[]> {
         try {
-            const result: AkaGenerator.User[] = await Collaborator.createQueryBuilder()
-                .select("id")
-                .addSelect("gitHubName", "login")
-                .addSelect("telegramUsername", "tag")
-                .where("chatId = :chatId", {chatId: this.chatId})
-                .andWhere("gitHubName IN(:logins)", {logins})
+            const result: AkaGenerator.User[] = await Collaborator.createQueryBuilder("collaborator")
+                .select("collaborator.id")
+                .addSelect("collaborator.gitHubName", "login")
+                .addSelect("collaborator.telegramUsername", "tag")
+                .where("collaborator.chatId = :chatId", {chatId: this.chatId})
+                .andWhere("collaborator.gitHubName IN(:logins)", {logins})
                 .getRawMany();
 
             const combined: AkaGenerator.User[] = fromKeyPair({
