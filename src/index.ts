@@ -36,9 +36,12 @@ SystemConfig.setOptions({
     additionalConfigs: [config],
     envDispatcher
 });
-initLogger();
+const Logger = initLogger();
 console.log(`Logger level: ${SystemConfig.getConfig<Config>().log.logLevel}`);
 
 import main = require("./main");
 
-main.default().catch(console.error);
+main.default().catch(error => {
+    Logger.error("Fatal error im main thread:", error);
+    process.exit(1);
+});

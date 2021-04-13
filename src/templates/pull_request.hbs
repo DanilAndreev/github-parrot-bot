@@ -13,11 +13,11 @@
     {{/each}}
 {{/if}}
 {{#if info/assignees}}
-    {{#if info/opened_by}}<b>Opened by:</b> {{#if info/opened_by/tag}}{{info/opened_by/tag}}{{else}}{{info/opened_by/login}}{{/if}}{{/if}}
-    <b>Assignees:</b> {{#each info/assignees}}{{#if tag}}{{tag}}{{else}}{{login}}{{/if}} {{/each}}
+    {{#if info/opened_by}}<b>Opened by:</b> {{#if info/opened_by/tag}}@{{info/opened_by/tag}}{{else}}{{info/opened_by/login}}{{/if}}{{/if}}
+    <b>Assignees:</b> {{#each info/assignees}}{{#if tag}}@{{tag}}{{else}}{{login}}{{/if}} {{/each}}
 {{/if}}
 {{#if info/requested_reviewers}}
-    <b>Requested review: </b>{{#each info/requested_reviewers}}{{#if tag}}{{tag}}{{else}}{{login}}{{/if}} {{/each}}
+    <b>Requested review: </b>{{#each info/requested_reviewers}}{{#if tag}}@{{tag}}{{else}}{{login}}{{/if}} {{/each}}
 {{/if}}
 {{#if info/milestone}}
     <b>Milestone</b> <i>{{info/milestone/title}}</i> {{#if info/milestone/due_on}}<code>{{info/milestone/due_on}}</code>{{/if}}

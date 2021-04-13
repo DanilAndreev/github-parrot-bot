@@ -40,7 +40,7 @@ export default class PullRequestsHandler extends WebHookAmqpHandler {
         const akaGenerator = new AkaGenerator(webHook.chat.chatId);
 
         const info: PullRequest.Info = {
-            assignees: await akaGenerator.getAkas(pullRequest.assignees),
+            assignees: await akaGenerator.getAkas(pullRequest.assignees.map(assignee => assignee.login)),
             body: pullRequest.body,
             html_url: pullRequest.html_url,
             labels: pullRequest.labels.map(item => ({name: item.name})),
@@ -49,7 +49,9 @@ export default class PullRequestsHandler extends WebHookAmqpHandler {
                 due_on: pullRequest.milestone.due_on,
             },
             opened_by: await akaGenerator.getAka(pullRequest.user.login),
-            requested_reviewers: await akaGenerator.getAkas(pullRequest.requested_reviewers),
+            requested_reviewers: await akaGenerator.getAkas(
+                pullRequest.requested_reviewers.map(reviewer => reviewer.login)
+            ),
             state: pullRequest.state,
             tag: pullRequest.number,
             title: pullRequest.title,

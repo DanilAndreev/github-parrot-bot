@@ -41,7 +41,7 @@ export default class IssuesHandler extends WebHookAmqpHandler {
         const akaGenerator = new AkaGenerator(webHook.chat.chatId);
 
         const info: Issue.Info = {
-            assignees: await akaGenerator.getAkas(issue.assignees),
+            assignees: await akaGenerator.getAkas(issue.assignees.map(assignee => assignee.login)),
             labels: issue.labels.map(label => ({name: label.name})),
             opened_by: await akaGenerator.getAka(issue.user.login),
             state: issue.state,

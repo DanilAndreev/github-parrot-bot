@@ -31,6 +31,7 @@ import JSONObject from "../interfaces/JSONObject";
 import Config from "../interfaces/Config";
 import SystemConfig from "./SystemConfig";
 import {Logger} from "./Logger";
+import FatalError from "../errors/FatalError";
 
 /**
  * AmqpDispatcher - dispatcher for AMQP handlers.
@@ -135,10 +136,14 @@ class AmqpDispatcher {
      * @author Danil Andreev
      */
     public static async init(): Promise<AmqpDispatcher> {
-        Logger?.debug(`Initialized AMQP dispatcher.`);
-        const connection: Connection = await Amqp.connect(SystemConfig.getConfig<Config>().amqp.connect);
-        AmqpDispatcher.current = new AmqpDispatcher(connection);
-        return AmqpDispatcher.current;
+        try {
+            Logger?.debug(`Initialized AMQP dispatcher.`);
+            const connection: Connection = await Amqp.connect(SystemConfig.getConfig<Config>().amqp.connect);
+            AmqpDispatcher.current = new AmqpDispatcher(connection);
+            return AmqpDispatcher.current;
+        } catch(error) {
+            throw new FatalError("Failed to connect to AMQP server:", error);
+        }
     }
 
     /**

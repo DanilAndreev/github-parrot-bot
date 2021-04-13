@@ -38,12 +38,13 @@ class AkaGenerator {
 
     public async getAka(login: string): Promise<AkaGenerator.User> {
         try {
-            const result: AkaGenerator.User | undefined = await Collaborator.createQueryBuilder()
-                .select("id")
-                .addSelect("gitHubName", "login")
-                .addSelect("telegramUsername", "tag")
-                .where("chatId = :chatId", {chatId: this.chatId})
-                .andWhere("gitHubName = :login", {login})
+            const result: AkaGenerator.User = await Collaborator
+                .createQueryBuilder("collaborator")
+                .select("collaborator.id", "id")
+                .addSelect("collaborator.gitHubName", "login")
+                .addSelect("collaborator.telegramUsername", "tag")
+                .where("collaborator.chat = :chatId", {chatId: this.chatId})
+                .andWhere("collaborator.gitHubName = :login", {login})
                 .getRawOne();
 
             return result || {login};
@@ -54,20 +55,29 @@ class AkaGenerator {
 
     public async getAkas(logins: string[]): Promise<AkaGenerator.User[]> {
         try {
-            const result: AkaGenerator.User[] = await Collaborator.createQueryBuilder()
-                .select("id")
-                .addSelect("gitHubName", "login")
-                .addSelect("telegramUsername", "tag")
-                .where("chatId = :chatId", {chatId: this.chatId})
-                .andWhere("\"gitHubName\" IN(:logins)", {logins})
-                .getRawMany();
+            const result: Collaborator[] = await Collaborator
+                .createQueryBuilder("collaborator")
+                .select("collaborator.id")
+                .addSelect("collaborator.gitHubName")
+                .addSelect("collaborator.telegramUsername")
+                .where("collaborator.chat = :chatId", {chatId: this.chatId})
+                .andWhere("collaborator.gitHubName IN(:...logins)", {logins})
+                .getMany();
 
             const combined: AkaGenerator.User[] = fromKeyPair({
                 ...toKeyPair(
                     logins.map((item: string): AkaGenerator.User => ({login: item})),
                     (item: AkaGenerator.User): string => item.login
                 ),
-                ...toKeyPair(result, (item: AkaGenerator.User): string => item.login),
+                ...toKeyPair(
+                    result.map(
+                        (item: Collaborator): AkaGenerator.User => ({
+                            login: item.gitHubName,
+                            tag: item.telegramUsername,
+                        })
+                    ),
+                    (item: AkaGenerator.User): string => item.login
+                ),
             });
 
             return combined;

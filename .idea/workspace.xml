@@ -17,6 +17,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[AkaGenerator] Fixed request bug.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/AmqpDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/AmqpDispatcher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/IssuesHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/IssuesHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/issue.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/issue.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/pull_request.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/pull_request.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/AkaGenerator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/AkaGenerator.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -567,32 +575,6 @@
     <MESSAGE value="[AkaGenerator] Fixed request bug." />
     <option name="LAST_COMMIT_MESSAGE" value="[AkaGenerator] Fixed request bug." />
   </component>
-  <component name="WindowStateProjectService">
-    <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1618238240776">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618238240776" />
-    <state width="1877" height="348" key="GridCell.Tab.0.center" timestamp="1618238240776">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618238240776" />
-    <state width="1877" height="348" key="GridCell.Tab.0.left" timestamp="1618238240776">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618238240776" />
-    <state width="1877" height="348" key="GridCell.Tab.0.right" timestamp="1618238240776">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618238240776" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1618239382771">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618239382771" />
-    <state x="2698" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1618237836088">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2698" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618237836088" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -607,9 +589,16 @@
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts</url>
-          <line>44</line>
-          <option name="timeStamp" value="38" />
+          <url>file://$PROJECT_DIR$/src/utils/AkaGenerator.ts</url>
+          <line>40</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/utils/AkaGenerator.ts</url>
+          <line>57</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="45" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
