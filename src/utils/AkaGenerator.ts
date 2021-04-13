@@ -115,7 +115,7 @@ namespace AkaGenerator {
          */
         login: string;
         /**
-         * tag - talegram username without "@" symbol.
+         * tag - telegram username without "@" symbol.
          */
         tag?: string;
     }
