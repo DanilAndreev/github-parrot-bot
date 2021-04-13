@@ -29,13 +29,33 @@ import CommandError from "../errors/CommandError";
 import toKeyPair from "./toKeyPair";
 import fromKeyPair from "./fromKeyPair";
 
+/**
+ * AkaGenerator - class for getting names with AKAs ro without.
+ * @class
+ * @author Danil Andreev
+ */
 class AkaGenerator {
+    /**
+     * chatId - AKAs chat.
+     */
     protected chatId: number;
 
+    /**
+     * Creates an instance of AkaGenerator.
+     * @constructor
+     * @param chatId - Target AKAs chat id.
+     * @author Danil Andreev
+     */
     public constructor(chatId: number) {
         this.chatId = chatId;
     }
 
+    /**
+     * getAka - returns AkaGenerator.User object with tag or without it.
+     * @method
+     * @param login - GitHub login.
+     * @author Danil Andreev
+     */
     public async getAka(login: string): Promise<AkaGenerator.User> {
         try {
             const result: AkaGenerator.User = await Collaborator.createQueryBuilder("collaborator")
@@ -52,6 +72,12 @@ class AkaGenerator {
         }
     }
 
+    /**
+     * getAka - returns AkaGenerator.User[] array with tags or without.
+     * @method
+     * @param logins - GitHub logins array.
+     * @author Danil Andreev
+     */
     public async getAkas(logins: string[]): Promise<AkaGenerator.User[]> {
         try {
             const result: AkaGenerator.User[] = await Collaborator.createQueryBuilder("collaborator")
@@ -78,8 +104,19 @@ class AkaGenerator {
 }
 
 namespace AkaGenerator {
+    /**
+     * User - user data to display with tag or without it.
+     * @interface
+     * @author Danil Andreev
+     */
     export interface User {
+        /**
+         * login - GitHub login.
+         */
         login: string;
+        /**
+         * tag - talegram username without "@" symbol.
+         */
         tag?: string;
     }
 }
