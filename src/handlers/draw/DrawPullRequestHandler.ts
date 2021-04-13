@@ -38,7 +38,7 @@ import PullRequest from "../../entities/PullRequest";
 @WebHookAmqpHandler.Handler(QUEUES.PULL_REQUEST_SHOW_QUEUE, 10)
 @Reflect.metadata("amqp-handler-type", "draw-event-handler")
 export default class DrawPullRequestHandler extends AmqpHandler {
-    protected async handle(content: {pullRequest: number}): Promise<void | boolean> {
+    protected async handle(content: { pullRequest: number }): Promise<void | boolean> {
         const {pullRequest} = content;
 
         const entity: PullRequest | undefined = await PullRequest.findOne({
@@ -59,7 +59,10 @@ export default class DrawPullRequestHandler extends AmqpHandler {
                     const newMessage: Message = await Bot.getCurrent().sendMessage(entity.chat.chatId, text, {
                         parse_mode: "HTML",
                         reply_markup: {
-                            inline_keyboard: [[{text: "View on GitHub", url: entity.info.html_url}]],
+                            inline_keyboard: [
+                                [{text: "Maximize", callback_data: "maximize"}],
+                                [{text: "View on GitHub", url: entity.info.html_url}],
+                            ],
                         },
                     });
                     pullRequestMessage.messageId = newMessage.message_id;
@@ -73,7 +76,10 @@ export default class DrawPullRequestHandler extends AmqpHandler {
                     message_id: entity.chatMessage.messageId,
                     parse_mode: "HTML",
                     reply_markup: {
-                        inline_keyboard: [[{text: "View on GitHub", url: entity.info.html_url}]],
+                        inline_keyboard: [
+                            [{text: "Maximize", callback_data: "maximize"}],
+                            [{text: "View on GitHub", url: entity.info.html_url}],
+                        ],
                     },
                 });
             } catch (err) {

@@ -16,8 +16,15 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[AkaGenerator] Finished SQL.">
-      <change beforePath="$PROJECT_DIR$/src/utils/AkaGenerator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/AkaGenerator.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[AkaGenerator] Fixed typo in JSDoc.">
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/DRAW_EVENTS_HANDLERS.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/DRAW_EVENTS_HANDLERS.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Enqueuer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Enqueuer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Issue.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Issue.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/PullRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/PullRequest.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,13 +172,6 @@
       <workItem from="1618185681276" duration="465000" />
       <workItem from="1618186150208" duration="346000" />
       <workItem from="1618237943212" duration="1574000" />
-    </task>
-    <task id="LOCAL-00051" summary="[IssuesHandler] Added handlebars mechanism.">
-      <created>1616700599101</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1616700599102</updated>
     </task>
     <task id="LOCAL-00052" summary="[WebServer] Removed events emitter. Messages are pushed to RabbitMQ instantly.">
       <created>1616708638772</created>
@@ -509,7 +509,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618272769516</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="[AkaGenerator] Fixed typo in JSDoc.">
+      <created>1618273957059</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1618273957059</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -540,7 +547,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[CommandHandler] Added amqp logic to commands handler." />
     <MESSAGE value="[Commands] Changed to AMQP logic." />
     <MESSAGE value="[SystemConfig] Added system config gathering system." />
     <MESSAGE value="[envDispatcher] Added more params for database setup." />
@@ -565,7 +571,8 @@
     <MESSAGE value="[config] Added issues event to github webhook." />
     <MESSAGE value="[AkaGenerator] Fixed request bug." />
     <MESSAGE value="[AkaGenerator] Finished SQL." />
-    <option name="LAST_COMMIT_MESSAGE" value="[AkaGenerator] Finished SQL." />
+    <MESSAGE value="[AkaGenerator] Fixed typo in JSDoc." />
+    <option name="LAST_COMMIT_MESSAGE" value="[AkaGenerator] Fixed typo in JSDoc." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -589,6 +596,12 @@
           <url>file://$PROJECT_DIR$/src/utils/AkaGenerator.ts</url>
           <line>82</line>
           <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/core/Bot.ts</url>
+          <line>80</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="47" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

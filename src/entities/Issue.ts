@@ -51,6 +51,9 @@ class Issue extends BaseEntity {
     @Column({type: "jsonb"})
     info: Issue.Info;
 
+    @Column({default: true, nullable: false})
+    minimized: boolean;
+
     @Index()
     @ManyToOne(type => Chat, chat => chat.issues, {onDelete: "CASCADE"})
     chat: Chat;

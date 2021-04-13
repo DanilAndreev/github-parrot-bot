@@ -26,6 +26,7 @@
 
 import AmqpDispatcher from "./AmqpDispatcher";
 import {
+    CallbackQuery,
     EditMessageCaptionOptions,
     EditMessageReplyMarkupOptions,
     EditMessageTextOptions,
@@ -165,7 +166,7 @@ class Enqueuer {
         );
     }
 
-    public static async telegramEvent(
+    public static async telegramEvent<T extends Message | CallbackQuery>(
         event:
             | "channel_post"
             | "edited_message"
@@ -175,10 +176,11 @@ class Enqueuer {
             | "edited_channel_post_text"
             | "edited_channel_post_caption"
             | "new_chat_members"
-            | "left_chat_member",
-        message: Message
+            | "left_chat_member"
+            | "callback_query",
+        message: T
     ): Promise<void> {
-        await AmqpDispatcher.getCurrent().sendToQueue<Enqueuer.TelegramEvent>(QUEUES.TELEGRAM_EVENTS_QUEUE, {
+        await AmqpDispatcher.getCurrent().sendToQueue<Enqueuer.TelegramEvent<T>>(QUEUES.TELEGRAM_EVENTS_QUEUE, {
             type: event,
             message,
         });
@@ -219,7 +221,7 @@ namespace Enqueuer {
         showMessageOnError?: boolean;
     }
 
-    export interface TelegramEvent extends AMQPEvent {
+    export interface TelegramEvent<T> extends AMQPEvent {
         type:
             | "channel_post"
             | "edited_message"
@@ -229,8 +231,9 @@ namespace Enqueuer {
             | "edited_channel_post_text"
             | "edited_channel_post_caption"
             | "new_chat_members"
-            | "left_chat_member";
-        message: Message;
+            | "left_chat_member"
+            | "callback_query";
+        message: T;
     }
 }
 

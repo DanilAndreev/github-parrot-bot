@@ -59,7 +59,10 @@ export default class DrawIssueHandler extends AmqpHandler {
                     const newMessage: Message = await Bot.getCurrent().sendMessage(entity.chat.chatId, text, {
                         parse_mode: "HTML",
                         reply_markup: {
-                            inline_keyboard: [[{text: "View on GitHub", url: entity.info.html_url}]],
+                            inline_keyboard: [
+                                [{text: "Maximize", callback_data: "maximize"}],
+                                [{text: "View on GitHub", url: entity.info.html_url}],
+                            ],
                         },
                     });
                     issueMessage.messageId = newMessage.message_id;
@@ -73,7 +76,10 @@ export default class DrawIssueHandler extends AmqpHandler {
                     message_id: entity.chatMessage.messageId,
                     parse_mode: "HTML",
                     reply_markup: {
-                        inline_keyboard: [[{text: "View on GitHub", url: entity.info.html_url}]],
+                        inline_keyboard: [
+                            [{text: "Maximize", callback_data: "maximize"}],
+                            [{text: "View on GitHub", url: entity.info.html_url}],
+                        ],
                     },
                 });
             } catch (err) {

@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="DRAW_EVENTS_HANDLERS" type="NodeJSConfigurationType" singleton="false" application-parameters="--project tsconfig.json" node-parameters="--require ts-node/register" path-to-js-file="src/index.ts" working-dir="$PROJECT_DIR$">
     <envs>
-      <env name="GHTB_ENABLE_DRAW_EVENTS_HANDLERS" value="true" />
+      <env name="ENABLE_DRAW_EVENTS_HANDLERS" value="true" />
     </envs>
     <method v="2">
       <option name="NpmBeforeRunTask" enabled="true">
