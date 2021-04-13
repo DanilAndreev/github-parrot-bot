@@ -38,8 +38,7 @@ class AkaGenerator {
 
     public async getAka(login: string): Promise<AkaGenerator.User> {
         try {
-            const result: AkaGenerator.User = await Collaborator
-                .createQueryBuilder("collaborator")
+            const result: AkaGenerator.User = await Collaborator.createQueryBuilder("collaborator")
                 .select("collaborator.id", "id")
                 .addSelect("collaborator.gitHubName", "login")
                 .addSelect("collaborator.telegramUsername", "tag")
@@ -55,29 +54,20 @@ class AkaGenerator {
 
     public async getAkas(logins: string[]): Promise<AkaGenerator.User[]> {
         try {
-            const result: Collaborator[] = await Collaborator
-                .createQueryBuilder("collaborator")
-                .select("collaborator.id")
-                .addSelect("collaborator.gitHubName")
-                .addSelect("collaborator.telegramUsername")
+            const result: AkaGenerator.User[] = await Collaborator.createQueryBuilder("collaborator")
+                .select("collaborator.id", "id")
+                .addSelect("collaborator.gitHubName", "login")
+                .addSelect("collaborator.telegramUsername", "tag")
                 .where("collaborator.chat = :chatId", {chatId: this.chatId})
                 .andWhere("collaborator.gitHubName IN(:...logins)", {logins})
-                .getMany();
+                .getRawMany();
 
             const combined: AkaGenerator.User[] = fromKeyPair({
                 ...toKeyPair(
                     logins.map((item: string): AkaGenerator.User => ({login: item})),
                     (item: AkaGenerator.User): string => item.login
                 ),
-                ...toKeyPair(
-                    result.map(
-                        (item: Collaborator): AkaGenerator.User => ({
-                            login: item.gitHubName,
-                            tag: item.telegramUsername,
-                        })
-                    ),
-                    (item: AkaGenerator.User): string => item.login
-                ),
+                ...toKeyPair(result, (item: AkaGenerator.User): string => item.login),
             });
 
             return combined;
