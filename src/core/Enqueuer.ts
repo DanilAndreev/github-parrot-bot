@@ -221,7 +221,7 @@ namespace Enqueuer {
         showMessageOnError?: boolean;
     }
 
-    export interface TelegramEvent<T> extends AMQPEvent {
+    export interface TelegramEvent<T = Message> extends AMQPEvent {
         type:
             | "channel_post"
             | "edited_message"

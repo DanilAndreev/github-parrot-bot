@@ -43,6 +43,8 @@ export default class TelegramEventsHandler extends AmqpHandler {
                 return this.handleLeftChatMember(event.message);
             case "new_chat_members":
                 return this.handleNewChatMember(event.message);
+            case "callback_query":
+                return;
             default:
                 throw new AMQPNack("Unknown event type.", message.properties.messageId);
         }
