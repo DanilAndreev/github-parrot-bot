@@ -73,4 +73,8 @@ export default class TelegramEventsHandler extends AmqpHandler {
             }
         }
     }
+
+    protected async handlerQueryCallback(): Promise<void | boolean> {
+
+    }
 }

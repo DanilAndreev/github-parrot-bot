@@ -18,7 +18,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Bot] Added listener for callback_query event.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Enqueuer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Enqueuer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/AmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/AmqpHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -568,6 +568,32 @@
     <MESSAGE value="[AkaGenerator] Fixed typo in JSDoc." />
     <MESSAGE value="[Bot] Added listener for callback_query event." />
     <option name="LAST_COMMIT_MESSAGE" value="[Bot] Added listener for callback_query event." />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1618326971544">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618326971544" />
+    <state x="481" y="89" width="833" height="804" key="EnvironmentVariablesDialog" timestamp="1618326970275">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="481" y="89" width="833" height="804" key="EnvironmentVariablesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618326970275" />
+    <state width="1877" height="304" key="GridCell.Tab.0.bottom" timestamp="1618323788864">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="304" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618323788864" />
+    <state width="1877" height="304" key="GridCell.Tab.0.center" timestamp="1618323788863">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="304" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618323788863" />
+    <state width="1877" height="304" key="GridCell.Tab.0.left" timestamp="1618323788863">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="304" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618323788863" />
+    <state width="1877" height="304" key="GridCell.Tab.0.right" timestamp="1618323788863">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="304" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618323788863" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
