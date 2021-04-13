@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,10 +24,17 @@
  * SOFTWARE.
  */
 
-import Collaborator from "../entities/Collaborator";
+import JSONObject from "../interfaces/JSONObject";
 
-export default async function getAkaAlias(githubUsername: string, chatId: number) {
-    const aka: Collaborator | undefined = await Collaborator.findOne({where: {chatId, gitHubName: githubUsername}});
-    // if (aka) return "@" + aka.telegramName;
-    return githubUsername;
+/**
+ * toKeyPair - function for converting array to key pair structure.
+ * @param array - Array to convert.
+ * @param key - Callback for generating keys for each array item.
+ */
+export default function toKeyPair<T>(array: T[], key: (item: T) => string): JSONObject<T> {
+    const result: JSONObject<T> = {};
+    for (const item of array) {
+        result[key(item)] = item;
+    }
+    return result;
 }

@@ -111,6 +111,7 @@ const config: Config = {
             "create",
             "pull_request",
             "push",
+            "issues",
         ]
     },
     system: {},

@@ -31,17 +31,19 @@ import {Issues} from "github-webhook-event-types";
 import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
 import AmqpDispatcher from "../../core/AmqpDispatcher";
 import {QUEUES} from "../../globals";
+import AkaGenerator from "../../utils/AkaGenerator";
 
 @WebHookAmqpHandler.Handler("issues", 10)
 @Reflect.metadata("amqp-handler-type", "github-event-handler")
 export default class IssuesHandler extends WebHookAmqpHandler {
     protected async handleHook(webHook: WebHook, payload: Issues): Promise<boolean | void> {
         const {action, issue, repository} = payload;
+        const akaGenerator = new AkaGenerator(webHook.chat.chatId);
 
         const info: Issue.Info = {
-            assignees: issue.assignees.map(item => ({login: item.login})),
+            assignees: await akaGenerator.getAkas(issue.assignees.map(assignee => assignee.login)),
             labels: issue.labels.map(label => ({name: label.name})),
-            opened_by: issue.user.login,
+            opened_by: await akaGenerator.getAka(issue.user.login),
             state: issue.state,
             tag: issue.number,
             title: issue.title,
@@ -49,9 +51,9 @@ export default class IssuesHandler extends WebHookAmqpHandler {
             html_url: issue.html_url,
             milestone: issue.milestone
                 ? {
-                      title: issue.milestone.title,
-                      due_on: moment(issue.milestone.due_on).format("ll"),
-                  }
+                    title: issue.milestone.title,
+                    due_on: moment(issue.milestone.due_on).format("ll"),
+                }
                 : undefined,
         };
 

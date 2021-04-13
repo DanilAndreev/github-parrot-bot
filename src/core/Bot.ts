@@ -52,6 +52,7 @@ export default class Bot extends TelegramBot {
         Logger?.info(`Creating telegram bot. Polling: ${polling}. Tag: ${SystemConfig.getConfig<Config>().bot.tag}`);
         super(token, {polling});
         this.addListener("left_chat_member", this.handleMemberLeftChat);
+        this.addListener("polling_error", (error: Error) => Logger?.error("Polling error:", error));
         Logger?.silly(`Added listener of "left_chat_member" for bot.`);
         this.addListener("new_chat_members", this.handleNewChatMember);
         Logger?.silly(`Added listener of "new_chat_members" for bot.`);

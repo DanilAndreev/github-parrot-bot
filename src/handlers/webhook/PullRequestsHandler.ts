@@ -30,15 +30,17 @@ import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
 import PullRequest from "../../entities/PullRequest";
 import AmqpDispatcher from "../../core/AmqpDispatcher";
 import {QUEUES} from "../../globals";
+import AkaGenerator from "../../utils/AkaGenerator";
 
 @WebHookAmqpHandler.Handler("pull_request", 10)
 @Reflect.metadata("amqp-handler-type", "github-event-handler")
 export default class PullRequestsHandler extends WebHookAmqpHandler {
     protected async handleHook(webHook: WebHook, payload: PullRequestType): Promise<boolean | void> {
         const {action, pull_request: pullRequest, repository} = payload;
+        const akaGenerator = new AkaGenerator(webHook.chat.chatId);
 
         const info: PullRequest.Info = {
-            assignees: pullRequest.assignees.map(item => ({login: item.login})),
+            assignees: await akaGenerator.getAkas(pullRequest.assignees.map(assignee => assignee.login)),
             body: pullRequest.body,
             html_url: pullRequest.html_url,
             labels: pullRequest.labels.map(item => ({name: item.name})),
@@ -46,8 +48,10 @@ export default class PullRequestsHandler extends WebHookAmqpHandler {
                 title: pullRequest.milestone.title,
                 due_on: pullRequest.milestone.due_on,
             },
-            opened_by: pullRequest.user.login,
-            requested_reviewers: pullRequest.requested_reviewers.map(item => ({login: item.login})),
+            opened_by: await akaGenerator.getAka(pullRequest.user.login),
+            requested_reviewers: await akaGenerator.getAkas(
+                pullRequest.requested_reviewers.map(reviewer => reviewer.login)
+            ),
             state: pullRequest.state,
             tag: pullRequest.number,
             title: pullRequest.title,

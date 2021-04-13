@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,31 +24,16 @@
  * SOFTWARE.
  */
 
-import {BaseEntity, Column, CreateDateColumn, Entity, Index, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
-import Chat from "./Chat";
+import JSONObject from "../interfaces/JSONObject";
 
 /**
- * Collaborator - entity for storing AKA.
- * @author Danil Andreev
+ * fromKeyPair - converts kay pair object to array.
+ * @param input - Input object to for converting to array.
  */
-@Entity()
-export default class Collaborator extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @ManyToOne(type => Chat, chat => chat.collaborators, {onDelete: "CASCADE"})
-    chat: Chat;
-
-    @Column()
-    gitHubName: string;
-
-    @Index()
-    @Column({type: "bigint"})
-    telegramId: number;
-
-    @Column()
-    telegramUsername: string;
-
-    @CreateDateColumn()
-    createdAt: Date;
+export default function fromKeyPair<T>(input: JSONObject<T>): T[] {
+    const result: T[] = [];
+    for (const key in input) {
+        result.push(input[key]);
+    }
+    return result;
 }
