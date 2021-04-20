@@ -18,9 +18,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[IssueCallbackHandler] Added logging.&#10;[PullRequestCallbackHandler] Added logging.&#10;[CallbackQueryDispatcher] Added logging.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/CallbackQueryDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/CallbackQueryDispatcher.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/telegram/callbacks/IssueCallbacksHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/callbacks/IssueCallbacksHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/callbacks/PullRequestCallbacksHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/callbacks/PullRequestCallbacksHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

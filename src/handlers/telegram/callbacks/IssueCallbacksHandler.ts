@@ -39,7 +39,7 @@ export default class IssueCallbacksHandler {
         if (!query.message) return;
         const entity: Issue | undefined = await Issue.findOne({
             where: {
-                pullRequestId: +id,
+                issueId: +id,
                 chat: query.message.chat.id
             }
         });
@@ -57,7 +57,7 @@ export default class IssueCallbacksHandler {
         if (!query.message) return;
         const entity: Issue | undefined = await Issue.findOne({
             where: {
-                pullRequestId: +id,
+                issueId: +id,
                 chat: query.message.chat.id
             }
         });
