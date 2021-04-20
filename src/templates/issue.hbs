@@ -1,21 +1,33 @@
-<b>{{webhook/repository}}</b> #{{info/tag}}
-#issue <i>{{info/state}}</i>
+{{#if minimized}}
+    <b>{{webhook/repository}}</b> #{{info/tag}} #issue <i>{{info/state}}</i>
 
-<b>{{info/title}}</b>
-{{#if info/body}}
-    {{info/body}}
-{{/if}}
+    <b>Title:</b> {{info/title}}
+    {{#if info/assignees}}
+        <b>Assignees:</b> {{#each info/assignees}}{{#if tag}}@{{tag}}{{else}}{{login}}{{/if}} {{/each}}
+    {{/if}}
+    {{#if info/milestone}}
+        <b>Milestone</b> <i>{{info/milestone/title}}</i> {{#if info/milestone/due_on}}<code>{{info/milestone/due_on}}</code>{{/if}}
+    {{/if}}
+{{else}}
+    <b>{{webhook/repository}}</b> #{{info/tag}}
+    #issue <i>{{info/state}}</i>
 
-{{#if info/labels}}
-    <b>Labels:</b>
-    {{#each info/labels}}
-        <code>{{name}}</code>
-    {{/each}}
-{{/if}}
-{{#if info/opened_by}}<b>Opened by:</b> {{#if info/opened_by/tag}}@{{info/opened_by/tag}}{{else}}{{info/opened_by/login}}{{/if}}{{/if}}
-{{#if info/assignees}}
-    <b>Assignees:</b> {{#each info/assignees}}{{#if tag}}@{{tag}}{{else}}{{login}}{{/if}} {{/each}}
-{{/if}}
-{{#if info/milestone}}
-    <b>Milestone</b> <i>{{info/milestone/title}}</i> {{#if info/milestone/due_on}}<code>{{info/milestone/due_on}}</code>{{/if}}
+    <b>{{info/title}}</b>
+    {{#if info/body}}
+        {{info/body}}
+    {{/if}}
+
+    {{#if info/labels}}
+        <b>Labels:</b>
+        {{#each info/labels}}
+            <code>{{name}}</code>
+        {{/each}}
+    {{/if}}
+    {{#if info/opened_by}}<b>Opened by:</b> {{#if info/opened_by/tag}}@{{info/opened_by/tag}}{{else}}{{info/opened_by/login}}{{/if}}{{/if}}
+    {{#if info/assignees}}
+        <b>Assignees:</b> {{#each info/assignees}}{{#if tag}}@{{tag}}{{else}}{{login}}{{/if}} {{/each}}
+    {{/if}}
+    {{#if info/milestone}}
+        <b>Milestone</b> <i>{{info/milestone/title}}</i> {{#if info/milestone/due_on}}<code>{{info/milestone/due_on}}</code>{{/if}}
+    {{/if}}
 {{/if}}

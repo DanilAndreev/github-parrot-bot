@@ -33,8 +33,16 @@ import AMQPAck from "../errors/AMQPAck";
 import AmqpHandler from "./AmqpHandler";
 
 class CallbackQueryDispatcher extends AmqpHandler {
+    /**
+     * callbackQueryHandlers - registered handlers.
+     */
     protected callbackQueryHandlers: Set<CallbackQueryDispatcher.CallbackQueryHandlerMeta>;
 
+    /**
+     * Creates an instance of CallbackQueryDispatcher
+     * @constructor
+     * @author Danil Andreev
+     */
     constructor() {
         super()
         const callbackQueryHandlers = SystemConfig.getConfig<Config>().bot.callbackQueryHandlers;
@@ -43,6 +51,13 @@ class CallbackQueryDispatcher extends AmqpHandler {
         }
     }
 
+    /**
+     * handlersReducer - reducer for getting all handlers from all classes containers.
+     * @method
+     * @param accumulator
+     * @param current
+     * @author Danil Andreev
+     */
     protected static handlersReducer(
         accumulator: Set<CallbackQueryDispatcher.CallbackQueryHandlerMeta>,
         current: Constructable
@@ -54,6 +69,14 @@ class CallbackQueryDispatcher extends AmqpHandler {
         return accumulator;
     }
 
+    /**
+     * handleCallbackQuery - handler for callback query. Decides which handlers to call using pattern in callback data.
+     * @method
+     * @param query - Input callback query object.
+     * @throws AMQPAck
+     * @throws AMQPNack
+     * @author Danil Andreev
+     */
     protected async handleCallbackQuery(query: CallbackQuery): Promise<void> {
         if (!query.data)
             throw new AMQPAck("Incorrect query callback data. Got falsy value.");
@@ -72,6 +95,13 @@ class CallbackQueryDispatcher extends AmqpHandler {
         await Promise.all(promises);
     }
 
+    /**
+     * comparePatterns - compares request and handler patterns.
+     * @method
+     * @param handlerPattern - Handler pattern in format: "hello.:darkness.my.old.:friend".
+     * @param requestPattern - Request data split by ".".
+     * @author Danil Andreev
+     */
     protected static comparePatterns(handlerPattern: string[], requestPattern: string[]): JSONObject | null {
         const variables: JSONObject = {};
         if (handlerPattern.length > requestPattern.length)
@@ -90,17 +120,61 @@ class CallbackQueryDispatcher extends AmqpHandler {
 }
 
 namespace CallbackQueryDispatcher {
+    /**
+     * CallbackQueryHandlerOptions - options for callback handler binding.
+     * @interface
+     * @author Danil Andreev
+     */
     export interface CallbackQueryHandlerOptions {
+        /**
+         * exact - if true, handler will be called only if pattern exactly matches the request.
+         */
         exact?: boolean;
     }
 
+    /**
+     * CallbackQueryHandlerMeta - object with handler metadata.
+     * @interface
+     * @author Danil Andreev
+     */
     export interface CallbackQueryHandlerMeta {
+        /**
+         * callback - callback function for handling request.
+         * @function
+         * @param query - CallbackQuery object.
+         * @param params - Request params got from request data using handler pattern.
+         * @author Danil Andreev
+         */
         callback: (query: CallbackQuery, params: JSONObject) => void | Promise<void>;
+        /**
+         * options - handler options.
+         */
         options: CallbackQueryHandlerOptions;
+        /**
+         * pattern - handler pattern.
+         */
         pattern: string[];
     }
 
-    export function CallbackQueryHandler(pattern: string | string[], options?: CallbackQueryHandlerOptions) {
+    /**
+     * CallbackQueryHandler - decorator for callback query handler functions.
+     * @function
+     * @param pattern - handler Handler pattern in format: "hello.:darkness.my.old.:friend".
+     * @param options - handler binding options.
+     * @author Danil Andreev
+     * @example
+     * import CallbackQueryDispatcher from "../../../core/CallbackQueryDispatcher";
+     * import {CallbackQuery} from "node-telegram-bot-api";
+     * import JSONObject from "../../../interfaces/JSONObject";
+
+     * export default class QueryCallbacks {
+     *     @CallbackQueryDispatcher.CallbackQueryHandler("pull_request.:id.maximize", {exact: true})
+     *     public static async handle(query: CallbackQuery, params: JSONObject): Promise<void> {
+     *         console.log("Hello from query callback handler.");
+     *     }
+     * }
+     */
+    export function CallbackQueryHandler(pattern: string | string[], options?: CallbackQueryHandlerOptions): Function {
         if (typeof pattern === "string")
             pattern = pattern.split(".");
 

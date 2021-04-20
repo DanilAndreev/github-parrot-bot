@@ -27,15 +27,15 @@
 import CallbackQueryDispatcher from "../../../core/CallbackQueryDispatcher";
 import {CallbackQuery} from "node-telegram-bot-api";
 import JSONObject from "../../../interfaces/JSONObject";
-import PullRequest from "../../../entities/PullRequest";
 import Enqueuer from "../../../core/Enqueuer";
+import Issue from "../../../entities/Issue";
 
-export default class PullRequestCallbacksHandler {
-    @CallbackQueryDispatcher.CallbackQueryHandler("pull_request.:id.maximize", {exact: true})
+export default class IssueCallbacksHandler {
+    @CallbackQueryDispatcher.CallbackQueryHandler("issue.:id.maximize", {exact: true})
     public static async maximize(query: CallbackQuery, params: JSONObject<{ id: string }>): Promise<void> {
         const {id} = params;
         if (!query.message) return;
-        const entity: PullRequest | undefined = await PullRequest.findOne({
+        const entity: Issue | undefined = await Issue.findOne({
             where: {
                 pullRequestId: +id,
                 chat: query.message.chat.id
@@ -45,14 +45,14 @@ export default class PullRequestCallbacksHandler {
 
         entity.minimized = false;
         await entity.save();
-        await Enqueuer.drawPullRequest(entity.id);
+        await Enqueuer.drawIssue(entity.id);
     }
 
-    @CallbackQueryDispatcher.CallbackQueryHandler("pull_request.:id.minimize", {exact: true})
+    @CallbackQueryDispatcher.CallbackQueryHandler("issue.:id.minimize", {exact: true})
     public static async minimize(query: CallbackQuery, params: JSONObject<{ id: string }>): Promise<void> {
         const {id} = params;
         if (!query.message) return;
-        const entity: PullRequest | undefined = await PullRequest.findOne({
+        const entity: Issue | undefined = await Issue.findOne({
             where: {
                 pullRequestId: +id,
                 chat: query.message.chat.id
@@ -62,6 +62,6 @@ export default class PullRequestCallbacksHandler {
 
         entity.minimized = true;
         await entity.save();
-        await Enqueuer.drawPullRequest(entity.id);
+        await Enqueuer.drawIssue(entity.id);
     }
 }

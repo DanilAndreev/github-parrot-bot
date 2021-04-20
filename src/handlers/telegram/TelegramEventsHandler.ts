@@ -33,9 +33,6 @@ import Chat from "../../entities/Chat";
 import Collaborator from "../../entities/Collaborator";
 import Bot from "../../core/Bot";
 import AMQPNack from "../../errors/AMQPNack";
-// import AMQPAck from "../../errors/AMQPAck";
-// import PullRequest from "../../entities/PullRequest";
-// import JSONObject from "../../interfaces/JSONObject";
 import CallbackQueryDispatcher from "../../core/CallbackQueryDispatcher";
 
 @AmqpHandler.Handler(QUEUES.TELEGRAM_EVENTS_QUEUE, 10)
@@ -77,25 +74,4 @@ export default class TelegramEventsHandler extends CallbackQueryDispatcher {
             }
         }
     }
-
-    // protected async handlerQueryCallback(query: CallbackQuery): Promise<void | boolean> {
-    //     if (!query.data)
-    //         throw new AMQPAck("Incorrect query callback data. Got falsy value.");
-    //
-    //
-    //     // TODO: add mechanism for callback query handlers.
-    //     let params;
-    //     if ((params = TelegramEventsHandler.comparePatterns("pull_request.:id.:action".split("."), query.data.split("."))) !== null) {
-    //         const pullRequest = await PullRequest.findOne({where: {pullRequestId: params.id}});
-    //         break;
-    //     }
-    //
-    //     switch (query.data) {
-    //         case "pull_request.maximize":
-    //             const pullRequest = await PullRequest.findOne({where: {pullRequestId: query.}});
-    //             break;
-    //         default:
-    //             throw new AMQPAck(`Unknown callback query data. ${query.data}`)
-    //     }
-    // }
 }

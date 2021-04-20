@@ -52,6 +52,7 @@ import DrawMessageHandler from "./handlers/draw/DrawMessageHandler";
 import TelegramEventsHandler from "./handlers/telegram/TelegramEventsHandler";
 import VersionCommand from "./commands/VersionCommand";
 import PullRequestCallbacksHandler from "./handlers/telegram/callbacks/PullRequestCallbacksHandler";
+import IssueCallbacksHandler from "./handlers/telegram/callbacks/IssueCallbacksHandler";
 
 const config: Config = {
     bot: {
@@ -68,6 +69,7 @@ const config: Config = {
         ],
         callbackQueryHandlers: [
             PullRequestCallbacksHandler,
+            IssueCallbacksHandler,
         ],
     },
     db: {
