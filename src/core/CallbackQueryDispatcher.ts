@@ -54,7 +54,7 @@ class CallbackQueryDispatcher extends AmqpHandler {
         return accumulator;
     }
 
-    protected async handleCallbackQuery(query: CallbackQuery) {
+    protected async handleCallbackQuery(query: CallbackQuery): Promise<void> {
         if (!query.data)
             throw new AMQPAck("Incorrect query callback data. Got falsy value.");
 
