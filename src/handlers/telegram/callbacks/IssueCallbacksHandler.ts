@@ -29,10 +29,12 @@ import {CallbackQuery} from "node-telegram-bot-api";
 import JSONObject from "../../../interfaces/JSONObject";
 import Enqueuer from "../../../core/Enqueuer";
 import Issue from "../../../entities/Issue";
+import {Logger} from "../../../core/Logger";
 
 export default class IssueCallbacksHandler {
     @CallbackQueryDispatcher.CallbackQueryHandler("issue.:id.maximize", {exact: true})
     public static async maximize(query: CallbackQuery, params: JSONObject<{ id: string }>): Promise<void> {
+        Logger?.debug(`Handling Telegram callback query: ${query.data} | IssueCallbacksHandler.maximize()`);
         const {id} = params;
         if (!query.message) return;
         const entity: Issue | undefined = await Issue.findOne({
@@ -50,6 +52,7 @@ export default class IssueCallbacksHandler {
 
     @CallbackQueryDispatcher.CallbackQueryHandler("issue.:id.minimize", {exact: true})
     public static async minimize(query: CallbackQuery, params: JSONObject<{ id: string }>): Promise<void> {
+        Logger?.debug(`Handling Telegram callback query: ${query.data} | IssueCallbacksHandler.minimize()`);
         const {id} = params;
         if (!query.message) return;
         const entity: Issue | undefined = await Issue.findOne({

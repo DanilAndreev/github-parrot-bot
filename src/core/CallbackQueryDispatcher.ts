@@ -31,6 +31,7 @@ import Constructable from "../interfaces/Constructable";
 import {CallbackQuery} from "node-telegram-bot-api";
 import AMQPAck from "../errors/AMQPAck";
 import AmqpHandler from "./AmqpHandler";
+import {Logger} from "./Logger";
 
 class CallbackQueryDispatcher extends AmqpHandler {
     /**
@@ -48,6 +49,14 @@ class CallbackQueryDispatcher extends AmqpHandler {
         const callbackQueryHandlers = SystemConfig.getConfig<Config>().bot.callbackQueryHandlers;
         if (callbackQueryHandlers) {
             this.callbackQueryHandlers = callbackQueryHandlers.reduce(CallbackQueryDispatcher.handlersReducer, new Set());
+            for (const handler of this.callbackQueryHandlers) {
+                Logger?.silly(
+                    `Loaded Telegram callback query handler for: ${handler.pattern.join(".")}. exact=${!!handler.options.exact}`
+                );
+            }
+            Logger?.debug(`Loaded ${this.callbackQueryHandlers.size} Telegram callback query handlers.`);
+        } else {
+            Logger?.debug(`Loaded 0 Telegram callback query handlers. No handlers found.`);
         }
     }
 

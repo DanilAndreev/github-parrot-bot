@@ -16,9 +16,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[IssueCallbacksHandler] Created handler for issue callbacks.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[CallbackQueryDispatcher] Added exact option.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/CallbackQueryDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/CallbackQueryDispatcher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/callbacks/IssueCallbacksHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/callbacks/IssueCallbacksHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/callbacks/PullRequestCallbacksHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/callbacks/PullRequestCallbacksHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,14 +170,7 @@
       <workItem from="1618186150208" duration="346000" />
       <workItem from="1618237943212" duration="1574000" />
       <workItem from="1618834495779" duration="188000" />
-      <workItem from="1618917736585" duration="11255000" />
-    </task>
-    <task id="LOCAL-00057" summary="[CheckSuiteHandler] Added mechanism for check suits.">
-      <created>1616899860454</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1616899860455</updated>
+      <workItem from="1618917736585" duration="11790000" />
     </task>
     <task id="LOCAL-00058" summary="[PullRequestHandler] Renamed template and added dividers to checksuits.">
       <created>1616900260240</created>
@@ -513,7 +508,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618929079618</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL-00106" summary="[CallbackQueryDispatcher] Added exact option.">
+      <created>1618929212548</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1618929212548</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -544,7 +546,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[Core] Added JSDocs." />
     <MESSAGE value="[GLOBAL] Code formatted." />
     <MESSAGE value="[README] Updated." />
     <MESSAGE value="[Dockerfile] Created." />
@@ -569,7 +570,8 @@
     <MESSAGE value="[DrawPullRequestHandler] Added callback data for buttons." />
     <MESSAGE value="[DrawPullRequestHandler] Fixed incorrect callback data generating." />
     <MESSAGE value="[IssueCallbacksHandler] Created handler for issue callbacks." />
-    <option name="LAST_COMMIT_MESSAGE" value="[IssueCallbacksHandler] Created handler for issue callbacks." />
+    <MESSAGE value="[CallbackQueryDispatcher] Added exact option." />
+    <option name="LAST_COMMIT_MESSAGE" value="[CallbackQueryDispatcher] Added exact option." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1618926338998">
@@ -650,10 +652,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2381" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618925125392" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1618929082099">
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1618929214963">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618929082099" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618929214963" />
     <state x="2698" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1618917883220">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -662,10 +664,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="591" y="0" width="1345" height="1022" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618918338895" />
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1618919343760">
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1618929527948">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618919343760" />
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618929527948" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -699,7 +701,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/handlers/telegram/callbacks/PullRequestCallbacksHandler.ts</url>
-          <line>35</line>
+          <line>37</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="56" />
         </line-breakpoint>
