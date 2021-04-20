@@ -49,6 +49,7 @@ export default class DrawPullRequestHandler extends AmqpHandler {
 
         const template = await loadTemplate("pull_request");
         const text: string = template(entity).replace(/  +/g, " ").replace(/\n +/g, "\n");
+        const maximizeMinimizeCallbackData: string = `pull_request.${entity.pullRequestId}` + (entity.minimized ? ".maximize" : ".minimize");
 
         try {
             const pullRequestMessage: PullRequest.PullRequestMessage = new PullRequest.PullRequestMessage();
@@ -62,7 +63,7 @@ export default class DrawPullRequestHandler extends AmqpHandler {
                             inline_keyboard: [
                                 [{
                                     text: entity.minimized ? "Maximize" : "Minimize",
-                                    callback_data: `pull_request.${entity.pullRequestId}` + entity.minimized ? ".maximize" : ".minimize"
+                                    callback_data: maximizeMinimizeCallbackData
                                 }],
                                 [{text: "View on GitHub", url: entity.info.html_url}],
                             ],
@@ -82,7 +83,7 @@ export default class DrawPullRequestHandler extends AmqpHandler {
                         inline_keyboard: [
                             [{
                                 text: entity.minimized ? "Maximize" : "Minimize",
-                                callback_data: `pull_request.${entity.pullRequestId}` + entity.minimized ? ".maximize" : ".minimize"
+                                callback_data: maximizeMinimizeCallbackData
                             }],
                             [{text: "View on GitHub", url: entity.info.html_url}],
                         ],
