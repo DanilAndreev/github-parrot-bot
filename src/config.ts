@@ -53,6 +53,7 @@ import TelegramEventsHandler from "./handlers/telegram/TelegramEventsHandler";
 import VersionCommand from "./commands/VersionCommand";
 import PullRequestCallbacksHandler from "./handlers/telegram/callbacks/PullRequestCallbacksHandler";
 import IssueCallbacksHandler from "./handlers/telegram/callbacks/IssueCallbacksHandler";
+import WebHookSettingsHandler from "./handlers/telegram/callbacks/WebHookSettingsHandler";
 
 const config: Config = {
     bot: {
@@ -70,6 +71,7 @@ const config: Config = {
         callbackQueryHandlers: [
             PullRequestCallbacksHandler,
             IssueCallbacksHandler,
+            WebHookSettingsHandler,
         ],
     },
     db: {
@@ -77,6 +79,7 @@ const config: Config = {
         url: "you-should-pass-database-url-as-env-variable",
         entities: [
             WebHook,
+            WebHook.WebHookSettings,
             Collaborator,
             Issue,
             Issue.IssueMessage,

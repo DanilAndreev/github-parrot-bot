@@ -31,7 +31,7 @@ import {
     Entity,
     Index,
     ManyToOne,
-    OneToMany,
+    OneToMany, OneToOne,
     PrimaryGeneratedColumn,
 } from "typeorm";
 import Chat from "./Chat";
@@ -45,7 +45,7 @@ import CheckSuite from "./CheckSuite";
  */
 @Entity()
 @Index(["chat", "repository"], {unique: true})
-export default class WebHook extends BaseEntity {
+class WebHook extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -61,6 +61,9 @@ export default class WebHook extends BaseEntity {
     @OneToMany(type => CheckSuite, checksuite => checksuite.webhook)
     checksuits: CheckSuite[];
 
+    @OneToOne(type => WebHook.WebHookSettings, settings => settings.webhook)
+    settings: WebHook.WebHookSettings;
+
     @Column()
     secret: string;
 
@@ -73,3 +76,25 @@ export default class WebHook extends BaseEntity {
     @CreateDateColumn()
     createdAt: Date;
 }
+
+namespace WebHook {
+    @Entity()
+    export class WebHookSettings extends BaseEntity {
+        @PrimaryGeneratedColumn({type: "bigint"})
+        id: number;
+
+        @OneToOne(type => WebHook, webhook => webhook.settings)
+        webhook: WebHook;
+
+        @Column({type: "boolean", default: false})
+        trackPushes: boolean;
+
+        @Column({type: "boolean", default: false})
+        trackFreeCI: boolean;
+
+        @Column({type: "boolean", default: false})
+        trackPullRequestCI: boolean;
+    }
+}
+
+export default WebHook;
