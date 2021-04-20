@@ -55,5 +55,6 @@ export default class WebHookSettingsHandler {
                 throw new AMQPAck(`Invalid setting name ${setting}.`);
         }
         await entity.save();
+        //TODO: queue message update.
     }
 }
