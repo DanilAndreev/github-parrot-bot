@@ -16,8 +16,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[AkaGenerator] Finished SQL.">
-      <change beforePath="$PROJECT_DIR$/src/utils/AkaGenerator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/AkaGenerator.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[IssueCallbackHandler] Fixed bug in where condition.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +65,7 @@
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.20.7" />
     <property name="last.edited.regexp" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/handlers/telegram/callbacks" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -77,15 +78,11 @@
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="D:\Projects\github-parrot-bot\node_modules\prettier" />
-    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="C:\Users\onepl\WebstormProjects\github-parrot-bot\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Projects\github-tracker-telegram-bot\src\entities" />
-      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers\webhook" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\images" />
@@ -93,16 +90,21 @@
       <recent name="D:\Projects\github-tracker-telegram-bot\src\core" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\onepl\WebstormProjects\github-parrot-bot\src\handlers\telegram\callbacks" />
+      <recent name="D:\Projects\github-tracker-telegram-bot\src\entities" />
+      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers" />
+    </key>
   </component>
   <component name="RunManager" selected="Node.js.Run with ts-node">
     <list>
-      <item itemvalue="Node.js.Run with ts-node" />
+      <item itemvalue="Node.js.COMMANDS_EVENTS_HANDLERS" />
+      <item itemvalue="Node.js.COMMANDS_PROXY" />
       <item itemvalue="Node.js.CRON_DATABASE_GARBAGE_COLLECTORS" />
       <item itemvalue="Node.js.DRAW_EVENTS_HANDLERS" />
-      <item itemvalue="Node.js.COMMANDS_EVENTS_HANDLERS" />
       <item itemvalue="Node.js.GITHUB_EVENTS_HANDLERS" />
+      <item itemvalue="Node.js.Run with ts-node" />
       <item itemvalue="Node.js.WEBSERVER" />
-      <item itemvalue="Node.js.COMMANDS_PROXY" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -165,69 +167,8 @@
       <workItem from="1618185681276" duration="465000" />
       <workItem from="1618186150208" duration="346000" />
       <workItem from="1618237943212" duration="1574000" />
-    </task>
-    <task id="LOCAL-00051" summary="[IssuesHandler] Added handlebars mechanism.">
-      <created>1616700599101</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1616700599102</updated>
-    </task>
-    <task id="LOCAL-00052" summary="[WebServer] Removed events emitter. Messages are pushed to RabbitMQ instantly.">
-      <created>1616708638772</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1616708638772</updated>
-    </task>
-    <task id="LOCAL-00053" summary="[Entities] Changed structure. (PROBLEM WITH FK ON DELETION)">
-      <created>1616725409227</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1616725409227</updated>
-    </task>
-    <task id="LOCAL-00054" summary="[Entities] Fixed problems with FK constraint on deletion.">
-      <created>1616725691446</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1616725691447</updated>
-    </task>
-    <task id="LOCAL-00055" summary="[README] Added some information.">
-      <created>1616772584680</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1616772584680</updated>
-    </task>
-    <task id="LOCAL-00056" summary="[CheckSuite] Added new mechanism.">
-      <created>1616794473045</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1616794473045</updated>
-    </task>
-    <task id="LOCAL-00057" summary="[CheckSuiteHandler] Added mechanism for check suits.">
-      <created>1616899860454</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1616899860455</updated>
-    </task>
-    <task id="LOCAL-00058" summary="[PullRequestHandler] Renamed template and added dividers to checksuits.">
-      <created>1616900260240</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1616900260241</updated>
-    </task>
-    <task id="LOCAL-00059" summary="[Handlers] Removed extra comments.">
-      <created>1616922965734</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1616922965734</updated>
+      <workItem from="1618834495779" duration="188000" />
+      <workItem from="1618917736585" duration="11897000" />
     </task>
     <task id="LOCAL-00060" summary="[IssuesHandler] Added synchronization.">
       <created>1616961374424</created>
@@ -509,7 +450,70 @@
       <option name="project" value="LOCAL" />
       <updated>1618272769516</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="[AkaGenerator] Fixed typo in JSDoc.">
+      <created>1618273957059</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1618273957059</updated>
+    </task>
+    <task id="LOCAL-00101" summary="[Bot] Added listener for callback_query event.">
+      <created>1618277956902</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1618277956902</updated>
+    </task>
+    <task id="LOCAL-00102" summary="[CallbackQueryDispatcher] Added callback query dispatcher system.">
+      <created>1618925293750</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1618925293751</updated>
+    </task>
+    <task id="LOCAL-00103" summary="[DrawPullRequestHandler] Added callback data for buttons.">
+      <created>1618925673926</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1618925673926</updated>
+    </task>
+    <task id="LOCAL-00104" summary="[DrawPullRequestHandler] Fixed incorrect callback data generating.">
+      <created>1618926617251</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1618926617251</updated>
+    </task>
+    <task id="LOCAL-00105" summary="[IssueCallbacksHandler] Created handler for issue callbacks.">
+      <created>1618929079618</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1618929079618</updated>
+    </task>
+    <task id="LOCAL-00106" summary="[CallbackQueryDispatcher] Added exact option.">
+      <created>1618929212548</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1618929212548</updated>
+    </task>
+    <task id="LOCAL-00107" summary="[IssueCallbackHandler] Added logging.&#10;[PullRequestCallbackHandler] Added logging.&#10;[CallbackQueryDispatcher] Added logging.">
+      <created>1618929777159</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1618929777159</updated>
+    </task>
+    <task id="LOCAL-00108" summary="[IssueCallbackHandler] Fixed bug in where condition.">
+      <created>1618930310404</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1618930310404</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -540,15 +544,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[CommandHandler] Added amqp logic to commands handler." />
-    <MESSAGE value="[Commands] Changed to AMQP logic." />
-    <MESSAGE value="[SystemConfig] Added system config gathering system." />
-    <MESSAGE value="[envDispatcher] Added more params for database setup." />
-    <MESSAGE value="[envDispatcher] Added system settings." />
-    <MESSAGE value="[Bot] Added some log messages." />
-    <MESSAGE value="[Core] Added JSDocs." />
-    <MESSAGE value="[GLOBAL] Code formatted." />
-    <MESSAGE value="[README] Updated." />
     <MESSAGE value="[Dockerfile] Created." />
     <MESSAGE value="[EnvDispatcher] Removed GHTB prefix to envs." />
     <MESSAGE value="[Bot] Fixed problem with commands regexp." />
@@ -565,7 +560,112 @@
     <MESSAGE value="[config] Added issues event to github webhook." />
     <MESSAGE value="[AkaGenerator] Fixed request bug." />
     <MESSAGE value="[AkaGenerator] Finished SQL." />
-    <option name="LAST_COMMIT_MESSAGE" value="[AkaGenerator] Finished SQL." />
+    <MESSAGE value="[AkaGenerator] Fixed typo in JSDoc." />
+    <MESSAGE value="[Bot] Added listener for callback_query event." />
+    <MESSAGE value="[CallbackQueryDispatcher] Added callback query dispatcher system." />
+    <MESSAGE value="[DrawPullRequestHandler] Added callback data for buttons." />
+    <MESSAGE value="[DrawPullRequestHandler] Fixed incorrect callback data generating." />
+    <MESSAGE value="[IssueCallbacksHandler] Created handler for issue callbacks." />
+    <MESSAGE value="[CallbackQueryDispatcher] Added exact option." />
+    <MESSAGE value="[IssueCallbackHandler] Added logging.&#10;[PullRequestCallbackHandler] Added logging.&#10;[CallbackQueryDispatcher] Added logging." />
+    <MESSAGE value="[IssueCallbackHandler] Fixed bug in where condition." />
+    <option name="LAST_COMMIT_MESSAGE" value="[IssueCallbackHandler] Fixed bug in where condition." />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1618926338998">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618326971544" />
+    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618926338998" />
+    <state x="2401" y="89" width="833" height="804" key="EnvironmentVariablesDialog" timestamp="1618926338477">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="481" y="89" width="833" height="804" key="EnvironmentVariablesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618326970275" />
+    <state x="2401" y="89" key="EnvironmentVariablesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618926338477" />
+    <state width="1877" height="249" key="GridCell.Tab.0.bottom" timestamp="1618929782298">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="249" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618929782298" />
+    <state width="1877" height="249" key="GridCell.Tab.0.center" timestamp="1618929782298">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="249" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618929782298" />
+    <state width="1877" height="249" key="GridCell.Tab.0.left" timestamp="1618929782298">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="249" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618929782298" />
+    <state width="1877" height="249" key="GridCell.Tab.0.right" timestamp="1618929782298">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="249" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618929782298" />
+    <state width="1877" height="387" key="GridCell.Tab.1.bottom" timestamp="1618928596332">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="387" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618928596332" />
+    <state width="1877" height="387" key="GridCell.Tab.1.center" timestamp="1618928596332">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="387" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618928596332" />
+    <state width="1877" height="387" key="GridCell.Tab.1.left" timestamp="1618928596332">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="387" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618928596332" />
+    <state width="1877" height="387" key="GridCell.Tab.1.right" timestamp="1618928596332">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="387" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618928596332" />
+    <state width="1877" height="387" key="GridCell.Tab.2.bottom" timestamp="1618928596332">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="387" key="GridCell.Tab.2.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618928596332" />
+    <state width="1877" height="387" key="GridCell.Tab.2.center" timestamp="1618928596332">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="387" key="GridCell.Tab.2.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618928596332" />
+    <state width="1877" height="387" key="GridCell.Tab.2.left" timestamp="1618928596332">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="387" key="GridCell.Tab.2.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618928596332" />
+    <state width="1877" height="387" key="GridCell.Tab.2.right" timestamp="1618928596332">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="387" key="GridCell.Tab.2.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618928596332" />
+    <state width="1877" height="387" key="GridCell.Tab.3.bottom" timestamp="1618928596332">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="387" key="GridCell.Tab.3.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618928596332" />
+    <state width="1877" height="387" key="GridCell.Tab.3.center" timestamp="1618928596332">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="387" key="GridCell.Tab.3.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618928596332" />
+    <state width="1877" height="387" key="GridCell.Tab.3.left" timestamp="1618928596332">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="387" key="GridCell.Tab.3.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618928596332" />
+    <state width="1877" height="387" key="GridCell.Tab.3.right" timestamp="1618928596332">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="387" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618928596332" />
+    <state x="2381" y="165" key="SettingsEditor" timestamp="1618925125392">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2381" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618925125392" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1618930312701">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618930312701" />
+    <state x="2698" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1618917883220">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2698" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618917883220" />
+    <state x="591" y="0" width="1345" height="1022" maximized="true" key="dock-window-1" timestamp="1618918338895">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="591" y="0" width="1345" height="1022" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618918338895" />
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1618929527948">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618929527948" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -576,11 +676,6 @@
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts</url>
-          <line>45</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/utils/AkaGenerator.ts</url>
           <line>60</line>
           <option name="timeStamp" value="41" />
@@ -589,6 +684,24 @@
           <url>file://$PROJECT_DIR$/src/utils/AkaGenerator.ts</url>
           <line>82</line>
           <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts</url>
+          <line>49</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts</url>
+          <line>77</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/telegram/callbacks/PullRequestCallbacksHandler.ts</url>
+          <line>37</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="56" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

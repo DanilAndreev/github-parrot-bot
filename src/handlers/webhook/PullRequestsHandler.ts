@@ -31,6 +31,7 @@ import PullRequest from "../../entities/PullRequest";
 import AmqpDispatcher from "../../core/AmqpDispatcher";
 import {QUEUES} from "../../globals";
 import AkaGenerator from "../../utils/AkaGenerator";
+import * as moment from "moment";
 
 @WebHookAmqpHandler.Handler("pull_request", 10)
 @Reflect.metadata("amqp-handler-type", "github-event-handler")
@@ -46,7 +47,7 @@ export default class PullRequestsHandler extends WebHookAmqpHandler {
             labels: pullRequest.labels.map(item => ({name: item.name})),
             milestone: pullRequest.milestone && {
                 title: pullRequest.milestone.title,
-                due_on: pullRequest.milestone.due_on,
+                due_on: moment(pullRequest.milestone.due_on).format("ll"),
             },
             opened_by: await akaGenerator.getAka(pullRequest.user.login),
             requested_reviewers: await akaGenerator.getAkas(

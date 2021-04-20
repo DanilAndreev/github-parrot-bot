@@ -38,7 +38,7 @@ import PullRequest from "../../entities/PullRequest";
 @WebHookAmqpHandler.Handler(QUEUES.PULL_REQUEST_SHOW_QUEUE, 10)
 @Reflect.metadata("amqp-handler-type", "draw-event-handler")
 export default class DrawPullRequestHandler extends AmqpHandler {
-    protected async handle(content: {pullRequest: number}): Promise<void | boolean> {
+    protected async handle(content: { pullRequest: number }): Promise<void | boolean> {
         const {pullRequest} = content;
 
         const entity: PullRequest | undefined = await PullRequest.findOne({
@@ -49,6 +49,7 @@ export default class DrawPullRequestHandler extends AmqpHandler {
 
         const template = await loadTemplate("pull_request");
         const text: string = template(entity).replace(/  +/g, " ").replace(/\n +/g, "\n");
+        const maximizeMinimizeCallbackData: string = `pull_request.${entity.pullRequestId}` + (entity.minimized ? ".maximize" : ".minimize");
 
         try {
             const pullRequestMessage: PullRequest.PullRequestMessage = new PullRequest.PullRequestMessage();
@@ -59,7 +60,13 @@ export default class DrawPullRequestHandler extends AmqpHandler {
                     const newMessage: Message = await Bot.getCurrent().sendMessage(entity.chat.chatId, text, {
                         parse_mode: "HTML",
                         reply_markup: {
-                            inline_keyboard: [[{text: "View on GitHub", url: entity.info.html_url}]],
+                            inline_keyboard: [
+                                [{
+                                    text: entity.minimized ? "Maximize" : "Minimize",
+                                    callback_data: maximizeMinimizeCallbackData
+                                }],
+                                [{text: "View on GitHub", url: entity.info.html_url}],
+                            ],
                         },
                     });
                     pullRequestMessage.messageId = newMessage.message_id;
@@ -73,7 +80,13 @@ export default class DrawPullRequestHandler extends AmqpHandler {
                     message_id: entity.chatMessage.messageId,
                     parse_mode: "HTML",
                     reply_markup: {
-                        inline_keyboard: [[{text: "View on GitHub", url: entity.info.html_url}]],
+                        inline_keyboard: [
+                            [{
+                                text: entity.minimized ? "Maximize" : "Minimize",
+                                callback_data: maximizeMinimizeCallbackData
+                            }],
+                            [{text: "View on GitHub", url: entity.info.html_url}],
+                        ],
                     },
                 });
             } catch (err) {

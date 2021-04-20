@@ -29,6 +29,7 @@ import Enqueuer from "./Enqueuer";
 import {Logger} from "./Logger";
 import Config from "../interfaces/Config";
 import SystemConfig from "./SystemConfig";
+import {CallbackQuery} from "node-telegram-bot-api";
 
 /**
  * Bot - class for telegram bot api.
@@ -53,6 +54,7 @@ export default class Bot extends TelegramBot {
         super(token, {polling});
         this.addListener("left_chat_member", this.handleMemberLeftChat);
         this.addListener("polling_error", (error: Error) => Logger?.error("Polling error:", error));
+        this.addListener("callback_query", this.handleCallbackQuery);
         Logger?.silly(`Added listener of "left_chat_member" for bot.`);
         this.addListener("new_chat_members", this.handleNewChatMember);
         Logger?.silly(`Added listener of "new_chat_members" for bot.`);
@@ -67,6 +69,17 @@ export default class Bot extends TelegramBot {
         // this.updateBotCommandsHelp().catch((error: Error) => {
         //     console.error("Failed to update bot commands: ", error);
         // });
+    }
+
+    /**
+     * handleCallbackQuery - handler for inline keyboard callback query.
+     * @method
+     * @param message - CallbackQuery object.
+     * @author Danil Andreev
+     */
+    protected async handleCallbackQuery(query: CallbackQuery): Promise<void> {
+        Logger?.debug(`Caught event "left_chat_member" on chat id ${query.message?.chat.id}: "${query.data}"`);
+        await Enqueuer.telegramEvent("callback_query", query);
     }
 
     /**
