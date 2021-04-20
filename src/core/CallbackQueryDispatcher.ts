@@ -51,7 +51,7 @@ class CallbackQueryDispatcher extends AmqpHandler {
             this.callbackQueryHandlers = callbackQueryHandlers.reduce(CallbackQueryDispatcher.handlersReducer, new Set());
             for (const handler of this.callbackQueryHandlers) {
                 Logger?.silly(
-                    `Loaded Telegram callback query handler for: ${handler.pattern.join(".")}. exact=${!!handler.options.exact}`
+                    `Loaded Telegram callback query handler for: "${handler.pattern.join(".")}". exact=${!!handler.options.exact}`
                 );
             }
             Logger?.debug(`Loaded ${this.callbackQueryHandlers.size} Telegram callback query handlers.`);

@@ -34,7 +34,7 @@ import {Logger} from "../../../core/Logger";
 export default class PullRequestCallbacksHandler {
     @CallbackQueryDispatcher.CallbackQueryHandler("pull_request.:id.maximize", {exact: true})
     public static async maximize(query: CallbackQuery, params: JSONObject<{ id: string }>): Promise<void> {
-        Logger?.debug(`Handling Telegram callback query: ${query.data} | PullRequestCallbacksHandler.maximize()`);
+        Logger?.debug(`Handling Telegram callback query: "${query.data}" | PullRequestCallbacksHandler.maximize()`);
         const {id} = params;
         if (!query.message) return;
         const entity: PullRequest | undefined = await PullRequest.findOne({
@@ -52,7 +52,7 @@ export default class PullRequestCallbacksHandler {
 
     @CallbackQueryDispatcher.CallbackQueryHandler("pull_request.:id.minimize", {exact: true})
     public static async minimize(query: CallbackQuery, params: JSONObject<{ id: string }>): Promise<void> {
-        Logger?.debug(`Handling Telegram callback query: ${query.data} | PullRequestCallbacksHandler.minimize()`);
+        Logger?.debug(`Handling Telegram callback query: "${query.data}" | PullRequestCallbacksHandler.minimize()`);
         const {id} = params;
         if (!query.message) return;
         const entity: PullRequest | undefined = await PullRequest.findOne({
