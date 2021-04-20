@@ -77,7 +77,10 @@ export default class DrawPullRequestHandler extends AmqpHandler {
                     parse_mode: "HTML",
                     reply_markup: {
                         inline_keyboard: [
-                            [{text: "Maximize", callback_data: "maximize"}],
+                            [{
+                                text: entity.minimized ? "Maximize" : "Minimize",
+                                callback_data: `pull_request.${entity.pullRequestId}` + entity.minimized ? ".maximize" : ".minimize"
+                            }],
                             [{text: "View on GitHub", url: entity.info.html_url}],
                         ],
                     },

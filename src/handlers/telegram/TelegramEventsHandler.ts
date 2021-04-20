@@ -28,15 +28,19 @@ import AmqpHandler from "../../core/AmqpHandler";
 import {QUEUES} from "../../globals";
 import {Message as AMQPMessage} from "amqplib";
 import Enqueuer from "../../core/Enqueuer";
-import {Message, User} from "node-telegram-bot-api";
+import {CallbackQuery, Message, User} from "node-telegram-bot-api";
 import Chat from "../../entities/Chat";
 import Collaborator from "../../entities/Collaborator";
 import Bot from "../../core/Bot";
 import AMQPNack from "../../errors/AMQPNack";
+// import AMQPAck from "../../errors/AMQPAck";
+// import PullRequest from "../../entities/PullRequest";
+// import JSONObject from "../../interfaces/JSONObject";
+import CallbackQueryDispatcher from "../../core/CallbackQueryDispatcher";
 
 @AmqpHandler.Handler(QUEUES.TELEGRAM_EVENTS_QUEUE, 10)
 @Reflect.metadata("amqp-handler-type", "telegram-events-handler")
-export default class TelegramEventsHandler extends AmqpHandler {
+export default class TelegramEventsHandler extends CallbackQueryDispatcher {
     protected async handle(event: Enqueuer.TelegramEvent, message: AMQPMessage): Promise<void | boolean> {
         switch (event.type) {
             case "left_chat_member":
@@ -44,7 +48,7 @@ export default class TelegramEventsHandler extends AmqpHandler {
             case "new_chat_members":
                 return this.handleNewChatMember(event.message);
             case "callback_query":
-                return;
+                return this.handleCallbackQuery(event.message as unknown as CallbackQuery);
             default:
                 throw new AMQPNack("Unknown event type.", message.properties.messageId);
         }
@@ -74,7 +78,24 @@ export default class TelegramEventsHandler extends AmqpHandler {
         }
     }
 
-    protected async handlerQueryCallback(): Promise<void | boolean> {
-
-    }
+    // protected async handlerQueryCallback(query: CallbackQuery): Promise<void | boolean> {
+    //     if (!query.data)
+    //         throw new AMQPAck("Incorrect query callback data. Got falsy value.");
+    //
+    //
+    //     // TODO: add mechanism for callback query handlers.
+    //     let params;
+    //     if ((params = TelegramEventsHandler.comparePatterns("pull_request.:id.:action".split("."), query.data.split("."))) !== null) {
+    //         const pullRequest = await PullRequest.findOne({where: {pullRequestId: params.id}});
+    //         break;
+    //     }
+    //
+    //     switch (query.data) {
+    //         case "pull_request.maximize":
+    //             const pullRequest = await PullRequest.findOne({where: {pullRequestId: query.}});
+    //             break;
+    //         default:
+    //             throw new AMQPAck(`Unknown callback query data. ${query.data}`)
+    //     }
+    // }
 }
