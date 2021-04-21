@@ -27,6 +27,7 @@
 import {EditMessageCaptionOptions} from "node-telegram-bot-api";
 import AmqpEvent from "../../core/AmqpEvent";
 import JSONObject from "../../interfaces/JSONObject";
+import {QUEUES} from "../../globals";
 
 export default class EditChatMessageLiveLocationEvent extends AmqpEvent {
     public latitude: number;
@@ -34,7 +35,10 @@ export default class EditChatMessageLiveLocationEvent extends AmqpEvent {
     public options?: EditMessageCaptionOptions;
 
     constructor(latitude: number, longitude: number, options?: EditMessageCaptionOptions) {
-        super("edit-chat-message-live-location");
+        super("edit-chat-message-live-location", {
+            expiration: 1000 * 60 * 10,
+            queue: QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
+        });
         this.latitude = latitude;
         this.longitude = longitude;
         this.options = options;
@@ -46,6 +50,6 @@ export default class EditChatMessageLiveLocationEvent extends AmqpEvent {
             latitude: this.latitude,
             longitude: this.longitude,
             options: this.options,
-        }
+        };
     }
 }

@@ -25,27 +25,78 @@
  */
 
 import JSONObject from "../interfaces/JSONObject";
+import AmqpDispatcher from "./AmqpDispatcher";
 
 /**
  * AmqpEvent - base class for AMQP events.
  * @class
  * @author Danil Andreev
  */
-class AmqpEvent {
+abstract class AmqpEvent {
     /**
      * type - event type. Needed for event identification.
      */
     protected type: string;
+    /**
+     * expiration - event expiration time.
+     */
+    protected expiration: number | undefined;
 
+    protected queue?: string;
 
     /**
      * Creates an instance of AmqpEvent.
      * @constructor
      * @param type - event type.
+     * @param expiration - event expiration time in milliseconds.
      * @author Danil Andreev
      */
-    protected constructor(type?: string) {
+    protected constructor(type?: string, options?: AmqpEvent.Options) {
         this.type = type || "untyped-event";
+        this.expiration = options?.expiration;
+        this.queue = options?.queue;
+    }
+
+    public async enqueue(queue?: string): Promise<AmqpEvent> {
+        const targetQueue: string | undefined = this.queue || queue;
+        if (!targetQueue)
+            throw new ReferenceError(`You must specify queue name for enqueuing.`);
+        await AmqpDispatcher.getCurrent().sendToQueue(
+            targetQueue,
+            this.serialize(),
+            {expiration: this.expiration}
+        );
+        return this;
+    }
+
+    /**
+     * setExpiration - sets event expiration.
+     * @method
+     * @param expiration - expiration time in milliseconds.
+     * @author Danil Andreev
+     */
+    public setExpiration(expiration: number): AmqpEvent {
+        this.expiration = expiration;
+        return this;
+    }
+
+    /**
+     * makeIndefinite - set expiration time to indefinite.
+     * @method
+     * @author Danil Andreev
+     */
+    public makeIndefinite(): AmqpEvent {
+        this.expiration = undefined;
+        return this;
+    }
+
+    /**
+     * getExpiration - getter for event expiration time.
+     * @method
+     * @author Danil Andreev
+     */
+    public getExpiration(): number | undefined {
+        return this.expiration;
     }
 
     /**
@@ -66,6 +117,13 @@ class AmqpEvent {
         return {
             type: this.type,
         };
+    }
+}
+
+namespace AmqpEvent {
+    export interface Options {
+        expiration?: number;
+        queue?: string;
     }
 }
 

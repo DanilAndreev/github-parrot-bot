@@ -26,6 +26,7 @@
 
 import AmqpEvent from "../../core/AmqpEvent";
 import JSONObject from "../../interfaces/JSONObject";
+import {QUEUES} from "../../globals";
 
 export default class DeleteChatMessageEvent extends AmqpEvent {
     public chatId: string | number;
@@ -33,7 +34,10 @@ export default class DeleteChatMessageEvent extends AmqpEvent {
     public showMessageOnError: boolean;
 
     constructor(chatId: string | number, messageId: string, options?: JSONObject, showMessageOnError?: boolean) {
-        super("edit-chat-message-live-location");
+        super("delete-chat-message", {
+            expiration: 1000 * 60 * 10,
+            queue: QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
+        });
         this.chatId = chatId;
         this.messageId = messageId;
         this.showMessageOnError = !!showMessageOnError;
@@ -45,6 +49,6 @@ export default class DeleteChatMessageEvent extends AmqpEvent {
             chatId: this.chatId,
             messageId: this.messageId,
             showMessageOnError: this.showMessageOnError,
-        }
+        };
     }
 }

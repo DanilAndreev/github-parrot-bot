@@ -27,13 +27,17 @@
 import {EditMessageReplyMarkupOptions, InlineKeyboardMarkup} from "node-telegram-bot-api";
 import AmqpEvent from "../../core/AmqpEvent";
 import JSONObject from "../../interfaces/JSONObject";
+import {QUEUES} from "../../globals";
 
 export default class EditChatMessageReplyMarkupEvent extends AmqpEvent {
     public replyMarkup: InlineKeyboardMarkup;
     public options?: EditMessageReplyMarkupOptions;
 
     constructor(replyMarkup: InlineKeyboardMarkup, options?: EditMessageReplyMarkupOptions) {
-        super("edit-chat-message-reply-markup");
+        super("edit-chat-message-reply-markup", {
+            expiration: 1000 * 60 * 10,
+            queue: QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
+        });
         this.replyMarkup = replyMarkup;
         this.options = options;
     }
@@ -43,6 +47,6 @@ export default class EditChatMessageReplyMarkupEvent extends AmqpEvent {
             ...super.serialize(),
             replyMarkup: this.replyMarkup,
             options: this.options,
-        }
+        };
     }
 }

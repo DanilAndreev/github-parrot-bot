@@ -26,26 +26,42 @@
 
 import AmqpEvent from "../../core/AmqpEvent";
 import JSONObject from "../../interfaces/JSONObject";
-import {Message} from "node-telegram-bot-api";
+import {CallbackQuery, Message} from "node-telegram-bot-api";
 import {QUEUES} from "../../globals";
 
-export default class ChatCommandEvent extends AmqpEvent {
-    public message: Message;
-    public match: RegExpMatchArray | null;
+class TelegramEventEvent<T extends Message | CallbackQuery> extends AmqpEvent {
+    public event: TelegramEventEvent.TelegramEvent;
+    public message: T;
 
-    constructor(message: Message, match: RegExpMatchArray | null) {
-        super("chat-command-event", {
-            queue: QUEUES.TELEGRAM_CHAT_COMMAND,
+    constructor(event: TelegramEventEvent.TelegramEvent, message: T) {
+        super("telegram-event-event", {
+            queue: QUEUES.TELEGRAM_EVENTS_QUEUE,
         });
         this.message = message;
-        this.match = match;
+        this.event = event;
     }
 
     public serialize(): JSONObject {
         return {
             ...super.serialize(),
+            event: this.event,
             message: this.message,
-            match: this.match,
-        }
+        };
     }
 }
+
+namespace TelegramEventEvent {
+    export type TelegramEvent =
+        | "channel_post"
+        | "edited_message"
+        | "edited_message_text"
+        | "edited_message_caption"
+        | "edited_channel_post"
+        | "edited_channel_post_text"
+        | "edited_channel_post_caption"
+        | "new_chat_members"
+        | "left_chat_member"
+        | "callback_query";
+}
+
+export default TelegramEventEvent;

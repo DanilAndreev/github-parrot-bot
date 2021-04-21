@@ -16,15 +16,18 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[ConnectCommand] Removed legacy TODO.">
-      <change afterPath="$PROJECT_DIR$/src/events/telegram/ChatCommandEvent.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/events/telegram/DeleteChatMessageEvent.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageLiveLocationEvent.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageReplyMarkupEvent.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageTextEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintrc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.yaml" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[AmqpEvent] Creating new AMQP event system.">
+      <change afterPath="$PROJECT_DIR$/src/events/telegram/DrawCheckSuiteEvent.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/events/telegram/DrawIssueEvent.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/events/telegram/DrawPullRequestEvent.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/events/telegram/TelegramEventEvent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/AmqpEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/AmqpEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/telegram/ChatCommandEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/ChatCommandEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/telegram/DeleteChatMessageEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/DeleteChatMessageEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageLiveLocationEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageLiveLocationEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageReplyMarkupEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageReplyMarkupEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageTextEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageTextEvent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/telegram/SendChatMessageEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/SendChatMessageEvent.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,11 +89,12 @@
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="D:\Projects\github-parrot-bot\node_modules\prettier" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="ts.external.directory.path" value="C:\Users\onepl\WebstormProjects\github-parrot-bot\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\Projects\github-parrot-bot\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\github-parrot-bot\src\events\telegram" />
       <recent name="C:\Users\onepl\WebstormProjects\github-parrot-bot\src\events\telegram" />
       <recent name="C:\Users\onepl\WebstormProjects\github-parrot-bot\src\handlers\telegram\callbacks" />
       <recent name="D:\Projects\github-tracker-telegram-bot\src\entities" />
@@ -181,6 +185,7 @@
       <workItem from="1618949976098" duration="7061000" />
       <workItem from="1618999334833" duration="2047000" />
       <workItem from="1619016189443" duration="1199000" />
+      <workItem from="1619034159639" duration="1367000" />
     </task>
     <task id="LOCAL-00062" summary="[IssueHandler] Fixed bug with message deletion.">
       <created>1616962489154</created>
@@ -582,20 +587,6 @@
     <MESSAGE value="[WebHookSettingsHandler] Added callback query handler for webhook settings." />
     <MESSAGE value="[ConnectCommand] Removed legacy TODO." />
     <option name="LAST_COMMIT_MESSAGE" value="[ConnectCommand] Removed legacy TODO." />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="2381" y="165" key="SettingsEditor" timestamp="1619016160685">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2381" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619016160685" />
-    <state x="577" y="0" width="1359" height="865" maximized="true" key="dock-window-1" timestamp="1619016374424">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="577" y="0" width="1359" height="865" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619016374424" />
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1619016943397">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619016943397" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

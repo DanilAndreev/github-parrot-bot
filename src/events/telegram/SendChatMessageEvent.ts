@@ -27,6 +27,7 @@
 import AmqpEvent from "../../core/AmqpEvent";
 import {SendMessageOptions} from "node-telegram-bot-api";
 import JSONObject from "../../interfaces/JSONObject";
+import {QUEUES} from "../../globals";
 
 export default class SendChatMessageEvent extends AmqpEvent {
     public chatId: string | number;
@@ -34,7 +35,10 @@ export default class SendChatMessageEvent extends AmqpEvent {
     public options?: SendMessageOptions;
 
     public constructor(chatId: string | number, text: string, options?: SendMessageOptions) {
-        super("send-chat-message");
+        super("send-chat-message", {
+            expiration: 1000 * 60 * 10,
+            queue: QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
+        });
         this.chatId = chatId;
         this.text = text;
         this.options = options;

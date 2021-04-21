@@ -27,13 +27,17 @@
 import {EditMessageTextOptions} from "node-telegram-bot-api";
 import AmqpEvent from "../../core/AmqpEvent";
 import JSONObject from "../../interfaces/JSONObject";
+import {QUEUES} from "../../globals";
 
 export default class EditChatMessageTextEvent extends AmqpEvent {
     public text: string;
     public options?: EditMessageTextOptions;
 
     constructor(text: string, options?: EditMessageTextOptions) {
-        super("edit-message-text-event");
+        super("edit-message-text-event", {
+            expiration: 1000 * 60 * 10,
+            queue: QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
+        });
         this.text = text;
         this.options = options;
     }
@@ -43,6 +47,6 @@ export default class EditChatMessageTextEvent extends AmqpEvent {
             ...super.serialize(),
             text: this.text,
             options: this.options,
-        }
+        };
     }
 }

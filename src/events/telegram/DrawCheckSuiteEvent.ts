@@ -26,26 +26,25 @@
 
 import AmqpEvent from "../../core/AmqpEvent";
 import JSONObject from "../../interfaces/JSONObject";
-import {Message} from "node-telegram-bot-api";
 import {QUEUES} from "../../globals";
 
-export default class ChatCommandEvent extends AmqpEvent {
-    public message: Message;
-    public match: RegExpMatchArray | null;
+export default class DrawPullRequestEvent extends AmqpEvent {
+    public checkSuite: number;
+    public forceNewMessage:boolean;
 
-    constructor(message: Message, match: RegExpMatchArray | null) {
+    constructor(checkSuite: number, forceNewMessage: boolean = false) {
         super("chat-command-event", {
-            queue: QUEUES.TELEGRAM_CHAT_COMMAND,
+            queue: QUEUES.CHECK_SUITE_SHOW_QUEUE,
         });
-        this.message = message;
-        this.match = match;
+        this.checkSuite = checkSuite;
+        this.forceNewMessage = forceNewMessage;
     }
 
     public serialize(): JSONObject {
         return {
             ...super.serialize(),
-            message: this.message,
-            match: this.match,
+            checkSuite: this.checkSuite,
+            forceNewMessage: this.forceNewMessage,
         }
     }
 }
