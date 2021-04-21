@@ -24,28 +24,25 @@
  * SOFTWARE.
  */
 
+import {EditMessageReplyMarkupOptions, InlineKeyboardMarkup} from "node-telegram-bot-api";
 import AmqpEvent from "../../core/AmqpEvent";
-import {SendMessageOptions} from "node-telegram-bot-api";
 import JSONObject from "../../interfaces/JSONObject";
 
-export default class SendChatMessageEvent extends AmqpEvent {
-    public chatId: string | number;
-    public text: string;
-    public options?: SendMessageOptions;
+export default class EditChatMessageReplyMarkupEvent extends AmqpEvent {
+    public replyMarkup: InlineKeyboardMarkup;
+    public options?: EditMessageReplyMarkupOptions;
 
-    public constructor(chatId: string | number, text: string, options?: SendMessageOptions) {
-        super("send-chat-message");
-        this.chatId = chatId;
-        this.text = text;
+    constructor(replyMarkup: InlineKeyboardMarkup, options?: EditMessageReplyMarkupOptions) {
+        super("edit-chat-message-reply-markup");
+        this.replyMarkup = replyMarkup;
         this.options = options;
     }
 
     public serialize(): JSONObject {
         return {
             ...super.serialize(),
-            chatId: this.chatId,
-            text: this.text,
+            replyMarkup: this.replyMarkup,
             options: this.options,
-        };
+        }
     }
 }

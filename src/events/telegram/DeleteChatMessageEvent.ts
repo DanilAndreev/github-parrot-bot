@@ -25,27 +25,26 @@
  */
 
 import AmqpEvent from "../../core/AmqpEvent";
-import {SendMessageOptions} from "node-telegram-bot-api";
 import JSONObject from "../../interfaces/JSONObject";
 
-export default class SendChatMessageEvent extends AmqpEvent {
+export default class DeleteChatMessageEvent extends AmqpEvent {
     public chatId: string | number;
-    public text: string;
-    public options?: SendMessageOptions;
+    public messageId: string;
+    public showMessageOnError: boolean;
 
-    public constructor(chatId: string | number, text: string, options?: SendMessageOptions) {
-        super("send-chat-message");
+    constructor(chatId: string | number, messageId: string, options?: JSONObject, showMessageOnError?: boolean) {
+        super("edit-chat-message-live-location");
         this.chatId = chatId;
-        this.text = text;
-        this.options = options;
+        this.messageId = messageId;
+        this.showMessageOnError = !!showMessageOnError;
     }
 
     public serialize(): JSONObject {
         return {
             ...super.serialize(),
             chatId: this.chatId,
-            text: this.text,
-            options: this.options,
-        };
+            messageId: this.messageId,
+            showMessageOnError: this.showMessageOnError,
+        }
     }
 }

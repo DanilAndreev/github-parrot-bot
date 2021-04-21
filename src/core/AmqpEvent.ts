@@ -27,15 +27,16 @@
 import JSONObject from "../interfaces/JSONObject";
 
 /**
- * AmqpEvent - abstract base class for AMQP events.
+ * AmqpEvent - base class for AMQP events.
  * @class
  * @author Danil Andreev
  */
-abstract class AmqpEvent {
+class AmqpEvent {
     /**
      * type - event type. Needed for event identification.
      */
-    public readonly type: string;
+    protected type: string;
+
 
     /**
      * Creates an instance of AmqpEvent.
@@ -43,8 +44,17 @@ abstract class AmqpEvent {
      * @param type - event type.
      * @author Danil Andreev
      */
-    protected constructor(type: string) {
-        this.type = type;
+    protected constructor(type?: string) {
+        this.type = type || "untyped-event";
+    }
+
+    /**
+     * getType - getter for event type.
+     * @method
+     * @author Danil Andreev
+     */
+    protected getType(): string {
+        return this.type;
     }
 
     /**
@@ -52,20 +62,10 @@ abstract class AmqpEvent {
      * @method
      * @author Danil Andreev
      */
-    public serialize<T extends JSONObject>(): T {
+    public serialize(): JSONObject {
         return {
             type: this.type,
-        }
-    }
-
-    /**
-     * Deserializes event from JSON.
-     * @method
-     * @param serialized - Serialized event object.
-     * @author Danil Andreev
-     */
-    public static deserialize<T extends JSONObject = JSONObject>(serialized: T): AmqpEvent {
-        throw new
+        };
     }
 }
 

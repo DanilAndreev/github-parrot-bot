@@ -24,28 +24,28 @@
  * SOFTWARE.
  */
 
+import {EditMessageCaptionOptions} from "node-telegram-bot-api";
 import AmqpEvent from "../../core/AmqpEvent";
-import {SendMessageOptions} from "node-telegram-bot-api";
 import JSONObject from "../../interfaces/JSONObject";
 
-export default class SendChatMessageEvent extends AmqpEvent {
-    public chatId: string | number;
-    public text: string;
-    public options?: SendMessageOptions;
+export default class EditChatMessageLiveLocationEvent extends AmqpEvent {
+    public latitude: number;
+    public longitude: number;
+    public options?: EditMessageCaptionOptions;
 
-    public constructor(chatId: string | number, text: string, options?: SendMessageOptions) {
-        super("send-chat-message");
-        this.chatId = chatId;
-        this.text = text;
+    constructor(latitude: number, longitude: number, options?: EditMessageCaptionOptions) {
+        super("edit-chat-message-live-location");
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.options = options;
     }
 
     public serialize(): JSONObject {
         return {
             ...super.serialize(),
-            chatId: this.chatId,
-            text: this.text,
+            latitude: this.latitude,
+            longitude: this.longitude,
             options: this.options,
-        };
+        }
     }
 }

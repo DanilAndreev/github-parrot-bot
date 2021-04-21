@@ -24,18 +24,16 @@
  * SOFTWARE.
  */
 
+import {EditMessageTextOptions} from "node-telegram-bot-api";
 import AmqpEvent from "../../core/AmqpEvent";
-import {SendMessageOptions} from "node-telegram-bot-api";
 import JSONObject from "../../interfaces/JSONObject";
 
-export default class SendChatMessageEvent extends AmqpEvent {
-    public chatId: string | number;
+export default class EditChatMessageTextEvent extends AmqpEvent {
     public text: string;
-    public options?: SendMessageOptions;
+    public options?: EditMessageTextOptions;
 
-    public constructor(chatId: string | number, text: string, options?: SendMessageOptions) {
-        super("send-chat-message");
-        this.chatId = chatId;
+    constructor(text: string, options?: EditMessageTextOptions) {
+        super("edit-message-text-event");
         this.text = text;
         this.options = options;
     }
@@ -43,9 +41,8 @@ export default class SendChatMessageEvent extends AmqpEvent {
     public serialize(): JSONObject {
         return {
             ...super.serialize(),
-            chatId: this.chatId,
             text: this.text,
             options: this.options,
-        };
+        }
     }
 }
