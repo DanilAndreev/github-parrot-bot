@@ -29,11 +29,12 @@ import {CallbackQuery, Message} from "node-telegram-bot-api";
 import {QUEUES} from "../../globals";
 
 class TelegramEventEvent<T extends Message | CallbackQuery> extends AmqpEvent {
+    public static readonly type: string = "telegram-event-event";
     public event: TelegramEventEvent.TelegramEvent;
     public message: T;
 
     constructor(event: TelegramEventEvent.TelegramEvent, message: T) {
-        super("telegram-event-event", {
+        super(TelegramEventEvent.type, {
             queue: QUEUES.TELEGRAM_EVENTS_QUEUE,
         });
         this.message = message;

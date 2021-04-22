@@ -28,11 +28,12 @@ import AmqpEvent from "../../core/AmqpEvent";
 import {QUEUES} from "../../globals";
 
 class DrawIssueEvent extends AmqpEvent {
+    public static readonly type: string = "draw-issue-event";
     public issue: number;
     public forceNewMessage: boolean;
 
     constructor(issue: number, forceNewMessage: boolean = false) {
-        super("chat-command-event", {
+        super(DrawIssueEvent.type, {
             queue: QUEUES.ISSUE_SHOW_QUEUE,
         });
         this.issue = issue;

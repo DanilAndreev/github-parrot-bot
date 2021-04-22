@@ -33,18 +33,22 @@ import Collaborator from "../../entities/Collaborator";
 import Bot from "../../core/Bot";
 import AMQPNack from "../../errors/AMQPNack";
 import CallbackQueryDispatcher from "../../core/CallbackQueryDispatcher";
+import TelegramEventEvent from "../../events/telegram/TelegramEventEvent";
 
 @AmqpHandler.Handler(QUEUES.TELEGRAM_EVENTS_QUEUE, 10)
 @Reflect.metadata("amqp-handler-type", "telegram-events-handler")
 export default class TelegramEventsHandler extends CallbackQueryDispatcher {
-    protected async handle(event: Enqueuer.TelegramEvent, message: AMQPMessage): Promise<void | boolean> {
+    protected async handle(
+        event: TelegramEventEvent.Serialized<Message | CallbackQuery>,
+        message: AMQPMessage
+    ): Promise<void | boolean> {
         switch (event.type) {
             case "left_chat_member":
-                return this.handleLeftChatMember(event.message);
+                return this.handleLeftChatMember(event.message as Message);
             case "new_chat_members":
-                return this.handleNewChatMember(event.message);
+                return this.handleNewChatMember(event.message as Message);
             case "callback_query":
-                return this.handleCallbackQuery(event.message as unknown as CallbackQuery);
+                return this.handleCallbackQuery(event.message as CallbackQuery);
             default:
                 throw new AMQPNack("Unknown event type.", message.properties.messageId);
         }

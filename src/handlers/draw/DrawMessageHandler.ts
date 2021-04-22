@@ -44,15 +44,15 @@ import DeleteChatMessageEvent from "../../events/telegram/DeleteChatMessageEvent
 class DrawMessageHandler extends AmqpHandler {
     protected async handle(event: AmqpEvent.Serialized, message: AMQPMessage): Promise<void | boolean> {
         switch (event.type) {
-            case "send-chat-message":
+            case SendChatMessageEvent.type:
                 return await this.sendChatMessage(event as SendChatMessageEvent.Serialized, message);
-            case "edit-message-text":
+            case EditChatMessageTextEvent.type:
                 return await this.editMessageText(event as EditChatMessageTextEvent.Serialized, message);
-            case "edit-message-reply-markup":
+            case EditChatMessageReplyMarkupEvent.type:
                 return await this.editMessageReplyMarkup(event as EditChatMessageReplyMarkupEvent.Serialized, message);
-            case "edit-message-live-location":
+            case EditChatMessageLiveLocationEvent.type:
                 return await this.editMessageLiveLocation(event as EditChatMessageLiveLocationEvent.Serialized, message);
-            case "delete-chat-message":
+            case DeleteChatMessageEvent.type:
                 return await this.deleteMessage(event as DeleteChatMessageEvent.Serialized, message);
             default:
                 throw new AMQPAck(`Incorrect message type. Got: "${event.type}"`, message.properties.messageId);
@@ -78,7 +78,7 @@ class DrawMessageHandler extends AmqpHandler {
     }
 
     protected async editMessageText(
-        event: Enqueuer.EditMessageTextEvent,
+        event: EditChatMessageTextEvent.Serialized,
         message: AMQPMessage
     ): Promise<void | boolean> {
         try {
@@ -99,7 +99,7 @@ class DrawMessageHandler extends AmqpHandler {
     }
 
     protected async editMessageReplyMarkup(
-        event: Enqueuer.EditMessageReplyMarkupEvent,
+        event: EditChatMessageReplyMarkupEvent.Serialized,
         message: AMQPMessage
     ): Promise<void | boolean> {
         try {
@@ -114,7 +114,7 @@ class DrawMessageHandler extends AmqpHandler {
     }
 
     protected async editMessageLiveLocation(
-        event: Enqueuer.EditMessageLiveLocationEvent,
+        event: EditChatMessageLiveLocationEvent.Serialized,
         message: AMQPMessage
     ): Promise<void | boolean> {
         try {
@@ -129,7 +129,7 @@ class DrawMessageHandler extends AmqpHandler {
     }
 
     protected async deleteMessage(
-        event: Enqueuer.DeleteChatMessageEvent,
+        event: DeleteChatMessageEvent.Serialized,
         message: AMQPMessage
     ): Promise<void | boolean> {
         try {

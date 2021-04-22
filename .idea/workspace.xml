@@ -16,25 +16,21 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[AmqpEvent] Added more events.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[ConnectCommand] Removed legacy TODO.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/AmqpEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/AmqpEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Enqueuer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/draw/DrawCheckSuiteEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawCheckSuiteEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/draw/DrawIssueEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawIssueEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/draw/DrawPullRequestEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawPullRequestEvent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/telegram/ChatCommandEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/ChatCommandEvent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/telegram/DeleteChatMessageEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/DeleteChatMessageEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/DrawCheckSuiteEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawCheckSuiteEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/DrawIssueEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawIssueEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/DrawPullRequestEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawPullRequestEvent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageLiveLocationEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageLiveLocationEvent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageReplyMarkupEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageReplyMarkupEvent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageTextEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageTextEvent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/telegram/SendChatMessageEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/SendChatMessageEvent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/telegram/TelegramEventEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/TelegramEventEvent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/callbacks/IssueCallbacksHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/callbacks/IssueCallbacksHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/callbacks/PullRequestCallbacksHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/callbacks/PullRequestCallbacksHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -594,6 +590,16 @@
     <MESSAGE value="[AmqpEvent] Added more events." />
     <option name="LAST_COMMIT_MESSAGE" value="[AmqpEvent] Added more events." />
   </component>
+  <component name="WindowStateProjectService">
+    <state x="601" y="0" width="1335" height="859" maximized="true" key="dock-window-1" timestamp="1619090325069">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="601" y="0" width="1335" height="859" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619090325069" />
+    <state x="2536" y="240" key="run.anything.popup" timestamp="1619090297282">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2536" y="240" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619090297282" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -614,18 +620,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts</url>
-          <line>49</line>
-          <option name="timeStamp" value="54" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts</url>
           <line>77</line>
           <option name="timeStamp" value="55" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/handlers/telegram/callbacks/PullRequestCallbacksHandler.ts</url>
-          <line>37</line>
-          <option name="timeStamp" value="56" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

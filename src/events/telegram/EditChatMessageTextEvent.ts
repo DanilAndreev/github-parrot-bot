@@ -29,11 +29,12 @@ import AmqpEvent from "../../core/AmqpEvent";
 import {QUEUES} from "../../globals";
 
 class EditChatMessageTextEvent extends AmqpEvent {
+    public static readonly type: string = "edit-message-text-event";
     public text: string;
     public options?: EditMessageTextOptions;
 
     constructor(text: string, options?: EditMessageTextOptions) {
-        super("edit-message-text-event", {
+        super(EditChatMessageTextEvent.type, {
             expiration: 1000 * 60 * 10,
             queue: QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
         });

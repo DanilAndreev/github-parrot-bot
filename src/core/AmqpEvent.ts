@@ -34,6 +34,10 @@ import AmqpDispatcher from "./AmqpDispatcher";
  */
 abstract class AmqpEvent {
     /**
+     * type - event type.
+     */
+    public static readonly type: string = "untyped-event";
+    /**
      * type - event type. Needed for event identification.
      */
     protected type: string;
@@ -41,7 +45,9 @@ abstract class AmqpEvent {
      * expiration - event expiration time.
      */
     protected expiration: number | undefined;
-
+    /**
+     * queue - default AMQP queue name for event enqueuing.
+     */
     protected queue?: string;
 
     /**
@@ -52,7 +58,7 @@ abstract class AmqpEvent {
      * @author Danil Andreev
      */
     protected constructor(type?: string, options?: AmqpEvent.Options) {
-        this.type = type || "untyped-event";
+        this.type = type || AmqpEvent.type;
         this.expiration = options?.expiration;
         this.queue = options?.queue;
     }
@@ -126,7 +132,7 @@ namespace AmqpEvent {
         queue?: string;
     }
 
-    export interface Serialized extends JSONObject{
+    export interface Serialized extends JSONObject {
         type: string;
     }
 }

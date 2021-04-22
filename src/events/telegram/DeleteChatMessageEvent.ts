@@ -29,12 +29,13 @@ import JSONObject from "../../interfaces/JSONObject";
 import {QUEUES} from "../../globals";
 
 class DeleteChatMessageEvent extends AmqpEvent {
+    public static readonly type: string = "delete-chat-message";
     public chatId: string | number;
     public messageId: string;
     public showMessageOnError: boolean;
 
     constructor(chatId: string | number, messageId: string, options?: JSONObject, showMessageOnError?: boolean) {
-        super("delete-chat-message", {
+        super(DeleteChatMessageEvent.type, {
             expiration: 1000 * 60 * 10,
             queue: QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
         });

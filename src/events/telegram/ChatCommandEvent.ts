@@ -29,11 +29,12 @@ import {Message} from "node-telegram-bot-api";
 import {QUEUES} from "../../globals";
 
 class ChatCommandEvent extends AmqpEvent {
+    public static readonly type: string = "chat-command-event";
     public message: Message;
     public match: RegExpMatchArray | null;
 
     constructor(message: Message, match: RegExpMatchArray | null) {
-        super("chat-command-event", {
+        super(ChatCommandEvent.type, {
             queue: QUEUES.TELEGRAM_CHAT_COMMAND,
         });
         this.message = message;

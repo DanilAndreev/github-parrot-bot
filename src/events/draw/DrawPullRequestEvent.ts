@@ -28,11 +28,12 @@ import AmqpEvent from "../../core/AmqpEvent";
 import {QUEUES} from "../../globals";
 
 class DrawPullRequestEvent extends AmqpEvent {
+    public static readonly type: string = "draw-pull-request-event";
     public pullRequest: number;
     public forceNewMessage: boolean;
 
     constructor(pullRequest: number, forceNewMessage: boolean = false) {
-        super("chat-command-event", {
+        super(DrawPullRequestEvent.type, {
             queue: QUEUES.PULL_REQUEST_SHOW_QUEUE,
         });
         this.pullRequest = pullRequest;

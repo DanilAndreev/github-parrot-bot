@@ -29,12 +29,13 @@ import {SendMessageOptions} from "node-telegram-bot-api";
 import {QUEUES} from "../../globals";
 
 class SendChatMessageEvent extends AmqpEvent {
+    public static readonly type: string = "send-chat-message";
     public chatId: string | number;
     public text: string;
     public options?: SendMessageOptions;
 
     public constructor(chatId: string | number, text: string, options?: SendMessageOptions) {
-        super("send-chat-message", {
+        super(SendChatMessageEvent.type, {
             expiration: 1000 * 60 * 10,
             queue: QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
         });

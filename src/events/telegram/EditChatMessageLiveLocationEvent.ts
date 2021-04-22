@@ -29,12 +29,13 @@ import AmqpEvent from "../../core/AmqpEvent";
 import {QUEUES} from "../../globals";
 
 class EditChatMessageLiveLocationEvent extends AmqpEvent {
+    public static readonly type: string = "edit-chat-message-live-location";
     public latitude: number;
     public longitude: number;
     public options?: EditMessageCaptionOptions;
 
     constructor(latitude: number, longitude: number, options?: EditMessageCaptionOptions) {
-        super("edit-chat-message-live-location", {
+        super(EditChatMessageLiveLocationEvent.type, {
             expiration: 1000 * 60 * 10,
             queue: QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
         });

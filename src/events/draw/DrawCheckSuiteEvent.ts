@@ -28,11 +28,12 @@ import AmqpEvent from "../../core/AmqpEvent";
 import {QUEUES} from "../../globals";
 
 class DrawCheckSuiteEvent extends AmqpEvent {
+    public static readonly type: string = "draw-check-suite-event";
     public checkSuite: number;
     public forceNewMessage: boolean;
 
     constructor(checkSuite: number, forceNewMessage: boolean = false) {
-        super("chat-command-event", {
+        super(DrawCheckSuiteEvent.type, {
             queue: QUEUES.CHECK_SUITE_SHOW_QUEUE,
         });
         this.checkSuite = checkSuite;
