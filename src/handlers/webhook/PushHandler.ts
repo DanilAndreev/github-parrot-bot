@@ -25,9 +25,7 @@
  */
 
 import WebHook from "../../entities/WebHook";
-import Bot from "../../core/bot/Bot";
 import {Push} from "github-webhook-event-types";
-import loadTemplate from "../../utils/loadTemplate";
 import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
 import AMQPAck from "../../errors/AMQPAck";
 import DrawPushEvent from "../../events/draw/DrawPushEvent";
@@ -41,26 +39,5 @@ export default class PushHandler extends WebHookAmqpHandler {
         const {pusher, head_commit, repository, ref} = payload;
 
         await new DrawPushEvent(payload, webHook.chat.chatId).enqueue();
-
-        // const split = ref.split("/");
-        // const branch: string = split[split.length - 1];
-        //
-        // const template = await loadTemplate("push");
-        // const message: string = template({
-        //     repository: repository.full_name,
-        //     message: head_commit.message,
-        //     pusher: pusher.name,
-        //     ref: branch,
-        // })
-        //     .replace(/  +/g, " ")
-        //     .replace(/\n +/g, "\n");
-        //
-        // //TODO: REMOVE BOT USAGE AND PROVIDE AMQP EVENT!!!!!!!!!!!!!!!!!!!
-        // await Bot.getCurrent().sendMessage(webHook.chat.chatId, message, {
-        //     parse_mode: "HTML",
-        //     reply_markup: {
-        //         inline_keyboard: [[{text: "View on GitHub", url: head_commit.url}]],
-        //     },
-        // });
     }
 }

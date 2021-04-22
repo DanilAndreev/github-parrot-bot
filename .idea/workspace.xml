@@ -17,13 +17,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[AmqpEvent] Added more events.">
-      <change afterPath="$PROJECT_DIR$/src/events/draw/DrawPushEvent.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/handlers/draw/DrawPushHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/globals.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/webhook/CheckRunHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckRunHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/IssuesHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/IssuesHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/webhook/PushHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PushHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -182,13 +180,6 @@
       <workItem from="1618999334833" duration="2047000" />
       <workItem from="1619016189443" duration="1199000" />
       <workItem from="1619034159639" duration="6558000" />
-    </task>
-    <task id="LOCAL-00067" summary="[Entities] Packed *Message entities to their parent classes.">
-      <created>1617135665433</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1617135665433</updated>
     </task>
     <task id="LOCAL-00068" summary="[TBot] Adding new bot commands logic.">
       <created>1617190345097</created>
@@ -526,7 +517,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619099146753</updated>
     </task>
-    <option name="localTasksCounter" value="116" />
+    <task id="LOCAL-00116" summary="[Handler] Fixed TODOs.">
+      <created>1619122769257</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1619122769258</updated>
+    </task>
+    <option name="localTasksCounter" value="117" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -557,7 +555,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[Logger] Added database support." />
     <MESSAGE value="[Entities] Added cascade deletion to message tables." />
     <MESSAGE value="[Logger] Added database logging." />
     <MESSAGE value="[main] Added process error handler." />
@@ -582,7 +579,8 @@
     <MESSAGE value="[BotCommand] Small fixes." />
     <MESSAGE value="[GLOBAL] Refactored core directories." />
     <MESSAGE value="[WebHookSettings] Added interactive settings." />
-    <option name="LAST_COMMIT_MESSAGE" value="[WebHookSettings] Added interactive settings." />
+    <MESSAGE value="[Handler] Fixed TODOs." />
+    <option name="LAST_COMMIT_MESSAGE" value="[Handler] Fixed TODOs." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

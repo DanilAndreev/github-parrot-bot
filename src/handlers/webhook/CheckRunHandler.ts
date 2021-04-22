@@ -30,8 +30,6 @@ import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
 import CheckRun from "../../entities/CheckRun";
 import CheckSuiteHandler from "./CheckSuiteHandler";
 import CheckSuite from "../../entities/CheckSuite";
-import AmqpDispatcher from "../../core/amqp/AmqpDispatcher";
-import {QUEUES} from "../../globals";
 import AMQPAck from "../../errors/AMQPAck";
 import DrawPullRequestEvent from "../../events/draw/DrawPullRequestEvent";
 import DrawCheckSuiteEvent from "../../events/draw/DrawCheckSuiteEvent";
