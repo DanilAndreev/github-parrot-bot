@@ -16,12 +16,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="&#10;[AmqpEvents] Work finished.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[BotCommand] Small fixes.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/BotCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/BotCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/callbacks/PullRequestCallbacksHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/callbacks/PullRequestCallbacksHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,13 +176,6 @@
       <workItem from="1618999334833" duration="2047000" />
       <workItem from="1619016189443" duration="1199000" />
       <workItem from="1619034159639" duration="6558000" />
-    </task>
-    <task id="LOCAL-00064" summary="[IssuesHandler] Separated to two handlers.">
-      <created>1617054402209</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1617054402209</updated>
     </task>
     <task id="LOCAL-00065" summary="[CheckSuiteHandler] Separated to two parts.">
       <created>1617128960426</created>
@@ -523,7 +513,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619091073551</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="[BotCommand] Small fixes.">
+      <created>1619092524327</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1619092524327</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -554,7 +551,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[Commands] Added messages reply mechanism." />
     <MESSAGE value="[WebServer] Added events list." />
     <MESSAGE value="[VersionCommand] Fixed command for getting version." />
     <MESSAGE value="[Logger] Added database support." />
@@ -579,29 +575,46 @@
     <MESSAGE value="[ConnectCommand] Removed legacy TODO." />
     <MESSAGE value="[AmqpEvent] Added more events." />
     <MESSAGE value="&#10;[AmqpEvents] Work finished." />
-    <option name="LAST_COMMIT_MESSAGE" value="&#10;[AmqpEvents] Work finished." />
+    <MESSAGE value="[BotCommand] Small fixes." />
+    <option name="LAST_COMMIT_MESSAGE" value="[BotCommand] Small fixes." />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="251" key="GridCell.Tab.0.bottom" timestamp="1619092372995">
+    <state width="1877" height="387" key="GridCell.Tab.0.bottom" timestamp="1619092831113">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="251" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092372995" />
-    <state width="1877" height="251" key="GridCell.Tab.0.center" timestamp="1619092372994">
+    <state width="1877" height="387" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092831113" />
+    <state width="1877" height="387" key="GridCell.Tab.0.center" timestamp="1619092831113">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="251" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092372994" />
-    <state width="1877" height="251" key="GridCell.Tab.0.left" timestamp="1619092372994">
+    <state width="1877" height="387" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092831113" />
+    <state width="1877" height="387" key="GridCell.Tab.0.left" timestamp="1619092831113">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="251" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092372994" />
-    <state width="1877" height="251" key="GridCell.Tab.0.right" timestamp="1619092372995">
+    <state width="1877" height="387" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092831113" />
+    <state width="1877" height="387" key="GridCell.Tab.0.right" timestamp="1619092831113">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="251" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092372994" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1619091075916">
+    <state width="1877" height="387" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092831113" />
+    <state width="1877" height="387" key="GridCell.Tab.1.bottom" timestamp="1619092867310">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619091075916" />
+    <state width="1877" height="387" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092867310" />
+    <state width="1877" height="387" key="GridCell.Tab.1.center" timestamp="1619092867309">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="387" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092867309" />
+    <state width="1877" height="387" key="GridCell.Tab.1.left" timestamp="1619092867304">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="387" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092867304" />
+    <state width="1877" height="387" key="GridCell.Tab.1.right" timestamp="1619092867309">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="387" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092867309" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1619092526337">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092526337" />
     <state x="601" y="0" width="1335" height="859" maximized="true" key="dock-window-1" timestamp="1619090325069">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -633,6 +646,18 @@
           <url>file://$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts</url>
           <line>77</line>
           <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/core/CallbackQueryDispatcher.ts</url>
+          <line>92</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/telegram/callbacks/PullRequestCallbacksHandler.ts</url>
+          <line>36</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="59" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -47,7 +47,7 @@ export default class PullRequestCallbacksHandler {
 
         entity.minimized = false;
         await entity.save();
-        await new DrawPullRequestEvent(entity.id)
+        await new DrawPullRequestEvent(entity.id).enqueue();
     }
 
     @CallbackQueryDispatcher.CallbackQueryHandler("pull_request.:id.minimize", {exact: true})
@@ -65,6 +65,6 @@ export default class PullRequestCallbacksHandler {
 
         entity.minimized = true;
         await entity.save();
-        await new DrawPullRequestEvent(entity.id)
+        await new DrawPullRequestEvent(entity.id).enqueue();
     }
 }
