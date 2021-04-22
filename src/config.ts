@@ -56,6 +56,7 @@ import IssueCallbacksHandler from "./handlers/telegram/callbacks/IssueCallbacksH
 import WebHookSettingsHandler from "./handlers/telegram/callbacks/WebHookSettingsHandler";
 import WebHookSettingsCommand from "./commands/WebHookSettingsCommand";
 import DrawWebHookSettingsHandler from "./handlers/draw/DrawWebHookSettingsHandler";
+import DrawPushHandler from "./handlers/draw/DrawPushHandler";
 
 const config: Config = {
     bot: {
@@ -111,6 +112,7 @@ const config: Config = {
             DrawCheckSuiteHandler,
             DrawMessageHandler,
             DrawWebHookSettingsHandler,
+            DrawPushHandler,
 
             CommandsHandler,
             TelegramEventsHandler,

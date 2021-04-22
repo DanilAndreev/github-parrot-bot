@@ -30,6 +30,7 @@ import {Push} from "github-webhook-event-types";
 import loadTemplate from "../../utils/loadTemplate";
 import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
 import AMQPAck from "../../errors/AMQPAck";
+import DrawPushEvent from "../../events/draw/DrawPushEvent";
 
 @WebHookAmqpHandler.Handler("push", 10)
 @Reflect.metadata("amqp-handler-type", "github-event-handler")
@@ -39,25 +40,27 @@ export default class PushHandler extends WebHookAmqpHandler {
             throw new AMQPAck("WebHook setting 'trackPushes' is disabled.");
         const {pusher, head_commit, repository, ref} = payload;
 
-        const split = ref.split("/");
-        const branch: string = split[split.length - 1];
+        await new DrawPushEvent(payload, webHook.chat.chatId).enqueue();
 
-        const template = await loadTemplate("push");
-        const message: string = template({
-            repository: repository.full_name,
-            message: head_commit.message,
-            pusher: pusher.name,
-            ref: branch,
-        })
-            .replace(/  +/g, " ")
-            .replace(/\n +/g, "\n");
-
-        //TODO: REMOVE BOT USAGE AND PROVIDE AMQP EVENT!!!!!!!!!!!!!!!!!!!
-        await Bot.getCurrent().sendMessage(webHook.chat.chatId, message, {
-            parse_mode: "HTML",
-            reply_markup: {
-                inline_keyboard: [[{text: "View on GitHub", url: head_commit.url}]],
-            },
-        });
+        // const split = ref.split("/");
+        // const branch: string = split[split.length - 1];
+        //
+        // const template = await loadTemplate("push");
+        // const message: string = template({
+        //     repository: repository.full_name,
+        //     message: head_commit.message,
+        //     pusher: pusher.name,
+        //     ref: branch,
+        // })
+        //     .replace(/  +/g, " ")
+        //     .replace(/\n +/g, "\n");
+        //
+        // //TODO: REMOVE BOT USAGE AND PROVIDE AMQP EVENT!!!!!!!!!!!!!!!!!!!
+        // await Bot.getCurrent().sendMessage(webHook.chat.chatId, message, {
+        //     parse_mode: "HTML",
+        //     reply_markup: {
+        //         inline_keyboard: [[{text: "View on GitHub", url: head_commit.url}]],
+        //     },
+        // });
     }
 }

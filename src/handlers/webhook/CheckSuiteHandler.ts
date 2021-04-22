@@ -33,6 +33,8 @@ import {getConnection} from "typeorm";
 import AmqpDispatcher from "../../core/amqp/AmqpDispatcher";
 import {QUEUES} from "../../globals";
 import AMQPAck from "../../errors/AMQPAck";
+import DrawPullRequestEvent from "../../events/draw/DrawPullRequestEvent";
+import DrawCheckSuiteEvent from "../../events/draw/DrawCheckSuiteEvent";
 
 @WebHookAmqpHandler.Handler("check_suite", 10)
 @Reflect.metadata("amqp-handler-type", "github-event-handler")
@@ -104,19 +106,9 @@ export default class CheckSuiteHandler extends WebHookAmqpHandler {
         } finally {
             if (draw) {
                 if (pullRequest) {
-                    //TODO: Create Amqp event.
-                    await AmqpDispatcher.getCurrent().sendToQueue(
-                        QUEUES.PULL_REQUEST_SHOW_QUEUE,
-                        {pullRequest: pullRequest.id},
-                        {expiration: 1000 * 60 * 30}
-                    );
+                    await new DrawPullRequestEvent(pullRequest.id).enqueue();
                 } else {
-                    //TODO: Create Amqp event.
-                    await AmqpDispatcher.getCurrent().sendToQueue(
-                        QUEUES.CHECK_SUITE_SHOW_QUEUE,
-                        {checkSuite: entityId},
-                        {expiration: 1000 * 60 * 30}
-                    );
+                    await new DrawCheckSuiteEvent(entityId).enqueue();
                 }
             }
         }

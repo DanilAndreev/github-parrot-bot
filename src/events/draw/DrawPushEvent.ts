@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,13 +24,37 @@
  * SOFTWARE.
  */
 
-export const QUEUES = {
-    PULL_REQUEST_SHOW_QUEUE: "pull-request-show-queue",
-    ISSUE_SHOW_QUEUE: "issue-show-queue",
-    CHECK_SUITE_SHOW_QUEUE: "check-suite-show-queue",
-    WEB_HOOK_SETTINGS_SHOW_QUEUE: "web-hook-settings-show-queue",
-    PUSH_SHOW_QUEUE: "push-show-queue",
-    TELEGRAM_CHAT_COMMAND: "telegram-chat-command",
-    DRAW_TELEGRAM_MESSAGE_QUEUE: "messages",
-    TELEGRAM_EVENTS_QUEUE: "telegram-events-queue",
-};
+import AmqpEvent from "../../core/amqp/AmqpEvent";
+import {QUEUES} from "../../globals";
+import {Push} from "github-webhook-event-types";
+
+class DrawPushEvent extends AmqpEvent {
+    public static readonly type: string = "draw-push-event";
+    public push: Push;
+    chat: number;
+
+    constructor(push: Push, chat: number) {
+        super(DrawPushEvent.type, {
+            queue: QUEUES.ISSUE_SHOW_QUEUE,
+        });
+        this.push = push;
+        this.chat = chat;
+    }
+
+    public serialize(): DrawPushEvent.Serialized {
+        return {
+            ...super.serialize(),
+            push: this.push,
+            chat: this.chat,
+        };
+    }
+}
+
+namespace DrawPushEvent {
+    export interface Serialized extends AmqpEvent.Serialized {
+        push: Push;
+        chat: number;
+    }
+}
+
+export default DrawPushEvent;
