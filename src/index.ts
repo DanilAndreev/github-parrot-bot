@@ -28,7 +28,7 @@
 import SystemConfig from "./core/SystemConfig";
 import config from "./config";
 import envDispatcher from "./envDispatcher";
-import {initLogger} from "./core/Logger";
+import {initLogger} from "./core/logger/Logger";
 import Config from "./interfaces/Config";
 
 SystemConfig.setOptions({

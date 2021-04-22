@@ -24,22 +24,36 @@
  * SOFTWARE.
  */
 
-/**
- * FatalError - class for fatal errors.
- * @class
- * @author Danil Andreev
- */
-export default class FatalError extends Error {
-    /**
-     * FatalError - creates an instance of FatalError.
-     * @constructor
-     * @param args - arguments as in console error.
-     * @author Danil Andreev
-     */
-    constructor(...args: any[]) {
-        const message: string = args
-            .map(item => (typeof item === "object" ? JSON.stringify(item) : String(item)))
-            .join(" ");
-        super(message);
+import AmqpEvent from "../../core/amqp/AmqpEvent";
+import {QUEUES} from "../../globals";
+
+class DrawCheckSuiteEvent extends AmqpEvent {
+    public static readonly type: string = "draw-check-suite-event";
+    public checkSuite: number;
+    public forceNewMessage: boolean;
+
+    constructor(checkSuite: number, forceNewMessage: boolean = false) {
+        super(DrawCheckSuiteEvent.type, {
+            queue: QUEUES.CHECK_SUITE_SHOW_QUEUE,
+        });
+        this.checkSuite = checkSuite;
+        this.forceNewMessage = forceNewMessage;
+    }
+
+    public serialize(): DrawCheckSuiteEvent.Serialized {
+        return {
+            ...super.serialize(),
+            checkSuite: this.checkSuite,
+            forceNewMessage: this.forceNewMessage,
+        };
     }
 }
+
+namespace DrawCheckSuiteEvent {
+    export interface Serialized extends AmqpEvent.Serialized {
+        checkSuite: number;
+        forceNewMessage: boolean;
+    }
+}
+
+export default DrawCheckSuiteEvent;

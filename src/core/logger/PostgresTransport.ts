@@ -27,7 +27,7 @@
 import * as Transport from "winston-transport";
 import * as PgPromise from "pg-promise";
 import {IDatabase} from "pg-promise";
-import JSONObject from "../interfaces/JSONObject";
+import JSONObject from "../../interfaces/JSONObject";
 
 /**
  * PostgresTransport - winston transport for storing logs in database.
@@ -56,12 +56,7 @@ class PostgresTransport<T = any> extends Transport {
      */
     public constructor(options: PostgresTransport.Options<T>) {
         super(options);
-        const {
-            hostname = process.env.COMPUTERNAME || null,
-            level = "error",
-            table = "log",
-            connection,
-        } = options;
+        const {hostname = process.env.COMPUTERNAME || null, level = "error", table = "log", connection} = options;
         this.hostname = hostname;
         this.level = level;
         this.table = table;
@@ -76,7 +71,7 @@ class PostgresTransport<T = any> extends Transport {
             } else {
                 this.db = connection;
             }
-        } catch(error) {
+        } catch (error) {
             console.log("\x1b[31mFailed to connect to log database", error);
             this.db = null;
         }
@@ -87,12 +82,11 @@ class PostgresTransport<T = any> extends Transport {
         try {
             if (!this.db) return;
             if (this.level !== level) return;
-            await this.db
-                .query(
-                    `INSERT INTO "${this.table}" ("timestamp", "level", "message", "meta", "host")
+            await this.db.query(
+                `INSERT INTO "${this.table}" ("timestamp", "level", "message", "meta", "host")
                      VALUES ($1, $2, $3, $4, $5)`,
-                    [timestamp, level, message, meta, this.hostname]
-                );
+                [timestamp, level, message, meta, this.hostname]
+            );
         } catch (error) {
             console.error("\x1b[31mFailed to log to database:", error);
         } finally {

@@ -24,7 +24,7 @@
  * SOFTWARE.
  */
 
-import Bot from "../core/Bot";
+import Bot from "../core/bot/Bot";
 import {ChatMember} from "node-telegram-bot-api";
 
 /**

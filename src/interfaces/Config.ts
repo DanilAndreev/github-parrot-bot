@@ -24,8 +24,8 @@
  * SOFTWARE.
  */
 
-import BotCommand from "../core/BotCommand";
-import AmqpHandler from "../core/AmqpHandler";
+import BotCommand from "../core/bot/BotCommand";
+import AmqpHandler from "../core/amqp/AmqpHandler";
 import {ConnectionOptions} from "typeorm";
 import * as AMQP from "amqplib";
 import Constructable from "./Constructable";
@@ -40,7 +40,7 @@ namespace Config {
         token: string;
         tag?: string;
         commands: typeof BotCommand[];
-        callbackQueryHandlers?: Constructable[]
+        callbackQueryHandlers?: Constructable[];
     }
 
     /**

@@ -24,22 +24,37 @@
  * SOFTWARE.
  */
 
-/**
- * FatalError - class for fatal errors.
- * @class
- * @author Danil Andreev
- */
-export default class FatalError extends Error {
-    /**
-     * FatalError - creates an instance of FatalError.
-     * @constructor
-     * @param args - arguments as in console error.
-     * @author Danil Andreev
-     */
-    constructor(...args: any[]) {
-        const message: string = args
-            .map(item => (typeof item === "object" ? JSON.stringify(item) : String(item)))
-            .join(" ");
-        super(message);
+import AmqpEvent from "../../core/amqp/AmqpEvent";
+import {QUEUES} from "../../globals";
+import {Push} from "github-webhook-event-types";
+
+class DrawPushEvent extends AmqpEvent {
+    public static readonly type: string = "draw-push-event";
+    public push: Push;
+    chat: number;
+
+    constructor(push: Push, chat: number) {
+        super(DrawPushEvent.type, {
+            queue: QUEUES.ISSUE_SHOW_QUEUE,
+        });
+        this.push = push;
+        this.chat = chat;
+    }
+
+    public serialize(): DrawPushEvent.Serialized {
+        return {
+            ...super.serialize(),
+            push: this.push,
+            chat: this.chat,
+        };
     }
 }
+
+namespace DrawPushEvent {
+    export interface Serialized extends AmqpEvent.Serialized {
+        push: Push;
+        chat: number;
+    }
+}
+
+export default DrawPushEvent;

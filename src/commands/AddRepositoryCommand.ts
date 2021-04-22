@@ -24,14 +24,15 @@
  * SOFTWARE.
  */
 
-import BotCommand from "../core/BotCommand";
+import BotCommand from "../core/bot/BotCommand";
 import {Message} from "node-telegram-bot-api";
 import CommandError from "../errors/CommandError";
 import checkAdmin from "../utils/checkAdmin";
 import WebHook from "../entities/WebHook";
 import Chat from "../entities/Chat";
-import Enqueuer from "../core/Enqueuer";
 import JSONObject from "../interfaces/JSONObject";
+import DeleteChatMessageEvent from "../events/telegram/DeleteChatMessageEvent";
+import {getConnection} from "typeorm";
 
 /**
  * Handler for command:
@@ -62,27 +63,26 @@ export default class AddRepositoryCommand extends BotCommand {
                 `Use /remove command to remove repository.`
             );
 
-        const webhook = new WebHook();
-        try {
-            webhook.secretPreview = AddRepositoryCommand.createSecretPreview(secret);
-        } catch (error) {
-            throw new CommandError(error.message);
-        }
-        webhook.secret = secret;
-        webhook.chat = chat;
-        webhook.repository = repository;
-        const result = await webhook.save();
+        let result: WebHook | JSONObject = {};
+        await getConnection().transaction(async transaction => {
+            let webhook = new WebHook();
+            try {
+                webhook.secretPreview = AddRepositoryCommand.createSecretPreview(secret);
+            } catch (error) {
+                throw new CommandError(error.message);
+            }
+            webhook.secret = secret;
+            webhook.chat = chat;
+            webhook.repository = repository;
+            webhook = await transaction.save(webhook);
+            result = webhook;
 
-        await Enqueuer.deleteChatMessage(chatId, "" + message.message_id, undefined, true);
+            const settings = new WebHook.WebHookSettings();
+            settings.webhook = webhook;
+            await transaction.save(settings);
+        });
 
-        // try {
-        //     await Bot.getCurrent().deleteMessage(chatId, "" + message.message_id);
-        // } catch (error) {
-        //     await Bot.getCurrent().sendMessage(
-        //         chatId,
-        //         `Warning: You should give permissions to delete messages for GitHub Tracker bot.`
-        //     );
-        // }
+        await new DeleteChatMessageEvent(chatId, "" + message.message_id, {}, true).enqueue();
         return [
             `Successfully added repository.`,
             `Name: <b>${result.repository}</b>`,

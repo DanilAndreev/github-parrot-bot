@@ -27,7 +27,7 @@
 import Chrono from "../core/Chrono";
 import Issue from "../entities/Issue";
 import {DeleteResult} from "typeorm";
-import {Logger} from "../core/Logger";
+import {Logger} from "../core/logger/Logger";
 
 /**
  * IssuesGarbageCollector - class for deleting outdated issues.

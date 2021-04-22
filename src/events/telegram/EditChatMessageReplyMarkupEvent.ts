@@ -24,22 +24,38 @@
  * SOFTWARE.
  */
 
-/**
- * FatalError - class for fatal errors.
- * @class
- * @author Danil Andreev
- */
-export default class FatalError extends Error {
-    /**
-     * FatalError - creates an instance of FatalError.
-     * @constructor
-     * @param args - arguments as in console error.
-     * @author Danil Andreev
-     */
-    constructor(...args: any[]) {
-        const message: string = args
-            .map(item => (typeof item === "object" ? JSON.stringify(item) : String(item)))
-            .join(" ");
-        super(message);
+import {EditMessageReplyMarkupOptions, InlineKeyboardMarkup} from "node-telegram-bot-api";
+import AmqpEvent from "../../core/amqp/AmqpEvent";
+import {QUEUES} from "../../globals";
+
+class EditChatMessageReplyMarkupEvent extends AmqpEvent {
+    public static readonly type: string = "edit-chat-message-reply-markup";
+    public replyMarkup: InlineKeyboardMarkup;
+    public options?: EditMessageReplyMarkupOptions;
+
+    constructor(replyMarkup: InlineKeyboardMarkup, options?: EditMessageReplyMarkupOptions) {
+        super(EditChatMessageReplyMarkupEvent.type, {
+            expiration: 1000 * 60 * 10,
+            queue: QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
+        });
+        this.replyMarkup = replyMarkup;
+        this.options = options;
+    }
+
+    public serialize(): EditChatMessageReplyMarkupEvent.Serialized {
+        return {
+            ...super.serialize(),
+            replyMarkup: this.replyMarkup,
+            options: this.options,
+        };
     }
 }
+
+namespace EditChatMessageReplyMarkupEvent {
+    export interface Serialized extends AmqpEvent.Serialized {
+        replyMarkup: InlineKeyboardMarkup;
+        options?: EditMessageReplyMarkupOptions;
+    }
+}
+
+export default EditChatMessageReplyMarkupEvent;

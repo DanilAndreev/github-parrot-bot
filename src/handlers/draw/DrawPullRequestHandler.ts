@@ -24,21 +24,21 @@
  * SOFTWARE.
  */
 
-import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
-import AmqpHandler from "../../core/AmqpHandler";
-import Bot from "../../core/Bot";
+import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
+import AmqpHandler from "../../core/amqp/AmqpHandler";
+import Bot from "../../core/bot/Bot";
 import loadTemplate from "../../utils/loadTemplate";
 import etelegramIgnore from "../../utils/etelegramIgnore";
 import {QUEUES} from "../../globals";
 import {Message} from "node-telegram-bot-api";
 import {getConnection} from "typeorm";
-import AmqpDispatcher from "../../core/AmqpDispatcher";
+import AmqpDispatcher from "../../core/amqp/AmqpDispatcher";
 import PullRequest from "../../entities/PullRequest";
 
 @WebHookAmqpHandler.Handler(QUEUES.PULL_REQUEST_SHOW_QUEUE, 10)
 @Reflect.metadata("amqp-handler-type", "draw-event-handler")
 export default class DrawPullRequestHandler extends AmqpHandler {
-    protected async handle(content: { pullRequest: number }): Promise<void | boolean> {
+    protected async handle(content: {pullRequest: number}): Promise<void | boolean> {
         const {pullRequest} = content;
 
         const entity: PullRequest | undefined = await PullRequest.findOne({
@@ -49,7 +49,8 @@ export default class DrawPullRequestHandler extends AmqpHandler {
 
         const template = await loadTemplate("pull_request");
         const text: string = template(entity).replace(/  +/g, " ").replace(/\n +/g, "\n");
-        const maximizeMinimizeCallbackData: string = `pull_request.${entity.pullRequestId}` + (entity.minimized ? ".maximize" : ".minimize");
+        const maximizeMinimizeCallbackData: string =
+            `pull_request.${entity.pullRequestId}` + (entity.minimized ? ".maximize" : ".minimize");
 
         try {
             const pullRequestMessage: PullRequest.PullRequestMessage = new PullRequest.PullRequestMessage();
@@ -61,10 +62,12 @@ export default class DrawPullRequestHandler extends AmqpHandler {
                         parse_mode: "HTML",
                         reply_markup: {
                             inline_keyboard: [
-                                [{
-                                    text: entity.minimized ? "Maximize" : "Minimize",
-                                    callback_data: maximizeMinimizeCallbackData
-                                }],
+                                [
+                                    {
+                                        text: entity.minimized ? "Maximize" : "Minimize",
+                                        callback_data: maximizeMinimizeCallbackData,
+                                    },
+                                ],
                                 [{text: "View on GitHub", url: entity.info.html_url}],
                             ],
                         },
@@ -81,10 +84,12 @@ export default class DrawPullRequestHandler extends AmqpHandler {
                     parse_mode: "HTML",
                     reply_markup: {
                         inline_keyboard: [
-                            [{
-                                text: entity.minimized ? "Maximize" : "Minimize",
-                                callback_data: maximizeMinimizeCallbackData
-                            }],
+                            [
+                                {
+                                    text: entity.minimized ? "Maximize" : "Minimize",
+                                    callback_data: maximizeMinimizeCallbackData,
+                                },
+                            ],
                             [{text: "View on GitHub", url: entity.info.html_url}],
                         ],
                     },

@@ -82,9 +82,9 @@ namespace Issue {
         state: string;
         title: string;
         body?: string;
-        opened_by: { login: string, tag?: string};
-        assignees: { login: string, tag?: string }[];
-        labels: { name: string }[];
+        opened_by: {login: string; tag?: string};
+        assignees: {login: string; tag?: string}[];
+        labels: {name: string}[];
         milestone?: {
             title: string;
             due_on?: string;

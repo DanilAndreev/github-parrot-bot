@@ -27,7 +27,7 @@
 import Chrono from "../core/Chrono";
 import {DeleteResult} from "typeorm";
 import CheckSuite from "../entities/CheckSuite";
-import {Logger} from "../core/Logger";
+import {Logger} from "../core/logger/Logger";
 
 /**
  * CheckSuitsGarbageCollector - class for deleting outdated check suits.

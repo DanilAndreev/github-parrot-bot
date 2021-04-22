@@ -24,19 +24,38 @@
  * SOFTWARE.
  */
 
-import WebHook from "../../entities/WebHook";
-import {Push} from "github-webhook-event-types";
 import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
-import AMQPAck from "../../errors/AMQPAck";
+import {QUEUES} from "../../globals";
+import AmqpHandler from "../../core/amqp/AmqpHandler";
+import loadTemplate from "../../utils/loadTemplate";
 import DrawPushEvent from "../../events/draw/DrawPushEvent";
+import Bot from "../../core/bot/Bot";
 
-@WebHookAmqpHandler.Handler("push", 10)
-@Reflect.metadata("amqp-handler-type", "github-event-handler")
-export default class PushHandler extends WebHookAmqpHandler {
-    protected async handleHook(webHook: WebHook, payload: Push): Promise<boolean | void> {
-        if (!webHook.settings.trackPushes) throw new AMQPAck("WebHook setting 'trackPushes' is disabled.");
-        const {pusher, head_commit, repository, ref} = payload;
+@WebHookAmqpHandler.Handler(QUEUES.PUSH_SHOW_QUEUE, 10)
+@Reflect.metadata("amqp-handler-type", "draw-event-handler")
+export default class DrawPushHandler extends AmqpHandler {
+    protected async handle(content: DrawPushEvent.Serialized): Promise<void | boolean> {
+        const {pusher, head_commit, repository, ref} = content.push;
 
-        await new DrawPushEvent(payload, webHook.chat.chatId).enqueue();
+        const split = ref.split("/");
+        const branch: string = split[split.length - 1];
+
+        const template = await loadTemplate("push");
+
+        const message: string = template({
+            repository: repository.full_name,
+            message: head_commit.message,
+            pusher: pusher.name,
+            ref: branch,
+        })
+            .replace(/  +/g, " ")
+            .replace(/\n +/g, "\n");
+
+        await Bot.getCurrent().sendMessage(content.chat, message, {
+            parse_mode: "HTML",
+            reply_markup: {
+                inline_keyboard: [[{text: "View on GitHub", url: head_commit.url}]],
+            },
+        });
     }
 }

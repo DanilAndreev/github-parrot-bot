@@ -25,14 +25,13 @@
  */
 
 import {Message} from "node-telegram-bot-api";
-import Bot from "./Bot";
-import CommandError from "../errors/CommandError";
+import CommandError from "../../errors/CommandError";
 import * as commander from "commander";
 import {Command as CommanderCommand, CommanderError, Option as CommanderOption} from "commander";
 import stringArgv from "string-argv";
-import JSONObject from "../interfaces/JSONObject";
-import Enqueuer from "./Enqueuer";
-import {Logger} from "./Logger";
+import JSONObject from "../../interfaces/JSONObject";
+import {Logger} from "../logger/Logger";
+import SendChatMessageEvent from "../../events/telegram/SendChatMessageEvent";
 
 /**
  * BotCommand - basic class for creating Telegram bot commands.
@@ -102,25 +101,28 @@ class BotCommand {
                 let result: string | string[] | void = await this.handler(message, command.args, command.opts());
                 if (Array.isArray(result)) result = result.join("\n");
                 if (result) {
-                    await Enqueuer.sendChatMessage(message.chat.id, result, {
+                    await new SendChatMessageEvent(message.chat.id, result, {
                         parse_mode: "HTML",
                         reply_to_message_id: message.message_id,
-                    });
+                    }).enqueue();
                 }
             } catch (error) {
                 if (error instanceof CommandError) {
                     const out_message = error.message;
-                    Enqueuer.sendChatMessage(message.chat.id, "<i>Error:</i> \n" + out_message, {
+                    await new SendChatMessageEvent(message.chat.id, "<i>Error:</i> \n" + out_message, {
                         parse_mode: "HTML",
                         reply_to_message_id: message.message_id,
-                    }).catch(err => {
-                        throw err;
-                    });
+                    }).enqueue();
+                    // Enqueuer.sendChatMessage(message.chat.id, "<i>Error:</i> \n" + out_message, {
+                    //     parse_mode: "HTML",
+                    //     reply_to_message_id: message.message_id,
+                    // }).catch(err => {
+                    //     throw err;
+                    // });
                 } else {
-                    await Enqueuer.sendChatMessage(message.chat.id, "Unrecognized error", {
+                    await new SendChatMessageEvent(message.chat.id, "Unrecognized error", {
                         reply_to_message_id: message.message_id,
-                    });
-                    console.error(error);
+                    }).enqueue();
                 }
             }
         });
@@ -130,13 +132,12 @@ class BotCommand {
             this.validation.parse(argv, {from: "user"});
         } catch (error) {
             if (error instanceof CommanderError) {
-                await Enqueuer.sendChatMessage(
+                await new SendChatMessageEvent(
                     message.chat.id,
                     error.message + "\n\n" + this.validation.helpInformation()
-                );
+                ).enqueue();
             } else {
-                await Enqueuer.sendChatMessage(message.chat.id, "Unrecognized error");
-                console.error(error);
+                await new SendChatMessageEvent(message.chat.id, "Unrecognized error").enqueue();
             }
         }
     }

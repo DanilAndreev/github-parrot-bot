@@ -26,12 +26,11 @@
 
 import {PullRequest as PullRequestType} from "github-webhook-event-types";
 import WebHook from "../../entities/WebHook";
-import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
+import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
 import PullRequest from "../../entities/PullRequest";
-import AmqpDispatcher from "../../core/AmqpDispatcher";
-import {QUEUES} from "../../globals";
 import AkaGenerator from "../../utils/AkaGenerator";
 import * as moment from "moment";
+import DrawPullRequestEvent from "../../events/draw/DrawPullRequestEvent";
 
 @WebHookAmqpHandler.Handler("pull_request", 10)
 @Reflect.metadata("amqp-handler-type", "github-event-handler")
@@ -77,11 +76,7 @@ export default class PullRequestsHandler extends WebHookAmqpHandler {
                 entityId = entity.id;
             }
         } finally {
-            await AmqpDispatcher.getCurrent().sendToQueue(
-                QUEUES.PULL_REQUEST_SHOW_QUEUE,
-                {pullRequest: entityId},
-                {expiration: 1000 * 60 * 30}
-            );
+            await new DrawPullRequestEvent(entityId).enqueue();
         }
     }
 }

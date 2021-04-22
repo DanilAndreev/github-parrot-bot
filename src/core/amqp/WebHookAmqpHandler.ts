@@ -27,7 +27,7 @@
 import AmqpHandler from "./AmqpHandler";
 import * as Crypto from "crypto";
 import {Context} from "koa";
-import WebHook from "../entities/WebHook";
+import WebHook from "../../entities/WebHook";
 import {Message} from "amqplib";
 
 /**
@@ -61,7 +61,7 @@ export default class WebHookAmqpHandler extends AmqpHandler {
 
         const webHooks: WebHook[] = await WebHook.find({
             where: {repository: repository.full_name},
-            relations: ["chat"],
+            relations: ["chat", "settings"],
         });
 
         const promises: Promise<boolean | void>[] = [];

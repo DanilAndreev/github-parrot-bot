@@ -24,12 +24,12 @@
  * SOFTWARE.
  */
 
-import BotCommand from "../core/BotCommand";
+import BotCommand from "../core/bot/BotCommand";
 import {ChatMember, Message} from "node-telegram-bot-api";
 import Collaborator from "../entities/Collaborator";
 import JSONObject from "../interfaces/JSONObject";
 import CommandError from "../errors/CommandError";
-import Bot from "../core/Bot";
+import Bot from "../core/bot/Bot";
 import Chat from "../entities/Chat";
 
 /**

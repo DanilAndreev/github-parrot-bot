@@ -26,18 +26,26 @@
 
 import WebHook from "../../entities/WebHook";
 import {CheckSuite as CheckSuiteType} from "github-webhook-event-types";
-import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
+import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
 import CheckSuite from "../../entities/CheckSuite";
 import PullRequest from "../../entities/PullRequest";
 import {getConnection} from "typeorm";
-import AmqpDispatcher from "../../core/AmqpDispatcher";
-import {QUEUES} from "../../globals";
+import AMQPAck from "../../errors/AMQPAck";
+import DrawPullRequestEvent from "../../events/draw/DrawPullRequestEvent";
+import DrawCheckSuiteEvent from "../../events/draw/DrawCheckSuiteEvent";
 
 @WebHookAmqpHandler.Handler("check_suite", 10)
 @Reflect.metadata("amqp-handler-type", "github-event-handler")
 export default class CheckSuiteHandler extends WebHookAmqpHandler {
     public async handleHook(webHook: WebHook, payload: CheckSuiteType, draw: boolean = true): Promise<boolean | void> {
         const {action, check_suite, repository, sender} = payload;
+
+        if (check_suite.pull_requests.length) {
+            if (!webHook.settings.trackPullRequestCI)
+                throw new AMQPAck("WebHook setting 'trackPullRequestCI' is disabled.");
+        } else {
+            if (!webHook.settings.trackFreeCI) throw new AMQPAck("WebHook setting 'trackFreeCI' is disabled.");
+        }
 
         let pullRequest: PullRequest | undefined = undefined;
         if (check_suite.pull_requests.length) {
@@ -95,17 +103,9 @@ export default class CheckSuiteHandler extends WebHookAmqpHandler {
         } finally {
             if (draw) {
                 if (pullRequest) {
-                    await AmqpDispatcher.getCurrent().sendToQueue(
-                        QUEUES.PULL_REQUEST_SHOW_QUEUE,
-                        {pullRequest: pullRequest.id},
-                        {expiration: 1000 * 60 * 30}
-                    );
+                    await new DrawPullRequestEvent(pullRequest.id).enqueue();
                 } else {
-                    await AmqpDispatcher.getCurrent().sendToQueue(
-                        QUEUES.CHECK_SUITE_SHOW_QUEUE,
-                        {checkSuite: entityId},
-                        {expiration: 1000 * 60 * 30}
-                    );
+                    await new DrawCheckSuiteEvent(entityId).enqueue();
                 }
             }
         }

@@ -28,10 +28,9 @@ import WebHook from "../../entities/WebHook";
 import * as moment from "moment";
 import Issue from "../../entities/Issue";
 import {Issues} from "github-webhook-event-types";
-import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
-import AmqpDispatcher from "../../core/AmqpDispatcher";
-import {QUEUES} from "../../globals";
+import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
 import AkaGenerator from "../../utils/AkaGenerator";
+import DrawIssueEvent from "../../events/draw/DrawIssueEvent";
 
 @WebHookAmqpHandler.Handler("issues", 10)
 @Reflect.metadata("amqp-handler-type", "github-event-handler")
@@ -51,9 +50,9 @@ export default class IssuesHandler extends WebHookAmqpHandler {
             html_url: issue.html_url,
             milestone: issue.milestone
                 ? {
-                    title: issue.milestone.title,
-                    due_on: moment(issue.milestone.due_on).format("ll"),
-                }
+                      title: issue.milestone.title,
+                      due_on: moment(issue.milestone.due_on).format("ll"),
+                  }
                 : undefined,
         };
 
@@ -76,11 +75,7 @@ export default class IssuesHandler extends WebHookAmqpHandler {
                 entityId = entity.id;
             }
         } finally {
-            await AmqpDispatcher.getCurrent().sendToQueue(
-                QUEUES.ISSUE_SHOW_QUEUE,
-                {issue: entityId},
-                {expiration: 1000 * 60 * 30}
-            );
+            await new DrawIssueEvent(entityId).enqueue();
         }
     }
 }

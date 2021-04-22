@@ -89,10 +89,10 @@ namespace PullRequest {
         state: string;
         title: string;
         body?: string;
-        labels: { name: string, tag?: string }[];
-        assignees: { login: string, tag?: string }[];
-        opened_by: { login: string, tag?: string };
-        requested_reviewers: { login: string, tag?: string }[];
+        labels: {name: string; tag?: string}[];
+        assignees: {login: string; tag?: string}[];
+        opened_by: {login: string; tag?: string};
+        requested_reviewers: {login: string; tag?: string}[];
         milestone?: {
             title: string;
             due_on?: string;

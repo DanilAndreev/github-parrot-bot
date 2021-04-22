@@ -24,22 +24,42 @@
  * SOFTWARE.
  */
 
-/**
- * FatalError - class for fatal errors.
- * @class
- * @author Danil Andreev
- */
-export default class FatalError extends Error {
-    /**
-     * FatalError - creates an instance of FatalError.
-     * @constructor
-     * @param args - arguments as in console error.
-     * @author Danil Andreev
-     */
-    constructor(...args: any[]) {
-        const message: string = args
-            .map(item => (typeof item === "object" ? JSON.stringify(item) : String(item)))
-            .join(" ");
-        super(message);
+import AmqpEvent from "../../core/amqp/AmqpEvent";
+import {SendMessageOptions} from "node-telegram-bot-api";
+import {QUEUES} from "../../globals";
+
+class SendChatMessageEvent extends AmqpEvent {
+    public static readonly type: string = "send-chat-message";
+    public chatId: string | number;
+    public text: string;
+    public options?: SendMessageOptions;
+
+    public constructor(chatId: string | number, text: string, options?: SendMessageOptions) {
+        super(SendChatMessageEvent.type, {
+            expiration: 1000 * 60 * 10,
+            queue: QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
+        });
+        this.chatId = chatId;
+        this.text = text;
+        this.options = options;
+    }
+
+    public serialize(): SendChatMessageEvent.Serialized {
+        return {
+            ...super.serialize(),
+            chatId: this.chatId,
+            text: this.text,
+            options: this.options,
+        };
     }
 }
+
+namespace SendChatMessageEvent {
+    export interface Serialized extends AmqpEvent.Serialized {
+        chatId: string | number;
+        text: string;
+        options?: SendMessageOptions;
+    }
+}
+
+export default SendChatMessageEvent;

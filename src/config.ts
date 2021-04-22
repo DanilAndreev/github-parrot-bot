@@ -53,6 +53,10 @@ import TelegramEventsHandler from "./handlers/telegram/TelegramEventsHandler";
 import VersionCommand from "./commands/VersionCommand";
 import PullRequestCallbacksHandler from "./handlers/telegram/callbacks/PullRequestCallbacksHandler";
 import IssueCallbacksHandler from "./handlers/telegram/callbacks/IssueCallbacksHandler";
+import WebHookSettingsHandler from "./handlers/telegram/callbacks/WebHookSettingsHandler";
+import WebHookSettingsCommand from "./commands/WebHookSettingsCommand";
+import DrawWebHookSettingsHandler from "./handlers/draw/DrawWebHookSettingsHandler";
+import DrawPushHandler from "./handlers/draw/DrawPushHandler";
 
 const config: Config = {
     bot: {
@@ -66,17 +70,16 @@ const config: Config = {
             ListRepositoriesCommand,
             RemoveRepositoryCommand,
             VersionCommand,
+            WebHookSettingsCommand,
         ],
-        callbackQueryHandlers: [
-            PullRequestCallbacksHandler,
-            IssueCallbacksHandler,
-        ],
+        callbackQueryHandlers: [PullRequestCallbacksHandler, IssueCallbacksHandler, WebHookSettingsHandler],
     },
     db: {
         type: "postgres",
         url: "you-should-pass-database-url-as-env-variable",
         entities: [
             WebHook,
+            WebHook.WebHookSettings,
             Collaborator,
             Issue,
             Issue.IssueMessage,
@@ -104,6 +107,8 @@ const config: Config = {
             DrawPullRequestHandler,
             DrawCheckSuiteHandler,
             DrawMessageHandler,
+            DrawWebHookSettingsHandler,
+            DrawPushHandler,
 
             CommandsHandler,
             TelegramEventsHandler,
@@ -111,14 +116,7 @@ const config: Config = {
     },
     server: {
         port: 3030,
-        acceptEvents: [
-            "check_run",
-            "check_suite",
-            "create",
-            "pull_request",
-            "push",
-            "issues",
-        ]
+        acceptEvents: ["check_run", "check_suite", "create", "pull_request", "push", "issues"],
     },
     system: {},
     log: {

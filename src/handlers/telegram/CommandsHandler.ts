@@ -24,12 +24,12 @@
  * SOFTWARE.
  */
 
-import AmqpHandler from "../../core/AmqpHandler";
+import AmqpHandler from "../../core/amqp/AmqpHandler";
 import {Message} from "node-telegram-bot-api";
 import {QUEUES} from "../../globals";
-import BotCommand from "../../core/BotCommand";
+import BotCommand from "../../core/bot/BotCommand";
 import config from "../../config";
-import Enqueuer from "../../core/Enqueuer";
+import SendChatMessageEvent from "../../events/telegram/SendChatMessageEvent";
 
 @AmqpHandler.Handler(QUEUES.TELEGRAM_CHAT_COMMAND, 10)
 @Reflect.metadata("amqp-handler-type", "commands-event-handler")
@@ -51,9 +51,9 @@ class CommandsHandler extends AmqpHandler {
             }
         }
         if (!flag) {
-            await Enqueuer.sendChatMessage(message.chat.id, "Invalid command.", {
+            await new SendChatMessageEvent(message.chat.id, "Invalid command.", {
                 reply_to_message_id: message.message_id,
-            });
+            }).enqueue();
         }
     }
 }

@@ -24,15 +24,15 @@
  * SOFTWARE.
  */
 
-import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
-import AmqpHandler from "../../core/AmqpHandler";
-import Bot from "../../core/Bot";
+import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
+import AmqpHandler from "../../core/amqp/AmqpHandler";
+import Bot from "../../core/bot/Bot";
 import loadTemplate from "../../utils/loadTemplate";
 import etelegramIgnore from "../../utils/etelegramIgnore";
 import {QUEUES} from "../../globals";
 import {Message} from "node-telegram-bot-api";
 import {getConnection} from "typeorm";
-import AmqpDispatcher from "../../core/AmqpDispatcher";
+import AmqpDispatcher from "../../core/amqp/AmqpDispatcher";
 import CheckSuite from "../../entities/CheckSuite";
 
 @WebHookAmqpHandler.Handler(QUEUES.CHECK_SUITE_SHOW_QUEUE, 10)

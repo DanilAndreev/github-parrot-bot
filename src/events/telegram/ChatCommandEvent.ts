@@ -24,22 +24,37 @@
  * SOFTWARE.
  */
 
-/**
- * FatalError - class for fatal errors.
- * @class
- * @author Danil Andreev
- */
-export default class FatalError extends Error {
-    /**
-     * FatalError - creates an instance of FatalError.
-     * @constructor
-     * @param args - arguments as in console error.
-     * @author Danil Andreev
-     */
-    constructor(...args: any[]) {
-        const message: string = args
-            .map(item => (typeof item === "object" ? JSON.stringify(item) : String(item)))
-            .join(" ");
-        super(message);
+import AmqpEvent from "../../core/amqp/AmqpEvent";
+import {Message} from "node-telegram-bot-api";
+import {QUEUES} from "../../globals";
+
+class ChatCommandEvent extends AmqpEvent {
+    public static readonly type: string = "chat-command-event";
+    public message: Message;
+    public match: RegExpMatchArray | null;
+
+    constructor(message: Message, match: RegExpMatchArray | null) {
+        super(ChatCommandEvent.type, {
+            queue: QUEUES.TELEGRAM_CHAT_COMMAND,
+        });
+        this.message = message;
+        this.match = match;
+    }
+
+    public serialize(): ChatCommandEvent.Serialized {
+        return {
+            ...super.serialize(),
+            message: this.message,
+            match: this.match,
+        };
     }
 }
+
+namespace ChatCommandEvent {
+    export interface Serialized extends AmqpEvent.Serialized {
+        message: Message;
+        match: RegExpMatchArray | null;
+    }
+}
+
+export default ChatCommandEvent;

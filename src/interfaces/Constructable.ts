@@ -34,5 +34,5 @@ export default interface Constructable {
      * Creates an instance of class.
      * @param params - Input constructor params.
      */
-    new(...params: any[]);
+    new (...params: any[]);
 }

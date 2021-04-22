@@ -27,11 +27,11 @@
 import * as Amqp from "amqplib";
 import {Connection} from "amqplib";
 import AmqpHandler from "./AmqpHandler";
-import JSONObject from "../interfaces/JSONObject";
-import Config from "../interfaces/Config";
-import SystemConfig from "./SystemConfig";
-import {Logger} from "./Logger";
-import FatalError from "../errors/FatalError";
+import JSONObject from "../../interfaces/JSONObject";
+import Config from "../../interfaces/Config";
+import SystemConfig from "../SystemConfig";
+import {Logger} from "../logger/Logger";
+import FatalError from "../../errors/FatalError";
 
 /**
  * AmqpDispatcher - dispatcher for AMQP handlers.
@@ -141,7 +141,7 @@ class AmqpDispatcher {
             const connection: Connection = await Amqp.connect(SystemConfig.getConfig<Config>().amqp.connect);
             AmqpDispatcher.current = new AmqpDispatcher(connection);
             return AmqpDispatcher.current;
-        } catch(error) {
+        } catch (error) {
             throw new FatalError("Failed to connect to AMQP server:", error);
         }
     }

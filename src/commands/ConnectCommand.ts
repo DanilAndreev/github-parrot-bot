@@ -24,7 +24,7 @@
  * SOFTWARE.
  */
 
-import BotCommand from "../core/BotCommand";
+import BotCommand from "../core/bot/BotCommand";
 import {Message} from "node-telegram-bot-api";
 import CommandError from "../errors/CommandError";
 import Collaborator from "../entities/Collaborator";
@@ -48,14 +48,6 @@ export default class ConnectCommand extends BotCommand {
         const telegramName: string = message.from?.username || message.from?.first_name || "";
         if (!message.from?.id) throw new CommandError("Unable to get telegram user id.");
         const telegramId: number = message.from.id;
-
-        // TODO: fix bug in groups.
-        // try {
-        //     await Bot.getChatMember(chatId, telegramName);
-        // } catch (error) {
-        //     if (message.chat.username !== telegramName)
-        //         return `User ${telegramName} is not belong to this chat.`;
-        // }
 
         const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
         if (!chat) throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);

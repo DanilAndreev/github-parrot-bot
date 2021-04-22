@@ -24,47 +24,47 @@
  * SOFTWARE.
  */
 
-import CallbackQueryDispatcher from "../../../core/CallbackQueryDispatcher";
+import CallbackQueryDispatcher from "../../../core/amqp/CallbackQueryDispatcher";
 import {CallbackQuery} from "node-telegram-bot-api";
 import JSONObject from "../../../interfaces/JSONObject";
-import Enqueuer from "../../../core/Enqueuer";
 import Issue from "../../../entities/Issue";
-import {Logger} from "../../../core/Logger";
+import {Logger} from "../../../core/logger/Logger";
+import DrawIssueEvent from "../../../events/draw/DrawIssueEvent";
 
 export default class IssueCallbacksHandler {
     @CallbackQueryDispatcher.CallbackQueryHandler("issue.:id.maximize", {exact: true})
-    public static async maximize(query: CallbackQuery, params: JSONObject<{ id: string }>): Promise<void> {
+    public static async maximize(query: CallbackQuery, params: JSONObject<{id: string}>): Promise<void> {
         Logger?.debug(`Handling Telegram callback query: "${query.data}" | IssueCallbacksHandler.maximize()`);
         const {id} = params;
         if (!query.message) return;
         const entity: Issue | undefined = await Issue.findOne({
             where: {
                 issueId: +id,
-                chat: query.message.chat.id
-            }
+                chat: query.message.chat.id,
+            },
         });
         if (!entity) return;
 
         entity.minimized = false;
         await entity.save();
-        await Enqueuer.drawIssue(entity.id);
+        await new DrawIssueEvent(entity.id).enqueue();
     }
 
     @CallbackQueryDispatcher.CallbackQueryHandler("issue.:id.minimize", {exact: true})
-    public static async minimize(query: CallbackQuery, params: JSONObject<{ id: string }>): Promise<void> {
+    public static async minimize(query: CallbackQuery, params: JSONObject<{id: string}>): Promise<void> {
         Logger?.debug(`Handling Telegram callback query: "${query.data}" | IssueCallbacksHandler.minimize()`);
         const {id} = params;
         if (!query.message) return;
         const entity: Issue | undefined = await Issue.findOne({
             where: {
                 issueId: +id,
-                chat: query.message.chat.id
-            }
+                chat: query.message.chat.id,
+            },
         });
         if (!entity) return;
 
         entity.minimized = true;
         await entity.save();
-        await Enqueuer.drawIssue(entity.id);
+        await new DrawIssueEvent(entity.id).enqueue();
     }
 }

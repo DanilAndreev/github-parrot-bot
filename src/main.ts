@@ -25,15 +25,15 @@
  */
 
 import {setupDbConnection} from "./core/DataBase";
-import Bot from "./core/Bot";
+import Bot from "./core/bot/Bot";
 import WebServer from "./core/WebServer";
-import AmqpDispatcher from "./core/AmqpDispatcher";
+import AmqpDispatcher from "./core/amqp/AmqpDispatcher";
 import IssuesGarbageCollector from "./chrono/IssuesGarbageCollector";
 import PullRequestsGarbageCollector from "./chrono/PullRequestsGarbageCollector";
 import CheckSuitsGarbageCollector from "./chrono/CheckSuitsGarbageCollector";
 import SystemConfig from "./core/SystemConfig";
 import Config from "./interfaces/Config";
-import {Logger} from "./core/Logger";
+import {Logger} from "./core/logger/Logger";
 import FatalError from "./errors/FatalError";
 
 /**
@@ -82,7 +82,13 @@ export default async function main(): Promise<void> {
         }
 
         if (
-            requiredFor("commandsProxy", "webserver", "githubEventsHandlers", "commandsEventHandlers", "drawEventsHandlers")
+            requiredFor(
+                "commandsProxy",
+                "webserver",
+                "githubEventsHandlers",
+                "commandsEventHandlers",
+                "drawEventsHandlers"
+            )
         ) {
             const RabbitMQ: AmqpDispatcher = await AmqpDispatcher.init();
         }
