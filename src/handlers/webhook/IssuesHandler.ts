@@ -76,6 +76,7 @@ export default class IssuesHandler extends WebHookAmqpHandler {
                 entityId = entity.id;
             }
         } finally {
+            //TODO: Create Amqp event.
             await AmqpDispatcher.getCurrent().sendToQueue(
                 QUEUES.ISSUE_SHOW_QUEUE,
                 {issue: entityId},

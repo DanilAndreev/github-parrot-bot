@@ -77,6 +77,7 @@ export default class PullRequestsHandler extends WebHookAmqpHandler {
                 entityId = entity.id;
             }
         } finally {
+            //TODO: Create Amqp event.
             await AmqpDispatcher.getCurrent().sendToQueue(
                 QUEUES.PULL_REQUEST_SHOW_QUEUE,
                 {pullRequest: entityId},

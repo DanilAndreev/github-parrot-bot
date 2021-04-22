@@ -29,11 +29,14 @@ import Bot from "../../core/bot/Bot";
 import {Push} from "github-webhook-event-types";
 import loadTemplate from "../../utils/loadTemplate";
 import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
+import AMQPAck from "../../errors/AMQPAck";
 
 @WebHookAmqpHandler.Handler("push", 10)
 @Reflect.metadata("amqp-handler-type", "github-event-handler")
 export default class PushHandler extends WebHookAmqpHandler {
     protected async handleHook(webHook: WebHook, payload: Push): Promise<boolean | void> {
+        if (!webHook.settings.trackPushes)
+            throw new AMQPAck("WebHook setting 'trackPushes' is disabled.");
         const {pusher, head_commit, repository, ref} = payload;
 
         const split = ref.split("/");
@@ -49,6 +52,7 @@ export default class PushHandler extends WebHookAmqpHandler {
             .replace(/  +/g, " ")
             .replace(/\n +/g, "\n");
 
+        //TODO: REMOVE BOT USAGE AND PROVIDE AMQP EVENT!!!!!!!!!!!!!!!!!!!
         await Bot.getCurrent().sendMessage(webHook.chat.chatId, message, {
             parse_mode: "HTML",
             reply_markup: {

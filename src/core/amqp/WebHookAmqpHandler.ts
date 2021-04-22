@@ -61,7 +61,7 @@ export default class WebHookAmqpHandler extends AmqpHandler {
 
         const webHooks: WebHook[] = await WebHook.find({
             where: {repository: repository.full_name},
-            relations: ["chat"],
+            relations: ["chat", "settings"],
         });
 
         const promises: Promise<boolean | void>[] = [];

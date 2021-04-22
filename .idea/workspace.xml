@@ -16,16 +16,14 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[GLOBAL] Refactored core directories.">
-      <change afterPath="$PROJECT_DIR$/src/commands/WebHookSettingsCommand.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/events/draw/DrawWebHookSettingsEvent.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/handlers/draw/DrawWebHookSettingsHandler.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[WebHookSettings] Added interactive settings.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/WebHook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/WebHook.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/globals.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/callbacks/WebHookSettingsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/callbacks/WebHookSettingsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/amqp/WebHookAmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/WebHookAmqpHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/CheckRunHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckRunHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/IssuesHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/IssuesHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/PushHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PushHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,13 +181,6 @@
       <workItem from="1618999334833" duration="2047000" />
       <workItem from="1619016189443" duration="1199000" />
       <workItem from="1619034159639" duration="6558000" />
-    </task>
-    <task id="LOCAL-00066" summary="[CheckRunHandler] Separated to two handlers.">
-      <created>1617135229621</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1617135229621</updated>
     </task>
     <task id="LOCAL-00067" summary="[Entities] Packed *Message entities to their parent classes.">
       <created>1617135665433</created>
@@ -527,7 +518,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619093509399</updated>
     </task>
-    <option name="localTasksCounter" value="115" />
+    <task id="LOCAL-00115" summary="[WebHookSettings] Added interactive settings.">
+      <created>1619099146753</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1619099146753</updated>
+    </task>
+    <option name="localTasksCounter" value="116" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -558,7 +556,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[VersionCommand] Fixed command for getting version." />
     <MESSAGE value="[Logger] Added database support." />
     <MESSAGE value="[Entities] Added cascade deletion to message tables." />
     <MESSAGE value="[Logger] Added database logging." />
@@ -583,7 +580,8 @@
     <MESSAGE value="&#10;[AmqpEvents] Work finished." />
     <MESSAGE value="[BotCommand] Small fixes." />
     <MESSAGE value="[GLOBAL] Refactored core directories." />
-    <option name="LAST_COMMIT_MESSAGE" value="[GLOBAL] Refactored core directories." />
+    <MESSAGE value="[WebHookSettings] Added interactive settings." />
+    <option name="LAST_COMMIT_MESSAGE" value="[WebHookSettings] Added interactive settings." />
   </component>
   <component name="WindowStateProjectService">
     <state width="1877" height="227" key="GridCell.Tab.0.bottom" timestamp="1619099005051">
@@ -650,10 +648,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="317" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619099004385" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1619093524281">
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1619099150140">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619093524281" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619099150140" />
     <state x="601" y="0" width="1335" height="859" maximized="true" key="dock-window-1" timestamp="1619090325069">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -662,6 +660,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="601" y="0" width="1335" height="718" maximized="true" key="dock-window-2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619098986887" />
+    <state x="601" y="0" width="1335" height="772" maximized="true" key="dock-window-3" timestamp="1619102878079">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="601" y="0" width="1335" height="772" maximized="true" key="dock-window-3/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619102878079" />
     <state x="2536" y="240" key="run.anything.popup" timestamp="1619090297282">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>

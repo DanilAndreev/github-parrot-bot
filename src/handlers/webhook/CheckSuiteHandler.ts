@@ -32,12 +32,21 @@ import PullRequest from "../../entities/PullRequest";
 import {getConnection} from "typeorm";
 import AmqpDispatcher from "../../core/amqp/AmqpDispatcher";
 import {QUEUES} from "../../globals";
+import AMQPAck from "../../errors/AMQPAck";
 
 @WebHookAmqpHandler.Handler("check_suite", 10)
 @Reflect.metadata("amqp-handler-type", "github-event-handler")
 export default class CheckSuiteHandler extends WebHookAmqpHandler {
     public async handleHook(webHook: WebHook, payload: CheckSuiteType, draw: boolean = true): Promise<boolean | void> {
         const {action, check_suite, repository, sender} = payload;
+
+        if (check_suite.pull_requests.length) {
+            if (!webHook.settings.trackPullRequestCI)
+                throw new AMQPAck("WebHook setting 'trackPullRequestCI' is disabled.");
+        } else {
+            if (!webHook.settings.trackFreeCI)
+                throw new AMQPAck("WebHook setting 'trackFreeCI' is disabled.");
+        }
 
         let pullRequest: PullRequest | undefined = undefined;
         if (check_suite.pull_requests.length) {
@@ -95,12 +104,14 @@ export default class CheckSuiteHandler extends WebHookAmqpHandler {
         } finally {
             if (draw) {
                 if (pullRequest) {
+                    //TODO: Create Amqp event.
                     await AmqpDispatcher.getCurrent().sendToQueue(
                         QUEUES.PULL_REQUEST_SHOW_QUEUE,
                         {pullRequest: pullRequest.id},
                         {expiration: 1000 * 60 * 30}
                     );
                 } else {
+                    //TODO: Create Amqp event.
                     await AmqpDispatcher.getCurrent().sendToQueue(
                         QUEUES.CHECK_SUITE_SHOW_QUEUE,
                         {checkSuite: entityId},
