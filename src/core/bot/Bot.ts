@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,11 +26,11 @@
 
 import * as TelegramBot from "node-telegram-bot-api";
 import {CallbackQuery} from "node-telegram-bot-api";
-import {Logger} from "./Logger";
-import Config from "../interfaces/Config";
-import SystemConfig from "./SystemConfig";
-import ChatCommandEvent from "../events/telegram/ChatCommandEvent";
-import TelegramEventEvent from "../events/telegram/TelegramEventEvent";
+import {Logger} from "../logger/Logger";
+import Config from "../../interfaces/Config";
+import SystemConfig from "../SystemConfig";
+import ChatCommandEvent from "../../events/telegram/ChatCommandEvent";
+import TelegramEventEvent from "../../events/telegram/TelegramEventEvent";
 
 /**
  * Bot - class for telegram bot api.

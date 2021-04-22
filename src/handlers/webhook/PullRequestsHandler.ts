@@ -26,9 +26,9 @@
 
 import {PullRequest as PullRequestType} from "github-webhook-event-types";
 import WebHook from "../../entities/WebHook";
-import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
+import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
 import PullRequest from "../../entities/PullRequest";
-import AmqpDispatcher from "../../core/AmqpDispatcher";
+import AmqpDispatcher from "../../core/amqp/AmqpDispatcher";
 import {QUEUES} from "../../globals";
 import AkaGenerator from "../../utils/AkaGenerator";
 import * as moment from "moment";

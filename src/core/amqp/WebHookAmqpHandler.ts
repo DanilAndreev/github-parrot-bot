@@ -27,7 +27,7 @@
 import AmqpHandler from "./AmqpHandler";
 import * as Crypto from "crypto";
 import {Context} from "koa";
-import WebHook from "../entities/WebHook";
+import WebHook from "../../entities/WebHook";
 import {Message} from "amqplib";
 
 /**

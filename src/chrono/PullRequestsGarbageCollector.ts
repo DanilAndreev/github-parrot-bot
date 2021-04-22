@@ -27,7 +27,7 @@
 import Chrono from "../core/Chrono";
 import {DeleteResult} from "typeorm";
 import PullRequest from "../entities/PullRequest";
-import {Logger} from "../core/Logger";
+import {Logger} from "../core/logger/Logger";
 
 /**
  * PullRequestsGarbageCollector - class for deleting outdated pull requests.

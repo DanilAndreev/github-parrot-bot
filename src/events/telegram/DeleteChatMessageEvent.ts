@@ -24,7 +24,7 @@
  * SOFTWARE.
  */
 
-import AmqpEvent from "../../core/AmqpEvent";
+import AmqpEvent from "../../core/amqp/AmqpEvent";
 import JSONObject from "../../interfaces/JSONObject";
 import {QUEUES} from "../../globals";
 

@@ -25,10 +25,10 @@
  */
 
 import WebHook from "../../entities/WebHook";
-import Bot from "../../core/Bot";
+import Bot from "../../core/bot/Bot";
 import {Push} from "github-webhook-event-types";
 import loadTemplate from "../../utils/loadTemplate";
-import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
+import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
 
 @WebHookAmqpHandler.Handler("push", 10)
 @Reflect.metadata("amqp-handler-type", "github-event-handler")

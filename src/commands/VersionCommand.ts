@@ -24,11 +24,11 @@
  * SOFTWARE.
  */
 
-import BotCommand from "../core/BotCommand";
+import BotCommand from "../core/bot/BotCommand";
 import JSONObject from "../interfaces/JSONObject";
 import {Message} from "node-telegram-bot-api";
 import root from "../utils/root";
-import {Logger} from "../core/Logger";
+import {Logger} from "../core/logger/Logger";
 
 /**
  * Handler for command:

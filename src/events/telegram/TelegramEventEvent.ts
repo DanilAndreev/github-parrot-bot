@@ -24,7 +24,7 @@
  * SOFTWARE.
  */
 
-import AmqpEvent from "../../core/AmqpEvent";
+import AmqpEvent from "../../core/amqp/AmqpEvent";
 import {CallbackQuery, Message} from "node-telegram-bot-api";
 import {QUEUES} from "../../globals";
 

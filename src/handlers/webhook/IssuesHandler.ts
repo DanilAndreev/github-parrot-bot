@@ -28,8 +28,8 @@ import WebHook from "../../entities/WebHook";
 import * as moment from "moment";
 import Issue from "../../entities/Issue";
 import {Issues} from "github-webhook-event-types";
-import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
-import AmqpDispatcher from "../../core/AmqpDispatcher";
+import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
+import AmqpDispatcher from "../../core/amqp/AmqpDispatcher";
 import {QUEUES} from "../../globals";
 import AkaGenerator from "../../utils/AkaGenerator";
 

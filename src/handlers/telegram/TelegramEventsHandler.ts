@@ -24,15 +24,15 @@
  * SOFTWARE.
  */
 
-import AmqpHandler from "../../core/AmqpHandler";
+import AmqpHandler from "../../core/amqp/AmqpHandler";
 import {QUEUES} from "../../globals";
 import {Message as AMQPMessage} from "amqplib";
 import {CallbackQuery, Message, User} from "node-telegram-bot-api";
 import Chat from "../../entities/Chat";
 import Collaborator from "../../entities/Collaborator";
-import Bot from "../../core/Bot";
+import Bot from "../../core/bot/Bot";
 import AMQPNack from "../../errors/AMQPNack";
-import CallbackQueryDispatcher from "../../core/CallbackQueryDispatcher";
+import CallbackQueryDispatcher from "../../core/amqp/CallbackQueryDispatcher";
 import TelegramEventEvent from "../../events/telegram/TelegramEventEvent";
 
 @AmqpHandler.Handler(QUEUES.TELEGRAM_EVENTS_QUEUE, 10)

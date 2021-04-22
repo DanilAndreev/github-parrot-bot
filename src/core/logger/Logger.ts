@@ -27,8 +27,8 @@
 import {createLogger, format, Logger as LoggerType, transports} from "winston";
 import * as Transport from "winston-transport";
 import * as moment from "moment";
-import Config from "../interfaces/Config";
-import SystemConfig from "./SystemConfig";
+import Config from "../../interfaces/Config";
+import SystemConfig from "../SystemConfig";
 import PostgresTransport from "./PostgresTransport";
 
 export let Logger: LoggerType | undefined;

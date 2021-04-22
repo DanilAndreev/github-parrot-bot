@@ -27,10 +27,10 @@
 import * as Koa from "koa";
 import {Context, Next} from "koa";
 import * as BodyParser from "koa-bodyparser";
-import AmqpDispatcher from "./AmqpDispatcher";
+import AmqpDispatcher from "./amqp/AmqpDispatcher";
 import Config from "../interfaces/Config";
 import SystemConfig from "./SystemConfig";
-import {Logger} from "./Logger";
+import {Logger} from "./logger/Logger";
 
 /**
  * WebServer - web server for handling WebHooks.

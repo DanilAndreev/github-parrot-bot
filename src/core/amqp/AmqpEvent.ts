@@ -24,7 +24,7 @@
  * SOFTWARE.
  */
 
-import JSONObject from "../interfaces/JSONObject";
+import JSONObject from "../../interfaces/JSONObject";
 import AmqpDispatcher from "./AmqpDispatcher";
 
 /**

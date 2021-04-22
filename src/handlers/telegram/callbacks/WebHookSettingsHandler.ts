@@ -24,7 +24,7 @@
  * SOFTWARE.
  */
 
-import CallbackQueryDispatcher from "../../../core/CallbackQueryDispatcher";
+import CallbackQueryDispatcher from "../../../core/amqp/CallbackQueryDispatcher";
 import {CallbackQuery} from "node-telegram-bot-api";
 import JSONObject from "../../../interfaces/JSONObject";
 import WebHook from "../../../entities/WebHook";

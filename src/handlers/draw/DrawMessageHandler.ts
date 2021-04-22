@@ -24,16 +24,16 @@
  * SOFTWARE.
  */
 
-import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
+import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
 import {QUEUES} from "../../globals";
-import AmqpHandler from "../../core/AmqpHandler";
-import Bot from "../../core/Bot";
+import AmqpHandler from "../../core/amqp/AmqpHandler";
+import Bot from "../../core/bot/Bot";
 import etelegramIgnore from "../../utils/etelegramIgnore";
 import AMQPAck from "../../errors/AMQPAck";
 import AMQPNack from "../../errors/AMQPNack";
 import {Message as AMQPMessage} from "amqplib";
 import SendChatMessageEvent from "../../events/telegram/SendChatMessageEvent";
-import AmqpEvent from "../../core/AmqpEvent";
+import AmqpEvent from "../../core/amqp/AmqpEvent";
 import EditChatMessageTextEvent from "../../events/telegram/EditChatMessageTextEvent";
 import EditChatMessageReplyMarkupEvent from "../../events/telegram/EditChatMessageReplyMarkupEvent";
 import EditChatMessageLiveLocationEvent from "../../events/telegram/EditChatMessageLiveLocationEvent";

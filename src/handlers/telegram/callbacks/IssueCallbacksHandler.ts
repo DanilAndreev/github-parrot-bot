@@ -24,11 +24,11 @@
  * SOFTWARE.
  */
 
-import CallbackQueryDispatcher from "../../../core/CallbackQueryDispatcher";
+import CallbackQueryDispatcher from "../../../core/amqp/CallbackQueryDispatcher";
 import {CallbackQuery} from "node-telegram-bot-api";
 import JSONObject from "../../../interfaces/JSONObject";
 import Issue from "../../../entities/Issue";
-import {Logger} from "../../../core/Logger";
+import {Logger} from "../../../core/logger/Logger";
 import DrawIssueEvent from "../../../events/draw/DrawIssueEvent";
 
 export default class IssueCallbacksHandler {

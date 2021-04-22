@@ -24,7 +24,7 @@
  * SOFTWARE.
  */
 
-import AmqpEvent from "../../core/AmqpEvent";
+import AmqpEvent from "../../core/amqp/AmqpEvent";
 import {QUEUES} from "../../globals";
 
 class DrawCheckSuiteEvent extends AmqpEvent {

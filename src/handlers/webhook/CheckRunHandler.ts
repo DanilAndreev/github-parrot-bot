@@ -26,11 +26,11 @@
 
 import WebHook from "../../entities/WebHook";
 import {CheckRun as CheckRunType, CheckSuite as CheckSuiteType} from "github-webhook-event-types";
-import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
+import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
 import CheckRun from "../../entities/CheckRun";
 import CheckSuiteHandler from "./CheckSuiteHandler";
 import CheckSuite from "../../entities/CheckSuite";
-import AmqpDispatcher from "../../core/AmqpDispatcher";
+import AmqpDispatcher from "../../core/amqp/AmqpDispatcher";
 import {QUEUES} from "../../globals";
 
 @WebHookAmqpHandler.Handler("check_run", 10)

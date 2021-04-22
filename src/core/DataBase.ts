@@ -27,7 +27,7 @@
 import {Connection, createConnection} from "typeorm";
 import SystemConfig from "./SystemConfig";
 import Config from "../interfaces/Config";
-import {Logger} from "./Logger";
+import {Logger} from "./logger/Logger";
 
 /**
  * DBConnection - current database connection.

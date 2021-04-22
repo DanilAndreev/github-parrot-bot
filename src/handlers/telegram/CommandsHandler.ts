@@ -24,10 +24,10 @@
  * SOFTWARE.
  */
 
-import AmqpHandler from "../../core/AmqpHandler";
+import AmqpHandler from "../../core/amqp/AmqpHandler";
 import {Message} from "node-telegram-bot-api";
 import {QUEUES} from "../../globals";
-import BotCommand from "../../core/BotCommand";
+import BotCommand from "../../core/bot/BotCommand";
 import config from "../../config";
 import SendChatMessageEvent from "../../events/telegram/SendChatMessageEvent";
 

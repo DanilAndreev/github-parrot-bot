@@ -24,7 +24,7 @@
  * SOFTWARE.
  */
 
-import BotCommand from "../core/BotCommand";
+import BotCommand from "../core/bot/BotCommand";
 import {Message} from "node-telegram-bot-api";
 import WebHook from "../entities/WebHook";
 import JSONObject from "../interfaces/JSONObject";

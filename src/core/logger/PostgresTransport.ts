@@ -27,7 +27,7 @@
 import * as Transport from "winston-transport";
 import * as PgPromise from "pg-promise";
 import {IDatabase} from "pg-promise";
-import JSONObject from "../interfaces/JSONObject";
+import JSONObject from "../../interfaces/JSONObject";
 
 /**
  * PostgresTransport - winston transport for storing logs in database.

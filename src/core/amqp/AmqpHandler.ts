@@ -26,8 +26,8 @@
 
 import * as Amqp from "amqplib";
 import {Message} from "amqplib";
-import AMQPAck from "../errors/AMQPAck";
-import {Logger} from "./Logger";
+import AMQPAck from "../../errors/AMQPAck";
+import {Logger} from "../logger/Logger";
 
 /**
  * AmqpHandler - base class for AMQP queue handlers.
