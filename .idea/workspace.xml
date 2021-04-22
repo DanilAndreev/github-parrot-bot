@@ -16,57 +16,16 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[PullRequestCallbacksHandler] Fixed bug with enqueuing.">
-      <change beforePath="$PROJECT_DIR$/src/chrono/CheckSuitsGarbageCollector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/chrono/CheckSuitsGarbageCollector.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chrono/IssuesGarbageCollector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/chrono/IssuesGarbageCollector.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chrono/PullRequestsGarbageCollector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/chrono/PullRequestsGarbageCollector.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[GLOBAL] Refactored core directories.">
+      <change afterPath="$PROJECT_DIR$/src/commands/WebHookSettingsCommand.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/events/draw/DrawWebHookSettingsEvent.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/handlers/draw/DrawWebHookSettingsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ClearAKACommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ClearAKACommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ConnectCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ConnectCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/DisconnectCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/DisconnectCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ListRepositoriesCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ListRepositoriesCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/RemoveRepositoryCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/RemoveRepositoryCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/VersionCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/VersionCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/AmqpDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/AmqpDispatcher.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/AmqpEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/AmqpEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/AmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/AmqpHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bot/Bot.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/BotCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bot/BotCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/CallbackQueryDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/CallbackQueryDispatcher.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/DataBase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/DataBase.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Logger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/logger/Logger.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/PostgresTransport.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/logger/PostgresTransport.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/WebHookAmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/WebHookAmqpHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebServer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/draw/DrawCheckSuiteEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawCheckSuiteEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/draw/DrawIssueEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawIssueEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/draw/DrawPullRequestEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawPullRequestEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/ChatCommandEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/ChatCommandEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/DeleteChatMessageEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/DeleteChatMessageEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageLiveLocationEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageLiveLocationEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageReplyMarkupEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageReplyMarkupEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageTextEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageTextEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/SendChatMessageEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/SendChatMessageEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/TelegramEventEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/TelegramEventEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawCheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawCheckSuiteHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/callbacks/IssueCallbacksHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/callbacks/IssueCallbacksHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/callbacks/PullRequestCallbacksHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/callbacks/PullRequestCallbacksHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/WebHook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/WebHook.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/globals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/globals.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/telegram/callbacks/WebHookSettingsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/callbacks/WebHookSettingsHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/CheckRunHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckRunHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/IssuesHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/IssuesHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PullRequestsHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/PushHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PushHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/Config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/checkAdmin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/checkAdmin.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +72,7 @@
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.20.7" />
     <property name="last.edited.regexp" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../test" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/events/draw" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -139,11 +98,11 @@
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers\webhook" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\onepl\WebstormProjects\github-parrot-bot\src\events\draw" />
       <recent name="D:\Projects\github-parrot-bot\src\events\telegram" />
       <recent name="C:\Users\onepl\WebstormProjects\github-parrot-bot\src\events\telegram" />
       <recent name="C:\Users\onepl\WebstormProjects\github-parrot-bot\src\handlers\telegram\callbacks" />
       <recent name="D:\Projects\github-tracker-telegram-bot\src\entities" />
-      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.Run with ts-node">
@@ -224,13 +183,6 @@
       <workItem from="1618999334833" duration="2047000" />
       <workItem from="1619016189443" duration="1199000" />
       <workItem from="1619034159639" duration="6558000" />
-    </task>
-    <task id="LOCAL-00065" summary="[CheckSuiteHandler] Separated to two parts.">
-      <created>1617128960426</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1617128960427</updated>
     </task>
     <task id="LOCAL-00066" summary="[CheckRunHandler] Separated to two handlers.">
       <created>1617135229621</created>
@@ -568,7 +520,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619092524327</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="[GLOBAL] Refactored core directories.">
+      <created>1619093509399</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1619093509399</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -599,7 +558,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[WebServer] Added events list." />
     <MESSAGE value="[VersionCommand] Fixed command for getting version." />
     <MESSAGE value="[Logger] Added database support." />
     <MESSAGE value="[Entities] Added cascade deletion to message tables." />
@@ -624,49 +582,86 @@
     <MESSAGE value="[AmqpEvent] Added more events." />
     <MESSAGE value="&#10;[AmqpEvents] Work finished." />
     <MESSAGE value="[BotCommand] Small fixes." />
-    <option name="LAST_COMMIT_MESSAGE" value="[BotCommand] Small fixes." />
+    <MESSAGE value="[GLOBAL] Refactored core directories." />
+    <option name="LAST_COMMIT_MESSAGE" value="[GLOBAL] Refactored core directories." />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="387" key="GridCell.Tab.0.bottom" timestamp="1619092831113">
+    <state width="1877" height="227" key="GridCell.Tab.0.bottom" timestamp="1619099005051">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="387" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092831113" />
-    <state width="1877" height="387" key="GridCell.Tab.0.center" timestamp="1619092831113">
+    <state width="1877" height="227" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619099005051" />
+    <state width="1877" height="227" key="GridCell.Tab.0.center" timestamp="1619099005051">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="387" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092831113" />
-    <state width="1877" height="387" key="GridCell.Tab.0.left" timestamp="1619092831113">
+    <state width="1877" height="227" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619099005051" />
+    <state width="1877" height="227" key="GridCell.Tab.0.left" timestamp="1619099005051">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="387" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092831113" />
-    <state width="1877" height="387" key="GridCell.Tab.0.right" timestamp="1619092831113">
+    <state width="1877" height="227" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619099005051" />
+    <state width="1877" height="227" key="GridCell.Tab.0.right" timestamp="1619099005051">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="387" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092831113" />
-    <state width="1877" height="387" key="GridCell.Tab.1.bottom" timestamp="1619092867310">
+    <state width="1877" height="227" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619099005051" />
+    <state width="1877" height="317" key="GridCell.Tab.1.bottom" timestamp="1619099004385">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="387" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092867310" />
-    <state width="1877" height="387" key="GridCell.Tab.1.center" timestamp="1619092867309">
+    <state width="1877" height="317" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619099004385" />
+    <state width="1877" height="317" key="GridCell.Tab.1.center" timestamp="1619099004385">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="387" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092867309" />
-    <state width="1877" height="387" key="GridCell.Tab.1.left" timestamp="1619092867304">
+    <state width="1877" height="317" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619099004385" />
+    <state width="1877" height="317" key="GridCell.Tab.1.left" timestamp="1619099004385">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="387" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092867304" />
-    <state width="1877" height="387" key="GridCell.Tab.1.right" timestamp="1619092867309">
+    <state width="1877" height="317" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619099004385" />
+    <state width="1877" height="317" key="GridCell.Tab.1.right" timestamp="1619099004385">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="387" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092867309" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1619092526337">
+    <state width="1877" height="317" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619099004385" />
+    <state width="1877" height="317" key="GridCell.Tab.2.bottom" timestamp="1619099004385">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092526337" />
+    <state width="1877" height="317" key="GridCell.Tab.2.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619099004385" />
+    <state width="1877" height="317" key="GridCell.Tab.2.center" timestamp="1619099004385">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="317" key="GridCell.Tab.2.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619099004385" />
+    <state width="1877" height="317" key="GridCell.Tab.2.left" timestamp="1619099004385">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="317" key="GridCell.Tab.2.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619099004385" />
+    <state width="1877" height="317" key="GridCell.Tab.2.right" timestamp="1619099004385">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="317" key="GridCell.Tab.2.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619099004385" />
+    <state width="1877" height="317" key="GridCell.Tab.3.bottom" timestamp="1619099004385">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="317" key="GridCell.Tab.3.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619099004385" />
+    <state width="1877" height="317" key="GridCell.Tab.3.center" timestamp="1619099004385">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="317" key="GridCell.Tab.3.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619099004385" />
+    <state width="1877" height="317" key="GridCell.Tab.3.left" timestamp="1619099004385">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="317" key="GridCell.Tab.3.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619099004385" />
+    <state width="1877" height="317" key="GridCell.Tab.3.right" timestamp="1619099004385">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="317" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619099004385" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1619093524281">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619093524281" />
     <state x="601" y="0" width="1335" height="859" maximized="true" key="dock-window-1" timestamp="1619090325069">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="601" y="0" width="1335" height="859" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619090325069" />
+    <state x="601" y="0" width="1335" height="718" maximized="true" key="dock-window-2" timestamp="1619098986887">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="601" y="0" width="1335" height="718" maximized="true" key="dock-window-2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619098986887" />
     <state x="2536" y="240" key="run.anything.popup" timestamp="1619090297282">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -696,14 +691,33 @@
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/core/amqp/CallbackQueryDispatcher.ts</url>
-          <line>92</line>
-          <option name="timeStamp" value="58" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/handlers/telegram/callbacks/PullRequestCallbacksHandler.ts</url>
           <line>36</line>
           <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/commands/WebHookSettingsCommand.ts</url>
+          <line>47</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/draw/DrawWebHookSettingsHandler.ts</url>
+          <line>68</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="62" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/draw/DrawWebHookSettingsHandler.ts</url>
+          <line>66</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/handlers/telegram/callbacks/WebHookSettingsHandler.ts</url>
+          <line>61</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="65" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

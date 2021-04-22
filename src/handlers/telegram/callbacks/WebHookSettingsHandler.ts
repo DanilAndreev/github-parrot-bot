@@ -29,11 +29,15 @@ import {CallbackQuery} from "node-telegram-bot-api";
 import JSONObject from "../../../interfaces/JSONObject";
 import WebHook from "../../../entities/WebHook";
 import AMQPAck from "../../../errors/AMQPAck";
+import DrawWebHookSettingsEvent from "../../../events/draw/DrawWebHookSettingsEvent";
 
 export default class WebHookSettingsHandler {
     @CallbackQueryDispatcher.CallbackQueryHandler("webhook.:id.settings.:setting.:value")
     public static async setter(query: CallbackQuery, params: JSONObject): Promise<void> {
         const {id, setting, value} = params;
+        if (!query.message?.message_id)
+            throw new AMQPAck(`No message id provided.`);
+
         const entity: WebHook.WebHookSettings | undefined = await WebHook.WebHookSettings.findOne({
             where: {webhook: +id}
         });
@@ -55,6 +59,6 @@ export default class WebHookSettingsHandler {
                 throw new AMQPAck(`Invalid setting name ${setting}.`);
         }
         await entity.save();
-        //TODO: queue message update.
+        await new DrawWebHookSettingsEvent(id, query.message.message_id).enqueue();
     }
 }

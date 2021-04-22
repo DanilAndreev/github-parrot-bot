@@ -54,6 +54,8 @@ import VersionCommand from "./commands/VersionCommand";
 import PullRequestCallbacksHandler from "./handlers/telegram/callbacks/PullRequestCallbacksHandler";
 import IssueCallbacksHandler from "./handlers/telegram/callbacks/IssueCallbacksHandler";
 import WebHookSettingsHandler from "./handlers/telegram/callbacks/WebHookSettingsHandler";
+import WebHookSettingsCommand from "./commands/WebHookSettingsCommand";
+import DrawWebHookSettingsHandler from "./handlers/draw/DrawWebHookSettingsHandler";
 
 const config: Config = {
     bot: {
@@ -67,6 +69,7 @@ const config: Config = {
             ListRepositoriesCommand,
             RemoveRepositoryCommand,
             VersionCommand,
+            WebHookSettingsCommand,
         ],
         callbackQueryHandlers: [
             PullRequestCallbacksHandler,
@@ -107,6 +110,7 @@ const config: Config = {
             DrawPullRequestHandler,
             DrawCheckSuiteHandler,
             DrawMessageHandler,
+            DrawWebHookSettingsHandler,
 
             CommandsHandler,
             TelegramEventsHandler,

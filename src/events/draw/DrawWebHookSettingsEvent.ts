@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,12 +24,36 @@
  * SOFTWARE.
  */
 
-export const QUEUES = {
-    PULL_REQUEST_SHOW_QUEUE: "pull-request-show-queue",
-    ISSUE_SHOW_QUEUE: "issue-show-queue",
-    CHECK_SUITE_SHOW_QUEUE: "check-suite-show-queue",
-    WEB_HOOK_SETTINGS_SHOW_QUEUE: "web-hook-settings-show-queue",
-    TELEGRAM_CHAT_COMMAND: "telegram-chat-command",
-    DRAW_TELEGRAM_MESSAGE_QUEUE: "messages",
-    TELEGRAM_EVENTS_QUEUE: "telegram-events-queue",
-};
+import AmqpEvent from "../../core/amqp/AmqpEvent";
+import {QUEUES} from "../../globals";
+
+class DrawWebHookSettingsEvent extends AmqpEvent {
+    public static readonly type: string = "draw-web-hook-settings-event";
+    public webhook: number;
+    public message?: number;
+
+    constructor(webhook: number, message?: number) {
+        super(DrawWebHookSettingsEvent.type, {
+            queue: QUEUES.WEB_HOOK_SETTINGS_SHOW_QUEUE,
+        });
+        this.webhook = webhook;
+        this.message = message;
+    }
+
+    public serialize(): DrawWebHookSettingsEvent.Serialized {
+        return {
+            ...super.serialize(),
+            webhook: this.webhook,
+            message: this.message,
+        };
+    }
+}
+
+namespace DrawWebHookSettingsEvent {
+    export interface Serialized extends AmqpEvent.Serialized {
+        webhook: number;
+        message?: number;
+    }
+}
+
+export default DrawWebHookSettingsEvent;

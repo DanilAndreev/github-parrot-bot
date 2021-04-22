@@ -32,6 +32,7 @@ import WebHook from "../entities/WebHook";
 import Chat from "../entities/Chat";
 import JSONObject from "../interfaces/JSONObject";
 import DeleteChatMessageEvent from "../events/telegram/DeleteChatMessageEvent";
+import {getConnection} from "typeorm";
 
 /**
  * Handler for command:
@@ -62,16 +63,24 @@ export default class AddRepositoryCommand extends BotCommand {
                 `Use /remove command to remove repository.`
             );
 
-        const webhook = new WebHook();
-        try {
-            webhook.secretPreview = AddRepositoryCommand.createSecretPreview(secret);
-        } catch (error) {
-            throw new CommandError(error.message);
-        }
-        webhook.secret = secret;
-        webhook.chat = chat;
-        webhook.repository = repository;
-        const result = await webhook.save();
+        let result: WebHook | JSONObject = {};
+        await getConnection().transaction(async transaction => {
+            let webhook = new WebHook();
+            try {
+                webhook.secretPreview = AddRepositoryCommand.createSecretPreview(secret);
+            } catch (error) {
+                throw new CommandError(error.message);
+            }
+            webhook.secret = secret;
+            webhook.chat = chat;
+            webhook.repository = repository;
+            webhook = await transaction.save(webhook);
+            result = webhook;
+
+            const settings = new WebHook.WebHookSettings();
+            settings.webhook = webhook;
+            await transaction.save(settings);
+        });
 
         await new DeleteChatMessageEvent(chatId, "" + message.message_id, {}, true).enqueue();
         return [

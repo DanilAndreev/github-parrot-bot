@@ -29,7 +29,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    Index,
+    Index, JoinColumn,
     ManyToOne,
     OneToMany, OneToOne,
     PrimaryGeneratedColumn,
@@ -61,7 +61,7 @@ class WebHook extends BaseEntity {
     @OneToMany(type => CheckSuite, checksuite => checksuite.webhook)
     checksuits: CheckSuite[];
 
-    @OneToOne(type => WebHook.WebHookSettings, settings => settings.webhook)
+    @OneToOne(type => WebHook.WebHookSettings, settings => settings.webhook, {nullable: false})
     settings: WebHook.WebHookSettings;
 
     @Column()
@@ -84,6 +84,7 @@ namespace WebHook {
         id: number;
 
         @OneToOne(type => WebHook, webhook => webhook.settings)
+        @JoinColumn()
         webhook: WebHook;
 
         @Column({type: "boolean", default: false})
