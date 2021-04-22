@@ -27,9 +27,9 @@
 import CallbackQueryDispatcher from "../../../core/CallbackQueryDispatcher";
 import {CallbackQuery} from "node-telegram-bot-api";
 import JSONObject from "../../../interfaces/JSONObject";
-import Enqueuer from "../../../core/Enqueuer";
 import Issue from "../../../entities/Issue";
 import {Logger} from "../../../core/Logger";
+import DrawIssueEvent from "../../../events/draw/DrawIssueEvent";
 
 export default class IssueCallbacksHandler {
     @CallbackQueryDispatcher.CallbackQueryHandler("issue.:id.maximize", {exact: true})
@@ -47,7 +47,7 @@ export default class IssueCallbacksHandler {
 
         entity.minimized = false;
         await entity.save();
-        await Enqueuer.drawIssue(entity.id);
+        await new DrawIssueEvent(entity.id).enqueue();
     }
 
     @CallbackQueryDispatcher.CallbackQueryHandler("issue.:id.minimize", {exact: true})
@@ -65,6 +65,6 @@ export default class IssueCallbacksHandler {
 
         entity.minimized = true;
         await entity.save();
-        await Enqueuer.drawIssue(entity.id);
+        await new DrawIssueEvent(entity.id).enqueue();
     }
 }

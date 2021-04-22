@@ -16,19 +16,25 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[AmqpEvent] Creating new AMQP event system.">
-      <change afterPath="$PROJECT_DIR$/src/events/telegram/DrawCheckSuiteEvent.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/events/telegram/DrawIssueEvent.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/events/telegram/DrawPullRequestEvent.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/events/telegram/TelegramEventEvent.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[AmqpEvent] Added more events.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/AmqpEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/AmqpEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Enqueuer.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/telegram/ChatCommandEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/ChatCommandEvent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/telegram/DeleteChatMessageEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/DeleteChatMessageEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/telegram/DrawCheckSuiteEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawCheckSuiteEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/telegram/DrawIssueEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawIssueEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/telegram/DrawPullRequestEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawPullRequestEvent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageLiveLocationEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageLiveLocationEvent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageReplyMarkupEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageReplyMarkupEvent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageTextEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageTextEvent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/telegram/SendChatMessageEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/SendChatMessageEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/telegram/TelegramEventEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/TelegramEventEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/callbacks/IssueCallbacksHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/callbacks/IssueCallbacksHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/callbacks/PullRequestCallbacksHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/callbacks/PullRequestCallbacksHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +81,7 @@
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.20.7" />
     <property name="last.edited.regexp" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/events/telegram" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../test" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -101,11 +107,11 @@
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\github-parrot-bot\src\events\draw" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\handlers\webhook" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\images" />
       <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src\errors" />
       <recent name="D:\Projects\github-tracker-telegram-bot\src\core" />
-      <recent name="C:\Users\onepl\WebstormProjects\github-tracker-telegram-bot\src" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.Run with ts-node">
@@ -185,14 +191,7 @@
       <workItem from="1618949976098" duration="7061000" />
       <workItem from="1618999334833" duration="2047000" />
       <workItem from="1619016189443" duration="1199000" />
-      <workItem from="1619034159639" duration="1367000" />
-    </task>
-    <task id="LOCAL-00062" summary="[IssueHandler] Fixed bug with message deletion.">
-      <created>1616962489154</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1616962489154</updated>
+      <workItem from="1619034159639" duration="6558000" />
     </task>
     <task id="LOCAL-00063" summary="[Handlers] Structured to directories.&#10;[WebHookAmqpHandler] Changed input params in handler.">
       <created>1617019397125</created>
@@ -530,7 +529,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618960282060</updated>
     </task>
-    <option name="localTasksCounter" value="111" />
+    <task id="LOCAL-00111" summary="[AmqpEvent] Added more events.">
+      <created>1619035544240</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1619035544241</updated>
+    </task>
+    <option name="localTasksCounter" value="112" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -561,7 +567,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[Bot] Fixed problem with commands regexp." />
     <MESSAGE value="[CommandsHandler] Added reply to message on Incorrect message." />
     <MESSAGE value="[Commands] Added messages reply mechanism." />
     <MESSAGE value="[WebServer] Added events list." />
@@ -586,7 +591,8 @@
     <MESSAGE value="[IssueCallbackHandler] Fixed bug in where condition." />
     <MESSAGE value="[WebHookSettingsHandler] Added callback query handler for webhook settings." />
     <MESSAGE value="[ConnectCommand] Removed legacy TODO." />
-    <option name="LAST_COMMIT_MESSAGE" value="[ConnectCommand] Removed legacy TODO." />
+    <MESSAGE value="[AmqpEvent] Added more events." />
+    <option name="LAST_COMMIT_MESSAGE" value="[AmqpEvent] Added more events." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

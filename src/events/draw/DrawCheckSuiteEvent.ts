@@ -25,26 +25,34 @@
  */
 
 import AmqpEvent from "../../core/AmqpEvent";
-import JSONObject from "../../interfaces/JSONObject";
 import {QUEUES} from "../../globals";
 
-export default class DrawPullRequestEvent extends AmqpEvent {
-    public pullRequest: number;
-    public forceNewMessage:boolean;
+class DrawCheckSuiteEvent extends AmqpEvent {
+    public checkSuite: number;
+    public forceNewMessage: boolean;
 
-    constructor(pullRequest: number, forceNewMessage: boolean = false) {
+    constructor(checkSuite: number, forceNewMessage: boolean = false) {
         super("chat-command-event", {
-            queue: QUEUES.PULL_REQUEST_SHOW_QUEUE,
+            queue: QUEUES.CHECK_SUITE_SHOW_QUEUE,
         });
-        this.pullRequest = pullRequest;
+        this.checkSuite = checkSuite;
         this.forceNewMessage = forceNewMessage;
     }
 
-    public serialize(): JSONObject {
+    public serialize(): DrawCheckSuiteEvent.Serialized {
         return {
             ...super.serialize(),
-            pullRequest: this.pullRequest,
+            checkSuite: this.checkSuite,
             forceNewMessage: this.forceNewMessage,
-        }
+        };
     }
 }
+
+namespace DrawCheckSuiteEvent {
+    export interface Serialized extends AmqpEvent.Serialized {
+        checkSuite: number;
+        forceNewMessage: boolean;
+    }
+}
+
+export default DrawCheckSuiteEvent;

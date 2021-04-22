@@ -25,11 +25,10 @@
  */
 
 import AmqpEvent from "../../core/AmqpEvent";
-import JSONObject from "../../interfaces/JSONObject";
 import {Message} from "node-telegram-bot-api";
 import {QUEUES} from "../../globals";
 
-export default class ChatCommandEvent extends AmqpEvent {
+class ChatCommandEvent extends AmqpEvent {
     public message: Message;
     public match: RegExpMatchArray | null;
 
@@ -41,11 +40,20 @@ export default class ChatCommandEvent extends AmqpEvent {
         this.match = match;
     }
 
-    public serialize(): JSONObject {
+    public serialize(): ChatCommandEvent.Serialized {
         return {
             ...super.serialize(),
             message: this.message,
             match: this.match,
-        }
+        };
     }
 }
+
+namespace ChatCommandEvent {
+    export interface Serialized extends AmqpEvent.Serialized {
+        message: Message;
+        match: RegExpMatchArray | null;
+    }
+}
+
+export default ChatCommandEvent;

@@ -26,10 +26,9 @@
 
 import {EditMessageTextOptions} from "node-telegram-bot-api";
 import AmqpEvent from "../../core/AmqpEvent";
-import JSONObject from "../../interfaces/JSONObject";
 import {QUEUES} from "../../globals";
 
-export default class EditChatMessageTextEvent extends AmqpEvent {
+class EditChatMessageTextEvent extends AmqpEvent {
     public text: string;
     public options?: EditMessageTextOptions;
 
@@ -42,7 +41,7 @@ export default class EditChatMessageTextEvent extends AmqpEvent {
         this.options = options;
     }
 
-    public serialize(): JSONObject {
+    public serialize(): EditChatMessageTextEvent.Serialized {
         return {
             ...super.serialize(),
             text: this.text,
@@ -50,3 +49,12 @@ export default class EditChatMessageTextEvent extends AmqpEvent {
         };
     }
 }
+
+namespace EditChatMessageTextEvent {
+    export interface Serialized extends AmqpEvent.Serialized {
+        text: string;
+        options?: EditMessageTextOptions;
+    }
+}
+
+export default EditChatMessageTextEvent;

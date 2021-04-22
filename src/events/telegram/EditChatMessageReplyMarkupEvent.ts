@@ -26,10 +26,9 @@
 
 import {EditMessageReplyMarkupOptions, InlineKeyboardMarkup} from "node-telegram-bot-api";
 import AmqpEvent from "../../core/AmqpEvent";
-import JSONObject from "../../interfaces/JSONObject";
 import {QUEUES} from "../../globals";
 
-export default class EditChatMessageReplyMarkupEvent extends AmqpEvent {
+class EditChatMessageReplyMarkupEvent extends AmqpEvent {
     public replyMarkup: InlineKeyboardMarkup;
     public options?: EditMessageReplyMarkupOptions;
 
@@ -42,7 +41,7 @@ export default class EditChatMessageReplyMarkupEvent extends AmqpEvent {
         this.options = options;
     }
 
-    public serialize(): JSONObject {
+    public serialize(): EditChatMessageReplyMarkupEvent.Serialized {
         return {
             ...super.serialize(),
             replyMarkup: this.replyMarkup,
@@ -50,3 +49,12 @@ export default class EditChatMessageReplyMarkupEvent extends AmqpEvent {
         };
     }
 }
+
+namespace EditChatMessageReplyMarkupEvent {
+    export interface Serialized extends AmqpEvent.Serialized {
+        replyMarkup: InlineKeyboardMarkup;
+        options?: EditMessageReplyMarkupOptions;
+    }
+}
+
+export default EditChatMessageReplyMarkupEvent;

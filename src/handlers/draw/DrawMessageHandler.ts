@@ -28,34 +28,39 @@ import WebHookAmqpHandler from "../../core/WebHookAmqpHandler";
 import {QUEUES} from "../../globals";
 import AmqpHandler from "../../core/AmqpHandler";
 import Bot from "../../core/Bot";
-import Enqueuer from "../../core/Enqueuer";
 import etelegramIgnore from "../../utils/etelegramIgnore";
 import AMQPAck from "../../errors/AMQPAck";
 import AMQPNack from "../../errors/AMQPNack";
 import {Message as AMQPMessage} from "amqplib";
+import SendChatMessageEvent from "../../events/telegram/SendChatMessageEvent";
+import AmqpEvent from "../../core/AmqpEvent";
+import EditChatMessageTextEvent from "../../events/telegram/EditChatMessageTextEvent";
+import EditChatMessageReplyMarkupEvent from "../../events/telegram/EditChatMessageReplyMarkupEvent";
+import EditChatMessageLiveLocationEvent from "../../events/telegram/EditChatMessageLiveLocationEvent";
+import DeleteChatMessageEvent from "../../events/telegram/DeleteChatMessageEvent";
 
 @WebHookAmqpHandler.Handler(QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE, 10)
 @Reflect.metadata("amqp-handler-type", "draw-event-handler")
 class DrawMessageHandler extends AmqpHandler {
-    protected async handle(event: Enqueuer.AMQPEvent, message: AMQPMessage): Promise<void | boolean> {
+    protected async handle(event: AmqpEvent.Serialized, message: AMQPMessage): Promise<void | boolean> {
         switch (event.type) {
             case "send-chat-message":
-                return await this.sendChatMessage(event as Enqueuer.SendChatMessageEvent, message);
+                return await this.sendChatMessage(event as SendChatMessageEvent.Serialized, message);
             case "edit-message-text":
-                return await this.editMessageText(event as Enqueuer.EditMessageTextEvent, message);
+                return await this.editMessageText(event as EditChatMessageTextEvent.Serialized, message);
             case "edit-message-reply-markup":
-                return await this.editMessageReplyMarkup(event as Enqueuer.EditMessageReplyMarkupEvent, message);
+                return await this.editMessageReplyMarkup(event as EditChatMessageReplyMarkupEvent.Serialized, message);
             case "edit-message-live-location":
-                return await this.editMessageLiveLocation(event as Enqueuer.EditMessageLiveLocationEvent, message);
+                return await this.editMessageLiveLocation(event as EditChatMessageLiveLocationEvent.Serialized, message);
             case "delete-chat-message":
-                return await this.deleteMessage(event as Enqueuer.DeleteChatMessageEvent, message);
+                return await this.deleteMessage(event as DeleteChatMessageEvent.Serialized, message);
             default:
                 throw new AMQPAck(`Incorrect message type. Got: "${event.type}"`, message.properties.messageId);
         }
     }
 
     protected async sendChatMessage(
-        event: Enqueuer.SendChatMessageEvent,
+        event: SendChatMessageEvent.Serialized,
         message: AMQPMessage
     ): Promise<void | boolean> {
         try {

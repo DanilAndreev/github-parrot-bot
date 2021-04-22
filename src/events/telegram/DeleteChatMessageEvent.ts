@@ -28,7 +28,7 @@ import AmqpEvent from "../../core/AmqpEvent";
 import JSONObject from "../../interfaces/JSONObject";
 import {QUEUES} from "../../globals";
 
-export default class DeleteChatMessageEvent extends AmqpEvent {
+class DeleteChatMessageEvent extends AmqpEvent {
     public chatId: string | number;
     public messageId: string;
     public showMessageOnError: boolean;
@@ -43,7 +43,7 @@ export default class DeleteChatMessageEvent extends AmqpEvent {
         this.showMessageOnError = !!showMessageOnError;
     }
 
-    public serialize(): JSONObject {
+    public serialize(): DeleteChatMessageEvent.Serialized {
         return {
             ...super.serialize(),
             chatId: this.chatId,
@@ -52,3 +52,13 @@ export default class DeleteChatMessageEvent extends AmqpEvent {
         };
     }
 }
+
+namespace DeleteChatMessageEvent {
+    export interface Serialized extends AmqpEvent.Serialized {
+        chatId: string | number;
+        messageId: string;
+        showMessageOnError: boolean;
+    }
+}
+
+export default DeleteChatMessageEvent;

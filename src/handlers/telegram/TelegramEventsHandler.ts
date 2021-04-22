@@ -27,7 +27,6 @@
 import AmqpHandler from "../../core/AmqpHandler";
 import {QUEUES} from "../../globals";
 import {Message as AMQPMessage} from "amqplib";
-import Enqueuer from "../../core/Enqueuer";
 import {CallbackQuery, Message, User} from "node-telegram-bot-api";
 import Chat from "../../entities/Chat";
 import Collaborator from "../../entities/Collaborator";

@@ -26,10 +26,9 @@
 
 import AmqpEvent from "../../core/AmqpEvent";
 import {SendMessageOptions} from "node-telegram-bot-api";
-import JSONObject from "../../interfaces/JSONObject";
 import {QUEUES} from "../../globals";
 
-export default class SendChatMessageEvent extends AmqpEvent {
+class SendChatMessageEvent extends AmqpEvent {
     public chatId: string | number;
     public text: string;
     public options?: SendMessageOptions;
@@ -44,7 +43,7 @@ export default class SendChatMessageEvent extends AmqpEvent {
         this.options = options;
     }
 
-    public serialize(): JSONObject {
+    public serialize(): SendChatMessageEvent.Serialized {
         return {
             ...super.serialize(),
             chatId: this.chatId,
@@ -53,3 +52,13 @@ export default class SendChatMessageEvent extends AmqpEvent {
         };
     }
 }
+
+namespace SendChatMessageEvent {
+    export interface Serialized extends AmqpEvent.Serialized {
+        chatId: string | number;
+        text: string;
+        options?: SendMessageOptions;
+    }
+}
+
+export default SendChatMessageEvent;

@@ -113,7 +113,7 @@ abstract class AmqpEvent {
      * @method
      * @author Danil Andreev
      */
-    public serialize(): JSONObject {
+    public serialize(): AmqpEvent.Serialized {
         return {
             type: this.type,
         };
@@ -124,6 +124,10 @@ namespace AmqpEvent {
     export interface Options {
         expiration?: number;
         queue?: string;
+    }
+
+    export interface Serialized extends JSONObject{
+        type: string;
     }
 }
 

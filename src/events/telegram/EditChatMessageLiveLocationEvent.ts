@@ -26,10 +26,9 @@
 
 import {EditMessageCaptionOptions} from "node-telegram-bot-api";
 import AmqpEvent from "../../core/AmqpEvent";
-import JSONObject from "../../interfaces/JSONObject";
 import {QUEUES} from "../../globals";
 
-export default class EditChatMessageLiveLocationEvent extends AmqpEvent {
+class EditChatMessageLiveLocationEvent extends AmqpEvent {
     public latitude: number;
     public longitude: number;
     public options?: EditMessageCaptionOptions;
@@ -44,7 +43,7 @@ export default class EditChatMessageLiveLocationEvent extends AmqpEvent {
         this.options = options;
     }
 
-    public serialize(): JSONObject {
+    public serialize(): EditChatMessageLiveLocationEvent.Serialized {
         return {
             ...super.serialize(),
             latitude: this.latitude,
@@ -53,3 +52,13 @@ export default class EditChatMessageLiveLocationEvent extends AmqpEvent {
         };
     }
 }
+
+namespace EditChatMessageLiveLocationEvent {
+    export interface Serialized extends AmqpEvent.Serialized {
+        latitude: number;
+        longitude: number;
+        options?: EditMessageCaptionOptions;
+    }
+}
+
+export default EditChatMessageLiveLocationEvent;

@@ -25,7 +25,6 @@
  */
 
 import AmqpEvent from "../../core/AmqpEvent";
-import JSONObject from "../../interfaces/JSONObject";
 import {CallbackQuery, Message} from "node-telegram-bot-api";
 import {QUEUES} from "../../globals";
 
@@ -41,7 +40,7 @@ class TelegramEventEvent<T extends Message | CallbackQuery> extends AmqpEvent {
         this.event = event;
     }
 
-    public serialize(): JSONObject {
+    public serialize(): TelegramEventEvent.Serialized<T> {
         return {
             ...super.serialize(),
             event: this.event,
@@ -62,6 +61,11 @@ namespace TelegramEventEvent {
         | "new_chat_members"
         | "left_chat_member"
         | "callback_query";
+
+    export interface Serialized<T extends Message | CallbackQuery> extends AmqpEvent.Serialized {
+        event: TelegramEventEvent.TelegramEvent;
+        message: T;
+    }
 }
 
 export default TelegramEventEvent;
