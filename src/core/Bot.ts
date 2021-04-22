@@ -25,11 +25,12 @@
  */
 
 import * as TelegramBot from "node-telegram-bot-api";
-import Enqueuer from "./Enqueuer";
+import {CallbackQuery} from "node-telegram-bot-api";
 import {Logger} from "./Logger";
 import Config from "../interfaces/Config";
 import SystemConfig from "./SystemConfig";
-import {CallbackQuery} from "node-telegram-bot-api";
+import ChatCommandEvent from "../events/telegram/ChatCommandEvent";
+import TelegramEventEvent from "../events/telegram/TelegramEventEvent";
 
 /**
  * Bot - class for telegram bot api.
@@ -63,7 +64,7 @@ export default class Bot extends TelegramBot {
             regExp = new RegExp(`^/([^\\s@]+)(?:${SystemConfig.getConfig<Config>().bot.tag})?(?:\\s)?(.*)?`);
         this.onText(regExp, (message, match) => {
             Logger?.debug(`Got command from chat id: ${message.chat.id}. Command: "${match && match[0]}"`);
-            Enqueuer.chatCommand(message, match).then();
+            new ChatCommandEvent(message, match).enqueue().catch(Logger?.error);
         });
         Logger?.silly(`Added listener for telegram messages.`);
         // this.updateBotCommandsHelp().catch((error: Error) => {
@@ -79,7 +80,7 @@ export default class Bot extends TelegramBot {
      */
     protected async handleCallbackQuery(query: CallbackQuery): Promise<void> {
         Logger?.debug(`Caught event "left_chat_member" on chat id ${query.message?.chat.id}: "${query.data}"`);
-        await Enqueuer.telegramEvent("callback_query", query);
+        await new TelegramEventEvent("callback_query", query).setExpiration(100 * 60 * 2).enqueue();
     }
 
     /**
@@ -114,7 +115,7 @@ export default class Bot extends TelegramBot {
         Logger?.debug(
             `Caught event "left_chat_member" on chat id ${message.chat.id}. Member id: ${message.left_chat_member?.id}`
         );
-        await Enqueuer.telegramEvent("left_chat_member", message);
+        await new TelegramEventEvent("left_chat_member", message).enqueue();
     }
 
     /**
@@ -129,7 +130,7 @@ export default class Bot extends TelegramBot {
                 member => member.id
             )}.`
         );
-        await Enqueuer.telegramEvent("new_chat_members", message);
+        await new TelegramEventEvent("new_chat_members", message).enqueue();
     }
 
     /**

@@ -16,20 +16,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[ConnectCommand] Removed legacy TODO.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="&#10;[AmqpEvents] Work finished.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/AmqpEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/AmqpEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/draw/DrawCheckSuiteEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawCheckSuiteEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/draw/DrawIssueEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawIssueEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/draw/DrawPullRequestEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawPullRequestEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/ChatCommandEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/ChatCommandEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/DeleteChatMessageEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/DeleteChatMessageEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageLiveLocationEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageLiveLocationEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageReplyMarkupEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageReplyMarkupEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageTextEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageTextEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/SendChatMessageEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/SendChatMessageEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/TelegramEventEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/TelegramEventEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Bot.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/BotCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/BotCommand.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -188,13 +179,6 @@
       <workItem from="1618999334833" duration="2047000" />
       <workItem from="1619016189443" duration="1199000" />
       <workItem from="1619034159639" duration="6558000" />
-    </task>
-    <task id="LOCAL-00063" summary="[Handlers] Structured to directories.&#10;[WebHookAmqpHandler] Changed input params in handler.">
-      <created>1617019397125</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1617019397125</updated>
     </task>
     <task id="LOCAL-00064" summary="[IssuesHandler] Separated to two handlers.">
       <created>1617054402209</created>
@@ -532,7 +516,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619035544241</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="&#10;[AmqpEvents] Work finished.">
+      <created>1619091073551</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1619091073551</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -563,7 +554,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[CommandsHandler] Added reply to message on Incorrect message." />
     <MESSAGE value="[Commands] Added messages reply mechanism." />
     <MESSAGE value="[WebServer] Added events list." />
     <MESSAGE value="[VersionCommand] Fixed command for getting version." />
@@ -588,9 +578,30 @@
     <MESSAGE value="[WebHookSettingsHandler] Added callback query handler for webhook settings." />
     <MESSAGE value="[ConnectCommand] Removed legacy TODO." />
     <MESSAGE value="[AmqpEvent] Added more events." />
-    <option name="LAST_COMMIT_MESSAGE" value="[AmqpEvent] Added more events." />
+    <MESSAGE value="&#10;[AmqpEvents] Work finished." />
+    <option name="LAST_COMMIT_MESSAGE" value="&#10;[AmqpEvents] Work finished." />
   </component>
   <component name="WindowStateProjectService">
+    <state width="1877" height="251" key="GridCell.Tab.0.bottom" timestamp="1619092372995">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="251" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092372995" />
+    <state width="1877" height="251" key="GridCell.Tab.0.center" timestamp="1619092372994">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="251" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092372994" />
+    <state width="1877" height="251" key="GridCell.Tab.0.left" timestamp="1619092372994">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="251" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092372994" />
+    <state width="1877" height="251" key="GridCell.Tab.0.right" timestamp="1619092372995">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="251" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619092372994" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1619091075916">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619091075916" />
     <state x="601" y="0" width="1335" height="859" maximized="true" key="dock-window-1" timestamp="1619090325069">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -42,7 +42,7 @@ export default class TelegramEventsHandler extends CallbackQueryDispatcher {
         event: TelegramEventEvent.Serialized<Message | CallbackQuery>,
         message: AMQPMessage
     ): Promise<void | boolean> {
-        switch (event.type) {
+        switch (event.event) {
             case "left_chat_member":
                 return this.handleLeftChatMember(event.message as Message);
             case "new_chat_members":
