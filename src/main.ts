@@ -82,7 +82,13 @@ export default async function main(): Promise<void> {
         }
 
         if (
-            requiredFor("commandsProxy", "webserver", "githubEventsHandlers", "commandsEventHandlers", "drawEventsHandlers")
+            requiredFor(
+                "commandsProxy",
+                "webserver",
+                "githubEventsHandlers",
+                "commandsEventHandlers",
+                "drawEventsHandlers"
+            )
         ) {
             const RabbitMQ: AmqpDispatcher = await AmqpDispatcher.init();
         }

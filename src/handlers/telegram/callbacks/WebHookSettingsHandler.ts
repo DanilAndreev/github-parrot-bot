@@ -35,15 +35,13 @@ export default class WebHookSettingsHandler {
     @CallbackQueryDispatcher.CallbackQueryHandler("webhook.:id.settings.:setting.:value")
     public static async setter(query: CallbackQuery, params: JSONObject): Promise<void> {
         const {id, setting, value} = params;
-        if (!query.message?.message_id)
-            throw new AMQPAck(`No message id provided.`);
+        if (!query.message?.message_id) throw new AMQPAck(`No message id provided.`);
 
         const entity: WebHook.WebHookSettings | undefined = await WebHook.WebHookSettings.findOne({
-            where: {webhook: +id}
+            where: {webhook: +id},
         });
 
-        if (!entity)
-            throw new AMQPAck("Entity not found.");
+        if (!entity) throw new AMQPAck("Entity not found.");
 
         switch (setting) {
             case "track_pushes":

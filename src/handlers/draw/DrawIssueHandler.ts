@@ -38,7 +38,7 @@ import AmqpDispatcher from "../../core/amqp/AmqpDispatcher";
 @WebHookAmqpHandler.Handler(QUEUES.ISSUE_SHOW_QUEUE, 10)
 @Reflect.metadata("amqp-handler-type", "draw-event-handler")
 export default class DrawIssueHandler extends AmqpHandler {
-    protected async handle(content: { issue: number }): Promise<void | boolean> {
+    protected async handle(content: {issue: number}): Promise<void | boolean> {
         const {issue} = content;
 
         const entity: Issue | undefined = await Issue.findOne({
@@ -49,7 +49,8 @@ export default class DrawIssueHandler extends AmqpHandler {
 
         const template = await loadTemplate("issue");
         const text: string = template(entity).replace(/  +/g, " ").replace(/\n +/g, "\n");
-        const maximizeMinimizeCallbackData: string = `issue.${entity.issueId}` + (entity.minimized ? ".maximize" : ".minimize");
+        const maximizeMinimizeCallbackData: string =
+            `issue.${entity.issueId}` + (entity.minimized ? ".maximize" : ".minimize");
 
         try {
             const issueMessage: Issue.IssueMessage = new Issue.IssueMessage();
@@ -61,10 +62,12 @@ export default class DrawIssueHandler extends AmqpHandler {
                         parse_mode: "HTML",
                         reply_markup: {
                             inline_keyboard: [
-                                [{
-                                    text: entity.minimized ? "Maximize" : "Minimize",
-                                    callback_data: maximizeMinimizeCallbackData
-                                }],
+                                [
+                                    {
+                                        text: entity.minimized ? "Maximize" : "Minimize",
+                                        callback_data: maximizeMinimizeCallbackData,
+                                    },
+                                ],
                                 [{text: "View on GitHub", url: entity.info.html_url}],
                             ],
                         },
@@ -81,10 +84,12 @@ export default class DrawIssueHandler extends AmqpHandler {
                     parse_mode: "HTML",
                     reply_markup: {
                         inline_keyboard: [
-                            [{
-                                text: entity.minimized ? "Maximize" : "Minimize",
-                                callback_data: maximizeMinimizeCallbackData
-                            }],
+                            [
+                                {
+                                    text: entity.minimized ? "Maximize" : "Minimize",
+                                    callback_data: maximizeMinimizeCallbackData,
+                                },
+                            ],
                             [{text: "View on GitHub", url: entity.info.html_url}],
                         ],
                     },

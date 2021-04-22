@@ -44,8 +44,7 @@ export default class CheckSuiteHandler extends WebHookAmqpHandler {
             if (!webHook.settings.trackPullRequestCI)
                 throw new AMQPAck("WebHook setting 'trackPullRequestCI' is disabled.");
         } else {
-            if (!webHook.settings.trackFreeCI)
-                throw new AMQPAck("WebHook setting 'trackFreeCI' is disabled.");
+            if (!webHook.settings.trackFreeCI) throw new AMQPAck("WebHook setting 'trackFreeCI' is disabled.");
         }
 
         let pullRequest: PullRequest | undefined = undefined;

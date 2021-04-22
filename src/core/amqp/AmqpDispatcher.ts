@@ -141,7 +141,7 @@ class AmqpDispatcher {
             const connection: Connection = await Amqp.connect(SystemConfig.getConfig<Config>().amqp.connect);
             AmqpDispatcher.current = new AmqpDispatcher(connection);
             return AmqpDispatcher.current;
-        } catch(error) {
+        } catch (error) {
             throw new FatalError("Failed to connect to AMQP server:", error);
         }
     }

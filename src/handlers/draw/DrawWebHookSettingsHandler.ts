@@ -40,46 +40,54 @@ export default class DrawWebHookSettingsHandler extends AmqpHandler {
 
         const entity: WebHook | undefined = await WebHook.findOne({
             where: {id: webhook},
-            relations: ["settings", "chat"]
+            relations: ["settings", "chat"],
         });
 
-        if (!entity)
-            return;
+        if (!entity) return;
 
         const replyMarkup: InlineKeyboardMarkup = {
             inline_keyboard: [
-                [{
-                    text: "Track free CI: " + (entity.settings.trackFreeCI ? "ON" : "OFF"),
-                    callback_data: `webhook.${entity.id}.settings.track_free_ci.${entity.settings.trackFreeCI ? "off" : "on"}`,
-                }],
-                [{
-                    text: "Track pushes: " + (entity.settings.trackPushes ? "ON" : "OFF"),
-                    callback_data: `webhook.${entity.id}.settings.track_pushes.${entity.settings.trackPushes ? "off" : "on"}`,
-                }],
-                [{
-                    text: "Track Pull Request CI: " + (entity.settings.trackPullRequestCI ? "ON" : "OFF"),
-                    callback_data: `webhook.${entity.id}.settings.track_pull_request_ci.${entity.settings.trackPullRequestCI ? "off" : "on"}`,
-                }],
-            ]
-        }
-
+                [
+                    {
+                        text: "Track free CI: " + (entity.settings.trackFreeCI ? "ON" : "OFF"),
+                        callback_data: `webhook.${entity.id}.settings.track_free_ci.${
+                            entity.settings.trackFreeCI ? "off" : "on"
+                        }`,
+                    },
+                ],
+                [
+                    {
+                        text: "Track pushes: " + (entity.settings.trackPushes ? "ON" : "OFF"),
+                        callback_data: `webhook.${entity.id}.settings.track_pushes.${
+                            entity.settings.trackPushes ? "off" : "on"
+                        }`,
+                    },
+                ],
+                [
+                    {
+                        text: "Track Pull Request CI: " + (entity.settings.trackPullRequestCI ? "ON" : "OFF"),
+                        callback_data: `webhook.${entity.id}.settings.track_pull_request_ci.${
+                            entity.settings.trackPullRequestCI ? "off" : "on"
+                        }`,
+                    },
+                ],
+            ],
+        };
 
         if (message) {
             try {
                 await Bot.getCurrent().editMessageText(`Settigns for ${entity.repository}`, {
                     chat_id: entity.chat.chatId,
                     message_id: message,
-                    reply_markup: replyMarkup
+                    reply_markup: replyMarkup,
                 });
-            } catch (error) {
-            }
+            } catch (error) {}
         } else {
             try {
                 await Bot.getCurrent().sendMessage(entity.chat.chatId, `Settigns for ${entity.repository}`, {
-                    reply_markup: replyMarkup
+                    reply_markup: replyMarkup,
                 });
-            } catch (error) {
-            }
+            } catch (error) {}
         }
     }
 }

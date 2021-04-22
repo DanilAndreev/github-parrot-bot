@@ -37,7 +37,9 @@ export default class FatalError extends Error {
      * @author Danil Andreev
      */
     constructor(...args: any[]) {
-        const message: string = args.map(item => typeof item === "object" ? JSON.stringify(item) : String(item)).join(" ");
+        const message: string = args
+            .map(item => (typeof item === "object" ? JSON.stringify(item) : String(item)))
+            .join(" ");
         super(message);
     }
 }

@@ -65,13 +65,8 @@ abstract class AmqpEvent {
 
     public async enqueue(queue?: string): Promise<AmqpEvent> {
         const targetQueue: string | undefined = this.queue || queue;
-        if (!targetQueue)
-            throw new ReferenceError(`You must specify queue name for enqueuing.`);
-        await AmqpDispatcher.getCurrent().sendToQueue(
-            targetQueue,
-            this.serialize(),
-            {expiration: this.expiration}
-        );
+        if (!targetQueue) throw new ReferenceError(`You must specify queue name for enqueuing.`);
+        await AmqpDispatcher.getCurrent().sendToQueue(targetQueue, this.serialize(), {expiration: this.expiration});
         return this;
     }
 

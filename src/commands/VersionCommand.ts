@@ -49,9 +49,6 @@ export default class VersionCommand extends BotCommand {
             version = "Unavailable";
         }
 
-        return [
-            "GitHub Parrot Bot",
-            `<i>version:</i> <b>${version || "Unavailable"}</b>`
-        ];
+        return ["GitHub Parrot Bot", `<i>version:</i> <b>${version || "Unavailable"}</b>`];
     }
 }

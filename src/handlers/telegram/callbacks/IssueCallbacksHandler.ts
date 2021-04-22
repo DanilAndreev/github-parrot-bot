@@ -33,15 +33,15 @@ import DrawIssueEvent from "../../../events/draw/DrawIssueEvent";
 
 export default class IssueCallbacksHandler {
     @CallbackQueryDispatcher.CallbackQueryHandler("issue.:id.maximize", {exact: true})
-    public static async maximize(query: CallbackQuery, params: JSONObject<{ id: string }>): Promise<void> {
+    public static async maximize(query: CallbackQuery, params: JSONObject<{id: string}>): Promise<void> {
         Logger?.debug(`Handling Telegram callback query: "${query.data}" | IssueCallbacksHandler.maximize()`);
         const {id} = params;
         if (!query.message) return;
         const entity: Issue | undefined = await Issue.findOne({
             where: {
                 issueId: +id,
-                chat: query.message.chat.id
-            }
+                chat: query.message.chat.id,
+            },
         });
         if (!entity) return;
 
@@ -51,15 +51,15 @@ export default class IssueCallbacksHandler {
     }
 
     @CallbackQueryDispatcher.CallbackQueryHandler("issue.:id.minimize", {exact: true})
-    public static async minimize(query: CallbackQuery, params: JSONObject<{ id: string }>): Promise<void> {
+    public static async minimize(query: CallbackQuery, params: JSONObject<{id: string}>): Promise<void> {
         Logger?.debug(`Handling Telegram callback query: "${query.data}" | IssueCallbacksHandler.minimize()`);
         const {id} = params;
         if (!query.message) return;
         const entity: Issue | undefined = await Issue.findOne({
             where: {
                 issueId: +id,
-                chat: query.message.chat.id
-            }
+                chat: query.message.chat.id,
+            },
         });
         if (!entity) return;
 

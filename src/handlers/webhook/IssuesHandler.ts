@@ -50,9 +50,9 @@ export default class IssuesHandler extends WebHookAmqpHandler {
             html_url: issue.html_url,
             milestone: issue.milestone
                 ? {
-                    title: issue.milestone.title,
-                    due_on: moment(issue.milestone.due_on).format("ll"),
-                }
+                      title: issue.milestone.title,
+                      due_on: moment(issue.milestone.due_on).format("ll"),
+                  }
                 : undefined,
         };
 

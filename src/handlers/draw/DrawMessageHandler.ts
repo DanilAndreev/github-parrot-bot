@@ -51,7 +51,10 @@ class DrawMessageHandler extends AmqpHandler {
             case EditChatMessageReplyMarkupEvent.type:
                 return await this.editMessageReplyMarkup(event as EditChatMessageReplyMarkupEvent.Serialized, message);
             case EditChatMessageLiveLocationEvent.type:
-                return await this.editMessageLiveLocation(event as EditChatMessageLiveLocationEvent.Serialized, message);
+                return await this.editMessageLiveLocation(
+                    event as EditChatMessageLiveLocationEvent.Serialized,
+                    message
+                );
             case DeleteChatMessageEvent.type:
                 return await this.deleteMessage(event as DeleteChatMessageEvent.Serialized, message);
             default:
@@ -69,7 +72,7 @@ class DrawMessageHandler extends AmqpHandler {
             try {
                 await Bot.getCurrent().sendMessage(event.chatId, event.text, {
                     ...event.options,
-                    reply_to_message_id: undefined
+                    reply_to_message_id: undefined,
                 });
             } catch (error) {
                 throw new AMQPNack(`Failed to send message to chat ${event.chatId}.`, message.properties.messageId);

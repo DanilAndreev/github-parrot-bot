@@ -72,11 +72,7 @@ const config: Config = {
             VersionCommand,
             WebHookSettingsCommand,
         ],
-        callbackQueryHandlers: [
-            PullRequestCallbacksHandler,
-            IssueCallbacksHandler,
-            WebHookSettingsHandler,
-        ],
+        callbackQueryHandlers: [PullRequestCallbacksHandler, IssueCallbacksHandler, WebHookSettingsHandler],
     },
     db: {
         type: "postgres",
@@ -120,14 +116,7 @@ const config: Config = {
     },
     server: {
         port: 3030,
-        acceptEvents: [
-            "check_run",
-            "check_suite",
-            "create",
-            "pull_request",
-            "push",
-            "issues",
-        ]
+        acceptEvents: ["check_run", "check_suite", "create", "pull_request", "push", "issues"],
     },
     system: {},
     log: {

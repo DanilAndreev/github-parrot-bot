@@ -53,8 +53,7 @@ export default class WebHookSettingsCommand extends BotCommand {
             relations: ["settings"],
         });
 
-        if (!entity)
-            throw new CommandError(`Repository <b>${repository}</b> not found.`);
+        if (!entity) throw new CommandError(`Repository <b>${repository}</b> not found.`);
 
         if (!(await checkAdmin(telegramName, message)))
             throw new CommandError(`User @${telegramName} have no permissions to edit repository settings.`);

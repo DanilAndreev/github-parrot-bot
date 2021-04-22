@@ -34,8 +34,7 @@ import DrawPushEvent from "../../events/draw/DrawPushEvent";
 @Reflect.metadata("amqp-handler-type", "github-event-handler")
 export default class PushHandler extends WebHookAmqpHandler {
     protected async handleHook(webHook: WebHook, payload: Push): Promise<boolean | void> {
-        if (!webHook.settings.trackPushes)
-            throw new AMQPAck("WebHook setting 'trackPushes' is disabled.");
+        if (!webHook.settings.trackPushes) throw new AMQPAck("WebHook setting 'trackPushes' is disabled.");
         const {pusher, head_commit, repository, ref} = payload;
 
         await new DrawPushEvent(payload, webHook.chat.chatId).enqueue();

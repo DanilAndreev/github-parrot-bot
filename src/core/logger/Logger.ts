@@ -71,7 +71,6 @@ export function initLogger(): LoggerType {
         level: logLevel,
         format: format.combine(format.label({label: "GHTB"}), format.timestamp(), logFormat),
         transports: logTransports,
-
     });
     return Logger;
 }

@@ -40,7 +40,7 @@ namespace Config {
         token: string;
         tag?: string;
         commands: typeof BotCommand[];
-        callbackQueryHandlers?: Constructable[]
+        callbackQueryHandlers?: Constructable[];
     }
 
     /**

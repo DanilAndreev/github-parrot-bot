@@ -29,9 +29,11 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    Index, JoinColumn,
+    Index,
+    JoinColumn,
     ManyToOne,
-    OneToMany, OneToOne,
+    OneToMany,
+    OneToOne,
     PrimaryGeneratedColumn,
 } from "typeorm";
 import Chat from "./Chat";

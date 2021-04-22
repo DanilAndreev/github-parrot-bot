@@ -45,13 +45,17 @@ class CallbackQueryDispatcher extends AmqpHandler {
      * @author Danil Andreev
      */
     constructor() {
-        super()
+        super();
         const callbackQueryHandlers = SystemConfig.getConfig<Config>().bot.callbackQueryHandlers;
         if (callbackQueryHandlers) {
-            this.callbackQueryHandlers = callbackQueryHandlers.reduce(CallbackQueryDispatcher.handlersReducer, new Set());
+            this.callbackQueryHandlers = callbackQueryHandlers.reduce(
+                CallbackQueryDispatcher.handlersReducer,
+                new Set()
+            );
             for (const handler of this.callbackQueryHandlers) {
                 Logger?.silly(
-                    `Loaded Telegram callback query handler for: "${handler.pattern.join(".")}". exact=${!!handler.options.exact}`
+                    `Loaded Telegram callback query handler for: "${handler.pattern.join(".")}". exact=${!!handler
+                        .options.exact}`
                 );
             }
             Logger?.debug(`Loaded ${this.callbackQueryHandlers.size} Telegram callback query handlers.`);
@@ -71,10 +75,9 @@ class CallbackQueryDispatcher extends AmqpHandler {
         accumulator: Set<CallbackQueryDispatcher.CallbackQueryHandlerMeta>,
         current: Constructable
     ): Set<CallbackQueryDispatcher.CallbackQueryHandlerMeta> {
-        const methods: Set<CallbackQueryDispatcher.CallbackQueryHandlerMeta> = Reflect
-            .getMetadata("callback-query-handlers", current) || new Set();
-        for (const method of methods)
-            accumulator.add(method);
+        const methods: Set<CallbackQueryDispatcher.CallbackQueryHandlerMeta> =
+            Reflect.getMetadata("callback-query-handlers", current) || new Set();
+        for (const method of methods) accumulator.add(method);
         return accumulator;
     }
 
@@ -87,15 +90,13 @@ class CallbackQueryDispatcher extends AmqpHandler {
      * @author Danil Andreev
      */
     protected async handleCallbackQuery(query: CallbackQuery): Promise<void> {
-        if (!query.data)
-            throw new AMQPAck("Incorrect query callback data. Got falsy value.");
+        if (!query.data) throw new AMQPAck("Incorrect query callback data. Got falsy value.");
 
         const requestPattern = query.data.split(".");
 
         const promises: Promise<void>[] = [];
         for (const handler of this.callbackQueryHandlers) {
-            if (handler.options.exact && handler.pattern.length !== requestPattern.length)
-                continue;
+            if (handler.options.exact && handler.pattern.length !== requestPattern.length) continue;
             const params: JSONObject | null = CallbackQueryDispatcher.comparePatterns(handler.pattern, requestPattern);
             if (params) {
                 type Executor = () => Promise<void>;
@@ -115,11 +116,10 @@ class CallbackQueryDispatcher extends AmqpHandler {
      */
     protected static comparePatterns(handlerPattern: string[], requestPattern: string[]): JSONObject | null {
         const variables: JSONObject = {};
-        if (handlerPattern.length > requestPattern.length)
-            return null;
+        if (handlerPattern.length > requestPattern.length) return null;
         for (let i = 0; i < handlerPattern.length; i++) {
             if (handlerPattern[i].slice(0, 1) === ":") {
-                variables[handlerPattern[i].slice(1)] = requestPattern[i]
+                variables[handlerPattern[i].slice(1)] = requestPattern[i];
                 continue;
             }
             if (handlerPattern[i] !== requestPattern[i]) {
@@ -186,11 +186,11 @@ namespace CallbackQueryDispatcher {
      * }
      */
     export function CallbackQueryHandler(pattern: string | string[], options?: CallbackQueryHandlerOptions): Function {
-        if (typeof pattern === "string")
-            pattern = pattern.split(".");
+        if (typeof pattern === "string") pattern = pattern.split(".");
 
         return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-            const metadata: Set<CallbackQueryHandlerMeta> = Reflect.getMetadata("callback-query-handlers", target) || new Set();
+            const metadata: Set<CallbackQueryHandlerMeta> =
+                Reflect.getMetadata("callback-query-handlers", target) || new Set();
             metadata.add({
                 callback: target[propertyKey],
                 options: options || {},

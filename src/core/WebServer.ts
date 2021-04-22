@@ -64,8 +64,7 @@ class WebServer extends Koa {
             if (!event) throw new Error(`Failed to get event from "x-github-event" header.`);
             if (SystemConfig.getConfig<Config>().server.acceptEvents.includes(event))
                 await AmqpDispatcher.getCurrent().sendToQueue(event, {payload, ctx}, {expiration: 1000 * 60 * 30});
-            else
-                throw new Error(`Event ${event} is not supported`);
+            else throw new Error(`Event ${event} is not supported`);
             ctx.status = 200;
         } catch (error) {
             Logger?.http(`Incorrect webhook request. Origin: ${ctx.req.url}. ${error}`);

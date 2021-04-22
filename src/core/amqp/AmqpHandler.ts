@@ -70,7 +70,7 @@ class AmqpHandler {
                 );
                 Logger?.warn(
                     `Deprecated NACKing by returning false value in class ${this.constructor.name}. This feature will`,
-                    `be removed in next versions. Use throw AMQPNack or throw AMQPAck instead.`,
+                    `be removed in next versions. Use throw AMQPNack or throw AMQPAck instead.`
                 );
                 channel.nack(message);
             } else {
