@@ -16,7 +16,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[WebHookSettings] Added interactive settings.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[BotCommand] (issue #32) Changed meta structure.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/bot/BotCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bot/BotCommand.ts" afterDir="false" />
     </list>
@@ -176,14 +176,7 @@
       <workItem from="1618999334833" duration="2047000" />
       <workItem from="1619016189443" duration="1199000" />
       <workItem from="1619034159639" duration="6558000" />
-      <workItem from="1619523748928" duration="3524000" />
-    </task>
-    <task id="LOCAL-00068" summary="[TBot] Adding new bot commands logic.">
-      <created>1617190345097</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1617190345097</updated>
+      <workItem from="1619523748928" duration="3791000" />
     </task>
     <task id="LOCAL-00069" summary="[Enqueuer] Finished.&#10;[DrawMessageHandler] Finished.">
       <created>1617368516709</created>
@@ -521,7 +514,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619122769258</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="[BotCommand] (issue #32) Changed meta structure.">
+      <created>1619527332949</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1619527332949</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -552,7 +552,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[Entities] Added cascade deletion to message tables." />
     <MESSAGE value="[Logger] Added database logging." />
     <MESSAGE value="[main] Added process error handler." />
     <MESSAGE value="[sql] Added log database creation script." />
@@ -577,7 +576,8 @@
     <MESSAGE value="[GLOBAL] Refactored core directories." />
     <MESSAGE value="[WebHookSettings] Added interactive settings." />
     <MESSAGE value="[Handler] Fixed TODOs." />
-    <option name="LAST_COMMIT_MESSAGE" value="[Handler] Fixed TODOs." />
+    <MESSAGE value="[BotCommand] (issue #32) Changed meta structure." />
+    <option name="LAST_COMMIT_MESSAGE" value="[BotCommand] (issue #32) Changed meta structure." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2685" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1619525433577">
@@ -588,10 +588,30 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2660" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619436523015" />
+    <state width="1877" height="222" key="GridCell.Tab.0.bottom" timestamp="1619527431423">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="222" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619527431423" />
+    <state width="1877" height="222" key="GridCell.Tab.0.center" timestamp="1619527431423">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="222" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619527431423" />
+    <state width="1877" height="222" key="GridCell.Tab.0.left" timestamp="1619527431422">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="222" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619527431422" />
+    <state width="1877" height="222" key="GridCell.Tab.0.right" timestamp="1619527431423">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="222" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619527431423" />
     <state x="2639" y="139" key="RollbackChangesDialog" timestamp="1619436511459">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2639" y="139" key="RollbackChangesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619436511459" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1619527339335">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619527339335" />
     <state x="2698" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1619523981321">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>

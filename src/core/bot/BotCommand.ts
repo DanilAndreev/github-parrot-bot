@@ -44,10 +44,6 @@ import SendChatMessageEvent from "../../events/telegram/SendChatMessageEvent";
 @Reflect.metadata("bot-command-allowed-excess-arguments", false)
 class BotCommand {
     /**
-     * validation - validation spec array.
-     */
-    public validation: commander.Command;
-    /**
      * pattern - command pattern.
      * For example - "myCommand".
      */
@@ -59,14 +55,14 @@ class BotCommand {
      * @author Danil Andreev
      */
     public constructor() {
-        this.validation = new CommanderCommand();
-        this.validation
-            .exitOverride((error: CommanderError) => {
-                throw error;
-            })
-            .helpOption(false)
-            .allowUnknownOption(false)
-            .allowExcessArguments(false);
+        // this.validation = new CommanderCommand();
+        // this.validation
+        //     .exitOverride((error: CommanderError) => {
+        //         throw error;
+        //     })
+        //     .helpOption(false)
+        //     .allowUnknownOption(false)
+        //     .allowExcessArguments(false);
         this.pattern = "";
     }
 
@@ -85,8 +81,8 @@ class BotCommand {
         if (!name)
             throw new TypeError("Invalid command. You should specify the command name via Command decorator.");
         const args: string = Reflect.getMetadata("bot-command", this, "arguments") || name;
-        this.validation.name(name);
-        this.validation.arguments(args);
+        validator.name(name);
+        validator.arguments(args);
 
 
         const options = Reflect.getMetadata("bot-command", this, "options") || [];
@@ -145,7 +141,8 @@ class BotCommand {
      */
     public async execute(message: Message, match: RegExpExecArray) {
         Logger?.debug(`Handling Telegram chat command "${match[0]}".`);
-        this.validation.action(async (...params) => {
+        const validator: commander.Command = this.createValidator();
+        validator.action(async (...params) => {
             try {
                 const command: CommanderCommand = params[params.length - 1];
                 let result: string | string[] | void = await this.handler(message, command.args, command.opts());
@@ -173,12 +170,12 @@ class BotCommand {
 
         try {
             const argv = stringArgv(match[2] || "");
-            this.validation.parse(argv, {from: "user"});
+            validator.parse(argv, {from: "user"});
         } catch (error) {
             if (error instanceof CommanderError) {
                 await new SendChatMessageEvent(
                     message.chat.id,
-                    error.message + "\n\n" + this.validation.helpInformation()
+                    error.message + "\n\n" + validator.helpInformation()
                 ).enqueue();
             } else {
                 await new SendChatMessageEvent(message.chat.id, "Unrecognized error").enqueue();
