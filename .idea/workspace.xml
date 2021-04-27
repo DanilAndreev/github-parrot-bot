@@ -579,44 +579,6 @@
     <MESSAGE value="[BotCommand] (issue #32) Replaced old mechanism with new meta structure." />
     <option name="LAST_COMMIT_MESSAGE" value="[BotCommand] (issue #32) Replaced old mechanism with new meta structure." />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="2685" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1619525433577">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2685" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619525433577" />
-    <state x="2660" y="275" key="FileChooserDialogImpl" timestamp="1619436523015">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2660" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619436523015" />
-    <state width="1877" height="222" key="GridCell.Tab.0.bottom" timestamp="1619527431423">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="222" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619527431423" />
-    <state width="1877" height="222" key="GridCell.Tab.0.center" timestamp="1619527431423">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="222" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619527431423" />
-    <state width="1877" height="222" key="GridCell.Tab.0.left" timestamp="1619527431422">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="222" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619527431422" />
-    <state width="1877" height="222" key="GridCell.Tab.0.right" timestamp="1619527431423">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="222" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619527431423" />
-    <state x="2639" y="139" key="RollbackChangesDialog" timestamp="1619436511459">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2639" y="139" key="RollbackChangesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619436511459" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1619527603405">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619527603405" />
-    <state x="2698" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1619523981321">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2698" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619523981321" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>

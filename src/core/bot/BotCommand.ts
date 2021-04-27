@@ -55,14 +55,6 @@ class BotCommand {
      * @author Danil Andreev
      */
     public constructor() {
-        // this.validation = new CommanderCommand();
-        // this.validation
-        //     .exitOverride((error: CommanderError) => {
-        //         throw error;
-        //     })
-        //     .helpOption(false)
-        //     .allowUnknownOption(false)
-        //     .allowExcessArguments(false);
         this.pattern = "";
     }
 
@@ -110,8 +102,6 @@ class BotCommand {
         );
         if (description)
             validator.description(description, argsDescription)
-
-
 
         return validator;
     }
