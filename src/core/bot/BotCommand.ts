@@ -70,6 +70,56 @@ class BotCommand {
         this.pattern = "";
     }
 
+    protected createValidator(): commander.Command {
+        const validator = new CommanderCommand();
+        validator
+            .exitOverride((error: CommanderError) => {
+                throw error;
+            })
+            .helpOption(false)
+            .allowUnknownOption(!!Reflect.getMetadata("bot-command", this, "allow-unknown-options-enabled"))
+            .allowExcessArguments(!!Reflect.getMetadata("bot-command", this, "allow-excess-arguments-enabled"));
+
+
+        const name: string | undefined = Reflect.getMetadata("bot-command", this, "name");
+        if (!name)
+            throw new TypeError("Invalid command. You should specify the command name via Command decorator.");
+        const args: string = Reflect.getMetadata("bot-command", this, "arguments") || name;
+        this.validation.name(name);
+        this.validation.arguments(args);
+
+
+        const options = Reflect.getMetadata("bot-command", this, "options") || [];
+        for (const option of options) {
+            validator.addOption(option);
+        }
+
+        const helpText: {position: commander.AddHelpTextPosition, text: string} | undefined = Reflect.getMetadata(
+            "bot-command",
+            this,
+            "help-text"
+        );
+        if (helpText)
+            validator.addHelpText(helpText.position, helpText.text);
+
+        const description: string | undefined = Reflect.getMetadata(
+            "bot-command",
+            this,
+            "description"
+        );
+        const argsDescription: JSONObject | undefined = Reflect.getMetadata(
+            "bot-command",
+            this,
+            "arguments-description"
+        );
+        if (description)
+            validator.description(description, argsDescription)
+
+
+
+        return validator;
+    }
+
     /**
      * handler - command handler. Here you can do actions.
      * @method
@@ -113,12 +163,6 @@ class BotCommand {
                         parse_mode: "HTML",
                         reply_to_message_id: message.message_id,
                     }).enqueue();
-                    // Enqueuer.sendChatMessage(message.chat.id, "<i>Error:</i> \n" + out_message, {
-                    //     parse_mode: "HTML",
-                    //     reply_to_message_id: message.message_id,
-                    // }).catch(err => {
-                    //     throw err;
-                    // });
                 } else {
                     await new SendChatMessageEvent(message.chat.id, "Unrecognized error", {
                         reply_to_message_id: message.message_id,
@@ -165,18 +209,23 @@ namespace BotCommand {
     /**
      * Command - decorator for bot command.
      * @param name - command name.
-     * @param args_pattern - command arguments pattern.
+     * @param argsPattern - command arguments pattern.
      */
-    export function Command(name: string, args_pattern: string = "") {
+    export function Command(name: string, argsPattern: string = "") {
         return function BotCommandWrapper<T extends new (...args: any[]) => {}>(objectConstructor: T): T {
             return class WrappedBotCommand extends objectConstructor {
                 constructor(...args: any[]) {
                     super(...args);
                     if (this instanceof BotCommand) {
-                        Reflect.defineMetadata("bot-command-name", name, WrappedBotCommand.prototype);
-                        Reflect.defineMetadata("bot-command-arguments", args_pattern, WrappedBotCommand.prototype);
-                        this.validation.arguments([name, args_pattern].join(" "));
-                        this.validation.name(name);
+                        // Reflect.defineMetadata("bot-command-name", name, WrappedBotCommand.prototype);
+                        // Reflect.defineMetadata("bot-command-arguments", args_pattern, WrappedBotCommand.prototype);
+
+
+                        Reflect.defineMetadata("bot-command", name, WrappedBotCommand.prototype, "name");
+                        Reflect.defineMetadata("bot-command", [name, argsPattern].join(" "), WrappedBotCommand.prototype, "arguments");
+
+                        // this.validation.arguments([name, args_pattern].join(" "));
+                        // this.validation.name(name);
                         this.pattern = name;
                     } else {
                         throw new TypeError(`Invalid decorated class, expected BotCommand or derived from it.`);
@@ -199,11 +248,20 @@ namespace BotCommand {
                 constructor(...args: any[]) {
                     super(...args);
                     if (this instanceof BotCommand) {
-                        if (flags instanceof Option) {
-                            this.validation.addOption(flags as CommanderOption);
-                        } else {
-                            this.validation.option(flags as string, description, defaultValue);
+                        if (!Reflect.getMetadata("bot-command", WrappedBotCommand.prototype, "options")) {
+                            Reflect.defineMetadata("bot-command", [], WrappedBotCommand.prototype, "options");
                         }
+
+                        const meta = Reflect.getMetadata("bot-command", WrappedBotCommand.prototype, "options");
+                        if (flags instanceof CommanderOption) {
+                            meta.push(flags);
+                            // this.validation.addOption(flags as CommanderOption);
+                        } else if (typeof flags === "string") {
+                            meta.push(new CommanderOption(flags, description));
+                            // this.validation.option(flags as string, description, defaultValue);
+                        }
+                        Reflect.defineMetadata("bot-command", meta, WrappedBotCommand.prototype, "options")
+
                     } else {
                         throw new TypeError(`Invalid decorated class, expected BotCommand or derived from it.`);
                     }
@@ -218,19 +276,22 @@ namespace BotCommand {
      * @param str - Description string.
      * @param argsDescription - Object with arguments descriptions. Key - argument name.
      */
-    export function Description(str: string, argsDescription?: {[p: string]: string} | undefined) {
+    export function Description(str: string, argsDescription?: { [p: string]: string } | undefined) {
         return function BotCommandWrapper<T extends new (...args: any[]) => {}>(objectConstructor: T): T {
             return class WrappedBotCommand extends objectConstructor {
                 constructor(...args: any[]) {
                     super(...args);
                     if (this instanceof BotCommand) {
-                        Reflect.defineMetadata("bot-command-description", str, WrappedBotCommand.prototype);
-                        Reflect.defineMetadata(
-                            "bot-command-arguments-description",
-                            argsDescription,
-                            WrappedBotCommand.prototype
-                        );
-                        this.validation.description(str, argsDescription);
+                        Reflect.defineMetadata("bot-command", str, WrappedBotCommand.prototype, "description");
+                        Reflect.defineMetadata("bot-command", argsDescription, WrappedBotCommand.prototype, "arguments-description");
+
+                        // Reflect.defineMetadata("bot-command-description", str, WrappedBotCommand.prototype);
+                        // Reflect.defineMetadata(
+                        //     "bot-command-arguments-description",
+                        //     argsDescription,
+                        //     WrappedBotCommand.prototype
+                        // );
+                        // this.validation.description(str, argsDescription);
                     } else {
                         throw new TypeError(`Invalid decorated class, expected BotCommand or derived from it.`);
                     }
@@ -250,11 +311,18 @@ namespace BotCommand {
                     super(...args);
                     if (this instanceof BotCommand) {
                         Reflect.defineMetadata(
-                            "bot-command-allowed-excess-arguments",
+                            "bot-command",
                             true,
-                            WrappedBotCommand.prototype
+                            WrappedBotCommand.prototype,
+                            "allow-excess-arguments-enabled"
                         );
-                        this.validation.allowExcessArguments(true);
+
+                        // Reflect.defineMetadata(
+                        //     "bot-command-allowed-excess-arguments",
+                        //     true,
+                        //     WrappedBotCommand.prototype
+                        // );
+                        // this.validation.allowExcessArguments(true);
                     } else {
                         throw new TypeError(`Invalid decorated class, expected BotCommand or derived from it.`);
                     }
@@ -273,8 +341,16 @@ namespace BotCommand {
                 constructor(...args: any[]) {
                     super(...args);
                     if (this instanceof BotCommand) {
-                        Reflect.defineMetadata("bot-command-allowed-unknown-option", true, WrappedBotCommand.prototype);
-                        this.validation.allowUnknownOption(true);
+                        Reflect.defineMetadata(
+                            "bot-command",
+                            true,
+                            WrappedBotCommand.prototype,
+                            "allow-unknown-options-enabled"
+                        );
+
+
+                        // Reflect.defineMetadata("bot-command-allowed-unknown-option", true, WrappedBotCommand.prototype);
+                        // this.validation.allowUnknownOption(true);
                     } else {
                         throw new TypeError(`Invalid decorated class, expected BotCommand or derived from it.`);
                     }
@@ -295,8 +371,14 @@ namespace BotCommand {
                 constructor(...args: any[]) {
                     super(...args);
                     if (this instanceof BotCommand) {
-                        Reflect.defineMetadata("bot-command-help-text", text, WrappedBotCommand.prototype);
-                        this.validation.addHelpText(position, text);
+                        Reflect.defineMetadata(
+                            "bot-command-help-text",
+                            {position, text},
+                            WrappedBotCommand.prototype,
+                            "help-text"
+                        );
+                        // Reflect.defineMetadata("bot-command-help-text", text, WrappedBotCommand.prototype);
+                        // this.validation.addHelpText(position, text);
                     } else {
                         throw new TypeError(`Invalid decorated class, expected BotCommand or derived from it.`);
                     }
