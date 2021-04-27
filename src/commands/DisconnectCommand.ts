@@ -71,7 +71,7 @@ export default class DisconnectCommand extends BotCommand {
             }
         }
 
-        const chat: Chat | undefined = await Chat.findOne({where: {id: chatId}});
+        const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
         if (!chat) throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
 
         const result = await Collaborator.delete({chat, telegramId});
