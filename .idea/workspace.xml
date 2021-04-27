@@ -16,7 +16,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[BotCommand] (issue #32) Changed meta structure.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[BotCommand] (issue #32) Replaced old mechanism with new meta structure.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/bot/BotCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bot/BotCommand.ts" afterDir="false" />
     </list>
@@ -176,14 +176,7 @@
       <workItem from="1618999334833" duration="2047000" />
       <workItem from="1619016189443" duration="1199000" />
       <workItem from="1619034159639" duration="6558000" />
-      <workItem from="1619523748928" duration="3791000" />
-    </task>
-    <task id="LOCAL-00069" summary="[Enqueuer] Finished.&#10;[DrawMessageHandler] Finished.">
-      <created>1617368516709</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1617368516709</updated>
+      <workItem from="1619523748928" duration="3852000" />
     </task>
     <task id="LOCAL-00070" summary="[CommandHandler] Added amqp logic to commands handler.">
       <created>1617468057198</created>
@@ -521,7 +514,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619527332949</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary="[BotCommand] (issue #32) Replaced old mechanism with new meta structure.">
+      <created>1619527600481</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1619527600481</updated>
+    </task>
+    <option name="localTasksCounter" value="119" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -552,7 +552,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[Logger] Added database logging." />
     <MESSAGE value="[main] Added process error handler." />
     <MESSAGE value="[sql] Added log database creation script." />
     <MESSAGE value="[Handlers] Added AKA mechanism." />
@@ -577,7 +576,8 @@
     <MESSAGE value="[WebHookSettings] Added interactive settings." />
     <MESSAGE value="[Handler] Fixed TODOs." />
     <MESSAGE value="[BotCommand] (issue #32) Changed meta structure." />
-    <option name="LAST_COMMIT_MESSAGE" value="[BotCommand] (issue #32) Changed meta structure." />
+    <MESSAGE value="[BotCommand] (issue #32) Replaced old mechanism with new meta structure." />
+    <option name="LAST_COMMIT_MESSAGE" value="[BotCommand] (issue #32) Replaced old mechanism with new meta structure." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2685" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1619525433577">
@@ -608,10 +608,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2639" y="139" key="RollbackChangesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619436511459" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1619527339335">
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1619527603405">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619527339335" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1619527603405" />
     <state x="2698" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1619523981321">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>

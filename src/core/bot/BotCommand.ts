@@ -214,15 +214,8 @@ namespace BotCommand {
                 constructor(...args: any[]) {
                     super(...args);
                     if (this instanceof BotCommand) {
-                        // Reflect.defineMetadata("bot-command-name", name, WrappedBotCommand.prototype);
-                        // Reflect.defineMetadata("bot-command-arguments", args_pattern, WrappedBotCommand.prototype);
-
-
                         Reflect.defineMetadata("bot-command", name, WrappedBotCommand.prototype, "name");
                         Reflect.defineMetadata("bot-command", [name, argsPattern].join(" "), WrappedBotCommand.prototype, "arguments");
-
-                        // this.validation.arguments([name, args_pattern].join(" "));
-                        // this.validation.name(name);
                         this.pattern = name;
                     } else {
                         throw new TypeError(`Invalid decorated class, expected BotCommand or derived from it.`);
@@ -252,10 +245,8 @@ namespace BotCommand {
                         const meta = Reflect.getMetadata("bot-command", WrappedBotCommand.prototype, "options");
                         if (flags instanceof CommanderOption) {
                             meta.push(flags);
-                            // this.validation.addOption(flags as CommanderOption);
                         } else if (typeof flags === "string") {
                             meta.push(new CommanderOption(flags, description));
-                            // this.validation.option(flags as string, description, defaultValue);
                         }
                         Reflect.defineMetadata("bot-command", meta, WrappedBotCommand.prototype, "options")
 
@@ -281,14 +272,6 @@ namespace BotCommand {
                     if (this instanceof BotCommand) {
                         Reflect.defineMetadata("bot-command", str, WrappedBotCommand.prototype, "description");
                         Reflect.defineMetadata("bot-command", argsDescription, WrappedBotCommand.prototype, "arguments-description");
-
-                        // Reflect.defineMetadata("bot-command-description", str, WrappedBotCommand.prototype);
-                        // Reflect.defineMetadata(
-                        //     "bot-command-arguments-description",
-                        //     argsDescription,
-                        //     WrappedBotCommand.prototype
-                        // );
-                        // this.validation.description(str, argsDescription);
                     } else {
                         throw new TypeError(`Invalid decorated class, expected BotCommand or derived from it.`);
                     }
@@ -313,13 +296,6 @@ namespace BotCommand {
                             WrappedBotCommand.prototype,
                             "allow-excess-arguments-enabled"
                         );
-
-                        // Reflect.defineMetadata(
-                        //     "bot-command-allowed-excess-arguments",
-                        //     true,
-                        //     WrappedBotCommand.prototype
-                        // );
-                        // this.validation.allowExcessArguments(true);
                     } else {
                         throw new TypeError(`Invalid decorated class, expected BotCommand or derived from it.`);
                     }
@@ -344,10 +320,6 @@ namespace BotCommand {
                             WrappedBotCommand.prototype,
                             "allow-unknown-options-enabled"
                         );
-
-
-                        // Reflect.defineMetadata("bot-command-allowed-unknown-option", true, WrappedBotCommand.prototype);
-                        // this.validation.allowUnknownOption(true);
                     } else {
                         throw new TypeError(`Invalid decorated class, expected BotCommand or derived from it.`);
                     }
@@ -374,8 +346,6 @@ namespace BotCommand {
                             WrappedBotCommand.prototype,
                             "help-text"
                         );
-                        // Reflect.defineMetadata("bot-command-help-text", text, WrappedBotCommand.prototype);
-                        // this.validation.addHelpText(position, text);
                     } else {
                         throw new TypeError(`Invalid decorated class, expected BotCommand or derived from it.`);
                     }
