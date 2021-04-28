@@ -16,8 +16,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[DisconnectCommand] Fixed bug with all AKAs deletion crush.">
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Dockerfile] Updated building scenario.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/amqp/WebHookAmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/WebHookAmqpHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,13 +177,6 @@
       <workItem from="1619016189443" duration="1199000" />
       <workItem from="1619034159639" duration="6558000" />
       <workItem from="1619523748928" duration="3852000" />
-    </task>
-    <task id="LOCAL-00071" summary="[Commands] Changed to AMQP logic.">
-      <created>1617469695866</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1617469695866</updated>
     </task>
     <task id="LOCAL-00072" summary="[SystemConfig] Added system config gathering system.">
       <created>1617632042946</created>
@@ -520,7 +514,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619546528470</updated>
     </task>
-    <option name="localTasksCounter" value="120" />
+    <task id="LOCAL-00120" summary="[Dockerfile] Updated building scenario.">
+      <created>1619631671483</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1619631671484</updated>
+    </task>
+    <option name="localTasksCounter" value="121" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -551,7 +552,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[sql] Added log database creation script." />
     <MESSAGE value="[Handlers] Added AKA mechanism." />
     <MESSAGE value="[config] Added issues event to github webhook." />
     <MESSAGE value="[AkaGenerator] Fixed request bug." />
@@ -576,7 +576,8 @@
     <MESSAGE value="[BotCommand] (issue #32) Changed meta structure." />
     <MESSAGE value="[BotCommand] (issue #32) Replaced old mechanism with new meta structure." />
     <MESSAGE value="[BotCommand] Cleaned up." />
-    <option name="LAST_COMMIT_MESSAGE" value="[BotCommand] Cleaned up." />
+    <MESSAGE value="[Dockerfile] Updated building scenario." />
+    <option name="LAST_COMMIT_MESSAGE" value="[Dockerfile] Updated building scenario." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

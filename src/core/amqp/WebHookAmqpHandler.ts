@@ -67,7 +67,13 @@ export default class WebHookAmqpHandler extends AmqpHandler {
         const promises: Promise<boolean | void>[] = [];
 
         for (const webHook of webHooks) {
-            if (!WebHookAmqpHandler.checkSignature(ctx.request.header["x-hub-signature"], payload, webHook.secret)) {
+            if (
+                !WebHookAmqpHandler.checkSignature(
+                    ctx.request.header["x-hub-signature"] as string,
+                    payload,
+                    webHook.secret
+                )
+            ) {
                 continue;
             }
             promises.push(this.handleHook(webHook, payload));
