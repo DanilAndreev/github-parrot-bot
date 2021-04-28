@@ -7,7 +7,8 @@ RUN npm install
 
 # Build project
 COPY . .
-RUN npm run build
+RUN npm run build:compile
+RUN npm run build:copyfiles
 
 FROM node:12-alpine
 ENV PORT $PORT
