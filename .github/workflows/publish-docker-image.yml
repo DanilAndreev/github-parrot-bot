@@ -1,0 +1,19 @@
+name: Publish docker image
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  ghcr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
+          repository: danilandreev/github-parrot-bot
+          tags: latest, ${{ github.event.release.tag_name }}
