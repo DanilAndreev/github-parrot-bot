@@ -1,0 +1,20 @@
+name: Publish docker image to dev registry
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  ghcr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
+          repository: danilandreev/github-parrot-bot-dev
+          tags: latest
+          tag_with_ref: true
