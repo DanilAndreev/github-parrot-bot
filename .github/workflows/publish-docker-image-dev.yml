@@ -16,4 +16,4 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
           repository: danilandreev/github-parrot-bot-dev
-          tags: latest, ${{ env.GITHUB_SHA }}
+          tags: latest, ${ GITHUB_SHA }
