@@ -8,3 +8,4 @@ build/
 .env
 # yarn
 yarn-error.log
+beta-yamles/RepoSecret.yaml
