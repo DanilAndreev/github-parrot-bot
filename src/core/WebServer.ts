@@ -33,6 +33,7 @@ import SystemConfig from "./SystemConfig";
 import {Logger} from "./logger/Logger";
 import * as githubWebhookSchema from "@octokit/webhooks-schemas";
 import Ajv, {ValidateFunction} from "ajv";
+import addAjvFormats from "ajv-formats";
 import HttpError from "../errors/HttpError";
 
 /**
@@ -51,13 +52,16 @@ class WebServer extends Koa {
      */
     constructor() {
         super();
+        const ajv = new Ajv({strict: true});
+        addAjvFormats(ajv);
+        ajv.addKeyword("tsAdditionalProperties");
+
+        this.eventValidator = ajv.compile(githubWebhookSchema);
+
         this.use(async (ctx: Context, next: Next) => await WebServer.httpErrorsMiddleware(ctx, next));
         this.use(BodyParser());
         this.use(async (ctx: Context, next: Next) => await this.webhookValidateMiddleware(ctx, next));
         this.use(async (ctx: Context, next: Next) => await this.handleEventRequest(ctx, next));
-
-        const ajv = new Ajv({strict: true});
-        this.eventValidator = ajv.compile(githubWebhookSchema);
     }
 
     /**
@@ -71,6 +75,7 @@ class WebServer extends Koa {
         if (this.eventValidator(ctx.request.body)) {
             await next();
         } else {
+            Logger?.warn(`Got GitHub WebHook message. Payload validation failed.`);
             throw new HttpError("Validation error", 400).setData({validation: this.eventValidator.errors});
         }
     }
@@ -87,6 +92,7 @@ class WebServer extends Koa {
             await next();
         } catch (error) {
             if (error instanceof HttpError) {
+                Logger?.debug(`Http Request error(${error.code}): ${error.message}`);
                 ctx.status = error.code;
                 ctx.body = error.getResponseMessage();
             } else {
@@ -103,6 +109,18 @@ class WebServer extends Koa {
      * @author Danil Andreev
      */
     protected async handleEventRequest(ctx: Context, next: Next): Promise<void> {
+        // if (ctx.request.type === "GET") { //TODO: add Router.
+        //     ctx.body = "Github Parrot Bot";
+        //     ctx.status = 200;
+        //     return;
+        // }
+        //
+        // if (ctx.request.type !== "POST") {
+        //     ctx.body = "Method not allowed";
+        //     ctx.status = 405;
+        //     return;
+        // }
+
         try {
             const payload: any = ctx.request.body;
             const event = ctx.request.get("x-github-event");
