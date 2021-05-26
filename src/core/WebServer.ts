@@ -31,6 +31,9 @@ import AmqpDispatcher from "./amqp/AmqpDispatcher";
 import Config from "../interfaces/Config";
 import SystemConfig from "./SystemConfig";
 import {Logger} from "./logger/Logger";
+import * as githubWebhookSchema from "@octokit/webhooks-schemas";
+import Ajv, {ValidateFunction} from "ajv";
+import HttpError from "../errors/HttpError";
 
 /**
  * WebServer - web server for handling WebHooks.
@@ -38,6 +41,9 @@ import {Logger} from "./logger/Logger";
  * @author Danil Andreev
  */
 class WebServer extends Koa {
+
+    protected eventValidator: ValidateFunction;
+
     /**
      * Creates an instance of WebServer.
      * @constructor
@@ -45,8 +51,48 @@ class WebServer extends Koa {
      */
     constructor() {
         super();
+        this.use(async (ctx: Context, next: Next) => await WebServer.httpErrorsMiddleware(ctx, next));
         this.use(BodyParser());
-        this.use((ctx: Context, next: Next) => this.handleEventRequest(ctx, next));
+        this.use(async (ctx: Context, next: Next) => await this.webhookValidateMiddleware(ctx, next));
+        this.use(async (ctx: Context, next: Next) => await this.handleEventRequest(ctx, next));
+
+        const ajv = new Ajv({strict: true});
+        this.eventValidator = ajv.compile(githubWebhookSchema);
+    }
+
+    /**
+     * webhookValidateMiddleware - middleware for webhook payload validation.
+     * @method
+     * @param ctx - Koa HTTP context.
+     * @param next - Next middleware.
+     * @author Danil Andreev
+     */
+    public async webhookValidateMiddleware(ctx: Context, next: Next): Promise<void> {
+        if (this.eventValidator(ctx.request.body)) {
+            await next();
+        } else {
+            throw new HttpError("Validation error", 400).setData({validation: this.eventValidator.errors});
+        }
+    }
+
+    /**
+     * httpErrorsMiddleware - middleware for handling HttpError.
+     * @method
+     * @param ctx - Koa HTTP context.
+     * @param next - Next middleware.
+     * @author Danil Andreev
+     */
+    public static async httpErrorsMiddleware(ctx: Context, next: Next): Promise<void> {
+        try {
+            await next();
+        } catch (error) {
+            if (error instanceof HttpError) {
+                ctx.status = error.code;
+                ctx.body = error.getResponseMessage();
+            } else {
+                throw error;
+            }
+        }
     }
 
     /**
@@ -56,11 +102,11 @@ class WebServer extends Koa {
      * @param next - Next.
      * @author Danil Andreev
      */
-    protected async handleEventRequest(ctx: Context, next: Next) {
+    protected async handleEventRequest(ctx: Context, next: Next): Promise<void> {
         try {
             const payload: any = ctx.request.body;
             const event = ctx.request.get("x-github-event");
-            Logger?.debug(`Got WebHook message. Event: ${event}. Origin: ${ctx.req.url}`);
+            Logger?.debug(`Got WebHook message. Event: ${event || "NOT PASSED"}. Origin: ${ctx.req.url}`);
             if (!event) throw new Error(`Failed to get event from "x-github-event" header.`);
             if (SystemConfig.getConfig<Config>().server.acceptEvents.includes(event))
                 await AmqpDispatcher.getCurrent().sendToQueue(event, {payload, ctx}, {expiration: 1000 * 60 * 30});
