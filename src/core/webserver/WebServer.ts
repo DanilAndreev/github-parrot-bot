@@ -27,14 +27,14 @@
 import * as Koa from "koa";
 import {Context, Next} from "koa";
 import * as BodyParser from "koa-bodyparser";
-import AmqpDispatcher from "./amqp/AmqpDispatcher";
-import Config from "../interfaces/Config";
-import SystemConfig from "./SystemConfig";
-import {Logger} from "./logger/Logger";
+import AmqpDispatcher from "../amqp/AmqpDispatcher";
+import Config from "../../interfaces/Config";
+import SystemConfig from "../SystemConfig";
+import {Logger} from "../logger/Logger";
 import * as githubWebhookSchema from "@octokit/webhooks-schemas";
 import Ajv, {ValidateFunction} from "ajv";
 import addAjvFormats from "ajv-formats";
-import HttpError from "../errors/HttpError";
+import HttpError from "../../errors/HttpError";
 
 /**
  * WebServer - web server for handling WebHooks.

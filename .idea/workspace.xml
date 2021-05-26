@@ -16,10 +16,12 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[WebServer] Added webhook payload validation.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[WebServer] Added middlewares and TODO.">
+      <change afterPath="$PROJECT_DIR$/src/core/webserver/Controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WebServer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/webserver/WebServer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -67,7 +69,7 @@
     <property name="javascript.nodejs.core.library.configured.version" value="10.19.0" />
     <property name="javascript.nodejs.core.library.typings.version" value="10.17.60" />
     <property name="last.edited.regexp" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/schemas/webhook/parts" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ts-test" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -93,9 +95,9 @@
       <recent name="C:\Users\onepl\WebstormProjects\github-parrot-bot\src\events\telegram" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/core/webserver" />
       <recent name="$PROJECT_DIR$/src/schemas/webhook/requests" />
       <recent name="$PROJECT_DIR$/src/core" />
-      <recent name="$PROJECT_DIR$/src/core/webserver" />
       <recent name="C:\Users\onepl\WebstormProjects\github-parrot-bot\src\core\amqp" />
       <recent name="C:\Users\onepl\WebstormProjects\github-parrot-bot\src\core\logger" />
     </key>
@@ -180,6 +182,7 @@
       <workItem from="1619034159639" duration="6558000" />
       <workItem from="1619523748928" duration="3852000" />
       <workItem from="1622027542517" duration="8783000" />
+      <workItem from="1622040609704" duration="1780000" />
     </task>
     <task id="LOCAL-00073" summary="[envDispatcher] Added more params for database setup.">
       <created>1617632401906</created>

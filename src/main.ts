@@ -26,7 +26,7 @@
 
 import {setupDbConnection} from "./core/DataBase";
 import Bot from "./core/bot/Bot";
-import WebServer from "./core/WebServer";
+import WebServer from "./core/webserver/WebServer";
 import AmqpDispatcher from "./core/amqp/AmqpDispatcher";
 import IssuesGarbageCollector from "./chrono/IssuesGarbageCollector";
 import PullRequestsGarbageCollector from "./chrono/PullRequestsGarbageCollector";
