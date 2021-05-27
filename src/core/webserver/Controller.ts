@@ -131,14 +131,7 @@ namespace Controller {
             const routes: JSONObject<RouteMeta> = Reflect.getMetadata("routes", target);
             if (!routes[propertyKey]) routes[propertyKey] = {...routes[propertyKey], middlewares: []};
             const route: RouteMeta = routes[propertyKey];
-
             route.middlewares?.push(...middlewares);
-
-            // if (!routes[propertyKey]) routes[propertyKey] = {...routes[propertyKey]};
-            // if (route?.middlewares)
-            //     routes[propertyKey].middlewares = [...middlewares, ...route.middlewares];
-            // else
-            //     routes[propertyKey].middlewares = [...middlewares];
         };
     }
 
@@ -166,6 +159,7 @@ namespace Controller {
      * NestedController - decorator for adding nested controllers.
      * @param controller - Controller type.
      * @param baseRoute - Base route for nested controller. If declared - will replace native controller base route.
+     * @throws TypeError
      * @author Danil Andreev
      */
     export function NestedController(controller: typeof Controller, baseRoute?: string) {
@@ -187,6 +181,7 @@ namespace Controller {
     /**
      * HTTPController - decorator for HTTP controllers.
      * @param baseRoute - Base route for controller.
+     * @throws TypeError
      * @author Danil Andreev
      */
     export function HTTPController(baseRoute: string = "") {

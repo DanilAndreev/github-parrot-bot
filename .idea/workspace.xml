@@ -16,13 +16,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[WebServer] Added middlewares and TODO.">
-      <change afterPath="$PROJECT_DIR$/src/controllers/GithubWebhookController.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[GithubWebhookController] Added webhooks controller.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/GithubWebhookController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/GithubWebhookController.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/webserver/Controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/webserver/Controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/webserver/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/webserver/WebServer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/Config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,14 +181,7 @@
       <workItem from="1619523748928" duration="3852000" />
       <workItem from="1622027542517" duration="8783000" />
       <workItem from="1622040609704" duration="1780000" />
-      <workItem from="1622116046503" duration="3605000" />
-    </task>
-    <task id="LOCAL-00073" summary="[envDispatcher] Added more params for database setup.">
-      <created>1617632401906</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1617632401906</updated>
+      <workItem from="1622116046503" duration="4103000" />
     </task>
     <task id="LOCAL-00074" summary="[envDispatcher] Added system settings.">
       <created>1617633192489</created>
@@ -528,7 +519,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622035220263</updated>
     </task>
-    <option name="localTasksCounter" value="122" />
+    <task id="LOCAL-00122" summary="[GithubWebhookController] Added webhooks controller.">
+      <created>1622119674737</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1622119674737</updated>
+    </task>
+    <option name="localTasksCounter" value="123" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -559,7 +557,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[config] Added issues event to github webhook." />
     <MESSAGE value="[AkaGenerator] Fixed request bug." />
     <MESSAGE value="[AkaGenerator] Finished SQL." />
     <MESSAGE value="[AkaGenerator] Fixed typo in JSDoc." />
@@ -584,7 +581,8 @@
     <MESSAGE value="[BotCommand] Cleaned up." />
     <MESSAGE value="[Dockerfile] Updated building scenario." />
     <MESSAGE value="[WebServer] Added webhook payload validation." />
-    <option name="LAST_COMMIT_MESSAGE" value="[WebServer] Added webhook payload validation." />
+    <MESSAGE value="[GithubWebhookController] Added webhooks controller." />
+    <option name="LAST_COMMIT_MESSAGE" value="[GithubWebhookController] Added webhooks controller." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

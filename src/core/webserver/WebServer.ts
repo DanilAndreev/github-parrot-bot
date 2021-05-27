@@ -70,6 +70,7 @@ class WebServer extends Koa {
      * @method
      * @param ctx - Koa HTTP context.
      * @param next - Next middleware.
+     * @throws Error
      * @author Danil Andreev
      */
     public static async httpErrorsMiddleware(ctx: Context, next: Next): Promise<void> {

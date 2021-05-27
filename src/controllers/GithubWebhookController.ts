@@ -37,10 +37,23 @@ import addAjvFormats from "ajv-formats";
 import * as githubWebhookSchema from "@octokit/webhooks-schemas";
 
 
+/**
+ * GithubWebhookController - HTTP controller for handling GitHub requests.
+ * @class
+ * @author Danil Andreev
+ */
 @Controller.HTTPController("/github")
 class GithubWebhookController extends Controller {
+    /**
+     * eventValidator- GitHub webhook event AJV validator.
+     */
     protected static eventValidator: ValidateFunction;
 
+    /**
+     * Creates an instance of HTTPController;
+     * @constructor
+     * @author Danil Andreev
+     */
     public constructor() {
         super();
         const ajv = new Ajv({strict: true});
@@ -49,6 +62,12 @@ class GithubWebhookController extends Controller {
         GithubWebhookController.eventValidator = ajv.compile(githubWebhookSchema);
     }
 
+    /**
+     * Controller for [POST] /github/webhook
+     * Handles GitHub webhook request.
+     * @throws HttpError
+     * @author Danil Andreev
+     */
     @Controller.Route("POST", "/webhook")
     @Controller.RouteValidation(GithubWebhookController.webhookValidateMiddleware)
     public async webhookEvent(ctx: Context): Promise<void> {
@@ -63,11 +82,18 @@ class GithubWebhookController extends Controller {
             ctx.status = 200;
         } catch (error) {
             Logger?.http(`Incorrect webhook request. Origin: ${ctx.req.url}. ${error}`);
-            ctx.status = 400;
-            ctx.body = "Incorrect webhook request." + error.message;
+            throw new HttpError("Incorrect webhook request. " + error.message, 400);
         }
     }
 
+    /**
+     * webhookValidateMiddleware - middleware for webhook payload validation.
+     * @method
+     * @param ctx - Koa HTTP context.
+     * @param next - Next middleware.
+     * @throws HttpError
+     * @author Danil Andreev
+     */
     public static async webhookValidateMiddleware(ctx: Context, next: Next): Promise<void> {
         if (GithubWebhookController.eventValidator(ctx.request.body)) {
             await next();
