@@ -31,6 +31,7 @@ import Config from "../../interfaces/Config";
 import SystemConfig from "../SystemConfig";
 import ChatCommandEvent from "../../events/telegram/ChatCommandEvent";
 import TelegramEventEvent from "../../events/telegram/TelegramEventEvent";
+import BotCommand from "./BotCommand";
 
 /**
  * Bot - class for telegram bot api.
@@ -67,9 +68,10 @@ export default class Bot extends TelegramBot {
             new ChatCommandEvent(message, match).enqueue().catch(Logger?.error);
         });
         Logger.silly(`Added listener for telegram messages.`);
-        // this.updateBotCommandsHelp().catch((error: Error) => {
-        //     console.error("Failed to update bot commands: ", error);
-        // });
+        if (polling)
+            this.updateBotCommandsHelp().catch((error: Error) => {
+                Logger.error("Failed to update bot commands: " + error);
+            });
     }
 
     /**
@@ -89,19 +91,19 @@ export default class Bot extends TelegramBot {
      * @author Danil Andreev
      */
     protected async updateBotCommandsHelp(): Promise<boolean> {
-        // return await this.setMyCommands(
-        //     Bot.commands
-        //         .filter((command: BotCommand) => !!Reflect.getMetadata("bot-command-name", command))
-        //         .map((command: BotCommand) => {
-        //             const name: string = Reflect.getMetadata("bot-command-name", command);
-        //             const args: string = Reflect.getMetadata("bot-command-arguments", command);
-        //             const description: string = Reflect.getMetadata("bot-command-description", command);
-        //             return {
-        //                 command: name,
-        //                 description: [args, description].filter(i => i).join(" "),
-        //             };
-        //         })
-        // );
+        return await this.setMyCommands(
+            SystemConfig.getConfig<Config>().bot.commands
+                .filter((command: typeof BotCommand) => !!Reflect.getMetadata("bot-command-name", command))
+                .map((command: typeof BotCommand) => {
+                    const name: string = Reflect.getMetadata("bot-command-name", command);
+                    const args: string = Reflect.getMetadata("bot-command-arguments", command);
+                    const description: string = Reflect.getMetadata("bot-command-description", command);
+                    return {
+                        command: name,
+                        description: [args, description].filter(i => i).join(" "),
+                    };
+                })
+        );
         return true;
     }
 
