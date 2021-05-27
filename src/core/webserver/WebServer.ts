@@ -27,14 +27,12 @@
 import * as Koa from "koa";
 import {Context, Next} from "koa";
 import * as BodyParser from "koa-bodyparser";
-import AmqpDispatcher from "../amqp/AmqpDispatcher";
 import Config from "../../interfaces/Config";
 import SystemConfig from "../SystemConfig";
 import {Logger} from "../logger/Logger";
-import * as githubWebhookSchema from "@octokit/webhooks-schemas";
-import Ajv, {ValidateFunction} from "ajv";
-import addAjvFormats from "ajv-formats";
 import HttpError from "../../errors/HttpError";
+import Controller from "./Controller";
+import * as Router from "koa-router";
 
 /**
  * WebServer - web server for handling WebHooks.
@@ -42,8 +40,11 @@ import HttpError from "../../errors/HttpError";
  * @author Danil Andreev
  */
 class WebServer extends Koa {
-
-    protected eventValidator: ValidateFunction;
+    /**
+     * router - Root server router. Other routers used by it.
+     * @readonly
+     */
+    protected readonly router: Router;
 
     /**
      * Creates an instance of WebServer.
@@ -52,32 +53,16 @@ class WebServer extends Koa {
      */
     constructor() {
         super();
-        const ajv = new Ajv({strict: true});
-        addAjvFormats(ajv);
-        ajv.addKeyword("tsAdditionalProperties");
-
-        this.eventValidator = ajv.compile(githubWebhookSchema);
-
+        this.router = new Router();
         this.use(async (ctx: Context, next: Next) => await WebServer.httpErrorsMiddleware(ctx, next));
         this.use(BodyParser());
-        this.use(async (ctx: Context, next: Next) => await this.webhookValidateMiddleware(ctx, next));
-        this.use(async (ctx: Context, next: Next) => await this.handleEventRequest(ctx, next));
-    }
 
-    /**
-     * webhookValidateMiddleware - middleware for webhook payload validation.
-     * @method
-     * @param ctx - Koa HTTP context.
-     * @param next - Next middleware.
-     * @author Danil Andreev
-     */
-    public async webhookValidateMiddleware(ctx: Context, next: Next): Promise<void> {
-        if (this.eventValidator(ctx.request.body)) {
-            await next();
-        } else {
-            Logger?.warn(`Got GitHub WebHook message. Payload validation failed.`);
-            throw new HttpError("Validation error", 400).setData({validation: this.eventValidator.errors});
+        const controllers: typeof Controller[] = SystemConfig.getConfig<Config>().server.controllers;
+        for (const controller of controllers) {
+            const instance: Controller = new controller();
+            this.router.use(instance.baseRoute, instance.routes(), instance.allowedMethods());
         }
+        this.use(this.router.routes());
     }
 
     /**
@@ -99,43 +84,6 @@ class WebServer extends Koa {
                 throw error;
             }
         }
-    }
-
-    /**
-     * handleEventRequest - method for handling WebHook request and determine event type.
-     * @method
-     * @param ctx - Context.
-     * @param next - Next.
-     * @author Danil Andreev
-     */
-    protected async handleEventRequest(ctx: Context, next: Next): Promise<void> {
-        // if (ctx.request.type === "GET") { //TODO: add Router.
-        //     ctx.body = "Github Parrot Bot";
-        //     ctx.status = 200;
-        //     return;
-        // }
-        //
-        // if (ctx.request.type !== "POST") {
-        //     ctx.body = "Method not allowed";
-        //     ctx.status = 405;
-        //     return;
-        // }
-
-        try {
-            const payload: any = ctx.request.body;
-            const event = ctx.request.get("x-github-event");
-            Logger?.debug(`Got WebHook message. Event: ${event || "NOT PASSED"}. Origin: ${ctx.req.url}`);
-            if (!event) throw new Error(`Failed to get event from "x-github-event" header.`);
-            if (SystemConfig.getConfig<Config>().server.acceptEvents.includes(event))
-                await AmqpDispatcher.getCurrent().sendToQueue(event, {payload, ctx}, {expiration: 1000 * 60 * 30});
-            else throw new Error(`Event ${event} is not supported`);
-            ctx.status = 200;
-        } catch (error) {
-            Logger?.http(`Incorrect webhook request. Origin: ${ctx.req.url}. ${error}`);
-            ctx.status = 400;
-            ctx.body = "Incorrect webhook request." + error.message;
-        }
-        await next();
     }
 
     /**

@@ -57,6 +57,7 @@ import WebHookSettingsHandler from "./handlers/telegram/callbacks/WebHookSetting
 import WebHookSettingsCommand from "./commands/WebHookSettingsCommand";
 import DrawWebHookSettingsHandler from "./handlers/draw/DrawWebHookSettingsHandler";
 import DrawPushHandler from "./handlers/draw/DrawPushHandler";
+import GithubWebhookController from "./controllers/GithubWebhookController";
 
 const config: Config = {
     bot: {
@@ -117,6 +118,9 @@ const config: Config = {
     server: {
         port: 3030,
         acceptEvents: ["check_run", "check_suite", "create", "pull_request", "push", "issues"],
+        controllers: [
+            GithubWebhookController,
+        ]
     },
     system: {},
     log: {

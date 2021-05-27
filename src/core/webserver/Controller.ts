@@ -129,13 +129,16 @@ namespace Controller {
                 Reflect.defineMetadata("routes", {}, target);
 
             const routes: JSONObject<RouteMeta> = Reflect.getMetadata("routes", target);
+            if (!routes[propertyKey]) routes[propertyKey] = {...routes[propertyKey], middlewares: []};
             const route: RouteMeta = routes[propertyKey];
 
-            if (!routes[propertyKey]) routes[propertyKey] = {...routes[propertyKey]};
-            if (route?.middlewares)
-                routes[propertyKey].middlewares = [...middlewares, ...route.middlewares];
-            else
-                routes[propertyKey].middlewares = [...middlewares];
+            route.middlewares?.push(...middlewares);
+
+            // if (!routes[propertyKey]) routes[propertyKey] = {...routes[propertyKey]};
+            // if (route?.middlewares)
+            //     routes[propertyKey].middlewares = [...middlewares, ...route.middlewares];
+            // else
+            //     routes[propertyKey].middlewares = [...middlewares];
         };
     }
 
@@ -173,6 +176,52 @@ namespace Controller {
                     if (this instanceof Controller) {
                         const instance = new controller();
                         this.use(baseRoute || instance.baseRoute, instance.routes(), instance.allowedMethods());
+                    } else {
+                        throw new TypeError(`Invalid target class, expected Controller.`);
+                    }
+                }
+            };
+        };
+    }
+
+    /**
+     * HTTPController - decorator for HTTP controllers.
+     * @param baseRoute - Base route for controller.
+     * @author Danil Andreev
+     */
+    export function HTTPController(baseRoute: string = "") {
+        return function HTTPControllerWrapper<T extends new(...args: any[]) => {}>(objectConstructor: T): T {
+            return class WrappedController extends objectConstructor {
+                constructor(...args: any[]) {
+                    super(args);
+                    if (this instanceof Controller) {
+                        this.baseRoute = baseRoute;
+                        const routes: JSONObject<RouteMeta> = Reflect.getMetadata("routes", this);
+                        if (routes) {
+                            for (const key in routes) {
+                                const route = routes[key];
+                                const callback = this[key];
+                                const middlewares: Middleware<any>[] = [];
+                                if (route.validation) middlewares.push(route.validation);
+                                if (route.middlewares) middlewares.push(...route.middlewares);
+                                switch (route.method) {
+                                    case "GET":
+                                        this.get(route.route, ...middlewares, callback);
+                                        break;
+                                    case "POST":
+                                        this.post(route.route, ...middlewares, callback);
+                                        break;
+                                    case "PUT":
+                                        this.put(route.route, ...middlewares, callback);
+                                        break;
+                                    case "DELETE":
+                                        this.delete(route.route, ...middlewares, callback);
+                                        break;
+                                    default:
+                                        throw new TypeError(`Incorrect value of 'method', expected "'GET' | 'POST' | 'PUT' | 'DELETE'", got ${route.method}`);
+                                }
+                            }
+                        }
                     } else {
                         throw new TypeError(`Invalid target class, expected Controller.`);
                     }
