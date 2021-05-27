@@ -29,6 +29,7 @@ import AmqpHandler from "../core/amqp/AmqpHandler";
 import {ConnectionOptions} from "typeorm";
 import * as AMQP from "amqplib";
 import Constructable from "./Constructable";
+import Controller from "../core/webserver/Controller";
 
 namespace Config {
     /**
@@ -51,6 +52,7 @@ namespace Config {
     export interface Server {
         port: number;
         acceptEvents: string[];
+        controllers: typeof Controller[];
     }
 
     /**
