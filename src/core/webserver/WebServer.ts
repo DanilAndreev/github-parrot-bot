@@ -41,6 +41,11 @@ import * as Router from "koa-router";
  */
 class WebServer extends Koa {
     /**
+     * activeHttpSessionsQuantity - quantity of currently active HTTP sessions.
+     */
+    private static activeHttpSessionsQuantity: number = 0;
+
+    /**
      * router - Root server router. Other routers used by it.
      * @readonly
      */
@@ -54,6 +59,7 @@ class WebServer extends Koa {
     constructor() {
         super();
         this.router = new Router();
+        this.use(async (ctx: Context, next: Next) => await WebServer.activeHttpSessionsCounterMiddleware(ctx, next));
         this.use(async (ctx: Context, next: Next) => await WebServer.httpErrorsMiddleware(ctx, next));
         this.use(BodyParser());
 
@@ -63,6 +69,29 @@ class WebServer extends Koa {
             this.router.use(instance.baseRoute, instance.routes(), instance.allowedMethods());
         }
         this.use(this.router.routes());
+    }
+
+    /**
+     * getActiveHttpSessionsQuantity - returns quantity of currently active HTTP sessions on the web server.
+     * @method
+     * @author Danil Andreev
+     */
+    public static getActiveHttpSessionsQuantity(): number {
+        return this.activeHttpSessionsQuantity;
+    }
+
+    /**
+     * activeHttpSessionsCounterMiddleware - middleware for counting active HTTP sessions.
+     * @method
+     * @param ctx - Koa HTTP context.
+     * @param next - Next middleware.
+     * @author Danil Andreev
+     */
+    private static async activeHttpSessionsCounterMiddleware(ctx: Context, next: Next): Promise<void> {
+        this.activeHttpSessionsQuantity++;
+        await next();
+        this.activeHttpSessionsQuantity--;
+        if (this.activeHttpSessionsQuantity < 0) this.activeHttpSessionsQuantity = 0;
     }
 
     /**

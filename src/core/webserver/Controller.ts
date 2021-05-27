@@ -101,7 +101,7 @@ namespace Controller {
      * @param route - target route.
      * @author Danil Andreev
      */
-    export function Route(method: "GET" | "POST" | "PUT" | "DELETE", route: string) {
+    export function Route(method: "GET" | "POST" | "PUT" | "DELETE", route: string = "/") {
         return (
             target: Controller,
             propertyKey: string,
