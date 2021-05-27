@@ -25,7 +25,7 @@
  */
 
 import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
-import {QUEUES} from "../../globals";
+import {QUEUES} from "../../Globals";
 import AmqpHandler from "../../core/amqp/AmqpHandler";
 import loadTemplate from "../../utils/loadTemplate";
 import DrawPushEvent from "../../events/draw/DrawPushEvent";

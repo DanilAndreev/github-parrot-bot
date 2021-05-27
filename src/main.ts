@@ -35,6 +35,7 @@ import SystemConfig from "./core/SystemConfig";
 import Config from "./interfaces/Config";
 import {Logger} from "./core/logger/Logger";
 import FatalError from "./errors/FatalError";
+import Globals from "./Globals";
 
 /**
  * requiredFor - function, designed to determine if some functional is required.
@@ -70,30 +71,30 @@ export default async function main(): Promise<void> {
             await new CheckSuitsGarbageCollector({interval: 1000 * 60 * 30}).start();
         }
 
-        let server: WebServer | undefined;
         if (requiredFor("webserver")) {
-            server = new WebServer();
+            Globals.webHookServer = new WebServer(SystemConfig.getConfig<Config>().webHookServer);
         }
         if (requiredFor("drawEventsHandlers", "commandsProxy")) {
-            const bot: Bot = Bot.init(
+            Globals.telegramBot = Bot.init(
                 SystemConfig.getConfig<Config>().bot.token,
                 SystemConfig.getConfig<Config>().system.commandsProxy
             );
         }
 
-        if (
-            requiredFor(
-                "commandsProxy",
-                "webserver",
-                "githubEventsHandlers",
-                "commandsEventHandlers",
-                "drawEventsHandlers"
-            )
-        ) {
-            const RabbitMQ: AmqpDispatcher = await AmqpDispatcher.init();
+        if (requiredFor(
+            "commandsProxy",
+            "webserver",
+            "githubEventsHandlers",
+            "commandsEventHandlers",
+            "drawEventsHandlers"
+        )) {
+            Globals.amqpDispatcher = await AmqpDispatcher.init();
         }
 
-        server && server.start();
+        Globals.pulseWebServer = new WebServer(SystemConfig.getConfig<Config>().pulseWebServer);
+
+        Globals.webHookServer?.start();
+        Globals.pulseWebServer?.start();
     } catch (error) {
         if (error instanceof FatalError) {
             throw error;

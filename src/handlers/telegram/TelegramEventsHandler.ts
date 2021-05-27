@@ -25,7 +25,7 @@
  */
 
 import AmqpHandler from "../../core/amqp/AmqpHandler";
-import {QUEUES} from "../../globals";
+import {QUEUES} from "../../Globals";
 import {Message as AMQPMessage} from "amqplib";
 import {CallbackQuery, Message, User} from "node-telegram-bot-api";
 import Chat from "../../entities/Chat";

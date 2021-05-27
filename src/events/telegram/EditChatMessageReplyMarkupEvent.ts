@@ -26,7 +26,7 @@
 
 import {EditMessageReplyMarkupOptions, InlineKeyboardMarkup} from "node-telegram-bot-api";
 import AmqpEvent from "../../core/amqp/AmqpEvent";
-import {QUEUES} from "../../globals";
+import {QUEUES} from "../../Globals";
 
 class EditChatMessageReplyMarkupEvent extends AmqpEvent {
     public static readonly type: string = "edit-chat-message-reply-markup";

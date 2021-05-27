@@ -116,11 +116,16 @@ const config: Config = {
             TelegramEventsHandler,
         ],
     },
-    server: {
+    webHookServer: {
         port: 3030,
         acceptEvents: ["check_run", "check_suite", "create", "pull_request", "push", "issues"],
         controllers: [
             GithubWebhookController,
+        ]
+    },
+    pulseWebServer: {
+        port: 3100,
+        controllers: [
             PulseController,
         ]
     },

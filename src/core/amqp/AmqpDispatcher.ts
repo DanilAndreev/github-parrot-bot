@@ -113,7 +113,7 @@ class AmqpDispatcher {
         await channel.assertQueue(queueName);
         await channel.prefetch(prefetch || 10);
         await channel.consume(queueName, msg => msg && handler.execute(msg, channel));
-        Logger?.silly(`Hooked AMQP handler to queue: "${queueName}"`);
+        Logger.silly(`Hooked AMQP handler to queue: "${queueName}"`);
     }
 
     /**
@@ -123,7 +123,7 @@ class AmqpDispatcher {
      * @param options - Send options.
      */
     public async sendToQueue<T extends JSONObject>(queueName: string, message: T, options?: Amqp.Options.Publish) {
-        Logger?.debug(`Sent message to AMQP queue: "${queueName}".`);
+        Logger.debug(`Sent message to AMQP queue: "${queueName}".`);
         const channel: Amqp.Channel = await this.connection.createChannel();
         await channel.assertQueue(queueName);
         channel.sendToQueue(queueName, Buffer.from(JSON.stringify(message)), options);
@@ -137,7 +137,7 @@ class AmqpDispatcher {
      */
     public static async init(): Promise<AmqpDispatcher> {
         try {
-            Logger?.debug(`Initialized AMQP dispatcher.`);
+            Logger.debug(`Initialized AMQP dispatcher.`);
             const connection: Connection = await Amqp.connect(SystemConfig.getConfig<Config>().amqp.connect);
             AmqpDispatcher.current = new AmqpDispatcher(connection);
             return AmqpDispatcher.current;

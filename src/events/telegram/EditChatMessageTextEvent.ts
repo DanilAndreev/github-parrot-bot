@@ -26,7 +26,7 @@
 
 import {EditMessageTextOptions} from "node-telegram-bot-api";
 import AmqpEvent from "../../core/amqp/AmqpEvent";
-import {QUEUES} from "../../globals";
+import {QUEUES} from "../../Globals";
 
 class EditChatMessageTextEvent extends AmqpEvent {
     public static readonly type: string = "edit-message-text-event";

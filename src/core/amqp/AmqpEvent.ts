@@ -54,7 +54,7 @@ abstract class AmqpEvent {
      * Creates an instance of AmqpEvent.
      * @constructor
      * @param type - event type.
-     * @param expiration - event expiration time in milliseconds.
+     * @param options - event AMQP options.
      * @author Danil Andreev
      */
     protected constructor(type?: string, options?: AmqpEvent.Options) {

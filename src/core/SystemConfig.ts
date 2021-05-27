@@ -114,16 +114,11 @@ class SystemConfig<T extends JSONObject> {
      * @author Danil Andreev
      */
     constructor() {
-        // Merging config.json variables to config
         try {
             const configJson: JSONObject = JSON.parse(fs.readFileSync("./../config.json").toString());
             _.merge(this.config, configJson);
         } catch (error) {
             if (error.code !== "ENOENT")
-                //     Logger.error({
-                //         disableDB: true,
-                //         verbosity: 1
-                //     })(`Unable to load configuration from "config.json" file.`, error.method, error.stack);
                 console.warn(`Unable to load configuration from "config.json" file.`, error.method, error.stack);
         }
 
@@ -133,10 +128,6 @@ class SystemConfig<T extends JSONObject> {
                 if (typeof config === "object") {
                     _.merge(this.config, config);
                 } else {
-                    // Logger.error({
-                    //     disableDB: true,
-                    //     verbosity: 1
-                    // })(`Invalid type of 'additionalConfig' item, expected "object", got "${typeof config}"`);
                     console.warn(`Invalid type of 'additionalConfig' item, expected "object", got "${typeof config}"`);
                 }
             }
@@ -175,9 +166,7 @@ class SystemConfig<T extends JSONObject> {
                 _.merge(env, tempEnv);
             } catch (error) {
                 if (error.code === "ENOENT")
-                    // Logger.warn({disableDB: true, verbosity: 4})(`Could not find env file "${pathname}", skipping`);
                     console.warn(`Could not find env file "${pathname}", skipping`);
-                // Logger.error({disableDB: true, verbosity: 1})(error.message, error.stack);
                 else console.warn(error.message, error.stack);
             }
         }

@@ -26,7 +26,7 @@
 
 import AmqpEvent from "../../core/amqp/AmqpEvent";
 import {CallbackQuery, Message} from "node-telegram-bot-api";
-import {QUEUES} from "../../globals";
+import {QUEUES} from "../../Globals";
 
 class TelegramEventEvent<T extends Message | CallbackQuery> extends AmqpEvent {
     public static readonly type: string = "telegram-event-event";

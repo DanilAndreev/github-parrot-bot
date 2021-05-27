@@ -27,8 +27,6 @@
 import * as Koa from "koa";
 import {Context, Next} from "koa";
 import * as BodyParser from "koa-bodyparser";
-import Config from "../../interfaces/Config";
-import SystemConfig from "../SystemConfig";
 import {Logger} from "../logger/Logger";
 import HttpError from "../../errors/HttpError";
 import Controller from "./Controller";
@@ -41,29 +39,51 @@ import * as Router from "koa-router";
  */
 class WebServer extends Koa {
     /**
-     * activeHttpSessionsQuantity - quantity of currently active HTTP sessions.
+     * activeHttpSessionsQuantity - quantity of currently active HTTP sessions for last 5 seconds.
      */
-    private static activeHttpSessionsQuantity: number = 0;
+    private activeHttpSessionsQuantity: number;
+
+    /**
+     * activeHttpSessionsQuantity - quantity of currently active HTTP sessions live encounter. Not shown;
+     */
+    private activeHttpSessionsQuantityCurrent: number;
 
     /**
      * router - Root server router. Other routers used by it.
-     * @readonly
      */
     protected readonly router: Router;
+
+    /**
+     * metricsInterval - Interval for calculating metrics.
+     */
+    public readonly metricsInterval: NodeJS.Timeout;
+
+    /**
+     * port - target serving port.
+     */
+    public port: number;
 
     /**
      * Creates an instance of WebServer.
      * @constructor
      * @author Danil Andreev
      */
-    constructor() {
+    constructor(config: WebServer.Config) {
         super();
         this.router = new Router();
-        this.use(async (ctx: Context, next: Next) => await WebServer.activeHttpSessionsCounterMiddleware(ctx, next));
+        this.port = config.port;
+        this.activeHttpSessionsQuantityCurrent = 0;
+        this.activeHttpSessionsQuantity = 0;
+        this.metricsInterval = setInterval(() => {
+            this.activeHttpSessionsQuantity = this.activeHttpSessionsQuantityCurrent;
+            this.activeHttpSessionsQuantityCurrent = 0;
+        }, 5);
+
+        this.use(async (ctx: Context, next: Next) => await this.activeHttpSessionsCounterMiddleware(ctx, next));
         this.use(async (ctx: Context, next: Next) => await WebServer.httpErrorsMiddleware(ctx, next));
         this.use(BodyParser());
 
-        const controllers: typeof Controller[] = SystemConfig.getConfig<Config>().server.controllers;
+        const controllers: typeof Controller[] = config.controllers;
         for (const controller of controllers) {
             const instance: Controller = new controller();
             this.router.use(instance.baseRoute, instance.routes(), instance.allowedMethods());
@@ -76,7 +96,7 @@ class WebServer extends Koa {
      * @method
      * @author Danil Andreev
      */
-    public static getActiveHttpSessionsQuantity(): number {
+    public getActiveHttpSessionsQuantity(): number {
         return this.activeHttpSessionsQuantity;
     }
 
@@ -87,11 +107,9 @@ class WebServer extends Koa {
      * @param next - Next middleware.
      * @author Danil Andreev
      */
-    private static async activeHttpSessionsCounterMiddleware(ctx: Context, next: Next): Promise<void> {
-        this.activeHttpSessionsQuantity++;
+    private async activeHttpSessionsCounterMiddleware(ctx: Context, next: Next): Promise<void> {
+        this.activeHttpSessionsQuantityCurrent++;
         await next();
-        this.activeHttpSessionsQuantity--;
-        if (this.activeHttpSessionsQuantity < 0) this.activeHttpSessionsQuantity = 0;
     }
 
     /**
@@ -123,10 +141,28 @@ class WebServer extends Koa {
      * @author Danil Andreev
      */
     public start(port?: number): WebServer {
-        const targetPort: number = port || SystemConfig.getConfig<Config>().server.port || 3030;
-        Logger?.info(`Web server started on port ${targetPort}.`);
+        const targetPort: number = port || this.port || 3030;
+        Logger.info(`Web server started on port ${targetPort}.`);
         this.listen(targetPort);
         return this;
+    }
+}
+
+namespace WebServer {
+    /**
+     * Server - web server configuration settings.
+     * @interface
+     * @author Danil Andreev
+     */
+    export interface Config {
+        /**
+         * port - target server port.
+         */
+        port: number;
+        /**
+         * controllers - controllers list.
+         */
+        controllers: typeof Controller[];
     }
 }
 

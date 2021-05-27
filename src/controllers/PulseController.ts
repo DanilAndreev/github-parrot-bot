@@ -26,11 +26,11 @@
 
 import Controller from "../core/webserver/Controller";
 import {Context} from "koa";
-import WebServer from "../core/webserver/WebServer";
+import Globals from "../Globals";
 
-@Controller.HTTPController("/pulse")
+@Controller.HTTPController("")
 class PulseController extends Controller {
-    @Controller.Route("GET", "/")
+    @Controller.Route("GET", "/pulse")
     public async pulse(ctx: Context): Promise<void> {
         ctx.body = {};
         ctx.body.status = PulseController.getStatus();
@@ -42,11 +42,12 @@ class PulseController extends Controller {
     public async metrics(ctx: Context): Promise<void> {
         ctx.body = {};
         ctx.body.status = PulseController.getStatus();
-        ctx.body.activeHttpSessions = WebServer.getActiveHttpSessionsQuantity();
+        ctx.body.activeHttpSessions = Globals.webHookServer?.getActiveHttpSessionsQuantity();
     }
 
-    public static getStatus(): string {
-        if (WebServer.getActiveHttpSessionsQuantity() > 1) return "running";
+    public static getStatus(): string { //TODO: finish. Requests are processing one by one.
+        if (!Globals.webHookServer) return "stopped";
+        if (Globals.webHookServer.getActiveHttpSessionsQuantity()) return "running";
         return "idle";
     }
 }

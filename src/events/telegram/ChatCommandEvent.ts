@@ -26,7 +26,7 @@
 
 import AmqpEvent from "../../core/amqp/AmqpEvent";
 import {Message} from "node-telegram-bot-api";
-import {QUEUES} from "../../globals";
+import {QUEUES} from "../../Globals";
 
 class ChatCommandEvent extends AmqpEvent {
     public static readonly type: string = "chat-command-event";

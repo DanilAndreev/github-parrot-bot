@@ -53,14 +53,14 @@ class CallbackQueryDispatcher extends AmqpHandler {
                 new Set()
             );
             for (const handler of this.callbackQueryHandlers) {
-                Logger?.silly(
+                Logger.silly(
                     `Loaded Telegram callback query handler for: "${handler.pattern.join(".")}". exact=${!!handler
                         .options.exact}`
                 );
             }
-            Logger?.debug(`Loaded ${this.callbackQueryHandlers.size} Telegram callback query handlers.`);
+            Logger.debug(`Loaded ${this.callbackQueryHandlers.size} Telegram callback query handlers.`);
         } else {
-            Logger?.debug(`Loaded 0 Telegram callback query handlers. No handlers found.`);
+            Logger.debug(`Loaded 0 Telegram callback query handlers. No handlers found.`);
         }
     }
 

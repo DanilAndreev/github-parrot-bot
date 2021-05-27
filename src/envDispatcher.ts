@@ -81,7 +81,11 @@ export default function envDispatcher(
                 break;
 
             case "port":
-                configRef.current.server.port = +value;
+                configRef.current.webHookServer.port = +value;
+                break;
+
+            case "pulse_port":
+                configRef.current.pulseWebServer.port = +value;
                 break;
 
             case "enable_webserver":

@@ -26,7 +26,7 @@
 
 import AmqpEvent from "../../core/amqp/AmqpEvent";
 import {SendMessageOptions} from "node-telegram-bot-api";
-import {QUEUES} from "../../globals";
+import {QUEUES} from "../../Globals";
 
 class SendChatMessageEvent extends AmqpEvent {
     public static readonly type: string = "send-chat-message";

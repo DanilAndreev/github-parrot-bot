@@ -17,11 +17,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[WebServer] Finished controllers integration.">
-      <change afterPath="$PROJECT_DIR$/src/controllers/PulseController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/WEBSERVER.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/WEBSERVER.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/webserver/Controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/webserver/Controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/GithubWebhookController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/GithubWebhookController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/PulseController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/PulseController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/DataBase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/DataBase.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/SystemConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/SystemConfig.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/amqp/AmqpDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/AmqpDispatcher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/amqp/AmqpEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/AmqpEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/amqp/AmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/AmqpHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/amqp/CallbackQueryDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/CallbackQueryDispatcher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/bot/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bot/Bot.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/logger/Logger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/logger/Logger.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/webserver/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/webserver/WebServer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/envDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/envDispatcher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/draw/DrawCheckSuiteEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawCheckSuiteEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/draw/DrawIssueEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawIssueEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/draw/DrawPullRequestEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawPullRequestEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/draw/DrawPushEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawPushEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/draw/DrawWebHookSettingsEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawWebHookSettingsEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/telegram/ChatCommandEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/ChatCommandEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/telegram/DeleteChatMessageEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/DeleteChatMessageEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageLiveLocationEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageLiveLocationEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageReplyMarkupEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageReplyMarkupEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageTextEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/EditChatMessageTextEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/telegram/SendChatMessageEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/SendChatMessageEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/telegram/TelegramEventEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/TelegramEventEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/globals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Globals.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawPushHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawPushHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawWebHookSettingsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawWebHookSettingsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/Config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,8 +98,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/.env" />
-    <property name="javascript.nodejs.core.library.configured.version" value="14.17.0" />
-    <property name="javascript.nodejs.core.library.typings.version" value="14.17.0" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
+    <property name="javascript.nodejs.core.library.typings.version" value="12.20.13" />
     <property name="last.edited.regexp" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../ts-test" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -94,11 +127,11 @@
       <recent name="C:\Users\onepl\WebstormProjects\github-parrot-bot\src\events\telegram" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\github-parrot-bot\src" />
+      <recent name="D:\Projects\github-parrot-bot\src\utils" />
+      <recent name="D:\Projects\github-parrot-bot\src\interfaces" />
       <recent name="$PROJECT_DIR$/src/core/webserver" />
       <recent name="$PROJECT_DIR$/src/schemas/webhook/requests" />
-      <recent name="$PROJECT_DIR$/src/core" />
-      <recent name="C:\Users\onepl\WebstormProjects\github-parrot-bot\src\core\amqp" />
-      <recent name="C:\Users\onepl\WebstormProjects\github-parrot-bot\src\core\logger" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.WEBSERVER">
@@ -183,6 +216,7 @@
       <workItem from="1622027542517" duration="8783000" />
       <workItem from="1622040609704" duration="1780000" />
       <workItem from="1622116046503" duration="6188000" />
+      <workItem from="1622140226285" duration="1684000" />
     </task>
     <task id="LOCAL-00075" summary="[Bot] Added some log messages.">
       <created>1617713754183</created>
@@ -627,6 +661,21 @@
           <url>file://$PROJECT_DIR$/src/handlers/draw/DrawWebHookSettingsHandler.ts</url>
           <line>66</line>
           <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/main.ts</url>
+          <line>95</line>
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/main.ts</url>
+          <line>73</line>
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/envDispatcher.ts</url>
+          <line>44</line>
+          <option name="timeStamp" value="69" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

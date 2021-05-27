@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+import WebServer from "./core/webserver/WebServer";
+import AmqpDispatcher from "./core/amqp/AmqpDispatcher";
+import Bot from "./core/bot/Bot";
+
+export default class Globals {
+    public static webHookServer: WebServer | null = null;
+    public static telegramBot: Bot | null = null;
+    public static pulseWebServer: WebServer | null = null;
+    public static amqpDispatcher: AmqpDispatcher | null = null;
+}
 
 export const QUEUES = {
     PULL_REQUEST_SHOW_QUEUE: "pull-request-show-queue",

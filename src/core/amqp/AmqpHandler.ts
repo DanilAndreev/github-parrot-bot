@@ -56,7 +56,7 @@ class AmqpHandler {
      */
     public async execute(message: Amqp.Message, channel: Amqp.Channel) {
         try {
-            Logger?.debug(
+            Logger.debug(
                 `Got AMQP message. ${JSON.stringify({
                     id: message.properties.messageId,
                     queue: message.fields.routingKey,
@@ -65,24 +65,24 @@ class AmqpHandler {
             const content: any = JSON.parse(message.content.toString());
             const result: boolean | void = await this.handle(content, message);
             if (result === false) {
-                Logger?.debug(
+                Logger.debug(
                     `Got AMQP message NACKed. Queue: ${message.fields.routingKey}. Reason: Handler returned false value.`
                 );
-                Logger?.warn(
+                Logger.warn(
                     `Deprecated NACKing by returning false value in class ${this.constructor.name}. This feature will`,
                     `be removed in next versions. Use throw AMQPNack or throw AMQPAck instead.`
                 );
                 channel.nack(message);
             } else {
-                Logger?.silly(`AMQP message ACKed. Queue: ${message.fields.routingKey}`);
+                Logger.silly(`AMQP message ACKed. Queue: ${message.fields.routingKey}`);
                 channel.ack(message);
             }
         } catch (error) {
             if (error instanceof AMQPAck) {
-                Logger?.silly(`AMQP message ACKed. Queue: ${message.fields.routingKey}`);
+                Logger.silly(`AMQP message ACKed. Queue: ${message.fields.routingKey}`);
                 channel.ack(message);
             } else {
-                Logger?.debug(`Got AMQP message NACKed. Queue: ${message.fields.routingKey}. Reason: ${error}`);
+                Logger.debug(`Got AMQP message NACKed. Queue: ${message.fields.routingKey}. Reason: ${error}`);
                 channel.nack(message);
             }
         }

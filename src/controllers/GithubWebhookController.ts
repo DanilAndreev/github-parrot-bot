@@ -42,7 +42,7 @@ import * as githubWebhookSchema from "@octokit/webhooks-schemas";
  * @class
  * @author Danil Andreev
  */
-@Controller.HTTPController("/github")
+@Controller.HTTPController("")
 class GithubWebhookController extends Controller {
     /**
      * eventValidator- GitHub webhook event AJV validator.
@@ -63,25 +63,25 @@ class GithubWebhookController extends Controller {
     }
 
     /**
-     * Controller for [POST] /github/webhook
+     * Controller for [POST] /github
      * Handles GitHub webhook request.
      * @throws HttpError
      * @author Danil Andreev
      */
-    @Controller.Route("POST", "/webhook")
+    @Controller.Route("POST", "/github")
     @Controller.RouteValidation(GithubWebhookController.webhookValidateMiddleware)
     public async webhookEvent(ctx: Context): Promise<void> {
         try {
             const payload: JSONObject = ctx.request.body;
             const event: string | undefined = ctx.request.get("x-github-event");
-            Logger?.debug(`Got WebHook message. Event: ${event || "NOT PASSED"}. Origin: ${ctx.req.url}`);
+            Logger.debug(`Got WebHook message. Event: ${event || "NOT PASSED"}. Origin: ${ctx.req.url}`);
             if (!event) throw new Error(`Failed to get event from "x-github-event" header.`);
-            if (SystemConfig.getConfig<Config>().server.acceptEvents.includes(event))
+            if (SystemConfig.getConfig<Config>().webHookServer.acceptEvents.includes(event))
                 await AmqpDispatcher.getCurrent().sendToQueue(event, {payload, ctx}, {expiration: 1000 * 60 * 30});
             else throw new Error(`Event ${event} is not supported`);
             ctx.status = 200;
         } catch (error) {
-            Logger?.http(`Incorrect webhook request. Origin: ${ctx.req.url}. ${error}`);
+            Logger.http(`Incorrect webhook request. Origin: ${ctx.req.url}. ${error}`);
             throw new HttpError("Incorrect webhook request. " + error.message, 400);
         }
     }
@@ -98,7 +98,7 @@ class GithubWebhookController extends Controller {
         if (GithubWebhookController.eventValidator(ctx.request.body)) {
             await next();
         } else {
-            Logger?.warn(`Got GitHub WebHook message. Payload validation failed.`);
+            Logger.warn(`Got GitHub WebHook message. Payload validation failed.`);
             throw new HttpError("Validation error", 400).setData({
                 validation: GithubWebhookController.eventValidator.errors,
             });

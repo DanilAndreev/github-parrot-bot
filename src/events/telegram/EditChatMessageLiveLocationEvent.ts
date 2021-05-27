@@ -26,7 +26,7 @@
 
 import {EditMessageCaptionOptions} from "node-telegram-bot-api";
 import AmqpEvent from "../../core/amqp/AmqpEvent";
-import {QUEUES} from "../../globals";
+import {QUEUES} from "../../Globals";
 
 class EditChatMessageLiveLocationEvent extends AmqpEvent {
     public static readonly type: string = "edit-chat-message-live-location";
