@@ -42,12 +42,12 @@ class PulseController extends Controller {
     public async metrics(ctx: Context): Promise<void> {
         ctx.body = {};
         ctx.body.status = PulseController.getStatus();
-        ctx.body.activeHttpSessions = Globals.webHookServer?.getActiveHttpSessionsQuantity();
+        ctx.body.activeHttpSessions = Globals.webHookServer?.getMetrics();
     }
 
     public static getStatus(): string { //TODO: finish. Requests are processing one by one.
         if (!Globals.webHookServer) return "stopped";
-        if (Globals.webHookServer.getActiveHttpSessionsQuantity()) return "running";
+        if (Globals.webHookServer.getMetrics()) return "running";
         return "idle";
     }
 }

@@ -24,10 +24,10 @@
  * SOFTWARE.
  */
 
-import Ref from "./interfaces/Ref";
+import Ref from "./core/interfaces/Ref";
 import SystemConfig from "./core/SystemConfig";
 import Config from "./interfaces/Config";
-import JSONObject from "./interfaces/JSONObject";
+import JSONObject from "./core/interfaces/JSONObject";
 
 /**
  * envDispatcher - function, designed to place variables from env to right places in config.

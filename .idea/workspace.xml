@@ -16,15 +16,42 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[System] Added system globals.">
-      <change afterPath="$PROJECT_DIR$/examples/draw_events_handlers.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/garbage_collectors.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/telegram_commands_handlers.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/telegram_commands_proxy.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/webhook_events_handlers.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/webhook_web_server.env" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[examples] Added example envs.">
+      <change afterPath="$PROJECT_DIR$/src/core/utils/Metricable.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/ClearAKACommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ClearAKACommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/ConnectCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ConnectCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/DisconnectCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/DisconnectCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/ListRepositoriesCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ListRepositoriesCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/RemoveRepositoryCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/RemoveRepositoryCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/VersionCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/VersionCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/WebHookSettingsCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/WebHookSettingsCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/GithubWebhookController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/GithubWebhookController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/PulseController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/PulseController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/SystemConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/SystemConfig.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/amqp/AmqpDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/AmqpDispatcher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/amqp/AmqpEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/AmqpEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/amqp/CallbackQueryDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/CallbackQueryDispatcher.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/bot/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bot/Bot.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/bot/BotCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bot/BotCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/logger/PostgresTransport.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/logger/PostgresTransport.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/webserver/Controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/webserver/Controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/webserver/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/webserver/WebServer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/envDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/envDispatcher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/errors/HttpError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors/HttpError.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/telegram/DeleteChatMessageEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/telegram/DeleteChatMessageEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/callbacks/IssueCallbacksHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/callbacks/IssueCallbacksHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/callbacks/PullRequestCallbacksHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/callbacks/PullRequestCallbacksHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/callbacks/WebHookSettingsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/callbacks/WebHookSettingsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/Config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/Constructable.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/interfaces/Constructable.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/JSONObject.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/interfaces/JSONObject.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/Ref.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/interfaces/Ref.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/createRef.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/createRef.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/fromKeyPair.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/fromKeyPair.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/toKeyPair.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/toKeyPair.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +98,7 @@
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.20.13" />
     <property name="last.edited.regexp" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/examples" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../atlas-core" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -97,11 +124,11 @@
       <recent name="D:\Projects\github-parrot-bot\src\events\telegram" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\github-parrot-bot\src\core\utils" />
+      <recent name="D:\Projects\github-parrot-bot\src\core\interfaces" />
       <recent name="D:\Projects\github-parrot-bot\src" />
       <recent name="D:\Projects\github-parrot-bot\src\utils" />
       <recent name="D:\Projects\github-parrot-bot\src\interfaces" />
-      <recent name="$PROJECT_DIR$/src/core/webserver" />
-      <recent name="$PROJECT_DIR$/src/schemas/webhook/requests" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.GITHUB_EVENTS_HANDLERS">
@@ -187,13 +214,6 @@
       <workItem from="1622040609704" duration="1780000" />
       <workItem from="1622116046503" duration="6188000" />
       <workItem from="1622140226285" duration="1684000" />
-    </task>
-    <task id="LOCAL-00075" summary="[Bot] Added some log messages.">
-      <created>1617713754183</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1617713754183</updated>
     </task>
     <task id="LOCAL-00076" summary="[Core] Added JSDocs.">
       <created>1617796227894</created>
@@ -531,7 +551,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622120153302</updated>
     </task>
-    <option name="localTasksCounter" value="124" />
+    <task id="LOCAL-00124" summary="[examples] Added example envs.">
+      <created>1622159827193</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1622159827193</updated>
+    </task>
+    <option name="localTasksCounter" value="125" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -562,7 +589,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[AkaGenerator] Finished SQL." />
     <MESSAGE value="[AkaGenerator] Fixed typo in JSDoc." />
     <MESSAGE value="[Bot] Added listener for callback_query event." />
     <MESSAGE value="[CallbackQueryDispatcher] Added callback query dispatcher system." />
@@ -587,7 +613,8 @@
     <MESSAGE value="[WebServer] Added webhook payload validation." />
     <MESSAGE value="[GithubWebhookController] Added webhooks controller." />
     <MESSAGE value="[WebServer] Finished controllers integration." />
-    <option name="LAST_COMMIT_MESSAGE" value="[WebServer] Finished controllers integration." />
+    <MESSAGE value="[examples] Added example envs." />
+    <option name="LAST_COMMIT_MESSAGE" value="[examples] Added example envs." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -631,16 +658,6 @@
           <url>file://$PROJECT_DIR$/src/handlers/draw/DrawWebHookSettingsHandler.ts</url>
           <line>66</line>
           <option name="timeStamp" value="64" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/main.ts</url>
-          <line>95</line>
-          <option name="timeStamp" value="65" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/main.ts</url>
-          <line>73</line>
-          <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/envDispatcher.ts</url>

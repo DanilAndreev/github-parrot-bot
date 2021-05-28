@@ -28,7 +28,7 @@ import BotCommand from "../core/bot/BotCommand";
 import {Message} from "node-telegram-bot-api";
 import CommandError from "../errors/CommandError";
 import Collaborator from "../entities/Collaborator";
-import JSONObject from "../interfaces/JSONObject";
+import JSONObject from "../core/interfaces/JSONObject";
 import Chat from "../entities/Chat";
 
 /**

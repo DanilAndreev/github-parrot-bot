@@ -30,7 +30,7 @@ import CommandError from "../errors/CommandError";
 import checkAdmin from "../utils/checkAdmin";
 import WebHook from "../entities/WebHook";
 import Chat from "../entities/Chat";
-import JSONObject from "../interfaces/JSONObject";
+import JSONObject from "../core/interfaces/JSONObject";
 import DeleteChatMessageEvent from "../events/telegram/DeleteChatMessageEvent";
 import {getConnection} from "typeorm";
 

@@ -27,7 +27,7 @@
 import * as Amqp from "amqplib";
 import {Connection} from "amqplib";
 import AmqpHandler from "./AmqpHandler";
-import JSONObject from "../../interfaces/JSONObject";
+import JSONObject from "../interfaces/JSONObject";
 import Config from "../../interfaces/Config";
 import SystemConfig from "../SystemConfig";
 import {Logger} from "../logger/Logger";

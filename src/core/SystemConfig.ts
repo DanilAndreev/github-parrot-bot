@@ -25,11 +25,11 @@
  */
 
 import * as dotenv from "dotenv";
-import JSONObject from "../interfaces/JSONObject";
+import JSONObject from "./interfaces/JSONObject";
 import * as fs from "fs";
 import * as _ from "lodash";
 import createRef from "../utils/createRef";
-import Ref from "../interfaces/Ref";
+import Ref from "./interfaces/Ref";
 import root from "../utils/root";
 
 namespace SystemConfig {

@@ -26,7 +26,7 @@
 
 import * as Router from "koa-router";
 import {Middleware} from "koa";
-import JSONObject from "../../interfaces/JSONObject";
+import JSONObject from "../interfaces/JSONObject";
 
 
 /**

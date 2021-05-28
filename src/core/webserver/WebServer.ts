@@ -31,13 +31,14 @@ import {Logger} from "../logger/Logger";
 import HttpError from "../../errors/HttpError";
 import Controller from "./Controller";
 import * as Router from "koa-router";
+import Metricable from "../utils/Metricable";
 
 /**
  * WebServer - web server for handling WebHooks.
  * @class
  * @author Danil Andreev
  */
-class WebServer extends Koa {
+class WebServer extends Koa implements Metricable {
     /**
      * activeHttpSessionsQuantity - quantity of currently active HTTP sessions for last 5 seconds.
      */
@@ -92,11 +93,11 @@ class WebServer extends Koa {
     }
 
     /**
-     * getActiveHttpSessionsQuantity - returns quantity of currently active HTTP sessions on the web server.
+     * getMetrics - returns quantity of currently active HTTP sessions on the web server.
      * @method
      * @author Danil Andreev
      */
-    public getActiveHttpSessionsQuantity(): number {
+    public getMetrics(): number {
         return this.activeHttpSessionsQuantity;
     }
 

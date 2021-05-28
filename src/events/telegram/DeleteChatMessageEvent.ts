@@ -25,7 +25,7 @@
  */
 
 import AmqpEvent from "../../core/amqp/AmqpEvent";
-import JSONObject from "../../interfaces/JSONObject";
+import JSONObject from "../../core/interfaces/JSONObject";
 import {QUEUES} from "../../Globals";
 
 class DeleteChatMessageEvent extends AmqpEvent {

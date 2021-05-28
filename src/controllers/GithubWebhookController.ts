@@ -30,7 +30,7 @@ import {Logger} from "../core/logger/Logger";
 import SystemConfig from "../core/SystemConfig";
 import Config from "../interfaces/Config";
 import AmqpDispatcher from "../core/amqp/AmqpDispatcher";
-import JSONObject from "../interfaces/JSONObject";
+import JSONObject from "../core/interfaces/JSONObject";
 import HttpError from "../errors/HttpError";
 import Ajv, {ValidateFunction} from "ajv";
 import addAjvFormats from "ajv-formats";

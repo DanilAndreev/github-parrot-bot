@@ -24,14 +24,31 @@
  * SOFTWARE.
  */
 
-import Ref from "../core/interfaces/Ref";
+import JSONObject from "../interfaces/JSONObject";
 
 /**
- * createRef - creates Ref object with passed value.
+ * Metricable - decorator for mechanisms that supports activity metrics.
  * @function
- * @param value - Initial value.
  * @author Danil Andreev
  */
-export default function createRef<T>(value: T): Ref<T> {
-    return {current: value};
+function Metricable(updateMs: number) {
+    return function MetricsWrapper<T extends new(...args: any[]) => {}>(objectConstructor: T): T {
+        return class WrappedMetrics extends objectConstructor {
+            constructor(...args: any[]) {
+                super(args);
+
+            }
+        };
+    };
 }
+
+interface Metricable {
+    /**
+     * getMetrics - get metrics.
+     * @method
+     * @author Danil Andreev
+     */
+    getMetrics(): number | JSONObject<number>;
+}
+
+export default Metricable;

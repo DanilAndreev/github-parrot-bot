@@ -24,7 +24,7 @@
  * SOFTWARE.
  */
 
-import JSONObject from "../interfaces/JSONObject";
+import JSONObject from "../core/interfaces/JSONObject";
 
 /**
  * toKeyPair - function for converting array to key pair structure.

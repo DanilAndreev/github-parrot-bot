@@ -32,17 +32,22 @@ import SystemConfig from "../SystemConfig";
 import ChatCommandEvent from "../../events/telegram/ChatCommandEvent";
 import TelegramEventEvent from "../../events/telegram/TelegramEventEvent";
 import BotCommand from "./BotCommand";
+import Metricable from "../utils/Metricable";
+import JSONObject from "../interfaces/JSONObject";
 
 /**
  * Bot - class for telegram bot api.
  * @class
  * @author Danil Andreev
  */
-export default class Bot extends TelegramBot {
+class Bot extends TelegramBot implements Metricable {
     /**
      * current - current class instance. Singleton.
      */
     protected static current: Bot;
+
+    protected metricsPrev: number;
+    protected metricsActive: number;
 
     /**
      * Creates an instance of Bot.
@@ -155,4 +160,10 @@ export default class Bot extends TelegramBot {
         if (!this.current) this.init();
         return this.current;
     }
+
+    getMetrics(): number | JSONObject<number> {
+        return 1;
+    }
 }
+
+export default Bot;

@@ -26,8 +26,8 @@
 
 import SystemConfig from "../SystemConfig";
 import Config from "../../interfaces/Config";
-import JSONObject from "../../interfaces/JSONObject";
-import Constructable from "../../interfaces/Constructable";
+import JSONObject from "../interfaces/JSONObject";
+import Constructable from "../interfaces/Constructable";
 import {CallbackQuery} from "node-telegram-bot-api";
 import AMQPAck from "../../errors/AMQPAck";
 import AmqpHandler from "./AmqpHandler";
