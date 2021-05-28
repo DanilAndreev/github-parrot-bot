@@ -17,8 +17,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[config] Removed text in bot token.">
+      <change afterPath="$PROJECT_DIR$/src/core/interfaces/Destructable.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/destructService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Globals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Globals.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/PulseController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/PulseController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Chrono.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Chrono.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/DataBase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/DataBase.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/amqp/AmqpDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/AmqpDispatcher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/bot/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bot/Bot.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/webserver/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/webserver/WebServer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +48,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="adding-metrics" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -627,9 +638,10 @@
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/envDispatcher.ts</url>
-          <line>44</line>
-          <option name="timeStamp" value="69" />
+          <url>file://$PROJECT_DIR$/src/main.ts</url>
+          <line>58</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="70" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

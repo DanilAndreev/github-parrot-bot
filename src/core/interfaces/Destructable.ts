@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,28 +24,16 @@
  * SOFTWARE.
  */
 
-import {Connection, createConnection} from "typeorm";
-import SystemConfig from "./SystemConfig";
-import Config from "../interfaces/Config";
-import {Logger} from "./logger/Logger";
-import Globals from "../Globals";
-import FatalError from "../errors/FatalError";
-
-
 /**
- * setupDbConnection - setting up database connection and synchronizes entities structure.
- * @function
+ * Destructable - interface for classes that have to be destructed.
+ * @interface
  * @author Danil Andreev
  */
-export async function setupDbConnection(): Promise<void> {
-    try {
-        Logger.info("Connecting to database...");
-        const connection: Connection = await createConnection(SystemConfig.getConfig<Config>().db);
-        Logger.info("Connected to database.");
-        await connection.synchronize();
-        Globals.dbConnection = connection;
-        Logger.info("Typeorm entities synchronized.");
-    } catch (error) {
-        throw new FatalError("Failed to connect to database!" + error);
-    }
+export default interface Destructable {
+    /**
+     * Destructor.
+     * @method
+     * @author Danil Andreev
+     */
+    destruct(): void | Promise<void>;
 }

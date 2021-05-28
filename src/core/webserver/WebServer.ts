@@ -32,13 +32,16 @@ import HttpError from "../../errors/HttpError";
 import Controller from "./Controller";
 import * as Router from "koa-router";
 import Metricable from "../interfaces/Metricable";
+import Destructable from "../interfaces/Destructable";
+import {Server} from "http";
+import * as shutdown from "koa-graceful-shutdown";
 
 /**
  * WebServer - web server for handling WebHooks.
  * @class
  * @author Danil Andreev
  */
-class WebServer extends Koa implements Metricable {
+class WebServer extends Koa implements Metricable, Destructable {
     /**
      * metricsPrev - quantity of currently active HTTP sessions for last 5 seconds.
      */
@@ -64,6 +67,8 @@ class WebServer extends Koa implements Metricable {
      */
     public port: number;
 
+    private session: Server | null;
+
     /**
      * Creates an instance of WebServer.
      * @constructor
@@ -71,6 +76,7 @@ class WebServer extends Koa implements Metricable {
      */
     constructor(config: WebServer.Config) {
         super();
+        this.session = null;
         this.router = new Router();
         this.port = config.port;
 
@@ -146,11 +152,32 @@ class WebServer extends Koa implements Metricable {
      * @param port - Target port. If not defined - will be taken from env or config.
      * @author Danil Andreev
      */
-    public start(port?: number): WebServer {
+    public async start(port?: number): Promise<WebServer> {
+        await this.stopServer();
         const targetPort: number = port || this.port || 3030;
         Logger.info(`Web server started on port ${targetPort}.`);
-        this.listen(targetPort);
+        this.session = this.listen(targetPort);
+        this.use(shutdown(this.session));
         return this;
+    }
+
+    protected stopServer(): Promise<WebServer> {
+        return new Promise<WebServer>((resolve, reject) => {
+            const session: Server | null = this.session;
+            this.session = null;
+            if (session) {
+                session.close((error: Error) => {
+                    if (error) reject(error);
+                    resolve(this);
+                });
+            } else {
+                resolve(this);
+            }
+        });
+    }
+
+    public async destruct(): Promise<void> {
+        await this.stopServer();
     }
 }
 

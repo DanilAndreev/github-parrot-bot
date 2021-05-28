@@ -33,13 +33,14 @@ import ChatCommandEvent from "../../events/telegram/ChatCommandEvent";
 import TelegramEventEvent from "../../events/telegram/TelegramEventEvent";
 import BotCommand from "./BotCommand";
 import Metricable from "../interfaces/Metricable";
+import Destructable from "../interfaces/Destructable";
 
 /**
  * Bot - class for telegram bot api.
  * @class
  * @author Danil Andreev
  */
-class Bot extends TelegramBot implements Metricable {
+class Bot extends TelegramBot implements Metricable, Destructable {
     /**
      * current - current class instance. Singleton.
      */
@@ -198,6 +199,10 @@ class Bot extends TelegramBot implements Metricable {
 
     public release(): void {
         clearInterval(this.metricsInterval);
+    }
+
+    public async destruct(): Promise<void> {
+        await this.stopPolling();
     }
 }
 

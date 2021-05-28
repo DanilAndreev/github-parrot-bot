@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,28 +24,22 @@
  * SOFTWARE.
  */
 
-import {Connection, createConnection} from "typeorm";
-import SystemConfig from "./SystemConfig";
-import Config from "../interfaces/Config";
-import {Logger} from "./logger/Logger";
-import Globals from "../Globals";
-import FatalError from "../errors/FatalError";
-
+import Destructable from "../core/interfaces/Destructable";
+import {Logger} from "../core/logger/Logger";
 
 /**
- * setupDbConnection - setting up database connection and synchronizes entities structure.
- * @function
- * @author Danil Andreev
+ * destructService - destructs detectable service and logs.
+ * @param service
+ * @param name
  */
-export async function setupDbConnection(): Promise<void> {
+export default async function destructService(service: Destructable, name: string = "application"): Promise<boolean> {
+    Logger.silly(`Stopping ${name}.`);
     try {
-        Logger.info("Connecting to database...");
-        const connection: Connection = await createConnection(SystemConfig.getConfig<Config>().db);
-        Logger.info("Connected to database.");
-        await connection.synchronize();
-        Globals.dbConnection = connection;
-        Logger.info("Typeorm entities synchronized.");
+        await service.destruct();
+        Logger.silly(`${name} successfully stopped.`);
+        return true;
     } catch (error) {
-        throw new FatalError("Failed to connect to database!" + error);
+        Logger.error(`${name} stopped with error: ` + error);
+        return false;
     }
 }

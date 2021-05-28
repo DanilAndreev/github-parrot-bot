@@ -33,13 +33,14 @@ import SystemConfig from "../SystemConfig";
 import {Logger} from "../logger/Logger";
 import FatalError from "../../errors/FatalError";
 import Metricable from "../interfaces/Metricable";
+import Destructable from "../interfaces/Destructable";
 
 /**
  * AmqpDispatcher - dispatcher for AMQP handlers.
  * @class
  * @author Danil Andreev
  */
-class AmqpDispatcher implements Metricable {
+class AmqpDispatcher implements Metricable, Destructable {
     /**
      * current - current class instance. Singleton.
      */
@@ -135,7 +136,10 @@ class AmqpDispatcher implements Metricable {
         const channel: Amqp.Channel = await this.connection.createChannel();
         await channel.assertQueue(queueName);
         await channel.prefetch(prefetch || 10);
-        await channel.consume(queueName, msg => msg && handler.execute(msg, channel));
+        await channel.consume(queueName, msg => {
+            this.metricsActive++;
+            if (msg) handler.execute(msg, channel);
+        });
         Logger.silly(`Hooked AMQP handler to queue: "${queueName}"`);
     }
 
@@ -159,6 +163,7 @@ class AmqpDispatcher implements Metricable {
      * @author Danil Andreev
      */
     public static async init(): Promise<AmqpDispatcher> {
+        // await this.getCurrent().destruct();
         try {
             Logger.debug(`Initialized AMQP dispatcher.`);
             const connection: Connection = await Amqp.connect(SystemConfig.getConfig<Config>().amqp.connect);
@@ -197,7 +202,12 @@ class AmqpDispatcher implements Metricable {
     }
 
     public release(): void {
-        clearInterval(this.metricsInterval)
+        clearInterval(this.metricsInterval);
+    }
+
+    public async destruct(): Promise<void> {
+        if (this.connection)
+            await this.connection.close();
     }
 }
 

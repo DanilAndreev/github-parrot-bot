@@ -24,6 +24,8 @@
  * SOFTWARE.
  */
 
+import Destructable from "./interfaces/Destructable";
+
 /**
  * Chrono - class for implementing chron functional.
  * @class
@@ -37,7 +39,7 @@
  * }
  * const cron: Chrono = new MyChrono().start();
  */
-abstract class Chrono {
+abstract class Chrono implements Destructable {
     /**
      * chronHandle - JS setInterval() handle.
      */
@@ -89,12 +91,7 @@ abstract class Chrono {
         return this;
     }
 
-    /**
-     * stop - stops executing chron function.
-     * @method
-     * @author Danil Andreev
-     */
-    public stop(): void {
+    public destruct(): void {
         clearInterval(this.chronHandle);
     }
 }

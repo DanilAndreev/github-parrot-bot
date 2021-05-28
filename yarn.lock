@@ -3873,6 +3873,11 @@ koa-cors@^0.0.16:
   resolved "https://registry.yarnpkg.com/koa-cors/-/koa-cors-0.0.16.tgz#98107993a7909e34c042986c5ec6156d77f3432e"
   integrity sha1-mBB5k6eQnjTAQphsXsYVbXfzQy4=
 
+koa-graceful-shutdown@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/koa-graceful-shutdown/-/koa-graceful-shutdown-1.2.1.tgz#4969d5fd9654632106a60602cc73222a78956d9a"
+  integrity sha512-nwNYW0l2gVcvyX2V5s0tjFQjk/NzEtiHtnA+EWDFFFxM8EMfUQZ48vSPNjEwGiFkSRS+rjrqMqs0R2vpKG1baw==
+
 koa-router@^10.0.0:
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/koa-router/-/koa-router-10.0.0.tgz#7bc76a031085731e61fc92c1683687b2f44de6a4"

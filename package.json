@@ -40,6 +40,7 @@
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
     "koa-cors": "^0.0.16",
+    "koa-graceful-shutdown": "^1.2.1",
     "koa-router": "^10.0.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",

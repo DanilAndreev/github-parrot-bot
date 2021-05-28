@@ -27,12 +27,18 @@
 import WebServer from "./core/webserver/WebServer";
 import AmqpDispatcher from "./core/amqp/AmqpDispatcher";
 import Bot from "./core/bot/Bot";
+import Chrono from "./core/Chrono";
+import {Connection} from "typeorm";
 
 export default class Globals {
     public static webHookServer: WebServer | null = null;
     public static telegramBot: Bot | null = null;
     public static pulseWebServer: WebServer | null = null;
     public static amqpDispatcher: AmqpDispatcher | null = null;
+    public static checkSuitsGarbageCollector: Chrono | null = null;
+    public static issuesGarbageCollector: Chrono | null = null;
+    public static pullRequestsGarbageCollector: Chrono | null = null;
+    public static dbConnection: Connection | null = null;
 }
 
 export const QUEUES = {

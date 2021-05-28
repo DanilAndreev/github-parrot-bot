@@ -35,10 +35,10 @@ import JSONObject from "../core/interfaces/JSONObject";
 @Controller.HTTPController("")
 class PulseController extends Controller {
     private static StatusesValues = {
-        "stopped": 0,
-        "idle": 100,
-        "running": 200,
-    }
+        stopped: 0,
+        idle: 100,
+        running: 200,
+    };
 
     @Controller.Route("GET", "/pulse")
     public async pulse(ctx: Context): Promise<void> {
@@ -76,26 +76,23 @@ class PulseController extends Controller {
             body.telegram_commands_proxy_status = PulseController.getStatus(Globals.telegramBot);
             body.telegram_commands_proxy_load = Globals.telegramBot?.getMetrics();
         }
+        body.amqp_handlers_status = PulseController.getStatus(Globals.amqpDispatcher);
+        body.amqp_handlers_load = Globals.amqpDispatcher?.getMetrics();
 
         body.status = PulseController.getCommonStatus();
         body.activeHttpSessions = Globals.webHookServer?.getMetrics();
 
+        for (const key in body) if (body[key] === undefined) delete body[key];
         ctx.body = body;
     }
 
     public static getCommonStatus(): string {
-        const services: (Metricable | null)[] = [
-            Globals.webHookServer,
-            Globals.pulseWebServer,
-            Globals.telegramBot,
-        ];
+        const services: (Metricable | null)[] = [Globals.webHookServer, Globals.pulseWebServer, Globals.telegramBot];
 
         return services.reduce<string>((previous: string, current: Metricable | null) => {
             const status: string = this.getStatus(current);
-            if (this.StatusesValues[status] > this.StatusesValues[previous])
-                return status;
-            else
-                return previous;
+            if (this.StatusesValues[status] > this.StatusesValues[previous]) return status;
+            else return previous;
         }, "stopped");
     }
 

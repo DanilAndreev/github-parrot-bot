@@ -36,6 +36,7 @@ import Config from "./interfaces/Config";
 import {Logger} from "./core/logger/Logger";
 import FatalError from "./errors/FatalError";
 import Globals from "./Globals";
+import destructService from "./utils/destructService";
 
 /**
  * requiredFor - function, designed to determine if some functional is required.
@@ -66,9 +67,15 @@ export default async function main(): Promise<void> {
             await setupDbConnection();
         }
         if (requiredFor("cronDatabaseGarbageCollectors")) {
-            await new IssuesGarbageCollector({interval: 1000 * 60 * 30}).start();
-            await new PullRequestsGarbageCollector({interval: 1000 * 60 * 30}).start();
-            await new CheckSuitsGarbageCollector({interval: 1000 * 60 * 30}).start();
+            Globals.issuesGarbageCollector = await new IssuesGarbageCollector({
+                interval: 1000 * 60 * 30,
+            }).start();
+            Globals.pullRequestsGarbageCollector = await new PullRequestsGarbageCollector({
+                interval: 1000 * 60 * 30,
+            }).start();
+            Globals.checkSuitsGarbageCollector = await new CheckSuitsGarbageCollector({
+                interval: 1000 * 60 * 30,
+            }).start();
         }
 
         if (requiredFor("webserver")) {
@@ -81,24 +88,65 @@ export default async function main(): Promise<void> {
             );
         }
 
-        if (requiredFor(
-            "commandsProxy",
-            "webserver",
-            "githubEventsHandlers",
-            "commandsEventHandlers",
-            "drawEventsHandlers"
-        )) {
+        if (
+            requiredFor(
+                "commandsProxy",
+                "webserver",
+                "githubEventsHandlers",
+                "commandsEventHandlers",
+                "drawEventsHandlers"
+            )
+        ) {
             Globals.amqpDispatcher = await AmqpDispatcher.init();
         }
 
         Globals.pulseWebServer = new WebServer(SystemConfig.getConfig<Config>().pulseWebServer);
 
-        Globals.webHookServer?.start();
-        Globals.pulseWebServer?.start();
+        await Globals.webHookServer?.start();
+        await Globals.pulseWebServer?.start();
     } catch (error) {
         if (error instanceof FatalError) {
             throw error;
         }
-        Logger?.error("Unhandled non fatal error in main thread: ", error);
+        Logger.error("Unhandled non fatal error in main thread: ", error);
     }
 }
+
+async function shutDown(): Promise<void> {
+    let noErr: boolean = true;
+    Logger.info(`Shutting down application by "SIGTERM" sygnal...`);
+    if (Globals.webHookServer) noErr = noErr && (await destructService(Globals.webHookServer, "WebHook Web Server"));
+    if (Globals.pulseWebServer) noErr = noErr && (await destructService(Globals.pulseWebServer, "Pulse Web Server"));
+    if (Globals.telegramBot) noErr = noErr && (await destructService(Globals.telegramBot, "Telegram Bot"));
+    if (Globals.amqpDispatcher) noErr = noErr && (await destructService(Globals.amqpDispatcher, "Amqp Dispatcher"));
+
+    if (Globals.issuesGarbageCollector)
+        noErr = noErr && (await destructService(Globals.issuesGarbageCollector, "Issues Garbage Collector"));
+    if (Globals.pullRequestsGarbageCollector)
+        noErr =
+            noErr && (await destructService(Globals.pullRequestsGarbageCollector, "Pull Request Garbage Collector"));
+    if (Globals.checkSuitsGarbageCollector)
+        noErr = noErr && (await destructService(Globals.checkSuitsGarbageCollector, "Check Suits Garbage Collector"));
+
+    if (Globals.dbConnection) {
+        Logger.silly(`Stopping Database Connection.`);
+        try {
+            await Globals.dbConnection.close();
+            Logger.silly(`Database Connection successfully stopped.`);
+        } catch (error) {
+            Logger.error(`Database Connection stopped with error: ` + error);
+            noErr = noErr && true;
+        }
+    }
+
+    if (noErr) {
+        Logger.info(`Application successfully shut down.`);
+        process.exit(0);
+    } else {
+        Logger.error(`Application shut down with errors.`);
+        process.exit(1);
+    }
+}
+
+process.on("SIGTERM", shutDown);
+process.on("SIGINT", shutDown);
