@@ -79,7 +79,10 @@ class Bot extends TelegramBot implements Metricable {
         }, SystemConfig.getConfig<Config>().system.metricsUpdateInterval);
 
         this.addListener("left_chat_member", this.handleMemberLeftChat);
-        this.addListener("polling_error", (error: Error) => Logger.error("Polling error:", error));
+        this.addListener("polling_error", (error: Error) => {
+            this.metricsActive++;
+            Logger.error("Polling error:", error);
+        });
         this.addListener("callback_query", this.handleCallbackQuery);
         Logger.silly(`Added listener of "left_chat_member" for bot.`);
         this.addListener("new_chat_members", this.handleNewChatMember);

@@ -62,7 +62,7 @@ import PulseController from "./controllers/PulseController";
 
 const config: Config = {
     bot: {
-        token: "you-should-pass-telegram-token-as-env-variable",
+        token: "",
         commands: [
             AddRepositoryCommand,
             AKAsCommand,

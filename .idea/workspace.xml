@@ -16,16 +16,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[examples] Added example envs.">
-      <change afterPath="$PROJECT_DIR$/src/core/interfaces/Metricable.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Metricable] Server and Bot became metricable.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/PulseController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/PulseController.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/bot/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bot/Bot.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/utils/Metricable.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/webserver/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/webserver/WebServer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawCheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawCheckSuiteHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/Config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +99,7 @@
       <recent name="D:\Projects\github-parrot-bot\src\interfaces" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.WEBSERVER">
+  <component name="RunManager" selected="Node.js.Run with ts-node">
     <list>
       <item itemvalue="Node.js.COMMANDS_EVENTS_HANDLERS" />
       <item itemvalue="Node.js.COMMANDS_PROXY" />
@@ -188,13 +182,6 @@
       <workItem from="1622040609704" duration="1780000" />
       <workItem from="1622116046503" duration="6188000" />
       <workItem from="1622140226285" duration="1684000" />
-    </task>
-    <task id="LOCAL-00076" summary="[Core] Added JSDocs.">
-      <created>1617796227894</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1617796227894</updated>
     </task>
     <task id="LOCAL-00077" summary="[GLOBAL] Code formatted.">
       <created>1617796993027</created>
@@ -532,7 +519,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622159827193</updated>
     </task>
-    <option name="localTasksCounter" value="125" />
+    <task id="LOCAL-00125" summary="[Metricable] Server and Bot became metricable.">
+      <created>1622209588722</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1622209588723</updated>
+    </task>
+    <option name="localTasksCounter" value="126" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -563,8 +557,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[AkaGenerator] Fixed typo in JSDoc." />
-    <MESSAGE value="[Bot] Added listener for callback_query event." />
     <MESSAGE value="[CallbackQueryDispatcher] Added callback query dispatcher system." />
     <MESSAGE value="[DrawPullRequestHandler] Added callback data for buttons." />
     <MESSAGE value="[DrawPullRequestHandler] Fixed incorrect callback data generating." />
@@ -588,7 +580,9 @@
     <MESSAGE value="[GithubWebhookController] Added webhooks controller." />
     <MESSAGE value="[WebServer] Finished controllers integration." />
     <MESSAGE value="[examples] Added example envs." />
-    <option name="LAST_COMMIT_MESSAGE" value="[examples] Added example envs." />
+    <MESSAGE value="[Metricable] Server and Bot became metrcable." />
+    <MESSAGE value="[Metricable] Server and Bot became metricable." />
+    <option name="LAST_COMMIT_MESSAGE" value="[Metricable] Server and Bot became metricable." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
