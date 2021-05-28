@@ -32,13 +32,14 @@ import Config from "../../interfaces/Config";
 import SystemConfig from "../SystemConfig";
 import {Logger} from "../logger/Logger";
 import FatalError from "../../errors/FatalError";
+import Metricable from "../interfaces/Metricable";
 
 /**
  * AmqpDispatcher - dispatcher for AMQP handlers.
  * @class
  * @author Danil Andreev
  */
-class AmqpDispatcher {
+class AmqpDispatcher implements Metricable {
     /**
      * current - current class instance. Singleton.
      */
@@ -54,6 +55,21 @@ class AmqpDispatcher {
     protected connection: Connection;
 
     /**
+     * metricsPrev - quantity of queue items for last 5 seconds.
+     */
+    private metricsPrev: number;
+
+    /**
+     * metricsActive - quantity of queue items live encounter. Not shown;
+     */
+    private metricsActive: number;
+
+    /**
+     * metricsInterval - Interval for calculating metrics.
+     */
+    public readonly metricsInterval: NodeJS.Timeout;
+
+    /**
      * Creates an instance of AmqpDispatcher.
      * @constructor
      * @param connection - AMQP connection object.
@@ -63,6 +79,13 @@ class AmqpDispatcher {
      */
     constructor(connection: Connection) {
         this.connection = connection;
+
+        this.metricsActive = 0;
+        this.metricsPrev = 0;
+        this.metricsInterval = setInterval(() => {
+            this.metricsPrev = this.metricsActive;
+            this.metricsActive = 0;
+        }, SystemConfig.getConfig<Config>().system.metricsUpdateInterval);
 
         this.handlers = SystemConfig.getConfig<Config>()
             .amqp.handlers.filter((HandlerClass: typeof AmqpHandler): boolean =>
@@ -162,6 +185,19 @@ class AmqpDispatcher {
      */
     public getConnection(): Connection {
         return this.connection;
+    }
+
+    /**
+     * getMetrics - returns quantity of handled event messages.
+     * @method
+     * @author Danil Andreev
+     */
+    public getMetrics(): number | JSONObject<number> {
+        return this.metricsPrev;
+    }
+
+    public release(): void {
+        clearInterval(this.metricsInterval)
     }
 }
 

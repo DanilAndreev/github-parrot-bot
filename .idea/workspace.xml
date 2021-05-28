@@ -16,10 +16,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Metricable] Server and Bot became metricable.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[config] Removed text in bot token.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/bot/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bot/Bot.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/amqp/AmqpDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/AmqpDispatcher.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,13 +181,6 @@
       <workItem from="1622040609704" duration="1780000" />
       <workItem from="1622116046503" duration="6188000" />
       <workItem from="1622140226285" duration="1684000" />
-    </task>
-    <task id="LOCAL-00077" summary="[GLOBAL] Code formatted.">
-      <created>1617796993027</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1617796993027</updated>
     </task>
     <task id="LOCAL-00078" summary="[README] Updated.">
       <created>1617797684221</created>
@@ -526,7 +518,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622209588723</updated>
     </task>
-    <option name="localTasksCounter" value="126" />
+    <task id="LOCAL-00126" summary="[config] Removed text in bot token.">
+      <created>1622210259793</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1622210259793</updated>
+    </task>
+    <option name="localTasksCounter" value="127" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -557,7 +556,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[CallbackQueryDispatcher] Added callback query dispatcher system." />
     <MESSAGE value="[DrawPullRequestHandler] Added callback data for buttons." />
     <MESSAGE value="[DrawPullRequestHandler] Fixed incorrect callback data generating." />
     <MESSAGE value="[IssueCallbacksHandler] Created handler for issue callbacks." />
@@ -582,7 +580,8 @@
     <MESSAGE value="[examples] Added example envs." />
     <MESSAGE value="[Metricable] Server and Bot became metrcable." />
     <MESSAGE value="[Metricable] Server and Bot became metricable." />
-    <option name="LAST_COMMIT_MESSAGE" value="[Metricable] Server and Bot became metricable." />
+    <MESSAGE value="[config] Removed text in bot token." />
+    <option name="LAST_COMMIT_MESSAGE" value="[config] Removed text in bot token." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
