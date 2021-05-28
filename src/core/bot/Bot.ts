@@ -32,8 +32,7 @@ import SystemConfig from "../SystemConfig";
 import ChatCommandEvent from "../../events/telegram/ChatCommandEvent";
 import TelegramEventEvent from "../../events/telegram/TelegramEventEvent";
 import BotCommand from "./BotCommand";
-import Metricable from "../utils/Metricable";
-import JSONObject from "../interfaces/JSONObject";
+import Metricable from "../interfaces/Metricable";
 
 /**
  * Bot - class for telegram bot api.
@@ -46,8 +45,20 @@ class Bot extends TelegramBot implements Metricable {
      */
     protected static current: Bot;
 
-    protected metricsPrev: number;
-    protected metricsActive: number;
+    /**
+     * metricsPrev - quantity of commands for last 5 seconds.
+     */
+    private metricsPrev: number;
+
+    /**
+     * metricsActive - quantity of commands live encounter. Not shown;
+     */
+    private metricsActive: number;
+
+    /**
+     * metricsInterval - Interval for calculating metrics.
+     */
+    public readonly metricsInterval: NodeJS.Timeout;
 
     /**
      * Creates an instance of Bot.
@@ -59,6 +70,14 @@ class Bot extends TelegramBot implements Metricable {
         if (!token) throw new Error(`FatalError: you must specify token to run this app! "token" = "${token}".`);
         Logger.info(`Creating telegram bot. Polling: ${polling}. Tag: ${SystemConfig.getConfig<Config>().bot.tag}`);
         super(token, {polling});
+
+        this.metricsActive = 0;
+        this.metricsPrev = 0;
+        this.metricsInterval = setInterval(() => {
+            this.metricsPrev = this.metricsActive;
+            this.metricsActive = 0;
+        }, SystemConfig.getConfig<Config>().system.metricsUpdateInterval);
+
         this.addListener("left_chat_member", this.handleMemberLeftChat);
         this.addListener("polling_error", (error: Error) => Logger.error("Polling error:", error));
         this.addListener("callback_query", this.handleCallbackQuery);
@@ -69,6 +88,7 @@ class Bot extends TelegramBot implements Metricable {
         if (SystemConfig.getConfig<Config>().bot.tag)
             regExp = new RegExp(`^/([^\\s@]+)(?:${SystemConfig.getConfig<Config>().bot.tag})?(?:\\s)?(.*)?`);
         this.onText(regExp, (message, match) => {
+            this.metricsActive++;
             Logger.debug(`Got command from chat id: ${message.chat.id}. Command: "${match && match[0]}"`);
             new ChatCommandEvent(message, match).enqueue().catch(Logger?.error);
         });
@@ -86,6 +106,7 @@ class Bot extends TelegramBot implements Metricable {
      * @author Danil Andreev
      */
     protected async handleCallbackQuery(query: CallbackQuery): Promise<void> {
+        this.metricsActive++;
         Logger.debug(`Caught event "left_chat_member" on chat id ${query.message?.chat.id}: "${query.data}"`);
         await new TelegramEventEvent("callback_query", query).setExpiration(100 * 60 * 2).enqueue();
     }
@@ -119,6 +140,7 @@ class Bot extends TelegramBot implements Metricable {
      * @author Danil Andreev
      */
     protected async handleMemberLeftChat(message: TelegramBot.Message): Promise<void> {
+        this.metricsActive++;
         Logger.debug(
             `Caught event "left_chat_member" on chat id ${message.chat.id}. Member id: ${message.left_chat_member?.id}`
         );
@@ -132,6 +154,7 @@ class Bot extends TelegramBot implements Metricable {
      * @author Danil Andreev
      */
     protected async handleNewChatMember(message: TelegramBot.Message): Promise<void> {
+        this.metricsActive++;
         Logger.debug(
             `Caught event "new_chat_members" on chat id ${message.chat.id}. Member ids: ${message.new_chat_members?.map(
                 member => member.id
@@ -161,8 +184,17 @@ class Bot extends TelegramBot implements Metricable {
         return this.current;
     }
 
-    getMetrics(): number | JSONObject<number> {
-        return 1;
+    /**
+     * getMetrics - returns quantity of handled commands from the telegram.
+     * @method
+     * @author Danil Andreev
+     */
+    public getMetrics(): number {
+        return this.metricsPrev;
+    }
+
+    public release(): void {
+        clearInterval(this.metricsInterval);
     }
 }
 

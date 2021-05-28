@@ -27,27 +27,81 @@
 import Controller from "../core/webserver/Controller";
 import {Context} from "koa";
 import Globals from "../Globals";
+import Metricable from "../core/interfaces/Metricable";
+import SystemConfig from "../core/SystemConfig";
+import Config from "../interfaces/Config";
+import JSONObject from "../core/interfaces/JSONObject";
 
 @Controller.HTTPController("")
 class PulseController extends Controller {
+    private static StatusesValues = {
+        "stopped": 0,
+        "idle": 100,
+        "running": 200,
+    }
+
     @Controller.Route("GET", "/pulse")
     public async pulse(ctx: Context): Promise<void> {
         ctx.body = {};
-        ctx.body.status = PulseController.getStatus();
+        ctx.body.status = PulseController.getCommonStatus();
         ctx.body.application = "Github Parrot Bot";
         ctx.body.version = "UNKNOWN";
     }
 
     @Controller.Route("GET", "/metrics")
     public async metrics(ctx: Context): Promise<void> {
-        ctx.body = {};
-        ctx.body.status = PulseController.getStatus();
-        ctx.body.activeHttpSessions = Globals.webHookServer?.getMetrics();
+        const {
+            drawEventsHandlers,
+            cronDatabaseGarbageCollectors,
+            commandsEventHandlers,
+            commandsProxy,
+            githubEventsHandlers,
+            webserver,
+        } = SystemConfig.getConfig<Config>().system;
+        const body: JSONObject = {};
+        body.draw_events_handlers_enabled = drawEventsHandlers;
+        body.cron_garbage_collectors_enabled = cronDatabaseGarbageCollectors;
+        body.telegram_commands_handlers_enabled = commandsEventHandlers;
+        body.telegram_commands_proxy_enabled = commandsProxy;
+        body.webhook_events_handlers_enabled = githubEventsHandlers;
+        body.webhook_web_server_enabled = webserver;
+
+        body.pulse_web_server_status = PulseController.getStatus(Globals.pulseWebServer);
+        body.pulse_web_server_load = Globals.pulseWebServer?.getMetrics();
+        if (webserver) {
+            body.webhook_web_server_status = PulseController.getStatus(Globals.webHookServer);
+            body.webhook_web_server_load = Globals.webHookServer?.getMetrics();
+        }
+        if (commandsProxy) {
+            body.telegram_commands_proxy_status = PulseController.getStatus(Globals.telegramBot);
+            body.telegram_commands_proxy_load = Globals.telegramBot?.getMetrics();
+        }
+
+        body.status = PulseController.getCommonStatus();
+        body.activeHttpSessions = Globals.webHookServer?.getMetrics();
+
+        ctx.body = body;
     }
 
-    public static getStatus(): string { //TODO: finish. Requests are processing one by one.
-        if (!Globals.webHookServer) return "stopped";
-        if (Globals.webHookServer.getMetrics()) return "running";
+    public static getCommonStatus(): string {
+        const services: (Metricable | null)[] = [
+            Globals.webHookServer,
+            Globals.pulseWebServer,
+            Globals.telegramBot,
+        ];
+
+        return services.reduce<string>((previous: string, current: Metricable | null) => {
+            const status: string = this.getStatus(current);
+            if (this.StatusesValues[status] > this.StatusesValues[previous])
+                return status;
+            else
+                return previous;
+        }, "stopped");
+    }
+
+    public static getStatus(target: Metricable | null): string {
+        if (!target) return "stopped";
+        if (target.getMetrics()) return "running";
         return "idle";
     }
 }

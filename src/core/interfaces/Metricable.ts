@@ -24,31 +24,25 @@
  * SOFTWARE.
  */
 
-import JSONObject from "../interfaces/JSONObject";
+import JSONObject from "./JSONObject";
 
 /**
- * Metricable - decorator for mechanisms that supports activity metrics.
- * @function
+ * Metricable - interface for classes that support load metrics.
+ * @interface
  * @author Danil Andreev
  */
-function Metricable(updateMs: number) {
-    return function MetricsWrapper<T extends new(...args: any[]) => {}>(objectConstructor: T): T {
-        return class WrappedMetrics extends objectConstructor {
-            constructor(...args: any[]) {
-                super(args);
-
-            }
-        };
-    };
-}
-
-interface Metricable {
+export default interface Metricable {
     /**
      * getMetrics - get metrics.
      * @method
      * @author Danil Andreev
      */
     getMetrics(): number | JSONObject<number>;
-}
 
-export default Metricable;
+    /**
+     * release - releases intervals, event handlers, etc.
+     * @method
+     * @author Danil Andreev
+     */
+    release(): void;
+}

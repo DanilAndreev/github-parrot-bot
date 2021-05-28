@@ -121,15 +121,19 @@ const config: Config = {
         acceptEvents: ["check_run", "check_suite", "create", "pull_request", "push", "issues"],
         controllers: [
             GithubWebhookController,
-        ]
+        ],
+        metricsUpdateInterval: 5000,
     },
     pulseWebServer: {
         port: 3100,
         controllers: [
             PulseController,
-        ]
+        ],
+        metricsUpdateInterval: 5000,
     },
-    system: {},
+    system: {
+        metricsUpdateInterval: 5000,
+    },
     log: {
         logLevel: "error",
     },

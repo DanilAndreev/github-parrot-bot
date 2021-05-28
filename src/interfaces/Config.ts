@@ -76,6 +76,7 @@ namespace Config {
         commandsEventHandlers?: boolean;
         drawEventsHandlers?: boolean;
         cronDatabaseGarbageCollectors?: boolean;
+        metricsUpdateInterval: number;
     }
 
     export interface Log {

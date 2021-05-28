@@ -31,7 +31,7 @@ import {Logger} from "../logger/Logger";
 import HttpError from "../../errors/HttpError";
 import Controller from "./Controller";
 import * as Router from "koa-router";
-import Metricable from "../utils/Metricable";
+import Metricable from "../interfaces/Metricable";
 
 /**
  * WebServer - web server for handling WebHooks.
@@ -40,24 +40,24 @@ import Metricable from "../utils/Metricable";
  */
 class WebServer extends Koa implements Metricable {
     /**
-     * activeHttpSessionsQuantity - quantity of currently active HTTP sessions for last 5 seconds.
+     * metricsPrev - quantity of currently active HTTP sessions for last 5 seconds.
      */
-    private activeHttpSessionsQuantity: number;
+    private metricsPrev: number;
 
     /**
-     * activeHttpSessionsQuantity - quantity of currently active HTTP sessions live encounter. Not shown;
+     * metricsActive - quantity of currently active HTTP sessions live encounter. Not shown;
      */
-    private activeHttpSessionsQuantityCurrent: number;
-
-    /**
-     * router - Root server router. Other routers used by it.
-     */
-    protected readonly router: Router;
+    private metricsActive: number;
 
     /**
      * metricsInterval - Interval for calculating metrics.
      */
     public readonly metricsInterval: NodeJS.Timeout;
+
+    /**
+     * router - Root server router. Other routers used by it.
+     */
+    protected readonly router: Router;
 
     /**
      * port - target serving port.
@@ -73,12 +73,13 @@ class WebServer extends Koa implements Metricable {
         super();
         this.router = new Router();
         this.port = config.port;
-        this.activeHttpSessionsQuantityCurrent = 0;
-        this.activeHttpSessionsQuantity = 0;
+
+        this.metricsActive = 0;
+        this.metricsPrev = 0;
         this.metricsInterval = setInterval(() => {
-            this.activeHttpSessionsQuantity = this.activeHttpSessionsQuantityCurrent;
-            this.activeHttpSessionsQuantityCurrent = 0;
-        }, 5);
+            this.metricsPrev = this.metricsActive;
+            this.metricsActive = 0;
+        }, config.metricsUpdateInterval);
 
         this.use(async (ctx: Context, next: Next) => await this.activeHttpSessionsCounterMiddleware(ctx, next));
         this.use(async (ctx: Context, next: Next) => await WebServer.httpErrorsMiddleware(ctx, next));
@@ -98,7 +99,11 @@ class WebServer extends Koa implements Metricable {
      * @author Danil Andreev
      */
     public getMetrics(): number {
-        return this.activeHttpSessionsQuantity;
+        return this.metricsPrev;
+    }
+
+    public release(): void {
+        clearInterval(this.metricsInterval);
     }
 
     /**
@@ -109,7 +114,7 @@ class WebServer extends Koa implements Metricable {
      * @author Danil Andreev
      */
     private async activeHttpSessionsCounterMiddleware(ctx: Context, next: Next): Promise<void> {
-        this.activeHttpSessionsQuantityCurrent++;
+        this.metricsActive++;
         await next();
     }
 
@@ -164,6 +169,7 @@ namespace WebServer {
          * controllers - controllers list.
          */
         controllers: typeof Controller[];
+        metricsUpdateInterval: number;
     }
 }
 
