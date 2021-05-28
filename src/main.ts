@@ -116,7 +116,6 @@ async function shutDown(): Promise<void> {
     let noErr: boolean = true;
     Logger.info(`Shutting down application by "SIGTERM" sygnal...`);
     if (Globals.webHookServer) noErr = noErr && (await destructService(Globals.webHookServer, "WebHook Web Server"));
-    if (Globals.pulseWebServer) noErr = noErr && (await destructService(Globals.pulseWebServer, "Pulse Web Server"));
     if (Globals.telegramBot) noErr = noErr && (await destructService(Globals.telegramBot, "Telegram Bot"));
     if (Globals.amqpDispatcher) noErr = noErr && (await destructService(Globals.amqpDispatcher, "Amqp Dispatcher"));
 
@@ -138,6 +137,8 @@ async function shutDown(): Promise<void> {
             noErr = noErr && true;
         }
     }
+
+    if (Globals.pulseWebServer) noErr = noErr && (await destructService(Globals.pulseWebServer, "Pulse Web Server"));
 
     if (noErr) {
         Logger.info(`Application successfully shut down.`);
