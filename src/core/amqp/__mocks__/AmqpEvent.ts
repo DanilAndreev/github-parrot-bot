@@ -29,7 +29,7 @@ import type AmqpEvent from "../AmqpEvent";
 //TODO: use jest.createMockFromModule;
 
 interface Queues {
-    [queueName: string]: { data: any, options: AmqpEvent.Options };
+    [queueName: string]: { data: any, options: AmqpEvent.Options }[];
 }
 
 export const queues: Queues = {};
@@ -59,10 +59,12 @@ class AmqpEventMock {
     public async enqueue(queue?: string): Promise<AmqpEventMock> {
         const targetQueue: string | undefined = this.queue || queue;
         if (!targetQueue) throw new ReferenceError(`You must specify queue name for enqueuing.`);
-        queues[targetQueue] = {
+        if (!Array.isArray(queues[targetQueue]))
+            queues[targetQueue] = [];
+        queues[targetQueue].push({
             data: this.serialize(),
             options: {expiration: this.expiration},
-        };
+        });
         return this;
     }
 

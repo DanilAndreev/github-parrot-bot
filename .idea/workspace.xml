@@ -17,12 +17,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Chrono] Added tests.">
-      <change afterPath="$PROJECT_DIR$/src/core/amqp/__mocks__/AmqpEvent.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/logger/__mocks__/Logger.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/core/bot/BotCommand.test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/jest-setup-file.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/babel.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/babel.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jest.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/jest.config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/amqp/__mocks__/AmqpEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/__mocks__/AmqpEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/bot/BotCommand.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tests/core/bot/BotCommand.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -97,23 +98,14 @@
       <recent name="D:\Projects\github-parrot-bot\src\events\telegram" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\github-parrot-bot\tests" />
+      <recent name="D:\Projects\github-parrot-bot" />
       <recent name="D:\Projects\github-parrot-bot\src\core\utils" />
       <recent name="D:\Projects\github-parrot-bot\src\core\interfaces" />
       <recent name="D:\Projects\github-parrot-bot\src" />
-      <recent name="D:\Projects\github-parrot-bot\src\utils" />
-      <recent name="D:\Projects\github-parrot-bot\src\interfaces" />
     </key>
   </component>
   <component name="RunManager" selected="Jest.All Tests">
-    <configuration name="All Tests" type="JavaScriptTestRunnerJest" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="ALL" />
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Jest.All Tests" />
       <item itemvalue="Node.js.COMMANDS_EVENTS_HANDLERS" />
@@ -198,6 +190,7 @@
       <workItem from="1622116046503" duration="6188000" />
       <workItem from="1622140226285" duration="1684000" />
       <workItem from="1622247927981" duration="5583000" />
+      <workItem from="1622299251579" duration="9688000" />
     </task>
     <task id="LOCAL-00080" summary="[Dockerfile] Created.">
       <created>1617799385295</created>
@@ -647,6 +640,12 @@
           <url>file://$PROJECT_DIR$/src/main.ts</url>
           <line>58</line>
           <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/core/bot/BotCommand.ts</url>
+          <line>73</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="80" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
