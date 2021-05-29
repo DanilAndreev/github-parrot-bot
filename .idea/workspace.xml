@@ -16,14 +16,13 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[main] Added shut down scenario.">
-      <change afterPath="$PROJECT_DIR$/babel.config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jest.config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/core/Chrono.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/github-parrot-bot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/github-parrot-bot.iml" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Chrono] Added tests.">
+      <change afterPath="$PROJECT_DIR$/src/core/amqp/__mocks__/AmqpEvent.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/logger/__mocks__/Logger.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/core/bot/BotCommand.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/babel.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/babel.config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Chrono.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Chrono.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,8 +34,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="tsconfig.json" />
-        <option value="TypeScript File" />
         <option value="JavaScript File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -105,22 +104,18 @@
       <recent name="D:\Projects\github-parrot-bot\src\interfaces" />
     </key>
   </component>
-  <component name="RunManager" selected="Jest.core-&gt;Chrono (1)">
-    <configuration name="core-&gt;Chrono (1)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Jest.All Tests">
+    <configuration name="All Tests" type="JavaScriptTestRunnerJest" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
-      <scope-kind value="SUITE" />
-      <test-file value="$PROJECT_DIR$/tests/core/Chrono.test.ts" />
-      <test-names>
-        <test-name value="core-&gt;Chrono" />
-      </test-names>
+      <scope-kind value="ALL" />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Jest.core-&gt;Chrono (1)" />
+      <item itemvalue="Jest.All Tests" />
       <item itemvalue="Node.js.COMMANDS_EVENTS_HANDLERS" />
       <item itemvalue="Node.js.COMMANDS_PROXY" />
       <item itemvalue="Node.js.CRON_DATABASE_GARBAGE_COLLECTORS" />
@@ -129,11 +124,6 @@
       <item itemvalue="Node.js.Run with ts-node" />
       <item itemvalue="Node.js.WEBSERVER" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Jest.core-&gt;Chrono (1)" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -207,14 +197,7 @@
       <workItem from="1622040609704" duration="1780000" />
       <workItem from="1622116046503" duration="6188000" />
       <workItem from="1622140226285" duration="1684000" />
-      <workItem from="1622247927981" duration="1924000" />
-    </task>
-    <task id="LOCAL-00079" summary="[README] Updated.">
-      <created>1617798101217</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1617798101217</updated>
+      <workItem from="1622247927981" duration="5583000" />
     </task>
     <task id="LOCAL-00080" summary="[Dockerfile] Created.">
       <created>1617799385295</created>
@@ -552,7 +535,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622224766796</updated>
     </task>
-    <option name="localTasksCounter" value="128" />
+    <task id="LOCAL-00128" summary="[Chrono] Added tests.">
+      <created>1622249883253</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1622249883254</updated>
+    </task>
+    <option name="localTasksCounter" value="129" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -583,7 +573,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[DrawPullRequestHandler] Fixed incorrect callback data generating." />
     <MESSAGE value="[IssueCallbacksHandler] Created handler for issue callbacks." />
     <MESSAGE value="[CallbackQueryDispatcher] Added exact option." />
     <MESSAGE value="[IssueCallbackHandler] Added logging.&#10;[PullRequestCallbackHandler] Added logging.&#10;[CallbackQueryDispatcher] Added logging." />
@@ -608,7 +597,8 @@
     <MESSAGE value="[Metricable] Server and Bot became metricable." />
     <MESSAGE value="[config] Removed text in bot token." />
     <MESSAGE value="[main] Added shut down scenario." />
-    <option name="LAST_COMMIT_MESSAGE" value="[main] Added shut down scenario." />
+    <MESSAGE value="[Chrono] Added tests." />
+    <option name="LAST_COMMIT_MESSAGE" value="[Chrono] Added tests." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
