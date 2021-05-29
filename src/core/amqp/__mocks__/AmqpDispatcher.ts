@@ -24,5 +24,40 @@
  * SOFTWARE.
  */
 
-import "reflect-metadata";
-jest.mock("../src/core/logger/Logger");
+import type * as Amqp from "amqplib";
+import JSONObject from "../../interfaces/JSONObject";
+
+const AmqpDispatcher: any = jest.createMockFromModule("../AmqpDispatcher");
+
+interface Queues {
+    [queueName: string]: {data: any; options: Amqp.Options.Publish}[];
+}
+
+const queues: Queues = {};
+
+async function sendToQueue<T extends JSONObject>(
+    queueName: string,
+    message: T,
+    options: Amqp.Options.Publish = {}
+): Promise<void> {
+    if (!Array.isArray(queues[queueName])) queues[queueName] = [];
+    queues[queueName].push({data: message, options});
+}
+
+function clearQueues() {
+    for (const key in queues) {
+        delete queues[key];
+    }
+}
+
+AmqpDispatcher.default = {
+    getCurrent: () => ({
+        sendToQueue,
+    }),
+    init: jest.fn(),
+    queues,
+    clearQueues,
+    determineHandlerIsRequired: jest.fn().mockReturnValue(true),
+};
+AmqpDispatcher.queues = queues;
+module.exports = AmqpDispatcher;

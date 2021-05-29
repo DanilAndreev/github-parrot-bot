@@ -116,7 +116,7 @@ abstract class AmqpEvent {
      */
     public serialize(): AmqpEvent.Serialized {
         return {
-            type: this.type,
+            type: this.getType(),
         };
     }
 }

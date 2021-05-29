@@ -32,7 +32,6 @@ import CommandError from "../../../src/errors/CommandError";
 const AmqpEventModule = require("../../../src/core/amqp/AmqpEvent");
 
 jest.mock("../../../src/core/amqp/AmqpEvent");
-jest.mock("../../../src/core/logger/Logger");
 
 @BotCommand.Command("test", "<param1> <param2>")
 class TestBotCommand extends BotCommand {

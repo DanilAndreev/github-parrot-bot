@@ -126,7 +126,7 @@ class AmqpDispatcher implements Metricable, Destructable {
      * @param handler - instance of handler class.
      * @author Danil Andreev
      */
-    public async hook(handler: AmqpHandler) {
+    public async hook(handler: AmqpHandler): Promise<void> {
         const queueName = Reflect.getMetadata("amqp-handler-queue", handler);
         const prefetch = Reflect.getMetadata("amqp-handler-prefetch", handler);
         if (typeof queueName !== "string")
@@ -149,7 +149,11 @@ class AmqpDispatcher implements Metricable, Destructable {
      * @param message  - JSON object to send.
      * @param options - Send options.
      */
-    public async sendToQueue<T extends JSONObject>(queueName: string, message: T, options?: Amqp.Options.Publish) {
+    public async sendToQueue<T extends JSONObject>(
+        queueName: string,
+        message: T,
+        options?: Amqp.Options.Publish
+    ): Promise<void> {
         Logger.debug(`Sent message to AMQP queue: "${queueName}".`);
         const channel: Amqp.Channel = await this.connection.createChannel();
         await channel.assertQueue(queueName);
@@ -206,8 +210,7 @@ class AmqpDispatcher implements Metricable, Destructable {
     }
 
     public async destruct(): Promise<void> {
-        if (this.connection)
-            await this.connection.close();
+        if (this.connection) await this.connection.close();
     }
 }
 
