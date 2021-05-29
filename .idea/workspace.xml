@@ -16,14 +16,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[BotCommand] Added tests.">
-      <change afterPath="$PROJECT_DIR$/src/core/amqp/__mocks__/AmqpDispatcher.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/core/amqp/AmqpEvent.test.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[AmqpEvent] Added unit tests.">
+      <change afterPath="$PROJECT_DIR$/tests/core/amqp/AmqpHandler.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/amqp/AmqpDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/AmqpDispatcher.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/amqp/AmqpEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/AmqpEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/core/bot/BotCommand.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tests/core/bot/BotCommand.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/jest-setup-file.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tests/jest-setup-file.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/amqp/AmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/AmqpHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,14 +185,7 @@
       <workItem from="1622116046503" duration="6188000" />
       <workItem from="1622140226285" duration="1684000" />
       <workItem from="1622247927981" duration="5583000" />
-      <workItem from="1622299251579" duration="15345000" />
-    </task>
-    <task id="LOCAL-00081" summary="[EnvDispatcher] Removed GHTB prefix to envs.">
-      <created>1617881826679</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1617881826679</updated>
+      <workItem from="1622299251579" duration="20777000" />
     </task>
     <task id="LOCAL-00082" summary="[Bot] Fixed problem with commands regexp.">
       <created>1617882958341</created>
@@ -534,7 +523,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622311840392</updated>
     </task>
-    <option name="localTasksCounter" value="130" />
+    <task id="LOCAL-00130" summary="[AmqpEvent] Added unit tests.">
+      <created>1622317656608</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1622317656608</updated>
+    </task>
+    <option name="localTasksCounter" value="131" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -565,7 +561,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[CallbackQueryDispatcher] Added exact option." />
     <MESSAGE value="[IssueCallbackHandler] Added logging.&#10;[PullRequestCallbackHandler] Added logging.&#10;[CallbackQueryDispatcher] Added logging." />
     <MESSAGE value="[IssueCallbackHandler] Fixed bug in where condition." />
     <MESSAGE value="[WebHookSettingsHandler] Added callback query handler for webhook settings." />
@@ -590,7 +585,8 @@
     <MESSAGE value="[main] Added shut down scenario." />
     <MESSAGE value="[Chrono] Added tests." />
     <MESSAGE value="[BotCommand] Added tests." />
-    <option name="LAST_COMMIT_MESSAGE" value="[BotCommand] Added tests." />
+    <MESSAGE value="[AmqpEvent] Added unit tests." />
+    <option name="LAST_COMMIT_MESSAGE" value="[AmqpEvent] Added unit tests." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

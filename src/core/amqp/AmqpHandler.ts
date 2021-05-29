@@ -103,6 +103,7 @@ namespace AmqpHandler {
                     super(...args);
                     Reflect.defineMetadata("amqp-handler", true, WrappedAmqpHandler);
                     Reflect.defineMetadata("amqp-handler-queue", queue, WrappedAmqpHandler);
+                    prefetch && Reflect.defineMetadata("amqp-handler-prefetch", prefetch, WrappedAmqpHandler);
                     Reflect.defineMetadata("amqp-handler", true, this);
                     Reflect.defineMetadata("amqp-handler-queue", queue, this);
                     prefetch && Reflect.defineMetadata("amqp-handler-prefetch", prefetch, this);
