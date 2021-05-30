@@ -46,6 +46,10 @@ class TestAmqpEvent extends AmqpEvent {
 }
 
 describe("core->amqp->AmqpEvent", () => {
+    beforeAll(() => {
+        jest.clearAllMocks();
+    });
+
     beforeEach(() => {
         AmqpDispatcherMock.default.clearQueues();
     });

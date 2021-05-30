@@ -43,15 +43,19 @@ class TestAmqpHandler extends AmqpHandler {
     }
 }
 
-const message: Amqp.Message = {
-    content: Buffer.from(JSON.stringify({message: "Test message"})),
-    fields: {} as Amqp.MessageFields,
-    properties: {} as Amqp.MessageProperties,
-};
-
-let channel: Amqp.Channel;
-
 describe("core->amqp->AmqpHandler", () => {
+    const message: Amqp.Message = {
+        content: Buffer.from(JSON.stringify({message: "Test message"})),
+        fields: {} as Amqp.MessageFields,
+        properties: {} as Amqp.MessageProperties,
+    };
+
+    let channel: Amqp.Channel;
+
+    beforeAll(() => {
+        jest.clearAllMocks();
+    });
+
     beforeEach(() => {
         channel = ({
             ack: jest.fn(),

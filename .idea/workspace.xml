@@ -16,10 +16,14 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[AmqpEvent] Added unit tests.">
-      <change afterPath="$PROJECT_DIR$/tests/core/amqp/AmqpHandler.test.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[AmqpHandler] Added unit tests.">
+      <change afterPath="$PROJECT_DIR$/tests/__mocks__/typeorm.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/core/amqp/WebHookAmqpHandler.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/amqp/AmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/AmqpHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/amqp/WebHookAmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/WebHookAmqpHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/amqp/AmqpEvent.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tests/core/amqp/AmqpEvent.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/amqp/AmqpHandler.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tests/core/amqp/AmqpHandler.test.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +70,7 @@
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.20.13" />
     <property name="last.edited.regexp" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ts-test" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -185,14 +189,9 @@
       <workItem from="1622116046503" duration="6188000" />
       <workItem from="1622140226285" duration="1684000" />
       <workItem from="1622247927981" duration="5583000" />
-      <workItem from="1622299251579" duration="20777000" />
-    </task>
-    <task id="LOCAL-00082" summary="[Bot] Fixed problem with commands regexp.">
-      <created>1617882958341</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1617882958341</updated>
+      <workItem from="1622299251579" duration="20875000" />
+      <workItem from="1622332540706" duration="5000" />
+      <workItem from="1622372232696" duration="9454000" />
     </task>
     <task id="LOCAL-00083" summary="[CommandsHandler] Added reply to message on Incorrect message.">
       <created>1617883248035</created>
@@ -530,7 +529,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622317656608</updated>
     </task>
-    <option name="localTasksCounter" value="131" />
+    <task id="LOCAL-00131" summary="[AmqpHandler] Added unit tests.">
+      <created>1622332448894</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1622332448894</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -561,7 +567,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[IssueCallbackHandler] Added logging.&#10;[PullRequestCallbackHandler] Added logging.&#10;[CallbackQueryDispatcher] Added logging." />
     <MESSAGE value="[IssueCallbackHandler] Fixed bug in where condition." />
     <MESSAGE value="[WebHookSettingsHandler] Added callback query handler for webhook settings." />
     <MESSAGE value="[ConnectCommand] Removed legacy TODO." />
@@ -586,7 +591,8 @@
     <MESSAGE value="[Chrono] Added tests." />
     <MESSAGE value="[BotCommand] Added tests." />
     <MESSAGE value="[AmqpEvent] Added unit tests." />
-    <option name="LAST_COMMIT_MESSAGE" value="[AmqpEvent] Added unit tests." />
+    <MESSAGE value="[AmqpHandler] Added unit tests." />
+    <option name="LAST_COMMIT_MESSAGE" value="[AmqpHandler] Added unit tests." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -639,20 +645,25 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/core/bot/BotCommand.ts</url>
           <line>73</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="80" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/core/amqp/__mocks__/AmqpDispatcher.ts</url>
-          <line>42</line>
+          <url>file://$PROJECT_DIR$/src/core/amqp/WebHookAmqpHandler.ts</url>
+          <line>62</line>
           <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="103" />
+          <option name="timeStamp" value="106" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/core/amqp/AmqpEvent.ts</url>
-          <line>68</line>
+          <url>file://$PROJECT_DIR$/src/core/amqp/WebHookAmqpHandler.ts</url>
+          <line>67</line>
           <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="104" />
+          <option name="timeStamp" value="107" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/core/amqp/WebHookAmqpHandler.ts</url>
+          <line>46</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="116" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -660,5 +671,8 @@
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/github_parrot_bot$All_Tests.info" NAME="All Tests Coverage Results" MODIFIED="1622380007266" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
