@@ -16,10 +16,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[package] Updated packages.">
-      <change afterPath="$PROJECT_DIR$/tests/core/SystemConfig.test.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[SystemConfig] Adding unit tests. WIP">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/SystemConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/SystemConfig.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/SystemConfig.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tests/core/SystemConfig.test.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +66,7 @@
     <property name="javascript.nodejs.core.library.configured.version" value="14.17.0" />
     <property name="javascript.nodejs.core.library.typings.version" value="14.17.0" />
     <property name="last.edited.regexp" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ts-test" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -101,8 +101,22 @@
     </key>
   </component>
   <component name="RunManager" selected="Jest.All Tests">
+    <configuration name="core-&gt;SystemConfig" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/tests/core/SystemConfig.test.ts" />
+      <test-names>
+        <test-name value="core-&gt;SystemConfig" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Jest.All Tests" />
+      <item itemvalue="Jest.core-&gt;SystemConfig" />
       <item itemvalue="Node.js.COMMANDS_EVENTS_HANDLERS" />
       <item itemvalue="Node.js.COMMANDS_PROXY" />
       <item itemvalue="Node.js.CRON_DATABASE_GARBAGE_COLLECTORS" />
@@ -111,6 +125,11 @@
       <item itemvalue="Node.js.Run with ts-node" />
       <item itemvalue="Node.js.WEBSERVER" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Jest.core-&gt;SystemConfig" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -188,6 +207,7 @@
       <workItem from="1622299251579" duration="20875000" />
       <workItem from="1622332540706" duration="5000" />
       <workItem from="1622372232696" duration="24592000" />
+      <workItem from="1622468932369" duration="3000000" />
     </task>
     <task id="LOCAL-00087" summary="[VersionCommand] Fixed command for getting version.">
       <created>1617886497388</created>
@@ -642,6 +662,12 @@
           <url>file://$PROJECT_DIR$/src/core/bot/BotCommand.ts</url>
           <line>73</line>
           <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/core/SystemConfig.ts</url>
+          <line>170</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="90" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

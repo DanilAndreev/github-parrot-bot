@@ -100,6 +100,7 @@ class SystemConfig<T extends JSONObject> {
             root + "/../.env.development",
             root + "/../.env.local",
         ],
+        envMask: /(.+)/
     };
     protected static current: SystemConfig<JSONObject>;
 
@@ -114,14 +115,6 @@ class SystemConfig<T extends JSONObject> {
      * @author Danil Andreev
      */
     constructor() {
-        try {
-            const configJson: JSONObject = JSON.parse(fs.readFileSync("./../config.json").toString());
-            _.merge(this.config, configJson);
-        } catch (error) {
-            if (error.code !== "ENOENT")
-                console.warn(`Unable to load configuration from "config.json" file.`, error.method, error.stack);
-        }
-
         // Merging additional configs to common config
         if (SystemConfig.options?.additionalConfigs) {
             for (const config of SystemConfig.options.additionalConfigs) {
@@ -133,6 +126,14 @@ class SystemConfig<T extends JSONObject> {
             }
         }
 
+        try {
+            const configJson: JSONObject = JSON.parse(fs.readFileSync("./../config.json").toString());
+            _.merge(this.config, configJson);
+        } catch (error) {
+            if (error.code !== "ENOENT")
+                console.warn(`Unable to load configuration from "config.json" file.`, error.method, error.stack);
+        }
+
         SystemConfig.loadEnv();
 
         // Merging ENV variables to config
@@ -141,6 +142,7 @@ class SystemConfig<T extends JSONObject> {
         for (const key in process.env) {
             if (!regExp || regExp.test(key)) {
                 const execArray: RegExpExecArray | null = regExp ? regExp.exec(key) : null;
+                if (execArray === null) continue;
                 const envDispatcher: SystemConfig.EnvDispatcher =
                     SystemConfig.options?.envDispatcher || SystemConfig.defaultEnvDispatcher;
                 envDispatcher(configRef, process.env[key], execArray, regExp);
