@@ -94,6 +94,7 @@
     "start:dev": "ts-node",
     "start": "node dest/index.js",
     "prettier-format": "prettier --config .prettierrc.yaml \"src/**/*.ts\" --write",
-    "lint": "eslint src --ext .ts"
+    "lint": "eslint src --ext .ts",
+    "test": "jest"
   }
 }
