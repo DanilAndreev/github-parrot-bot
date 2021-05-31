@@ -24,14 +24,42 @@
  * SOFTWARE.
  */
 
-import Ref from "../core/interfaces/Ref";
+import AmqpEvent from "../../amqp/AmqpEvent";
+import {SendMessageOptions} from "node-telegram-bot-api";
+import {QUEUES} from "../../../Globals";
 
-/**
- * createRef - creates Ref object with passed value.
- * @function
- * @param value - Initial value.
- * @author Danil Andreev
- */
-export default function createRef<T>(value: T): Ref<T> {
-    return {current: value};
+class SendChatMessageEvent extends AmqpEvent {
+    public static readonly type: string = "send-chat-message";
+    public chatId: string | number;
+    public text: string;
+    public options?: SendMessageOptions;
+
+    public constructor(chatId: string | number, text: string, options?: SendMessageOptions) {
+        super(SendChatMessageEvent.type, {
+            expiration: 1000 * 60 * 10,
+            queue: QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
+        });
+        this.chatId = chatId;
+        this.text = text;
+        this.options = options;
+    }
+
+    public serialize(): SendChatMessageEvent.Serialized {
+        return {
+            ...super.serialize(),
+            chatId: this.chatId,
+            text: this.text,
+            options: this.options,
+        };
+    }
 }
+
+namespace SendChatMessageEvent {
+    export interface Serialized extends AmqpEvent.Serialized {
+        chatId: string | number;
+        text: string;
+        options?: SendMessageOptions;
+    }
+}
+
+export default SendChatMessageEvent;

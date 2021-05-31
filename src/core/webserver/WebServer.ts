@@ -28,7 +28,7 @@ import * as Koa from "koa";
 import {Context, Next} from "koa";
 import * as BodyParser from "koa-bodyparser";
 import {Logger} from "../logger/Logger";
-import HttpError from "../../errors/HttpError";
+import HttpError from "../errors/HttpError";
 import Controller from "./Controller";
 import * as Router from "koa-router";
 import Metricable from "../interfaces/Metricable";

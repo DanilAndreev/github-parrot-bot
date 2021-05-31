@@ -24,49 +24,42 @@
  * SOFTWARE.
  */
 
-import AmqpEvent from "../../core/amqp/AmqpEvent";
-import {CallbackQuery, Message} from "node-telegram-bot-api";
-import {QUEUES} from "../../Globals";
+import {EditMessageCaptionOptions} from "node-telegram-bot-api";
+import AmqpEvent from "../../amqp/AmqpEvent";
+import {QUEUES} from "../../../Globals";
 
-class TelegramEventEvent<T extends Message | CallbackQuery> extends AmqpEvent {
-    public static readonly type: string = "telegram-event-event";
-    public event: TelegramEventEvent.TelegramEvent;
-    public message: T;
+class EditChatMessageLiveLocationEvent extends AmqpEvent {
+    public static readonly type: string = "edit-chat-message-live-location";
+    public latitude: number;
+    public longitude: number;
+    public options?: EditMessageCaptionOptions;
 
-    constructor(event: TelegramEventEvent.TelegramEvent, message: T) {
-        super(TelegramEventEvent.type, {
-            queue: QUEUES.TELEGRAM_EVENTS_QUEUE,
+    constructor(latitude: number, longitude: number, options?: EditMessageCaptionOptions) {
+        super(EditChatMessageLiveLocationEvent.type, {
+            expiration: 1000 * 60 * 10,
+            queue: QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
         });
-        this.message = message;
-        this.event = event;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.options = options;
     }
 
-    public serialize(): TelegramEventEvent.Serialized<T> {
+    public serialize(): EditChatMessageLiveLocationEvent.Serialized {
         return {
             ...super.serialize(),
-            event: this.event,
-            message: this.message,
+            latitude: this.latitude,
+            longitude: this.longitude,
+            options: this.options,
         };
     }
 }
 
-namespace TelegramEventEvent {
-    export type TelegramEvent =
-        | "channel_post"
-        | "edited_message"
-        | "edited_message_text"
-        | "edited_message_caption"
-        | "edited_channel_post"
-        | "edited_channel_post_text"
-        | "edited_channel_post_caption"
-        | "new_chat_members"
-        | "left_chat_member"
-        | "callback_query";
-
-    export interface Serialized<T extends Message | CallbackQuery> extends AmqpEvent.Serialized {
-        event: TelegramEventEvent.TelegramEvent;
-        message: T;
+namespace EditChatMessageLiveLocationEvent {
+    export interface Serialized extends AmqpEvent.Serialized {
+        latitude: number;
+        longitude: number;
+        options?: EditMessageCaptionOptions;
     }
 }
 
-export default TelegramEventEvent;
+export default EditChatMessageLiveLocationEvent;

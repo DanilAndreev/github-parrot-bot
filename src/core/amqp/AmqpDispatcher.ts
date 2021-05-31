@@ -31,7 +31,7 @@ import JSONObject from "../interfaces/JSONObject";
 import Config from "../../interfaces/Config";
 import SystemConfig from "../SystemConfig";
 import {Logger} from "../logger/Logger";
-import FatalError from "../../errors/FatalError";
+import FatalError from "../errors/FatalError";
 import Metricable from "../interfaces/Metricable";
 import Destructable from "../interfaces/Destructable";
 

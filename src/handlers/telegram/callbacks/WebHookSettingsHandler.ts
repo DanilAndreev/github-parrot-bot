@@ -28,7 +28,7 @@ import CallbackQueryDispatcher from "../../../core/amqp/CallbackQueryDispatcher"
 import {CallbackQuery} from "node-telegram-bot-api";
 import JSONObject from "../../../core/interfaces/JSONObject";
 import WebHook from "../../../entities/WebHook";
-import AMQPAck from "../../../errors/AMQPAck";
+import AMQPAck from "../../../core/errors/AMQPAck";
 import DrawWebHookSettingsEvent from "../../../events/draw/DrawWebHookSettingsEvent";
 
 export default class WebHookSettingsHandler {

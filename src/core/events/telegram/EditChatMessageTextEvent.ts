@@ -24,42 +24,38 @@
  * SOFTWARE.
  */
 
-import AmqpEvent from "../../core/amqp/AmqpEvent";
-import {SendMessageOptions} from "node-telegram-bot-api";
-import {QUEUES} from "../../Globals";
+import {EditMessageTextOptions} from "node-telegram-bot-api";
+import AmqpEvent from "../../amqp/AmqpEvent";
+import {QUEUES} from "../../../Globals";
 
-class SendChatMessageEvent extends AmqpEvent {
-    public static readonly type: string = "send-chat-message";
-    public chatId: string | number;
+class EditChatMessageTextEvent extends AmqpEvent {
+    public static readonly type: string = "edit-message-text-event";
     public text: string;
-    public options?: SendMessageOptions;
+    public options?: EditMessageTextOptions;
 
-    public constructor(chatId: string | number, text: string, options?: SendMessageOptions) {
-        super(SendChatMessageEvent.type, {
+    constructor(text: string, options?: EditMessageTextOptions) {
+        super(EditChatMessageTextEvent.type, {
             expiration: 1000 * 60 * 10,
             queue: QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
         });
-        this.chatId = chatId;
         this.text = text;
         this.options = options;
     }
 
-    public serialize(): SendChatMessageEvent.Serialized {
+    public serialize(): EditChatMessageTextEvent.Serialized {
         return {
             ...super.serialize(),
-            chatId: this.chatId,
             text: this.text,
             options: this.options,
         };
     }
 }
 
-namespace SendChatMessageEvent {
+namespace EditChatMessageTextEvent {
     export interface Serialized extends AmqpEvent.Serialized {
-        chatId: string | number;
         text: string;
-        options?: SendMessageOptions;
+        options?: EditMessageTextOptions;
     }
 }
 
-export default SendChatMessageEvent;
+export default EditChatMessageTextEvent;

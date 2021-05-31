@@ -24,9 +24,9 @@
  * SOFTWARE.
  */
 
-import AmqpEvent from "../../core/amqp/AmqpEvent";
-import JSONObject from "../../core/interfaces/JSONObject";
-import {QUEUES} from "../../Globals";
+import AmqpEvent from "../../amqp/AmqpEvent";
+import JSONObject from "../../interfaces/JSONObject";
+import {QUEUES} from "../../../Globals";
 
 class DeleteChatMessageEvent extends AmqpEvent {
     public static readonly type: string = "delete-chat-message";

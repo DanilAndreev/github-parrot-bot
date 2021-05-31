@@ -24,7 +24,7 @@
  * SOFTWARE.
  */
 
-import JSONObject from "../core/interfaces/JSONObject";
+import JSONObject from "../interfaces/JSONObject";
 
 /**
  * HttpError - class for HTTP exchange error.
