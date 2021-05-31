@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: commands-handler
+  namespace: beta-parrot-bot
+  labels:
+    app: commands-handler
+spec:
+  selector:
+    matchLabels:
+      app: commands-handler
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: commands-handler
+    spec:
+      imagePullSecrets:
+        - name: docker-pass
+      containers:
+        - name: telegram-drawer
+          image: ghcr.io/danilandreev/github-parrot-bot-dev
+          ports:
+            - containerPort: 3100
+          volumeMounts:
+            - mountPath: /.env
+              subPath: .env
+              name: env
+      volumes:
+        - name: env
+          configMap:
+            name: commands-handler
+            items:
+              - key: env
+                path: .env
