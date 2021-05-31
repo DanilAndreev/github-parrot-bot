@@ -17,51 +17,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[TESTING] Added script to package.json.">
+      <change afterPath="$PROJECT_DIR$/tests/__mocks__/node-telegram-bot-api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/core/bot/Bot.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ClearAKACommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ClearAKACommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ConnectCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ConnectCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/DisconnectCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/DisconnectCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ListRepositoriesCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ListRepositoriesCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/RemoveRepositoryCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/RemoveRepositoryCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/VersionCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/VersionCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/WebHookSettingsCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/WebHookSettingsCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/GithubWebhookController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/GithubWebhookController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/DataBase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/DataBase.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/SystemConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/SystemConfig.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/amqp/AmqpDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/AmqpDispatcher.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/amqp/AmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/AmqpHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/amqp/CallbackQueryDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/CallbackQueryDispatcher.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/bot/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bot/Bot.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/bot/BotCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bot/BotCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/webserver/WebServer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/webserver/WebServer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/errors/AMQPAck.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/errors/AMQPAck.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/errors/AMQPNack.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/errors/AMQPNack.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/errors/CommandError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/errors/CommandError.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/errors/FatalError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/errors/FatalError.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/errors/HttpError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/errors/HttpError.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/ChatCommandEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/events/telegram/ChatCommandEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/DeleteChatMessageEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/events/telegram/DeleteChatMessageEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageLiveLocationEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/events/telegram/EditChatMessageLiveLocationEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageReplyMarkupEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/events/telegram/EditChatMessageReplyMarkupEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/EditChatMessageTextEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/events/telegram/EditChatMessageTextEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/SendChatMessageEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/events/telegram/SendChatMessageEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/telegram/TelegramEventEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/events/telegram/TelegramEventEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/CommandsHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/callbacks/WebHookSettingsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/callbacks/WebHookSettingsHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/CheckRunHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckRunHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/CheckSuiteHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/webhook/PushHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/webhook/PushHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/AkaGenerator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/AkaGenerator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/createRef.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utils/createRef.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/loadTemplate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/loadTemplate.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/root.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utils/root.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/core/amqp/AmqpHandler.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tests/core/amqp/AmqpHandler.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/core/bot/BotCommand.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tests/core/bot/BotCommand.test.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,8 +64,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/.env" />
-    <property name="javascript.nodejs.core.library.configured.version" value="14.17.0" />
-    <property name="javascript.nodejs.core.library.typings.version" value="14.17.0" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
+    <property name="javascript.nodejs.core.library.typings.version" value="12.20.13" />
     <property name="last.edited.regexp" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -142,7 +101,7 @@
       <recent name="D:\Projects\github-parrot-bot" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.Run with ts-node">
+  <component name="RunManager" selected="Jest.All Tests">
     <list>
       <item itemvalue="Jest.All Tests" />
       <item itemvalue="Node.js.COMMANDS_EVENTS_HANDLERS" />
@@ -687,9 +646,10 @@
           <option name="timeStamp" value="80" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/core/SystemConfig.ts</url>
-          <line>170</line>
-          <option name="timeStamp" value="90" />
+          <url>file://$PROJECT_DIR$/src/core/bot/Bot.ts</url>
+          <line>70</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="92" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -69,7 +69,7 @@ class Bot extends TelegramBot implements Metricable, Destructable {
      */
     protected constructor(token?: string, polling: boolean = false) {
         if (!token) throw new Error(`FatalError: you must specify token to run this app! "token" = "${token}".`);
-        Logger.info(`Creating telegram bot. Polling: ${polling}. Tag: ${SystemConfig.getConfig<Config>().bot.tag}`);
+        Logger.info(`Creating telegram bot. Polling: ${polling}. Tag: ${SystemConfig.getConfig<Config>().bot?.tag}`);
         super(token, {polling});
 
         this.metricsActive = 0;
