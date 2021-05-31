@@ -34,7 +34,7 @@ import CheckSuitsGarbageCollector from "./chrono/CheckSuitsGarbageCollector";
 import SystemConfig from "./core/SystemConfig";
 import Config from "./interfaces/Config";
 import {Logger} from "./core/logger/Logger";
-import FatalError from "./errors/FatalError";
+import FatalError from "./core/errors/FatalError";
 import Globals from "./Globals";
 import destructService from "./utils/destructService";
 

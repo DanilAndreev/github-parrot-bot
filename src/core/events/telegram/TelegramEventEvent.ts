@@ -24,37 +24,49 @@
  * SOFTWARE.
  */
 
-import AmqpEvent from "../../core/amqp/AmqpEvent";
-import {Message} from "node-telegram-bot-api";
-import {QUEUES} from "../../Globals";
+import AmqpEvent from "../../amqp/AmqpEvent";
+import {CallbackQuery, Message} from "node-telegram-bot-api";
+import {QUEUES} from "../../../Globals";
 
-class ChatCommandEvent extends AmqpEvent {
-    public static readonly type: string = "chat-command-event";
-    public message: Message;
-    public match: RegExpMatchArray | null;
+class TelegramEventEvent<T extends Message | CallbackQuery> extends AmqpEvent {
+    public static readonly type: string = "telegram-event-event";
+    public event: TelegramEventEvent.TelegramEvent;
+    public message: T;
 
-    constructor(message: Message, match: RegExpMatchArray | null) {
-        super(ChatCommandEvent.type, {
-            queue: QUEUES.TELEGRAM_CHAT_COMMAND,
+    constructor(event: TelegramEventEvent.TelegramEvent, message: T) {
+        super(TelegramEventEvent.type, {
+            queue: QUEUES.TELEGRAM_EVENTS_QUEUE,
         });
         this.message = message;
-        this.match = match;
+        this.event = event;
     }
 
-    public serialize(): ChatCommandEvent.Serialized {
+    public serialize(): TelegramEventEvent.Serialized<T> {
         return {
             ...super.serialize(),
+            event: this.event,
             message: this.message,
-            match: this.match,
         };
     }
 }
 
-namespace ChatCommandEvent {
-    export interface Serialized extends AmqpEvent.Serialized {
-        message: Message;
-        match: RegExpMatchArray | null;
+namespace TelegramEventEvent {
+    export type TelegramEvent =
+        | "channel_post"
+        | "edited_message"
+        | "edited_message_text"
+        | "edited_message_caption"
+        | "edited_channel_post"
+        | "edited_channel_post_text"
+        | "edited_channel_post_caption"
+        | "new_chat_members"
+        | "left_chat_member"
+        | "callback_query";
+
+    export interface Serialized<T extends Message | CallbackQuery> extends AmqpEvent.Serialized {
+        event: TelegramEventEvent.TelegramEvent;
+        message: T;
     }
 }
 
-export default ChatCommandEvent;
+export default TelegramEventEvent;

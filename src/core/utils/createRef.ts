@@ -24,38 +24,14 @@
  * SOFTWARE.
  */
 
-import {EditMessageReplyMarkupOptions, InlineKeyboardMarkup} from "node-telegram-bot-api";
-import AmqpEvent from "../../core/amqp/AmqpEvent";
-import {QUEUES} from "../../Globals";
+import Ref from "../interfaces/Ref";
 
-class EditChatMessageReplyMarkupEvent extends AmqpEvent {
-    public static readonly type: string = "edit-chat-message-reply-markup";
-    public replyMarkup: InlineKeyboardMarkup;
-    public options?: EditMessageReplyMarkupOptions;
-
-    constructor(replyMarkup: InlineKeyboardMarkup, options?: EditMessageReplyMarkupOptions) {
-        super(EditChatMessageReplyMarkupEvent.type, {
-            expiration: 1000 * 60 * 10,
-            queue: QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
-        });
-        this.replyMarkup = replyMarkup;
-        this.options = options;
-    }
-
-    public serialize(): EditChatMessageReplyMarkupEvent.Serialized {
-        return {
-            ...super.serialize(),
-            replyMarkup: this.replyMarkup,
-            options: this.options,
-        };
-    }
+/**
+ * createRef - creates Ref object with passed value.
+ * @function
+ * @param value - Initial value.
+ * @author Danil Andreev
+ */
+export default function createRef<T>(value: T): Ref<T> {
+    return {current: value};
 }
-
-namespace EditChatMessageReplyMarkupEvent {
-    export interface Serialized extends AmqpEvent.Serialized {
-        replyMarkup: InlineKeyboardMarkup;
-        options?: EditMessageReplyMarkupOptions;
-    }
-}
-
-export default EditChatMessageReplyMarkupEvent;

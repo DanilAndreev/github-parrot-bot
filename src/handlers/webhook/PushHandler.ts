@@ -27,7 +27,7 @@
 import WebHook from "../../entities/WebHook";
 import {Push} from "github-webhook-event-types";
 import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
-import AMQPAck from "../../errors/AMQPAck";
+import AMQPAck from "../../core/errors/AMQPAck";
 import DrawPushEvent from "../../events/draw/DrawPushEvent";
 
 @WebHookAmqpHandler.Handler("push", 10)

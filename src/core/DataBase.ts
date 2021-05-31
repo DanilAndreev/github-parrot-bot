@@ -29,7 +29,7 @@ import SystemConfig from "./SystemConfig";
 import Config from "../interfaces/Config";
 import {Logger} from "./logger/Logger";
 import Globals from "../Globals";
-import FatalError from "../errors/FatalError";
+import FatalError from "./errors/FatalError";
 
 
 /**

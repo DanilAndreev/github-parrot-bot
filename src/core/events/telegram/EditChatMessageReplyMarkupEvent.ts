@@ -24,42 +24,38 @@
  * SOFTWARE.
  */
 
-import {EditMessageCaptionOptions} from "node-telegram-bot-api";
-import AmqpEvent from "../../core/amqp/AmqpEvent";
-import {QUEUES} from "../../Globals";
+import {EditMessageReplyMarkupOptions, InlineKeyboardMarkup} from "node-telegram-bot-api";
+import AmqpEvent from "../../amqp/AmqpEvent";
+import {QUEUES} from "../../../Globals";
 
-class EditChatMessageLiveLocationEvent extends AmqpEvent {
-    public static readonly type: string = "edit-chat-message-live-location";
-    public latitude: number;
-    public longitude: number;
-    public options?: EditMessageCaptionOptions;
+class EditChatMessageReplyMarkupEvent extends AmqpEvent {
+    public static readonly type: string = "edit-chat-message-reply-markup";
+    public replyMarkup: InlineKeyboardMarkup;
+    public options?: EditMessageReplyMarkupOptions;
 
-    constructor(latitude: number, longitude: number, options?: EditMessageCaptionOptions) {
-        super(EditChatMessageLiveLocationEvent.type, {
+    constructor(replyMarkup: InlineKeyboardMarkup, options?: EditMessageReplyMarkupOptions) {
+        super(EditChatMessageReplyMarkupEvent.type, {
             expiration: 1000 * 60 * 10,
             queue: QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
         });
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.replyMarkup = replyMarkup;
         this.options = options;
     }
 
-    public serialize(): EditChatMessageLiveLocationEvent.Serialized {
+    public serialize(): EditChatMessageReplyMarkupEvent.Serialized {
         return {
             ...super.serialize(),
-            latitude: this.latitude,
-            longitude: this.longitude,
+            replyMarkup: this.replyMarkup,
             options: this.options,
         };
     }
 }
 
-namespace EditChatMessageLiveLocationEvent {
+namespace EditChatMessageReplyMarkupEvent {
     export interface Serialized extends AmqpEvent.Serialized {
-        latitude: number;
-        longitude: number;
-        options?: EditMessageCaptionOptions;
+        replyMarkup: InlineKeyboardMarkup;
+        options?: EditMessageReplyMarkupOptions;
     }
 }
 
-export default EditChatMessageLiveLocationEvent;
+export default EditChatMessageReplyMarkupEvent;

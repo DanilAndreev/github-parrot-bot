@@ -26,8 +26,8 @@
 
 import AmqpHandler from "../../../src/core/amqp/AmqpHandler";
 import * as Amqp from "amqplib";
-import AMQPAck from "../../../src/errors/AMQPAck";
-import AMQPNack from "../../../src/errors/AMQPNack";
+import AMQPAck from "../../../src/core/errors/AMQPAck";
+import AMQPNack from "../../../src/core/errors/AMQPNack";
 
 @AmqpHandler.Handler("test-queue", 10)
 class TestAmqpHandler extends AmqpHandler {

@@ -31,7 +31,7 @@ import SystemConfig from "../core/SystemConfig";
 import Config from "../interfaces/Config";
 import AmqpDispatcher from "../core/amqp/AmqpDispatcher";
 import JSONObject from "../core/interfaces/JSONObject";
-import HttpError from "../errors/HttpError";
+import HttpError from "../core/errors/HttpError";
 import Ajv, {ValidateFunction} from "ajv";
 import addAjvFormats from "ajv-formats";
 import * as githubWebhookSchema from "@octokit/webhooks-schemas";

@@ -27,7 +27,7 @@
 import BotCommand from "../core/bot/BotCommand";
 import JSONObject from "../core/interfaces/JSONObject";
 import {Message} from "node-telegram-bot-api";
-import root from "../utils/root";
+import root from "../core/utils/root";
 import {Logger} from "../core/logger/Logger";
 
 /**

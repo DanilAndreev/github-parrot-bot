@@ -27,7 +27,7 @@
 import BotCommand from "../../../src/core/bot/BotCommand";
 import {Message} from "node-telegram-bot-api";
 import JSONObject from "../../../src/core/interfaces/JSONObject";
-import CommandError from "../../../src/errors/CommandError";
+import CommandError from "../../../src/core/errors/CommandError";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const AmqpEventModule = require("../../../src/core/amqp/AmqpEvent");
 
