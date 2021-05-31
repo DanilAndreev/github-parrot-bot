@@ -14,10 +14,12 @@
     "resolveJsonModule": true,
     "noEmit": false,
     "removeComments": true,
-    "declaration": false
+    "declaration": false,
   },
   "include": ["src/**/*"],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "tests",
+    "**/__mocks__"
   ]
 }

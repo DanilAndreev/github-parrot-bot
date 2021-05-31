@@ -16,10 +16,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[WebHookAmqpHandler] Added unit tests.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[CallbackQueryDispatcher] Added unit tests.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/amqp/CallbackQueryDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/CallbackQueryDispatcher.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/core/amqp/CallbacksQueryDispathcer.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tests/core/amqp/CallbacksQueryDispathcer.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +99,7 @@
       <recent name="D:\Projects\github-parrot-bot\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Jest.All Tests">
+  <component name="RunManager" selected="Node.js.Run with ts-node">
     <list>
       <item itemvalue="Jest.All Tests" />
       <item itemvalue="Node.js.COMMANDS_EVENTS_HANDLERS" />
@@ -188,13 +187,6 @@
       <workItem from="1622299251579" duration="20875000" />
       <workItem from="1622332540706" duration="5000" />
       <workItem from="1622372232696" duration="24592000" />
-    </task>
-    <task id="LOCAL-00084" summary="[Commands] Added messages reply mechanism.">
-      <created>1617883876380</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1617883876380</updated>
     </task>
     <task id="LOCAL-00085" summary="[WebServer] Added events list.">
       <created>1617884846070</created>
@@ -532,7 +524,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622384668495</updated>
     </task>
-    <option name="localTasksCounter" value="133" />
+    <task id="LOCAL-00133" summary="[CallbackQueryDispatcher] Added unit tests.">
+      <created>1622462860135</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1622462860136</updated>
+    </task>
+    <option name="localTasksCounter" value="134" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -563,7 +562,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[WebHookSettingsHandler] Added callback query handler for webhook settings." />
     <MESSAGE value="[ConnectCommand] Removed legacy TODO." />
     <MESSAGE value="[AmqpEvent] Added more events." />
     <MESSAGE value="&#10;[AmqpEvents] Work finished." />
@@ -588,7 +586,8 @@
     <MESSAGE value="[AmqpEvent] Added unit tests." />
     <MESSAGE value="[AmqpHandler] Added unit tests." />
     <MESSAGE value="[WebHookAmqpHandler] Added unit tests." />
-    <option name="LAST_COMMIT_MESSAGE" value="[WebHookAmqpHandler] Added unit tests." />
+    <MESSAGE value="[CallbackQueryDispatcher] Added unit tests." />
+    <option name="LAST_COMMIT_MESSAGE" value="[CallbackQueryDispatcher] Added unit tests." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
