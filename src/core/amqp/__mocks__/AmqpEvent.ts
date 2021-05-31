@@ -24,112 +24,73 @@
  * SOFTWARE.
  */
 
-import JSONObject from "../interfaces/JSONObject";
-import AmqpDispatcher from "./AmqpDispatcher";
+import type AmqpEvent from "../AmqpEvent";
 
-/**
- * AmqpEvent - base class for AMQP events.
- * @class
- * @author Danil Andreev
- */
-abstract class AmqpEvent {
-    /**
-     * type - event type.
-     */
+//TODO: use jest.createMockFromModule;
+
+interface Queues {
+    [queueName: string]: { data: any, options: AmqpEvent.Options }[];
+}
+
+export const queues: Queues = {};
+
+export function clearQueues(): void {
+    for (const key in queues) {
+        delete queues[key];
+    }
+}
+
+export function clearQueue(key: string): void {
+    delete queues[key];
+}
+
+class AmqpEventMock {
     public static readonly type: string = "untyped-event";
-    /**
-     * type - event type. Needed for event identification.
-     */
     protected type: string;
-    /**
-     * expiration - event expiration time.
-     */
     protected expiration: number | undefined;
-    /**
-     * queue - default AMQP queue name for event enqueuing.
-     */
     protected queue?: string;
 
-    /**
-     * Creates an instance of AmqpEvent.
-     * @constructor
-     * @param type - event type.
-     * @param options - event AMQP options.
-     * @author Danil Andreev
-     */
     protected constructor(type?: string, options?: AmqpEvent.Options) {
-        this.type = type || AmqpEvent.type;
+        this.type = type || "untyped-event-mock";
         this.expiration = options?.expiration;
         this.queue = options?.queue;
     }
 
-    public async enqueue(queue?: string): Promise<AmqpEvent> {
+    public async enqueue(queue?: string): Promise<AmqpEventMock> {
         const targetQueue: string | undefined = this.queue || queue;
         if (!targetQueue) throw new ReferenceError(`You must specify queue name for enqueuing.`);
-        await AmqpDispatcher.getCurrent().sendToQueue(targetQueue, this.serialize(), {expiration: this.expiration});
+        if (!Array.isArray(queues[targetQueue]))
+            queues[targetQueue] = [];
+        queues[targetQueue].push({
+            data: this.serialize(),
+            options: {expiration: this.expiration},
+        });
         return this;
     }
 
-    /**
-     * setExpiration - sets event expiration.
-     * @method
-     * @param expiration - expiration time in milliseconds.
-     * @author Danil Andreev
-     */
-    public setExpiration(expiration: number): AmqpEvent {
+    public setExpiration(expiration: number): AmqpEventMock {
         this.expiration = expiration;
         return this;
     }
 
-    /**
-     * makeIndefinite - set expiration time to indefinite.
-     * @method
-     * @author Danil Andreev
-     */
-    public makeIndefinite(): AmqpEvent {
+    public makeIndefinite(): AmqpEventMock {
         this.expiration = undefined;
         return this;
     }
 
-    /**
-     * getExpiration - getter for event expiration time.
-     * @method
-     * @author Danil Andreev
-     */
     public getExpiration(): number | undefined {
         return this.expiration;
     }
 
-    /**
-     * getType - getter for event type.
-     * @method
-     * @author Danil Andreev
-     */
     protected getType(): string {
         return this.type;
     }
 
-    /**
-     * serialize - serializes event for web exchange.
-     * @method
-     * @author Danil Andreev
-     */
     public serialize(): AmqpEvent.Serialized {
         return {
-            type: this.getType(),
+            type: this.type,
         };
     }
 }
 
-namespace AmqpEvent {
-    export interface Options {
-        expiration?: number;
-        queue?: string;
-    }
-
-    export interface Serialized extends JSONObject {
-        type: string;
-    }
-}
-
-export default AmqpEvent;
+export default AmqpEventMock;

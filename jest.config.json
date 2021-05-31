@@ -1,0 +1,15 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "testPathIgnorePatterns": [
+    "/node_modules/",
+    "/dest/",
+    "/examples/",
+    "/sql/",
+    "/media/",
+    "/.github/"
+  ],
+  "setupFiles": [
+    "./tests/jest-setup-file.ts"
+  ]
+}

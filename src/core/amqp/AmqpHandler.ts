@@ -69,8 +69,7 @@ class AmqpHandler {
                     `Got AMQP message NACKed. Queue: ${message.fields.routingKey}. Reason: Handler returned false value.`
                 );
                 Logger.warn(
-                    `Deprecated NACKing by returning false value in class ${this.constructor.name}. This feature will`,
-                    `be removed in next versions. Use throw AMQPNack or throw AMQPAck instead.`
+                    `Deprecated NACKing by returning false value in class ${this.constructor.name}. This feature will be removed in future versions. Use throw AMQPNack or throw AMQPAck instead.`
                 );
                 channel.nack(message);
             } else {
@@ -103,6 +102,7 @@ namespace AmqpHandler {
                     super(...args);
                     Reflect.defineMetadata("amqp-handler", true, WrappedAmqpHandler);
                     Reflect.defineMetadata("amqp-handler-queue", queue, WrappedAmqpHandler);
+                    prefetch && Reflect.defineMetadata("amqp-handler-prefetch", prefetch, WrappedAmqpHandler);
                     Reflect.defineMetadata("amqp-handler", true, this);
                     Reflect.defineMetadata("amqp-handler-queue", queue, this);
                     prefetch && Reflect.defineMetadata("amqp-handler-prefetch", prefetch, this);

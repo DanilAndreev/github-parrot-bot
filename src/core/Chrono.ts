@@ -87,7 +87,7 @@ abstract class Chrono implements Destructable {
         const {interval = 1000, noInstantRun = false} = this.options;
         await this.beforeLaunch();
         if (!noInstantRun) this.run();
-        this.chronHandle = setInterval(this.run, interval, args);
+        this.chronHandle = setInterval(() => this.run(), interval, args);
         return this;
     }
 

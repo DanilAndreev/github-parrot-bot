@@ -96,7 +96,7 @@ class CallbackQueryDispatcher extends AmqpHandler {
 
         const promises: Promise<void>[] = [];
         for (const handler of this.callbackQueryHandlers) {
-            if (handler.options.exact && handler.pattern.length !== requestPattern.length) continue;
+            if (handler.options.exact && (handler.pattern.length !== requestPattern.length)) continue;
             const params: JSONObject | null = CallbackQueryDispatcher.comparePatterns(handler.pattern, requestPattern);
             if (params) {
                 type Executor = () => Promise<void>;
@@ -192,7 +192,7 @@ namespace CallbackQueryDispatcher {
             const metadata: Set<CallbackQueryHandlerMeta> =
                 Reflect.getMetadata("callback-query-handlers", target) || new Set();
             metadata.add({
-                callback: target[propertyKey],
+                callback: target[propertyKey].bind(target),
                 options: options || {},
                 pattern: pattern as string[],
             });

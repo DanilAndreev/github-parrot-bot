@@ -16,9 +16,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[main] Added shut down scenario.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[SystemConfig] Added unit tests.">
+      <change beforePath="$PROJECT_DIR$/.idea/github-parrot-bot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/github-parrot-bot.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,8 +28,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="tsconfig.json" />
+        <option value="JavaScript File" />
         <option value="TypeScript File" />
       </list>
     </option>
@@ -37,7 +37,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="adding-metrics" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -62,10 +62,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/.env" />
-    <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
-    <property name="javascript.nodejs.core.library.typings.version" value="12.20.13" />
+    <property name="javascript.nodejs.core.library.configured.version" value="14.17.0" />
+    <property name="javascript.nodejs.core.library.typings.version" value="14.17.0" />
     <property name="last.edited.regexp" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../atlas-core" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -75,6 +75,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/jest" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="D:\Projects\github-parrot-bot\node_modules\prettier" />
@@ -91,15 +92,16 @@
       <recent name="D:\Projects\github-parrot-bot\src\events\telegram" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\github-parrot-bot\tests" />
+      <recent name="D:\Projects\github-parrot-bot" />
       <recent name="D:\Projects\github-parrot-bot\src\core\utils" />
       <recent name="D:\Projects\github-parrot-bot\src\core\interfaces" />
       <recent name="D:\Projects\github-parrot-bot\src" />
-      <recent name="D:\Projects\github-parrot-bot\src\utils" />
-      <recent name="D:\Projects\github-parrot-bot\src\interfaces" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.Run with ts-node">
+  <component name="RunManager" selected="Jest.All Tests">
     <list>
+      <item itemvalue="Jest.All Tests" />
       <item itemvalue="Node.js.COMMANDS_EVENTS_HANDLERS" />
       <item itemvalue="Node.js.COMMANDS_PROXY" />
       <item itemvalue="Node.js.CRON_DATABASE_GARBAGE_COLLECTORS" />
@@ -181,69 +183,11 @@
       <workItem from="1622040609704" duration="1780000" />
       <workItem from="1622116046503" duration="6188000" />
       <workItem from="1622140226285" duration="1684000" />
-    </task>
-    <task id="LOCAL-00079" summary="[README] Updated.">
-      <created>1617798101217</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1617798101217</updated>
-    </task>
-    <task id="LOCAL-00080" summary="[Dockerfile] Created.">
-      <created>1617799385295</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1617799385295</updated>
-    </task>
-    <task id="LOCAL-00081" summary="[EnvDispatcher] Removed GHTB prefix to envs.">
-      <created>1617881826679</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1617881826679</updated>
-    </task>
-    <task id="LOCAL-00082" summary="[Bot] Fixed problem with commands regexp.">
-      <created>1617882958341</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1617882958341</updated>
-    </task>
-    <task id="LOCAL-00083" summary="[CommandsHandler] Added reply to message on Incorrect message.">
-      <created>1617883248035</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1617883248035</updated>
-    </task>
-    <task id="LOCAL-00084" summary="[Commands] Added messages reply mechanism.">
-      <created>1617883876380</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1617883876380</updated>
-    </task>
-    <task id="LOCAL-00085" summary="[WebServer] Added events list.">
-      <created>1617884846070</created>
-      <option name="number" value="00085" />
-      <option name="presentableId" value="LOCAL-00085" />
-      <option name="project" value="LOCAL" />
-      <updated>1617884846070</updated>
-    </task>
-    <task id="LOCAL-00086" summary="[VersionCommand] Fixed command for getting version.">
-      <created>1617886229618</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL-00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1617886229618</updated>
-    </task>
-    <task id="LOCAL-00087" summary="[VersionCommand] Fixed command for getting version.">
-      <created>1617886497388</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1617886497388</updated>
+      <workItem from="1622247927981" duration="5583000" />
+      <workItem from="1622299251579" duration="20875000" />
+      <workItem from="1622332540706" duration="5000" />
+      <workItem from="1622372232696" duration="24592000" />
+      <workItem from="1622468932369" duration="3086000" />
     </task>
     <task id="LOCAL-00088" summary="[Logger] Added database support.">
       <created>1617981780163</created>
@@ -525,7 +469,70 @@
       <option name="project" value="LOCAL" />
       <updated>1622224766796</updated>
     </task>
-    <option name="localTasksCounter" value="128" />
+    <task id="LOCAL-00128" summary="[Chrono] Added tests.">
+      <created>1622249883253</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1622249883254</updated>
+    </task>
+    <task id="LOCAL-00129" summary="[BotCommand] Added tests.">
+      <created>1622311840392</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1622311840392</updated>
+    </task>
+    <task id="LOCAL-00130" summary="[AmqpEvent] Added unit tests.">
+      <created>1622317656608</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1622317656608</updated>
+    </task>
+    <task id="LOCAL-00131" summary="[AmqpHandler] Added unit tests.">
+      <created>1622332448894</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1622332448894</updated>
+    </task>
+    <task id="LOCAL-00132" summary="[WebHookAmqpHandler] Added unit tests.">
+      <created>1622384668495</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1622384668495</updated>
+    </task>
+    <task id="LOCAL-00133" summary="[CallbackQueryDispatcher] Added unit tests.">
+      <created>1622462860135</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1622462860136</updated>
+    </task>
+    <task id="LOCAL-00134" summary="[tsconfig] Tests added to excluded dirs.">
+      <created>1622463802734</created>
+      <option name="number" value="00134" />
+      <option name="presentableId" value="LOCAL-00134" />
+      <option name="project" value="LOCAL" />
+      <updated>1622463802734</updated>
+    </task>
+    <task id="LOCAL-00135" summary="[package] Updated packages.">
+      <created>1622464913332</created>
+      <option name="number" value="00135" />
+      <option name="presentableId" value="LOCAL-00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1622464913332</updated>
+    </task>
+    <task id="LOCAL-00136" summary="[SystemConfig] Added unit tests.">
+      <created>1622471944962</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1622471944962</updated>
+    </task>
+    <option name="localTasksCounter" value="137" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -556,15 +563,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[DrawPullRequestHandler] Fixed incorrect callback data generating." />
-    <MESSAGE value="[IssueCallbacksHandler] Created handler for issue callbacks." />
-    <MESSAGE value="[CallbackQueryDispatcher] Added exact option." />
-    <MESSAGE value="[IssueCallbackHandler] Added logging.&#10;[PullRequestCallbackHandler] Added logging.&#10;[CallbackQueryDispatcher] Added logging." />
-    <MESSAGE value="[IssueCallbackHandler] Fixed bug in where condition." />
-    <MESSAGE value="[WebHookSettingsHandler] Added callback query handler for webhook settings." />
-    <MESSAGE value="[ConnectCommand] Removed legacy TODO." />
-    <MESSAGE value="[AmqpEvent] Added more events." />
-    <MESSAGE value="&#10;[AmqpEvents] Work finished." />
     <MESSAGE value="[BotCommand] Small fixes." />
     <MESSAGE value="[GLOBAL] Refactored core directories." />
     <MESSAGE value="[WebHookSettings] Added interactive settings." />
@@ -581,7 +579,16 @@
     <MESSAGE value="[Metricable] Server and Bot became metricable." />
     <MESSAGE value="[config] Removed text in bot token." />
     <MESSAGE value="[main] Added shut down scenario." />
-    <option name="LAST_COMMIT_MESSAGE" value="[main] Added shut down scenario." />
+    <MESSAGE value="[Chrono] Added tests." />
+    <MESSAGE value="[BotCommand] Added tests." />
+    <MESSAGE value="[AmqpEvent] Added unit tests." />
+    <MESSAGE value="[AmqpHandler] Added unit tests." />
+    <MESSAGE value="[WebHookAmqpHandler] Added unit tests." />
+    <MESSAGE value="[CallbackQueryDispatcher] Added unit tests." />
+    <MESSAGE value="[tsconfig] Tests added to excluded dirs." />
+    <MESSAGE value="[package] Updated packages." />
+    <MESSAGE value="[SystemConfig] Added unit tests." />
+    <option name="LAST_COMMIT_MESSAGE" value="[SystemConfig] Added unit tests." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -629,8 +636,18 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main.ts</url>
           <line>58</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/core/bot/BotCommand.ts</url>
+          <line>73</line>
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/core/SystemConfig.ts</url>
+          <line>170</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="90" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -638,5 +655,8 @@
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/github_parrot_bot$All_Tests.info" NAME="All Tests Coverage Results" MODIFIED="1622380007266" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

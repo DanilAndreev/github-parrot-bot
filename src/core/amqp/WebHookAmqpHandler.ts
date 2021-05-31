@@ -35,7 +35,7 @@ import {Message} from "amqplib";
  * @class
  * @author Danil Andreev
  */
-export default class WebHookAmqpHandler extends AmqpHandler {
+class WebHookAmqpHandler extends AmqpHandler {
     /**
      * checkSignature - checks GitHub signature with WebHook secret key.
      * @param incomingSignature - Incoming signature.
@@ -43,6 +43,7 @@ export default class WebHookAmqpHandler extends AmqpHandler {
      * @param key - Secret key.
      */
     static checkSignature(incomingSignature: string, payload: any, key: string): boolean {
+        //TODO: rewrite using verify.
         const hmac: string = Crypto.createHmac("sha1", key).update(JSON.stringify(payload)).digest("hex");
         const expectedSignature = "sha1=" + hmac;
         return expectedSignature === incomingSignature;
@@ -55,8 +56,8 @@ export default class WebHookAmqpHandler extends AmqpHandler {
      * @param message - AMQP message.
      * @author Danil Andreev
      */
-    protected async handle(content: any, message: Message): Promise<void | boolean> {
-        const {payload, ctx}: {payload: any; ctx: Context} = content;
+    protected async handle(content: WebHookAmqpHandler.HandlerContent, message: Message): Promise<void | boolean> {
+        const {payload, ctx} = content;
         const {repository} = payload;
 
         const webHooks: WebHook[] = await WebHook.find({
@@ -71,7 +72,7 @@ export default class WebHookAmqpHandler extends AmqpHandler {
                 !WebHookAmqpHandler.checkSignature(
                     ctx.request.header["x-hub-signature"] as string,
                     payload,
-                    webHook.secret
+                    webHook.secret,
                 )
             ) {
                 continue;
@@ -94,3 +95,12 @@ export default class WebHookAmqpHandler extends AmqpHandler {
         throw new ReferenceError(`Abstract method call. Inherit this class and override this method.`);
     }
 }
+
+namespace WebHookAmqpHandler {
+    export interface HandlerContent {
+        payload: any;
+        ctx: Context;
+    }
+}
+
+export default WebHookAmqpHandler;
