@@ -16,10 +16,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[tsconfig] Tests added to excluded dirs.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[package] Updated packages.">
+      <change afterPath="$PROJECT_DIR$/tests/core/SystemConfig.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +100,7 @@
       <recent name="D:\Projects\github-parrot-bot\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.Run with ts-node">
+  <component name="RunManager" selected="Jest.All Tests">
     <list>
       <item itemvalue="Jest.All Tests" />
       <item itemvalue="Node.js.COMMANDS_EVENTS_HANDLERS" />
@@ -188,13 +188,6 @@
       <workItem from="1622299251579" duration="20875000" />
       <workItem from="1622332540706" duration="5000" />
       <workItem from="1622372232696" duration="24592000" />
-    </task>
-    <task id="LOCAL-00086" summary="[VersionCommand] Fixed command for getting version.">
-      <created>1617886229618</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL-00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1617886229618</updated>
     </task>
     <task id="LOCAL-00087" summary="[VersionCommand] Fixed command for getting version.">
       <created>1617886497388</created>
@@ -532,7 +525,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622463802734</updated>
     </task>
-    <option name="localTasksCounter" value="135" />
+    <task id="LOCAL-00135" summary="[package] Updated packages.">
+      <created>1622464913332</created>
+      <option name="number" value="00135" />
+      <option name="presentableId" value="LOCAL-00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1622464913332</updated>
+    </task>
+    <option name="localTasksCounter" value="136" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -563,7 +563,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[AmqpEvent] Added more events." />
     <MESSAGE value="&#10;[AmqpEvents] Work finished." />
     <MESSAGE value="[BotCommand] Small fixes." />
     <MESSAGE value="[GLOBAL] Refactored core directories." />
@@ -588,7 +587,8 @@
     <MESSAGE value="[WebHookAmqpHandler] Added unit tests." />
     <MESSAGE value="[CallbackQueryDispatcher] Added unit tests." />
     <MESSAGE value="[tsconfig] Tests added to excluded dirs." />
-    <option name="LAST_COMMIT_MESSAGE" value="[tsconfig] Tests added to excluded dirs." />
+    <MESSAGE value="[package] Updated packages." />
+    <option name="LAST_COMMIT_MESSAGE" value="[package] Updated packages." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
