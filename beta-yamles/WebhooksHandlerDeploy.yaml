@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webhooks-handler
+  namespace: beta-parrot-bot
+  labels:
+    app: webhooks-handler
+spec:
+  selector:
+    matchLabels:
+      app: webhooks-handler
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: webhooks-handler
+    spec:
+      imagePullSecrets:
+        - name: docker-pass
+      containers:
+        - name: telegram-drawer
+          image: ghcr.io/danilandreev/github-parrot-bot-dev
+          ports:
+            - containerPort: 3100
+          volumeMounts:
+            - mountPath: /.env
+              subPath: .env
+              name: env
+      volumes:
+        - name: env
+          configMap:
+            name: webhooks-handler
+            items:
+              - key: env
+                path: .env
