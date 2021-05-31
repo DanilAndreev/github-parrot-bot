@@ -16,14 +16,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[AmqpHandler] Added unit tests.">
-      <change afterPath="$PROJECT_DIR$/tests/__mocks__/typeorm.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/core/amqp/WebHookAmqpHandler.test.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[WebHookAmqpHandler] Added unit tests.">
+      <change afterPath="$PROJECT_DIR$/src/core/__mocks__/SystemConfig.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/core/amqp/CallbacksQueryDispathcer.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/amqp/AmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/AmqpHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/amqp/WebHookAmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/WebHookAmqpHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/core/amqp/AmqpEvent.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tests/core/amqp/AmqpEvent.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/core/amqp/AmqpHandler.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tests/core/amqp/AmqpHandler.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/amqp/CallbackQueryDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/CallbackQueryDispatcher.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,14 +188,7 @@
       <workItem from="1622247927981" duration="5583000" />
       <workItem from="1622299251579" duration="20875000" />
       <workItem from="1622332540706" duration="5000" />
-      <workItem from="1622372232696" duration="9454000" />
-    </task>
-    <task id="LOCAL-00083" summary="[CommandsHandler] Added reply to message on Incorrect message.">
-      <created>1617883248035</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1617883248035</updated>
+      <workItem from="1622372232696" duration="24592000" />
     </task>
     <task id="LOCAL-00084" summary="[Commands] Added messages reply mechanism.">
       <created>1617883876380</created>
@@ -536,7 +526,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622332448894</updated>
     </task>
-    <option name="localTasksCounter" value="132" />
+    <task id="LOCAL-00132" summary="[WebHookAmqpHandler] Added unit tests.">
+      <created>1622384668495</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1622384668495</updated>
+    </task>
+    <option name="localTasksCounter" value="133" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -567,7 +564,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[IssueCallbackHandler] Fixed bug in where condition." />
     <MESSAGE value="[WebHookSettingsHandler] Added callback query handler for webhook settings." />
     <MESSAGE value="[ConnectCommand] Removed legacy TODO." />
     <MESSAGE value="[AmqpEvent] Added more events." />
@@ -592,7 +588,8 @@
     <MESSAGE value="[BotCommand] Added tests." />
     <MESSAGE value="[AmqpEvent] Added unit tests." />
     <MESSAGE value="[AmqpHandler] Added unit tests." />
-    <option name="LAST_COMMIT_MESSAGE" value="[AmqpHandler] Added unit tests." />
+    <MESSAGE value="[WebHookAmqpHandler] Added unit tests." />
+    <option name="LAST_COMMIT_MESSAGE" value="[WebHookAmqpHandler] Added unit tests." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -646,24 +643,6 @@
           <url>file://$PROJECT_DIR$/src/core/bot/BotCommand.ts</url>
           <line>73</line>
           <option name="timeStamp" value="80" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/core/amqp/WebHookAmqpHandler.ts</url>
-          <line>62</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="106" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/core/amqp/WebHookAmqpHandler.ts</url>
-          <line>67</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="107" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/core/amqp/WebHookAmqpHandler.ts</url>
-          <line>46</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="116" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
