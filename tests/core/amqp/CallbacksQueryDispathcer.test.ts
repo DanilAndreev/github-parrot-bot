@@ -33,123 +33,170 @@ import CallbackQueryDispatcher from "../../../src/core/amqp/CallbackQueryDispatc
 
 jest.mock("../../../src/core/SystemConfig");
 
-//TODO: fix problems with describes.
 describe("core->amqp->CallbacksQueryDispatcher", () => {
-    describe("Exact=false", () => {
+    describe("Pattern with exact=false", () => {
         class TestCallbacksDispatcher {
             public static callback: Function;
 
-            @CallbackQueryDispatcher.CallbackQueryHandler("dispatcher1.handler1")
-            public static handler1(query: CallbackQuery, params: JSONObject<{id: string}>) {
+            @CallbackQueryDispatcher.CallbackQueryHandler("dispatcher.handler1")
+            public static handler1(query: CallbackQuery, params: JSONObject<{ id: string }>) {
                 this.callback(query, params);
             }
 
-            @CallbackQueryDispatcher.CallbackQueryHandler("dispatcher1")
-            public static handler2(query: CallbackQuery, params: JSONObject<{id: string}>) {
+            @CallbackQueryDispatcher.CallbackQueryHandler("dispatcher")
+            public static handler2(query: CallbackQuery, params: JSONObject<{ id: string }>) {
                 this.callback(query, params);
             }
         }
 
         let config: Config;
-
-        beforeEach(() => {
-            config = ({bot: {callbackQueryHandlers: []}} as unknown) as Config;
-        });
+        let dispatcher: any;
 
         beforeAll(() => {
             jest.clearAllMocks();
         });
 
-        test("Test path that longer than one of the handlers.", () => {
-            const callback = jest.fn();
-            TestCallbacksDispatcher.callback = callback;
-            config.bot.callbackQueryHandlers = [TestCallbacksDispatcher];
+        beforeEach(() => {
+            TestCallbacksDispatcher.callback = jest.fn();
+            config = ({bot: {callbackQueryHandlers: [TestCallbacksDispatcher]}} as unknown) as Config;
             mocked(SystemConfig.getConfig).mockReturnValue(config);
-            const dispatcher: any = new CallbackQueryDispatcher();
-            const query: CallbackQuery = {data: "dispatcher1.handler1"} as CallbackQuery;
-            expect(dispatcher.handleCallbackQuery(query)).resolves.not.toThrowError();
-            expect(callback).toBeCalledTimes(2);
+            dispatcher = new CallbackQueryDispatcher();
         });
 
-        test("Test path that longer than bot handlers.", () => {
-            const callback = jest.fn();
-            TestCallbacksDispatcher.callback = callback;
-            config.bot.callbackQueryHandlers = [TestCallbacksDispatcher];
-            mocked(SystemConfig.getConfig).mockReturnValue(config);
-            const dispatcher: any = new CallbackQueryDispatcher();
-            const query: CallbackQuery = {data: "dispatcher1.handler1.trail"} as CallbackQuery;
-            expect(dispatcher.handleCallbackQuery(query)).resolves.not.toThrowError();
-            expect(callback).toBeCalledTimes(2);
+        test("Test path that longer than one of the handlers.", async () => {
+            const query: CallbackQuery = {data: "dispatcher.handler1"} as CallbackQuery;
+            await expect(dispatcher.handleCallbackQuery(query)).resolves.not.toThrowError();
+            expect(TestCallbacksDispatcher.callback).toBeCalledTimes(2);
         });
 
-        test("Test path that shorter than bot handlers.", () => {
-            const callback = jest.fn();
-            TestCallbacksDispatcher.callback = callback;
-            config.bot.callbackQueryHandlers = [TestCallbacksDispatcher];
-            mocked(SystemConfig.getConfig).mockReturnValue(config);
-            const dispatcher: any = new CallbackQueryDispatcher();
-            const query: CallbackQuery = {data: "dispatcher1"} as CallbackQuery;
-            expect(dispatcher.handleCallbackQuery(query)).resolves.not.toThrowError();
-            expect(callback).toBeCalledTimes(1);
+        test("Test path that longer than bot handlers.", async () => {
+            const query: CallbackQuery = {data: "dispatcher.handler1.trail"} as CallbackQuery;
+            await expect(dispatcher.handleCallbackQuery(query)).resolves.not.toThrowError();
+            expect(TestCallbacksDispatcher.callback).toBeCalledTimes(2);
+        });
+
+        test("Test path that shorter than bot handlers.", async () => {
+            const query: CallbackQuery = {data: "dispatcher"} as CallbackQuery;
+            await expect(dispatcher.handleCallbackQuery(query)).resolves.not.toThrowError();
+            expect(TestCallbacksDispatcher.callback).toBeCalledTimes(1);
         });
     });
 
-    describe("Exact=true", () => {
+    describe("Pattern with exact=true", () => {
         class TestCallbacksDispatcher {
             public static callback: Function;
 
-            @CallbackQueryDispatcher.CallbackQueryHandler("dispatcher1.handler1", {exact: true})
-            public static handler1(query: CallbackQuery, params: JSONObject<{id: string}>) {
+            @CallbackQueryDispatcher.CallbackQueryHandler("dispatcher.handler1", {exact: true})
+            public static handler1(query: CallbackQuery, params: JSONObject<{ id: string }>) {
                 this.callback(query, params);
             }
 
-            @CallbackQueryDispatcher.CallbackQueryHandler("dispatcher1", {exact: true})
-            public static handler2(query: CallbackQuery, params: JSONObject<{id: string}>) {
+            @CallbackQueryDispatcher.CallbackQueryHandler("dispatcher", {exact: true})
+            public static handler2(query: CallbackQuery, params: JSONObject<{ id: string }>) {
                 this.callback(query, params);
             }
         }
 
         let config: Config;
+        let dispatcher: any;
 
         beforeAll(() => {
             jest.clearAllMocks();
         });
 
         beforeEach(() => {
-            config = ({bot: {callbackQueryHandlers: []}} as unknown) as Config;
+            TestCallbacksDispatcher.callback = jest.fn();
+            config = ({bot: {callbackQueryHandlers: [TestCallbacksDispatcher]}} as unknown) as Config;
+            mocked(SystemConfig.getConfig).mockReturnValue(config);
+            dispatcher = new CallbackQueryDispatcher();
         });
 
-        test("Test path that longer than one of the handlers. (exact=true)", () => {
-            const callback = jest.fn();
-            TestCallbacksDispatcher.callback = callback;
-            config.bot.callbackQueryHandlers = [TestCallbacksDispatcher];
-            mocked(SystemConfig.getConfig).mockReturnValue(config);
-            const dispatcher: any = new CallbackQueryDispatcher();
-            const query: CallbackQuery = {data: "dispatcher1.handler1"} as CallbackQuery;
-            expect(dispatcher.handleCallbackQuery(query)).resolves.not.toThrowError();
-            expect(callback).toBeCalledTimes(1);
+        test("Test path that longer than one of the handlers.", async () => {
+            const query: CallbackQuery = {data: "dispatcher.handler1"} as CallbackQuery;
+            await expect(dispatcher.handleCallbackQuery(query)).resolves.not.toThrowError();
+            expect(TestCallbacksDispatcher.callback).toBeCalledTimes(1);
         });
 
-        test("Test path that longer than bot handlers. (exact=true)", () => {
-            const callback = jest.fn();
-            TestCallbacksDispatcher.callback = callback;
-            config.bot.callbackQueryHandlers = [TestCallbacksDispatcher];
-            mocked(SystemConfig.getConfig).mockReturnValue(config);
-            const dispatcher: any = new CallbackQueryDispatcher();
-            const query: CallbackQuery = {data: "dispatcher1.handler1.trail"} as CallbackQuery;
-            expect(dispatcher.handleCallbackQuery(query)).resolves.not.toThrowError();
-            expect(callback).not.toBeCalled();
+        test("Test path that longer than bot handlers.", async () => {
+            const query: CallbackQuery = {data: "dispatcher.handler1.trail"} as CallbackQuery;
+            await expect(dispatcher.handleCallbackQuery(query)).resolves.not.toThrowError();
+            expect(TestCallbacksDispatcher.callback).not.toBeCalled();
         });
 
-        test("Test path that shorter than bot handlers. (exact=true)", () => {
-            const callback = jest.fn();
-            TestCallbacksDispatcher.callback = callback;
-            config.bot.callbackQueryHandlers = [TestCallbacksDispatcher];
+        test("Test path that shorter than bot handlers.", async () => {
+            const query: CallbackQuery = {data: "dispatcher"} as CallbackQuery;
+            await expect(dispatcher.handleCallbackQuery(query)).resolves.not.toThrowError();
+            expect(TestCallbacksDispatcher.callback).toBeCalledTimes(1);
+        });
+    });
+
+    describe("Pattern with arguments", () => {
+        class TestCallbacksDispatcher {
+            public static callback1: Function;
+            public static callback2: Function;
+            public static callback3: Function;
+            public static callback4: Function;
+
+            @CallbackQueryDispatcher.CallbackQueryHandler("dispatcher.:handler")
+            public static handler1(query: CallbackQuery, params: JSONObject<{ id: string }>) {
+                this.callback1(query, params);
+            }
+
+            @CallbackQueryDispatcher.CallbackQueryHandler("dispatcher")
+            public static handler2(query: CallbackQuery, params: JSONObject<{ id: string }>) {
+                this.callback2(query, params);
+            }
+
+            @CallbackQueryDispatcher.CallbackQueryHandler("dispatcher.:handler.:argument")
+            public static handler3(query: CallbackQuery, params: JSONObject<{ id: string }>) {
+                this.callback3(query, params);
+            }
+
+            @CallbackQueryDispatcher.CallbackQueryHandler("dispatcher.:handler.path")
+            public static handler4(query: CallbackQuery, params: JSONObject<{ id: string }>) {
+                this.callback4(query, params);
+            }
+        }
+
+        let config: Config;
+        let dispatcher: any;
+
+        beforeAll(() => {
+            jest.clearAllMocks();
+        });
+
+        beforeEach(() => {
+            TestCallbacksDispatcher.callback1 = jest.fn();
+            TestCallbacksDispatcher.callback2 = jest.fn();
+            TestCallbacksDispatcher.callback3 = jest.fn();
+            TestCallbacksDispatcher.callback4 = jest.fn();
+            config = ({bot: {callbackQueryHandlers: [TestCallbacksDispatcher]}} as unknown) as Config;
             mocked(SystemConfig.getConfig).mockReturnValue(config);
-            const dispatcher: any = new CallbackQueryDispatcher();
-            const query: CallbackQuery = {data: "dispatcher1"} as CallbackQuery;
-            expect(dispatcher.handleCallbackQuery(query)).resolves.not.toThrowError();
-            expect(callback).toBeCalledTimes(1);
+            dispatcher = new CallbackQueryDispatcher();
+        });
+
+        test("Test arguments are passed to handler.", async () => {
+            const query: CallbackQuery = {data: "dispatcher.handler"} as CallbackQuery;
+            await expect(dispatcher.handleCallbackQuery(query)).resolves.not.toThrowError();
+            expect(TestCallbacksDispatcher.callback1).toBeCalledTimes(1);
+            expect(TestCallbacksDispatcher.callback1).toBeCalledWith(query, {handler: "handler"})
+            expect(TestCallbacksDispatcher.callback2).toBeCalledTimes(1);
+            expect(TestCallbacksDispatcher.callback2).toBeCalledWith(query, {});
+            expect(TestCallbacksDispatcher.callback3).not.toBeCalled();
+            expect(TestCallbacksDispatcher.callback4).not.toBeCalled();
+        });
+
+        test("Test static and param fields in different handlers on the same position.", async () => {
+            const query: CallbackQuery = {data: "dispatcher.handler.path"} as CallbackQuery;
+            await expect(dispatcher.handleCallbackQuery(query)).resolves.not.toThrowError();
+            expect(TestCallbacksDispatcher.callback1).toBeCalledTimes(1);
+            expect(TestCallbacksDispatcher.callback1).toBeCalledWith(query, {handler: "handler"})
+            expect(TestCallbacksDispatcher.callback2).toBeCalledTimes(1);
+            expect(TestCallbacksDispatcher.callback2).toBeCalledWith(query, {})
+            expect(TestCallbacksDispatcher.callback3).toBeCalledTimes(1);
+            expect(TestCallbacksDispatcher.callback3).toBeCalledWith(query, {handler: "handler", argument: "path"})
+            expect(TestCallbacksDispatcher.callback4).toBeCalledTimes(1);
+            expect(TestCallbacksDispatcher.callback4).toBeCalledWith(query, {handler: "handler"})
         });
     });
 });

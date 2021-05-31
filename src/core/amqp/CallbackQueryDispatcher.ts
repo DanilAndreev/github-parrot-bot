@@ -192,7 +192,7 @@ namespace CallbackQueryDispatcher {
             const metadata: Set<CallbackQueryHandlerMeta> =
                 Reflect.getMetadata("callback-query-handlers", target) || new Set();
             metadata.add({
-                callback: target[propertyKey],
+                callback: target[propertyKey].bind(target),
                 options: options || {},
                 pattern: pattern as string[],
             });
