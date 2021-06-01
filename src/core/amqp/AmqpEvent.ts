@@ -27,13 +27,15 @@
 import JSONObject from "../interfaces/JSONObject";
 import AmqpDispatcher from "./AmqpDispatcher";
 import ApplicationContext from "../interfaces/ApplicationContext";
+import Contextable from "../interfaces/Contextable";
+import Destructable from "../interfaces/Destructable";
 
 /**
  * AmqpEvent - base class for AMQP events.
  * @class
  * @author Danil Andreev
  */
-abstract class AmqpEvent {
+abstract class AmqpEvent extends Contextable<ApplicationContext> {
     /**
      * type - event type.
      */
@@ -50,6 +52,10 @@ abstract class AmqpEvent {
      * queue - default AMQP queue name for event enqueuing.
      */
     protected queue?: string;
+    /**
+     * context - application context.
+     */
+    private context?: ApplicationContext;
 
     /**
      * Creates an instance of AmqpEvent.
@@ -59,14 +65,14 @@ abstract class AmqpEvent {
      * @author Danil Andreev
      */
     protected constructor(type?: string, options?: AmqpEvent.Options) {
+        super();
         this.type = type || AmqpEvent.type;
         this.expiration = options?.expiration;
         this.queue = options?.queue;
     }
 
-    public async enqueue(dispathcer: AmqpDispatcher, queue?: string): Promise<AmqpEvent> {
-        const applicationContext: ApplicationContext | undefined = Reflect.getMetadata("application-context", this);
-        const targetDispatcher: AmqpDispatcher | undefined = dispathcer || applicationContext;
+    public async enqueue(dispatcher?: AmqpDispatcher, queue?: string): Promise<AmqpEvent> {
+        const targetDispatcher: AmqpDispatcher | undefined | null = dispatcher || this.context?.amqpDispatcher;
         if (!targetDispatcher) throw new ReferenceError(`You must specify amqp dispatcher for enqueuing.`);
         const targetQueue: string | undefined = this.queue || queue;
         if (!targetQueue) throw new ReferenceError(`You must specify queue name for enqueuing.`);
@@ -122,6 +128,18 @@ abstract class AmqpEvent {
         return {
             type: this.getType(),
         };
+    }
+
+    public getContext(): Readonly<ApplicationContext | undefined> {
+        return this.context;
+    }
+
+    public setContext(context: Readonly<ApplicationContext>): AmqpEvent {
+        return this;
+    }
+
+    destruct(): void {
+        this.context = undefined;
     }
 }
 

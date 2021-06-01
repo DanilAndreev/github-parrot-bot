@@ -24,7 +24,13 @@
  * SOFTWARE.
  */
 
+import Destructable from "./Destructable";
 
-"use strict";
-import "reflect-metadata";
-jest.mock("../src/core/logger/Logger");
+export default abstract class Contextable<T extends object> implements Destructable {
+    public abstract getContext(): Readonly<T | undefined>;
+
+    //TODO: fix return type.
+    public abstract setContext(context: Readonly<T>): any;
+
+    public abstract destruct(): void | Promise<void>;
+}

@@ -24,6 +24,7 @@
  * SOFTWARE.
  */
 
+"use strict";
 
 import SystemConfig from "./core/SystemConfig";
 import config from "./config";

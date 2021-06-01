@@ -33,14 +33,15 @@ import ChatCommandEvent from "../events/telegram/ChatCommandEvent";
 import TelegramEventEvent from "../events/telegram/TelegramEventEvent";
 import BotCommand from "./BotCommand";
 import Metricable from "../interfaces/Metricable";
-import Destructable from "../interfaces/Destructable";
+import Contextable from "../interfaces/Contextable";
+import ApplicationContext from "../interfaces/ApplicationContext";
 
 /**
  * Bot - class for telegram bot api.
  * @class
  * @author Danil Andreev
  */
-class Bot extends TelegramBot implements Metricable, Destructable {
+class Bot extends TelegramBot implements Metricable, Contextable<ApplicationContext> {
     // /**
     //  * current - current class instance. Singleton.
     //  */
@@ -60,6 +61,8 @@ class Bot extends TelegramBot implements Metricable, Destructable {
      * metricsInterval - Interval for calculating metrics.
      */
     public readonly metricsInterval: NodeJS.Timeout;
+
+    private context: ApplicationContext | undefined;
 
     /**
      * Creates an instance of Bot.
@@ -203,6 +206,13 @@ class Bot extends TelegramBot implements Metricable, Destructable {
 
     public async destruct(): Promise<void> {
         await this.stopPolling();
+    }
+
+    getContext(): Readonly<ApplicationContext | undefined> {
+        return undefined;
+    }
+
+    setContext(context: Readonly<ApplicationContext>): any {
     }
 }
 
