@@ -34,6 +34,7 @@ import {getConnection} from "typeorm";
 import AmqpDispatcher from "../../core/amqp/AmqpDispatcher";
 import PullRequest from "../../entities/PullRequest";
 import BotSingleton from "../../classes/BotSingleton";
+import AmqpDispatcherSingleton from "../../classes/AmqpDispathcerSingleton";
 
 @WebHookAmqpHandler.Handler(QUEUES.PULL_REQUEST_SHOW_QUEUE, 10)
 @Reflect.metadata("amqp-handler-type", "draw-event-handler")
@@ -97,7 +98,8 @@ export default class DrawPullRequestHandler extends AmqpHandler {
             } catch (err) {
                 if (!etelegramIgnore(err)) {
                     if (entity.chatMessage) await entity.chatMessage.remove();
-                    await AmqpDispatcher.getCurrent().sendToQueue(QUEUES.PULL_REQUEST_SHOW_QUEUE, content);
+                    const amqpDispatcher: AmqpDispatcher = await AmqpDispatcherSingleton.getCurrent()
+                    await amqpDispatcher.sendToQueue(QUEUES.PULL_REQUEST_SHOW_QUEUE, content);
                 }
             }
         }

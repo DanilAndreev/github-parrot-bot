@@ -34,6 +34,7 @@ import {Logger} from "../logger/Logger";
 import FatalError from "../errors/FatalError";
 import Metricable from "../interfaces/Metricable";
 import Destructable from "../interfaces/Destructable";
+import AmqpEvent from "./AmqpEvent";
 
 /**
  * AmqpDispatcher - dispatcher for AMQP handlers.
@@ -41,10 +42,10 @@ import Destructable from "../interfaces/Destructable";
  * @author Danil Andreev
  */
 class AmqpDispatcher implements Metricable, Destructable {
-    /**
-     * current - current class instance. Singleton.
-     */
-    protected static current: AmqpDispatcher;
+    // /**
+    //  * current - current class instance. Singleton.
+    //  */
+    // protected static current: AmqpDispatcher;
 
     /**
      * handlers - AMQP handlers connected to dispathcer.
@@ -80,7 +81,6 @@ class AmqpDispatcher implements Metricable, Destructable {
      */
     constructor(connection: Connection) {
         this.connection = connection;
-
         this.metricsActive = 0;
         this.metricsPrev = 0;
         this.metricsInterval = setInterval(() => {
@@ -99,6 +99,7 @@ class AmqpDispatcher implements Metricable, Destructable {
                 throw error;
             });
         }
+        Logger.debug(`Initialized AMQP dispatcher.`);
     }
 
     /**
@@ -162,30 +163,41 @@ class AmqpDispatcher implements Metricable, Destructable {
     }
 
     /**
-     * init - initializes AmqpDispatcher.
-     * @constructor
+     * enqueue - enqueues target Amqp event to AMQP queue.
+     * @method
+     * @param event - Amqp event.
+     * @param [queue] - target queue.
      * @author Danil Andreev
      */
-    public static async init(): Promise<AmqpDispatcher> {
-        // await this.getCurrent().destruct();
-        try {
-            Logger.debug(`Initialized AMQP dispatcher.`);
-            const connection: Connection = await Amqp.connect(SystemConfig.getConfig<Config>().amqp.connect);
-            AmqpDispatcher.current = new AmqpDispatcher(connection);
-            return AmqpDispatcher.current;
-        } catch (error) {
-            throw new FatalError("Failed to connect to AMQP server:", error);
-        }
+    public async enqueue(event: AmqpEvent, queue?: string) {
+        await event.enqueue(this, queue);
     }
 
-    /**
-     * getCurrent - returns current instance of dispatcher.
-     * @method
-     * @author Danil Andreev
-     */
-    public static getCurrent(): AmqpDispatcher {
-        return this.current;
-    }
+    // /**
+    //  * init - initializes AmqpDispatcher.
+    //  * @constructor
+    //  * @author Danil Andreev
+    //  */
+    // public static async init(): Promise<AmqpDispatcher> {
+    //     // await this.getCurrent().destruct();
+    //     try {
+    //         Logger.debug(`Initialized AMQP dispatcher.`);
+    //         const connection: Connection = await Amqp.connect(SystemConfig.getConfig<Config>().amqp.connect);
+    //         AmqpDispatcher.current = new AmqpDispatcher(connection);
+    //         return AmqpDispatcher.current;
+    //     } catch (error) {
+    //         throw new FatalError("Failed to connect to AMQP server:", error);
+    //     }
+    // }
+
+    // /**
+    //  * getCurrent - returns current instance of dispatcher.
+    //  * @method
+    //  * @author Danil Andreev
+    //  */
+    // public static getCurrent(): AmqpDispatcher {
+    //     return this.current;
+    // }
 
     /**
      * getConnection - returns AMQP connection object.

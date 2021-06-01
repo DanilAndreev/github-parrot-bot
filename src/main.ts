@@ -26,7 +26,6 @@
 
 import {setupDbConnection} from "./core/DataBase";
 import WebServer from "./core/webserver/WebServer";
-import AmqpDispatcher from "./core/amqp/AmqpDispatcher";
 import IssuesGarbageCollector from "./chrono/IssuesGarbageCollector";
 import PullRequestsGarbageCollector from "./chrono/PullRequestsGarbageCollector";
 import CheckSuitsGarbageCollector from "./chrono/CheckSuitsGarbageCollector";
@@ -37,6 +36,7 @@ import FatalError from "./core/errors/FatalError";
 import Globals from "./Globals";
 import destructService from "./utils/destructService";
 import BotSingleton from "./classes/BotSingleton";
+import AmqpDispatcherSingleton from "./classes/AmqpDispathcerSingleton";
 
 /**
  * requiredFor - function, designed to determine if some functional is required.
@@ -94,7 +94,7 @@ export default async function main(): Promise<void> {
                 "drawEventsHandlers"
             )
         ) {
-            Globals.amqpDispatcher = await AmqpDispatcher.init();
+            Globals.amqpDispatcher = await AmqpDispatcherSingleton.getCurrent();
         }
 
         Globals.pulseWebServer = new WebServer(SystemConfig.getConfig<Config>().pulseWebServer);

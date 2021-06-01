@@ -34,6 +34,7 @@ import {getConnection} from "typeorm";
 import AmqpDispatcher from "../../core/amqp/AmqpDispatcher";
 import CheckSuite from "../../entities/CheckSuite";
 import BotSingleton from "../../classes/BotSingleton";
+import AmqpDispatcherSingleton from "../../classes/AmqpDispathcerSingleton";
 
 @WebHookAmqpHandler.Handler(QUEUES.CHECK_SUITE_SHOW_QUEUE, 10)
 @Reflect.metadata("amqp-handler-type", "draw-event-handler")
@@ -48,7 +49,8 @@ export default class DrawCheckSuiteHandler extends AmqpHandler {
         if (!entity) return;
 
         if (entity.pullRequest) {
-            await AmqpDispatcher.getCurrent().sendToQueue(
+            const amqpDispatcher: AmqpDispatcher = await AmqpDispatcherSingleton.getCurrent()
+            await amqpDispatcher.sendToQueue(
                 QUEUES.CHECK_SUITE_SHOW_QUEUE,
                 {pullRequest: entity.pullRequest.id},
                 {expiration: 1000 * 60 * 60}
@@ -82,7 +84,8 @@ export default class DrawCheckSuiteHandler extends AmqpHandler {
             } catch (err) {
                 if (!etelegramIgnore(err)) {
                     if (entity.chatMessage) await entity.chatMessage.remove();
-                    await AmqpDispatcher.getCurrent().sendToQueue(QUEUES.CHECK_SUITE_SHOW_QUEUE, content);
+                    const amqpDispatcher: AmqpDispatcher = await AmqpDispatcherSingleton.getCurrent()
+                    await amqpDispatcher.sendToQueue(QUEUES.CHECK_SUITE_SHOW_QUEUE, content);
                 }
             }
         }

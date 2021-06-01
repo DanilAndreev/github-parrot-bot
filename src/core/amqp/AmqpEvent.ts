@@ -26,6 +26,7 @@
 
 import JSONObject from "../interfaces/JSONObject";
 import AmqpDispatcher from "./AmqpDispatcher";
+import ApplicationContext from "../interfaces/ApplicationContext";
 
 /**
  * AmqpEvent - base class for AMQP events.
@@ -63,10 +64,13 @@ abstract class AmqpEvent {
         this.queue = options?.queue;
     }
 
-    public async enqueue(queue?: string): Promise<AmqpEvent> {
+    public async enqueue(dispathcer: AmqpDispatcher, queue?: string): Promise<AmqpEvent> {
+        const applicationContext: ApplicationContext | undefined = Reflect.getMetadata("application-context", this);
+        const targetDispatcher: AmqpDispatcher | undefined = dispathcer || applicationContext;
+        if (!targetDispatcher) throw new ReferenceError(`You must specify amqp dispatcher for enqueuing.`);
         const targetQueue: string | undefined = this.queue || queue;
         if (!targetQueue) throw new ReferenceError(`You must specify queue name for enqueuing.`);
-        await AmqpDispatcher.getCurrent().sendToQueue(targetQueue, this.serialize(), {expiration: this.expiration});
+        await targetDispatcher.sendToQueue(targetQueue, this.serialize(), {expiration: this.expiration});
         return this;
     }
 

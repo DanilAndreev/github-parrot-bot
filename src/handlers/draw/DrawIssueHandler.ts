@@ -34,6 +34,7 @@ import {Message} from "node-telegram-bot-api";
 import {getConnection} from "typeorm";
 import AmqpDispatcher from "../../core/amqp/AmqpDispatcher";
 import BotSingleton from "../../classes/BotSingleton";
+import AmqpDispatcherSingleton from "../../classes/AmqpDispathcerSingleton";
 
 @WebHookAmqpHandler.Handler(QUEUES.ISSUE_SHOW_QUEUE, 10)
 @Reflect.metadata("amqp-handler-type", "draw-event-handler")
@@ -97,7 +98,8 @@ export default class DrawIssueHandler extends AmqpHandler {
             } catch (err) {
                 if (!etelegramIgnore(err)) {
                     if (entity.chatMessage) await entity.chatMessage.remove();
-                    await AmqpDispatcher.getCurrent().sendToQueue(QUEUES.ISSUE_SHOW_QUEUE, content);
+                    const amqpDispatcher: AmqpDispatcher = await AmqpDispatcherSingleton.getCurrent()
+                    await amqpDispatcher.sendToQueue(QUEUES.ISSUE_SHOW_QUEUE, content);
                 }
             }
         }

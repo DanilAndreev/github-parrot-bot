@@ -24,11 +24,19 @@
  * SOFTWARE.
  */
 
-/**
- * Singleton - interface for singleton classes.
- * @interface
- * @author Danil Andreev
- */
-export default interface Singleton<T> {
-    getCurrent(): T | Promise<T>;
+import Bot from "../bot/Bot";
+import AmqpDispatcher from "../amqp/AmqpDispatcher";
+import WebServer from "../webserver/WebServer";
+import Chrono from "../Chrono";
+import {Connection} from "typeorm";
+
+export default interface ApplicationContext {
+    webHookServer?: WebServer | null;
+    telegramBot?: Bot | null;
+    pulseWebServer?: WebServer | null;
+    amqpDispatcher?: AmqpDispatcher | null;
+    checkSuitsGarbageCollector?: Chrono | null;
+    issuesGarbageCollector?: Chrono | null;
+    pullRequestsGarbageCollector?: Chrono | null;
+    dbConnection?: Connection | null;
 }

@@ -24,11 +24,32 @@
  * SOFTWARE.
  */
 
-/**
- * Singleton - interface for singleton classes.
- * @interface
- * @author Danil Andreev
- */
-export default interface Singleton<T> {
-    getCurrent(): T | Promise<T>;
+import AmqpDispatcher from "../core/amqp/AmqpDispatcher";
+import StaticImplements from "../core/utils/staticImplements";
+import Singleton from "../core/interfaces/Singleton";
+import * as Amqp from "amqplib";
+import {Connection} from "amqplib";
+import SystemConfig from "../core/SystemConfig";
+import Config from "../interfaces/Config";
+import FatalError from "../core/errors/FatalError";
+
+@StaticImplements<Singleton<AmqpDispatcher>>()
+export default class AmqpDispatcherSingleton extends AmqpDispatcher {
+    protected static instance: AmqpDispatcher;
+
+    protected constructor(connection: Amqp.Connection) {
+        super(connection);
+    }
+
+    public static async getCurrent(): Promise<AmqpDispatcher> {
+        if (!this.instance) {
+            try {
+                const connection: Connection = await Amqp.connect(SystemConfig.getConfig<Config>().amqp.connect);
+                this.instance = new AmqpDispatcher(connection);
+            } catch (error) {
+                throw new FatalError("Failed to connect to AMQP server:", error);
+            }
+        }
+        return this.instance;
+    }
 }

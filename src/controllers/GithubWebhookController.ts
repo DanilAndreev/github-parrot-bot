@@ -35,6 +35,7 @@ import HttpError from "../core/errors/HttpError";
 import Ajv, {ValidateFunction} from "ajv";
 import addAjvFormats from "ajv-formats";
 import * as githubWebhookSchema from "@octokit/webhooks-schemas";
+import AmqpDispatcherSingleton from "../classes/AmqpDispathcerSingleton";
 
 
 /**
@@ -72,12 +73,13 @@ class GithubWebhookController extends Controller {
     @Controller.RouteValidation(GithubWebhookController.webhookValidateMiddleware)
     public async webhookEvent(ctx: Context): Promise<void> {
         try {
+            const amqpDispatcher = await AmqpDispatcherSingleton.getCurrent();
             const payload: JSONObject = ctx.request.body;
             const event: string | undefined = ctx.request.get("x-github-event");
             Logger.debug(`Got WebHook message. Event: ${event || "NOT PASSED"}. Origin: ${ctx.req.url}`);
             if (!event) throw new Error(`Failed to get event from "x-github-event" header.`);
             if (SystemConfig.getConfig<Config>().webHookServer.acceptEvents.includes(event))
-                await AmqpDispatcher.getCurrent().sendToQueue(event, {payload, ctx}, {expiration: 1000 * 60 * 30});
+                await amqpDispatcher.sendToQueue(event, {payload, ctx}, {expiration: 1000 * 60 * 30});
             else throw new Error(`Event ${event} is not supported`);
             ctx.status = 200;
         } catch (error) {
