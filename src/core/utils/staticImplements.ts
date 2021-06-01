@@ -24,22 +24,11 @@
  * SOFTWARE.
  */
 
-import {ChatMember} from "node-telegram-bot-api";
-import BotSingleton from "../classes/BotSingleton";
-
 /**
- * checkAdmin - ckecks if member is a chat admin or not.
+ * StaticImplements - decorator for static methods implementation with interface.
  * @function
- * @param username - member telegram username.
- * @param message - Chat message.
  * @author Danil Andreev
  */
-export default async function checkAdmin(username: string, message): Promise<boolean> {
-    try {
-        const admins: ChatMember[] = await BotSingleton.getCurrent().getChatAdministrators(message.chat.id);
-        if (admins.find(member => member.user.username === username)) return true;
-    } catch (error) {
-        if (message.chat.username === username) return true;
-    }
-    return false;
+export default function StaticImplements<T>() {
+    return <U extends T>(classConstructor: U) => {classConstructor};
 }

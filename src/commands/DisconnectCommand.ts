@@ -29,8 +29,8 @@ import {ChatMember, Message} from "node-telegram-bot-api";
 import Collaborator from "../entities/Collaborator";
 import CommandError from "../core/errors/CommandError";
 import JSONObject from "../core/interfaces/JSONObject";
-import Bot from "../core/bot/Bot";
 import Chat from "../entities/Chat";
+import BotSingleton from "../classes/BotSingleton";
 
 /**
  * Handler for command:
@@ -64,7 +64,7 @@ export default class DisconnectCommand extends BotCommand {
 
         if (opts.user) {
             try {
-                const chatMember: ChatMember = await Bot.getCurrent().getChatMember(chatId, String(telegramId));
+                const chatMember: ChatMember = await BotSingleton.getCurrent().getChatMember(chatId, String(telegramId));
                 telegramName = chatMember.user.username || chatMember.user.first_name;
             } catch (error) {
                 throw new CommandError(`Unable to get telegram user with id: ${telegramId}.`);
@@ -91,7 +91,7 @@ export default class DisconnectCommand extends BotCommand {
 
         if (opts.user) {
             try {
-                const chatMember: ChatMember = await Bot.getCurrent().getChatMember(chatId, String(telegramId));
+                const chatMember: ChatMember = await BotSingleton.getCurrent().getChatMember(chatId, String(telegramId));
                 telegramName = chatMember.user.username || chatMember.user.first_name;
             } catch (error) {
                 throw new CommandError(`Unable to get telegram user with id: ${telegramId}.`);

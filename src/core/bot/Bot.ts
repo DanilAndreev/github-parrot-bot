@@ -41,10 +41,10 @@ import Destructable from "../interfaces/Destructable";
  * @author Danil Andreev
  */
 class Bot extends TelegramBot implements Metricable, Destructable {
-    /**
-     * current - current class instance. Singleton.
-     */
-    protected static current: Bot;
+    // /**
+    //  * current - current class instance. Singleton.
+    //  */
+    // protected static current: Bot;
 
     /**
      * metricsPrev - quantity of commands for last 5 seconds.
@@ -67,7 +67,7 @@ class Bot extends TelegramBot implements Metricable, Destructable {
      * @param polling - Updates getting method.
      * @protected
      */
-    protected constructor(token?: string, polling: boolean = false) {
+    public constructor(token?: string, polling: boolean = false) {
         if (!token) throw new Error(`FatalError: you must specify token to run this app! "token" = "${token}".`);
         Logger.info(`Creating telegram bot. Polling: ${polling}. Tag: ${SystemConfig.getConfig<Config>().bot?.tag}`);
         super(token, {polling});
@@ -167,26 +167,26 @@ class Bot extends TelegramBot implements Metricable, Destructable {
         await new TelegramEventEvent("new_chat_members", message).enqueue();
     }
 
-    /**
-     * init - initializes an instance of Bot and stores it in current.
-     * @param token - Telegram bot token.
-     * @param polling - Updates getting method.
-     */
-    public static init(token?: string, polling?: boolean): Bot {
-        Logger.silly(`Bot initialization...`);
-        if (this.current) throw new ReferenceError("Class instance is already created.");
-        this.current = new Bot(token, polling);
-        return this.current;
-    }
+    // /**
+    //  * init - initializes an instance of Bot and stores it in current.
+    //  * @param token - Telegram bot token.
+    //  * @param polling - Updates getting method.
+    //  */
+    // public static init(token?: string, polling?: boolean): Bot {
+    //     Logger.silly(`Bot initialization...`);
+    //     if (this.current) throw new ReferenceError("Class instance is already created.");
+    //     this.current = new Bot(token, polling);
+    //     return this.current;
+    // }
 
-    /**
-     * getCurrent - returns current instance of Bot.
-     * If bot hasn't been initialized - it will be initialized automatically.
-     */
-    public static getCurrent(): Bot {
-        if (!this.current) this.init();
-        return this.current;
-    }
+    // /**
+    //  * getCurrent - returns current instance of Bot.
+    //  * If bot hasn't been initialized - it will be initialized automatically.
+    //  */
+    // public static getCurrent(): Bot {
+    //     if (!this.current) this.init();
+    //     return this.current;
+    // }
 
     /**
      * getMetrics - returns quantity of handled commands from the telegram.

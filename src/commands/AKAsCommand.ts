@@ -29,8 +29,8 @@ import {ChatMember, Message} from "node-telegram-bot-api";
 import Collaborator from "../entities/Collaborator";
 import JSONObject from "../core/interfaces/JSONObject";
 import CommandError from "../core/errors/CommandError";
-import Bot from "../core/bot/Bot";
 import Chat from "../entities/Chat";
+import BotSingleton from "../classes/BotSingleton";
 
 /**
  * Handler for command:
@@ -63,7 +63,7 @@ export default class AKAsCommand extends BotCommand {
         const text: string[] = await Promise.all(
             result.map(async (collaboration: Collaborator) => {
                 try {
-                    const chatMember: ChatMember = await Bot.getCurrent().getChatMember(
+                    const chatMember: ChatMember = await BotSingleton.getCurrent().getChatMember(
                         chatId,
                         "" + collaboration.telegramId
                     );

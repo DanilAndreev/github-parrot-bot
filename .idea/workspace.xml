@@ -16,11 +16,23 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[TESTING] Added script to package.json.">
-      <change afterPath="$PROJECT_DIR$/tests/__mocks__/node-telegram-bot-api.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/core/bot/Bot.test.ts" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Bot] Adding unit tests. WIP">
+      <change afterPath="$PROJECT_DIR$/src/classes/BotSingleton.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/interfaces/Singleton.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/utils/staticImplements.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/DisconnectCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/DisconnectCommand.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/bot/Bot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bot/Bot.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawCheckSuiteHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawCheckSuiteHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawIssueHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawMessageHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawPullRequestHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawPushHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawPushHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/draw/DrawWebHookSettingsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/draw/DrawWebHookSettingsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/checkAdmin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/checkAdmin.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +113,7 @@
       <recent name="D:\Projects\github-parrot-bot" />
     </key>
   </component>
-  <component name="RunManager" selected="Jest.All Tests">
+  <component name="RunManager" selected="Node.js.Run with ts-node">
     <list>
       <item itemvalue="Jest.All Tests" />
       <item itemvalue="Node.js.COMMANDS_EVENTS_HANDLERS" />
@@ -190,13 +202,6 @@
       <workItem from="1622332540706" duration="5000" />
       <workItem from="1622372232696" duration="24592000" />
       <workItem from="1622468932369" duration="3086000" />
-    </task>
-    <task id="LOCAL-00089" summary="[Logger] Added database support.">
-      <created>1617982173151</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1617982173151</updated>
     </task>
     <task id="LOCAL-00090" summary="[Entities] Added cascade deletion to message tables.">
       <created>1618012069468</created>
@@ -534,7 +539,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622472586063</updated>
     </task>
-    <option name="localTasksCounter" value="138" />
+    <task id="LOCAL-00138" summary="[Bot] Adding unit tests. WIP">
+      <created>1622505197622</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1622505197623</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -565,7 +577,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[GLOBAL] Refactored core directories." />
     <MESSAGE value="[WebHookSettings] Added interactive settings." />
     <MESSAGE value="[Handler] Fixed TODOs." />
     <MESSAGE value="[BotCommand] (issue #32) Changed meta structure." />
@@ -590,7 +601,8 @@
     <MESSAGE value="[package] Updated packages." />
     <MESSAGE value="[SystemConfig] Added unit tests." />
     <MESSAGE value="[TESTING] Added script to package.json." />
-    <option name="LAST_COMMIT_MESSAGE" value="[TESTING] Added script to package.json." />
+    <MESSAGE value="[Bot] Adding unit tests. WIP" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Bot] Adding unit tests. WIP" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -624,16 +636,6 @@
           <url>file://$PROJECT_DIR$/src/commands/WebHookSettingsCommand.ts</url>
           <line>47</line>
           <option name="timeStamp" value="61" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/handlers/draw/DrawWebHookSettingsHandler.ts</url>
-          <line>68</line>
-          <option name="timeStamp" value="62" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/handlers/draw/DrawWebHookSettingsHandler.ts</url>
-          <line>66</line>
-          <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main.ts</url>

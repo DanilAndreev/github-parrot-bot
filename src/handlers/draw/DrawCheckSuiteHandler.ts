@@ -26,7 +26,6 @@
 
 import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
 import AmqpHandler from "../../core/amqp/AmqpHandler";
-import Bot from "../../core/bot/Bot";
 import loadTemplate from "../../utils/loadTemplate";
 import etelegramIgnore from "../../utils/etelegramIgnore";
 import {QUEUES} from "../../Globals";
@@ -34,6 +33,7 @@ import {Message} from "node-telegram-bot-api";
 import {getConnection} from "typeorm";
 import AmqpDispatcher from "../../core/amqp/AmqpDispatcher";
 import CheckSuite from "../../entities/CheckSuite";
+import BotSingleton from "../../classes/BotSingleton";
 
 @WebHookAmqpHandler.Handler(QUEUES.CHECK_SUITE_SHOW_QUEUE, 10)
 @Reflect.metadata("amqp-handler-type", "draw-event-handler")
@@ -65,7 +65,7 @@ export default class DrawCheckSuiteHandler extends AmqpHandler {
             await getConnection().transaction(async transaction => {
                 if (entity) {
                     await transaction.save(checkSuiteMessage);
-                    const newMessage: Message = await Bot.getCurrent().sendMessage(entity.chat.chatId, text, {
+                    const newMessage: Message = await BotSingleton.getCurrent().sendMessage(entity.chat.chatId, text, {
                         parse_mode: "HTML",
                     });
                     checkSuiteMessage.messageId = newMessage.message_id;
@@ -74,7 +74,7 @@ export default class DrawCheckSuiteHandler extends AmqpHandler {
             });
         } catch (error) {
             try {
-                await Bot.getCurrent().editMessageText(text, {
+                await BotSingleton.getCurrent().editMessageText(text, {
                     chat_id: entity.chat.chatId,
                     message_id: entity.chatMessage.messageId,
                     parse_mode: "HTML",

@@ -27,7 +27,6 @@
 import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
 import {QUEUES} from "../../Globals";
 import AmqpHandler from "../../core/amqp/AmqpHandler";
-import Bot from "../../core/bot/Bot";
 import etelegramIgnore from "../../utils/etelegramIgnore";
 import AMQPAck from "../../core/errors/AMQPAck";
 import AMQPNack from "../../core/errors/AMQPNack";
@@ -38,6 +37,7 @@ import EditChatMessageTextEvent from "../../core/events/telegram/EditChatMessage
 import EditChatMessageReplyMarkupEvent from "../../core/events/telegram/EditChatMessageReplyMarkupEvent";
 import EditChatMessageLiveLocationEvent from "../../core/events/telegram/EditChatMessageLiveLocationEvent";
 import DeleteChatMessageEvent from "../../core/events/telegram/DeleteChatMessageEvent";
+import BotSingleton from "../../classes/BotSingleton";
 
 @WebHookAmqpHandler.Handler(QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE, 10)
 @Reflect.metadata("amqp-handler-type", "draw-event-handler")
@@ -67,10 +67,10 @@ class DrawMessageHandler extends AmqpHandler {
         message: AMQPMessage
     ): Promise<void | boolean> {
         try {
-            await Bot.getCurrent().sendMessage(event.chatId, event.text, event.options);
+            await BotSingleton.getCurrent().sendMessage(event.chatId, event.text, event.options);
         } catch {
             try {
-                await Bot.getCurrent().sendMessage(event.chatId, event.text, {
+                await BotSingleton.getCurrent().sendMessage(event.chatId, event.text, {
                     ...event.options,
                     reply_to_message_id: undefined,
                 });
@@ -85,12 +85,12 @@ class DrawMessageHandler extends AmqpHandler {
         message: AMQPMessage
     ): Promise<void | boolean> {
         try {
-            await Bot.getCurrent().editMessageText(event.text, event.options);
+            await BotSingleton.getCurrent().editMessageText(event.text, event.options);
         } catch (error) {
             if (!etelegramIgnore(error)) {
                 try {
                     if (event.options?.chat_id)
-                        await Bot.getCurrent().sendMessage(event.options.chat_id, event.text, event.options);
+                        await BotSingleton.getCurrent().sendMessage(event.options.chat_id, event.text, event.options);
                 } catch (err) {
                     throw new AMQPNack(
                         `Failed to edit telegram message ${event.options?.message_id}`,
@@ -106,7 +106,7 @@ class DrawMessageHandler extends AmqpHandler {
         message: AMQPMessage
     ): Promise<void | boolean> {
         try {
-            await Bot.getCurrent().editMessageReplyMarkup(event.replyMarkup, event.options);
+            await BotSingleton.getCurrent().editMessageReplyMarkup(event.replyMarkup, event.options);
         } catch (error) {
             if (!etelegramIgnore(error))
                 throw new AMQPNack(
@@ -121,7 +121,7 @@ class DrawMessageHandler extends AmqpHandler {
         message: AMQPMessage
     ): Promise<void | boolean> {
         try {
-            await Bot.getCurrent().editMessageLiveLocation(event.latitude, event.latitude, event.options);
+            await BotSingleton.getCurrent().editMessageLiveLocation(event.latitude, event.latitude, event.options);
         } catch (error) {
             if (!etelegramIgnore(error))
                 throw new AMQPNack(
@@ -136,11 +136,11 @@ class DrawMessageHandler extends AmqpHandler {
         message: AMQPMessage
     ): Promise<void | boolean> {
         try {
-            await Bot.getCurrent().deleteMessage(event.chatId, event.messageId, event.options);
+            await BotSingleton.getCurrent().deleteMessage(event.chatId, event.messageId, event.options);
         } catch {
             if (event.showMessageOnError) {
                 try {
-                    await Bot.getCurrent().sendMessage(
+                    await BotSingleton.getCurrent().sendMessage(
                         event.chatId,
                         "Warning: You should give permissions to delete messages for GitHub Tracker bot."
                     );

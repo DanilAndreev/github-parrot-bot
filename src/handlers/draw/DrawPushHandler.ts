@@ -29,7 +29,7 @@ import {QUEUES} from "../../Globals";
 import AmqpHandler from "../../core/amqp/AmqpHandler";
 import loadTemplate from "../../utils/loadTemplate";
 import DrawPushEvent from "../../events/draw/DrawPushEvent";
-import Bot from "../../core/bot/Bot";
+import BotSingleton from "../../classes/BotSingleton";
 
 @WebHookAmqpHandler.Handler(QUEUES.PUSH_SHOW_QUEUE, 10)
 @Reflect.metadata("amqp-handler-type", "draw-event-handler")
@@ -51,7 +51,7 @@ export default class DrawPushHandler extends AmqpHandler {
             .replace(/  +/g, " ")
             .replace(/\n +/g, "\n");
 
-        await Bot.getCurrent().sendMessage(content.chat, message, {
+        await BotSingleton.getCurrent().sendMessage(content.chat, message, {
             parse_mode: "HTML",
             reply_markup: {
                 inline_keyboard: [[{text: "View on GitHub", url: head_commit.url}]],

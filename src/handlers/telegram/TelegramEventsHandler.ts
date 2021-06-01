@@ -30,10 +30,10 @@ import {Message as AMQPMessage} from "amqplib";
 import {CallbackQuery, Message, User} from "node-telegram-bot-api";
 import Chat from "../../entities/Chat";
 import Collaborator from "../../entities/Collaborator";
-import Bot from "../../core/bot/Bot";
 import AMQPNack from "../../core/errors/AMQPNack";
 import CallbackQueryDispatcher from "../../core/amqp/CallbackQueryDispatcher";
 import TelegramEventEvent from "../../core/events/telegram/TelegramEventEvent";
+import BotSingleton from "../../classes/BotSingleton";
 
 @AmqpHandler.Handler(QUEUES.TELEGRAM_EVENTS_QUEUE, 10)
 @Reflect.metadata("amqp-handler-type", "telegram-events-handler")
@@ -57,7 +57,7 @@ export default class TelegramEventsHandler extends CallbackQueryDispatcher {
     protected async handleLeftChatMember(message: Message): Promise<void | boolean> {
         if (message.left_chat_member?.id) {
             const telegramId: number = message.left_chat_member.id;
-            const me: User = await Bot.getCurrent().getMe();
+            const me: User = await BotSingleton.getCurrent().getMe();
             if (telegramId == me.id) {
                 await Chat.delete({chatId: message.chat.id});
             } else {
@@ -69,7 +69,7 @@ export default class TelegramEventsHandler extends CallbackQueryDispatcher {
     protected async handleNewChatMember(message: Message): Promise<void | boolean> {
         for (const newChatMember of message.new_chat_members || []) {
             const telegramId: number = newChatMember.id;
-            const me: User = await Bot.getCurrent().getMe();
+            const me: User = await BotSingleton.getCurrent().getMe();
             if (telegramId == me.id) {
                 const chat: Chat = new Chat();
                 chat.chatId = message.chat.id;

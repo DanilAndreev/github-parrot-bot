@@ -25,7 +25,6 @@
  */
 
 import {setupDbConnection} from "./core/DataBase";
-import Bot from "./core/bot/Bot";
 import WebServer from "./core/webserver/WebServer";
 import AmqpDispatcher from "./core/amqp/AmqpDispatcher";
 import IssuesGarbageCollector from "./chrono/IssuesGarbageCollector";
@@ -37,6 +36,7 @@ import {Logger} from "./core/logger/Logger";
 import FatalError from "./core/errors/FatalError";
 import Globals from "./Globals";
 import destructService from "./utils/destructService";
+import BotSingleton from "./classes/BotSingleton";
 
 /**
  * requiredFor - function, designed to determine if some functional is required.
@@ -82,10 +82,7 @@ export default async function main(): Promise<void> {
             Globals.webHookServer = new WebServer(SystemConfig.getConfig<Config>().webHookServer);
         }
         if (requiredFor("drawEventsHandlers", "commandsProxy")) {
-            Globals.telegramBot = Bot.init(
-                SystemConfig.getConfig<Config>().bot.token,
-                SystemConfig.getConfig<Config>().system.commandsProxy
-            );
+            Globals.telegramBot = BotSingleton.getCurrent();
         }
 
         if (

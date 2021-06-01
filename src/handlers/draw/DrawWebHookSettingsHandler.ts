@@ -26,11 +26,11 @@
 
 import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
 import AmqpHandler from "../../core/amqp/AmqpHandler";
-import Bot from "../../core/bot/Bot";
 import {QUEUES} from "../../Globals";
 import {InlineKeyboardMarkup} from "node-telegram-bot-api";
 import DrawWebHookSettingsEvent from "../../events/draw/DrawWebHookSettingsEvent";
 import WebHook from "../../entities/WebHook";
+import BotSingleton from "../../classes/BotSingleton";
 
 @WebHookAmqpHandler.Handler(QUEUES.WEB_HOOK_SETTINGS_SHOW_QUEUE, 10)
 @Reflect.metadata("amqp-handler-type", "draw-event-handler")
@@ -76,7 +76,7 @@ export default class DrawWebHookSettingsHandler extends AmqpHandler {
 
         if (message) {
             try {
-                await Bot.getCurrent().editMessageText(`Settigns for ${entity.repository}`, {
+                await BotSingleton.getCurrent().editMessageText(`Settigns for ${entity.repository}`, {
                     chat_id: entity.chat.chatId,
                     message_id: message,
                     reply_markup: replyMarkup,
@@ -84,7 +84,7 @@ export default class DrawWebHookSettingsHandler extends AmqpHandler {
             } catch (error) {}
         } else {
             try {
-                await Bot.getCurrent().sendMessage(entity.chat.chatId, `Settigns for ${entity.repository}`, {
+                await BotSingleton.getCurrent().sendMessage(entity.chat.chatId, `Settigns for ${entity.repository}`, {
                     reply_markup: replyMarkup,
                 });
             } catch (error) {}
