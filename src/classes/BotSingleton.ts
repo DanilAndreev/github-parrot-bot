@@ -34,16 +34,13 @@ import Config from "../interfaces/Config";
 export default class BotSingleton extends Bot {
     protected static instance: Bot;
 
-    protected constructor(token?: string, polling: boolean = false) {
-        super(token, polling);
+    protected constructor(options: Bot.Options) {
+        super(options);
     }
 
     public static getCurrent(): Bot {
         if (!this.instance) {
-            this.instance = new Bot(
-                SystemConfig.getConfig<Config>().bot.token,
-                SystemConfig.getConfig<Config>().system.commandsProxy
-            );
+            this.instance = new Bot(SystemConfig.getConfig<Config>().bot);
         }
         return this.instance;
     }

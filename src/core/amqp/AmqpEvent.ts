@@ -25,7 +25,8 @@
  */
 
 import JSONObject from "../interfaces/JSONObject";
-import AmqpDispatcher from "./AmqpDispatcher";
+import * as Amqp from "amqplib";
+import {Logger} from "../logger/Logger";
 
 /**
  * AmqpEvent - base class for AMQP events.
@@ -44,11 +45,15 @@ abstract class AmqpEvent {
     /**
      * expiration - event expiration time.
      */
-    protected expiration: number | undefined;
+    protected expiration?: number;
     /**
      * queue - default AMQP queue name for event enqueuing.
      */
     protected queue?: string;
+
+    protected connection?: Amqp.Connection;
+
+    protected static connection?: Amqp.Connection | Function;
 
     /**
      * Creates an instance of AmqpEvent.
@@ -61,12 +66,39 @@ abstract class AmqpEvent {
         this.type = type || AmqpEvent.type;
         this.expiration = options?.expiration;
         this.queue = options?.queue;
+        this.connection = options?.connection || this.getDefaultConnection();
     }
 
-    public async enqueue(queue?: string): Promise<AmqpEvent> {
-        const targetQueue: string | undefined = this.queue || queue;
-        if (!targetQueue) throw new ReferenceError(`You must specify queue name for enqueuing.`);
-        await AmqpDispatcher.getCurrent().sendToQueue(targetQueue, this.serialize(), {expiration: this.expiration});
+    private getDefaultConnection(): Amqp.Connection | undefined {
+        const thisStatic: typeof AmqpEvent = this.constructor as typeof AmqpEvent;
+        switch (typeof thisStatic.connection) {
+            case "function":
+                return thisStatic.connection();
+            case "object":
+                return thisStatic.connection;
+            default:
+                return;
+        }
+    }
+
+    public async enqueue(): Promise<AmqpEvent> {
+        if (!this.connection) throw new ReferenceError(`You must specify AMQP connection before enqueuing.`);
+        if (!this.queue) throw new ReferenceError(`You must specify queue name for enqueuing.`);
+        Logger.debug(`Sent message to AMQP queue: "${this.queue}".`);
+        const channel: Amqp.Channel = await this.connection.createChannel();
+        await channel.assertQueue(this.queue);
+        channel.sendToQueue(this.queue, Buffer.from(JSON.stringify(this.serialize())), {expiration: this.expiration});
+        await channel.close();
+        return this;
+    }
+
+    public setConnection(connection: Amqp.Connection): AmqpEvent {
+        this.connection = connection;
+        return this;
+    }
+
+    public setQueue(queue: string): AmqpEvent {
+        this.queue = queue;
         return this;
     }
 
@@ -123,6 +155,7 @@ abstract class AmqpEvent {
 
 namespace AmqpEvent {
     export interface Options {
+        connection?: Amqp.Connection;
         expiration?: number;
         queue?: string;
     }

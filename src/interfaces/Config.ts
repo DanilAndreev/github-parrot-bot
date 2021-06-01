@@ -31,19 +31,20 @@ import * as AMQP from "amqplib";
 import Constructable from "../core/interfaces/Constructable";
 import Controller from "../core/webserver/Controller";
 import WebServer from "../core/webserver/WebServer";
+import Bot from "../core/bot/Bot";
 
 namespace Config {
-    /**
-     * Bot - telegram bot configuration settings.
-     * @interface
-     * @author Danil Andreev
-     */
-    export interface Bot {
-        token: string;
-        tag?: string;
-        commands: typeof BotCommand[];
-        callbackQueryHandlers?: Constructable[];
-    }
+    // /**
+    //  * Bot - telegram bot configuration settings.
+    //  * @interface
+    //  * @author Danil Andreev
+    //  */
+    // export interface Bot {
+    //     token: string;
+    //     tag?: string;
+    //     commands: typeof BotCommand[];
+    //     callbackQueryHandlers?: Constructable[];
+    // }
 
     /**
      * Server - webhooks processing web server configuration settings.
@@ -93,7 +94,7 @@ namespace Config {
  * @author Danil Andreev
  */
 interface Config {
-    bot: Config.Bot;
+    bot: Bot.Options;
     db: ConnectionOptions;
     webHookServer: Config.WebHookServer;
     pulseWebServer: WebServer.Config;

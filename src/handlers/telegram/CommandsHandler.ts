@@ -28,17 +28,20 @@ import AmqpHandler from "../../core/amqp/AmqpHandler";
 import {Message} from "node-telegram-bot-api";
 import {QUEUES} from "../../Globals";
 import BotCommand from "../../core/bot/BotCommand";
-import config from "../../config";
+import * as Amqp from "amqplib";
 import SendChatMessageEvent from "../../core/events/telegram/SendChatMessageEvent";
 
 @AmqpHandler.Handler(QUEUES.TELEGRAM_CHAT_COMMAND, 10)
 @Reflect.metadata("amqp-handler-type", "commands-event-handler")
 class CommandsHandler extends AmqpHandler {
     protected commands: BotCommand[] = [];
+    protected amqp: Amqp.Connection;
 
-    public constructor() {
+    public constructor(amqp: Amqp.Connection,commands: BotCommand[]) {
         super();
-        this.commands = config.bot.commands.map((CommandClass: typeof BotCommand) => new CommandClass());
+        this.amqp = amqp;
+        this.commands = commands;
+        // this.commands = config.bot.commands.map((CommandClass: typeof BotCommand) => new CommandClass());
     }
 
     protected async handle(content: CommandsHandler.CommandMessage): Promise<void | boolean> {
@@ -53,7 +56,9 @@ class CommandsHandler extends AmqpHandler {
         if (!flag) {
             await new SendChatMessageEvent(message.chat.id, "Invalid command.", {
                 reply_to_message_id: message.message_id,
-            }).enqueue();
+            })
+                .setConnection(this.amqp)
+                .enqueue();
         }
     }
 }

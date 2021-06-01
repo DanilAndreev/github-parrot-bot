@@ -32,6 +32,7 @@ import stringArgv from "string-argv";
 import JSONObject from "../interfaces/JSONObject";
 import {Logger} from "../logger/Logger";
 import SendChatMessageEvent from "../events/telegram/SendChatMessageEvent";
+import * as Amqp from "amqplib";
 
 /**
  * BotCommand - basic class for creating Telegram bot commands.
@@ -48,14 +49,20 @@ class BotCommand {
      * For example - "myCommand".
      */
     public pattern: string;
+    /**
+     * amqp - Amqp connection object.
+     */
+    protected amqp: Amqp.Connection;
 
     /**
      * Creates an instance of BotCommand.
      * @constructor
+     * @param amqp - Amqp connection object.
      * @author Danil Andreev
      */
-    public constructor() {
+    public constructor(amqp: Amqp.Connection) {
         this.pattern = "";
+        this.amqp = amqp;
     }
 
     protected createValidator(): commander.Command {
@@ -82,7 +89,7 @@ class BotCommand {
             validator.addOption(option);
         }
 
-        const helpText: {position: commander.AddHelpTextPosition, text: string} | undefined = Reflect.getMetadata(
+        const helpText: { position: commander.AddHelpTextPosition, text: string } | undefined = Reflect.getMetadata(
             "bot-command",
             this,
             "help-text"
@@ -141,7 +148,7 @@ class BotCommand {
                     await new SendChatMessageEvent(message.chat.id, result, {
                         parse_mode: "HTML",
                         reply_to_message_id: message.message_id,
-                    }).enqueue();
+                    }).setConnection(this.amqp).enqueue();
                 }
             } catch (error) {
                 if (error instanceof CommandError) {
@@ -149,11 +156,11 @@ class BotCommand {
                     await new SendChatMessageEvent(message.chat.id, "<i>Error:</i> \n" + out_message, {
                         parse_mode: "HTML",
                         reply_to_message_id: message.message_id,
-                    }).enqueue();
+                    }).setConnection(this.amqp).enqueue();
                 } else {
                     await new SendChatMessageEvent(message.chat.id, "Unrecognized error", {
                         reply_to_message_id: message.message_id,
-                    }).enqueue();
+                    }).setConnection(this.amqp).enqueue();
                 }
             }
         });
@@ -166,9 +173,11 @@ class BotCommand {
                 await new SendChatMessageEvent(
                     message.chat.id,
                     error.message + "\n\n" + validator.helpInformation()
-                ).enqueue();
+                ).setConnection(this.amqp).enqueue();
             } else {
-                await new SendChatMessageEvent(message.chat.id, "Unrecognized error").enqueue();
+                await new SendChatMessageEvent(message.chat.id, "Unrecognized error")
+                    .setConnection(this.amqp)
+                    .enqueue();
             }
         }
     }

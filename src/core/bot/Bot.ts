@@ -27,13 +27,12 @@
 import * as TelegramBot from "node-telegram-bot-api";
 import {CallbackQuery} from "node-telegram-bot-api";
 import {Logger} from "../logger/Logger";
-import Config from "../../interfaces/Config";
-import SystemConfig from "../SystemConfig";
 import ChatCommandEvent from "../events/telegram/ChatCommandEvent";
 import TelegramEventEvent from "../events/telegram/TelegramEventEvent";
 import BotCommand from "./BotCommand";
 import Metricable from "../interfaces/Metricable";
 import Destructable from "../interfaces/Destructable";
+import * as Amqp from "amqplib";
 
 /**
  * Bot - class for telegram bot api.
@@ -61,46 +60,65 @@ class Bot extends TelegramBot implements Metricable, Destructable {
      */
     public readonly metricsInterval: NodeJS.Timeout;
 
+    protected options: Bot.Options;
+
     /**
      * Creates an instance of Bot.
      * @param token - Telegram bot token.
      * @param polling - Updates getting method.
      * @protected
      */
-    public constructor(token?: string, polling: boolean = false) {
+    public constructor(options: Bot.Options = {}) {
+        const {
+            token,
+            polling = false,
+            tag,
+            commands = [],
+            // callbackQueryHandlers,
+            metricsUpdateInterval,
+        } = options;
+
         if (!token) throw new Error(`FatalError: you must specify token to run this app! "token" = "${token}".`);
-        Logger.info(`Creating telegram bot. Polling: ${polling}. Tag: ${SystemConfig.getConfig<Config>().bot?.tag}`);
+        Logger.info(`Creating telegram bot. Polling: ${polling}. Tag: ${tag}`);
         super(token, {polling});
+        this.options = {...options};
 
         this.metricsActive = 0;
         this.metricsPrev = 0;
         this.metricsInterval = setInterval(() => {
             this.metricsPrev = this.metricsActive;
             this.metricsActive = 0;
-        }, SystemConfig.getConfig<Config>().system.metricsUpdateInterval);
+        }, metricsUpdateInterval || 10000);
 
-        this.addListener("left_chat_member", this.handleMemberLeftChat);
-        this.addListener("polling_error", (error: Error) => {
-            this.metricsActive++;
-            Logger.error("Polling error:", error);
-        });
-        this.addListener("callback_query", this.handleCallbackQuery);
-        Logger.silly(`Added listener of "left_chat_member" for bot.`);
-        this.addListener("new_chat_members", this.handleNewChatMember);
-        Logger.silly(`Added listener of "new_chat_members" for bot.`);
-        let regExp: RegExp = /^\/([^\s@]+)(?:\s)?(.*)?/;
-        if (SystemConfig.getConfig<Config>().bot.tag)
-            regExp = new RegExp(`^/([^\\s@]+)(?:${SystemConfig.getConfig<Config>().bot.tag})?(?:\\s)?(.*)?`);
-        this.onText(regExp, (message, match) => {
-            this.metricsActive++;
-            Logger.debug(`Got command from chat id: ${message.chat.id}. Command: "${match && match[0]}"`);
-            new ChatCommandEvent(message, match).enqueue().catch(Logger?.error);
-        });
-        Logger.silly(`Added listener for telegram messages.`);
-        if (polling)
+        if (polling) {
+            if (!options.connection)
+                throw new ReferenceError(`You have to specify AMQP connection to use polling.`)
+
+            this.addListener("left_chat_member", this.handleMemberLeftChat);
+            this.addListener("polling_error", (error: Error) => {
+                this.metricsActive++;
+                Logger.error("Polling error:", error);
+            });
+            this.addListener("callback_query", this.handleCallbackQuery);
+            Logger.silly(`Added listener of "left_chat_member" for bot.`);
+            this.addListener("new_chat_members", this.handleNewChatMember);
+            Logger.silly(`Added listener of "new_chat_members" for bot.`);
+            let regExp: RegExp = /^\/([^\s@]+)(?:\s)?(.*)?/;
+            if (tag)
+                regExp = new RegExp(`^/([^\\s@]+)(?:${tag})?(?:\\s)?(.*)?`);
+            this.onText(regExp, (message, match) => {
+                this.metricsActive++;
+                Logger.debug(`Got command from chat id: ${message.chat.id}. Command: "${match && match[0]}"`);
+                new ChatCommandEvent(message, match)
+                    .setConnection(options.connection as Amqp.Connection)
+                    .enqueue()
+                    .catch(Logger?.error);
+            });
+            Logger.silly(`Added listener for telegram messages.`);
             this.updateBotCommandsHelp().catch((error: Error) => {
                 Logger.error("Failed to update bot commands: " + error);
             });
+        }
     }
 
     /**
@@ -112,7 +130,10 @@ class Bot extends TelegramBot implements Metricable, Destructable {
     protected async handleCallbackQuery(query: CallbackQuery): Promise<void> {
         this.metricsActive++;
         Logger.debug(`Caught event "left_chat_member" on chat id ${query.message?.chat.id}: "${query.data}"`);
-        await new TelegramEventEvent("callback_query", query).setExpiration(100 * 60 * 2).enqueue();
+        await new TelegramEventEvent("callback_query", query)
+            .setConnection(this.options.connection as Amqp.Connection)
+            .setExpiration(100 * 60 * 2)
+            .enqueue();
     }
 
     /**
@@ -121,8 +142,9 @@ class Bot extends TelegramBot implements Metricable, Destructable {
      * @author Danil Andreev
      */
     protected async updateBotCommandsHelp(): Promise<boolean> {
+        if (!this.options.commands) return false;
         return await this.setMyCommands(
-            SystemConfig.getConfig<Config>().bot.commands
+            this.options.commands
                 .filter((command: typeof BotCommand) => !!Reflect.getMetadata("bot-command-name", command))
                 .map((command: typeof BotCommand) => {
                     const name: string = Reflect.getMetadata("bot-command-name", command);
@@ -134,7 +156,6 @@ class Bot extends TelegramBot implements Metricable, Destructable {
                     };
                 })
         );
-        return true;
     }
 
     /**
@@ -148,7 +169,9 @@ class Bot extends TelegramBot implements Metricable, Destructable {
         Logger.debug(
             `Caught event "left_chat_member" on chat id ${message.chat.id}. Member id: ${message.left_chat_member?.id}`
         );
-        await new TelegramEventEvent("left_chat_member", message).enqueue();
+        await new TelegramEventEvent("left_chat_member", message)
+            .setConnection(this.options.connection as Amqp.Connection)
+            .enqueue();
     }
 
     /**
@@ -164,7 +187,9 @@ class Bot extends TelegramBot implements Metricable, Destructable {
                 member => member.id
             )}.`
         );
-        await new TelegramEventEvent("new_chat_members", message).enqueue();
+        await new TelegramEventEvent("new_chat_members", message)
+            .setConnection(this.options.connection as Amqp.Connection)
+            .enqueue();
     }
 
     // /**
@@ -203,6 +228,18 @@ class Bot extends TelegramBot implements Metricable, Destructable {
 
     public async destruct(): Promise<void> {
         await this.stopPolling();
+    }
+}
+
+namespace Bot {
+    export interface Options {
+        token?: string,
+        polling?: boolean;
+        tag?: string;
+        commands?: typeof BotCommand[];
+        // callbackQueryHandlers?: Constructable[];
+        metricsUpdateInterval?: number;
+        connection?: Amqp.Connection;
     }
 }
 
