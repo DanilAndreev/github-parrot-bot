@@ -42,10 +42,14 @@ class PulseController extends Controller {
 
     @Controller.Route("GET", "/pulse")
     public async pulse(ctx: Context): Promise<void> {
-        ctx.body = {};
-        ctx.body.status = PulseController.getCommonStatus();
-        ctx.body.application = "Github Parrot Bot";
-        ctx.body.version = "UNKNOWN";
+        ctx.body = {
+            status: PulseController.getCommonStatus(),
+            application: "Github Parrot Bot",
+            version: "UNKNOWN",
+        };
+        // ctx.body.status = PulseController.getCommonStatus();
+        // ctx.body.application = "Github Parrot Bot";
+        // ctx.body.version = "UNKNOWN";
     }
 
     @Controller.Route("GET", "/metrics")
