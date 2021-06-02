@@ -95,6 +95,7 @@ const config: Config = {
         // ssl: { //TODO: add ENV variable.
         //     rejectUnauthorized: false,
         // },
+        ssl: false,
     },
     amqp: {
         connect: "you-should-pass-amqp-url-as-env-variable",
