@@ -16,11 +16,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[CI] Disabled old ci.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[envDispathcer] Added more flexible setup.">
+      <change afterPath="$PROJECT_DIR$/.github/workflows/publish-docker-image-dev.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/amqp/AmqpDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/AmqpDispatcher.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/envDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/envDispatcher.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +65,7 @@
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.20.13" />
     <property name="last.edited.regexp" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.github/workflows" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -87,11 +85,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\github-parrot-bot\.github\workflows" />
       <recent name="D:\Projects\github-parrot-bot\examples" />
       <recent name="$PROJECT_DIR$/src/schemas/webhook/parts" />
       <recent name="$PROJECT_DIR$/src/schemas/webhook" />
       <recent name="C:\Users\onepl\WebstormProjects\github-parrot-bot\src\events\draw" />
-      <recent name="D:\Projects\github-parrot-bot\src\events\telegram" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\github-parrot-bot\.github\disabled-workflows" />
@@ -190,13 +188,6 @@
       <workItem from="1622332540706" duration="5000" />
       <workItem from="1622372232696" duration="24592000" />
       <workItem from="1622468932369" duration="3086000" />
-    </task>
-    <task id="LOCAL-00091" summary="[Logger] Added database logging.">
-      <created>1618015170116</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1618015170116</updated>
     </task>
     <task id="LOCAL-00092" summary="[main] Added process error handler.">
       <created>1618015267928</created>
@@ -534,7 +525,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622653441098</updated>
     </task>
-    <option name="localTasksCounter" value="140" />
+    <task id="LOCAL-00140" summary="[envDispathcer] Added more flexible setup.">
+      <created>1622654990943</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1622654990943</updated>
+    </task>
+    <option name="localTasksCounter" value="141" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -565,7 +563,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[WebHookSettings] Added interactive settings." />
     <MESSAGE value="[Handler] Fixed TODOs." />
     <MESSAGE value="[BotCommand] (issue #32) Changed meta structure." />
     <MESSAGE value="[BotCommand] (issue #32) Replaced old mechanism with new meta structure." />
@@ -590,7 +587,8 @@
     <MESSAGE value="[SystemConfig] Added unit tests." />
     <MESSAGE value="[TESTING] Added script to package.json." />
     <MESSAGE value="[CI] Disabled old ci." />
-    <option name="LAST_COMMIT_MESSAGE" value="[CI] Disabled old ci." />
+    <MESSAGE value="[envDispathcer] Added more flexible setup." />
+    <option name="LAST_COMMIT_MESSAGE" value="[envDispathcer] Added more flexible setup." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
