@@ -8,4 +8,4 @@ spec:
     app: telegram-drawer
   ports:
     - port: 3100
-  type: NodePort
+  type: ClusterIP

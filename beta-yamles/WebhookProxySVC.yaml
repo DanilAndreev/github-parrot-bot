@@ -9,4 +9,4 @@ spec:
   ports:
     - port: 3030
       nodePort: 30080
-  type: LoadBalancer
+  type: NodePort

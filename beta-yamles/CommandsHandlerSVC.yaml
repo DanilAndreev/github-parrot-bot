@@ -8,4 +8,4 @@ spec:
     app: commands-handler
   ports:
     - port: 3100
-  type: NodePort
+  type: ClusterIP
