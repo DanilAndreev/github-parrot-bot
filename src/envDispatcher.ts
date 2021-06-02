@@ -47,6 +47,23 @@ export default function envDispatcher(
                 configRef.current.amqp.connect = value;
                 break;
 
+            case "cloudamqp_host":
+                if (typeof configRef.current.amqp.connect !== "object") configRef.current.amqp.connect = {}
+                configRef.current.amqp.connect.hostname = value;
+                break;
+            case "cloudamqp_port":
+                if (typeof configRef.current.amqp.connect !== "object") configRef.current.amqp.connect = {}
+                configRef.current.amqp.connect.port = +value;
+                break;
+            case "cloudamqp_user":
+                if (typeof configRef.current.amqp.connect !== "object") configRef.current.amqp.connect = {}
+                configRef.current.amqp.connect.username = value;
+                break;
+            case "cloudamqp_password":
+                if (typeof configRef.current.amqp.connect !== "object") configRef.current.amqp.connect = {}
+                configRef.current.amqp.connect.password = value;
+                break;
+
             case "database_url":
                 (configRef.current.db as JSONObject).url = value;
                 break;

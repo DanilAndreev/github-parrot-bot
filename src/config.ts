@@ -98,7 +98,10 @@ const config: Config = {
         ssl: false,
     },
     amqp: {
-        connect: "you-should-pass-amqp-url-as-env-variable",
+        connect: {
+
+        },
+        // connect: "you-should-pass-amqp-url-as-env-variable",
         handlers: [
             IssuesHandler,
             PullRequestsHandler,
