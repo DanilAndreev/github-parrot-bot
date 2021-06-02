@@ -16,11 +16,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[CI] Disabled old ci.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/amqp/AmqpDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/AmqpDispatcher.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/envDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/envDispatcher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/beta-yamles/WebhookProxySVC.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/beta-yamles/WebhookProxySVC.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +51,10 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="KubernetesApiPersistence">
+    <option name="context" value="kubernetes-admin@kubernetes" />
+    <option name="namespace" value="default" />
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedIndex" value="1" />
   </component>
@@ -64,8 +67,9 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/.env" />
-    <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
-    <property name="javascript.nodejs.core.library.typings.version" value="12.20.13" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="14.15.4" />
+    <property name="javascript.nodejs.core.library.typings.version" value="14.17.1" />
     <property name="last.edited.regexp" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
