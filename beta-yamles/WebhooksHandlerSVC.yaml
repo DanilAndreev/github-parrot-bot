@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webhooks-handler
+  namespace: beta-parrot-bot
+spec:
+  selector:
+    app: webhooks-handler
+  ports:
+    - port: 3100
+  type: NodePort
