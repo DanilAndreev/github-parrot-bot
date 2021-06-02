@@ -16,9 +16,8 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[envDispathcer] Added more flexible setup.">
-      <change afterPath="$PROJECT_DIR$/.github/workflows/publish-docker-image-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[CI] Added skaffold ci.">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/publish-docker-image-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/publish-docker-image-dev.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,13 +187,6 @@
       <workItem from="1622332540706" duration="5000" />
       <workItem from="1622372232696" duration="24592000" />
       <workItem from="1622468932369" duration="3086000" />
-    </task>
-    <task id="LOCAL-00092" summary="[main] Added process error handler.">
-      <created>1618015267928</created>
-      <option name="number" value="00092" />
-      <option name="presentableId" value="LOCAL-00092" />
-      <option name="project" value="LOCAL" />
-      <updated>1618015267928</updated>
     </task>
     <task id="LOCAL-00093" summary="[main] Added process error handler.">
       <created>1618015516076</created>
@@ -532,7 +524,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622654990943</updated>
     </task>
-    <option name="localTasksCounter" value="141" />
+    <task id="LOCAL-00141" summary="[CI] Added skaffold ci.">
+      <created>1622656116039</created>
+      <option name="number" value="00141" />
+      <option name="presentableId" value="LOCAL-00141" />
+      <option name="project" value="LOCAL" />
+      <updated>1622656116039</updated>
+    </task>
+    <option name="localTasksCounter" value="142" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -563,7 +562,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[Handler] Fixed TODOs." />
     <MESSAGE value="[BotCommand] (issue #32) Changed meta structure." />
     <MESSAGE value="[BotCommand] (issue #32) Replaced old mechanism with new meta structure." />
     <MESSAGE value="[BotCommand] Cleaned up." />
@@ -588,7 +586,8 @@
     <MESSAGE value="[TESTING] Added script to package.json." />
     <MESSAGE value="[CI] Disabled old ci." />
     <MESSAGE value="[envDispathcer] Added more flexible setup." />
-    <option name="LAST_COMMIT_MESSAGE" value="[envDispathcer] Added more flexible setup." />
+    <MESSAGE value="[CI] Added skaffold ci." />
+    <option name="LAST_COMMIT_MESSAGE" value="[CI] Added skaffold ci." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

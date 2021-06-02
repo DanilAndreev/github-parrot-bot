@@ -9,5 +9,6 @@ jobs:
     runs-on:
       - skaffold
     steps:
+      - uses: actions/checkout@v2
       - name: Run Skaffold build and publish.
         run: skaffold run -p beta
