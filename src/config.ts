@@ -92,9 +92,9 @@ const config: Config = {
             PullRequest.PullRequestMessage,
             CheckRun,
         ],
-        ssl: {
-            rejectUnauthorized: false,
-        },
+        // ssl: { //TODO: add ENV variable.
+        //     rejectUnauthorized: false,
+        // },
     },
     amqp: {
         connect: "you-should-pass-amqp-url-as-env-variable",
