@@ -28,11 +28,9 @@ import {Connection, createConnection} from "typeorm";
 import SystemConfig from "./SystemConfig";
 import Config from "../interfaces/Config";
 import {Logger} from "./logger/Logger";
+import Globals from "../Globals";
+import FatalError from "./errors/FatalError";
 
-/**
- * DBConnection - current database connection.
- */
-export let DBConnection: Connection | null = null;
 
 /**
  * setupDbConnection - setting up database connection and synchronizes entities structure.
@@ -41,13 +39,13 @@ export let DBConnection: Connection | null = null;
  */
 export async function setupDbConnection(): Promise<void> {
     try {
-        Logger?.info("Connecting to database...");
-        DBConnection = await createConnection(SystemConfig.getConfig<Config>().db);
-        Logger?.info("Connected to database.");
-        await DBConnection.synchronize();
-        Logger?.info("Typeorm entities synchronized.");
+        Logger.info("Connecting to database...");
+        const connection: Connection = await createConnection(SystemConfig.getConfig<Config>().db);
+        Logger.info("Connected to database.");
+        await connection.synchronize();
+        Globals.dbConnection = connection;
+        Logger.info("Typeorm entities synchronized.");
     } catch (error) {
-        Logger?.error("Failed to connect to database!", error);
-        process.exit(1);
+        throw new FatalError("Failed to connect to database!" + error);
     }
 }

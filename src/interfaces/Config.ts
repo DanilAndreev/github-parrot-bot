@@ -28,7 +28,9 @@ import BotCommand from "../core/bot/BotCommand";
 import AmqpHandler from "../core/amqp/AmqpHandler";
 import {ConnectionOptions} from "typeorm";
 import * as AMQP from "amqplib";
-import Constructable from "./Constructable";
+import Constructable from "../core/interfaces/Constructable";
+import Controller from "../core/webserver/Controller";
+import WebServer from "../core/webserver/WebServer";
 
 namespace Config {
     /**
@@ -44,12 +46,11 @@ namespace Config {
     }
 
     /**
-     * Server - web server configuration settings.
+     * Server - webhooks processing web server configuration settings.
      * @interface
      * @author Danil Andreev
      */
-    export interface Server {
-        port: number;
+    export interface WebHookServer extends WebServer.Config {
         acceptEvents: string[];
     }
 
@@ -75,6 +76,7 @@ namespace Config {
         commandsEventHandlers?: boolean;
         drawEventsHandlers?: boolean;
         cronDatabaseGarbageCollectors?: boolean;
+        metricsUpdateInterval: number;
     }
 
     export interface Log {
@@ -93,7 +95,8 @@ namespace Config {
 interface Config {
     bot: Config.Bot;
     db: ConnectionOptions;
-    server: Config.Server;
+    webHookServer: Config.WebHookServer;
+    pulseWebServer: WebServer.Config;
     amqp: Config.Amqp;
     system: Config.System;
     log: Config.Log;

@@ -25,7 +25,7 @@
  */
 
 import AmqpEvent from "../../core/amqp/AmqpEvent";
-import {QUEUES} from "../../globals";
+import {QUEUES} from "../../Globals";
 import {Push} from "github-webhook-event-types";
 
 class DrawPushEvent extends AmqpEvent {

@@ -25,13 +25,13 @@
  */
 
 import {Message} from "node-telegram-bot-api";
-import CommandError from "../../errors/CommandError";
+import CommandError from "../errors/CommandError";
 import * as commander from "commander";
 import {Command as CommanderCommand, CommanderError, Option as CommanderOption} from "commander";
 import stringArgv from "string-argv";
-import JSONObject from "../../interfaces/JSONObject";
+import JSONObject from "../interfaces/JSONObject";
 import {Logger} from "../logger/Logger";
-import SendChatMessageEvent from "../../events/telegram/SendChatMessageEvent";
+import SendChatMessageEvent from "../events/telegram/SendChatMessageEvent";
 
 /**
  * BotCommand - basic class for creating Telegram bot commands.

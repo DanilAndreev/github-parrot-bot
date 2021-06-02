@@ -24,37 +24,36 @@
  * SOFTWARE.
  */
 
-import AmqpEvent from "../../core/amqp/AmqpEvent";
-import {Message} from "node-telegram-bot-api";
-import {QUEUES} from "../../globals";
+import Bot from "../../../src/core/bot/Bot";
+import SystemConfig from "../../../src/core/SystemConfig";
+import {mocked} from "ts-jest/utils";
+import BotCommand from "../../../src/core/bot/BotCommand";
 
-class ChatCommandEvent extends AmqpEvent {
-    public static readonly type: string = "chat-command-event";
-    public message: Message;
-    public match: RegExpMatchArray | null;
+jest.mock("node-telegram-bot-api");
+jest.mock("../../../src/core/SystemConfig");
 
-    constructor(message: Message, match: RegExpMatchArray | null) {
-        super(ChatCommandEvent.type, {
-            queue: QUEUES.TELEGRAM_CHAT_COMMAND,
+jest.useFakeTimers();
+
+describe("core->bot->Bot", () => {
+    @BotCommand.Command("command1")
+    class TestBotCommand1 extends BotCommand {
+
+    }
+
+    beforeAll(() => {
+        mocked(SystemConfig.getConfig).mockReturnValue({
+            bot: {tag: "tag"},
+            system: {metricsUpdateInterval: 10},
         });
-        this.message = message;
-        this.match = match;
-    }
+    });
 
-    public serialize(): ChatCommandEvent.Serialized {
-        return {
-            ...super.serialize(),
-            message: this.message,
-            match: this.match,
-        };
-    }
-}
+    beforeEach(() => {
+        jest.clearAllTimers();
+    });
 
-namespace ChatCommandEvent {
-    export interface Serialized extends AmqpEvent.Serialized {
-        message: Message;
-        match: RegExpMatchArray | null;
-    }
-}
+    test("Contruction.", () => {
+        const bot: Bot = new (Bot as any)("token");
 
-export default ChatCommandEvent;
+        bot.release();
+    });
+});

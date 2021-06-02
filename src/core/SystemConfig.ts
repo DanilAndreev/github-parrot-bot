@@ -25,12 +25,12 @@
  */
 
 import * as dotenv from "dotenv";
-import JSONObject from "../interfaces/JSONObject";
+import JSONObject from "./interfaces/JSONObject";
 import * as fs from "fs";
 import * as _ from "lodash";
-import createRef from "../utils/createRef";
-import Ref from "../interfaces/Ref";
-import root from "../utils/root";
+import createRef from "./utils/createRef";
+import Ref from "./interfaces/Ref";
+import root from "./utils/root";
 
 namespace SystemConfig {
     /**
@@ -100,6 +100,7 @@ class SystemConfig<T extends JSONObject> {
             root + "/../.env.development",
             root + "/../.env.local",
         ],
+        envMask: /(.+)/
     };
     protected static current: SystemConfig<JSONObject>;
 
@@ -114,32 +115,23 @@ class SystemConfig<T extends JSONObject> {
      * @author Danil Andreev
      */
     constructor() {
-        // Merging config.json variables to config
-        try {
-            const configJson: JSONObject = JSON.parse(fs.readFileSync("./../config.json").toString());
-            _.merge(this.config, configJson);
-        } catch (error) {
-            if (error.code !== "ENOENT")
-                //     Logger.error({
-                //         disableDB: true,
-                //         verbosity: 1
-                //     })(`Unable to load configuration from "config.json" file.`, error.method, error.stack);
-                console.warn(`Unable to load configuration from "config.json" file.`, error.method, error.stack);
-        }
-
         // Merging additional configs to common config
         if (SystemConfig.options?.additionalConfigs) {
             for (const config of SystemConfig.options.additionalConfigs) {
                 if (typeof config === "object") {
                     _.merge(this.config, config);
                 } else {
-                    // Logger.error({
-                    //     disableDB: true,
-                    //     verbosity: 1
-                    // })(`Invalid type of 'additionalConfig' item, expected "object", got "${typeof config}"`);
                     console.warn(`Invalid type of 'additionalConfig' item, expected "object", got "${typeof config}"`);
                 }
             }
+        }
+
+        try {
+            const configJson: JSONObject = JSON.parse(fs.readFileSync("./../config.json").toString());
+            _.merge(this.config, configJson);
+        } catch (error) {
+            if (error.code !== "ENOENT")
+                console.warn(`Unable to load configuration from "config.json" file.`, error.method, error.stack);
         }
 
         SystemConfig.loadEnv();
@@ -150,6 +142,7 @@ class SystemConfig<T extends JSONObject> {
         for (const key in process.env) {
             if (!regExp || regExp.test(key)) {
                 const execArray: RegExpExecArray | null = regExp ? regExp.exec(key) : null;
+                if (execArray === null) continue;
                 const envDispatcher: SystemConfig.EnvDispatcher =
                     SystemConfig.options?.envDispatcher || SystemConfig.defaultEnvDispatcher;
                 envDispatcher(configRef, process.env[key], execArray, regExp);
@@ -175,9 +168,7 @@ class SystemConfig<T extends JSONObject> {
                 _.merge(env, tempEnv);
             } catch (error) {
                 if (error.code === "ENOENT")
-                    // Logger.warn({disableDB: true, verbosity: 4})(`Could not find env file "${pathname}", skipping`);
                     console.warn(`Could not find env file "${pathname}", skipping`);
-                // Logger.error({disableDB: true, verbosity: 1})(error.message, error.stack);
                 else console.warn(error.message, error.stack);
             }
         }

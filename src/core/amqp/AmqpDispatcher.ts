@@ -27,18 +27,20 @@
 import * as Amqp from "amqplib";
 import {Connection} from "amqplib";
 import AmqpHandler from "./AmqpHandler";
-import JSONObject from "../../interfaces/JSONObject";
+import JSONObject from "../interfaces/JSONObject";
 import Config from "../../interfaces/Config";
 import SystemConfig from "../SystemConfig";
 import {Logger} from "../logger/Logger";
-import FatalError from "../../errors/FatalError";
+import FatalError from "../errors/FatalError";
+import Metricable from "../interfaces/Metricable";
+import Destructable from "../interfaces/Destructable";
 
 /**
  * AmqpDispatcher - dispatcher for AMQP handlers.
  * @class
  * @author Danil Andreev
  */
-class AmqpDispatcher {
+class AmqpDispatcher implements Metricable, Destructable {
     /**
      * current - current class instance. Singleton.
      */
@@ -54,6 +56,21 @@ class AmqpDispatcher {
     protected connection: Connection;
 
     /**
+     * metricsPrev - quantity of queue items for last 5 seconds.
+     */
+    private metricsPrev: number;
+
+    /**
+     * metricsActive - quantity of queue items live encounter. Not shown;
+     */
+    private metricsActive: number;
+
+    /**
+     * metricsInterval - Interval for calculating metrics.
+     */
+    public readonly metricsInterval: NodeJS.Timeout;
+
+    /**
      * Creates an instance of AmqpDispatcher.
      * @constructor
      * @param connection - AMQP connection object.
@@ -63,6 +80,13 @@ class AmqpDispatcher {
      */
     constructor(connection: Connection) {
         this.connection = connection;
+
+        this.metricsActive = 0;
+        this.metricsPrev = 0;
+        this.metricsInterval = setInterval(() => {
+            this.metricsPrev = this.metricsActive;
+            this.metricsActive = 0;
+        }, SystemConfig.getConfig<Config>().system.metricsUpdateInterval);
 
         this.handlers = SystemConfig.getConfig<Config>()
             .amqp.handlers.filter((HandlerClass: typeof AmqpHandler): boolean =>
@@ -102,7 +126,7 @@ class AmqpDispatcher {
      * @param handler - instance of handler class.
      * @author Danil Andreev
      */
-    public async hook(handler: AmqpHandler) {
+    public async hook(handler: AmqpHandler): Promise<void> {
         const queueName = Reflect.getMetadata("amqp-handler-queue", handler);
         const prefetch = Reflect.getMetadata("amqp-handler-prefetch", handler);
         if (typeof queueName !== "string")
@@ -112,8 +136,11 @@ class AmqpDispatcher {
         const channel: Amqp.Channel = await this.connection.createChannel();
         await channel.assertQueue(queueName);
         await channel.prefetch(prefetch || 10);
-        await channel.consume(queueName, msg => msg && handler.execute(msg, channel));
-        Logger?.silly(`Hooked AMQP handler to queue: "${queueName}"`);
+        await channel.consume(queueName, msg => {
+            this.metricsActive++;
+            if (msg) handler.execute(msg, channel);
+        });
+        Logger.silly(`Hooked AMQP handler to queue: "${queueName}"`);
     }
 
     /**
@@ -122,8 +149,12 @@ class AmqpDispatcher {
      * @param message  - JSON object to send.
      * @param options - Send options.
      */
-    public async sendToQueue<T extends JSONObject>(queueName: string, message: T, options?: Amqp.Options.Publish) {
-        Logger?.debug(`Sent message to AMQP queue: "${queueName}".`);
+    public async sendToQueue<T extends JSONObject>(
+        queueName: string,
+        message: T,
+        options?: Amqp.Options.Publish
+    ): Promise<void> {
+        Logger.debug(`Sent message to AMQP queue: "${queueName}".`);
         const channel: Amqp.Channel = await this.connection.createChannel();
         await channel.assertQueue(queueName);
         channel.sendToQueue(queueName, Buffer.from(JSON.stringify(message)), options);
@@ -136,8 +167,9 @@ class AmqpDispatcher {
      * @author Danil Andreev
      */
     public static async init(): Promise<AmqpDispatcher> {
+        // await this.getCurrent().destruct();
         try {
-            Logger?.debug(`Initialized AMQP dispatcher.`);
+            Logger.debug(`Initialized AMQP dispatcher.`);
             const connection: Connection = await Amqp.connect(SystemConfig.getConfig<Config>().amqp.connect);
             AmqpDispatcher.current = new AmqpDispatcher(connection);
             return AmqpDispatcher.current;
@@ -162,6 +194,23 @@ class AmqpDispatcher {
      */
     public getConnection(): Connection {
         return this.connection;
+    }
+
+    /**
+     * getMetrics - returns quantity of handled event messages.
+     * @method
+     * @author Danil Andreev
+     */
+    public getMetrics(): number | JSONObject<number> {
+        return this.metricsPrev;
+    }
+
+    public release(): void {
+        clearInterval(this.metricsInterval);
+    }
+
+    public async destruct(): Promise<void> {
+        if (this.connection) await this.connection.close();
     }
 }
 

@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2020 Danil Andreev
+ * Copyright (c) 2021 Danil Andreev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,13 +24,5 @@
  * SOFTWARE.
  */
 
-export const QUEUES = {
-    PULL_REQUEST_SHOW_QUEUE: "pull-request-show-queue",
-    ISSUE_SHOW_QUEUE: "issue-show-queue",
-    CHECK_SUITE_SHOW_QUEUE: "check-suite-show-queue",
-    WEB_HOOK_SETTINGS_SHOW_QUEUE: "web-hook-settings-show-queue",
-    PUSH_SHOW_QUEUE: "push-show-queue",
-    TELEGRAM_CHAT_COMMAND: "telegram-chat-command",
-    DRAW_TELEGRAM_MESSAGE_QUEUE: "messages",
-    TELEGRAM_EVENTS_QUEUE: "telegram-events-queue",
-};
+import "reflect-metadata";
+jest.mock("../src/core/logger/Logger");

@@ -30,7 +30,7 @@ import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
 import CheckSuite from "../../entities/CheckSuite";
 import PullRequest from "../../entities/PullRequest";
 import {getConnection} from "typeorm";
-import AMQPAck from "../../errors/AMQPAck";
+import AMQPAck from "../../core/errors/AMQPAck";
 import DrawPullRequestEvent from "../../events/draw/DrawPullRequestEvent";
 import DrawCheckSuiteEvent from "../../events/draw/DrawCheckSuiteEvent";
 

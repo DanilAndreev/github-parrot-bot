@@ -24,7 +24,7 @@
  * SOFTWARE.
  */
 
-import JSONObject from "../interfaces/JSONObject";
+import JSONObject from "../core/interfaces/JSONObject";
 
 /**
  * fromKeyPair - converts kay pair object to array.

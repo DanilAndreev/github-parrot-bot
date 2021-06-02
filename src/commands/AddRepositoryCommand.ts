@@ -26,12 +26,12 @@
 
 import BotCommand from "../core/bot/BotCommand";
 import {Message} from "node-telegram-bot-api";
-import CommandError from "../errors/CommandError";
+import CommandError from "../core/errors/CommandError";
 import checkAdmin from "../utils/checkAdmin";
 import WebHook from "../entities/WebHook";
 import Chat from "../entities/Chat";
-import JSONObject from "../interfaces/JSONObject";
-import DeleteChatMessageEvent from "../events/telegram/DeleteChatMessageEvent";
+import JSONObject from "../core/interfaces/JSONObject";
+import DeleteChatMessageEvent from "../core/events/telegram/DeleteChatMessageEvent";
 import {getConnection} from "typeorm";
 
 /**

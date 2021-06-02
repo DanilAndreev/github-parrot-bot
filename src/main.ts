@@ -26,7 +26,7 @@
 
 import {setupDbConnection} from "./core/DataBase";
 import Bot from "./core/bot/Bot";
-import WebServer from "./core/WebServer";
+import WebServer from "./core/webserver/WebServer";
 import AmqpDispatcher from "./core/amqp/AmqpDispatcher";
 import IssuesGarbageCollector from "./chrono/IssuesGarbageCollector";
 import PullRequestsGarbageCollector from "./chrono/PullRequestsGarbageCollector";
@@ -34,7 +34,9 @@ import CheckSuitsGarbageCollector from "./chrono/CheckSuitsGarbageCollector";
 import SystemConfig from "./core/SystemConfig";
 import Config from "./interfaces/Config";
 import {Logger} from "./core/logger/Logger";
-import FatalError from "./errors/FatalError";
+import FatalError from "./core/errors/FatalError";
+import Globals from "./Globals";
+import destructService from "./utils/destructService";
 
 /**
  * requiredFor - function, designed to determine if some functional is required.
@@ -65,17 +67,22 @@ export default async function main(): Promise<void> {
             await setupDbConnection();
         }
         if (requiredFor("cronDatabaseGarbageCollectors")) {
-            await new IssuesGarbageCollector({interval: 1000 * 60 * 30}).start();
-            await new PullRequestsGarbageCollector({interval: 1000 * 60 * 30}).start();
-            await new CheckSuitsGarbageCollector({interval: 1000 * 60 * 30}).start();
+            Globals.issuesGarbageCollector = await new IssuesGarbageCollector({
+                interval: 1000 * 60 * 30,
+            }).start();
+            Globals.pullRequestsGarbageCollector = await new PullRequestsGarbageCollector({
+                interval: 1000 * 60 * 30,
+            }).start();
+            Globals.checkSuitsGarbageCollector = await new CheckSuitsGarbageCollector({
+                interval: 1000 * 60 * 30,
+            }).start();
         }
 
-        let server: WebServer | undefined;
         if (requiredFor("webserver")) {
-            server = new WebServer();
+            Globals.webHookServer = new WebServer(SystemConfig.getConfig<Config>().webHookServer);
         }
         if (requiredFor("drawEventsHandlers", "commandsProxy")) {
-            const bot: Bot = Bot.init(
+            Globals.telegramBot = Bot.init(
                 SystemConfig.getConfig<Config>().bot.token,
                 SystemConfig.getConfig<Config>().system.commandsProxy
             );
@@ -90,14 +97,57 @@ export default async function main(): Promise<void> {
                 "drawEventsHandlers"
             )
         ) {
-            const RabbitMQ: AmqpDispatcher = await AmqpDispatcher.init();
+            Globals.amqpDispatcher = await AmqpDispatcher.init();
         }
 
-        server && server.start();
+        Globals.pulseWebServer = new WebServer(SystemConfig.getConfig<Config>().pulseWebServer);
+
+        await Globals.webHookServer?.start();
+        await Globals.pulseWebServer?.start();
     } catch (error) {
         if (error instanceof FatalError) {
             throw error;
         }
-        Logger?.error("Unhandled non fatal error in main thread: ", error);
+        Logger.error("Unhandled non fatal error in main thread: ", error);
     }
 }
+
+async function shutDown(): Promise<void> {
+    let noErr: boolean = true;
+    Logger.info(`Shutting down application by "SIGTERM" sygnal...`);
+    if (Globals.webHookServer) noErr = noErr && (await destructService(Globals.webHookServer, "WebHook Web Server"));
+    if (Globals.telegramBot) noErr = noErr && (await destructService(Globals.telegramBot, "Telegram Bot"));
+    if (Globals.amqpDispatcher) noErr = noErr && (await destructService(Globals.amqpDispatcher, "Amqp Dispatcher"));
+
+    if (Globals.issuesGarbageCollector)
+        noErr = noErr && (await destructService(Globals.issuesGarbageCollector, "Issues Garbage Collector"));
+    if (Globals.pullRequestsGarbageCollector)
+        noErr =
+            noErr && (await destructService(Globals.pullRequestsGarbageCollector, "Pull Request Garbage Collector"));
+    if (Globals.checkSuitsGarbageCollector)
+        noErr = noErr && (await destructService(Globals.checkSuitsGarbageCollector, "Check Suits Garbage Collector"));
+
+    if (Globals.dbConnection) {
+        Logger.silly(`Stopping Database Connection.`);
+        try {
+            await Globals.dbConnection.close();
+            Logger.silly(`Database Connection successfully stopped.`);
+        } catch (error) {
+            Logger.error(`Database Connection stopped with error: ` + error);
+            noErr = noErr && true;
+        }
+    }
+
+    if (Globals.pulseWebServer) noErr = noErr && (await destructService(Globals.pulseWebServer, "Pulse Web Server"));
+
+    if (noErr) {
+        Logger.info(`Application successfully shut down.`);
+        process.exit(0);
+    } else {
+        Logger.error(`Application shut down with errors.`);
+        process.exit(1);
+    }
+}
+
+process.on("SIGTERM", shutDown);
+process.on("SIGINT", shutDown);

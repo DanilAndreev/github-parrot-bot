@@ -25,19 +25,19 @@
  */
 
 import WebHookAmqpHandler from "../../core/amqp/WebHookAmqpHandler";
-import {QUEUES} from "../../globals";
+import {QUEUES} from "../../Globals";
 import AmqpHandler from "../../core/amqp/AmqpHandler";
 import Bot from "../../core/bot/Bot";
 import etelegramIgnore from "../../utils/etelegramIgnore";
-import AMQPAck from "../../errors/AMQPAck";
-import AMQPNack from "../../errors/AMQPNack";
+import AMQPAck from "../../core/errors/AMQPAck";
+import AMQPNack from "../../core/errors/AMQPNack";
 import {Message as AMQPMessage} from "amqplib";
-import SendChatMessageEvent from "../../events/telegram/SendChatMessageEvent";
+import SendChatMessageEvent from "../../core/events/telegram/SendChatMessageEvent";
 import AmqpEvent from "../../core/amqp/AmqpEvent";
-import EditChatMessageTextEvent from "../../events/telegram/EditChatMessageTextEvent";
-import EditChatMessageReplyMarkupEvent from "../../events/telegram/EditChatMessageReplyMarkupEvent";
-import EditChatMessageLiveLocationEvent from "../../events/telegram/EditChatMessageLiveLocationEvent";
-import DeleteChatMessageEvent from "../../events/telegram/DeleteChatMessageEvent";
+import EditChatMessageTextEvent from "../../core/events/telegram/EditChatMessageTextEvent";
+import EditChatMessageReplyMarkupEvent from "../../core/events/telegram/EditChatMessageReplyMarkupEvent";
+import EditChatMessageLiveLocationEvent from "../../core/events/telegram/EditChatMessageLiveLocationEvent";
+import DeleteChatMessageEvent from "../../core/events/telegram/DeleteChatMessageEvent";
 
 @WebHookAmqpHandler.Handler(QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE, 10)
 @Reflect.metadata("amqp-handler-type", "draw-event-handler")

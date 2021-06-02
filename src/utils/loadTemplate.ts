@@ -25,7 +25,7 @@
  */
 
 import {readFileSync} from "fs";
-import root from "./root";
+import root from "../core/utils/root";
 import * as Handlebars from "handlebars";
 
 /**

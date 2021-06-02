@@ -26,10 +26,10 @@
 
 import SystemConfig from "../SystemConfig";
 import Config from "../../interfaces/Config";
-import JSONObject from "../../interfaces/JSONObject";
-import Constructable from "../../interfaces/Constructable";
+import JSONObject from "../interfaces/JSONObject";
+import Constructable from "../interfaces/Constructable";
 import {CallbackQuery} from "node-telegram-bot-api";
-import AMQPAck from "../../errors/AMQPAck";
+import AMQPAck from "../errors/AMQPAck";
 import AmqpHandler from "./AmqpHandler";
 import {Logger} from "../logger/Logger";
 
@@ -53,14 +53,14 @@ class CallbackQueryDispatcher extends AmqpHandler {
                 new Set()
             );
             for (const handler of this.callbackQueryHandlers) {
-                Logger?.silly(
+                Logger.silly(
                     `Loaded Telegram callback query handler for: "${handler.pattern.join(".")}". exact=${!!handler
                         .options.exact}`
                 );
             }
-            Logger?.debug(`Loaded ${this.callbackQueryHandlers.size} Telegram callback query handlers.`);
+            Logger.debug(`Loaded ${this.callbackQueryHandlers.size} Telegram callback query handlers.`);
         } else {
-            Logger?.debug(`Loaded 0 Telegram callback query handlers. No handlers found.`);
+            Logger.debug(`Loaded 0 Telegram callback query handlers. No handlers found.`);
         }
     }
 
@@ -96,7 +96,7 @@ class CallbackQueryDispatcher extends AmqpHandler {
 
         const promises: Promise<void>[] = [];
         for (const handler of this.callbackQueryHandlers) {
-            if (handler.options.exact && handler.pattern.length !== requestPattern.length) continue;
+            if (handler.options.exact && (handler.pattern.length !== requestPattern.length)) continue;
             const params: JSONObject | null = CallbackQueryDispatcher.comparePatterns(handler.pattern, requestPattern);
             if (params) {
                 type Executor = () => Promise<void>;
@@ -192,7 +192,7 @@ namespace CallbackQueryDispatcher {
             const metadata: Set<CallbackQueryHandlerMeta> =
                 Reflect.getMetadata("callback-query-handlers", target) || new Set();
             metadata.add({
-                callback: target[propertyKey],
+                callback: target[propertyKey].bind(target),
                 options: options || {},
                 pattern: pattern as string[],
             });

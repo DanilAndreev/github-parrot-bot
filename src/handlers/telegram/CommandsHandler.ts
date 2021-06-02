@@ -26,10 +26,10 @@
 
 import AmqpHandler from "../../core/amqp/AmqpHandler";
 import {Message} from "node-telegram-bot-api";
-import {QUEUES} from "../../globals";
+import {QUEUES} from "../../Globals";
 import BotCommand from "../../core/bot/BotCommand";
 import config from "../../config";
-import SendChatMessageEvent from "../../events/telegram/SendChatMessageEvent";
+import SendChatMessageEvent from "../../core/events/telegram/SendChatMessageEvent";
 
 @AmqpHandler.Handler(QUEUES.TELEGRAM_CHAT_COMMAND, 10)
 @Reflect.metadata("amqp-handler-type", "commands-event-handler")

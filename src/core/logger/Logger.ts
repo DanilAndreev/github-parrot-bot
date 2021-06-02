@@ -31,7 +31,7 @@ import Config from "../../interfaces/Config";
 import SystemConfig from "../SystemConfig";
 import PostgresTransport from "./PostgresTransport";
 
-export let Logger: LoggerType | undefined;
+export let Logger: LoggerType;
 
 const Colors = {
     info: "\x1b[34m",

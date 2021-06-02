@@ -26,7 +26,7 @@
 
 import CallbackQueryDispatcher from "../../../core/amqp/CallbackQueryDispatcher";
 import {CallbackQuery} from "node-telegram-bot-api";
-import JSONObject from "../../../interfaces/JSONObject";
+import JSONObject from "../../../core/interfaces/JSONObject";
 import Issue from "../../../entities/Issue";
 import {Logger} from "../../../core/logger/Logger";
 import DrawIssueEvent from "../../../events/draw/DrawIssueEvent";

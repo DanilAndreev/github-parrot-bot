@@ -25,7 +25,7 @@
  */
 
 import Collaborator from "../entities/Collaborator";
-import CommandError from "../errors/CommandError";
+import CommandError from "../core/errors/CommandError";
 import toKeyPair from "./toKeyPair";
 import fromKeyPair from "./fromKeyPair";
 

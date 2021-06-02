@@ -57,10 +57,12 @@ import WebHookSettingsHandler from "./handlers/telegram/callbacks/WebHookSetting
 import WebHookSettingsCommand from "./commands/WebHookSettingsCommand";
 import DrawWebHookSettingsHandler from "./handlers/draw/DrawWebHookSettingsHandler";
 import DrawPushHandler from "./handlers/draw/DrawPushHandler";
+import GithubWebhookController from "./controllers/GithubWebhookController";
+import PulseController from "./controllers/PulseController";
 
 const config: Config = {
     bot: {
-        token: "you-should-pass-telegram-token-as-env-variable",
+        token: "",
         commands: [
             AddRepositoryCommand,
             AKAsCommand,
@@ -90,9 +92,9 @@ const config: Config = {
             PullRequest.PullRequestMessage,
             CheckRun,
         ],
-        ssl: {
-            rejectUnauthorized: false,
-        },
+        // ssl: { //TODO: add ENV variable.
+        //     rejectUnauthorized: false,
+        // },
     },
     amqp: {
         connect: "you-should-pass-amqp-url-as-env-variable",
@@ -114,11 +116,24 @@ const config: Config = {
             TelegramEventsHandler,
         ],
     },
-    server: {
+    webHookServer: {
         port: 3030,
         acceptEvents: ["check_run", "check_suite", "create", "pull_request", "push", "issues"],
+        controllers: [
+            GithubWebhookController,
+        ],
+        metricsUpdateInterval: 5000,
     },
-    system: {},
+    pulseWebServer: {
+        port: 3100,
+        controllers: [
+            PulseController,
+        ],
+        metricsUpdateInterval: 5000,
+    },
+    system: {
+        metricsUpdateInterval: 5000,
+    },
     log: {
         logLevel: "error",
     },

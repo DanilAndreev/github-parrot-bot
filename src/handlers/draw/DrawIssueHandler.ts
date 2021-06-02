@@ -30,7 +30,7 @@ import Issue from "../../entities/Issue";
 import Bot from "../../core/bot/Bot";
 import loadTemplate from "../../utils/loadTemplate";
 import etelegramIgnore from "../../utils/etelegramIgnore";
-import {QUEUES} from "../../globals";
+import {QUEUES} from "../../Globals";
 import {Message} from "node-telegram-bot-api";
 import {getConnection} from "typeorm";
 import AmqpDispatcher from "../../core/amqp/AmqpDispatcher";

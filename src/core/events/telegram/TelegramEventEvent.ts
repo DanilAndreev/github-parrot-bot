@@ -24,38 +24,49 @@
  * SOFTWARE.
  */
 
-import {EditMessageTextOptions} from "node-telegram-bot-api";
-import AmqpEvent from "../../core/amqp/AmqpEvent";
-import {QUEUES} from "../../globals";
+import AmqpEvent from "../../amqp/AmqpEvent";
+import {CallbackQuery, Message} from "node-telegram-bot-api";
+import {QUEUES} from "../../../Globals";
 
-class EditChatMessageTextEvent extends AmqpEvent {
-    public static readonly type: string = "edit-message-text-event";
-    public text: string;
-    public options?: EditMessageTextOptions;
+class TelegramEventEvent<T extends Message | CallbackQuery> extends AmqpEvent {
+    public static readonly type: string = "telegram-event-event";
+    public event: TelegramEventEvent.TelegramEvent;
+    public message: T;
 
-    constructor(text: string, options?: EditMessageTextOptions) {
-        super(EditChatMessageTextEvent.type, {
-            expiration: 1000 * 60 * 10,
-            queue: QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
+    constructor(event: TelegramEventEvent.TelegramEvent, message: T) {
+        super(TelegramEventEvent.type, {
+            queue: QUEUES.TELEGRAM_EVENTS_QUEUE,
         });
-        this.text = text;
-        this.options = options;
+        this.message = message;
+        this.event = event;
     }
 
-    public serialize(): EditChatMessageTextEvent.Serialized {
+    public serialize(): TelegramEventEvent.Serialized<T> {
         return {
             ...super.serialize(),
-            text: this.text,
-            options: this.options,
+            event: this.event,
+            message: this.message,
         };
     }
 }
 
-namespace EditChatMessageTextEvent {
-    export interface Serialized extends AmqpEvent.Serialized {
-        text: string;
-        options?: EditMessageTextOptions;
+namespace TelegramEventEvent {
+    export type TelegramEvent =
+        | "channel_post"
+        | "edited_message"
+        | "edited_message_text"
+        | "edited_message_caption"
+        | "edited_channel_post"
+        | "edited_channel_post_text"
+        | "edited_channel_post_caption"
+        | "new_chat_members"
+        | "left_chat_member"
+        | "callback_query";
+
+    export interface Serialized<T extends Message | CallbackQuery> extends AmqpEvent.Serialized {
+        event: TelegramEventEvent.TelegramEvent;
+        message: T;
     }
 }
 
-export default EditChatMessageTextEvent;
+export default TelegramEventEvent;

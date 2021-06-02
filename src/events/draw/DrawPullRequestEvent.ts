@@ -25,7 +25,7 @@
  */
 
 import AmqpEvent from "../../core/amqp/AmqpEvent";
-import {QUEUES} from "../../globals";
+import {QUEUES} from "../../Globals";
 
 class DrawPullRequestEvent extends AmqpEvent {
     public static readonly type: string = "draw-pull-request-event";

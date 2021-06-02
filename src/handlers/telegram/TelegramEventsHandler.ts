@@ -25,15 +25,15 @@
  */
 
 import AmqpHandler from "../../core/amqp/AmqpHandler";
-import {QUEUES} from "../../globals";
+import {QUEUES} from "../../Globals";
 import {Message as AMQPMessage} from "amqplib";
 import {CallbackQuery, Message, User} from "node-telegram-bot-api";
 import Chat from "../../entities/Chat";
 import Collaborator from "../../entities/Collaborator";
 import Bot from "../../core/bot/Bot";
-import AMQPNack from "../../errors/AMQPNack";
+import AMQPNack from "../../core/errors/AMQPNack";
 import CallbackQueryDispatcher from "../../core/amqp/CallbackQueryDispatcher";
-import TelegramEventEvent from "../../events/telegram/TelegramEventEvent";
+import TelegramEventEvent from "../../core/events/telegram/TelegramEventEvent";
 
 @AmqpHandler.Handler(QUEUES.TELEGRAM_EVENTS_QUEUE, 10)
 @Reflect.metadata("amqp-handler-type", "telegram-events-handler")

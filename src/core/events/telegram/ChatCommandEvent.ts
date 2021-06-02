@@ -24,42 +24,37 @@
  * SOFTWARE.
  */
 
-import {EditMessageCaptionOptions} from "node-telegram-bot-api";
-import AmqpEvent from "../../core/amqp/AmqpEvent";
-import {QUEUES} from "../../globals";
+import AmqpEvent from "../../amqp/AmqpEvent";
+import {Message} from "node-telegram-bot-api";
+import {QUEUES} from "../../../Globals";
 
-class EditChatMessageLiveLocationEvent extends AmqpEvent {
-    public static readonly type: string = "edit-chat-message-live-location";
-    public latitude: number;
-    public longitude: number;
-    public options?: EditMessageCaptionOptions;
+class ChatCommandEvent extends AmqpEvent {
+    public static readonly type: string = "chat-command-event";
+    public message: Message;
+    public match: RegExpMatchArray | null;
 
-    constructor(latitude: number, longitude: number, options?: EditMessageCaptionOptions) {
-        super(EditChatMessageLiveLocationEvent.type, {
-            expiration: 1000 * 60 * 10,
-            queue: QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
+    constructor(message: Message, match: RegExpMatchArray | null) {
+        super(ChatCommandEvent.type, {
+            queue: QUEUES.TELEGRAM_CHAT_COMMAND,
         });
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.options = options;
+        this.message = message;
+        this.match = match;
     }
 
-    public serialize(): EditChatMessageLiveLocationEvent.Serialized {
+    public serialize(): ChatCommandEvent.Serialized {
         return {
             ...super.serialize(),
-            latitude: this.latitude,
-            longitude: this.longitude,
-            options: this.options,
+            message: this.message,
+            match: this.match,
         };
     }
 }
 
-namespace EditChatMessageLiveLocationEvent {
+namespace ChatCommandEvent {
     export interface Serialized extends AmqpEvent.Serialized {
-        latitude: number;
-        longitude: number;
-        options?: EditMessageCaptionOptions;
+        message: Message;
+        match: RegExpMatchArray | null;
     }
 }
 
-export default EditChatMessageLiveLocationEvent;
+export default ChatCommandEvent;

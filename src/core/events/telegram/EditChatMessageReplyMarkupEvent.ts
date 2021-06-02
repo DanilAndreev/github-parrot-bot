@@ -24,42 +24,38 @@
  * SOFTWARE.
  */
 
-import AmqpEvent from "../../core/amqp/AmqpEvent";
-import JSONObject from "../../interfaces/JSONObject";
-import {QUEUES} from "../../globals";
+import {EditMessageReplyMarkupOptions, InlineKeyboardMarkup} from "node-telegram-bot-api";
+import AmqpEvent from "../../amqp/AmqpEvent";
+import {QUEUES} from "../../../Globals";
 
-class DeleteChatMessageEvent extends AmqpEvent {
-    public static readonly type: string = "delete-chat-message";
-    public chatId: string | number;
-    public messageId: string;
-    public showMessageOnError: boolean;
+class EditChatMessageReplyMarkupEvent extends AmqpEvent {
+    public static readonly type: string = "edit-chat-message-reply-markup";
+    public replyMarkup: InlineKeyboardMarkup;
+    public options?: EditMessageReplyMarkupOptions;
 
-    constructor(chatId: string | number, messageId: string, options?: JSONObject, showMessageOnError?: boolean) {
-        super(DeleteChatMessageEvent.type, {
+    constructor(replyMarkup: InlineKeyboardMarkup, options?: EditMessageReplyMarkupOptions) {
+        super(EditChatMessageReplyMarkupEvent.type, {
             expiration: 1000 * 60 * 10,
             queue: QUEUES.DRAW_TELEGRAM_MESSAGE_QUEUE,
         });
-        this.chatId = chatId;
-        this.messageId = messageId;
-        this.showMessageOnError = !!showMessageOnError;
+        this.replyMarkup = replyMarkup;
+        this.options = options;
     }
 
-    public serialize(): DeleteChatMessageEvent.Serialized {
+    public serialize(): EditChatMessageReplyMarkupEvent.Serialized {
         return {
             ...super.serialize(),
-            chatId: this.chatId,
-            messageId: this.messageId,
-            showMessageOnError: this.showMessageOnError,
+            replyMarkup: this.replyMarkup,
+            options: this.options,
         };
     }
 }
 
-namespace DeleteChatMessageEvent {
+namespace EditChatMessageReplyMarkupEvent {
     export interface Serialized extends AmqpEvent.Serialized {
-        chatId: string | number;
-        messageId: string;
-        showMessageOnError: boolean;
+        replyMarkup: InlineKeyboardMarkup;
+        options?: EditMessageReplyMarkupOptions;
     }
 }
 
-export default DeleteChatMessageEvent;
+export default EditChatMessageReplyMarkupEvent;
