@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: telegram-drawer
+  namespace: beta-parrot-bot
+spec:
+  selector:
+    app: telegram-drawer
+  ports:
+    - port: 3100
+  type: NodePort

@@ -1,0 +1,38 @@
+apiVersion: skaffold/v2beta14
+kind: Config
+metadata:
+  name: parrot-bot
+profiles:
+  - name: beta
+    build:
+      artifacts:
+        - image: ghcr.io/danilandreev/github-parrot-bot-dev
+          docker:
+            dockerfile: Dockerfile
+            noCache: false
+      local: {}
+      tagPolicy:
+        gitCommit:
+          variant: AbbrevTreeSha
+          prefix: v.beta.1.
+    deploy:
+      kubectl:
+        manifests:
+          - beta-yamles/*.yaml
+  - name: prod
+    build:
+      artifacts:
+        - image: ghcr.io/danilandreev/github-parrot-bot-dev
+          docker:
+            dockerfile: Dockerfile
+            noCache: false
+      local: {}
+      tagPolicy:
+        gitCommit:
+          variant: AbbrevTreeSha
+          prefix: v.1.
+    deploy:
+      kubectl:
+        manifests:
+          - prod-yamles/*.yaml
+

@@ -8,3 +8,6 @@ build/
 .env
 # yarn
 yarn-error.log
+
+beta-yamles/Secret.yaml
+postgres/StorageClass.yaml

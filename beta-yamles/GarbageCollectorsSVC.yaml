@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: garbage-collectors
+  namespace: beta-parrot-bot
+spec:
+  selector:
+    app: garbage-collectors
+  ports:
+    - port: 3100
+  type: NodePort

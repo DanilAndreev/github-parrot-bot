@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: garbage-collectors
+  namespace: beta-parrot-bot
+  labels:
+    app: garbage-collectors
+spec:
+  selector:
+    matchLabels:
+      app: garbage-collectors
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: garbage-collectors
+    spec:
+      imagePullSecrets:
+        - name: docker-pass
+      containers:
+        - name: telegram-drawer
+          image: ghcr.io/danilandreev/github-parrot-bot-dev
+          ports:
+            - containerPort: 3100
+          volumeMounts:
+            - mountPath: /.env
+              subPath: .env
+              name: env
+      volumes:
+        - name: env
+          configMap:
+            name: garbage-collectors
+            items:
+              - key: env
+                path: .env
