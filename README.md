@@ -70,6 +70,7 @@ Example:
 ```
 Now, bot can tag you on new information updates.
 
+
 ## Congratulations :rocket:
 Congratulations, you have made basic bot setup and now you can track repository updates. Hope, you are pleased :smiley:.
 
