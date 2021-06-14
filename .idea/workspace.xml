@@ -17,18 +17,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[CI] Added skaffold ci.">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AKAsCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/AddRepositoryCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ClearAKACommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ClearAKACommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ConnectCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ConnectCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/DisconnectCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/DisconnectCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ListRepositoriesCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ListRepositoriesCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/RemoveRepositoryCommand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/RemoveRepositoryCommand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/Chat.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Chat.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/envDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/envDispatcher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -652,7 +642,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/core/amqp/WebHookAmqpHandler.ts</url>
           <line>59</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="93" />
         </line-breakpoint>
       </breakpoints>
