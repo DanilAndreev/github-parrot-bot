@@ -71,6 +71,7 @@ export default class DisconnectCommand extends BotCommand {
             }
         }
 
+        await Chat.createIfNotExists(chatId);
         const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
         if (!chat) throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
 
@@ -98,6 +99,7 @@ export default class DisconnectCommand extends BotCommand {
             }
         }
 
+        await Chat.createIfNotExists(chatId);
         const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
         if (!chat) throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
 

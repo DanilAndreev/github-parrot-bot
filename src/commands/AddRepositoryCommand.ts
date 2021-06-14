@@ -54,6 +54,7 @@ export default class AddRepositoryCommand extends BotCommand {
         if (!(await checkAdmin(telegramName, message)))
             throw new CommandError(`User @${telegramName} have no permissions to add repository.`);
 
+        await Chat.createIfNotExists(chatId);
         const chat: Chat | undefined = await Chat.findOne({where: {chatId: message.chat.id}});
         if (!chat) throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
 

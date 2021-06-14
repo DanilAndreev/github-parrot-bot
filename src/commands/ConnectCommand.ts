@@ -49,6 +49,7 @@ export default class ConnectCommand extends BotCommand {
         if (!message.from?.id) throw new CommandError("Unable to get telegram user id.");
         const telegramId: number = message.from.id;
 
+        await Chat.createIfNotExists(chatId);
         const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
         if (!chat) throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
 

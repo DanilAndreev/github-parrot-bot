@@ -29,6 +29,7 @@ import WebHook from "./WebHook";
 import Collaborator from "./Collaborator";
 import Issue from "./Issue";
 import CheckSuite from "./CheckSuite";
+import {Logger} from "../core/logger/Logger";
 
 /**
  * Chat - entity for storing connected telegram chat.
@@ -36,6 +37,25 @@ import CheckSuite from "./CheckSuite";
  */
 @Entity()
 export default class Chat extends BaseEntity {
+    /**
+     * createIfNotExists - creates chat instance if it not exists.
+     * @param chatId - Target chat id.
+     * @author Danil Andreev
+     */
+    static async createIfNotExists(chatId: number): Promise<typeof Chat> {
+        const chat = new Chat();
+        chat.chatId = chatId;
+        try {
+            await chat.save();
+            Logger.warn(`Added new chat on "createIfNotExists" method. Chat id: ${chatId}`);
+        } catch (error) {
+            // QueryFailedError (duplicate key value violates unique key constraint).
+            if (error.code !== "23505")
+                throw error;
+        }
+        return this;
+    }
+
     @PrimaryColumn({type: "bigint"})
     chatId: number;
 
