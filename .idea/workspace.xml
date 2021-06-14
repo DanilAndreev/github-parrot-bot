@@ -16,9 +16,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[CI] Added skaffold ci.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Dockerfile] Changed npm to yarn.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +63,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="add_unversioned_files" value="$PROJECT_DIR$/.env" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/.env&#10;/home/danil/Projects/github-parrot-bot/node_modules/ajv/dist/types/json-schema.d.ts" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.19.0" />
     <property name="javascript.nodejs.core.library.typings.version" value="10.17.60" />
     <property name="last.edited.regexp" value="" />
@@ -194,13 +195,6 @@
       <workItem from="1623670397390" duration="725000" />
       <workItem from="1623671412635" duration="289000" />
       <workItem from="1623671715280" duration="3137000" />
-    </task>
-    <task id="LOCAL-00093" summary="[main] Added process error handler.">
-      <created>1618015516076</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1618015516076</updated>
     </task>
     <task id="LOCAL-00094" summary="[sql] Added log database creation script.">
       <created>1618017045931</created>
@@ -538,7 +532,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622656116039</updated>
     </task>
-    <option name="localTasksCounter" value="142" />
+    <task id="LOCAL-00142" summary="[Dockerfile] Changed npm to yarn.">
+      <created>1623677164541</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1623677164541</updated>
+    </task>
+    <option name="localTasksCounter" value="143" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -569,7 +570,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[BotCommand] (issue #32) Changed meta structure." />
     <MESSAGE value="[BotCommand] (issue #32) Replaced old mechanism with new meta structure." />
     <MESSAGE value="[BotCommand] Cleaned up." />
     <MESSAGE value="[Dockerfile] Updated building scenario." />
@@ -594,7 +594,8 @@
     <MESSAGE value="[CI] Disabled old ci." />
     <MESSAGE value="[envDispathcer] Added more flexible setup." />
     <MESSAGE value="[CI] Added skaffold ci." />
-    <option name="LAST_COMMIT_MESSAGE" value="[CI] Added skaffold ci." />
+    <MESSAGE value="[Dockerfile] Changed npm to yarn." />
+    <option name="LAST_COMMIT_MESSAGE" value="[Dockerfile] Changed npm to yarn." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

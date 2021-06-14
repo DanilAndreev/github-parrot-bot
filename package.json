@@ -29,7 +29,7 @@
   "license": "MIT",
   "dependencies": {
     "@octokit/webhooks-schemas": "^3.75.2",
-    "ajv": "^8.5.0",
+    "ajv": "^8.6.0",
     "ajv-formats": "^2.1.0",
     "amqplib": "^0.6.0",
     "argon2": "^0.27.0",
@@ -84,8 +84,7 @@
     "telegram-test-api": "^2.5.0",
     "ts-jest": "^26.4.1",
     "ts-node": "^9.0.0",
-    "tsc": "^2.0.3",
-    "typescript": "^4.0.3"
+    "typescript": "^4.3.2"
   },
   "scripts": {
     "build:compile": "tsc",
