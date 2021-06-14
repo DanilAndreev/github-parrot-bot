@@ -79,6 +79,9 @@ export default function envDispatcher(
             case "database_database":
                 (configRef.current.db as JSONObject).database = value;
                 break;
+            case "database_ssl":
+                (configRef.current.db as JSONObject).ssl = value === "true" ? {rejectUnauthorized: false} : false;
+                break;
 
             case "logs_database_url":
                 configRef.current.log.databaseUrl = value;

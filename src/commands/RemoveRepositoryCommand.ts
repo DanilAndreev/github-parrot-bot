@@ -64,6 +64,7 @@ export default class RemoveRepositoryCommand extends BotCommand {
         const chatId: number = message.chat.id;
         const [repository] = args;
 
+        await Chat.createIfNotExists(chatId);
         const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
         if (!chat) throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
 
@@ -75,6 +76,7 @@ export default class RemoveRepositoryCommand extends BotCommand {
     protected async removeAll(message: Message, args: string[], opts: JSONObject<string>): Promise<string> {
         const chatId: number = message.chat.id;
 
+        await Chat.createIfNotExists(chatId);
         const chat: Chat | undefined = await Chat.findOne({where: {chatId}});
         if (!chat) throw new CommandError(`Error accessing to chat. Try to kick the bot and invite it again.`);
 
