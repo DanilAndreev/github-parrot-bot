@@ -34,6 +34,8 @@ import Bot from "../../core/bot/Bot";
 import AMQPNack from "../../core/errors/AMQPNack";
 import CallbackQueryDispatcher from "../../core/amqp/CallbackQueryDispatcher";
 import TelegramEventEvent from "../../core/events/telegram/TelegramEventEvent";
+import AMQPAck from "../../core/errors/AMQPAck";
+import {Logger} from "../../core/logger/Logger";
 
 @AmqpHandler.Handler(QUEUES.TELEGRAM_EVENTS_QUEUE, 10)
 @Reflect.metadata("amqp-handler-type", "telegram-events-handler")
@@ -73,7 +75,12 @@ export default class TelegramEventsHandler extends CallbackQueryDispatcher {
             if (telegramId == me.id) {
                 const chat: Chat = new Chat();
                 chat.chatId = message.chat.id;
-                await chat.save();
+                try {
+                    await chat.save();
+                } catch (error) {
+                    Logger.warn(`Chat "${message.chat.username}"(${message.chat.id}) already exists in database.`);
+                    throw new AMQPAck(`Chat "${message.chat.username}"(${message.chat.id}) already exists.`);
+                }
             }
         }
     }
