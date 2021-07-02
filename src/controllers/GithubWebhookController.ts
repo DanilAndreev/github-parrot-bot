@@ -98,7 +98,7 @@ class GithubWebhookController extends Controller {
         if (GithubWebhookController.eventValidator(ctx.request.body)) {
             await next();
         } else {
-            Logger.warn(`Got GitHub WebHook message. Payload validation failed.`);
+            Logger.warn(`Got GitHub WebHook message. Payload validation failed. ${JSON.stringify((ctx.request.body as any)?.action)}`);
             throw new HttpError("Validation error", 400).setData({
                 validation: GithubWebhookController.eventValidator.errors,
             });

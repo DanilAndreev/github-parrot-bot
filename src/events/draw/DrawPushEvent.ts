@@ -35,7 +35,7 @@ class DrawPushEvent extends AmqpEvent {
 
     constructor(push: Push, chat: number) {
         super(DrawPushEvent.type, {
-            queue: QUEUES.ISSUE_SHOW_QUEUE,
+            queue: QUEUES.PUSH_SHOW_QUEUE,
         });
         this.push = push;
         this.chat = chat;
