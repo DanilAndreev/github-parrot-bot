@@ -80,7 +80,7 @@ class WebHookAmqpHandler extends AmqpHandler {
             promises.push(this.handleHook(webHook, payload));
         }
 
-        return !(await Promise.all(promises)).some(item => item == false);
+        return !(await Promise.allSettled(promises)).some(item => !item); //TODO: test with hands.
     }
 
     /**

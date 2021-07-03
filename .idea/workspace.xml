@@ -16,11 +16,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[Dockerfile] Changed npm to yarn.">
+    <list default="true" id="6933f610-b0c0-4fe1-8074-023274eab8be" name="Default Changelist" comment="[AMQP] Fixes ACK bugs.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/GithubWebhookController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/GithubWebhookController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/draw/DrawPushEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/draw/DrawPushEvent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/amqp/WebHookAmqpHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/amqp/WebHookAmqpHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +81,7 @@
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="D:\Projects\github-parrot-bot\node_modules\prettier" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
     <property name="ts.external.directory.path" value="C:\Users\onepl\WebstormProjects\github-parrot-bot\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -197,14 +196,8 @@
       <workItem from="1623671412635" duration="289000" />
       <workItem from="1623671715280" duration="3137000" />
       <workItem from="1625175370963" duration="1878000" />
-      <workItem from="1625177326767" duration="4131000" />
-    </task>
-    <task id="LOCAL-00094" summary="[sql] Added log database creation script.">
-      <created>1618017045931</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1618017045931</updated>
+      <workItem from="1625177326767" duration="6501000" />
+      <workItem from="1625352085073" duration="447000" />
     </task>
     <task id="LOCAL-00095" summary="[Handlers] Added AKA mechanism.">
       <created>1618238614359</created>
@@ -542,7 +535,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623677164541</updated>
     </task>
-    <option name="localTasksCounter" value="143" />
+    <task id="LOCAL-00143" summary="[AMQP] Fixes ACK bugs.">
+      <created>1625182149851</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1625182149852</updated>
+    </task>
+    <option name="localTasksCounter" value="144" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -573,7 +573,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[BotCommand] (issue #32) Replaced old mechanism with new meta structure." />
     <MESSAGE value="[BotCommand] Cleaned up." />
     <MESSAGE value="[Dockerfile] Updated building scenario." />
     <MESSAGE value="[WebServer] Added webhook payload validation." />
@@ -598,7 +597,8 @@
     <MESSAGE value="[envDispathcer] Added more flexible setup." />
     <MESSAGE value="[CI] Added skaffold ci." />
     <MESSAGE value="[Dockerfile] Changed npm to yarn." />
-    <option name="LAST_COMMIT_MESSAGE" value="[Dockerfile] Changed npm to yarn." />
+    <MESSAGE value="[AMQP] Fixes ACK bugs." />
+    <option name="LAST_COMMIT_MESSAGE" value="[AMQP] Fixes ACK bugs." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -627,18 +627,6 @@
           <url>file://$PROJECT_DIR$/src/core/bot/BotCommand.ts</url>
           <line>73</line>
           <option name="timeStamp" value="80" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/controllers/GithubWebhookController.ts</url>
-          <line>100</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="102" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/handlers/telegram/TelegramEventsHandler.ts</url>
-          <line>80</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="103" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
